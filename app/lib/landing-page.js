@@ -76,21 +76,21 @@ export function getLandingPageHtml(locale) {
     <div class="mx-auto w-[min(1180px,calc(100vw-32px))]">
       <header class="sticky top-4 z-30 mt-4 flex items-center justify-between gap-4 rounded-full border border-line bg-slate-950/55 px-4 py-3 shadow-panel backdrop-blur-xl">
         <a class="flex items-center gap-3" href="#top" aria-label="Forgent3D Home">
-          <span class="grid h-11 w-11 place-items-center rounded-2xl border border-cyanx/25 bg-cyanx/10 font-mono text-xs font-bold tracking-[0.18em] text-cyanx shadow-glow">F3D</span>
+          <span class="grid h-11 w-11 place-items-center overflow-hidden rounded-2xl border border-cyanx/25 bg-cyanx/10 shadow-glow">
+            <img src="/apple-touch-icon.png" alt="Forgent3D icon" class="h-full w-full object-cover" />
+          </span>
           <span class="leading-tight">
             <strong class="block text-sm">Forgent3D</strong>
             <span class="block font-mono text-[11px] text-slate-400">agent sees CAD</span>
           </span>
         </a>
         <nav class="hidden items-center gap-6 font-mono text-xs text-slate-400 md:flex" aria-label="Primary">
-          <a class="transition hover:text-cyanx" href="#agents">Agents</a>
           <a class="transition hover:text-cyanx" href="#agent-loop">Agent Loop</a>
           <a class="transition hover:text-cyanx" href="#features">Features</a>
           <a class="transition hover:text-cyanx" href="#download">Download</a>
         </nav>
         <div class="flex items-center gap-3">
           <button class="js-lang-toggle rounded-full border border-line bg-white/5 px-3 py-2 font-mono text-xs text-slate-300 transition hover:border-cyanx/50 hover:text-white" type="button" aria-label="Switch language">${t.switchLabel}</button>
-          <a class="js-github-link font-mono text-xs text-slate-300 transition hover:text-white" href="#download">GitHub</a>
         </div>
       </header>
 
@@ -120,7 +120,7 @@ export function getLandingPageHtml(locale) {
             </div>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
               <a class="js-download-link inline-flex min-h-[52px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-6 py-4 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="#download">${t.heroDownload}</a>
-              <a class="js-github-link inline-flex min-h-[52px] items-center justify-center rounded-full border border-line bg-white/5 px-6 py-4 text-sm font-bold text-slate-100 transition hover:-translate-y-0.5 hover:border-cyanx/50" href="#download">${t.heroGithub}</a>
+              <a class="js-github-link inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-line bg-white/5 px-6 py-4 text-sm font-bold text-slate-100 transition hover:-translate-y-0.5 hover:border-cyanx/50" href="#download"><img src="https://github.githubassets.com/favicons/favicon.png" width="14" height="14" alt="GitHub" loading="lazy" decoding="async" class="brightness-0 invert opacity-90" />${t.heroGithub}</a>
             </div>
           </div>
 
@@ -230,12 +230,10 @@ agent.verify(
       <footer class="flex flex-col justify-between gap-5 border-t border-line py-8 text-sm text-slate-500 md:flex-row">
         <p><strong class="text-slate-200">Forgent3D</strong> / <span>${t.footerTagline}</span></p>
         <div class="flex gap-5 font-mono text-xs">
-          <a class="hover:text-cyanx" href="#agents">Agents</a>
           <a class="hover:text-cyanx" href="#agent-loop">Agent Loop</a>
           <a class="hover:text-cyanx" href="#features">Features</a>
           <a class="hover:text-cyanx" href="/${locale}/ai-3d-model-generation">${t.guidesAi3D}</a>
           <a class="hover:text-cyanx" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
-          <a class="js-github-link hover:text-cyanx" href="#download">GitHub</a>
         </div>
       </footer>
     </div>
