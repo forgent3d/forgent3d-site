@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "wrangler dev",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@opennextjs/cloudflare": "latest",
+    "wrangler": "^4.85.0"
+  }
+}
