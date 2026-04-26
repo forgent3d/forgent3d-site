@@ -3,8 +3,7 @@ const COPY = {
     locale: "en_US",
     htmlLang: "en",
     switchLabel: "中",
-    heroTitleLine1: "From prompt to",
-    heroTitleLine2: "parametric CAD",
+    heroTitle: "From prompt to parametric CAD",
     heroSubtitle:
       "Connect Codex, Claude Code, and Cursor to turn prompts into verifiable parametric CAD geometry.",
     heroDownload: "Download Forgent3D",
@@ -37,8 +36,7 @@ const COPY = {
     locale: "zh_CN",
     htmlLang: "zh-CN",
     switchLabel: "EN",
-    heroTitleLine1: "从 Prompt 到",
-    heroTitleLine2: "参数化 CAD",
+    heroTitle: "从 Prompt 到参数化 CAD",
     heroSubtitle:
       "连接 Codex、Claude Code、Cursor，将文本提示转为可验证的参数化 CAD 几何结果，支持 AI 生成三维模型与代码生成三维模型工作流。",
     heroDownload: "下载 Forgent3D",
@@ -100,9 +98,8 @@ export function getLandingPageHtml(locale) {
         <section class="grid min-h-[calc(100vh-96px)] items-center gap-12 py-16 lg:grid-cols-[0.86fr_1.14fr] lg:py-20">
           <div class="reveal">
             <p class="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-cyanx">AI CAD Previewer / local MCP</p>
-            <h1 class="max-w-[16ch] text-5xl font-bold leading-[0.92] tracking-[-0.05em] text-white sm:text-6xl lg:text-7xl">
-              <span class="block">${t.heroTitleLine1}</span>
-              <span class="block">${t.heroTitleLine2}</span>
+            <h1 class="max-w-[12ch] text-[clamp(2.2rem,6.8vw,5rem)] font-bold leading-[0.95] tracking-[-0.05em] text-white text-balance">
+              ${t.heroTitle}
             </h1>
             <p class="mt-6 max-w-md text-lg leading-8 text-slate-300">${t.heroSubtitle}</p>
             <div class="mt-6 flex max-w-xl flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-300">
