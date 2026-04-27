@@ -4,33 +4,35 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "代码生成三维模型软件：Code to Parametric CAD 工作流 | Forgent3D",
+      title: "代码生成三维模型软件：本地 AI CAD 工作流 | Forgent3D",
       description:
-        "面向开发者的代码生成三维模型方案：通过 Prompt 与代码协同生成参数化 CAD，并用几何证据校验结果，适合 AI 生成三维模型与 CAD 建模协作。",
+        "Forgent3D 让 Codex、Claude Code、Cursor 等已有 agent 生成可维护的模型代码，并在本地完成三维预览、验证和迭代。免费开源，数据留在本机。",
       ogLocale: "zh_CN",
-      h1: "代码生成三维模型：从代码到参数化 CAD 软件工作流",
+      h1: "代码生成三维模型，让模型成为可验证的资产",
       intro:
-        "这个流程专为 coding agents 设计，让 AI 输出不止是代码片段，而是可验证、可迭代的 CAD 结果，覆盖代码生成三维模型与 AI CAD 开发流程。",
+        "当模型由代码生成，它就可以被 Git 管理、被审查、被复用，也可以被 AI agent 持续修改。Forgent3D 把代码、三维预览和本地验证连接起来，让 agent 不只输出片段，还能根据真实结果继续修正。",
       bullets: [
-        "支持 Codex / Claude Code / Cursor 的代码生成三维模型工作流",
-        "每次改动都有重建与几何检查，提升 AI 生成三维模型可控性",
-        "更适合机械零件、夹具、法兰等参数化 CAD 场景",
+        "继续使用 Codex / Claude Code / Cursor 等已有 AI 编程工具，不绑定新的云端生成器",
+        "模型代码、构建反馈、截图和验证结果保留在本地项目中",
+        "agent 可以读取真实三维反馈，再修正尺寸、结构和生成逻辑",
+        "适合机械零件、产品原型、装配结构和可运动模型的持续迭代",
       ],
     };
   }
 
   return {
-    title: "Code to Parametric CAD: Generate 3D Models from Code | Forgent3D",
+    title: "Code to 3D Models with Local AI CAD Verification | Forgent3D",
     description:
-      "A developer-first code-to-parametric-CAD workflow: generate 3D models from prompts and code, then verify geometry with evidence-driven checks.",
+      "Forgent3D helps Codex, Claude Code, Cursor, and other existing agents generate maintainable model code, then preview and verify 3D results locally. Free, open source, and local-first.",
     ogLocale: "en_US",
-    h1: "Code to parametric CAD for reliable 3D generation",
+    h1: "Code-generated 3D models should be verifiable assets",
     intro:
-      "Move from raw code output to verifiable CAD artifacts with rebuild status, screenshots, and geometry checks.",
+      "When models are generated as code, they can be versioned, reviewed, reused, and improved by agents. Forgent3D connects that code to local 3D preview and verification, so agents can revise against real results instead of guessing.",
     bullets: [
-      "Built for Codex / Claude Code / Cursor coding loops",
-      "Evidence-backed CAD verification on each iteration",
-      "Ideal for brackets, fixtures, flanges, and other parametric parts",
+      "Keep using Codex / Claude Code / Cursor and other existing coding agents without adopting a new cloud generator",
+      "Keep model code, build feedback, screenshots, and validation results inside your local project",
+      "Let agents read real 3D feedback before they adjust dimensions, structure, and generation logic",
+      "Works for mechanical parts, product prototypes, assemblies, and motion-ready model iteration",
     ],
   };
 }

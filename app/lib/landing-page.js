@@ -3,65 +3,105 @@ const COPY = {
     locale: "en_US",
     htmlLang: "en",
     switchLabel: "中",
-    heroTitle: "From prompt to parametric CAD",
+    brandSubline: "local AI CAD workbench",
+    navLoop: "Workflow",
+    navFeatures: "Why Forgent3D",
+    navDownload: "Download",
+    heroKicker: "Existing agents / local data / real 3D",
+    heroTitle: "Generate real 3D models with the AI agents you already use",
     heroSubtitle:
-      "Connect Codex, Claude Code, and Cursor to turn prompts into verifiable parametric CAD geometry.",
+      "Connect Codex, Claude Code, Cursor, and other coding agents to turn model ideas into previewable, verifiable 3D results on your own machine. Open source, free to use, and built for local data.",
     heroDownload: "Download Forgent3D",
     heroGithub: "View GitHub",
-    loopTitle: "Stop editing CAD by guesswork",
-    loopSubtitle: "Make every agent change grounded in geometry evidence returned by tools.",
-    loopWrite: "Generate CAD code",
-    loopRebuild: "Build real geometry",
-    loopRead: "Screenshots / bbox / status",
-    loopIterate: "Tune and iterate",
-    featuresTitle: "Three evidence signals for agents",
-    featuresGeometry: "See real geometry instead of guessing.",
-    featuresRebuild: "Save code and rebuild instantly.",
-    featuresEvidence: "Readable screenshots, bbox, and status.",
-    casesTitle: "Code-first mechanical modeling",
+    chipExisting: "Existing agents",
+    chipLocal: "Local data",
+    chipFree: "Free & open source",
+    chipMotion: "Motion-ready workflows",
+    loopEyebrow: "Workflow",
+    loopTitle: "From idea to verified model",
+    loopSubtitle: "Forgent3D gives agents feedback from real local builds, so each change can be checked before the next one.",
+    loopDescribeLabel: "Describe",
+    loopDescribe: "Describe the part, assembly, or mechanism in the AI IDE you already use.",
+    loopGenerateLabel: "Generate",
+    loopGenerate: "The agent creates model code that remains editable, reviewable, and reusable.",
+    loopPreviewLabel: "Preview",
+    loopPreview: "Forgent3D rebuilds and displays the real 3D result locally.",
+    loopVerifyLabel: "Verify",
+    loopVerify: "The agent reads screenshots, dimensions, and status before iterating again.",
+    featuresEyebrow: "Why Forgent3D",
+    featuresTitle: "Free, local, verifiable AI CAD",
+    featuresAgentsTitle: "Use the agents you already have",
+    featuresAgents: "Keep working in Codex, Claude Code, Cursor, or another coding agent. Forgent3D adds CAD feedback without locking you into a new AI service.",
+    featuresLocalTitle: "Your data stays local",
+    featuresLocal: "Model code, build output, screenshots, and validation data stay on your machine during the preview and verification loop.",
+    featuresModelsTitle: "Real models, not one-shot images",
+    featuresModels: "Create editable 3D results that can be rebuilt, measured, revised, and used for parts, assemblies, and motion-ready experiments.",
+    casesTitle: "Modeling workflows agents can actually verify",
     casesPartTitle: "Mechanical parts",
-    casesPartDesc: "Brackets / flanges / fixtures",
-    casesParamTitle: "Parametric prototypes",
-    casesParamDesc: "Iterate dimensions and hole patterns",
-    casesAiTitle: "AI modeling",
-    casesAiDesc: "Align outputs with evidence",
-    ctaTitle: "Let agents start seeing models",
+    casesPartDesc: "Check geometry, dimensions, holes, and fit for brackets, flanges, fixtures, and enclosures.",
+    casesParamTitle: "Product prototypes",
+    casesParamDesc: "Keep design variables in code so models can evolve instead of ending as one-off outputs.",
+    casesAiTitle: "Assemblies and motion",
+    casesAiDesc: "Preview more complex structures and motion-ready models with feedback agents can read.",
+    ctaEyebrow: "Free / Open Source / Local",
+    ctaTitle: "Start building with your existing AI agent",
+    ctaSubtitle: "Download the desktop app, connect it to your local project, and let your agent verify models instead of guessing.",
     ctaDownload: "Download latest release",
     ctaSource: "View source code",
-    footerTagline: "CAD evidence for Codex, Claude Code, Cursor",
-    guidesAi3D: "AI 3D SEO Page",
-    guidesCodeCad: "Code to CAD Page",
+    footerTagline: "Free local CAD feedback for Codex, Claude Code, Cursor",
+    guidesAi3D: "AI 3D Model Generation",
+    guidesCodeCad: "Code to 3D Models",
   },
   zh: {
     locale: "zh_CN",
     htmlLang: "zh-CN",
     switchLabel: "EN",
-    heroTitle: "从 Prompt 到参数化 CAD",
+    brandSubline: "本地 AI CAD 工作台",
+    navLoop: "工作流",
+    navFeatures: "核心优势",
+    navDownload: "下载",
+    heroKicker: "已有 agent / 本地数据 / 真实 3D",
+    heroTitle: "用现有 AI agent 生成真实 3D 模型",
     heroSubtitle:
-      "连接 Codex、Claude Code、Cursor，将文本提示转为可验证的参数化 CAD 几何结果，支持 AI 生成三维模型与代码生成三维模型工作流。",
+      "连接 Codex、Claude Code、Cursor 等你已经在用的 AI 编程工具，在本机把模型想法变成可预览、可验证、可继续迭代的三维结果。开源免费，数据留在本地。",
     heroDownload: "下载 Forgent3D",
     heroGithub: "查看 GitHub",
-    loopTitle: "不再凭感觉改 CAD",
-    loopSubtitle: "让 agent 每次修改都基于工具返回的几何证据。",
-    loopWrite: "生成 CAD 代码",
-    loopRebuild: "构建真实模型",
-    loopRead: "截图 / bbox / 状态",
-    loopIterate: "继续调参数",
-    featuresTitle: "给 agent 的三种证据",
-    featuresGeometry: "看到真实模型，不再猜测。",
-    featuresRebuild: "保存代码，立即重建。",
-    featuresEvidence: "截图、bbox、状态可读取。",
-    casesTitle: "代码开始的机械建模",
+    chipExisting: "使用已有 agent",
+    chipLocal: "数据在本地",
+    chipFree: "免费开源",
+    chipMotion: "支持可运动模型工作流",
+    loopEyebrow: "工作流",
+    loopTitle: "从一句想法到可验证模型",
+    loopSubtitle: "Forgent3D 把真实构建反馈交给 agent，让每次修改都能先看结果、再继续迭代。",
+    loopDescribeLabel: "描述",
+    loopDescribe: "在熟悉的 AI IDE 里描述零件、装配或可运动结构。",
+    loopGenerateLabel: "生成",
+    loopGenerate: "agent 生成可编辑、可审查、可复用的模型代码。",
+    loopPreviewLabel: "预览",
+    loopPreview: "Forgent3D 在本机重建并显示真实三维结果。",
+    loopVerifyLabel: "验证",
+    loopVerify: "agent 读取截图、尺寸和状态后继续修正。",
+    featuresEyebrow: "核心优势",
+    featuresTitle: "免费、本地、可验证的 AI CAD",
+    featuresAgentsTitle: "继续用现有 agent",
+    featuresAgents: "不用换掉 Codex、Claude Code、Cursor，也不用绑定新的云端生成服务。Forgent3D 给已有 AI 编程工具补上 CAD 反馈。",
+    featuresLocalTitle: "数据留在本地",
+    featuresLocal: "模型代码、构建结果、截图和验证信息都在你的电脑上完成，适合私有项目、实验和开源协作。",
+    featuresModelsTitle: "真实模型，不是一次性图片",
+    featuresModels: "生成可重建、可量测、可修改的三维结果，覆盖零件、装配以及可运动模型的预览验证。",
+    casesTitle: "agent 能验证的建模场景",
     casesPartTitle: "机械零件",
-    casesPartDesc: "支架 / 法兰 / 夹具",
-    casesParamTitle: "参数原型",
-    casesParamDesc: "尺寸和孔位可迭代",
-    casesAiTitle: "AI 建模",
-    casesAiDesc: "用证据对齐结果",
-    ctaTitle: "让 agent 开始看见模型",
+    casesPartDesc: "验证支架、法兰、夹具、外壳的几何、尺寸、孔位和装配关系。",
+    casesParamTitle: "产品原型",
+    casesParamDesc: "把尺寸、孔位和结构变量保留在代码里，让模型持续演进。",
+    casesAiTitle: "装配与运动",
+    casesAiDesc: "预览更复杂的结构和可运动模型，让 agent 基于反馈继续修正。",
+    ctaEyebrow: "免费 / 开源 / 本地运行",
+    ctaTitle: "用你已有的 AI agent 开始建模",
+    ctaSubtitle: "下载桌面端，连接本地项目，让 agent 不再凭感觉猜模型，而是先验证再修改。",
     ctaDownload: "下载最新版本",
     ctaSource: "查看源码",
-    footerTagline: "为 Codex、Claude Code、Cursor 提供 CAD 几何证据",
+    footerTagline: "为 Codex、Claude Code、Cursor 提供免费的本地 CAD 反馈",
     guidesAi3D: "AI 生成三维模型软件",
     guidesCodeCad: "代码生成三维模型软件",
   },
@@ -81,13 +121,13 @@ export function getLandingPageHtml(locale) {
           </span>
           <span class="leading-tight">
             <strong class="block text-sm">Forgent3D</strong>
-            <span class="block font-mono text-[11px] text-slate-400">agent sees CAD</span>
+            <span class="block font-mono text-[11px] text-slate-400">${t.brandSubline}</span>
           </span>
         </a>
         <nav class="hidden items-center gap-6 font-mono text-xs text-slate-400 md:flex" aria-label="Primary">
-          <a class="transition hover:text-cyanx" href="#agent-loop">Agent Loop</a>
-          <a class="transition hover:text-cyanx" href="#features">Features</a>
-          <a class="transition hover:text-cyanx" href="#download">Download</a>
+          <a class="transition hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
+          <a class="transition hover:text-cyanx" href="#features">${t.navFeatures}</a>
+          <a class="transition hover:text-cyanx" href="#download">${t.navDownload}</a>
         </nav>
         <div class="flex items-center gap-3">
           <button class="js-lang-toggle rounded-full border border-line bg-white/5 px-3 py-2 font-mono text-xs text-slate-300 transition hover:border-cyanx/50 hover:text-white" type="button" aria-label="Switch language">${t.switchLabel}</button>
@@ -97,11 +137,11 @@ export function getLandingPageHtml(locale) {
       <main id="top" lang="${t.htmlLang}">
         <section class="grid min-h-[calc(100vh-96px)] items-center gap-12 py-16 lg:grid-cols-[0.86fr_1.14fr] lg:py-20">
           <div class="reveal">
-            <p class="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-cyanx">AI CAD Previewer / local MCP</p>
-            <h1 class="max-w-[12ch] text-[clamp(2.2rem,6.8vw,5rem)] font-bold leading-[0.95] tracking-[-0.05em] text-white text-balance">
+            <p class="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-cyanx">${t.heroKicker}</p>
+            <h1 class="max-w-3xl text-[clamp(2.2rem,6.8vw,5rem)] font-bold leading-[0.95] tracking-[-0.05em] text-white text-balance">
               ${t.heroTitle}
             </h1>
-            <p class="mt-6 max-w-md text-lg leading-8 text-slate-300">${t.heroSubtitle}</p>
+            <p class="mt-6 max-w-xl text-lg leading-8 text-slate-300">${t.heroSubtitle}</p>
             <div class="mt-6 flex max-w-xl flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-300">
               <span class="inline-flex items-center gap-2 rounded-full border border-cyanx/30 bg-cyanx/10 px-3 py-2">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -117,6 +157,12 @@ export function getLandingPageHtml(locale) {
                 <img src="https://cursor.com/favicon.ico" width="12" height="12" alt="Cursor" loading="lazy" decoding="async" />
                 Cursor
               </span>
+            </div>
+            <div class="mt-4 flex max-w-xl flex-wrap gap-2 text-xs text-slate-300">
+              <span class="rounded-full border border-line bg-white/5 px-3 py-2">${t.chipExisting}</span>
+              <span class="rounded-full border border-line bg-white/5 px-3 py-2">${t.chipLocal}</span>
+              <span class="rounded-full border border-line bg-white/5 px-3 py-2">${t.chipFree}</span>
+              <span class="rounded-full border border-line bg-white/5 px-3 py-2">${t.chipMotion}</span>
             </div>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
               <a class="js-download-link inline-flex min-h-[52px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-6 py-4 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="#download">${t.heroDownload}</a>
@@ -178,28 +224,28 @@ agent.verify(
         <section class="reveal py-20" id="agent-loop">
           <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">Agent Loop</p>
+              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.loopEyebrow}</p>
               <h2 class="max-w-2xl text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.loopTitle}</h2>
             </div>
             <p class="max-w-sm text-sm leading-6 text-slate-400">${t.loopSubtitle}</p>
           </div>
           <div class="grid gap-4 md:grid-cols-4">
-            <article class="rounded-3xl border border-line bg-white/[0.03] p-5 backdrop-blur"><span class="font-mono text-xs text-cyanx">01</span><h3 class="mt-8 text-xl font-bold">Write</h3><p class="mt-2 text-sm text-slate-500">${t.loopWrite}</p></article>
-            <article class="rounded-3xl border border-line bg-white/[0.03] p-5 backdrop-blur"><span class="font-mono text-xs text-cyanx">02</span><h3 class="mt-8 text-xl font-bold">Rebuild</h3><p class="mt-2 text-sm text-slate-500">${t.loopRebuild}</p></article>
-            <article class="rounded-3xl border border-cyanx/40 bg-cyanx/[0.06] p-5 shadow-glow backdrop-blur"><span class="font-mono text-xs text-signal">03</span><h3 class="mt-8 text-xl font-bold">Read</h3><p class="mt-2 text-sm text-slate-300">${t.loopRead}</p></article>
-            <article class="rounded-3xl border border-line bg-white/[0.03] p-5 backdrop-blur"><span class="font-mono text-xs text-cyanx">04</span><h3 class="mt-8 text-xl font-bold">Iterate</h3><p class="mt-2 text-sm text-slate-500">${t.loopIterate}</p></article>
+            <article class="rounded-3xl border border-line bg-white/[0.03] p-5 backdrop-blur"><span class="font-mono text-xs text-cyanx">01</span><h3 class="mt-8 text-xl font-bold">${t.loopDescribeLabel}</h3><p class="mt-2 text-sm text-slate-500">${t.loopDescribe}</p></article>
+            <article class="rounded-3xl border border-line bg-white/[0.03] p-5 backdrop-blur"><span class="font-mono text-xs text-cyanx">02</span><h3 class="mt-8 text-xl font-bold">${t.loopGenerateLabel}</h3><p class="mt-2 text-sm text-slate-500">${t.loopGenerate}</p></article>
+            <article class="rounded-3xl border border-cyanx/40 bg-cyanx/[0.06] p-5 shadow-glow backdrop-blur"><span class="font-mono text-xs text-signal">03</span><h3 class="mt-8 text-xl font-bold">${t.loopPreviewLabel}</h3><p class="mt-2 text-sm text-slate-300">${t.loopPreview}</p></article>
+            <article class="rounded-3xl border border-line bg-white/[0.03] p-5 backdrop-blur"><span class="font-mono text-xs text-cyanx">04</span><h3 class="mt-8 text-xl font-bold">${t.loopVerifyLabel}</h3><p class="mt-2 text-sm text-slate-500">${t.loopVerify}</p></article>
           </div>
         </section>
 
         <section class="py-20" id="features">
           <div class="reveal mb-8">
-            <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">Core Signals</p>
+            <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.featuresEyebrow}</p>
             <h2 class="text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.featuresTitle}</h2>
           </div>
           <div class="grid gap-4 lg:grid-cols-3">
-            <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-geometry"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Geometry</p><h3 class="mt-3 text-2xl font-bold">Agent sees geometry</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresGeometry}</p></article>
-            <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-rebuild"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Rebuild</p><h3 class="mt-3 text-2xl font-bold">Rebuild on save</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresRebuild}</p></article>
-            <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-evidence"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Evidence</p><h3 class="mt-3 text-2xl font-bold">Evidence for iteration</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresEvidence}</p></article>
+            <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-geometry"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Agents</p><h3 class="mt-3 text-2xl font-bold">${t.featuresAgentsTitle}</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresAgents}</p></article>
+            <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-rebuild"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Local</p><h3 class="mt-3 text-2xl font-bold">${t.featuresLocalTitle}</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresLocal}</p></article>
+            <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-evidence"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Models</p><h3 class="mt-3 text-2xl font-bold">${t.featuresModelsTitle}</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresModels}</p></article>
           </div>
         </section>
 
@@ -217,8 +263,9 @@ agent.verify(
 
         <section class="py-20" id="download">
           <div class="reveal overflow-hidden rounded-[2.25rem] border border-cyanx/30 bg-gradient-to-br from-cyanx/10 via-white/[0.03] to-violetx/10 p-8 shadow-panel md:p-12">
-            <p class="mb-4 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">Open Source</p>
+            <p class="mb-4 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.ctaEyebrow}</p>
             <h2 class="max-w-2xl text-4xl font-bold tracking-[-0.05em] md:text-6xl">${t.ctaTitle}</h2>
+            <p class="mt-5 max-w-2xl text-sm leading-6 text-slate-300">${t.ctaSubtitle}</p>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
               <a class="js-download-link inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5" href="#">${t.ctaDownload}</a>
               <a class="js-github-link inline-flex items-center justify-center rounded-full border border-line bg-slate-950/50 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5" href="#">${t.ctaSource}</a>
@@ -230,8 +277,8 @@ agent.verify(
       <footer class="flex flex-col justify-between gap-5 border-t border-line py-8 text-sm text-slate-500 md:flex-row">
         <p><strong class="text-slate-200">Forgent3D</strong> / <span>${t.footerTagline}</span></p>
         <div class="flex gap-5 font-mono text-xs">
-          <a class="hover:text-cyanx" href="#agent-loop">Agent Loop</a>
-          <a class="hover:text-cyanx" href="#features">Features</a>
+          <a class="hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
+          <a class="hover:text-cyanx" href="#features">${t.navFeatures}</a>
           <a class="hover:text-cyanx" href="/${locale}/ai-3d-model-generation">${t.guidesAi3D}</a>
           <a class="hover:text-cyanx" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
         </div>
