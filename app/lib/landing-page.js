@@ -5,6 +5,7 @@ const COPY = {
     switchLabel: "中",
     brandSubline: "local AI CAD workbench",
     navLoop: "Workflow",
+    navScreenshots: "Screenshots",
     navFeatures: "Why Forgent3D",
     navDownload: "Download",
     heroKicker: "Existing agents / local data / real 3D",
@@ -28,6 +29,18 @@ const COPY = {
     loopPreview: "Forgent3D rebuilds and displays the real 3D result locally.",
     loopVerifyLabel: "Verify",
     loopVerify: "The agent reads screenshots, dimensions, and status before iterating again.",
+    screenshotsEyebrow: "Product Screenshots",
+    screenshotsTitle: "See the local agent workflow in action",
+    screenshotsSubtitle:
+      "A focused view of prompt input, agent planning, generated parts, and assembly workflows inside Forgent3D.",
+    screenshotInputTitle: "Describe the model",
+    screenshotInputDesc: "Start from a plain-language request and keep the modeling context inside your local project.",
+    screenshotPlanTitle: "Let the agent plan",
+    screenshotPlanDesc: "Use the AI agent you already trust to break the model into concrete, editable steps.",
+    screenshotGenerateTitle: "Generate real parts",
+    screenshotGenerateDesc: "Turn the plan into visible 3D geometry that can be rebuilt, checked, and revised.",
+    screenshotAssemblyTitle: "Preview assemblies",
+    screenshotAssemblyDesc: "Inspect more complex structures and motion-ready models with local feedback.",
     featuresEyebrow: "Why Forgent3D",
     featuresTitle: "Free, local, verifiable AI CAD",
     featuresAgentsTitle: "Use the agents you already have",
@@ -51,6 +64,8 @@ const COPY = {
     footerTagline: "Free local CAD feedback for Codex, Claude Code, Cursor",
     guidesAi3D: "AI 3D Model Generation",
     guidesCodeCad: "Code to 3D Models",
+    guidesLocalData: "Local Data",
+    guidesQuickStart: "Quick Start",
   },
   zh: {
     locale: "zh_CN",
@@ -58,6 +73,7 @@ const COPY = {
     switchLabel: "EN",
     brandSubline: "本地 AI CAD 工作台",
     navLoop: "工作流",
+    navScreenshots: "截图展示",
     navFeatures: "核心优势",
     navDownload: "下载",
     heroKicker: "已有 agent / 本地数据 / 真实 3D",
@@ -81,6 +97,18 @@ const COPY = {
     loopPreview: "Forgent3D 在本机重建并显示真实三维结果。",
     loopVerifyLabel: "验证",
     loopVerify: "agent 读取截图、尺寸和状态后继续修正。",
+    screenshotsEyebrow: "产品截图",
+    screenshotsTitle: "看看本地 agent 工作流如何运转",
+    screenshotsSubtitle:
+      "从输入需求、agent 规划、生成零件到装配预览，展示 Forgent3D 里的真实建模闭环。",
+    screenshotInputTitle: "描述模型需求",
+    screenshotInputDesc: "从自然语言需求开始，把建模上下文保留在本地项目里。",
+    screenshotPlanTitle: "让 agent 规划",
+    screenshotPlanDesc: "继续使用你信任的 AI agent，把模型拆成清晰、可编辑的步骤。",
+    screenshotGenerateTitle: "生成真实零件",
+    screenshotGenerateDesc: "把计划转成可见的三维几何，并继续重建、检查和修改。",
+    screenshotAssemblyTitle: "预览装配结构",
+    screenshotAssemblyDesc: "检查更复杂的结构和可运动模型，并保留本地反馈。",
     featuresEyebrow: "核心优势",
     featuresTitle: "免费、本地、可验证的 AI CAD",
     featuresAgentsTitle: "继续用现有 agent",
@@ -104,6 +132,8 @@ const COPY = {
     footerTagline: "为 Codex、Claude Code、Cursor 提供免费的本地 CAD 反馈",
     guidesAi3D: "AI 生成三维模型软件",
     guidesCodeCad: "代码生成三维模型软件",
+    guidesLocalData: "本地数据",
+    guidesQuickStart: "快速开始",
   },
 };
 
@@ -126,6 +156,7 @@ export function getLandingPageHtml(locale) {
         </a>
         <nav class="hidden items-center gap-6 font-mono text-xs text-slate-400 md:flex" aria-label="Primary">
           <a class="transition hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
+          <a class="transition hover:text-cyanx" href="#screenshots">${t.navScreenshots}</a>
           <a class="transition hover:text-cyanx" href="#features">${t.navFeatures}</a>
           <a class="transition hover:text-cyanx" href="#download">${t.navDownload}</a>
         </nav>
@@ -237,6 +268,57 @@ agent.verify(
           </div>
         </section>
 
+        <section class="py-20" id="screenshots">
+          <div class="reveal mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.screenshotsEyebrow}</p>
+              <h2 class="max-w-3xl text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.screenshotsTitle}</h2>
+            </div>
+            <p class="max-w-sm text-sm leading-6 text-slate-400">${t.screenshotsSubtitle}</p>
+          </div>
+          <div class="reveal screenshot-carousel js-screenshot-carousel rounded-[2.25rem] border border-line bg-slate-950/55 p-4 shadow-panel backdrop-blur-xl">
+            <div class="screenshot-stage">
+              <figure class="screenshot-slide is-active" data-title="${t.screenshotInputTitle}" data-desc="${t.screenshotInputDesc}">
+                <picture>
+                  <source srcset="/screenshots/input.webp" type="image/webp" />
+                  <img src="/screenshots/input.png" alt="${t.screenshotInputTitle}" loading="lazy" decoding="async" />
+                </picture>
+              </figure>
+              <figure class="screenshot-slide" data-title="${t.screenshotPlanTitle}" data-desc="${t.screenshotPlanDesc}">
+                <picture>
+                  <source srcset="/screenshots/plan.webp" type="image/webp" />
+                  <img src="/screenshots/plan.png" alt="${t.screenshotPlanTitle}" loading="lazy" decoding="async" />
+                </picture>
+              </figure>
+              <figure class="screenshot-slide" data-title="${t.screenshotGenerateTitle}" data-desc="${t.screenshotGenerateDesc}">
+                <picture>
+                  <source srcset="/screenshots/generate-parts.webp" type="image/webp" />
+                  <img src="/screenshots/generate_parts.png" alt="${t.screenshotGenerateTitle}" loading="lazy" decoding="async" />
+                </picture>
+              </figure>
+              <figure class="screenshot-slide" data-title="${t.screenshotAssemblyTitle}" data-desc="${t.screenshotAssemblyDesc}">
+                <picture>
+                  <source srcset="/screenshots/assembly.webp" type="image/webp" />
+                  <img src="/screenshots/assembly.png" alt="${t.screenshotAssemblyTitle}" loading="lazy" decoding="async" />
+                </picture>
+              </figure>
+            </div>
+            <div class="mt-4 flex flex-col justify-between gap-4 rounded-3xl border border-line bg-white/[0.03] p-5 md:flex-row md:items-center">
+              <div>
+                <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyanx js-screenshot-index">01 / 04</p>
+                <h3 class="mt-2 text-2xl font-bold js-screenshot-title">${t.screenshotInputTitle}</h3>
+                <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-400 js-screenshot-desc">${t.screenshotInputDesc}</p>
+              </div>
+              <div class="flex gap-2" aria-label="Screenshot carousel controls">
+                <button class="js-screenshot-dot h-3 w-8 rounded-full bg-cyanx" type="button" aria-label="Show screenshot 1"></button>
+                <button class="js-screenshot-dot h-3 w-3 rounded-full bg-slate-600" type="button" aria-label="Show screenshot 2"></button>
+                <button class="js-screenshot-dot h-3 w-3 rounded-full bg-slate-600" type="button" aria-label="Show screenshot 3"></button>
+                <button class="js-screenshot-dot h-3 w-3 rounded-full bg-slate-600" type="button" aria-label="Show screenshot 4"></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section class="py-20" id="features">
           <div class="reveal mb-8">
             <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.featuresEyebrow}</p>
@@ -276,11 +358,14 @@ agent.verify(
 
       <footer class="flex flex-col justify-between gap-5 border-t border-line py-8 text-sm text-slate-500 md:flex-row">
         <p><strong class="text-slate-200">Forgent3D</strong> / <span>${t.footerTagline}</span></p>
-        <div class="flex gap-5 font-mono text-xs">
+        <div class="flex flex-wrap gap-5 font-mono text-xs">
           <a class="hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
+          <a class="hover:text-cyanx" href="#screenshots">${t.navScreenshots}</a>
           <a class="hover:text-cyanx" href="#features">${t.navFeatures}</a>
           <a class="hover:text-cyanx" href="/${locale}/ai-3d-model-generation">${t.guidesAi3D}</a>
           <a class="hover:text-cyanx" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
+          <a class="hover:text-cyanx" href="/${locale}/local-data">${t.guidesLocalData}</a>
+          <a class="hover:text-cyanx" href="/${locale}/quick-start">${t.guidesQuickStart}</a>
         </div>
       </footer>
     </div>

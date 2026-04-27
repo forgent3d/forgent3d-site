@@ -37,6 +37,44 @@ swapNodes.forEach((node) => {
   }, 1800);
 });
 
+document.querySelectorAll(".js-screenshot-carousel").forEach((carousel) => {
+  const slides = Array.from(carousel.querySelectorAll(".screenshot-slide"));
+  const dots = Array.from(carousel.querySelectorAll(".js-screenshot-dot"));
+  const indexNode = carousel.querySelector(".js-screenshot-index");
+  const titleNode = carousel.querySelector(".js-screenshot-title");
+  const descNode = carousel.querySelector(".js-screenshot-desc");
+
+  if (slides.length < 2) {
+    return;
+  }
+
+  let activeIndex = 0;
+
+  function setActiveSlide(nextIndex) {
+    activeIndex = (nextIndex + slides.length) % slides.length;
+    slides.forEach((slide, index) => slide.classList.toggle("is-active", index === activeIndex));
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("w-8", index === activeIndex);
+      dot.classList.toggle("w-3", index !== activeIndex);
+      dot.classList.toggle("bg-cyanx", index === activeIndex);
+      dot.classList.toggle("bg-slate-600", index !== activeIndex);
+      dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+    });
+
+    const activeSlide = slides[activeIndex];
+    if (indexNode) indexNode.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+    if (titleNode) titleNode.textContent = activeSlide.dataset.title || "";
+    if (descNode) descNode.textContent = activeSlide.dataset.desc || "";
+  }
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => setActiveSlide(index));
+  });
+
+  setActiveSlide(0);
+  window.setInterval(() => setActiveSlide(activeIndex + 1), 4200);
+});
+
 const revealNodes = document.querySelectorAll(".reveal");
 const observer = new IntersectionObserver(
   (entries) => {

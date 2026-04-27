@@ -4,17 +4,17 @@ import { getLandingPageHtml, isSupportedLocale } from "../lib/landing-page";
 function getSeoCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Forgent3D | 从 Prompt 到参数化 CAD",
+      title: "Forgent3D | 用现有 AI agent 生成真实 3D 模型",
       description:
-        "Forgent3D 面向 Codex、Claude Code、Cursor 与 CLI coding agents，将 Prompt 转为可验证的参数化 CAD 几何结果。",
+        "Forgent3D 连接 Codex、Claude Code、Cursor 等已有 AI agent，在本机生成、预览和验证真实三维模型。免费开源，数据留在本地。",
       ogLocale: "zh_CN",
     };
   }
 
   return {
-    title: "Forgent3D | From Prompt to Parametric CAD",
+    title: "Forgent3D | Generate Real 3D Models with Existing AI Agents",
     description:
-      "Forgent3D turns prompts into verifiable parametric CAD geometry for Codex, Claude Code, Cursor, and CLI coding agents.",
+      "Forgent3D connects Codex, Claude Code, Cursor, and other existing AI agents to generate, preview, and verify real 3D models locally. Free, open source, and local-first.",
     ogLocale: "en_US",
   };
 }
