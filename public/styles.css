@@ -332,7 +332,7 @@ pre {
 
 .screenshot-stage {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   border: 1px solid rgba(117, 220, 255, 0.16);
   border-radius: 28px;
@@ -366,6 +366,69 @@ pre {
 
 .screenshot-slide img {
   object-fit: cover;
+}
+
+.hero-preview-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.hero-preview-lightbox.is-open {
+  display: flex;
+}
+
+.hero-preview-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(2, 8, 16, 0.76);
+  backdrop-filter: blur(6px);
+}
+
+.hero-preview-panel {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, 96vw);
+  max-height: 90vh;
+  border: 1px solid rgba(117, 220, 255, 0.35);
+  border-radius: 26px;
+  background: rgba(3, 9, 17, 0.96);
+  padding: 14px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.hero-preview-panel img {
+  display: block;
+  width: 100%;
+  max-height: calc(90vh - 28px);
+  border-radius: 18px;
+  object-fit: contain;
+}
+
+.hero-preview-close {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  z-index: 2;
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(117, 220, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(3, 9, 17, 0.72);
+  color: #d8e8ff;
+  cursor: pointer;
+}
+
+body.hero-preview-open {
+  overflow: hidden;
 }
 
 .reveal {

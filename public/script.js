@@ -89,3 +89,37 @@ const observer = new IntersectionObserver(
 );
 
 revealNodes.forEach((node) => observer.observe(node));
+
+const heroPreviewTrigger = document.querySelector(".js-hero-preview-trigger");
+const heroPreviewLightbox = document.querySelector(".js-hero-preview-lightbox");
+const heroPreviewImage = document.querySelector(".js-hero-preview-image");
+const heroPreviewCloseNodes = document.querySelectorAll(".js-hero-preview-close");
+
+if (heroPreviewTrigger && heroPreviewLightbox && heroPreviewImage) {
+  function closeHeroPreview() {
+    heroPreviewLightbox.classList.remove("is-open");
+    heroPreviewLightbox.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("hero-preview-open");
+    heroPreviewTrigger.focus();
+  }
+
+  heroPreviewTrigger.addEventListener("click", () => {
+    const src = heroPreviewTrigger.dataset.previewSrc || heroPreviewImage.getAttribute("src") || "";
+    const alt = heroPreviewTrigger.dataset.previewAlt || heroPreviewImage.getAttribute("alt") || "Preview image";
+    heroPreviewImage.setAttribute("src", src);
+    heroPreviewImage.setAttribute("alt", alt);
+    heroPreviewLightbox.classList.add("is-open");
+    heroPreviewLightbox.setAttribute("aria-hidden", "false");
+    document.body.classList.add("hero-preview-open");
+  });
+
+  heroPreviewCloseNodes.forEach((node) => {
+    node.addEventListener("click", closeHeroPreview);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && heroPreviewLightbox.classList.contains("is-open")) {
+      closeHeroPreview();
+    }
+  });
+}

@@ -5,14 +5,15 @@ const COPY = {
     switchLabel: "中",
     brandSubline: "local AI CAD workbench",
     navLoop: "Workflow",
-    navScreenshots: "Screenshots",
+    navDemo: "Demo",
     navFeatures: "Why Forgent3D",
     navDownload: "Download",
-    heroKicker: "Existing agents / local data / real 3D",
-    heroTitle: "Generate real 3D models with the AI agents you already use",
+    heroKicker: "CODEX / CLAUDE CODE / CURSOR · LOCAL-FIRST · OPEN SOURCE · EDITABLE CAD",
+    heroTitle: "Generate editable 3D models with AI coding agents",
     heroSubtitle:
-      "Connect Codex, Claude Code, Cursor, and other coding agents to turn model ideas into previewable, verifiable 3D results on your own machine. Open source, free to use, and built for local data.",
-    heroDownload: "Download Forgent3D",
+      "Forgent3D gives Codex, Claude Code and Cursor a local CAD feedback loop: generate model code, rebuild, preview, verify and iterate.",
+    heroDemo: "Watch Demo",
+    heroDownload: "Download Desktop App",
     heroGithub: "View GitHub",
     chipExisting: "Existing agents",
     chipLocal: "Local data",
@@ -29,33 +30,35 @@ const COPY = {
     loopPreview: "Forgent3D rebuilds and displays the real 3D result locally.",
     loopVerifyLabel: "Verify",
     loopVerify: "The agent reads screenshots, dimensions, and status before iterating again.",
-    screenshotsEyebrow: "Product Screenshots",
-    screenshotsTitle: "See the local agent workflow in action",
+    screenshotsEyebrow: "Live Demo",
+    screenshotsTitle: "Real Demo: Codex Generates a Quadcopter",
     screenshotsSubtitle:
-      "A focused view of prompt input, agent planning, generated parts, and assembly workflows inside Forgent3D.",
-    screenshotInputTitle: "Describe the model",
-    screenshotInputDesc: "Start from a plain-language request and keep the modeling context inside your local project.",
-    screenshotPlanTitle: "Let the agent plan",
-    screenshotPlanDesc: "Use the AI agent you already trust to break the model into concrete, editable steps.",
-    screenshotGenerateTitle: "Generate real parts",
-    screenshotGenerateDesc: "Turn the plan into visible 3D geometry that can be rebuilt, checked, and revised.",
-    screenshotAssemblyTitle: "Preview assemblies",
-    screenshotAssemblyDesc: "Inspect more complex structures and motion-ready models with local feedback.",
-    featuresEyebrow: "Why Forgent3D",
-    featuresTitle: "Free, local, verifiable AI CAD",
-    featuresAgentsTitle: "Use the agents you already have",
-    featuresAgents: "Keep working in Codex, Claude Code, Cursor, or another coding agent. Forgent3D adds CAD feedback without locking you into a new AI service.",
-    featuresLocalTitle: "Your data stays local",
-    featuresLocal: "Model code, build output, screenshots, and validation data stay on your machine during the preview and verification loop.",
-    featuresModelsTitle: "Real models, not one-shot images",
-    featuresModels: "Create editable 3D results that can be rebuilt, measured, revised, and used for parts, assemblies, and motion-ready experiments.",
-    casesTitle: "Modeling workflows agents can actually verify",
-    casesPartTitle: "Mechanical parts",
-    casesPartDesc: "Check geometry, dimensions, holes, and fit for brackets, flanges, fixtures, and enclosures.",
-    casesParamTitle: "Product prototypes",
-    casesParamDesc: "Keep design variables in code so models can evolve instead of ending as one-off outputs.",
-    casesAiTitle: "Assemblies and motion",
-    casesAiDesc: "Preview more complex structures and motion-ready models with feedback agents can read.",
+      "Starting from a single prompt, the agent generates model code. Forgent3D rebuilds locally, shows the 3D preview, and feeds screenshots, dimensions, and build status back to the agent for the next iteration.",
+    screenshotInputTitle: "Describe to Codex",
+    screenshotInputDesc: "One natural-language prompt kicks off the drone build — model context stays inside your local project.",
+    screenshotPlanTitle: "Agent plans the parts",
+    screenshotPlanDesc: "Codex breaks the quadcopter down into concrete, editable modeling steps.",
+    screenshotGenerateTitle: "Generate drone geometry",
+    screenshotGenerateDesc: "Model code turns into real 3D geometry — arms, motor mounts, frame — rebuilt and verified locally.",
+    screenshotAssemblyTitle: "Preview the assembly",
+    screenshotAssemblyDesc: "Inspect the full 4-axis structure. The agent reads dimensions and screenshots to keep iterating.",
+    featuresEyebrow: "Why Not Text-to-3D?",
+    featuresTitle: "Why Not Ordinary Text-to-3D?",
+    featuresSubtitle: "Forgent3D doesn't generate one-shot images or uncontrolled meshes — it gives AI agents a local loop to generate, rebuild, and verify editable models.",
+    featuresModelsTitle: "Real, Editable Models",
+    featuresModels: "Generate code that can be rebuilt, measured, and revised — not a mesh or image you can only look at.",
+    featuresAgentsTitle: "Use the Agents You Already Have",
+    featuresAgents: "No need to replace Codex, Claude Code, or Cursor, or lock into a new cloud generation service.",
+    featuresLocalTitle: "Your Data Stays Local",
+    featuresLocal: "Model code, build output, screenshots, and validation data all stay on your machine — great for private projects and experiments.",
+    casesEyebrow: "Use Cases",
+    casesTitle: "Modeling Tasks Built for Agent Iteration",
+    casesPartTitle: "Mechanical Parts",
+    casesPartDesc: "Brackets, flanges, fixtures, enclosures — parts with clear hole patterns, chamfers, and dimensional constraints.",
+    casesParamTitle: "Product Prototypes",
+    casesParamDesc: "Keep dimensions, structure, and adjustable parameters in code for easy revision and reuse.",
+    casesAiTitle: "Assemblies and Motion",
+    casesAiDesc: "Preview multi-part structures and simple motion relationships, letting the agent refine based on real feedback.",
     ctaEyebrow: "Free / Open Source / Local",
     ctaTitle: "Start building with your existing AI agent",
     ctaSubtitle: "Download the desktop app, connect it to your local project, and let your agent verify models instead of guessing.",
@@ -73,14 +76,15 @@ const COPY = {
     switchLabel: "EN",
     brandSubline: "本地 AI CAD 工作台",
     navLoop: "工作流",
-    navScreenshots: "截图展示",
+    navDemo: "演示",
     navFeatures: "核心优势",
     navDownload: "下载",
-    heroKicker: "已有 agent / 本地数据 / 真实 3D",
-    heroTitle: "用现有 AI agent 生成真实 3D 模型",
+    heroKicker: "CODEX / CLAUDE CODE / CURSOR · 本地优先 · 开源 · 可编辑 CAD",
+    heroTitle: "用  Claude Code / Codex 生成可编辑 3D 模型",
     heroSubtitle:
-      "连接 Codex、Claude Code、Cursor 等你已经在用的 AI 编程工具，在本机把模型想法变成可预览、可验证、可继续迭代的三维结果。开源免费，数据留在本地。",
-    heroDownload: "下载 Forgent3D",
+      "Forgent3D 为 Codex、Claude Code 和 Cursor 提供本地 CAD 反馈闭环：生成模型代码、重建、预览、验证、迭代。",
+    heroDemo: "观看演示",
+    heroDownload: "下载应用",
     heroGithub: "查看 GitHub",
     chipExisting: "使用已有 agent",
     chipLocal: "数据在本地",
@@ -97,33 +101,35 @@ const COPY = {
     loopPreview: "Forgent3D 在本机重建并显示真实三维结果。",
     loopVerifyLabel: "验证",
     loopVerify: "agent 读取截图、尺寸和状态后继续修正。",
-    screenshotsEyebrow: "产品截图",
-    screenshotsTitle: "看看本地 agent 工作流如何运转",
+    screenshotsEyebrow: "真实演示",
+    screenshotsTitle: "真实 Demo：Codex 生成四轴无人机",
     screenshotsSubtitle:
-      "从输入需求、agent 规划、生成零件到装配预览，展示 Forgent3D 里的真实建模闭环。",
-    screenshotInputTitle: "描述模型需求",
-    screenshotInputDesc: "从自然语言需求开始，把建模上下文保留在本地项目里。",
-    screenshotPlanTitle: "让 agent 规划",
-    screenshotPlanDesc: "继续使用你信任的 AI agent，把模型拆成清晰、可编辑的步骤。",
-    screenshotGenerateTitle: "生成真实零件",
-    screenshotGenerateDesc: "把计划转成可见的三维几何，并继续重建、检查和修改。",
-    screenshotAssemblyTitle: "预览装配结构",
-    screenshotAssemblyDesc: "检查更复杂的结构和可运动模型，并保留本地反馈。",
-    featuresEyebrow: "核心优势",
-    featuresTitle: "免费、本地、可验证的 AI CAD",
+      "从一句需求开始，agent 生成模型代码，Forgent3D 在本地重建模型、显示 3D 预览，并把截图、尺寸和构建状态反馈给 agent 继续修正。",
+    screenshotInputTitle: "向 Codex 描述无人机",
+    screenshotInputDesc: "一句自然语言需求开始无人机建模，建模上下文保留在本地项目里。",
+    screenshotPlanTitle: "Agent 规划零件",
+    screenshotPlanDesc: "Codex 把四轴无人机拆成清晰、可编辑的建模步骤。",
+    screenshotGenerateTitle: "生成无人机几何",
+    screenshotGenerateDesc: "模型代码转成真实三维几何——机臂、电机座、机架——在本地重建并验证。",
+    screenshotAssemblyTitle: "预览整机装配",
+    screenshotAssemblyDesc: "检查完整的四轴结构，agent 读取尺寸和截图继续迭代。",
+    featuresEyebrow: "为什么不是 text-to-3D？",
+    featuresTitle: "为什么不是普通 text-to-3D？",
+    featuresSubtitle: "Forgent3D 不生成一次性图片或不可控 mesh，而是让 AI agent 在本地生成、重建、验证可编辑模型。",
+    featuresModelsTitle: "真实可编辑模型",
+    featuresModels: "生成可重建、可测量、可修改的模型代码，而不是只能看的 mesh 或图片。",
     featuresAgentsTitle: "继续用现有 agent",
-    featuresAgents: "不用换掉 Codex、Claude Code、Cursor，也不用绑定新的云端生成服务。Forgent3D 给已有 AI 编程工具补上 CAD 反馈。",
+    featuresAgents: "不用替换 Codex、Claude Code、Cursor，也不用绑定新的云端生成服务。",
     featuresLocalTitle: "数据留在本地",
-    featuresLocal: "模型代码、构建结果、截图和验证信息都在你的电脑上完成，适合私有项目、实验和开源协作。",
-    featuresModelsTitle: "真实模型，不是一次性图片",
-    featuresModels: "生成可重建、可量测、可修改的三维结果，覆盖零件、装配以及可运动模型的预览验证。",
-    casesTitle: "agent 能验证的建模场景",
+    featuresLocal: "模型代码、构建结果、截图和验证信息都在你的电脑上完成，适合私有项目和实验。",
+    casesEyebrow: "使用场景",
+    casesTitle: "适合 AI agent 迭代的建模任务",
     casesPartTitle: "机械零件",
-    casesPartDesc: "验证支架、法兰、夹具、外壳的几何、尺寸、孔位和装配关系。",
+    casesPartDesc: "支架、法兰、夹具、外壳、孔位、倒角和尺寸关系清晰的零件。",
     casesParamTitle: "产品原型",
-    casesParamDesc: "把尺寸、孔位和结构变量保留在代码里，让模型持续演进。",
+    casesParamDesc: "把尺寸、结构和可调参数保留在代码里，方便持续修改和复用。",
     casesAiTitle: "装配与运动",
-    casesAiDesc: "预览更复杂的结构和可运动模型，让 agent 基于反馈继续修正。",
+    casesAiDesc: "预览多零件结构和简单运动关系，让 agent 基于真实反馈继续修正。",
     ctaEyebrow: "免费 / 开源 / 本地运行",
     ctaTitle: "用你已有的 AI agent 开始建模",
     ctaSubtitle: "下载桌面端，连接本地项目，让 agent 不再凭感觉猜模型，而是先验证再修改。",
@@ -156,99 +162,52 @@ export function getLandingPageHtml(locale) {
         </a>
         <nav class="hidden items-center gap-6 font-mono text-xs text-slate-400 md:flex" aria-label="Primary">
           <a class="transition hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
-          <a class="transition hover:text-cyanx" href="#screenshots">${t.navScreenshots}</a>
+          <a class="transition hover:text-cyanx" href="#screenshots">${t.navDemo}</a>
           <a class="transition hover:text-cyanx" href="#features">${t.navFeatures}</a>
           <a class="transition hover:text-cyanx" href="#download">${t.navDownload}</a>
         </nav>
         <div class="flex items-center gap-3">
+          <a
+            class="js-github-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white/5 transition hover:-translate-y-0.5 hover:border-cyanx/50"
+            href="#"
+            aria-label="${t.heroGithub}"
+            title="${t.heroGithub}"
+          >
+            <img src="https://github.githubassets.com/favicons/favicon.png" width="16" height="16" alt="GitHub" loading="lazy" decoding="async" class="brightness-0 invert opacity-90" />
+          </a>
           <button class="js-lang-toggle rounded-full border border-line bg-white/5 px-3 py-2 font-mono text-xs text-slate-300 transition hover:border-cyanx/50 hover:text-white" type="button" aria-label="Switch language">${t.switchLabel}</button>
         </div>
       </header>
 
       <main id="top" lang="${t.htmlLang}">
-        <section class="grid min-h-[calc(100vh-96px)] items-center gap-12 py-16 lg:grid-cols-[0.86fr_1.14fr] lg:py-20">
-          <div class="reveal">
-            <p class="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-cyanx">${t.heroKicker}</p>
-            <h1 class="max-w-3xl text-[clamp(2.2rem,6.8vw,5rem)] font-bold leading-[0.95] tracking-[-0.05em] text-white text-balance">
+        <section class="grid min-h-[calc(100vh-80px)] items-center gap-10 pt-5 pb-16 lg:gap-14 lg:grid-cols-[0.86fr_1.14fr] lg:pt-6 lg:pb-20">
+          <div class="reveal min-h-[520px]">
+            <h1 class="max-w-[13.5ch] text-[clamp(1.9rem,5.2vw,3.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white text-balance">
               ${t.heroTitle}
             </h1>
-            <p class="mt-6 max-w-xl text-lg leading-8 text-slate-300">${t.heroSubtitle}</p>
-            <div class="mt-6 flex max-w-xl flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-300">
-              <span class="inline-flex items-center gap-2 rounded-full border border-cyanx/30 bg-cyanx/10 px-3 py-2">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M9.20509 8.76514V6.50548C9.20509 6.31517 9.27649 6.17237 9.44293 6.07733L13.9861 3.46091C14.6046 3.10416 15.342 2.93772 16.103 2.93772C18.9573 2.93772 20.7651 5.14986 20.7651 7.50457C20.7651 7.67101 20.7651 7.86132 20.7412 8.05164L16.0316 5.29243C15.7462 5.12599 15.4607 5.12599 15.1753 5.29243L9.20509 8.76514ZM19.8136 17.566V12.1665C19.8136 11.8334 19.6708 11.5955 19.3854 11.4291L13.4152 7.95637L15.3656 6.83836C15.5321 6.74332 15.6749 6.74332 15.8413 6.83836L20.3845 9.45477C21.6928 10.216 22.5728 11.8334 22.5728 13.4032C22.5728 15.2108 21.5025 16.8759 19.8136 17.5657V17.566ZM7.80173 12.8088L5.8513 11.6671C5.68486 11.5721 5.61346 11.4293 5.61346 11.239V6.00616C5.61346 3.46114 7.56389 1.53436 10.2042 1.53436C11.2033 1.53436 12.1307 1.86746 12.9159 2.46205L8.2301 5.17374C7.94475 5.34018 7.80196 5.57801 7.80196 5.91112V12.809L7.80173 12.8088ZM12 15.2349L9.20509 13.6651V10.3352L12 8.76537L14.7947 10.3352V13.6651L12 15.2349ZM13.7958 22.4659C12.7967 22.4659 11.8693 22.1328 11.0841 21.5382L15.7699 18.8265C16.0553 18.6601 16.198 18.4223 16.198 18.0892V11.1912L18.1723 12.3329C18.3388 12.4279 18.4102 12.5707 18.4102 12.7611V17.9939C18.4102 20.5389 16.4359 22.4657 13.7958 22.4657V22.4659ZM8.15848 17.1617L3.61528 14.5453C2.30696 13.784 1.42701 12.1667 1.42701 10.5969C1.42701 8.76537 2.52115 7.12417 4.20987 6.43431V11.8575C4.20987 12.1906 4.35266 12.4284 4.63802 12.5948L10.5846 16.0437L8.63415 17.1617C8.46771 17.2567 8.32492 17.2567 8.15848 17.1617ZM7.897 21.0626C5.20919 21.0626 3.23488 19.0407 3.23488 16.5432C3.23488 16.3529 3.25875 16.1626 3.2824 15.9723L7.96817 18.684C8.25352 18.8504 8.53911 18.8504 8.82447 18.684L14.7947 15.2351V17.4948C14.7947 17.6851 14.7233 17.8279 14.5568 17.9229L10.0136 20.5394C9.39518 20.8961 8.6578 21.0626 7.89677 21.0626H7.897ZM13.7958 23.8929C16.6739 23.8929 19.0762 21.8475 19.6235 19.1358C22.2874 18.4459 24 15.9484 24 13.4034C24 11.7383 23.2865 10.121 22.002 8.95546C22.121 8.45591 22.1924 7.95637 22.1924 7.45705C22.1924 4.05573 19.4331 1.51048 16.2458 1.51048C15.6037 1.51048 14.9852 1.60553 14.3668 1.81971C13.2963 0.773101 11.8215 0.107117 10.2042 0.107117C7.32606 0.107117 4.92383 2.15259 4.37653 4.86428C1.7126 5.55414 0 8.05164 0 10.5967C0 12.2617 0.713506 13.8791 1.99795 15.0446C1.87904 15.5441 1.80764 16.0437 1.80764 16.543C1.80764 19.9443 4.56685 22.4896 7.75421 22.4896C8.39632 22.4896 9.01478 22.3945 9.63324 22.1803C10.7035 23.2269 12.1783 23.8929 13.7958 23.8929Z"></path>
-                </svg>
-                Codex
-              </span>
-              <span class="inline-flex items-center gap-2 rounded-full border border-cyanx/30 bg-cyanx/10 px-3 py-2">
-                <img src="https://www.anthropic.com/favicon.ico" width="12" height="12" alt="Claude" loading="lazy" decoding="async" />
-                Claude Code
-              </span>
-              <span class="inline-flex items-center gap-2 rounded-full border border-cyanx/30 bg-cyanx/10 px-3 py-2">
-                <img src="https://cursor.com/favicon.ico" width="12" height="12" alt="Cursor" loading="lazy" decoding="async" />
-                Cursor
-              </span>
-            </div>
-            <div class="mt-4 flex max-w-xl flex-wrap gap-2 text-xs text-slate-300">
-              <span class="rounded-full border border-line bg-white/5 px-3 py-2">${t.chipExisting}</span>
-              <span class="rounded-full border border-line bg-white/5 px-3 py-2">${t.chipLocal}</span>
-              <span class="rounded-full border border-line bg-white/5 px-3 py-2">${t.chipFree}</span>
-              <span class="rounded-full border border-line bg-white/5 px-3 py-2">${t.chipMotion}</span>
-            </div>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a class="js-download-link inline-flex min-h-[52px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-6 py-4 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="#download">${t.heroDownload}</a>
-              <a class="js-github-link inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full border border-line bg-white/5 px-6 py-4 text-sm font-bold text-slate-100 transition hover:-translate-y-0.5 hover:border-cyanx/50" href="#download"><img src="https://github.githubassets.com/favicons/favicon.png" width="14" height="14" alt="GitHub" loading="lazy" decoding="async" class="brightness-0 invert opacity-90" />${t.heroGithub}</a>
+            <p class="mt-5 max-w-xl text-base leading-7 text-slate-300">${t.heroSubtitle}</p>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a class="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-white/25 bg-white/8 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/50" href="#screenshots">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                ${t.heroDemo}
+              </a>
+              <a class="js-download-link inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="#download">${t.heroDownload}</a>
             </div>
           </div>
 
-          <div class="reveal relative min-h-[560px]">
-            <div class="absolute inset-5 rounded-[2.2rem] border border-cyanx/20 bg-slate-950/55 shadow-panel backdrop-blur-xl">
-              <div class="absolute inset-0 rounded-[2.2rem] blueprint-grid"></div>
-              <div class="scanline absolute inset-x-0 top-0 h-28"></div>
-              <div class="mechanical-core absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2">
-                <span class="gear-ring"></span>
-                <span class="gear-bridge"></span>
-                <span class="axis axis-x"></span>
-                <span class="axis axis-y"></span>
-                <span class="axis axis-z"></span>
-              </div>
-              <div class="absolute bottom-5 left-5 right-5 flex items-center justify-between rounded-2xl border border-line bg-slate-950/70 px-4 py-3 font-mono text-xs text-slate-400">
-                <span>runner://workspace/flange</span>
-                <strong class="text-signal">rebuild_model ok</strong>
-              </div>
-            </div>
-
-            <div class="absolute right-0 top-0 w-64 rounded-3xl border border-line bg-slate-950/80 p-4 font-mono text-xs shadow-panel backdrop-blur-xl">
-              <div class="mb-4 flex items-center gap-2 text-slate-500">
-                <span class="h-2 w-2 rounded-full bg-red-400"></span>
-                <span class="h-2 w-2 rounded-full bg-amber-300"></span>
-                <span class="h-2 w-2 rounded-full bg-signal"></span>
-                <span class="ml-2">agent bridge</span>
-              </div>
-              <div class="space-y-3">
-                <p class="flex justify-between gap-4"><span>clients</span><strong class="text-cyanx">4 ready</strong></p>
-                <p class="flex justify-between gap-4"><span>rebuild_model</span><strong class="text-signal">ok</strong></p>
-                <p class="flex justify-between gap-4"><span>screenshot_model</span><strong class="text-cyanx">iso</strong></p>
-                <p class="flex justify-between gap-4"><span>get_model_info</span><strong class="text-cyanx">bbox</strong></p>
-              </div>
-            </div>
-
-            <div class="absolute bottom-0 left-0 w-[min(360px,82%)] rounded-3xl border border-line bg-slate-950/80 p-4 font-mono text-xs text-slate-300 shadow-panel backdrop-blur-xl">
-              <p class="mb-3 text-slate-500">models/bracket/part.py</p>
-              <pre class="overflow-hidden leading-6"><code>prompt = "motor bracket"
-result = build_part(params)
-
-agent.verify(
-  rebuild=True,
-  screenshot="iso",
-  bbox=True,
-)</code></pre>
-            </div>
-
-            <div class="absolute bottom-24 right-6 rounded-2xl border border-line bg-slate-950/75 p-4 font-mono text-xs shadow-panel backdrop-blur-xl">
-              <p class="text-slate-500">bbox</p>
-              <strong class="text-white">84 x 84 x 18 mm</strong>
-            </div>
+          <div class="reveal relative min-h-[520px] lg:min-h-[620px]">
+            <button
+              class="js-hero-preview-trigger absolute inset-2 overflow-hidden rounded-[2.2rem] border border-cyanx/35 bg-slate-900 p-1.5 shadow-panel transition hover:border-cyanx/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
+              type="button"
+              aria-label="Open larger product preview"
+              data-preview-src="/product.webp"
+              data-preview-alt="Forgent3D product UI"
+            >
+              <picture>
+                <source srcset="/product.webp" type="image/webp" />
+                <img src="/product.png" alt="Forgent3D product UI" class="h-full w-full object-contain object-center brightness-110 contrast-[1.04]" loading="eager" decoding="async" />
+              </picture>
+            </button>
           </div>
         </section>
 
@@ -320,20 +279,23 @@ agent.verify(
         </section>
 
         <section class="py-20" id="features">
-          <div class="reveal mb-8">
-            <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.featuresEyebrow}</p>
-            <h2 class="text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.featuresTitle}</h2>
+          <div class="reveal mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.featuresEyebrow}</p>
+              <h2 class="max-w-2xl text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.featuresTitle}</h2>
+            </div>
+            <p class="max-w-sm text-sm leading-6 text-slate-400">${t.featuresSubtitle}</p>
           </div>
           <div class="grid gap-4 lg:grid-cols-3">
+            <article class="reveal mech-card rounded-[2rem] border border-cyanx/30 bg-slate-950/55 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-evidence"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Models</p><h3 class="mt-3 text-2xl font-bold">${t.featuresModelsTitle}</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresModels}</p></article>
             <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-geometry"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Agents</p><h3 class="mt-3 text-2xl font-bold">${t.featuresAgentsTitle}</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresAgents}</p></article>
             <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-rebuild"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Local</p><h3 class="mt-3 text-2xl font-bold">${t.featuresLocalTitle}</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresLocal}</p></article>
-            <article class="reveal mech-card rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl"><div class="mini-visual visual-evidence"></div><p class="mt-6 font-mono text-xs uppercase tracking-[0.2em] text-cyanx">Models</p><h3 class="mt-3 text-2xl font-bold">${t.featuresModelsTitle}</h3><p class="mt-3 text-sm leading-6 text-slate-400">${t.featuresModels}</p></article>
           </div>
         </section>
 
         <section class="py-20">
           <div class="reveal mb-8">
-            <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">Use Cases</p>
+            <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.casesEyebrow}</p>
             <h2 class="text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.casesTitle}</h2>
           </div>
           <div class="grid gap-4 md:grid-cols-3">
@@ -356,11 +318,22 @@ agent.verify(
         </section>
       </main>
 
+      <div class="hero-preview-lightbox js-hero-preview-lightbox" aria-hidden="true">
+        <button class="hero-preview-backdrop js-hero-preview-close" type="button" aria-label="Close image preview"></button>
+        <div class="hero-preview-panel" role="dialog" aria-modal="true" aria-label="Product image preview">
+          <button class="hero-preview-close js-hero-preview-close" type="button" aria-label="Close image preview">✕</button>
+          <picture>
+            <source srcset="/product.webp" type="image/webp" />
+            <img class="js-hero-preview-image" src="/product.png" alt="Forgent3D product UI" loading="lazy" decoding="async" />
+          </picture>
+        </div>
+      </div>
+
       <footer class="flex flex-col justify-between gap-5 border-t border-line py-8 text-sm text-slate-500 md:flex-row">
         <p><strong class="text-slate-200">Forgent3D</strong> / <span>${t.footerTagline}</span></p>
         <div class="flex flex-wrap gap-5 font-mono text-xs">
           <a class="hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
-          <a class="hover:text-cyanx" href="#screenshots">${t.navScreenshots}</a>
+          <a class="hover:text-cyanx" href="#screenshots">${t.navDemo}</a>
           <a class="hover:text-cyanx" href="#features">${t.navFeatures}</a>
           <a class="hover:text-cyanx" href="/${locale}/ai-3d-model-generation">${t.guidesAi3D}</a>
           <a class="hover:text-cyanx" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
