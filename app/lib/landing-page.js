@@ -69,6 +69,9 @@ const COPY = {
     guidesCodeCad: "Code to 3D Models",
     guidesLocalData: "Local Data",
     guidesQuickStart: "Quick Start",
+    imagePreviewOpenAria: "Open larger preview",
+    imagePreviewDialogAria: "Image preview",
+    imagePreviewCloseAria: "Close preview",
   },
   zh: {
     locale: "zh_CN",
@@ -140,6 +143,9 @@ const COPY = {
     guidesCodeCad: "代码生成三维模型软件",
     guidesLocalData: "本地数据",
     guidesQuickStart: "快速开始",
+    imagePreviewOpenAria: "放大查看",
+    imagePreviewDialogAria: "图片预览",
+    imagePreviewCloseAria: "关闭预览",
   },
 };
 
@@ -199,8 +205,9 @@ export function getLandingPageHtml(locale) {
             <button
               class="js-hero-preview-trigger absolute inset-2 overflow-hidden rounded-[2.2rem] border border-cyanx/35 bg-slate-900 p-1.5 shadow-panel transition hover:border-cyanx/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
               type="button"
-              aria-label="Open larger product preview"
+              aria-label="${t.imagePreviewOpenAria}"
               data-preview-src="/product.webp"
+              data-preview-fallback="/product.png"
               data-preview-alt="Forgent3D product UI"
             >
               <picture>
@@ -227,53 +234,96 @@ export function getLandingPageHtml(locale) {
           </div>
         </section>
 
-        <section class="py-20" id="screenshots">
-          <div class="reveal mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <section class="py-12 md:py-16 lg:py-20" id="screenshots">
+          <div class="reveal mb-5 flex flex-col justify-between gap-3 md:mb-6 md:flex-row md:items-end md:gap-4">
             <div>
-              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.screenshotsEyebrow}</p>
-              <h2 class="max-w-3xl text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.screenshotsTitle}</h2>
+              <p class="mb-2 font-mono text-xs uppercase tracking-[0.24em] text-cyanx md:mb-3">${t.screenshotsEyebrow}</p>
+              <h2 class="max-w-3xl text-2xl font-bold tracking-[-0.05em] text-white md:text-3xl lg:text-4xl">${t.screenshotsTitle}</h2>
             </div>
             <p class="max-w-sm text-sm leading-6 text-slate-400">${t.screenshotsSubtitle}</p>
           </div>
-          <div class="reveal screenshot-carousel js-screenshot-carousel rounded-[2.25rem] border border-line bg-slate-950/55 p-4 shadow-panel backdrop-blur-xl">
-            <div class="screenshot-stage">
-              <figure class="screenshot-slide is-active" data-title="${t.screenshotInputTitle}" data-desc="${t.screenshotInputDesc}">
-                <picture>
-                  <source srcset="/screenshots/input.webp" type="image/webp" />
-                  <img src="/screenshots/input.png" alt="${t.screenshotInputTitle}" loading="lazy" decoding="async" />
-                </picture>
-              </figure>
-              <figure class="screenshot-slide" data-title="${t.screenshotPlanTitle}" data-desc="${t.screenshotPlanDesc}">
-                <picture>
-                  <source srcset="/screenshots/plan.webp" type="image/webp" />
-                  <img src="/screenshots/plan.png" alt="${t.screenshotPlanTitle}" loading="lazy" decoding="async" />
-                </picture>
-              </figure>
-              <figure class="screenshot-slide" data-title="${t.screenshotGenerateTitle}" data-desc="${t.screenshotGenerateDesc}">
-                <picture>
-                  <source srcset="/screenshots/generate-parts.webp" type="image/webp" />
-                  <img src="/screenshots/generate_parts.png" alt="${t.screenshotGenerateTitle}" loading="lazy" decoding="async" />
-                </picture>
-              </figure>
-              <figure class="screenshot-slide" data-title="${t.screenshotAssemblyTitle}" data-desc="${t.screenshotAssemblyDesc}">
-                <picture>
-                  <source srcset="/screenshots/assembly.webp" type="image/webp" />
-                  <img src="/screenshots/assembly.png" alt="${t.screenshotAssemblyTitle}" loading="lazy" decoding="async" />
-                </picture>
-              </figure>
-            </div>
-            <div class="mt-4 flex flex-col justify-between gap-4 rounded-3xl border border-line bg-white/[0.03] p-5 md:flex-row md:items-center">
-              <div>
-                <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyanx js-screenshot-index">01 / 04</p>
-                <h3 class="mt-2 text-2xl font-bold js-screenshot-title">${t.screenshotInputTitle}</h3>
-                <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-400 js-screenshot-desc">${t.screenshotInputDesc}</p>
-              </div>
-              <div class="flex gap-2" aria-label="Screenshot carousel controls">
-                <button class="js-screenshot-dot h-3 w-8 rounded-full bg-cyanx" type="button" aria-label="Show screenshot 1"></button>
-                <button class="js-screenshot-dot h-3 w-3 rounded-full bg-slate-600" type="button" aria-label="Show screenshot 2"></button>
-                <button class="js-screenshot-dot h-3 w-3 rounded-full bg-slate-600" type="button" aria-label="Show screenshot 3"></button>
-                <button class="js-screenshot-dot h-3 w-3 rounded-full bg-slate-600" type="button" aria-label="Show screenshot 4"></button>
-              </div>
+          <div class="reveal rounded-[2.25rem] border border-line bg-slate-950/55 p-3 shadow-panel backdrop-blur-xl md:p-4">
+            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <article class="overflow-hidden rounded-2xl border border-line bg-white/[0.02]">
+                <button
+                  type="button"
+                  class="js-hero-preview-trigger group relative aspect-[16/10] w-full cursor-zoom-in overflow-hidden border-0 bg-[#050b14] p-0 text-left transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
+                  aria-label="${t.imagePreviewOpenAria}: ${t.screenshotInputTitle}"
+                  data-preview-src="/screenshots/input.webp"
+                  data-preview-fallback="/screenshots/input.png"
+                  data-preview-alt="${t.screenshotInputTitle}"
+                >
+                  <picture>
+                    <source srcset="/screenshots/input.webp" type="image/webp" />
+                    <img src="/screenshots/input.png" alt="" class="pointer-events-none absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" aria-hidden="true" />
+                  </picture>
+                </button>
+                <div class="p-4">
+                  <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyanx">01</p>
+                  <h3 class="mt-2 text-lg font-bold text-white">${t.screenshotInputTitle}</h3>
+                  <p class="mt-2 text-sm leading-6 text-slate-400">${t.screenshotInputDesc}</p>
+                </div>
+              </article>
+              <article class="overflow-hidden rounded-2xl border border-line bg-white/[0.02]">
+                <button
+                  type="button"
+                  class="js-hero-preview-trigger group relative aspect-[16/10] w-full cursor-zoom-in overflow-hidden border-0 bg-[#050b14] p-0 text-left transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
+                  aria-label="${t.imagePreviewOpenAria}: ${t.screenshotPlanTitle}"
+                  data-preview-src="/screenshots/plan.webp"
+                  data-preview-fallback="/screenshots/plan.png"
+                  data-preview-alt="${t.screenshotPlanTitle}"
+                >
+                  <picture>
+                    <source srcset="/screenshots/plan.webp" type="image/webp" />
+                    <img src="/screenshots/plan.png" alt="" class="pointer-events-none absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" aria-hidden="true" />
+                  </picture>
+                </button>
+                <div class="p-4">
+                  <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyanx">02</p>
+                  <h3 class="mt-2 text-lg font-bold text-white">${t.screenshotPlanTitle}</h3>
+                  <p class="mt-2 text-sm leading-6 text-slate-400">${t.screenshotPlanDesc}</p>
+                </div>
+              </article>
+              <article class="overflow-hidden rounded-2xl border border-line bg-white/[0.02]">
+                <button
+                  type="button"
+                  class="js-hero-preview-trigger group relative aspect-[16/10] w-full cursor-zoom-in overflow-hidden border-0 bg-[#050b14] p-0 text-left transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
+                  aria-label="${t.imagePreviewOpenAria}: ${t.screenshotGenerateTitle}"
+                  data-preview-src="/screenshots/generate-parts.webp"
+                  data-preview-fallback="/screenshots/generate_parts.png"
+                  data-preview-alt="${t.screenshotGenerateTitle}"
+                >
+                  <picture>
+                    <source srcset="/screenshots/generate-parts.webp" type="image/webp" />
+                    <img src="/screenshots/generate_parts.png" alt="" class="pointer-events-none absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" aria-hidden="true" />
+                  </picture>
+                </button>
+                <div class="p-4">
+                  <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyanx">03</p>
+                  <h3 class="mt-2 text-lg font-bold text-white">${t.screenshotGenerateTitle}</h3>
+                  <p class="mt-2 text-sm leading-6 text-slate-400">${t.screenshotGenerateDesc}</p>
+                </div>
+              </article>
+              <article class="overflow-hidden rounded-2xl border border-line bg-white/[0.02]">
+                <button
+                  type="button"
+                  class="js-hero-preview-trigger group relative aspect-[16/10] w-full cursor-zoom-in overflow-hidden border-0 bg-[#050b14] p-0 text-left transition hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
+                  aria-label="${t.imagePreviewOpenAria}: ${t.screenshotAssemblyTitle}"
+                  data-preview-src="/screenshots/assembly.webp"
+                  data-preview-fallback="/screenshots/assembly.png"
+                  data-preview-alt="${t.screenshotAssemblyTitle}"
+                >
+                  <picture>
+                    <source srcset="/screenshots/assembly.webp" type="image/webp" />
+                    <img src="/screenshots/assembly.png" alt="" class="pointer-events-none absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" aria-hidden="true" />
+                  </picture>
+                </button>
+                <div class="p-4">
+                  <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyanx">04</p>
+                  <h3 class="mt-2 text-lg font-bold text-white">${t.screenshotAssemblyTitle}</h3>
+                  <p class="mt-2 text-sm leading-6 text-slate-400">${t.screenshotAssemblyDesc}</p>
+                </div>
+              </article>
             </div>
           </div>
         </section>
@@ -319,11 +369,11 @@ export function getLandingPageHtml(locale) {
       </main>
 
       <div class="hero-preview-lightbox js-hero-preview-lightbox" aria-hidden="true">
-        <button class="hero-preview-backdrop js-hero-preview-close" type="button" aria-label="Close image preview"></button>
-        <div class="hero-preview-panel" role="dialog" aria-modal="true" aria-label="Product image preview">
-          <button class="hero-preview-close js-hero-preview-close" type="button" aria-label="Close image preview">✕</button>
+        <button class="hero-preview-backdrop js-hero-preview-close" type="button" aria-label="${t.imagePreviewCloseAria}"></button>
+        <div class="hero-preview-panel" role="dialog" aria-modal="true" aria-label="${t.imagePreviewDialogAria}">
+          <button class="hero-preview-close js-hero-preview-close" type="button" aria-label="${t.imagePreviewCloseAria}">✕</button>
           <picture>
-            <source srcset="/product.webp" type="image/webp" />
+            <source class="js-hero-preview-source" srcset="/product.webp" type="image/webp" />
             <img class="js-hero-preview-image" src="/product.png" alt="Forgent3D product UI" loading="lazy" decoding="async" />
           </picture>
         </div>
