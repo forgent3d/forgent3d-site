@@ -12,5 +12,7 @@ export default function sitemap() {
     { url: `${base}/zh/local-data`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${base}/en/quick-start`, changeFrequency: "weekly", priority: 0.7 },
     { url: `${base}/zh/quick-start`, changeFrequency: "weekly", priority: 0.7 },
+    // { url: `${base}/en/gallery`, changeFrequency: "daily", priority: 0.85 },
+    // { url: `${base}/zh/gallery`, changeFrequency: "daily", priority: 0.85 },
   ];
 }

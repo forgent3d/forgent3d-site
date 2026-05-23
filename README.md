@@ -10,7 +10,16 @@
 - `public/site-links.js`: GitHub / 下载链接配置
 - `wrangler.jsonc`: Cloudflare Workers 静态资源配置
 
-## 本地预览
+## 本地开发
+
+```bash
+pnpm install
+pnpm dev
+```
+
+官网默认 `http://localhost:4173`。模型 Gallery 会请求本机 cad-agent（`http://localhost:3000`），需先在 `packages/cad-agent` 里 `pnpm dev`。
+
+## 本地预览（仅静态 public）
 
 先把链接配置改成真实地址：
 
@@ -53,6 +62,16 @@ npx wrangler deploy
 ```
 
 3. 如果要绑定自定义域名，在 Cloudflare 控制台为这个 Worker 添加域名路由即可。
+
+## 模型分享 / Gallery
+
+官网从 cad-agent 拉取已发布模型数据：
+
+- 画廊：`/en/gallery`、`/zh/gallery`
+- 3D 全屏：`/m/{shareSlug}`
+- 详情介绍：`/m/{shareSlug}/details`
+
+本地端口见 `.env.development`（site `4173`，agent `3000`）。
 
 ## 上线前建议修改
 

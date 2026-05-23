@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@source "./**/*.{js,jsx}";
+@source "./lib/**/*.{js,jsx}";
+
+@theme {
+  --font-display: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+
+  --color-void: #050b14;
+  --color-panel: rgba(8, 18, 32, 0.72);
+  --color-line: rgba(117, 220, 255, 0.18);
+  --color-cyanx: #75dcff;
+  --color-violetx: #9b7cff;
+  --color-signal: #62f7b0;
+
+  --shadow-glow: 0 0 80px rgba(117, 220, 255, 0.18);
+  --shadow-panel: 0 30px 90px rgba(0, 0, 0, 0.42);
+}
+
+@import "../public/styles.css";

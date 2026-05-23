@@ -69,6 +69,8 @@ const COPY = {
     guidesCodeCad: "Code to 3D Models",
     guidesLocalData: "Local Data",
     guidesQuickStart: "Quick Start",
+    navGallery: "Gallery",
+    guidesGallery: "Model Gallery",
     imagePreviewOpenAria: "Open larger preview",
     imagePreviewDialogAria: "Image preview",
     imagePreviewCloseAria: "Close preview",
@@ -143,6 +145,8 @@ const COPY = {
     guidesCodeCad: "代码生成三维模型软件",
     guidesLocalData: "本地数据",
     guidesQuickStart: "快速开始",
+    navGallery: "模型库",
+    guidesGallery: "模型库",
     imagePreviewOpenAria: "放大查看",
     imagePreviewDialogAria: "图片预览",
     imagePreviewCloseAria: "关闭预览",
@@ -170,6 +174,7 @@ export function getLandingPageHtml(locale) {
           <a class="transition hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
           <a class="transition hover:text-cyanx" href="#screenshots">${t.navDemo}</a>
           <a class="transition hover:text-cyanx" href="#features">${t.navFeatures}</a>
+          <!-- <a class="transition hover:text-cyanx" href="/${locale}/gallery">${t.navGallery}</a> -->
           <a class="transition hover:text-cyanx" href="#download">${t.navDownload}</a>
         </nav>
         <div class="flex items-center gap-3">
@@ -389,6 +394,7 @@ export function getLandingPageHtml(locale) {
           <a class="hover:text-cyanx" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
           <a class="hover:text-cyanx" href="/${locale}/local-data">${t.guidesLocalData}</a>
           <a class="hover:text-cyanx" href="/${locale}/quick-start">${t.guidesQuickStart}</a>
+          <!-- <a class="hover:text-cyanx" href="/${locale}/gallery">${t.guidesGallery}</a> -->
         </div>
       </footer>
     </div>

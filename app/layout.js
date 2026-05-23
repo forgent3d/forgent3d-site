@@ -1,3 +1,5 @@
+import "./globals.css";
+
 export const metadata = {
   metadataBase: new URL("https://www.forgent3d.com"),
   title: "Forgent3D",
@@ -33,13 +35,6 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `tailwind.config={theme:{extend:{fontFamily:{display:["Space Grotesk","Avenir Next","Segoe UI","sans-serif"],mono:["IBM Plex Mono","SFMono-Regular","monospace"]},colors:{void:"#050b14",panel:"rgba(8, 18, 32, 0.72)",line:"rgba(117, 220, 255, 0.18)",cyanx:"#75dcff",violetx:"#9b7cff",signal:"#62f7b0"},boxShadow:{glow:"0 0 80px rgba(117, 220, 255, 0.18)",panel:"0 30px 90px rgba(0, 0, 0, 0.42)"}}}};`,
-          }}
-        />
-        <link rel="stylesheet" href="/styles.css" />
       </head>
       <body className="bg-void font-display text-slate-100 antialiased">
         {children}
