@@ -60,13 +60,14 @@ export default async function SharedModelPage({ params, searchParams }) {
   const { shareSlug } = await params;
   const sp = await searchParams;
   const locale = sp?.lang === "zh" ? "zh" : "en";
+  const fromGallery = sp?.from === "gallery";
   const t = getCopy(locale);
 
   const model = await fetchPublishedModel(shareSlug);
   if (!model) notFound();
 
   const glbSrc = await resolveGlbUrl(model);
-  const detailsHref = `/m/${shareSlug}/details?lang=${locale}`;
+  const detailsHref = `/m/${shareSlug}/details?lang=${locale}${fromGallery ? "&from=gallery" : ""}`;
 
   if (!glbSrc) {
     redirect(detailsHref);

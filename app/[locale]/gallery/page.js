@@ -91,7 +91,7 @@ export default async function GalleryPage({ params }) {
           {items.map((item) => (
             <Link
               key={item.shareSlug}
-              href={`/m/${item.shareSlug}?lang=${locale}`}
+              href={`/m/${item.shareSlug}?lang=${locale}&from=gallery`}
               className="group overflow-hidden rounded-[1.5rem] border border-line bg-slate-950/55 shadow-panel backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-cyanx/40"
             >
               <div className="aspect-[4/3] bg-[#050b14]">

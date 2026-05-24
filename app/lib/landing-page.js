@@ -366,7 +366,7 @@ export function getLandingPageHtml(locale) {
             <h2 class="max-w-2xl text-4xl font-bold tracking-[-0.05em] md:text-6xl">${t.ctaTitle}</h2>
             <p class="mt-5 max-w-2xl text-sm leading-6 text-slate-300">${t.ctaSubtitle}</p>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a class="js-download-link inline-flex items-center justify-center rounded-full bg-white px-6 py-4 text-sm font-bold text-slate-950 transition hover:-translate-y-0.5" href="#">${t.ctaDownload}</a>
+              <a class="js-download-link inline-flex items-center justify-center rounded-full bg-linear-to-r from-cyanx to-violetx px-6 py-4 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="#">${t.ctaDownload}</a>
               <a class="js-github-link inline-flex items-center justify-center rounded-full border border-line bg-slate-950/50 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5" href="#">${t.ctaSource}</a>
             </div>
           </div>

@@ -78,6 +78,7 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
   const { shareSlug } = await params;
   const sp = await searchParams;
   const locale = sp?.lang === "zh" ? "zh" : "en";
+  const fromGallery = sp?.from === "gallery";
   const t = getCopy(locale);
 
   const model = await fetchPublishedModel(shareSlug);
@@ -93,14 +94,16 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
 
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
-      <div className="mb-8">
-        <Link
-          href={`/${locale}/gallery`}
-          className="font-mono text-xs uppercase tracking-[0.18em] text-cyanx transition hover:text-white"
-        >
-          ← {t.backGallery}
-        </Link>
-      </div>
+      {fromGallery && (
+        <div className="mb-8">
+          <Link
+            href={`/${locale}/gallery`}
+            className="font-mono text-xs uppercase tracking-[0.18em] text-cyanx transition hover:text-white"
+          >
+            ← {t.backGallery}
+          </Link>
+        </div>
+      )}
 
       <div className="mb-6 flex flex-wrap items-center gap-3">
         <span className="rounded-full border border-line bg-white/5 px-3 py-1 font-mono text-xs uppercase tracking-[0.16em] text-slate-400">
