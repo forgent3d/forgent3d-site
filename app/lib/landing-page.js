@@ -15,6 +15,7 @@ const COPY = {
     heroDemo: "Watch Demo",
     heroDownload: "Download Desktop App",
     heroGithub: "View GitHub",
+    heroX: "Follow on X",
     chipExisting: "Existing agents",
     chipLocal: "Local data",
     chipFree: "Free & open source",
@@ -91,6 +92,7 @@ const COPY = {
     heroDemo: "观看演示",
     heroDownload: "下载应用",
     heroGithub: "查看 GitHub",
+    heroX: "在 X 上关注",
     chipExisting: "使用已有 agent",
     chipLocal: "数据在本地",
     chipFree: "免费开源",
@@ -185,6 +187,14 @@ export function getLandingPageHtml(locale) {
             title="${t.heroGithub}"
           >
             <img src="https://github.githubassets.com/favicons/favicon.png" width="16" height="16" alt="GitHub" loading="lazy" decoding="async" class="brightness-0 invert opacity-90" />
+          </a>
+          <a
+            class="js-x-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white/5 font-mono text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-cyanx/50"
+            href="#"
+            aria-label="${t.heroX}"
+            title="${t.heroX}"
+          >
+            X
           </a>
           <button class="js-lang-toggle rounded-full border border-line bg-white/5 px-3 py-2 font-mono text-xs text-slate-300 transition hover:border-cyanx/50 hover:text-white" type="button" aria-label="Switch language">${t.switchLabel}</button>
         </div>
