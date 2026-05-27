@@ -4,17 +4,17 @@ import { getLandingPageHtml, isSupportedLocale } from "../lib/landing-page";
 function getSeoCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Forgent3D | 用现有 AI agent 生成真实 3D 模型",
+      title: "Forgent3D | 浏览器里的 AI CAD agent 与开源桌面版",
       description:
-        "Forgent3D 连接 Codex、Claude Code、Cursor 等已有 AI agent，在本机生成、预览和验证真实三维模型。免费开源，数据留在本地。",
+        "Forgent3D 让你不用安装 CAD 环境，就能在网页里让 Agent 生成、运行和预览可编辑 3D CAD；桌面版开源，适合本地项目和深度控制。",
       ogLocale: "zh_CN",
     };
   }
 
   return {
-    title: "Forgent3D | Generate Real 3D Models with Existing AI Agents",
+    title: "Forgent3D | Browser AI CAD Agent and Open-Source Desktop",
     description:
-      "Forgent3D connects Codex, Claude Code, Cursor, and other existing AI agents to generate, preview, and verify real 3D models locally. Free, open source, and local-first.",
+      "Forgent3D lets an Agent generate, run, and preview editable 3D CAD in the browser without CAD setup. The open-source desktop app fits local projects and deeper control.",
     ogLocale: "en_US",
   };
 }

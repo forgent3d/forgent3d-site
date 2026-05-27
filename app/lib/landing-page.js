@@ -3,72 +3,91 @@ const COPY = {
     locale: "en_US",
     htmlLang: "en",
     switchLabel: "中",
-    brandSubline: "local AI CAD workbench",
-    navLoop: "Workflow",
+    brandSubline: "Agent + open-source desktop",
+    navLoop: "Agent",
     navDemo: "Demo",
-    navFeatures: "Why Forgent3D",
-    navDownload: "Download",
-    heroKicker: "CODEX / CLAUDE CODE / CURSOR · LOCAL-FIRST · OPEN SOURCE · EDITABLE CAD",
-    heroTitle: "Generate editable 3D models with AI coding agents",
+    navFeatures: "Why Web",
+    navCompare: "Compare",
+    navPricing: "Plans",
+    navContact: "Contact",
+    navDownload: "Desktop",
+    heroKicker: "MANAGED CAD SANDBOX · HOSTED AI AGENT · OPEN-SOURCE DESKTOP",
+    heroTitle: "AI CAD agent in the browser",
     heroSubtitle:
-      "Forgent3D gives Codex, Claude Code and Cursor a local CAD feedback loop: generate model code, rebuild, preview, verify and iterate.",
+      "Try ideas in the browser without installing a CAD environment. When a model becomes a real project, move to the open-source desktop app for local files and deeper control.",
+    heroTry: "Try without login",
     heroDemo: "Watch Demo",
-    heroDownload: "Download Desktop App",
+    heroDownload: "Get Desktop App",
     heroGithub: "View GitHub",
     heroX: "Follow on X",
-    chipExisting: "Existing agents",
-    chipLocal: "Local data",
-    chipFree: "Free & open source",
-    chipMotion: "Motion-ready workflows",
-    loopEyebrow: "Workflow",
-    loopTitle: "From idea to verified model",
-    loopSubtitle: "Forgent3D gives agents feedback from real local builds, so each change can be checked before the next one.",
-    loopDescribeLabel: "Describe",
-    loopDescribe: "Describe the part, assembly, or mechanism in the AI IDE you already use.",
-    loopGenerateLabel: "Generate",
-    loopGenerate: "The agent creates model code that remains editable, reviewable, and reusable.",
-    loopPreviewLabel: "Preview",
-    loopPreview: "Forgent3D rebuilds and displays the real 3D result locally.",
-    loopVerifyLabel: "Verify",
-    loopVerify: "The agent reads screenshots, dimensions, and status before iterating again.",
-    screenshotsEyebrow: "Live Demo",
-    screenshotsTitle: "Real Demo: Codex Generates a Quadcopter",
+    chipExisting: "Hosted agent",
+    chipLocal: "No setup",
+    chipFree: "Open-source desktop",
+    chipMotion: "Editable CAD code",
+    loopEyebrow: "Agent Workflow",
+    loopTitle: "Prompt, run, preview, iterate",
+    loopSubtitle:
+      "Web focuses on rapid validation and managed execution: less setup, faster feedback, same editable CAD code.",
+    loopDescribeLabel: "Prompt",
+    loopDescribe: "Describe a part, product idea, or mechanism directly in the browser.",
+    loopGenerateLabel: "Agent",
+    loopGenerate: "The hosted agent writes editable CAD code instead of producing a one-shot mesh.",
+    loopPreviewLabel: "Sandbox",
+    loopPreview: "Forgent3D runs the CAD code in a prepared browser environment.",
+    loopVerifyLabel: "Preview",
+    loopVerify: "Inspect the 3D result, then let the agent revise against errors, geometry, and feedback.",
+    screenshotsEyebrow: "Demo",
+    screenshotsTitle: "Agent-generated CAD, not one-shot images",
     screenshotsSubtitle:
-      "Starting from a single prompt, the agent generates model code. Forgent3D rebuilds locally, shows the 3D preview, and feeds screenshots, dimensions, and build status back to the agent for the next iteration.",
-    screenshotInputTitle: "Describe to Codex",
-    screenshotInputDesc: "One natural-language prompt kicks off the drone build — model context stays inside your local project.",
-    screenshotPlanTitle: "Agent plans the parts",
-    screenshotPlanDesc: "Codex breaks the quadcopter down into concrete, editable modeling steps.",
-    screenshotGenerateTitle: "Generate drone geometry",
-    screenshotGenerateDesc: "Model code turns into real 3D geometry — arms, motor mounts, frame — rebuilt and verified locally.",
-    screenshotAssemblyTitle: "Preview the assembly",
-    screenshotAssemblyDesc: "Inspect the full 4-axis structure. The agent reads dimensions and screenshots to keep iterating.",
-    featuresEyebrow: "Why Not Text-to-3D?",
-    featuresTitle: "Why Not Ordinary Text-to-3D?",
-    featuresSubtitle: "Forgent3D doesn't generate one-shot images or uncontrolled meshes — it gives AI agents a local loop to generate, rebuild, and verify editable models.",
-    featuresModelsTitle: "Real, Editable Models",
-    featuresModels: "Generate code that can be rebuilt, measured, and revised — not a mesh or image you can only look at.",
-    featuresAgentsTitle: "Use the Agents You Already Have",
-    featuresAgents: "No need to replace Codex, Claude Code, or Cursor, or lock into a new cloud generation service.",
-    featuresLocalTitle: "Your Data Stays Local",
-    featuresLocal: "Model code, build output, screenshots, and validation data all stay on your machine — great for private projects and experiments.",
-    casesEyebrow: "Use Cases",
-    casesTitle: "Modeling Tasks Built for Agent Iteration",
-    casesPartTitle: "Mechanical Parts",
-    casesPartDesc: "Brackets, flanges, fixtures, enclosures — parts with clear hole patterns, chamfers, and dimensional constraints.",
-    casesParamTitle: "Product Prototypes",
-    casesParamDesc: "Keep dimensions, structure, and adjustable parameters in code for easy revision and reuse.",
-    casesAiTitle: "Assemblies and Motion",
-    casesAiDesc: "Preview multi-part structures and simple motion relationships, letting the agent refine based on real feedback.",
-    ctaEyebrow: "Free / Open Source / Local",
-    ctaTitle: "Start building with your existing AI agent",
-    ctaSubtitle: "Download the desktop app, connect it to your local project, and let your agent verify models instead of guessing.",
-    ctaDownload: "Download latest release",
+      "The same core loop works across Web and Desktop: generate code, build real geometry, inspect the result, and keep iterating.",
+    screenshotInputTitle: "Describe the model",
+    screenshotInputDesc: "A natural-language prompt starts the modeling loop without turning the result into a disposable image.",
+    screenshotPlanTitle: "Agent plans editable parts",
+    screenshotPlanDesc: "The agent breaks the request into concrete CAD steps that can be reviewed and revised.",
+    screenshotGenerateTitle: "Generate real geometry",
+    screenshotGenerateDesc: "Model code becomes inspectable 3D geometry: parts, frames, holes, mounts, and constraints.",
+    screenshotAssemblyTitle: "Preview and revise",
+    screenshotAssemblyDesc: "Use the preview, dimensions, build status, and screenshots to guide the next agent revision.",
+    featuresEyebrow: "Why Web?",
+    featuresTitle: "Web is the hosted agent service",
+    featuresSubtitle:
+      "The desktop app can be more complete and open source; Web is valuable because it removes setup, dependency management, and agent orchestration work.",
+    featuresModelsTitle: "No CAD Setup",
+    featuresModels: "Run Python CAD generation without installing kernels, build tooling, or local project scaffolding first.",
+    featuresAgentsTitle: "Hosted Agent Loop",
+    featuresAgents: "The browser product packages prompt, code generation, execution, preview, and revision into one guided flow.",
+    featuresLocalTitle: "Open-Source Desktop",
+    featuresLocal: "Use the full local workbench when you need private files, deeper control, or integration with Codex, Claude Code, and Cursor.",
+    compareEyebrow: "Product Paths",
+    compareTitle: "Web validates fast. Desktop gives full local control.",
+    compareSubtitle:
+      "They do not need to compete: Web is for quick exploration and hosted execution; Desktop gives advanced users complete local control.",
+    compareWebTitle: "Forgent3D Web",
+    compareWebBadge: "Hosted agent",
+    compareWebItems: [
+      "CAD dependencies ready to run in the browser",
+      "Built-in agent flow for prompt, code, build, preview, and revision",
+      "Best for quick trials, demos, teaching, sharing, and zero-setup exploration",
+    ],
+    compareDesktopTitle: "Forgent3D Desktop",
+    compareDesktopBadge: "Open-source local workbench",
+    compareDesktopItems: [
+      "Full local app for advanced projects and private files",
+      "Works with Codex, Claude Code, Cursor, and your own project structure",
+      "Best for deeper engineering workflows, local control, and open-source trust",
+    ],
+    compareShared: "Both paths keep the important promise: editable CAD code and real 3D preview, not disposable images.",
+    ctaEyebrow: "Agent / Open-Source Desktop",
+    ctaTitle: "Try without login, keep the full desktop path",
+    ctaSubtitle:
+      "Start in the browser when you want zero setup. Move to the open-source desktop workbench when the project needs local control.",
+    ctaTry: "Try without login",
+    ctaDownload: "Download Desktop",
     ctaSource: "View source code",
-    footerTagline: "Free local CAD feedback for Codex, Claude Code, Cursor",
+    footerTagline: "Hosted Agent plus full open-source desktop for editable AI CAD",
     guidesAi3D: "AI 3D Model Generation",
     guidesCodeCad: "Code to 3D Models",
-    guidesLocalData: "Local Data",
+    guidesLocalData: "Cloud & Local Data",
     guidesQuickStart: "Quick Start",
     navGallery: "Gallery",
     guidesGallery: "Model Gallery",
@@ -80,72 +99,87 @@ const COPY = {
     locale: "zh_CN",
     htmlLang: "zh-CN",
     switchLabel: "EN",
-    brandSubline: "本地 AI CAD 工作台",
-    navLoop: "工作流",
+    brandSubline: "Agent + 开源桌面版",
+    navLoop: "Agent",
     navDemo: "演示",
-    navFeatures: "核心优势",
-    navDownload: "下载",
-    heroKicker: "CODEX / CLAUDE CODE / CURSOR · 本地优先 · 开源 · 可编辑 CAD",
-    heroTitle: "用  Claude Code / Codex 生成可编辑 3D 模型",
+    navFeatures: "Web 价值",
+    navCompare: "版本对比",
+    navPricing: "方案",
+    navContact: "联系我们",
+    navDownload: "桌面版",
+    heroKicker: "托管 CAD 沙盒 · 内置 AI agent · 开源桌面版",
+    heroTitle: "浏览器里的 AI CAD agent",
     heroSubtitle:
-      "Forgent3D 为 Codex、Claude Code 和 Cursor 提供本地 CAD 反馈闭环：生成模型代码、重建、预览、验证、迭代。",
+      "不用安装 CAD 环境，直接在网页里让 Agent 生成并预览模型。项目需要本地文件和深度控制时，再进入开源桌面版。",
+    heroTry: "免登录试用",
     heroDemo: "观看演示",
-    heroDownload: "下载应用",
+    heroDownload: "下载桌面版",
     heroGithub: "查看 GitHub",
     heroX: "在 X 上关注",
-    chipExisting: "使用已有 agent",
-    chipLocal: "数据在本地",
-    chipFree: "免费开源",
-    chipMotion: "支持可运动模型工作流",
-    loopEyebrow: "工作流",
-    loopTitle: "从一句想法到可验证模型",
-    loopSubtitle: "Forgent3D 把真实构建反馈交给 agent，让每次修改都能先看结果、再继续迭代。",
-    loopDescribeLabel: "描述",
-    loopDescribe: "在熟悉的 AI IDE 里描述零件、装配或可运动结构。",
-    loopGenerateLabel: "生成",
-    loopGenerate: "agent 生成可编辑、可审查、可复用的模型代码。",
-    loopPreviewLabel: "预览",
-    loopPreview: "Forgent3D 在本机重建并显示真实三维结果。",
-    loopVerifyLabel: "验证",
-    loopVerify: "agent 读取截图、尺寸和状态后继续修正。",
-    screenshotsEyebrow: "真实演示",
-    screenshotsTitle: "真实 Demo：Codex 生成四轴无人机",
+    chipExisting: "托管 agent",
+    chipLocal: "免配置",
+    chipFree: "开源桌面版",
+    chipMotion: "可编辑 CAD 代码",
+    loopEyebrow: "Agent 工作流",
+    loopTitle: "输入需求，运行，预览，继续迭代",
+    loopSubtitle: "Web 聚焦快速验证和托管运行：少配置、更快反馈，同时保留可编辑 CAD 代码。",
+    loopDescribeLabel: "输入",
+    loopDescribe: "在浏览器里描述零件、产品想法或机构。",
+    loopGenerateLabel: "Agent",
+    loopGenerate: "托管 agent 生成可编辑 CAD 代码，而不是一次性 mesh。",
+    loopPreviewLabel: "Sandbox",
+    loopPreview: "Forgent3D 在准备好的网页环境中运行 CAD 代码和构建流程。",
+    loopVerifyLabel: "预览",
+    loopVerify: "查看真实 3D 结果，再让 agent 根据错误、几何和反馈继续修改。",
+    screenshotsEyebrow: "演示",
+    screenshotsTitle: "Agent 生成的是 CAD，不是一次性图片",
     screenshotsSubtitle:
-      "从一句需求开始，agent 生成模型代码，Forgent3D 在本地重建模型、显示 3D 预览，并把截图、尺寸和构建状态反馈给 agent 继续修正。",
-    screenshotInputTitle: "向 Codex 描述无人机",
-    screenshotInputDesc: "一句自然语言需求开始无人机建模，建模上下文保留在本地项目里。",
-    screenshotPlanTitle: "Agent 规划零件",
-    screenshotPlanDesc: "Codex 把四轴无人机拆成清晰、可编辑的建模步骤。",
-    screenshotGenerateTitle: "生成无人机几何",
-    screenshotGenerateDesc: "模型代码转成真实三维几何——机臂、电机座、机架——在本地重建并验证。",
-    screenshotAssemblyTitle: "预览整机装配",
-    screenshotAssemblyDesc: "检查完整的四轴结构，agent 读取尺寸和截图继续迭代。",
-    featuresEyebrow: "为什么不是 text-to-3D？",
-    featuresTitle: "为什么不是普通 text-to-3D？",
-    featuresSubtitle: "Forgent3D 不生成一次性图片或不可控 mesh，而是让 AI agent 在本地生成、重建、验证可编辑模型。",
-    featuresModelsTitle: "真实可编辑模型",
-    featuresModels: "生成可重建、可测量、可修改的模型代码，而不是只能看的 mesh 或图片。",
-    featuresAgentsTitle: "继续用现有 agent",
-    featuresAgents: "不用替换 Codex、Claude Code、Cursor，也不用绑定新的云端生成服务。",
-    featuresLocalTitle: "数据留在本地",
-    featuresLocal: "模型代码、构建结果、截图和验证信息都在你的电脑上完成，适合私有项目和实验。",
-    casesEyebrow: "使用场景",
-    casesTitle: "适合 AI agent 迭代的建模任务",
-    casesPartTitle: "机械零件",
-    casesPartDesc: "支架、法兰、夹具、外壳、孔位、倒角和尺寸关系清晰的零件。",
-    casesParamTitle: "产品原型",
-    casesParamDesc: "把尺寸、结构和可调参数保留在代码里，方便持续修改和复用。",
-    casesAiTitle: "装配与运动",
-    casesAiDesc: "预览多零件结构和简单运动关系，让 agent 基于真实反馈继续修正。",
-    ctaEyebrow: "免费 / 开源 / 本地运行",
-    ctaTitle: "用你已有的 AI agent 开始建模",
-    ctaSubtitle: "下载桌面端，连接本地项目，让 agent 不再凭感觉猜模型，而是先验证再修改。",
-    ctaDownload: "下载最新版本",
+      "同一条核心链路可以跑在 Web 和 Desktop：生成代码、构建真实几何、查看结果、继续迭代。",
+    screenshotInputTitle: "描述模型需求",
+    screenshotInputDesc: "用自然语言开启建模流程，结果不是只能看的图片。",
+    screenshotPlanTitle: "Agent 规划可编辑零件",
+    screenshotPlanDesc: "agent 把需求拆成具体 CAD 步骤，后续可以审查和修改。",
+    screenshotGenerateTitle: "生成真实几何",
+    screenshotGenerateDesc: "模型代码变成可检查的 3D 几何：零件、机架、孔位、安装结构和约束。",
+    screenshotAssemblyTitle: "预览并修正",
+    screenshotAssemblyDesc: "用预览、尺寸、构建状态和截图指导下一轮 agent 修改。",
+    featuresEyebrow: "为什么需要 Web？",
+    featuresTitle: "Web 是托管 agent 服务",
+    featuresSubtitle: "桌面版可以更完整、开源；Web 的价值是省掉安装、依赖管理和 agent 编排。",
+    featuresModelsTitle: "不用配置 CAD 环境",
+    featuresModels: "不用先安装 Python CAD 内核、构建工具和项目脚手架，就能运行 CAD 生成。",
+    featuresAgentsTitle: "内置 Agent 闭环",
+    featuresAgents: "浏览器产品把 prompt、代码生成、运行、预览和修正组织成一条完整流程。",
+    featuresLocalTitle: "开源桌面版",
+    featuresLocal: "需要私有文件、深度控制，或连接 Codex、Claude Code、Cursor 时，使用完整本地工作台。",
+    compareEyebrow: "产品路径",
+    compareTitle: "Web 快速验证，Desktop 完整本地控制",
+    compareSubtitle: "两者不必互相打架：Web 负责快速探索和托管运行，Desktop 给高级用户完整本地控制。",
+    compareWebTitle: "Forgent3D Web",
+    compareWebBadge: "托管 Agent",
+    compareWebItems: [
+      "CAD 依赖和构建环境已经准备好，可直接在网页里运行",
+      "内置从 prompt、代码、构建、预览到修正的 agent 流程",
+      "适合快速试用、演示、教学、分享和零配置探索",
+    ],
+    compareDesktopTitle: "Forgent3D Desktop",
+    compareDesktopBadge: "开源本地工作台",
+    compareDesktopItems: [
+      "完整本地应用，适合高级项目和私有文件",
+      "连接 Codex、Claude Code、Cursor 和你自己的项目结构",
+      "适合更深的工程工作流、本地控制和开源信任",
+    ],
+    compareShared: "两条路径保留同一个关键承诺：可编辑 CAD 代码和真实 3D 预览，而不是一次性图片。",
+    ctaEyebrow: "Agent / 开源桌面版",
+    ctaTitle: "先免登录试用，再保留完整桌面路径",
+    ctaSubtitle: "想零配置就从浏览器开始；项目需要本地控制时，再进入开源桌面工作台。",
+    ctaTry: "免登录试用",
+    ctaDownload: "下载桌面版",
     ctaSource: "查看源码",
-    footerTagline: "为 Codex、Claude Code、Cursor 提供免费的本地 CAD 反馈",
+    footerTagline: "托管 Agent + 完整开源桌面版，用于可编辑 AI CAD",
     guidesAi3D: "AI 生成三维模型软件",
     guidesCodeCad: "代码生成三维模型软件",
-    guidesLocalData: "本地数据",
+    guidesLocalData: "云端与本地数据",
     guidesQuickStart: "快速开始",
     navGallery: "模型库",
     guidesGallery: "模型库",
@@ -172,12 +206,11 @@ export function getLandingPageHtml(locale) {
             <span class="block font-mono text-[11px] text-slate-400">${t.brandSubline}</span>
           </span>
         </a>
-        <nav class="hidden items-center gap-6 font-mono text-xs text-slate-400 md:flex" aria-label="Primary">
+        <nav class="hidden items-center gap-5 font-mono text-xs text-slate-400 lg:flex" aria-label="Primary">
           <a class="transition hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
-          <a class="transition hover:text-cyanx" href="#screenshots">${t.navDemo}</a>
-          <a class="transition hover:text-cyanx" href="#features">${t.navFeatures}</a>
-          <!-- <a class="transition hover:text-cyanx" href="/${locale}/gallery">${t.navGallery}</a> -->
-          <a class="transition hover:text-cyanx" href="#download">${t.navDownload}</a>
+          <a class="transition hover:text-cyanx" href="#compare">${t.navCompare}</a>
+          <a class="transition hover:text-cyanx" href="/${locale}/pricing">${t.navPricing}</a>
+          <a class="transition hover:text-cyanx" href="/${locale}/contact">${t.navContact}</a>
         </nav>
         <div class="flex items-center gap-3">
           <a
@@ -188,14 +221,6 @@ export function getLandingPageHtml(locale) {
           >
             <img src="https://github.githubassets.com/favicons/favicon.png" width="16" height="16" alt="GitHub" loading="lazy" decoding="async" class="brightness-0 invert opacity-90" />
           </a>
-          <a
-            class="js-x-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white/5 font-mono text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-cyanx/50"
-            href="#"
-            aria-label="${t.heroX}"
-            title="${t.heroX}"
-          >
-            X
-          </a>
           <button class="js-lang-toggle rounded-full border border-line bg-white/5 px-3 py-2 font-mono text-xs text-slate-300 transition hover:border-cyanx/50 hover:text-white" type="button" aria-label="Switch language">${t.switchLabel}</button>
         </div>
       </header>
@@ -203,16 +228,18 @@ export function getLandingPageHtml(locale) {
       <main id="top" lang="${t.htmlLang}">
         <section class="grid min-h-[calc(100vh-80px)] items-center gap-10 pt-5 pb-16 lg:gap-14 lg:grid-cols-[0.86fr_1.14fr] lg:pt-6 lg:pb-20">
           <div class="reveal min-h-[520px]">
-            <h1 class="max-w-[13.5ch] text-[clamp(1.9rem,5.2vw,3.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white text-balance">
+            <p class="mb-4 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.heroKicker}</p>
+            <h1 class="max-w-[15ch] text-[clamp(1.9rem,5.2vw,3.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white text-balance">
               ${t.heroTitle}
             </h1>
             <p class="mt-5 max-w-xl text-base leading-7 text-slate-300">${t.heroSubtitle}</p>
             <div class="mt-8 flex flex-wrap gap-3">
-              <a class="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-white/25 bg-white/8 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/50" href="#screenshots">
+              <a class="js-try-link inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="https://app.forgent3d.com/try">${t.heroTry}</a>
+              <a class="js-download-link inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/25 bg-white/8 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/50" href="#download">${t.heroDownload}</a>
+              <a class="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-line bg-slate-950/50 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:-translate-y-0.5 hover:border-cyanx/50 hover:text-white" href="#screenshots">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                 ${t.heroDemo}
               </a>
-              <a class="js-download-link inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="#download">${t.heroDownload}</a>
             </div>
           </div>
 
@@ -358,16 +385,31 @@ export function getLandingPageHtml(locale) {
           </div>
         </section>
 
-        <section class="py-20">
-          <div class="reveal mb-8">
-            <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.casesEyebrow}</p>
-            <h2 class="text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.casesTitle}</h2>
+        <section class="py-20" id="compare">
+          <div class="reveal mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.compareEyebrow}</p>
+              <h2 class="max-w-3xl text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.compareTitle}</h2>
+            </div>
+            <p class="max-w-sm text-sm leading-6 text-slate-400">${t.compareSubtitle}</p>
           </div>
-          <div class="grid gap-4 md:grid-cols-3">
-            <article class="reveal rounded-[2rem] border border-line bg-white/[0.03] p-6"><div class="case-icon case-part"></div><h3 class="mt-5 text-xl font-bold">${t.casesPartTitle}</h3><p class="mt-2 text-sm text-slate-500">${t.casesPartDesc}</p></article>
-            <article class="reveal rounded-[2rem] border border-line bg-white/[0.03] p-6"><div class="case-icon case-param"></div><h3 class="mt-5 text-xl font-bold">${t.casesParamTitle}</h3><p class="mt-2 text-sm text-slate-500">${t.casesParamDesc}</p></article>
-            <article class="reveal rounded-[2rem] border border-line bg-white/[0.03] p-6"><div class="case-icon case-agent"></div><h3 class="mt-5 text-xl font-bold">${t.casesAiTitle}</h3><p class="mt-2 text-sm text-slate-500">${t.casesAiDesc}</p></article>
+          <div class="grid gap-4 lg:grid-cols-2">
+            <article class="reveal rounded-[2rem] border border-cyanx/30 bg-cyanx/[0.06] p-6 shadow-panel backdrop-blur-xl">
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyanx">${t.compareWebBadge}</p>
+              <h3 class="mt-3 text-3xl font-bold text-white">${t.compareWebTitle}</h3>
+              <ul class="mt-6 space-y-4 text-sm leading-6 text-slate-300">
+                ${t.compareWebItems.map((item) => `<li class="border-t border-line pt-4">${item}</li>`).join("")}
+              </ul>
+            </article>
+            <article class="reveal rounded-[2rem] border border-line bg-slate-950/45 p-6 shadow-panel backdrop-blur-xl">
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-cyanx">${t.compareDesktopBadge}</p>
+              <h3 class="mt-3 text-3xl font-bold text-white">${t.compareDesktopTitle}</h3>
+              <ul class="mt-6 space-y-4 text-sm leading-6 text-slate-300">
+                ${t.compareDesktopItems.map((item) => `<li class="border-t border-line pt-4">${item}</li>`).join("")}
+              </ul>
+            </article>
           </div>
+          <p class="reveal mt-5 rounded-2xl border border-line bg-white/[0.03] p-5 text-sm leading-6 text-slate-300">${t.compareShared}</p>
         </section>
 
         <section class="py-20" id="download">
@@ -376,8 +418,9 @@ export function getLandingPageHtml(locale) {
             <h2 class="max-w-2xl text-4xl font-bold tracking-[-0.05em] md:text-6xl">${t.ctaTitle}</h2>
             <p class="mt-5 max-w-2xl text-sm leading-6 text-slate-300">${t.ctaSubtitle}</p>
             <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a class="js-download-link inline-flex items-center justify-center rounded-full bg-linear-to-r from-cyanx to-violetx px-6 py-4 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="#">${t.ctaDownload}</a>
-              <a class="js-github-link inline-flex items-center justify-center rounded-full border border-line bg-slate-950/50 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5" href="#">${t.ctaSource}</a>
+              <a class="js-try-link inline-flex items-center justify-center rounded-full bg-linear-to-r from-cyanx to-violetx px-6 py-4 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="https://app.forgent3d.com/try">${t.ctaTry}</a>
+              <a class="js-download-link inline-flex items-center justify-center rounded-full border border-line bg-slate-950/50 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-cyanx/50" href="#">${t.ctaDownload}</a>
+              <a class="js-github-link inline-flex items-center justify-center rounded-full border border-line bg-slate-950/50 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-cyanx/50" href="#">${t.ctaSource}</a>
             </div>
           </div>
         </section>
@@ -400,6 +443,9 @@ export function getLandingPageHtml(locale) {
           <a class="hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
           <a class="hover:text-cyanx" href="#screenshots">${t.navDemo}</a>
           <a class="hover:text-cyanx" href="#features">${t.navFeatures}</a>
+          <a class="hover:text-cyanx" href="#compare">${t.navCompare}</a>
+          <a class="hover:text-cyanx" href="/${locale}/pricing">${t.navPricing}</a>
+          <a class="hover:text-cyanx" href="/${locale}/contact">${t.navContact}</a>
           <a class="hover:text-cyanx" href="/${locale}/ai-3d-model-generation">${t.guidesAi3D}</a>
           <a class="hover:text-cyanx" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
           <a class="hover:text-cyanx" href="/${locale}/local-data">${t.guidesLocalData}</a>

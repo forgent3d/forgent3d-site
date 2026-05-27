@@ -4,82 +4,86 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Quick Start：用现有 AI agent 开始本地 3D 建模 | Forgent3D",
+      title: "Quick Start：先免登录试用，再进入桌面版 | Forgent3D",
       description:
-        "用 Forgent3D 快速连接 Codex、Claude Code、Cursor 等已有 AI agent，在本机生成、预览和验证三维模型。",
+        "打开 Forgent3D Agent 免登录试用网页 CAD 生成与预览；需要完整本地控制时，再下载开源桌面版。",
       ogLocale: "zh_CN",
       kicker: "Quick Start",
-      h1: "三步跑通本地 AI CAD 验证闭环",
+      h1: "30 秒免登录试用，严肃项目用桌面版",
       intro:
-        "Forgent3D 的第一目标是让你尽快看到结果：下载桌面端，打开本地模型项目，然后让已有 AI agent 生成模型并读取验证反馈。",
+        "Forgent3D Agent 是最快入口：不用安装 CAD 环境，直接在网页里生成、运行和预览模型。桌面版开源，适合私有项目和深度工程工作流。",
+      tryLink: "免登录试用",
+      desktopLink: "下载开源桌面版",
       steps: [
         {
           label: "01",
-          title: "下载并打开 Forgent3D",
-          text: "从最新 Release 下载桌面端，打开后选择或创建一个模型项目目录。这个目录会保存模型代码、构建结果和截图。",
+          title: "打开网页试用",
+          text: "进入浏览器里的 Forgent3D Agent，不需要登录就可以先跑通一次托管 CAD 生成流程。",
         },
         {
           label: "02",
-          title: "连接你已有的 AI agent",
-          text: "继续使用 Codex、Claude Code、Cursor 或其他 AI 编程工具。让 agent 在项目中生成模型代码，并按照本地项目结构组织文件。",
+          title: "让 agent 生成 CAD",
+          text: "描述零件、产品想法或机构，agent 会生成可编辑 CAD 代码，并在准备好的网页环境中运行。",
         },
         {
           label: "03",
-          title: "预览、验证、继续迭代",
-          text: "保存模型后在 Forgent3D 中重建预览。agent 可以读取构建状态、截图和尺寸信息，再基于真实结果继续修改。",
+          title: "需要完整控制时切到桌面版",
+          text: "当模型进入私有项目、复杂工程或长期迭代阶段，下载开源桌面版，把工作流放回本地项目。",
         },
       ],
-      promptTitle: "可以直接给 agent 的提示",
+      promptTitle: "可以直接给 Agent 的提示",
       prompt:
-        "Create a simple mechanical bracket model in this project. After generating the model code, use the local Forgent3D verification tools to rebuild it, capture a screenshot, read dimensions, and revise the model until the result matches the request.",
-      checklistTitle: "第一次使用建议检查",
+        "Create a simple mechanical bracket model. Generate editable CAD code, run it, preview the model, and revise it until the geometry matches the request.",
+      checklistTitle: "选择 Web 还是 Desktop",
       checklist: [
-        "项目目录能被你的 AI IDE 打开。",
-        "模型文件、截图和缓存目录有清晰命名。",
-        "外部 AI 工具的隐私和上下文设置符合你的项目要求。",
+        "想快速试用、演示或分享，优先用 Agent。",
+        "想处理私有文件、复杂项目或完整本地控制，使用 Desktop。",
+        "Web 的价值是托管运行和更少配置；Desktop 的价值是完整开源和本地控制。",
         "先从简单零件开始，再尝试装配或可运动模型。",
       ],
-      localDataLink: "了解本地数据工作流",
+      localDataLink: "了解云端与本地数据",
     };
   }
 
   return {
-    title: "Quick Start: Local AI CAD Modeling with Existing Agents | Forgent3D",
+    title: "Quick Start: Try Without Login, Then Use Desktop for Full Control | Forgent3D",
     description:
-      "Quickly connect Forgent3D with Codex, Claude Code, Cursor, and other existing AI agents to generate, preview, and verify 3D models locally.",
+      "Try Forgent3D Agent in the browser without login, then use the open-source desktop app when you need full local control.",
     ogLocale: "en_US",
     kicker: "Quick Start",
-    h1: "Run the local AI CAD verification loop in three steps",
+    h1: "Try without login in 30 seconds, use Desktop for serious projects",
     intro:
-      "Forgent3D is designed to get you to a visible result quickly: download the desktop app, open a local model project, then let your existing AI agent generate models and read verification feedback.",
+      "Forgent3D Agent is the fastest front door: no CAD environment setup, just generate, run, and preview models in the browser. Desktop is open source and fits private projects and deeper engineering workflows.",
+    tryLink: "Try without login",
+    desktopLink: "Download Desktop",
     steps: [
       {
         label: "01",
-        title: "Download and open Forgent3D",
-        text: "Install the latest desktop release, then choose or create a local model project folder. This folder stores model code, build output, and screenshots.",
+        title: "Open the browser trial",
+        text: "Start with Forgent3D Agent in the browser. You can run the hosted CAD generation loop before creating an account.",
       },
       {
         label: "02",
-        title: "Connect the AI agent you already use",
-        text: "Keep working with Codex, Claude Code, Cursor, or another coding agent. Ask it to generate model code in the project and follow the local project structure.",
+        title: "Let the agent generate CAD",
+        text: "Describe a part, product idea, or mechanism. The agent writes editable CAD code and runs it in a prepared browser environment.",
       },
       {
         label: "03",
-        title: "Preview, verify, and iterate",
-        text: "After saving a model, rebuild and preview it in Forgent3D. The agent can read build status, screenshots, and dimensions before revising the model again.",
+        title: "Move to Desktop when you need full control",
+        text: "When the model becomes private, complex, or long-lived, use the open-source desktop app and keep the workflow inside your local project.",
       },
     ],
-    promptTitle: "Prompt you can give an agent",
+    promptTitle: "Prompt you can give the Agent",
     prompt:
-      "Create a simple mechanical bracket model in this project. After generating the model code, use the local Forgent3D verification tools to rebuild it, capture a screenshot, read dimensions, and revise the model until the result matches the request.",
-    checklistTitle: "First-run checklist",
+      "Create a simple mechanical bracket model. Generate editable CAD code, run it, preview the model, and revise it until the geometry matches the request.",
+    checklistTitle: "Choose Web or Desktop",
     checklist: [
-      "The project folder can be opened by your AI IDE.",
-      "Model files, screenshots, and cache folders have clear names.",
-      "External AI tool privacy and context settings match your project requirements.",
+      "Use Agent first for quick trials, demos, sharing, and zero-setup exploration.",
+      "Use Desktop for private files, complex projects, and full local control.",
+      "Web focuses on hosted execution and less setup; Desktop provides complete open-source local control.",
       "Start with a simple part before trying assemblies or motion-ready models.",
     ],
-    localDataLink: "Read about local data",
+    localDataLink: "Read about cloud and local data",
   };
 }
 
@@ -122,12 +126,20 @@ export default async function QuickStartPage({ params }) {
 
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
-      <a className="font-mono text-xs uppercase tracking-[0.2em] text-cyanx" href={`/${locale}`}>
-        Forgent3D
+      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+        {locale === "zh" ? "← 返回首页" : "← Back home"}
       </a>
       <p className="mt-10 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">{copy.kicker}</p>
       <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">{copy.h1}</h1>
       <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
+      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a className="js-try-link inline-flex rounded-full bg-linear-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow" href="https://app.forgent3d.com/try">
+          {copy.tryLink}
+        </a>
+        <a className="js-download-link inline-flex rounded-full border border-line px-5 py-3 text-sm font-bold text-white hover:border-cyanx/50" href="#">
+          {copy.desktopLink}
+        </a>
+      </div>
       <div className="mt-12 grid gap-5 md:grid-cols-3">
         {copy.steps.map((step) => (
           <article key={step.label} className="rounded-[2rem] border border-line bg-white/[0.03] p-6">

@@ -4,7 +4,7 @@ export const metadata = {
   metadataBase: new URL("https://www.forgent3d.com"),
   title: "Forgent3D",
   description:
-    "Free local AI CAD preview and verification for existing coding agents.",
+    "Browser AI CAD agent for editable 3D models, plus an open-source desktop app for local projects.",
 };
 
 export default function RootLayout({ children }) {
@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
         <meta property="og:title" content="Forgent3D" />
         <meta
           property="og:description"
-          content="Generate, preview, and verify real 3D models locally with the AI agents you already use."
+          content="Try AI CAD generation in the browser without CAD setup, then use the open-source desktop app for local files and deeper control."
         />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/og-image.svg" />

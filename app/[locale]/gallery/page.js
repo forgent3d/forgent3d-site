@@ -78,7 +78,10 @@ export default async function GalleryPage({ params }) {
 
   return (
     <main className="mx-auto w-[min(1180px,calc(100vw-32px))] py-16 text-slate-100">
-      <p className="font-mono text-xs uppercase tracking-[0.24em] text-cyanx">Gallery</p>
+      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+        {locale === "zh" ? "← 返回首页" : "← Back home"}
+      </a>
+      <p className="mt-10 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">Gallery</p>
       <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
 

@@ -4,83 +4,83 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Local Data：本地 AI CAD 工作流如何处理数据 | Forgent3D",
+      title: "Cloud & Local Data：Forgent3D Agent 与 Desktop 如何处理数据",
       description:
-        "了解 Forgent3D 的本地数据工作流：模型代码、构建结果、截图和验证信息留在本机，配合现有 AI agent 完成三维模型预览与验证。",
+        "了解 Forgent3D Agent 与 Forgent3D Desktop 的数据边界，按项目敏感度选择合适工作流。",
       ogLocale: "zh_CN",
-      kicker: "Local Data",
-      h1: "模型数据留在你的本地项目里",
+      kicker: "Cloud & Local Data",
+      h1: "Agent 快速试用，Desktop 给完整本地控制",
       intro:
-        "Forgent3D 的核心价值不是把模型上传到云端生成，而是在你的电脑上连接 AI agent、模型代码、三维预览和验证结果。这样，私有设计、实验项目和开源模型都能使用同一套本地反馈闭环。",
+        "Forgent3D 现在有两条路径：Agent 适合免配置试用、演示和快速验证；Desktop 开源，适合私有模型、复杂项目和长期工程工作流。",
       sections: [
         {
-          title: "哪些数据在本地",
+          title: "Agent 如何处理数据",
           items: [
-            "模型源码保存在你的项目目录中，便于 Git 管理、审查和复用。",
-            "构建产物、预览缓存、截图和验证结果由本机工作流生成。",
-            "agent 读取的是本地工具返回的状态、尺寸、截图路径和错误信息。",
+            "Agent 会在网页环境中运行 CAD 生成和构建流程。",
+            "它的价值是免安装、依赖已准备好、agent 流程内置，适合快速验证想法。",
+            "不要把 Web 描述成完整桌面版的替代品；它是省配置、可托管、适合快速验证的浏览器入口。",
           ],
         },
         {
-          title: "为什么这对 AI 建模重要",
+          title: "Desktop 如何处理数据",
           items: [
-            "agent 不需要靠你手动描述截图或错误日志，可以直接读取验证反馈。",
-            "每次修改都能基于真实构建结果继续迭代，减少凭感觉修模型。",
-            "复杂零件、装配结构和可运动模型可以保留在同一个本地工程里演进。",
+            "桌面版开源，模型代码、构建产物、截图和验证结果保存在你的项目目录。",
+            "它适合私有设计、专业模型、复杂装配、长期迭代和需要接入 Codex、Claude Code、Cursor 的工作流。",
+            "开源桌面版提供透明度和可控性：高级用户可以检查、扩展和本地掌控整个流程。",
           ],
         },
         {
-          title: "你仍然需要注意",
+          title: "如何选择",
           items: [
-            "Forgent3D 负责本地预览与验证；你使用的外部 AI 工具可能有自己的上下文上传和隐私设置。",
-            "如果项目包含敏感模型或商业设计，请同时检查 Codex、Claude Code、Cursor 等工具的隐私配置。",
-            "建议把模型、截图和导出文件纳入清晰的项目目录与 .gitignore 规则。",
+            "想让用户最快理解产品价值，用 Agent。",
+            "想处理敏感文件或需要完整工程控制，用 Desktop。",
+            "如果你使用外部 AI 工具，也要检查它们自己的上下文上传、隐私和保留策略。",
           ],
         },
       ],
-      ctaTitle: "想直接试一下？",
-      ctaText: "从 Quick Start 开始，把本地项目连接到你已有的 AI agent。",
+      ctaTitle: "先从 Agent 体验",
+      ctaText: "免登录试一次托管 agent；当项目需要本地控制时，再下载开源桌面版。",
       ctaLink: "查看快速开始",
     };
   }
 
   return {
-    title: "Local Data: How Forgent3D Handles AI CAD Workflow Data",
+    title: "Cloud & Local Data: How Forgent3D Agent and Desktop Handle Data",
     description:
-      "Learn how Forgent3D keeps model code, build output, screenshots, and verification data in your local project while working with existing AI agents.",
+      "Understand the data boundary between Forgent3D Agent and Forgent3D Desktop.",
     ogLocale: "en_US",
-    kicker: "Local Data",
-    h1: "Model data stays in your local project",
+    kicker: "Cloud & Local Data",
+    h1: "Agent is for quick trials. Desktop gives full local control.",
     intro:
-      "Forgent3D is not built around uploading models to a cloud generator. It connects AI agents, model code, 3D preview, and verification results on your own machine, so private designs, experiments, and open-source models can share the same local feedback loop.",
+      "Forgent3D now has two paths: Agent is for zero-setup trials, demos, sharing, and rapid validation; Desktop is open source and fits private models, complex projects, and long-running engineering workflows.",
     sections: [
       {
-        title: "What stays local",
+        title: "How Agent handles data",
         items: [
-          "Model source files live in your project folder, ready for Git, review, and reuse.",
-          "Build artifacts, preview caches, screenshots, and validation results are produced by the local workflow.",
-          "Agents read local tool feedback such as status, dimensions, screenshot paths, and error messages.",
+          "Agent runs CAD generation and builds in a prepared browser environment.",
+          "Its value is zero setup, prepared dependencies, and a built-in agent flow for fast idea validation.",
+          "Do not position Web as a complete replacement for Desktop; it is the convenient hosted browser entry point for rapid validation.",
         ],
       },
       {
-        title: "Why this matters for AI modeling",
+        title: "How Desktop handles data",
         items: [
-          "Agents do not need you to manually describe screenshots or error logs when local feedback is available.",
-          "Each change can be based on real build output instead of guesswork.",
-          "Complex parts, assemblies, and motion-ready models can evolve inside the same local engineering project.",
+          "Desktop is open source. Model code, build output, screenshots, and verification data live in your project folder.",
+          "It fits private designs, commercial models, complex assemblies, long-running iteration, and workflows with Codex, Claude Code, or Cursor.",
+          "The open-source desktop app provides transparency and control for advanced users who need to inspect, extend, and own the local workflow.",
         ],
       },
       {
-        title: "What you should still check",
+        title: "How to choose",
         items: [
-          "Forgent3D handles local preview and verification; external AI tools may have their own context sharing and privacy settings.",
-          "For sensitive models or commercial designs, also review the privacy settings in Codex, Claude Code, Cursor, or any agent you use.",
-          "Keep model files, screenshots, and exports organized with clear project folders and .gitignore rules.",
+          "Use Agent when you want users to understand the product value quickly.",
+          "Use Desktop for sensitive files or workflows that need complete engineering control.",
+          "If you connect external AI tools, also review their context sharing, privacy, and retention settings.",
         ],
       },
     ],
-    ctaTitle: "Want to try it now?",
-    ctaText: "Start with Quick Start and connect a local project to the AI agent you already use.",
+    ctaTitle: "Start with the Agent",
+    ctaText: "Try the hosted agent without login, then move to the open-source desktop app when the project needs local control.",
     ctaLink: "Open Quick Start",
   };
 }
@@ -124,8 +124,8 @@ export default async function LocalDataPage({ params }) {
 
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
-      <a className="font-mono text-xs uppercase tracking-[0.2em] text-cyanx" href={`/${locale}`}>
-        Forgent3D
+      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+        {locale === "zh" ? "← 返回首页" : "← Back home"}
       </a>
       <p className="mt-10 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">{copy.kicker}</p>
       <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">{copy.h1}</h1>

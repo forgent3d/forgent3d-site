@@ -4,16 +4,16 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "代码生成三维模型软件：本地 AI CAD 工作流 | Forgent3D",
+      title: "代码生成三维模型软件：Agent 与开源桌面版 | Forgent3D",
       description:
-        "Forgent3D 让 Codex、Claude Code、Cursor 等已有 agent 生成可维护的模型代码，并在本地完成三维预览、验证和迭代。免费开源，数据留在本机。",
+        "Forgent3D Agent 在网页里运行 AI 生成的 CAD 代码；Forgent3D Desktop 开源，适合把模型作为可维护资产长期迭代。",
       ogLocale: "zh_CN",
       h1: "代码生成三维模型，让模型成为可验证的资产",
       intro:
-        "当模型由代码生成，它就可以被 Git 管理、被审查、被复用，也可以被 AI agent 持续修改。Forgent3D 把代码、三维预览和本地验证连接起来，让 agent 不只输出片段，还能根据真实结果继续修正。",
+        "当模型由代码生成，它就可以被 Git 管理、被审查、被复用，也可以被 AI agent 持续修改。Forgent3D Agent 省掉网页试用前的环境配置；Forgent3D Desktop 承接复杂本地项目。",
       bullets: [
-        "继续使用 Codex / Claude Code / Cursor 等已有 AI 编程工具，不绑定新的云端生成器",
-        "模型代码、构建反馈、截图和验证结果保留在本地项目中",
+        "Agent 适合快速试用、演示和分享，把 prompt、代码、构建、预览放进浏览器流程",
+        "Desktop 适合私有文件、复杂装配和长期迭代，模型代码与构建反馈可以保留在本地项目中",
         "agent 可以读取真实三维反馈，再修正尺寸、结构和生成逻辑",
         "适合机械零件、产品原型、装配结构和可运动模型的持续迭代",
       ],
@@ -21,16 +21,16 @@ function getCopy(locale) {
   }
 
   return {
-    title: "Code to 3D Models with Local AI CAD Verification | Forgent3D",
+    title: "Code to 3D Models with Agent and Open-Source Desktop | Forgent3D",
     description:
-      "Forgent3D helps Codex, Claude Code, Cursor, and other existing agents generate maintainable model code, then preview and verify 3D results locally. Free, open source, and local-first.",
+      "Forgent3D Agent runs AI-generated CAD code in the browser. Forgent3D Desktop is open source for maintainable model code and local projects.",
     ogLocale: "en_US",
     h1: "Code-generated 3D models should be verifiable assets",
     intro:
-      "When models are generated as code, they can be versioned, reviewed, reused, and improved by agents. Forgent3D connects that code to local 3D preview and verification, so agents can revise against real results instead of guessing.",
+      "When models are generated as code, they can be versioned, reviewed, reused, and improved by agents. Forgent3D Agent removes setup for browser trials; Forgent3D Desktop carries the workflow into local projects.",
     bullets: [
-      "Keep using Codex / Claude Code / Cursor and other existing coding agents without adopting a new cloud generator",
-      "Keep model code, build feedback, screenshots, and validation results inside your local project",
+      "Use Agent for quick trials, demos, and sharing with prompt, code, build, and preview in the browser",
+      "Use Desktop for private files, complex assemblies, and long-running iteration with model code and build feedback in your local project",
       "Let agents read real 3D feedback before they adjust dimensions, structure, and generation logic",
       "Works for mechanical parts, product prototypes, assemblies, and motion-ready model iteration",
     ],
@@ -75,7 +75,10 @@ export default async function CodeToParametricCadPage({ params }) {
 
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
-      <h1 className="text-4xl font-bold tracking-tight md:text-5xl">{copy.h1}</h1>
+      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+        {locale === "zh" ? "← 返回首页" : "← Back home"}
+      </a>
+      <h1 className="mt-10 text-4xl font-bold tracking-tight md:text-5xl">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
       <ul className="mt-8 space-y-3 text-slate-200">
         {copy.bullets.map((item) => (

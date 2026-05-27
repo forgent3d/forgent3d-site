@@ -12,6 +12,7 @@ function applyLinks(selector, value, fallback) {
 applyLinks(".js-download-link", linkConfig.download, "#download");
 applyLinks(".js-github-link", linkConfig.github, "#download");
 applyLinks(".js-x-link", linkConfig.x, "#download");
+applyLinks(".js-try-link", linkConfig.try, "#download");
 
 const langToggle = document.querySelector(".js-lang-toggle");
 if (langToggle) {
