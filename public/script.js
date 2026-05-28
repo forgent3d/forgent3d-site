@@ -1,18 +1,51 @@
 const linkConfig = window.FORGENT_LINKS || {};
 
-function applyLinks(selector, value, fallback) {
+function getCurrentLocale() {
+  const urlLocale = new URLSearchParams(window.location.search).get("lang");
+  if (urlLocale === "zh" || urlLocale === "en") {
+    return urlLocale;
+  }
+
+  if (window.location.pathname.startsWith("/zh")) {
+    return "zh";
+  }
+
+  if (document.documentElement.lang.toLowerCase().startsWith("zh")) {
+    return "zh";
+  }
+
+  return "en";
+}
+
+function withLocaleParam(href) {
+  if (!href || href.startsWith("#") || href.startsWith("mailto:")) {
+    return href;
+  }
+
+  try {
+    const url = new URL(href, window.location.origin);
+    url.searchParams.set("lang", getCurrentLocale());
+    return url.toString();
+  } catch {
+    return href;
+  }
+}
+
+function applyLinks(selector, value, fallback, options = {}) {
   const href = value && !value.includes("your-") ? value : fallback;
+  const resolvedHref = options.includeLocale ? withLocaleParam(href) : href;
   document.querySelectorAll(selector).forEach((node) => {
-    node.setAttribute("href", href);
-    node.setAttribute("target", href.startsWith("http") ? "_blank" : "_self");
-    node.setAttribute("rel", href.startsWith("http") ? "noreferrer" : "");
+    node.setAttribute("href", resolvedHref);
+    node.setAttribute("target", resolvedHref.startsWith("http") ? "_blank" : "_self");
+    node.setAttribute("rel", resolvedHref.startsWith("http") ? "noreferrer" : "");
   });
 }
 
 applyLinks(".js-download-link", linkConfig.download, "#download");
 applyLinks(".js-github-link", linkConfig.github, "#download");
 applyLinks(".js-x-link", linkConfig.x, "#download");
-applyLinks(".js-try-link", linkConfig.try, "#download");
+applyLinks(".js-workbench-link", linkConfig.workbench, "https://app.forgent3d.com", { includeLocale: true });
+applyLinks(".js-try-link", linkConfig.try, "#download", { includeLocale: true });
 
 const langToggle = document.querySelector(".js-lang-toggle");
 if (langToggle) {

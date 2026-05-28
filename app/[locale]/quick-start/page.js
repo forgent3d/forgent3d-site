@@ -133,7 +133,7 @@ export default async function QuickStartPage({ params }) {
       <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">{copy.h1}</h1>
       <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a className="js-try-link inline-flex rounded-full bg-linear-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow" href="https://app.forgent3d.com/try">
+        <a className="js-try-link inline-flex rounded-full bg-linear-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow" href={`https://app.forgent3d.com/try?lang=${locale}`}>
           {copy.tryLink}
         </a>
         <a className="js-download-link inline-flex rounded-full border border-line px-5 py-3 text-sm font-bold text-white hover:border-cyanx/50" href="#">

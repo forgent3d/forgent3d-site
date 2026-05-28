@@ -11,6 +11,8 @@ const COPY = {
     navPricing: "Plans",
     navContact: "Contact",
     navDownload: "Desktop",
+    navWorkbench: "Open Workbench",
+    navWorkbenchShort: "Workbench",
     heroKicker: "MANAGED CAD SANDBOX · HOSTED AI AGENT · OPEN-SOURCE DESKTOP",
     heroTitle: "AI CAD agent in the browser",
     heroSubtitle:
@@ -77,13 +79,6 @@ const COPY = {
       "Best for deeper engineering workflows, local control, and open-source trust",
     ],
     compareShared: "Both paths keep the important promise: editable CAD code and real 3D preview, not disposable images.",
-    ctaEyebrow: "Agent / Open-Source Desktop",
-    ctaTitle: "Try without login, keep the full desktop path",
-    ctaSubtitle:
-      "Start in the browser when you want zero setup. Move to the open-source desktop workbench when the project needs local control.",
-    ctaTry: "Try without login",
-    ctaDownload: "Download Desktop",
-    ctaSource: "View source code",
     footerTagline: "Hosted Agent plus full open-source desktop for editable AI CAD",
     guidesAi3D: "AI 3D Model Generation",
     guidesCodeCad: "Code to 3D Models",
@@ -107,6 +102,8 @@ const COPY = {
     navPricing: "方案",
     navContact: "联系我们",
     navDownload: "桌面版",
+    navWorkbench: "进入工作台",
+    navWorkbenchShort: "工作台",
     heroKicker: "托管 CAD 沙盒 · 内置 AI agent · 开源桌面版",
     heroTitle: "浏览器里的 AI CAD agent",
     heroSubtitle:
@@ -170,12 +167,6 @@ const COPY = {
       "适合更深的工程工作流、本地控制和开源信任",
     ],
     compareShared: "两条路径保留同一个关键承诺：可编辑 CAD 代码和真实 3D 预览，而不是一次性图片。",
-    ctaEyebrow: "Agent / 开源桌面版",
-    ctaTitle: "先免登录试用，再保留完整桌面路径",
-    ctaSubtitle: "想零配置就从浏览器开始；项目需要本地控制时，再进入开源桌面工作台。",
-    ctaTry: "免登录试用",
-    ctaDownload: "下载桌面版",
-    ctaSource: "查看源码",
     footerTagline: "托管 Agent + 完整开源桌面版，用于可编辑 AI CAD",
     guidesAi3D: "AI 生成三维模型软件",
     guidesCodeCad: "代码生成三维模型软件",
@@ -214,6 +205,13 @@ export function getLandingPageHtml(locale) {
         </nav>
         <div class="flex items-center gap-3">
           <a
+            class="js-workbench-link inline-flex h-10 items-center justify-center rounded-full border border-cyanx/55 bg-cyanx/12 px-4 text-sm font-bold text-white shadow-[0_0_28px_rgba(117,220,255,0.16)] transition hover:-translate-y-0.5 hover:border-cyanx/80 hover:bg-cyanx/20"
+            href="https://app.forgent3d.com?lang=${locale}"
+          >
+            <span class="sm:hidden">${t.navWorkbenchShort}</span>
+            <span class="hidden sm:inline">${t.navWorkbench}</span>
+          </a>
+          <a
             class="js-github-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white/5 transition hover:-translate-y-0.5 hover:border-cyanx/50"
             href="#"
             aria-label="${t.heroGithub}"
@@ -234,8 +232,8 @@ export function getLandingPageHtml(locale) {
             </h1>
             <p class="mt-5 max-w-xl text-base leading-7 text-slate-300">${t.heroSubtitle}</p>
             <div class="mt-8 flex flex-wrap gap-3">
-              <a class="js-try-link inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="https://app.forgent3d.com/try">${t.heroTry}</a>
-              <a class="js-download-link inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/25 bg-white/8 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/50" href="#download">${t.heroDownload}</a>
+              <a class="js-try-link inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="https://app.forgent3d.com/try?lang=${locale}">${t.heroTry}</a>
+              <a class="js-download-link inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/25 bg-white/8 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/50" href="https://github.com/forgent3d/forgent3d/releases/latest">${t.heroDownload}</a>
               <a class="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-line bg-slate-950/50 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:-translate-y-0.5 hover:border-cyanx/50 hover:text-white" href="#screenshots">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
                 ${t.heroDemo}
@@ -412,18 +410,6 @@ export function getLandingPageHtml(locale) {
           <p class="reveal mt-5 rounded-2xl border border-line bg-white/[0.03] p-5 text-sm leading-6 text-slate-300">${t.compareShared}</p>
         </section>
 
-        <section class="py-20" id="download">
-          <div class="reveal overflow-hidden rounded-[2.25rem] border border-cyanx/30 bg-gradient-to-br from-cyanx/10 via-white/[0.03] to-violetx/10 p-8 shadow-panel md:p-12">
-            <p class="mb-4 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.ctaEyebrow}</p>
-            <h2 class="max-w-2xl text-4xl font-bold tracking-[-0.05em] md:text-6xl">${t.ctaTitle}</h2>
-            <p class="mt-5 max-w-2xl text-sm leading-6 text-slate-300">${t.ctaSubtitle}</p>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a class="js-try-link inline-flex items-center justify-center rounded-full bg-linear-to-r from-cyanx to-violetx px-6 py-4 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="https://app.forgent3d.com/try">${t.ctaTry}</a>
-              <a class="js-download-link inline-flex items-center justify-center rounded-full border border-line bg-slate-950/50 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-cyanx/50" href="#">${t.ctaDownload}</a>
-              <a class="js-github-link inline-flex items-center justify-center rounded-full border border-line bg-slate-950/50 px-6 py-4 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:border-cyanx/50" href="#">${t.ctaSource}</a>
-            </div>
-          </div>
-        </section>
       </main>
 
       <div class="hero-preview-lightbox js-hero-preview-lightbox" aria-hidden="true">
