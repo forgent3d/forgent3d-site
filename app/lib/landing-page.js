@@ -190,15 +190,15 @@ export function getLandingPageHtml(locale) {
     <div class="fixed inset-0 -z-10 bg-[radial-gradient(circle_at_18%_10%,rgba(117,220,255,0.18),transparent_28%),radial-gradient(circle_at_80%_8%,rgba(155,124,255,0.22),transparent_24%),linear-gradient(180deg,#07111f_0%,#050b14_58%,#03070d_100%)]"></div>
     <div class="fixed inset-0 -z-10 grid-field opacity-70"></div>
 
-    <div class="mx-auto w-[min(1180px,calc(100vw-32px))]">
-      <header class="sticky top-4 z-30 mt-4 flex items-center justify-between gap-4 rounded-full border border-line bg-slate-950/55 px-4 py-3 shadow-panel backdrop-blur-xl">
-        <a class="flex items-center gap-3" href="#top" aria-label="Forgent3D Home">
+    <div class="landing-page mx-auto w-[min(1180px,calc(100vw-32px))]">
+      <header class="site-header sticky top-4 z-30 mt-4 flex items-center justify-between gap-4 rounded-full border border-line bg-slate-950/55 px-4 py-3 shadow-panel backdrop-blur-xl">
+        <a class="site-brand flex items-center gap-3" href="#top" aria-label="Forgent3D Home">
           <span class="grid h-11 w-11 place-items-center overflow-hidden rounded-2xl border border-cyanx/25 bg-cyanx/10 shadow-glow">
             <img src="/apple-touch-icon.png" alt="Forgent3D icon" class="h-full w-full object-cover" />
           </span>
           <span class="leading-tight">
             <strong class="block text-sm">Forgent3D</strong>
-            <span class="block font-mono text-[11px] text-slate-400">${t.brandSubline}</span>
+            <span class="site-brand-subline block font-mono text-[11px] text-slate-400">${t.brandSubline}</span>
           </span>
         </a>
         <nav class="hidden items-center gap-5 font-mono text-xs text-slate-400 lg:flex" aria-label="Primary">
@@ -207,7 +207,7 @@ export function getLandingPageHtml(locale) {
           <a class="js-pricing-link transition hover:text-cyanx" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="transition hover:text-cyanx" href="/${locale}/contact">${t.navContact}</a>
         </nav>
-        <div class="flex items-center gap-3">
+        <div class="site-header-actions flex items-center gap-3">
           <a
             class="js-workbench-link inline-flex h-10 items-center justify-center rounded-full border border-cyanx/55 bg-cyanx/12 px-4 text-sm font-bold text-white shadow-[0_0_28px_rgba(117,220,255,0.16)] transition hover:-translate-y-0.5 hover:border-cyanx/80 hover:bg-cyanx/20"
             href="https://app.forgent3d.com?lang=${locale}"
@@ -216,7 +216,7 @@ export function getLandingPageHtml(locale) {
             <span class="hidden sm:inline">${t.navWorkbench}</span>
           </a>
           <a
-            class="js-github-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white/5 transition hover:-translate-y-0.5 hover:border-cyanx/50"
+            class="site-github-link js-github-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white/5 transition hover:-translate-y-0.5 hover:border-cyanx/50"
             href="#"
             aria-label="${t.heroGithub}"
             title="${t.heroGithub}"
@@ -228,14 +228,14 @@ export function getLandingPageHtml(locale) {
       </header>
 
       <main id="top" lang="${t.htmlLang}">
-        <section class="grid min-h-[calc(100vh-80px)] items-center gap-10 pt-5 pb-16 lg:gap-14 lg:grid-cols-[0.86fr_1.14fr] lg:pt-6 lg:pb-20">
-          <div class="min-h-[520px]">
-            <p class="mb-4 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.heroKicker}</p>
-            <h1 class="max-w-[15ch] text-[clamp(1.9rem,5.2vw,3.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white text-balance">
+        <section class="hero-section grid min-h-[calc(100vh-80px)] items-center gap-10 pt-5 pb-16 lg:gap-14 lg:grid-cols-[0.86fr_1.14fr] lg:pt-6 lg:pb-20">
+          <div class="hero-copy min-h-[520px]">
+            <p class="mobile-kicker mb-4 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.heroKicker}</p>
+            <h1 class="hero-title max-w-[15ch] text-[clamp(1.9rem,5.2vw,3.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white text-balance">
               ${t.heroTitle}
             </h1>
             <p class="mt-5 max-w-xl text-base leading-7 text-slate-300">${t.heroSubtitle}</p>
-            <div class="mt-8 flex flex-wrap gap-3">
+            <div class="hero-actions mt-8 flex flex-wrap gap-3">
               <a class="js-try-link inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5" href="https://app.forgent3d.com/try?lang=${locale}">${t.heroTry}</a>
               <a class="js-download-link inline-flex min-h-[48px] items-center justify-center rounded-full border border-white/25 bg-white/8 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:border-white/50" href="https://github.com/forgent3d/forgent3d/releases/latest">${t.heroDownload}</a>
               <a class="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border border-line bg-slate-950/50 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:-translate-y-0.5 hover:border-cyanx/50 hover:text-white" href="#screenshots">
@@ -245,9 +245,9 @@ export function getLandingPageHtml(locale) {
             </div>
           </div>
 
-          <div class="relative min-h-[520px] lg:min-h-[620px]">
+          <div class="hero-visual relative min-h-[520px] lg:min-h-[620px]">
             <button
-              class="js-hero-preview-trigger absolute inset-2 overflow-hidden rounded-[2.2rem] border border-cyanx/35 bg-slate-900 p-1.5 shadow-panel transition hover:border-cyanx/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
+              class="hero-preview-card js-hero-preview-trigger absolute inset-2 overflow-hidden rounded-[2.2rem] border border-cyanx/35 bg-slate-900 p-1.5 shadow-panel transition hover:border-cyanx/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
               type="button"
               aria-label="${t.imagePreviewOpenAria}"
               data-preview-src="/product.webp"
@@ -262,10 +262,10 @@ export function getLandingPageHtml(locale) {
           </div>
         </section>
 
-        <section class="reveal py-20" id="agent-loop">
+        <section class="landing-section reveal py-20" id="agent-loop">
           <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.loopEyebrow}</p>
+              <p class="mobile-kicker mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.loopEyebrow}</p>
               <h2 class="max-w-2xl text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.loopTitle}</h2>
             </div>
             <p class="max-w-sm text-sm leading-6 text-slate-400">${t.loopSubtitle}</p>
@@ -278,15 +278,15 @@ export function getLandingPageHtml(locale) {
           </div>
         </section>
 
-        <section class="py-12 md:py-16 lg:py-20" id="screenshots">
+        <section class="landing-section py-12 md:py-16 lg:py-20" id="screenshots">
           <div class="reveal mb-5 flex flex-col justify-between gap-3 md:mb-6 md:flex-row md:items-end md:gap-4">
             <div>
-              <p class="mb-2 font-mono text-xs uppercase tracking-[0.24em] text-cyanx md:mb-3">${t.screenshotsEyebrow}</p>
+              <p class="mobile-kicker mb-2 font-mono text-xs uppercase tracking-[0.24em] text-cyanx md:mb-3">${t.screenshotsEyebrow}</p>
               <h2 class="max-w-3xl text-2xl font-bold tracking-[-0.05em] text-white md:text-3xl lg:text-4xl">${t.screenshotsTitle}</h2>
             </div>
             <p class="max-w-sm text-sm leading-6 text-slate-400">${t.screenshotsSubtitle}</p>
           </div>
-          <div class="reveal rounded-[2.25rem] border border-line bg-slate-950/55 p-3 shadow-panel backdrop-blur-xl md:p-4">
+          <div class="screenshots-frame reveal rounded-[2.25rem] border border-line bg-slate-950/55 p-3 shadow-panel backdrop-blur-xl md:p-4">
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <article class="overflow-hidden rounded-2xl border border-line bg-white/[0.02]">
                 <button
@@ -372,10 +372,10 @@ export function getLandingPageHtml(locale) {
           </div>
         </section>
 
-        <section class="py-20" id="features">
+        <section class="landing-section py-20" id="features">
           <div class="reveal mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.featuresEyebrow}</p>
+              <p class="mobile-kicker mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.featuresEyebrow}</p>
               <h2 class="max-w-2xl text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.featuresTitle}</h2>
             </div>
             <p class="max-w-sm text-sm leading-6 text-slate-400">${t.featuresSubtitle}</p>
@@ -387,10 +387,10 @@ export function getLandingPageHtml(locale) {
           </div>
         </section>
 
-        <section class="py-20" id="compare">
+        <section class="landing-section py-20" id="compare">
           <div class="reveal mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
-              <p class="mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.compareEyebrow}</p>
+              <p class="mobile-kicker mb-3 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.compareEyebrow}</p>
               <h2 class="max-w-3xl text-4xl font-bold tracking-[-0.05em] text-white md:text-6xl">${t.compareTitle}</h2>
             </div>
             <p class="max-w-sm text-sm leading-6 text-slate-400">${t.compareSubtitle}</p>

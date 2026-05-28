@@ -14,6 +14,7 @@ html {
 
 body {
   margin: 0;
+  overflow-x: hidden;
 }
 
 a {
@@ -389,6 +390,21 @@ body.hero-preview-open {
   overflow: hidden;
 }
 
+body,
+button,
+input,
+textarea,
+select {
+  text-rendering: geometricPrecision;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(26px);
@@ -419,6 +435,306 @@ body.hero-preview-open {
 
   50% {
     transform: translateY(-12px) rotateZ(5deg);
+  }
+}
+
+@media (max-width: 767px) {
+  .landing-page {
+    width: min(100% - 24px, 1180px) !important;
+  }
+
+  .site-header {
+    top: 8px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 22px !important;
+  }
+
+  .site-brand {
+    min-width: 0;
+    gap: 10px;
+  }
+
+  .site-brand > span:first-child {
+    width: 38px;
+    height: 38px;
+    border-radius: 14px;
+    flex: 0 0 auto;
+  }
+
+  .site-brand strong,
+  .site-brand-subline {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .site-brand-subline {
+    max-width: 38vw;
+  }
+
+  .site-header-actions {
+    gap: 6px;
+  }
+
+  .site-header-actions .js-workbench-link {
+    height: 38px;
+    padding-inline: 12px;
+    font-size: 0.8125rem;
+  }
+
+  .site-header-actions .js-lang-toggle,
+  .site-github-link {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+  }
+
+  .site-header-actions .js-lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-section {
+    min-height: auto !important;
+    align-items: start;
+    gap: 28px;
+    padding-top: 32px !important;
+    padding-bottom: 48px !important;
+  }
+
+  .hero-copy,
+  .hero-visual {
+    min-height: 0 !important;
+  }
+
+  .hero-title {
+    max-width: none !important;
+    font-size: 2.5rem !important;
+    line-height: 1.08 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .hero-copy p:not(.mobile-kicker) {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .hero-actions {
+    gap: 10px;
+    margin-top: 24px !important;
+  }
+
+  .hero-actions > a {
+    width: 100%;
+    min-height: 46px;
+    padding-inline: 16px;
+  }
+
+  .hero-visual {
+    height: 280px;
+  }
+
+  .hero-preview-card {
+    inset: 0 !important;
+    border-radius: 22px !important;
+    padding: 4px !important;
+  }
+
+  .landing-section {
+    padding-block: 46px !important;
+  }
+
+  .landing-section h2,
+  #screenshots h2 {
+    font-size: 2rem !important;
+    line-height: 1.12 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .landing-section h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0 !important;
+  }
+
+  .mobile-kicker {
+    letter-spacing: 0.06em !important;
+    line-height: 1.45;
+  }
+
+  #agent-loop article h3 {
+    margin-top: 28px !important;
+  }
+
+  .landing-section article,
+  .screenshots-frame,
+  #compare > p {
+    border-radius: 20px !important;
+  }
+
+  .screenshots-frame {
+    padding: 8px !important;
+  }
+
+  #screenshots article {
+    border-radius: 16px !important;
+  }
+
+  #screenshots article img {
+    object-fit: contain !important;
+  }
+
+  .mini-visual {
+    height: 126px;
+    border-radius: 18px;
+  }
+
+  .hero-preview-lightbox {
+    padding: 10px;
+  }
+
+  .hero-preview-panel {
+    width: 100%;
+    max-height: calc(100dvh - 20px);
+    border-radius: 18px;
+    padding: 8px;
+  }
+
+  .hero-preview-panel img {
+    max-height: calc(100dvh - 36px);
+    border-radius: 12px;
+  }
+
+  .hero-preview-close {
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    background: rgba(3, 9, 17, 0.9);
+  }
+
+  body > main:not([class*="fixed"]) {
+    width: calc(100vw - 24px) !important;
+    padding-top: 40px !important;
+    padding-bottom: 52px !important;
+  }
+
+  body > main:not([class*="fixed"]) h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.12 !important;
+    letter-spacing: 0 !important;
+  }
+
+  body > main:not([class*="fixed"]) h2 {
+    font-size: 1.55rem !important;
+    line-height: 1.25 !important;
+    letter-spacing: 0 !important;
+  }
+
+  body > main:not([class*="fixed"]) p,
+  body > main:not([class*="fixed"]) li {
+    overflow-wrap: anywhere;
+  }
+
+  body > main:not([class*="fixed"]) [class*="rounded-[2rem]"],
+  body > main:not([class*="fixed"]) [class*="rounded-[1.75rem]"],
+  body > main:not([class*="fixed"]) [class*="rounded-[1.5rem]"] {
+    border-radius: 20px !important;
+  }
+
+  body > main:not([class*="fixed"]) section,
+  body > main:not([class*="fixed"]) article {
+    scroll-margin-top: 82px;
+  }
+
+  body > main:not([class*="fixed"]) pre {
+    border-radius: 16px !important;
+    padding: 16px !important;
+    white-space: pre-wrap;
+  }
+
+  body > main:not([class*="fixed"]) .js-try-link,
+  body > main:not([class*="fixed"]) .js-download-link {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 430px) {
+  .site-brand-subline {
+    display: none;
+  }
+
+  .site-github-link {
+    display: none !important;
+  }
+
+  .hero-title {
+    font-size: 2.25rem !important;
+  }
+
+  .hero-visual {
+    height: 236px;
+  }
+
+  .landing-section h2,
+  #screenshots h2 {
+    font-size: 1.75rem !important;
+  }
+
+  .landing-section {
+    padding-block: 40px !important;
+  }
+
+  .mobile-kicker {
+    font-size: 0.6875rem !important;
+  }
+
+  body > main:not([class*="fixed"]) h1 {
+    font-size: 2rem !important;
+  }
+
+  body > main:not([class*="fixed"]) {
+    width: calc(100vw - 20px) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .landing-page {
+    width: min(100% - 18px, 1180px) !important;
+  }
+
+  .site-header {
+    grid-template-columns: 1fr auto;
+    padding: 7px;
+  }
+
+  .site-brand > span:first-child {
+    width: 34px;
+    height: 34px;
+  }
+
+  .site-header-actions .js-workbench-link {
+    height: 36px;
+    padding-inline: 10px;
+  }
+
+  .site-header-actions .js-lang-toggle {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hero-title {
+    font-size: 2.05rem !important;
+  }
+
+  .hero-visual {
+    height: 218px;
   }
 }
 
