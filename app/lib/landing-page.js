@@ -204,7 +204,7 @@ export function getLandingPageHtml(locale) {
         <nav class="hidden items-center gap-5 font-mono text-xs text-slate-400 lg:flex" aria-label="Primary">
           <a class="transition hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
           <a class="transition hover:text-cyanx" href="#compare">${t.navCompare}</a>
-          <a class="transition hover:text-cyanx" href="/${locale}/pricing">${t.navPricing}</a>
+          <a class="js-pricing-link transition hover:text-cyanx" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="transition hover:text-cyanx" href="/${locale}/contact">${t.navContact}</a>
         </nav>
         <div class="flex items-center gap-3">
@@ -434,7 +434,7 @@ export function getLandingPageHtml(locale) {
           <a class="hover:text-cyanx" href="#screenshots">${t.navDemo}</a>
           <a class="hover:text-cyanx" href="#features">${t.navFeatures}</a>
           <a class="hover:text-cyanx" href="#compare">${t.navCompare}</a>
-          <a class="hover:text-cyanx" href="/${locale}/pricing">${t.navPricing}</a>
+          <a class="js-pricing-link hover:text-cyanx" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="hover:text-cyanx" href="/${locale}/contact">${t.navContact}</a>
           <a class="hover:text-cyanx" href="/${locale}/ai-3d-model-generation">${t.guidesAi3D}</a>
           <a class="hover:text-cyanx" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>

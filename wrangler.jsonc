@@ -12,6 +12,8 @@
     "binding": "ASSETS"
   },
   "vars": {
-    "CAD_AGENT_API_URL": "https://agent.forgent3d.com"
+    "CAD_AGENT_API_URL": "https://agent.forgent3d.com",
+    "NEXT_PUBLIC_POSTHOG_TOKEN": "phc_s46V8wP7bK9qr8HegR2pSgFN6ZFEpg76FNc28ssRM7Ha",
+    "NEXT_PUBLIC_POSTHOG_HOST": "https://us.i.posthog.com"
   }
 }
