@@ -101,11 +101,7 @@ if (heroPreviewTriggers.length && heroPreviewLightbox && heroPreviewImage) {
     const fallback = trigger.dataset.previewFallback || "";
     const alt = trigger.dataset.previewAlt || "Preview image";
     if (heroPreviewSource) {
-      if (webp) {
-        heroPreviewSource.setAttribute("srcset", webp);
-      } else {
-        heroPreviewSource.removeAttribute("srcset");
-      }
+      heroPreviewSource.setAttribute("srcset", webp || "/product.webp");
     }
     heroPreviewImage.setAttribute("src", fallback || webp || heroPreviewImage.getAttribute("src") || "");
     heroPreviewImage.setAttribute("alt", alt);

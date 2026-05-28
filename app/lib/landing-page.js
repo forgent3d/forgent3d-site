@@ -1,7 +1,3 @@
-const HERO_PRODUCT_SRCSET =
-  "/product-720.webp 720w, /product-1080.webp 1080w, /product-1440.webp 1440w, /product.webp 2354w";
-const HERO_PRODUCT_SIZES = "(min-width: 1024px) 58vw, calc(100vw - 32px)";
-
 const COPY = {
   en: {
     locale: "en_US",
@@ -229,7 +225,7 @@ export function getLandingPageHtml(locale) {
 
       <main id="top" lang="${t.htmlLang}">
         <section class="grid min-h-[calc(100vh-80px)] items-center gap-10 pt-5 pb-16 lg:gap-14 lg:grid-cols-[0.86fr_1.14fr] lg:pt-6 lg:pb-20">
-          <div class="min-h-[520px]">
+          <div class="reveal min-h-[520px]">
             <p class="mb-4 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">${t.heroKicker}</p>
             <h1 class="max-w-[15ch] text-[clamp(1.9rem,5.2vw,3.75rem)] font-bold leading-[1.15] tracking-[-0.02em] text-white text-balance">
               ${t.heroTitle}
@@ -245,18 +241,18 @@ export function getLandingPageHtml(locale) {
             </div>
           </div>
 
-          <div class="relative min-h-[520px] lg:min-h-[620px]">
+          <div class="reveal relative min-h-[520px] lg:min-h-[620px]">
             <button
               class="js-hero-preview-trigger absolute inset-2 overflow-hidden rounded-[2.2rem] border border-cyanx/35 bg-slate-900 p-1.5 shadow-panel transition hover:border-cyanx/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyanx/70"
               type="button"
               aria-label="${t.imagePreviewOpenAria}"
               data-preview-src="/product.webp"
-              data-preview-fallback="/product-1080.png"
+              data-preview-fallback="/product.png"
               data-preview-alt="Forgent3D product UI"
             >
               <picture>
-                <source srcset="${HERO_PRODUCT_SRCSET}" sizes="${HERO_PRODUCT_SIZES}" type="image/webp" />
-                <img src="/product-1080.png" alt="Forgent3D product UI" width="2354" height="1422" class="h-full w-full object-contain object-center brightness-110 contrast-[1.04]" loading="eager" decoding="async" fetchpriority="high" />
+                <source srcset="/product.webp" type="image/webp" />
+                <img src="/product.png" alt="Forgent3D product UI" class="h-full w-full object-contain object-center brightness-110 contrast-[1.04]" loading="eager" decoding="async" />
               </picture>
             </button>
           </div>
@@ -421,8 +417,8 @@ export function getLandingPageHtml(locale) {
         <div class="hero-preview-panel" role="dialog" aria-modal="true" aria-label="${t.imagePreviewDialogAria}">
           <button class="hero-preview-close js-hero-preview-close" type="button" aria-label="${t.imagePreviewCloseAria}">✕</button>
           <picture>
-            <source class="js-hero-preview-source" type="image/webp" />
-            <img class="js-hero-preview-image" alt="Forgent3D product UI" loading="lazy" decoding="async" />
+            <source class="js-hero-preview-source" srcset="/product.webp" type="image/webp" />
+            <img class="js-hero-preview-image" src="/product.png" alt="Forgent3D product UI" loading="lazy" decoding="async" />
           </picture>
         </div>
       </div>
