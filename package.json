@@ -9,7 +9,6 @@
   "dependencies": {
     "@google/model-viewer": "^4.2.0",
     "next": "latest",
-    "posthog-js": "^1.376.3",
     "react": "latest",
     "react-dom": "latest"
   },

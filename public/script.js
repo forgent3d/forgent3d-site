@@ -1,29 +1,4 @@
 const linkConfig = window.FORGENT_LINKS || {};
-const pendingPostHogEvents = [];
-
-function isHomepage() {
-  return /^\/(?:en|zh)?\/?$/.test(window.location.pathname);
-}
-
-function trackEvent(eventName, properties = {}) {
-  if (!window.posthog || !eventName) {
-    pendingPostHogEvents.push([eventName, properties]);
-    return;
-  }
-
-  window.posthog.capture(eventName, {
-    locale: getCurrentLocale(),
-    path: window.location.pathname,
-    ...properties,
-  });
-}
-
-function flushPendingPostHogEvents() {
-  while (pendingPostHogEvents.length && window.posthog) {
-    const [eventName, properties] = pendingPostHogEvents.shift();
-    trackEvent(eventName, properties);
-  }
-}
 
 function getCurrentLocale() {
   const urlLocale = new URLSearchParams(window.location.search).get("lang");
@@ -71,28 +46,6 @@ applyLinks(".js-github-link", linkConfig.github, "#download");
 applyLinks(".js-x-link", linkConfig.x, "#download");
 applyLinks(".js-workbench-link", linkConfig.workbench, "https://app.forgent3d.com", { includeLocale: true });
 applyLinks(".js-try-link", linkConfig.try, "#download", { includeLocale: true });
-
-window.addEventListener("posthog:ready", flushPendingPostHogEvents);
-
-if (isHomepage()) {
-  trackEvent("visit_homepage", { referrer: document.referrer || undefined });
-}
-
-[
-  [".js-try-link", "click_try"],
-  [".js-pricing-link", "click_pricing"],
-  [".js-download-link", "click_download_desktop"],
-  [".js-github-link", "click_github"],
-].forEach(([selector, eventName]) => {
-  document.querySelectorAll(selector).forEach((node) => {
-    node.addEventListener("click", () => {
-      trackEvent(eventName, {
-        href: node.getAttribute("href") || undefined,
-        label: node.textContent.trim() || node.getAttribute("aria-label") || undefined,
-      });
-    });
-  });
-});
 
 const langToggle = document.querySelector(".js-lang-toggle");
 if (langToggle) {
