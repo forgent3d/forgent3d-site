@@ -5,23 +5,27 @@ function isHomepage() {
   return /^\/(?:en|zh)?\/?$/.test(window.location.pathname);
 }
 
-function trackEvent(eventName, properties = {}) {
+function trackEvent(eventName, properties = {}, options = {}) {
   if (!window.posthog || !eventName) {
-    pendingPostHogEvents.push([eventName, properties]);
+    pendingPostHogEvents.push([eventName, properties, options]);
     return;
   }
 
-  window.posthog.capture(eventName, {
-    locale: getCurrentLocale(),
-    path: window.location.pathname,
-    ...properties,
-  });
+  window.posthog.capture(
+    eventName,
+    {
+      locale: getCurrentLocale(),
+      path: window.location.pathname,
+      ...properties,
+    },
+    options
+  );
 }
 
 function flushPendingPostHogEvents() {
   while (pendingPostHogEvents.length && window.posthog) {
-    const [eventName, properties] = pendingPostHogEvents.shift();
-    trackEvent(eventName, properties);
+    const [eventName, properties, options] = pendingPostHogEvents.shift();
+    trackEvent(eventName, properties, options);
   }
 }
 
@@ -75,11 +79,11 @@ applyLinks(".js-try-link", linkConfig.try, "#download", { includeLocale: true })
 window.addEventListener("posthog:ready", flushPendingPostHogEvents);
 
 if (isHomepage()) {
-  trackEvent("visit_homepage", { referrer: document.referrer || undefined });
+  trackEvent("homepage_viewed", { referrer: document.referrer || undefined });
 }
 
 [
-  [".js-try-link", "click_try"],
+  [".js-try-link", "try_clicked"],
   [".js-pricing-link", "click_pricing"],
   [".js-download-link", "click_download_desktop"],
   [".js-github-link", "click_github"],
@@ -89,7 +93,7 @@ if (isHomepage()) {
       trackEvent(eventName, {
         href: node.getAttribute("href") || undefined,
         label: node.textContent.trim() || node.getAttribute("aria-label") || undefined,
-      });
+      }, { transport: "sendBeacon" });
     });
   });
 });

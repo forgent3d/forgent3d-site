@@ -8,6 +8,7 @@ if (posthogToken) {
     defaults: "2026-01-30",
     autocapture: false,
     capture_pageview: false,
+    capture_performance: false,
     loaded: (client) => {
       window.posthog = client;
       window.dispatchEvent(new Event("posthog:ready"));
