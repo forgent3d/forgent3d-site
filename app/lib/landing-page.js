@@ -1,6 +1,11 @@
 const HERO_PRODUCT_SRCSET =
   "/product-720.webp 720w, /product-1080.webp 1080w, /product-1440.webp 1440w, /product.webp 2354w";
-const HERO_PRODUCT_SIZES = "(min-width: 1024px) 58vw, calc(100vw - 32px)";
+export const HERO_PRODUCT_SIZES =
+  "(min-width: 1180px) 658px, (min-width: 1024px) calc((100vw - 32px) * 0.58), calc(100vw - 32px)";
+export const HERO_PRODUCT_PRELOAD = {
+  imageSrcSet: HERO_PRODUCT_SRCSET,
+  imageSizes: HERO_PRODUCT_SIZES,
+};
 
 const COPY = {
   en: {

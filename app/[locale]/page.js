@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
-import { getLandingPageHtml, isSupportedLocale } from "../lib/landing-page";
+import {
+  getLandingPageHtml,
+  HERO_PRODUCT_PRELOAD,
+  isSupportedLocale,
+} from "../lib/landing-page";
 
 function getSeoCopy(locale) {
   if (locale === "zh") {
@@ -57,5 +61,16 @@ export default async function LocalizedPage({ params }) {
     notFound();
   }
 
-  return <div dangerouslySetInnerHTML={{ __html: getLandingPageHtml(locale) }} />;
+  return (
+    <>
+      <link
+        rel="preload"
+        as="image"
+        imageSrcSet={HERO_PRODUCT_PRELOAD.imageSrcSet}
+        imageSizes={HERO_PRODUCT_PRELOAD.imageSizes}
+        fetchPriority="high"
+      />
+      <div dangerouslySetInnerHTML={{ __html: getLandingPageHtml(locale) }} />
+    </>
+  );
 }
