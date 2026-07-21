@@ -4,21 +4,21 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Quick Start：先免登录试用，再进入桌面版 | Forgent3D",
+      title: "Quick Start：登录后快速开始，再进入桌面版 | Forgent3D",
       description:
-        "打开 Forgent3D Agent 免登录试用网页 CAD 生成与预览；需要完整本地控制时，再下载开源桌面版。",
+        "登录 Forgent3D Agent，在网页中生成并预览 CAD；需要完整本地控制时，再下载开源桌面版。",
       ogLocale: "zh_CN",
       kicker: "Quick Start",
-      h1: "30 秒免登录试用，严肃项目用桌面版",
+      h1: "登录后快速开始，严肃项目用桌面版",
       intro:
         "Forgent3D Agent 是最快入口：不用安装 CAD 环境，直接在网页里生成、运行和预览模型。桌面版开源，适合私有项目和深度工程工作流。",
-      tryLink: "免登录试用",
+      tryLink: "登录后开始使用",
       desktopLink: "下载开源桌面版",
       steps: [
         {
           label: "01",
-          title: "打开网页试用",
-          text: "进入浏览器里的 Forgent3D Agent，不需要登录就可以先跑通一次托管 CAD 生成流程。",
+          title: "登录网页 Agent",
+          text: "登录后进入浏览器里的 Forgent3D Agent，开始托管 CAD 生成流程。",
         },
         {
           label: "02",
@@ -46,21 +46,21 @@ function getCopy(locale) {
   }
 
   return {
-    title: "Quick Start: Try Without Login, Then Use Desktop for Full Control | Forgent3D",
+    title: "Quick Start: Sign In and Start, Then Use Desktop for Full Control | Forgent3D",
     description:
-      "Try Forgent3D Agent in the browser without login, then use the open-source desktop app when you need full local control.",
+      "Sign in to Forgent3D Agent to generate and preview CAD in the browser, then use the open-source desktop app when you need full local control.",
     ogLocale: "en_US",
     kicker: "Quick Start",
-    h1: "Try without login in 30 seconds, use Desktop for serious projects",
+    h1: "Sign in and start quickly, use Desktop for serious projects",
     intro:
       "Forgent3D Agent is the fastest front door: no CAD environment setup, just generate, run, and preview models in the browser. Desktop is open source and fits private projects and deeper engineering workflows.",
-    tryLink: "Try without login",
+    tryLink: "Sign in to start",
     desktopLink: "Download Desktop",
     steps: [
       {
         label: "01",
-        title: "Open the browser trial",
-        text: "Start with Forgent3D Agent in the browser. You can run the hosted CAD generation loop before creating an account.",
+        title: "Sign in to the browser Agent",
+        text: "Sign in to Forgent3D Agent in the browser, then start the hosted CAD generation loop.",
       },
       {
         label: "02",

@@ -39,7 +39,7 @@ function getCopy(locale) {
         },
       ],
       ctaTitle: "先从 Agent 体验",
-      ctaText: "免登录试一次托管 agent；当项目需要本地控制时，再下载开源桌面版。",
+      ctaText: "登录后开始使用托管 agent；当项目需要本地控制时，再下载开源桌面版。",
       ctaLink: "查看快速开始",
     };
   }
@@ -80,7 +80,7 @@ function getCopy(locale) {
       },
     ],
     ctaTitle: "Start with the Agent",
-    ctaText: "Try the hosted agent without login, then move to the open-source desktop app when the project needs local control.",
+    ctaText: "Sign in to use the hosted agent, then move to the open-source desktop app when the project needs local control.",
     ctaLink: "Open Quick Start",
   };
 }

@@ -26,7 +26,7 @@ const COPY = {
     heroTitle: "AI CAD agent in the browser",
     heroSubtitle:
       "Try ideas in the browser without installing a CAD environment. When a model becomes a real project, move to the open-source desktop app for local files and deeper control.",
-    heroTry: "Try without login",
+    heroTry: "Sign in to start",
     heroDemo: "Watch Demo",
     heroDownload: "Get Desktop App",
     heroGithub: "View GitHub",
@@ -117,7 +117,7 @@ const COPY = {
     heroTitle: "浏览器里的 AI CAD agent",
     heroSubtitle:
       "不用安装 CAD 环境，直接在网页里让 Agent 生成并预览模型。项目需要本地文件和深度控制时，再进入开源桌面版。",
-    heroTry: "免登录试用",
+    heroTry: "登录后开始使用",
     heroDemo: "观看演示",
     heroDownload: "下载桌面版",
     heroGithub: "查看 GitHub",
