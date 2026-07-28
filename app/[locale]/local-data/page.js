@@ -4,83 +4,83 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Cloud & Local Data：Forgent3D Agent 与 Desktop 如何处理数据",
+      title: "Cloud & Local Data：Forgent3D 云端与 skill 如何处理数据",
       description:
-        "了解 Forgent3D Agent 与 Forgent3D Desktop 的数据边界，按项目敏感度选择合适工作流。",
+        "了解 Forgent3D 云端 Agent 与本地 skill 的数据边界：模型代码放在哪里、构建在哪里跑、结果存在哪里。",
       ogLocale: "zh_CN",
       kicker: "Cloud & Local Data",
-      h1: "Agent 快速试用，Desktop 给完整本地控制",
+      h1: "云端负责构建，代码可以留在你自己的仓库",
       intro:
-        "Forgent3D 现在有两条路径：Agent 适合免配置试用、演示和快速验证；Desktop 开源，适合私有模型、复杂项目和长期工程工作流。",
+        "Forgent3D 有两个入口：在网页里直接用云端 Agent，或者装上 skill 让本地 agent 发起。两者跑的是同一套 CAD 引擎，区别只在于模型代码从哪里来、留在哪里。",
       sections: [
         {
-          title: "Agent 如何处理数据",
+          title: "云端 Agent 如何处理数据",
           items: [
-            "Agent 会在网页环境中运行 CAD 生成和构建流程。",
-            "它的价值是免安装、依赖已准备好、agent 流程内置，适合快速验证想法。",
-            "不要把 Web 描述成完整桌面版的替代品；它是省配置、可托管、适合快速验证的浏览器入口。",
+            "prompt、生成的模型代码、构建产物和 3D 预览都保存在你的 Forgent3D 工作区里。",
+            "CAD 内核和构建环境已经准备好，你不用在本地装任何依赖。",
+            "模型默认私有，只有你显式分享或设为公开时才会出现在模型库里。",
           ],
         },
         {
-          title: "Desktop 如何处理数据",
+          title: "本地 skill 如何处理数据",
           items: [
-            "桌面版开源，模型代码、构建产物、截图和验证结果保存在你的项目目录。",
-            "它适合私有设计、专业模型、复杂装配、长期迭代和需要接入 Codex、Claude Code、Cursor 的工作流。",
-            "开源桌面版提供透明度和可控性：高级用户可以检查、扩展和本地掌控整个流程。",
+            "模型代码由你本地的 agent 写在你自己的仓库里，可以 Git 管理、审查和长期维护。",
+            "构建和几何测量仍然发生在云端，构建结果和 3D 链接落回同一个工作区。",
+            "适合已经在 Claude Code、Codex、Cursor 里工作、希望模型代码和其他源码放在一起的人。",
           ],
         },
         {
           title: "如何选择",
           items: [
-            "想让用户最快理解产品价值，用 Agent。",
-            "想处理敏感文件或需要完整工程控制，用 Desktop。",
-            "如果你使用外部 AI 工具，也要检查它们自己的上下文上传、隐私和保留策略。",
+            "想最快看到结果、做演示或分享，直接用云端 Agent。",
+            "希望模型代码留在自己仓库里，和项目其他代码一起维护，用 skill。",
+            "涉及敏感设计时，先确认要不要把它交给任何托管服务；如果你还接了外部 AI 工具，也要检查它们的上下文上传、隐私和保留策略。",
           ],
         },
       ],
-      ctaTitle: "先从 Agent 体验",
-      ctaText: "登录后开始使用托管 agent；当项目需要本地控制时，再下载开源桌面版。",
+      ctaTitle: "先跑一遍完整链路",
+      ctaText: "登录后在云端生成第一个模型；想让本地 agent 也会建模，再装上 skill。",
       ctaLink: "查看快速开始",
     };
   }
 
   return {
-    title: "Cloud & Local Data: How Forgent3D Agent and Desktop Handle Data",
+    title: "Cloud & Local Data: How the Forgent3D Cloud and Skill Handle Data",
     description:
-      "Understand the data boundary between Forgent3D Agent and Forgent3D Desktop.",
+      "Understand the data boundary between the Forgent3D cloud agent and the local skill: where model code lives, where builds run, and where results are stored.",
     ogLocale: "en_US",
     kicker: "Cloud & Local Data",
-    h1: "Agent is for quick trials. Desktop gives full local control.",
+    h1: "Builds run in the cloud; model code can live in your own repo",
     intro:
-      "Forgent3D now has two paths: Agent is for zero-setup trials, demos, sharing, and rapid validation; Desktop is open source and fits private models, complex projects, and long-running engineering workflows.",
+      "Forgent3D has two entry points: prompt the cloud agent in the browser, or let your local agent drive it through the skill. Both run the same CAD engine — the difference is where the model code comes from and where it stays.",
     sections: [
       {
-        title: "How Agent handles data",
+        title: "How the cloud agent handles data",
         items: [
-          "Agent runs CAD generation and builds in a prepared browser environment.",
-          "Its value is zero setup, prepared dependencies, and a built-in agent flow for fast idea validation.",
-          "Do not position Web as a complete replacement for Desktop; it is the convenient hosted browser entry point for rapid validation.",
+          "Prompts, generated model code, build output, and 3D previews live in your Forgent3D workspace.",
+          "The CAD kernel and build environment are already running, so nothing is installed on your machine.",
+          "Models are private by default and only appear in the public library when you explicitly share or publish them.",
         ],
       },
       {
-        title: "How Desktop handles data",
+        title: "How the local skill handles data",
         items: [
-          "Desktop is open source. Model code, build output, screenshots, and verification data live in your project folder.",
-          "It fits private designs, commercial models, complex assemblies, long-running iteration, and workflows with Codex, Claude Code, or Cursor.",
-          "The open-source desktop app provides transparency and control for advanced users who need to inspect, extend, and own the local workflow.",
+          "Your local agent writes the model code inside your own repository, where it can be versioned, reviewed, and maintained.",
+          "Builds and geometry measurement still run in the cloud, and the built result plus its 3D link land in the same workspace.",
+          "It fits people already working in Claude Code, Codex, or Cursor who want model code to sit next to the rest of their source.",
         ],
       },
       {
         title: "How to choose",
         items: [
-          "Use Agent when you want users to understand the product value quickly.",
-          "Use Desktop for sensitive files or workflows that need complete engineering control.",
-          "If you connect external AI tools, also review their context sharing, privacy, and retention settings.",
+          "Use the cloud agent when you want the fastest result, a demo, or something to share.",
+          "Use the skill when model code should live in your repository alongside the rest of the project.",
+          "For sensitive designs, decide first whether they should go to any hosted service; if you also connect external AI tools, review their context sharing, privacy, and retention settings.",
         ],
       },
     ],
-    ctaTitle: "Start with the Agent",
-    ctaText: "Sign in to use the hosted agent, then move to the open-source desktop app when the project needs local control.",
+    ctaTitle: "Run the loop once, end to end",
+    ctaText: "Sign in and generate your first model in the cloud, then install the skill if you want your local agent to model too.",
     ctaLink: "Open Quick Start",
   };
 }

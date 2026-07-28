@@ -4,41 +4,41 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Quick Start：登录后快速开始，再进入桌面版 | Forgent3D",
+      title: "Quick Start：登录即用，或装进你自己的 agent | Forgent3D",
       description:
-        "登录 Forgent3D Agent，在网页中生成并预览 CAD；需要完整本地控制时，再下载开源桌面版。",
+        "登录 Forgent3D Agent，在云端生成并预览 CAD；或者装上 skill，让 Claude Code、Codex、Cursor 直接建模。",
       ogLocale: "zh_CN",
       kicker: "Quick Start",
-      h1: "登录后快速开始，严肃项目用桌面版",
+      h1: "登录就能开始，也可以从你自己的 agent 开始",
       intro:
-        "Forgent3D Agent 是最快入口：不用安装 CAD 环境，直接在网页里生成、运行和预览模型。桌面版开源，适合私有项目和深度工程工作流。",
+        "Forgent3D Agent 是最快入口：不用安装 CAD 环境，直接在云端生成、运行和预览模型。已经在用 AI IDE 的话，装上 Forgent3D skill，同一个 CAD agent 就在你的终端里。",
       tryLink: "登录后开始使用",
-      desktopLink: "下载开源桌面版",
+      skillsLink: "安装 Skill",
       steps: [
         {
           label: "01",
-          title: "登录网页 Agent",
-          text: "登录后进入浏览器里的 Forgent3D Agent，开始托管 CAD 生成流程。",
+          title: "登录云端 Agent",
+          text: "登录后进入 Forgent3D Agent，开始托管的 CAD 生成流程。",
         },
         {
           label: "02",
           title: "让 agent 生成 CAD",
-          text: "描述零件、产品想法或机构，agent 会生成可编辑 CAD 代码，并在准备好的网页环境中运行。",
+          text: "描述零件、产品想法或机构，agent 会生成可编辑 CAD 代码，并在准备好的云端环境中运行。",
         },
         {
           label: "03",
-          title: "需要完整控制时切到桌面版",
-          text: "当模型进入私有项目、复杂工程或长期迭代阶段，下载开源桌面版，把工作流放回本地项目。",
+          title: "想在自己的 agent 里做，就装 skill",
+          text: "一条 npx skills add forgent3d/forgent3d-skills，Claude Code、Codex、Cursor 就能建模，结果照样落到同一个工作区。",
         },
       ],
       promptTitle: "可以直接给 Agent 的提示",
       prompt:
         "Create a simple mechanical bracket model. Generate editable CAD code, run it, preview the model, and revise it until the geometry matches the request.",
-      checklistTitle: "选择 Web 还是 Desktop",
+      checklistTitle: "从网页开始，还是从 skill 开始",
       checklist: [
-        "想快速试用、演示或分享，优先用 Agent。",
-        "想处理私有文件、复杂项目或完整本地控制，使用 Desktop。",
-        "Web 的价值是托管运行和更少配置；Desktop 的价值是完整开源和本地控制。",
+        "想最快看到结果、做演示或分享，直接用网页里的 Agent。",
+        "已经在 Claude Code、Codex、Cursor 里写代码，装 skill，让模型代码留在你的仓库。",
+        "两条路径跑的是同一个 agent 和同一套 CAD 引擎，模型都落在同一个工作区，可以随时换。",
         "先从简单零件开始，再尝试装配或可运动模型。",
       ],
       localDataLink: "了解云端与本地数据",
@@ -46,41 +46,41 @@ function getCopy(locale) {
   }
 
   return {
-    title: "Quick Start: Sign In and Start, Then Use Desktop for Full Control | Forgent3D",
+    title: "Quick Start: Sign In, or Run It From Your Own Agent | Forgent3D",
     description:
-      "Sign in to Forgent3D Agent to generate and preview CAD in the browser, then use the open-source desktop app when you need full local control.",
+      "Sign in to Forgent3D Agent to generate and preview CAD in the cloud, or install the skill so Claude Code, Codex, and Cursor can build models.",
     ogLocale: "en_US",
     kicker: "Quick Start",
-    h1: "Sign in and start quickly, use Desktop for serious projects",
+    h1: "Sign in and start, or start from the agent you already use",
     intro:
-      "Forgent3D Agent is the fastest front door: no CAD environment setup, just generate, run, and preview models in the browser. Desktop is open source and fits private projects and deeper engineering workflows.",
+      "Forgent3D Agent is the fastest front door: no CAD environment setup, just generate, run, and preview models in the cloud. Already working in an AI IDE? Install the Forgent3D skill and the same CAD agent runs in your terminal.",
     tryLink: "Sign in to start",
-    desktopLink: "Download Desktop",
+    skillsLink: "Install the skill",
     steps: [
       {
         label: "01",
-        title: "Sign in to the browser Agent",
-        text: "Sign in to Forgent3D Agent in the browser, then start the hosted CAD generation loop.",
+        title: "Sign in to the cloud Agent",
+        text: "Sign in to Forgent3D Agent, then start the hosted CAD generation loop.",
       },
       {
         label: "02",
         title: "Let the agent generate CAD",
-        text: "Describe a part, product idea, or mechanism. The agent writes editable CAD code and runs it in a prepared browser environment.",
+        text: "Describe a part, product idea, or mechanism. The agent writes editable CAD code and runs it in a prepared cloud environment.",
       },
       {
         label: "03",
-        title: "Move to Desktop when you need full control",
-        text: "When the model becomes private, complex, or long-lived, use the open-source desktop app and keep the workflow inside your local project.",
+        title: "Prefer your own agent? Install the skill",
+        text: "One npx skills add forgent3d/forgent3d-skills and Claude Code, Codex, or Cursor can model too — results land in the same workspace.",
       },
     ],
     promptTitle: "Prompt you can give the Agent",
     prompt:
       "Create a simple mechanical bracket model. Generate editable CAD code, run it, preview the model, and revise it until the geometry matches the request.",
-    checklistTitle: "Choose Web or Desktop",
+    checklistTitle: "Start in the browser, or start from the skill",
     checklist: [
-      "Use Agent first for quick trials, demos, sharing, and zero-setup exploration.",
-      "Use Desktop for private files, complex projects, and full local control.",
-      "Web focuses on hosted execution and less setup; Desktop provides complete open-source local control.",
+      "Use the browser Agent for the fastest result, demos, and sharing.",
+      "Install the skill if you already write code in Claude Code, Codex, or Cursor and want model code to live in your repo.",
+      "Both paths run the same agent and the same CAD engine, and models land in the same workspace — you can switch any time.",
       "Start with a simple part before trying assemblies or motion-ready models.",
     ],
     localDataLink: "Read about cloud and local data",
@@ -136,8 +136,8 @@ export default async function QuickStartPage({ params }) {
         <a className="js-try-link inline-flex rounded-full bg-linear-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow" href={`https://app.forgent3d.com/try?lang=${locale}`}>
           {copy.tryLink}
         </a>
-        <a className="js-download-link inline-flex rounded-full border border-line px-5 py-3 text-sm font-bold text-white hover:border-cyanx/50" href="#">
-          {copy.desktopLink}
+        <a className="js-skills-cta inline-flex rounded-full border border-line px-5 py-3 text-sm font-bold text-white hover:border-cyanx/50" href={`/${locale}/skills`}>
+          {copy.skillsLink}
         </a>
       </div>
       <div className="mt-12 grid gap-5 md:grid-cols-3">

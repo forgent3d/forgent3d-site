@@ -8,12 +8,12 @@ function getCopy(locale) {
     return {
       title: "方案 | Forgent3D",
       description:
-        "了解 Forgent3D Agent 和开源桌面版的使用方式。Agent 适合免配置网页试用和快速验证，团队使用可联系 Forgent3D。",
+        "了解 Forgent3D 的两种用法：云端 Agent 免配置直接用，或装上 skill 让你自己的 AI agent 建模。团队使用可联系 Forgent3D。",
       ogLocale: "zh_CN",
       kicker: "Plans",
       h1: "选择适合你的 Forgent3D 工作流",
       intro:
-        "Agent 适合免配置网页试用和快速验证。Desktop 开源，适合私有项目、本地文件和深度控制。",
+        "云端 Agent 免配置、打开就能用。已经在用 AI IDE 的话，装上 skill，同一个 CAD agent 就跑在你的终端里。",
       plans: [
         {
           name: "Forgent3D Agent",
@@ -28,17 +28,21 @@ function getCopy(locale) {
           secondaryHref: `mailto:${CONTACT_EMAIL}`,
         },
         {
-          name: "Forgent3D Desktop",
-          badge: "开源本地工作台",
+          name: "Forgent3D Skill",
+          badge: "跑在你的 AI IDE 里",
           price: "免费开源",
-          text: "完整桌面版适合本地项目、私有文件和与 Codex、Claude Code、Cursor 的深度工作流。",
-          items: ["完整本地控制", "模型代码和构建结果留在项目目录", "适合复杂装配和长期迭代"],
-          primary: "下载桌面版",
-          primaryHref: "#",
-          primaryClass: "js-download-link",
+          text: "一条命令，让 Claude Code、Codex、Cursor 拥有同一个 CAD agent：它写模型、自己校验，结果落回你的工作区。",
+          items: [
+            "npx skills add forgent3d/forgent3d-skills",
+            "模型代码留在你的仓库，可以 Git 管理和审查",
+            "构建和几何测量仍跑在云端，本地不用装 CAD 内核",
+          ],
+          primary: "查看配置指南",
+          primaryHref: "/zh/skills",
+          primaryClass: "js-skills-cta",
           secondary: "查看源码",
-          secondaryHref: "#",
-          secondaryClass: "js-github-link",
+          secondaryHref: "https://github.com/forgent3d/forgent3d-skills",
+          secondaryClass: "js-skills-repo-link",
         },
       ],
       contactTitle: "需要更高额度、团队试用或合作？",
@@ -50,12 +54,12 @@ function getCopy(locale) {
   return {
     title: "Plans | Forgent3D",
     description:
-      "Explore Forgent3D Agent and the open-source desktop workflow. Agent is for zero-setup browser trials and rapid validation; teams can contact Forgent3D.",
+      "Two ways to use Forgent3D: the zero-setup cloud agent, or the skill that lets your own AI agent build models. Teams can contact Forgent3D.",
     ogLocale: "en_US",
     kicker: "Pricing",
     h1: "Choose the Forgent3D workflow that fits your project",
     intro:
-      "Agent is for zero-setup browser trials and rapid validation. Desktop is open source and fits private projects, local files, and deeper control.",
+      "The cloud agent needs no setup — open a tab and start. Already working in an AI IDE? Install the skill and the same CAD agent runs in your terminal.",
     plans: [
       {
         name: "Forgent3D Agent",
@@ -70,17 +74,21 @@ function getCopy(locale) {
         secondaryHref: `mailto:${CONTACT_EMAIL}`,
       },
       {
-        name: "Forgent3D Desktop",
-        badge: "Open-source local workbench",
+        name: "Forgent3D Skill",
+        badge: "Runs in your AI IDE",
         price: "Free and open source",
-        text: "The full desktop app fits local projects, private files, and deeper workflows with Codex, Claude Code, and Cursor.",
-        items: ["Complete local control", "Model code and build output stay in your project", "Good for complex assemblies and long-running iteration"],
-        primary: "Download Desktop",
-        primaryHref: "#",
-        primaryClass: "js-download-link",
+        text: "One command gives Claude Code, Codex, and Cursor the same CAD agent: it writes the model, checks its own geometry, and returns the result to your workspace.",
+        items: [
+          "npx skills add forgent3d/forgent3d-skills",
+          "Model code stays in your repo — versioned and reviewable",
+          "Builds and measurement still run in the cloud, so there is no local CAD kernel to install",
+        ],
+        primary: "Setup guide",
+        primaryHref: "/en/skills",
+        primaryClass: "js-skills-cta",
         secondary: "View source",
-        secondaryHref: "#",
-        secondaryClass: "js-github-link",
+        secondaryHref: "https://github.com/forgent3d/forgent3d-skills",
+        secondaryClass: "js-skills-repo-link",
       },
     ],
     contactTitle: "Need higher limits, team access, or a partnership?",

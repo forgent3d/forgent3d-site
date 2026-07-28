@@ -1,10 +1,14 @@
 # Forgent3D 官网产品文档
 
+> 这份文档描述官网 (www.forgent3d.com) 讲什么、怎么讲。改了官网叙事就改这里；
+> 过时的定位文档比没有更糟。产品本身的技术口径在 platform 仓库的 CLAUDE.md 与 docs/。
+
 ## 1. 产品定位
 
 ### 一句话定位
 
-Forgent3D 是面向 AI 时代的代码驱动 CAD 预览器：用 build123d / CadQuery 写模型代码，在桌面端实时重建、预览、截图和验证三维几何。
+Forgent3D 是云端的 AI CAD agent：描述一个零件，它写出真正可编辑的参数化 CAD 代码、
+构建出真实几何，交给你一个可以继续改的 3D 模型。
 
 ### 更短的官网口号
 
@@ -14,409 +18,149 @@ Forgent3D 是面向 AI 时代的代码驱动 CAD 预览器：用 build123d / Cad
 
 Code is Model.
 
+### 两个入口，一套引擎
+
+官网只讲两条路径，且必须讲清楚它们不是两个产品：
+
+1. **云端 Agent**（app.forgent3d.com）— 打开标签页就能用，CAD 内核和构建环境已经跑着。
+2. **Forgent3D Skill**（`npx skills add forgent3d/forgent3d-skills`）— 让用户已经在用的
+   AI agent（Claude Code、Codex、Cursor…）拥有同一个 CAD agent；模型代码留在用户自己的
+   仓库，构建仍在云端，结果落回同一个工作区。
+
+同一个 agent、同一套 CAD 引擎、同一个工作区。区别只在于**从哪里发起、代码留在哪里**。
+
 ### 面向用户
 
-Forgent3D 适合这些人：
-
-- 正在用 Cursor、Claude、Codex 等 AI 编程工具生成 CAD 代码的开发者。
-- 希望用 Python、Git 和可复用参数管理 3D 模型的工程师。
-- 想让 AI 代理不只“写代码”，还可以通过重建、量测、截图验证几何结果的创作者。
-- 喜欢代码工作流，但不想每次都手动运行脚本、找导出文件、切换查看器的用户。
+- 正在用 Claude Code、Codex、Cursor 等 AI 编程工具，希望它们也能做 CAD 的开发者。
+- 想用参数、代码和版本管理 3D 模型，而不是靠鼠标记忆操作步骤的工程师。
+- 需要快速把一个零件想法变成可验证几何的产品原型 / 硬件创作者。
+- 不想为了试一个想法先装 Python CAD 内核、编译工具链和一堆依赖的人。
 
 ### 产品边界
 
-Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的核心价值是把 AI 编程、Python CAD、实时预览和本地 MCP 验证连接成一个更短的建模闭环。
+Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是把 AI 生成、真实几何构建、
+自动校验和可编辑预览连成一个更短的建模闭环。
 
 ## 2. 官网信息架构
 
-建议首页采用单页滚动结构，先讲清楚“它解决什么问题”，再展示“它怎么工作”，最后给出下载和开源入口。
+### 站点地图
 
-### Section 1: 首屏 Hero
+```text
+/[locale]                        首页（单页滚动）
+/[locale]/skills                 Skills 落地页（安装、支持的 agent、流程、示例 prompt）
+/[locale]/quick-start            快速开始（网页入口 + skill 入口）
+/[locale]/pricing                方案（云端 Agent / Forgent3D Skill 两张卡）
+/[locale]/local-data             云端与本地数据边界
+/[locale]/ai-3d-model-generation SEO 落地页
+/[locale]/code-to-parametric-cad SEO 落地页
+/[locale]/contact                联系我们
+/m/[shareSlug]                   公开模型分享页（含 details / view）
+```
 
-目标：3 秒内让用户明白这是一个 AI + CAD + 代码预览工具。
+locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在各页的 `getCopy(locale)`，
+首页住在 `app/lib/landing-page.js` 的 `COPY`。
 
-主标题：
+### 首页区块顺序
 
-> 用代码生成真实 3D 模型
+```text
+[Nav]     Agent | Skills | 两种用法 | 方案 | 联系我们 | 进入工作台 | GitHub | 语言
 
-副标题：
+[Hero]    左：标题 + 副标题 + 三个 CTA（登录 / 安装 Skill / 观看演示）
+          右：产品界面大图（可点开灯箱）
 
-> Forgent3D 把 build123d / CadQuery 模型代码实时重建为可预览的三维几何，并通过本地 MCP 工具让 AI 代理完成重建、截图和几何验证。
+[Agent Loop]   输入 → Agent → Sandbox → 预览（四张卡，第三张高亮）
 
-短标签：
+[Demo]         四张真实产品截图：描述需求 / 规划零件 / 生成几何 / 预览修正
 
-- Code is Model
-- AI CAD Previewer
-- build123d / CadQuery
-- Local MCP Workflow
+[Why Cloud]    不用配置 CAD 环境 | 内置 Agent 闭环 | 能装进你的 AI IDE
 
-CTA：
+[Skills]       安装命令（可复制）+ 已验证 agent chips + 三步流程 + 配置指南入口
 
-- 主按钮：下载 Forgent3D
-- 次按钮：查看 GitHub
+[Compare]      Forgent3D 云端  vs  Forgent3D Skill  + 共同承诺
 
-首屏视觉：
+[Footer]       导航 + 指南链接 + 一条灰色的「开源桌面版」链接
+```
 
-左侧放标题、简介和按钮。右侧展示一个深色 3D 视口：中间是机械零件模型，旁边浮动三张小卡片，分别写着 `rebuild_model ok`、`screenshot_model iso`、`get_model_info bbox`。这能直接传达“模型不是图片，而是可验证的几何结果”。
+### 各区块要说的话
 
-### Section 2: 痛点
+**Hero** — 3 秒内说清两件事：这是云端 AI CAD agent；如果你已经有 agent，一条命令就能接上。
 
-标题：
+**Agent Loop** — 强调「不是一次性 mesh」：agent 写的是可编辑 CAD 代码，跑在准备好的云端环境里。
 
-> AI 会写 CAD 代码，但它需要看见结果
+**Demo** — 用真实截图证明上一段不是吹的。四步与 Loop 区一一对应。
 
-正文：
+**Why Cloud** — 云端的价值不是「更方便」，而是**环境已经跑着**：内核、构建工具、agent 编排
+都在服务端，用户只带设计意图来。第三张卡负责把话头递给 Skills。
 
-> 让 AI 生成 Python CAD 代码很快，但真正的建模反馈往往断在下一步：你需要手动运行脚本、处理环境错误、导出文件、打开查看器，再把结果描述给 AI。Forgent3D 把这些步骤收进一个本地桌面工作流，让代码、预览和验证保持同步。
+**Skills** — 官网唯一需要出现命令行的地方。命令必须可一键复制（`.js-copy-command`），
+已验证 agent 列表照抄产品内 `skills-guide.tsx`，不要各写一份。
 
-要点：
+**Compare** — 两栏不是「基础版 vs 高级版」，而是两扇门。副标题必须点明「同一个 agent、
+同一套 CAD 引擎、同一个工作区」，避免用户以为要二选一。
 
-- 不再把 PNG/JPG 当作 CAD 交付物。
-- 不再依赖猜测判断模型是否构建成功。
-- 不再在编辑器、终端、导出目录和查看器之间反复切换。
+## 3. 品牌语气
 
-### Section 3: 工作流
+### 应该强调
 
-标题：
+- 真实几何和可编辑代码，而不是图片或不可控 mesh。
+- agent 会自己验证：每次改完都构建并测量，形状不对在用户看到之前就发现。
+- 免配置：没有内核要装，没有依赖要修。
+- 模型是资产：可以调参数、编辑草图、分享、留版本。
+- 已经在用 AI IDE 的人，不需要换工具，只需要装一个 skill。
 
-> 从一句需求到可验证模型
+### 避免
 
-步骤文案：
+- 不写「替代 SolidWorks / Fusion / CATIA」。
+- 不写「全自动生成工业级 CAD」。
+- 不写「支持所有模型 / 所有格式」。
+- 不把两条入口写成互相竞争，或写成「简化版 / 完整版」。
+- 不在首页堆技术名词（OCCT、BREP、SceneIR 这些留给文档）。
 
-1. 在 AI IDE 里描述你想要的零件，例如齿轮、支架、外壳或装配结构。
-2. AI 在 `models/<name>/part.py` 或 `asm.py` 中生成 build123d / CadQuery 代码。
-3. Forgent3D 重建模型并生成可预览缓存。
-4. 通过本地 MCP 工具，AI 可以读取构建结果、截图和模型信息。
-5. 你在 3D 视口中检查结果，继续迭代参数和结构。
+### 桌面版怎么提
 
-页面呈现：
+开源桌面版仍然存在，官网上按**脚注**处理：footer 里一条低对比度链接，指向 GitHub Releases，
+保留原有 `js-download-link` 埋点。不在导航、hero、功能区、对比区、方案页里出现，也不写
+「不再维护」之类的话——只是不再是主线叙事。
 
-用一条横向流程线展示：
-
-Prompt -> Python CAD Code -> Rebuild -> 3D Preview -> MCP Evidence -> Iterate
-
-其中 `MCP Evidence` 可以高亮，用来形成产品差异化。
-
-### Section 4: 核心功能
-
-标题：
-
-> 为 AI CAD 工作流做的桌面预览器
-
-功能文案：
-
-#### 实时重建与预览
-
-保存模型代码后，Forgent3D 负责触发重建并刷新 3D 预览。你关注参数、结构和设计意图，工具负责把代码变成可查看的几何。
-
-#### 支持 Python CAD 内核
-
-围绕 build123d 和 CadQuery 工作流设计，模型源码以 `part.py` / `asm.py` 管理，并通过全局 `result` 输出几何对象。
-
-#### 本地 MCP 验证闭环
-
-内置 `aicad` MCP 服务，提供 `rebuild_model`、`get_model_info`、`screenshot_model` 和 `list_models` 等工具。AI 代理可以基于真实构建结果继续迭代，而不是凭空猜测模型是否正确。
-
-#### 面向代码项目
-
-模型放在清晰的项目目录中，适合 Git 管理、代码审查、参数化复用和 AI 协作。
-
-#### 截图与导出
-
-支持从模型预览中生成常用视角截图，并围绕 BREP 缓存与导出流程组织预览体验。
-
-### Section 5: AI IDE 集成
-
-标题：
-
-> 让 AI 代理拥有 CAD 反馈
-
-正文：
-
-> Forgent3D 不只是查看器。它会为不同 AI 编程环境生成项目规则和 MCP 配置，让代理知道模型源码在哪里、如何重建、如何截图，以及什么时候应该停止猜测并请求真实工具反馈。
-
-卡片文案：
-
-- Cursor：在项目规则中约定模型结构、验证方式和最终交付。
-- Claude / Codex / 其他代理：通过项目说明和 MCP 入口接入同一套本地验证流程。
-- 本地优先：模型代码、构建结果和截图都发生在你的机器上。
-
-### Section 6: 使用场景
-
-标题：
-
-> 适合从代码开始的 3D 建模
-
-场景：
-
-#### 机械零件草图
-
-用自然语言描述支架、法兰、外壳、夹具等结构，让 AI 生成参数化初稿，再通过预览快速调整。
-
-#### 参数化产品原型
-
-把尺寸、孔位、厚度、倒角等设计变量保留在代码顶部，让模型可以持续迭代，而不是停留在一次性生成结果。
-
-#### AI 建模实验
-
-测试不同 LLM 对 CAD 代码的生成能力，通过本地重建和截图快速判断结果质量。
-
-#### 开源硬件与教育
-
-用代码解释模型结构，让学习者同时看到参数、几何逻辑和最终三维形态。
-
-### Section 7: 开源与下载
-
-标题：
-
-> 开源、可下载、可本地运行
-
-正文：
-
-> Forgent3D 采用 MIT 协议开源。你可以从 GitHub Releases 下载最新版本，也可以在本地运行源码并参与改进。
-
-CTA：
-
-- 下载最新版本
-- Star on GitHub
-- 查看快速开始
-
-注意文案：
-
-> 当前版本仍在快速迭代中。不同平台和 Python CAD 环境的支持能力会持续完善，具体以 Release 页面和项目说明为准。
-
-## 3. 首页完整文案草案
-
-### Hero
-
-主标题：
-
-> 用代码生成真实 3D 模型
-
-副标题：
-
-> Forgent3D 是 AI 时代的代码驱动 CAD 预览器。用 build123d / CadQuery 编写模型代码，在桌面端实时重建和预览，并让 AI 代理通过本地 MCP 工具验证几何结果。
-
-按钮：
-
-- 下载 Forgent3D
-- 查看 GitHub
-
-辅助说明：
-
-> Code is Model. 让模型成为可以版本管理、可以审查、可以被 AI 迭代的代码。
-
-### 痛点区
-
-标题：
-
-> AI 写出了 CAD 代码，然后呢？
-
-正文：
-
-> 生成代码只是第一步。真正重要的是：它能不能构建？尺寸对不对？视图里看起来像不像？Forgent3D 把重建、预览、截图和模型信息暴露给本地工具，让 AI CAD 工作流从“生成”进入“验证”。
-
-### 功能区
-
-标题：
-
-> 一个窗口，连接代码、模型和 AI
-
-功能短句：
-
-- 写 Python CAD 代码，马上看到 3D 结果。
-- 用 build123d / CadQuery 管理真实几何，而不是图片占位。
-- 通过 MCP 工具让 AI 读取构建状态、模型信息和截图。
-- 用项目规则约定模型结构，让代理按正确方式生成和修复代码。
-- 保持本地工作流，适合实验、原型和开源项目。
-
-### 工作流区
-
-标题：
-
-> 你的新建模循环
-
-正文：
-
-> 描述需求，生成模型代码，重建预览，读取证据，继续迭代。Forgent3D 把这条链路固定下来，让每一次修改都有明确反馈。
-
-步骤：
-
-1. Tell: 描述你想要的模型。
-2. Code: AI 生成参数化 Python CAD。
-3. Build: Forgent3D 重建几何。
-4. See: 在桌面端查看 3D 预览。
-5. Verify: AI 通过 MCP 获取截图和模型信息。
-6. Iterate: 基于真实结果继续修改。
-
-### MCP 区
-
-标题：
-
-> 给 AI 的 CAD 工具箱
-
-正文：
-
-> Forgent3D 内置本地 MCP 服务。代理可以调用工具列出模型、触发重建、获取边界盒和面数、生成指定视角截图。这样，AI 不需要凭感觉判断模型是否正确，它可以先看结果，再继续建模。
-
-工具展示：
-
-- `rebuild_model`: 构建当前模型并返回成功状态与错误信息。
-- `get_model_info`: 读取边界盒、面数和缓存状态。
-- `screenshot_model`: 生成 iso / front / side / top 等视角截图。
-- `list_models`: 获取项目中的模型列表和当前模型。
-
-### 收尾 CTA
-
-标题：
-
-> 开始用代码建模
-
-正文：
-
-> 下载 Forgent3D，把你的 AI IDE、Python CAD 代码和本地 3D 预览连接起来。
-
-按钮：
-
-- 下载最新版本
-- 查看源码
+例外：`/m/[shareSlug]/details` 的模型包使用说明和 `/[locale]/gallery` 的来源说明仍然写桌面端，
+因为那些压缩包**确实**是桌面端项目目录结构，改成 skills 说法会误导下载的人。
 
 ## 4. 视觉与展现形式
 
 ### 整体风格
 
-建议使用深色科技风，但不要做成泛 AI SaaS 质感。Forgent3D 的核心是工程工具，所以视觉应更接近“代码编辑器 + CAD 视口 + 构建反馈”。
+深色工程风，不做泛 AI SaaS 质感。关键词：
 
-关键词：
+- 深色背景（`#050b14` 系）+ 径向渐变光晕 + 网格底纹
+- 青色 `cyanx` 主色，紫色 `violetx` 作渐变副色，`signal` 作状态强调
+- 圆角 2rem 的面板卡片、`backdrop-blur`、细线边框 `border-line`
+- 等宽字体（IBM Plex Mono）承载 eyebrow、序号、命令行和 chip
 
-- 深色背景
-- 高对比代码高亮
-- 线框 / BREP / 机械零件
-- 绿色构建成功状态
-- 蓝紫色 AI 辅助光效
-- 少量网格和坐标轴元素
+### 实现约定
 
-### 首页首屏布局
+- 首页是模板字符串拼 HTML（`getLandingPageHtml`），用 Tailwind class；子页面是正常 JSX。
+- 所有外链和埋点通过 class hook 接：`js-try-link`、`js-workbench-link`、`js-skills-cta`、
+  `js-skills-repo-link`、`js-pricing-link`、`js-github-link`、`js-download-link`、`js-copy-command`。
+  链接真值集中在 `public/site-links.js`，行为在 `public/script.js`。
+- 安装命令、skills 仓库地址、已验证 agent 列表是 `app/lib/landing-page.js` 里的导出常量
+  （`SKILLS_INSTALL_COMMAND` / `SKILLS_REPO_URL` / `SKILLS_AGENTS`），首页和 `/skills` 共用一份。
+- 图片一律 webp + 回退 png，配 `srcset/sizes`；hero 图 preload。
+- 移动端优先验证：hero 区、Skills 命令行（横向滚动不要顶破页面）、对比区两栏堆叠。
 
-左侧：
+### 埋点事件
 
-- Logo
-- 主标题
-- 副标题
-- 两个 CTA
-- 一行技术标签
+`homepage_viewed`、`try_clicked`、`click_pricing`、`click_skills`、`click_skills_repo`、
+`copy_skills_command`、`click_download_desktop`、`click_github`。新增 CTA 就补一条，
+别复用语义不符的事件名。
 
-右侧：
+## 5. 上线与迭代建议
 
-- 大尺寸 3D preview mockup
-- 左下角代码片段卡片
-- 右上角 MCP tool result 卡片
-- 底部状态条：`rebuild_model: ok`
+已完成：首屏、Agent 闭环、真实截图 Demo、Why Cloud、Skills 区块与落地页、两种用法对比、
+方案页、数据边界页、两个 SEO 落地页。
 
-### 推荐动效
+后续可以补：
 
-首屏动效：
-
-- 代码卡片里高亮参数变化，例如 `hole_count = 6` 变成 `hole_count = 8`。
-- 3D 模型轻微旋转，展示它是真实可查看对象。
-- MCP 卡片依次出现：Build OK、Screenshot Saved、BBox Read。
-
-工作流区动效：
-
-- 横向流程线随滚动点亮。
-- 从 Prompt 到 Preview 的每一步出现一个小状态反馈。
-
-功能区动效：
-
-- 每张功能卡片 hover 时显示对应工具输出，例如构建日志、截图视角、边界盒信息。
-
-### 可视化素材建议
-
-优先展示这些模型：
-
-- 法兰盘：能体现参数化、孔阵列和机械感。
-- 支架：能体现孔位、厚度、倒角和工程用途。
-- 小型外壳：能体现装配感和真实产品原型。
-- 齿轮：适合作为 AI CAD 的直观符号，但不要只用齿轮，避免显得像玩具 demo。
-
-### 页面结构草图
-
-```text
-[Nav]
-Logo | Product | Workflow | MCP | Download | GitHub
-
-[Hero]
-Left: headline + copy + CTA
-Right: 3D viewport mockup + code card + MCP result card
-
-[Pain]
-"AI wrote CAD code. Now verify it."
-
-[Workflow]
-Prompt -> Code -> Rebuild -> Preview -> MCP Evidence -> Iterate
-
-[Features]
-Realtime Preview | Python CAD Kernels | Local MCP | Project Rules | Screenshots
-
-[Use Cases]
-Mechanical parts | Parametric prototypes | AI experiments | Education
-
-[Open Source CTA]
-Download | GitHub | MIT License
-```
-
-## 5. 品牌语气
-
-### 应该强调
-
-- 真实几何，而不是图片。
-- 本地工作流，而不是云端黑箱。
-- AI 可以验证，而不是只会猜。
-- 代码可管理、可复用、可审查。
-- 适合快速原型、实验和开源协作。
-
-### 避免夸大
-
-- 不写“替代 SolidWorks / Fusion / CATIA”。
-- 不写“全自动生成工业级 CAD”。
-- 不写“无需任何环境即可支持所有模型”。
-- 不写“全平台正式发布”，除非发布流程已经覆盖。
-- 不把 MCP 写成云服务能力，它是本地工具闭环。
-
-## 6. 推荐最终首页标题组合
-
-### 版本 A：开发者友好
-
-> Code is Model
-
-> Forgent3D connects Python CAD code, real-time 3D preview, and local MCP validation for AI-assisted modeling.
-
-### 版本 B：中文主站
-
-> 代码就是模型
-
-> 用 AI 生成 Python CAD，在桌面端实时预览，并通过本地工具验证真实几何。
-
-### 版本 C：更产品化
-
-> AI CAD 的本地预览与验证工作台
-
-> 从一句需求到可查看、可重建、可迭代的三维模型。
-
-## 7. 上线建议
-
-第一版官网不需要做得很重。建议优先完成：
-
-1. 一个清楚的首屏。
-2. 一张真实产品截图或高保真 mockup。
-3. 一个 6 步工作流图。
-4. 一个 MCP 验证区。
-5. 下载和 GitHub CTA。
-
-后续再补：
-
-- Quick Start 文档。
-- 示例模型 Gallery。
-- Cursor / Claude / Codex 接入教程。
-- build123d 和 CadQuery 的分开示例。
-- Release notes 和已知限制。
+- Skills 落地页加一段真实终端录屏或对话截图（现在只有文字流程）。
+- 模型库（`/[locale]/gallery`）目前在导航和 sitemap 里都是注释状态，等公开模型够多再放出来。
+- 案例页：一个零件从 prompt 到可下载 STEP 的完整过程。
+- 团队 / 额度方案说明，目前统一走联系邮箱。

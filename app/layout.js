@@ -4,7 +4,7 @@ export const metadata = {
   metadataBase: new URL("https://www.forgent3d.com"),
   title: "Forgent3D",
   description:
-    "Browser AI CAD agent for editable 3D models, plus an open-source desktop app for local projects.",
+    "Cloud AI CAD agent for editable 3D models, plus a skill that brings it to Claude Code, Codex, and Cursor.",
 };
 
 export default function RootLayout({ children }) {
@@ -14,13 +14,13 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           name="keywords"
-          content="Forgent3D, coding agent, AI CAD, build123d, CadQuery, MCP, 3D preview"
+          content="Forgent3D, AI CAD, agent skills, Claude Code, Codex, Cursor, build123d, parametric CAD, 3D preview"
         />
         <meta name="theme-color" content="#050b14" />
         <meta property="og:title" content="Forgent3D" />
         <meta
           property="og:description"
-          content="Try AI CAD generation in the browser without CAD setup, then use the open-source desktop app for local files and deeper control."
+          content="Generate editable CAD in the cloud without any setup, or install the skill and let Claude Code, Codex, or Cursor build the model for you."
         />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/og-image.svg" />

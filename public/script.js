@@ -75,6 +75,31 @@ applyLinks(".js-github-link", linkConfig.github, "#download");
 applyLinks(".js-x-link", linkConfig.x, "#download");
 applyLinks(".js-workbench-link", linkConfig.workbench, "https://app.forgent3d.com", { includeLocale: true });
 applyLinks(".js-try-link", linkConfig.try, "#download", { includeLocale: true });
+applyLinks(".js-skills-repo-link", linkConfig.skillsRepo, "https://github.com/forgent3d/forgent3d-skills");
+
+// Install-command copy buttons (homepage skills section and /skills).
+document.querySelectorAll(".js-copy-command").forEach((node) => {
+  node.addEventListener("click", async () => {
+    const value = node.getAttribute("data-copy-value") || "";
+    const copiedLabel = node.getAttribute("data-copied-label");
+    const idleLabel = node.getAttribute("data-copy-label") || node.textContent.trim();
+    if (!value) return;
+
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      // Clipboard blocked (insecure context / denied) — the command stays selectable on screen.
+      return;
+    }
+
+    trackEvent("copy_skills_command", { command: value });
+    if (!copiedLabel) return;
+    node.textContent = copiedLabel;
+    window.setTimeout(() => {
+      node.textContent = idleLabel;
+    }, 1600);
+  });
+});
 
 window.addEventListener("posthog:ready", flushPendingPostHogEvents);
 
@@ -85,6 +110,8 @@ if (isHomepage()) {
 [
   [".js-try-link", "try_clicked"],
   [".js-pricing-link", "click_pricing"],
+  [".js-skills-cta", "click_skills"],
+  [".js-skills-repo-link", "click_skills_repo"],
   [".js-download-link", "click_download_desktop"],
   [".js-github-link", "click_github"],
 ].forEach(([selector, eventName]) => {

@@ -4,16 +4,16 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "AI 生成三维模型软件：Agent 与开源桌面版 | Forgent3D",
+      title: "AI 生成三维模型软件：云端 Agent 与 Skills | Forgent3D",
       description:
-        "Forgent3D Agent 不用安装 CAD 环境，就能在网页里生成、运行、预览可编辑 3D CAD；Forgent3D Desktop 开源，适合本地项目。",
+        "Forgent3D 不用安装 CAD 环境，就能在云端生成、运行、预览可编辑 3D CAD；装上 skill，Claude Code、Codex、Cursor 也能建模。",
       ogLocale: "zh_CN",
       h1: "AI 生成三维模型，需要可运行 CAD 代码和真实预览",
       intro:
-        "Forgent3D 不把 AI 3D 停在一次性图片或不可控 mesh。Agent 让你在网页里生成和运行 CAD；Desktop 开源，适合私有和复杂项目。",
+        "Forgent3D 不把 AI 3D 停在一次性图片或不可控 mesh。云端 Agent 让你直接生成和运行 CAD；装上 skill，你已经在用的 AI agent 也能走同一条链路。",
       points: [
-        "Agent 免安装 CAD 环境，直接在网页里运行生成结果",
-        "Desktop 开源，适合私有文件、复杂工程和长期迭代",
+        "免安装 CAD 环境，生成结果直接在云端运行",
+        "装上 skill，Claude Code、Codex、Cursor 就能建模，模型代码留在你的仓库",
         "生成结果是可重建、可修改、可检查的 CAD 代码，而不是一次性图片",
         "适合需要反复修改的机械零件、产品原型、装配和可运动模型工作流",
       ],
@@ -21,11 +21,11 @@ function getCopy(locale) {
       faqs: [
         {
           q: "Forgent3D 是 AI 模型服务吗？",
-          a: "Forgent3D Agent 用于快速跑通网页生成、预览和迭代；Forgent3D Desktop 是开源本地工作台。",
+          a: "Forgent3D 是一个云端 CAD agent：它生成可运行的模型代码、构建真实几何并给你可编辑的 3D 结果。装上 skill 后，同一个 agent 也能从你本地的 AI IDE 里发起。",
         },
         {
           q: "模型数据会上传到云端吗？",
-          a: "使用 Agent 时，CAD 生成和构建会在网页环境中运行。使用 Desktop 时，模型代码、预览缓存、截图和验证结果可以保留在你的本地项目中。",
+          a: "CAD 生成和构建跑在云端，模型和预览保存在你的 Forgent3D 工作区，默认私有。用 skill 时，模型代码由本地 agent 写在你自己的仓库里，构建仍在云端完成。",
         },
         {
           q: "AI 生成三维模型为什么需要验证？",
@@ -36,16 +36,16 @@ function getCopy(locale) {
   }
 
   return {
-    title: "AI 3D Model Generation with Agent and Open-Source Desktop | Forgent3D",
+    title: "AI 3D Model Generation with a Cloud Agent and Skills | Forgent3D",
     description:
-      "Forgent3D Agent generates, runs, and previews editable 3D CAD in the browser without CAD setup. Forgent3D Desktop is open source for local projects.",
+      "Forgent3D generates, runs, and previews editable 3D CAD in the cloud without CAD setup. Install the skill and Claude Code, Codex, or Cursor can model too.",
     ogLocale: "en_US",
     h1: "AI 3D model generation needs runnable CAD code and real preview",
     intro:
-      "Forgent3D does not stop at disposable images or uncontrolled meshes. Agent lets you generate and run CAD in the browser; Desktop is open source and fits private or complex projects.",
+      "Forgent3D does not stop at disposable images or uncontrolled meshes. The cloud agent generates and runs real CAD, and the skill lets the AI agent you already use run the same loop.",
     points: [
-      "Use Agent to run generated CAD in the browser without installing a CAD environment",
-      "Use Desktop for private files, complex engineering, and long-running local iteration",
+      "Run generated CAD in the cloud without installing a CAD environment",
+      "Install the skill so Claude Code, Codex, or Cursor can model, with code staying in your repo",
       "Generate rebuildable, editable, inspectable CAD code instead of one-shot images",
       "Works for iterative mechanical parts, product prototypes, assemblies, and motion-ready model workflows",
     ],
@@ -53,11 +53,11 @@ function getCopy(locale) {
     faqs: [
       {
         q: "Is Forgent3D an AI model service?",
-        a: "Forgent3D Agent quickly validates ideas through browser execution, preview, and iteration. Forgent3D Desktop is the open-source local workbench.",
+        a: "Forgent3D is a cloud CAD agent: it writes runnable model code, builds real geometry, and gives you an editable 3D result. With the skill installed, the same agent can be driven from your local AI IDE.",
       },
       {
         q: "Does model data upload to the cloud?",
-        a: "When you use Agent, CAD generation and builds run in a prepared browser environment. When you use Desktop, model code, preview artifacts, screenshots, and validation results can stay in your local project.",
+        a: "Generation and builds run in the cloud, and models and previews live in your Forgent3D workspace, private by default. With the skill, your local agent writes model code into your own repository while builds still run in the cloud.",
       },
       {
         q: "Why does AI 3D generation need verification?",
