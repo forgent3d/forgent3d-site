@@ -578,7 +578,6 @@ export function generatorsSharedCopy(locale) {
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP / 3MF；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
       openApp: "打开生成器",
-      openAppPending: "正在开发",
       remixApp: "用 AI 继续改",
       paramsTitle: "可调参数",
       paramsIntro: "以下参数在生成器里逐项可调，每次修改都会重建真实几何——不是缩放网格。",
@@ -607,7 +606,6 @@ export function generatorsSharedCopy(locale) {
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP / 3MF — and for anything beyond the sliders, the AI agent edits the same model.",
     openApp: "Open the generator",
-    openAppPending: "Coming soon",
     remixApp: "Remix with AI",
     paramsTitle: "Parameters you can tune",
     paramsIntro:

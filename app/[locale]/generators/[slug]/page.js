@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ComingSoonButton from "../../../components/coming-soon-button";
 import { isSupportedLocale } from "../../../lib/landing-page";
 import {
   GENERATORS,
+  generatorAppUrl,
   generatorsSharedCopy,
   getGenerator,
 } from "../../../lib/generators";
@@ -52,7 +52,7 @@ export default async function GeneratorLandingPage({ params }) {
 
   const copy = generator.copy[locale];
   const t = generatorsSharedCopy(locale);
-  // 生成器还没上线,CTA 暂时不跳转(见 ComingSoonButton)。接通后把 generatorAppUrl 接回去。
+  const appUrl = generatorAppUrl(generator, locale);
   const related = GENERATORS.filter((g) => g.slug !== slug);
 
   const faqSchema = {
@@ -102,13 +102,22 @@ export default async function GeneratorLandingPage({ params }) {
       <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
-        <ComingSoonButton
-          className="inline-flex rounded-md bg-brand px-6 py-3 font-mono text-sm font-semibold uppercase tracking-[0.18em] text-white! transition-colors"
-          label={`${t.openApp} →`}
-          pendingLabel={t.openAppPending}
+        <a
+          className="inline-flex rounded-md bg-brand px-6 py-3 font-mono text-sm font-semibold uppercase tracking-[0.18em] text-white! transition-colors hover:bg-brand/90"
+          href={appUrl}
           data-track="generator-open"
           data-generator={generator.slug}
-        />
+        >
+          {t.openApp} →
+        </a>
+        <a
+          className="inline-flex rounded-md border border-border/80 px-6 py-3 font-mono text-sm uppercase tracking-[0.18em] text-brand transition-colors hover:border-brand/50"
+          href={appUrl}
+          data-track="generator-remix"
+          data-generator={generator.slug}
+        >
+          {t.remixApp}
+        </a>
       </div>
 
       <ul className="mt-10 space-y-3 text-foreground">
