@@ -57,7 +57,7 @@ function getCopy(locale) {
       repoLink: "在 GitHub 查看",
       ctaTitle: "也可以直接在浏览器里用",
       ctaText: "不想接自己的 agent？登录 Forgent3D，同一个 CAD agent 在网页里就能用。",
-      ctaLink: "登录后开始使用",
+      ctaLink: "立即开始",
       quickStartLink: "查看快速开始",
       home: "← 返回首页",
     };
@@ -112,7 +112,7 @@ function getCopy(locale) {
     repoLink: "View on GitHub",
     ctaTitle: "Or just use it in the browser",
     ctaText: "Not wiring up your own agent? Sign in to Forgent3D and the same CAD agent runs in a browser tab.",
-    ctaLink: "Sign in to start",
+    ctaLink: "Get started",
     quickStartLink: "Open Quick Start",
     home: "← Back home",
   };

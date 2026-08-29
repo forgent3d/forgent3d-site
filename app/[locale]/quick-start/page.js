@@ -12,7 +12,7 @@ function getCopy(locale) {
       h1: "登录就能开始，也可以从你自己的 agent 开始",
       intro:
         "Forgent3D Agent 是最快入口：不用安装 CAD 环境，直接在云端生成、运行和预览模型。已经在用 AI IDE 的话，装上 Forgent3D skill，同一个 CAD agent 就在你的终端里。",
-      tryLink: "登录后开始使用",
+      tryLink: "立即开始",
       skillsLink: "安装 Skill",
       steps: [
         {
@@ -54,7 +54,7 @@ function getCopy(locale) {
     h1: "Sign in and start, or start from the agent you already use",
     intro:
       "Forgent3D Agent is the fastest front door: no CAD environment setup, just generate, run, and preview models in the cloud. Already working in an AI IDE? Install the Forgent3D skill and the same CAD agent runs in your terminal.",
-    tryLink: "Sign in to start",
+    tryLink: "Get started",
     skillsLink: "Install the skill",
     steps: [
       {
