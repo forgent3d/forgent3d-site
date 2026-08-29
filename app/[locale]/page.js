@@ -8,17 +8,17 @@ import {
 function getSeoCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Forgent3D | 云端 AI CAD agent，也能装进 Claude Code、Codex、Cursor",
+      title: "Forgent3D | 云端 AI CAD Agent，也能装进 Claude Code、Codex、Cursor",
       description:
-        "Forgent3D 让你不用安装 CAD 环境，就能在云端让 Agent 生成、运行和预览可编辑 3D CAD；一条命令装上 skill，你自己的 AI agent 也会做 CAD。",
+        "Forgent3D 让你不用安装 CAD 环境，就能在云端生成、运行和预览可编辑 3D CAD；一条命令装上 skill，你的 AI IDE 也会做 CAD。",
       ogLocale: "zh_CN",
     };
   }
 
   return {
-    title: "Forgent3D | Cloud AI CAD Agent, and a Skill for Your Own Agent",
+    title: "Forgent3D | Cloud AI CAD Agent, and a Skill for Your AI IDE",
     description:
-      "Forgent3D lets an agent generate, run, and preview editable 3D CAD in the cloud with no setup. One command installs the skill so Claude Code, Codex, or Cursor can build models too.",
+      "Forgent3D generates, runs, and previews editable 3D CAD in the cloud with no setup. One command installs the skill so Claude Code, Codex, or Cursor can build models too.",
     ogLocale: "en_US",
   };
 }
