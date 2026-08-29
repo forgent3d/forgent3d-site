@@ -11,7 +11,7 @@ export const APP_BASE = "https://app.forgent3d.com";
 export const GENERATORS = [
   {
     slug: "gridfinity-bin-generator",
-    shareSlug: null,
+    shareSlug: "vpKi8MpjP0",
     icon: "▦",
     keywords: [
       "gridfinity bin generator",
@@ -92,7 +92,7 @@ export const GENERATORS = [
   },
   {
     slug: "gridfinity-baseplate-generator",
-    shareSlug: null,
+    shareSlug: "hJ8B0CnJnl",
     icon: "▤",
     keywords: [
       "gridfinity baseplate generator",
@@ -169,7 +169,7 @@ export const GENERATORS = [
   },
   {
     slug: "parametric-box-generator",
-    shareSlug: null,
+    shareSlug: "qeAqTOXRG6",
     icon: "▣",
     keywords: [
       "parametric box generator",
@@ -248,7 +248,7 @@ export const GENERATORS = [
   },
   {
     slug: "hose-adapter-generator",
-    shareSlug: null,
+    shareSlug: "dMM29PhU66",
     icon: "◎",
     keywords: [
       "hose adapter generator",
@@ -329,7 +329,7 @@ export const GENERATORS = [
   },
   {
     slug: "funnel-generator",
-    shareSlug: null,
+    shareSlug: "LxyR3nENRh",
     icon: "▽",
     keywords: ["funnel generator", "custom funnel stl", "3d printed funnel maker"],
     params: [
@@ -403,7 +403,7 @@ export const GENERATORS = [
   },
   {
     slug: "spur-gear-generator",
-    shareSlug: null,
+    shareSlug: "UAaAjPHvCD",
     icon: "✱",
     keywords: [
       "spur gear generator",
@@ -481,7 +481,7 @@ export const GENERATORS = [
   },
   {
     slug: "washer-spacer-generator",
-    shareSlug: null,
+    shareSlug: "Pitsf1uupN",
     icon: "◌",
     keywords: [
       "washer generator 3d print",
