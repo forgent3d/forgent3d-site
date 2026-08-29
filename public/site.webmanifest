@@ -3,8 +3,8 @@
   "short_name": "Forgent3D",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#07111d",
-  "theme_color": "#09111e",
+  "background_color": "#f9fafb",
+  "theme_color": "#f9fafb",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -12,8 +12,8 @@
       "type": "image/png"
     },
     {
-      "src": "/android-chrome-512x512.png",
-      "sizes": "512x512",
+      "src": "/logo-mark.png",
+      "sizes": "320x320",
       "type": "image/png"
     }
   ]

@@ -127,18 +127,18 @@ export default async function Ai3DModelGenerationPage({ params }) {
   };
 
   return (
-    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
+    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
-      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
         {locale === "zh" ? "← 返回首页" : "← Back home"}
       </a>
-      <h1 className="mt-10 text-4xl font-bold tracking-tight md:text-5xl">{copy.h1}</h1>
-      <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
-      <ul className="mt-8 space-y-3 text-slate-200">
+      <h1 className="mt-10 text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
+      <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
+      <ul className="mt-8 space-y-3 text-foreground">
         {copy.points.map((item) => (
           <li key={item}>- {item}</li>
         ))}
@@ -148,8 +148,8 @@ export default async function Ai3DModelGenerationPage({ params }) {
         <div className="mt-4 space-y-5">
           {copy.faqs.map((faq) => (
             <article key={faq.q}>
-              <h3 className="font-semibold text-white">{faq.q}</h3>
-              <p className="mt-1 text-slate-300">{faq.a}</p>
+              <h3 className="font-semibold text-foreground">{faq.q}</h3>
+              <p className="mt-1 text-muted-foreground">{faq.a}</p>
             </article>
           ))}
         </div>

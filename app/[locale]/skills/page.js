@@ -156,23 +156,23 @@ export default async function SkillsPage({ params }) {
   const copy = getCopy(locale);
 
   return (
-    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
-      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
+      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
         {copy.home}
       </a>
-      <p className="mt-10 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">{copy.kicker}</p>
-      <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">{copy.h1}</h1>
-      <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
+      <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
+      <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
+      <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
 
-      <section className="mt-12 rounded-[2rem] border border-cyanx/30 bg-slate-950/60 p-6 shadow-panel">
-        <h2 className="text-2xl font-semibold text-white">{copy.installTitle}</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-400">{copy.installHint}</p>
+      <section className="mt-12 rounded-2xl border border-brand/30 bg-card/60 p-6 shadow-panel">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.installTitle}</h2>
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">{copy.installHint}</p>
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
-          <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap rounded-2xl border border-line bg-void px-4 py-3 font-mono text-sm text-slate-200">
+          <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap rounded-md border border-border/80 bg-background px-4 py-3 font-mono text-sm text-foreground">
             {SKILLS_INSTALL_COMMAND}
           </code>
           <button
-            className="js-copy-command inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-full border border-line bg-white/5 px-5 text-sm font-semibold text-white transition hover:border-cyanx/50"
+            className="js-copy-command inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-md border border-border/80 bg-card/60 px-5 text-sm font-semibold text-foreground transition-colors hover:border-brand/50"
             type="button"
             data-copy-value={SKILLS_INSTALL_COMMAND}
             data-copy-label={copy.copy}
@@ -181,53 +181,53 @@ export default async function SkillsPage({ params }) {
             {copy.copy}
           </button>
         </div>
-        <p className="mt-4 text-sm text-slate-400">{copy.installNote}</p>
+        <p className="mt-4 text-sm text-muted-foreground">{copy.installNote}</p>
       </section>
 
-      <section className="mt-6 rounded-[2rem] border border-line bg-white/[0.03] p-6">
-        <h2 className="text-2xl font-semibold text-white">{copy.agentsTitle}</h2>
-        <p className="mt-2 text-sm leading-6 text-slate-400">{copy.agentsHint}</p>
+      <section className="mt-6 rounded-2xl border border-border/80 bg-card/60 p-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.agentsTitle}</h2>
+        <p className="mt-2 text-sm leading-6 text-muted-foreground">{copy.agentsHint}</p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {SKILLS_AGENTS.map((agent) => (
-            <li key={agent} className="rounded-full border border-line bg-white/[0.03] px-3 py-1 font-mono text-xs text-slate-300">
+            <li key={agent} className="rounded-md border border-border/80 bg-card/60 px-3 py-1 font-mono text-xs text-muted-foreground">
               {agent}
             </li>
           ))}
         </ul>
       </section>
 
-      <h2 className="mt-12 text-2xl font-semibold text-white">{copy.flowTitle}</h2>
+      <h2 className="mt-12 text-2xl font-semibold text-foreground">{copy.flowTitle}</h2>
       <div className="mt-5 grid gap-5 md:grid-cols-3">
         {copy.steps.map((step) => (
-          <article key={step.label} className="rounded-[2rem] border border-line bg-white/[0.03] p-6">
-            <span className="font-mono text-xs text-cyanx">{step.label}</span>
-            <h3 className="mt-8 text-2xl font-semibold text-white">{step.title}</h3>
-            <p className="mt-3 text-sm leading-6 text-slate-400">{step.text}</p>
+          <article key={step.label} className="rounded-2xl border border-border/80 bg-card/60 p-6">
+            <span className="font-mono text-xs text-brand">{step.label}</span>
+            <h3 className="mt-5 text-lg font-semibold text-foreground">{step.title}</h3>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{step.text}</p>
           </article>
         ))}
       </div>
 
-      <section className="mt-12 rounded-[2rem] border border-line bg-white/[0.03] p-6">
-        <h2 className="text-2xl font-semibold text-white">{copy.whyTitle}</h2>
-        <ul className="mt-5 space-y-3 text-slate-300">
+      <section className="mt-12 rounded-2xl border border-border/80 bg-card/60 p-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.whyTitle}</h2>
+        <ul className="mt-5 space-y-3 text-muted-foreground">
           {copy.why.map((item) => (
             <li key={item}>- {item}</li>
           ))}
         </ul>
       </section>
 
-      <section className="mt-6 rounded-[2rem] border border-cyanx/30 bg-slate-950/60 p-6">
-        <h2 className="text-2xl font-semibold text-white">{copy.promptTitle}</h2>
-        <pre className="mt-5 overflow-x-auto rounded-2xl border border-line bg-void p-5 text-sm leading-6 text-slate-300">
+      <section className="mt-6 rounded-2xl border border-brand/30 bg-card/60 p-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.promptTitle}</h2>
+        <pre className="mt-5 overflow-x-auto rounded-md border border-border/80 bg-background p-5 text-sm leading-6 text-muted-foreground">
           <code>{copy.prompt}</code>
         </pre>
       </section>
 
-      <section className="mt-6 rounded-[2rem] border border-dashed border-line bg-white/[0.02] p-6">
-        <h2 className="text-2xl font-semibold text-white">{copy.manualTitle}</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-400">{copy.manualText}</p>
+      <section className="mt-6 rounded-2xl border border-dashed border-border/80 bg-card/60 p-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.manualTitle}</h2>
+        <p className="mt-3 text-sm leading-6 text-muted-foreground">{copy.manualText}</p>
         <a
-          className="js-skills-repo-link mt-5 inline-flex rounded-full border border-line px-5 py-3 text-sm font-bold text-white hover:border-cyanx/50"
+          className="js-skills-repo-link mt-5 inline-flex rounded-md border border-border/80 px-5 py-3 text-sm font-semibold text-foreground hover:border-brand/50"
           href={SKILLS_REPO_URL}
           target="_blank"
           rel="noreferrer"
@@ -236,18 +236,18 @@ export default async function SkillsPage({ params }) {
         </a>
       </section>
 
-      <section className="mt-12 rounded-[2rem] border border-cyanx/30 bg-cyanx/[0.06] p-6">
-        <h2 className="text-2xl font-semibold text-white">{copy.ctaTitle}</h2>
-        <p className="mt-3 text-slate-300">{copy.ctaText}</p>
+      <section className="mt-12 rounded-2xl border border-brand/30 bg-brand/[0.06] p-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.ctaTitle}</h2>
+        <p className="mt-3 text-muted-foreground">{copy.ctaText}</p>
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
           <a
-            className="js-try-link inline-flex justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow"
+            className="js-try-link inline-flex justify-center rounded-md bg-brand px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-brand/90"
             href={`https://app.forgent3d.com/try?lang=${locale}`}
           >
             {copy.ctaLink}
           </a>
           <a
-            className="inline-flex justify-center rounded-full border border-line px-5 py-3 text-sm font-bold text-white hover:border-cyanx/50"
+            className="inline-flex justify-center rounded-md border border-border/80 px-5 py-3 text-sm font-semibold text-foreground hover:border-brand/50"
             href={`/${locale}/quick-start`}
           >
             {copy.quickStartLink}

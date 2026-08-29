@@ -219,3 +219,16 @@ if (heroPreviewTriggers.length && heroPreviewLightbox && heroPreviewImage) {
     }
   });
 }
+
+// 顶栏贴顶透明,滚起来才铺半透明底 + 磨砂 —— 和产品 AppHeader 同一套行为(components/app-header.tsx)。
+// 透明是为了让页面顶部那片品牌辉光从窗口顶连贯下来;真铺一层实底,顶上就会裁出一条色带。
+{
+  const siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    const syncHeaderScrolled = () => {
+      siteHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    syncHeaderScrolled();
+    window.addEventListener("scroll", syncHeaderScrolled, { passive: true });
+  }
+}

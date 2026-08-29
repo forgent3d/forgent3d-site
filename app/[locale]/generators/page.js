@@ -50,33 +50,33 @@ export default async function GeneratorsIndexPage({ params }) {
   };
 
   return (
-    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
+    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }} />
       <Link
-        className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50"
+        className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50"
         href={`/${locale}`}
       >
         {t.backHome}
       </Link>
-      <h1 className="mt-10 text-4xl font-bold tracking-tight md:text-5xl">{t.catalogH1}</h1>
-      <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.catalogIntro}</p>
+      <h1 className="mt-10 text-3xl font-semibold tracking-tight md:text-4xl">{t.catalogH1}</h1>
+      <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{t.catalogIntro}</p>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {GENERATORS.map((g) => (
           <Link
             key={g.slug}
-            className="group rounded-2xl border border-line bg-slate-950/40 p-5 transition hover:border-cyanx/50"
+            className="group rounded-xl border border-border/80 bg-card/60 p-5 transition-colors hover:border-brand/50"
             href={`/${locale}/generators/${g.slug}`}
           >
             <div className="flex items-center gap-3">
-              <span className="text-2xl text-cyanx" aria-hidden>
+              <span className="text-2xl text-brand" aria-hidden>
                 {g.icon}
               </span>
-              <h2 className="text-lg font-semibold text-white group-hover:text-cyanx">
+              <h2 className="text-lg font-semibold text-foreground group-hover:text-brand">
                 {g.copy[locale].name}
               </h2>
             </div>
-            <p className="mt-3 text-sm leading-6 text-slate-300">{g.copy[locale].description}</p>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{g.copy[locale].description}</p>
           </Link>
         ))}
       </div>

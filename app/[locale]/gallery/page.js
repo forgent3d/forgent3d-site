@@ -77,16 +77,16 @@ export default async function GalleryPage({ params }) {
   const items = data?.items ?? [];
 
   return (
-    <main className="mx-auto w-[min(1180px,calc(100vw-32px))] py-16 text-slate-100">
-      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+    <main className="mx-auto w-[min(1180px,calc(100vw-32px))] py-16 text-foreground">
+      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
         {locale === "zh" ? "← 返回首页" : "← Back home"}
       </a>
-      <p className="mt-10 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">Gallery</p>
-      <h1 className="mt-3 text-4xl font-bold tracking-tight md:text-5xl">{copy.h1}</h1>
-      <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
+      <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted-foreground/80">Gallery</p>
+      <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
+      <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
 
       {items.length === 0 ? (
-        <p className="mt-12 rounded-2xl border border-line bg-slate-950/55 px-6 py-8 text-slate-400">
+        <p className="mt-12 rounded-md border border-border/80 bg-card/60 px-6 py-8 text-muted-foreground">
           {copy.empty}
         </p>
       ) : (
@@ -95,34 +95,34 @@ export default async function GalleryPage({ params }) {
             <Link
               key={item.shareSlug}
               href={`/m/${item.shareSlug}?lang=${locale}&from=gallery`}
-              className="group overflow-hidden rounded-[1.5rem] border border-line bg-slate-950/55 shadow-panel backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-cyanx/40"
+              className="group overflow-hidden rounded-2xl border border-border/80 bg-card/60 shadow-panel backdrop-blur-xl transition-colors hover:border-brand/40"
             >
-              <div className="aspect-[4/3] bg-[#050b14]">
+              <div className="aspect-[4/3] bg-muted">
                 {item.previewUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={item.previewUrl}
                     alt={item.title}
-                    className="h-full w-full object-contain p-3 transition group-hover:brightness-110"
+                    className="h-full w-full object-contain p-3 transition-colors"
                     loading="lazy"
                   />
                 ) : (
-                  <div className="flex h-full items-center justify-center font-mono text-xs uppercase tracking-[0.2em] text-slate-600">
+                  <div className="flex h-full items-center justify-center font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground/60">
                     {kindLabel(item.kind, locale)}
                   </div>
                 )}
               </div>
               <div className="p-5">
-                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-cyanx">
+                <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand">
                   {kindLabel(item.kind, locale)}
                 </p>
-                <h2 className="mt-2 text-lg font-semibold text-white group-hover:text-cyanx">
+                <h2 className="mt-2 text-lg font-semibold text-foreground group-hover:text-brand">
                   {item.title}
                 </h2>
                 {item.description && (
-                  <p className="mt-2 line-clamp-2 text-sm text-slate-400">{item.description}</p>
+                  <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{item.description}</p>
                 )}
-                <p className="mt-4 font-mono text-xs text-slate-500">
+                <p className="mt-4 font-mono text-xs text-muted-foreground">
                   {formatPublishedAt(item.publishedAt, locale) || copy.viewModel}
                 </p>
               </div>

@@ -93,12 +93,12 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
   const modelHref = `/m/${shareSlug}?lang=${locale}`;
 
   return (
-    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
+    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
       {fromGallery && (
         <div className="mb-8">
           <Link
             href={`/${locale}/gallery`}
-            className="font-mono text-xs uppercase tracking-[0.18em] text-cyanx transition hover:text-white"
+            className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80 transition-colors hover:text-foreground"
           >
             ← {t.backGallery}
           </Link>
@@ -106,17 +106,17 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
       )}
 
       <div className="mb-6 flex flex-wrap items-center gap-3">
-        <span className="rounded-full border border-line bg-white/5 px-3 py-1 font-mono text-xs uppercase tracking-[0.16em] text-slate-400">
+        <span className="rounded-md border border-border/80 bg-card/60 px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
           {kindLabel(model.kind, locale)}
         </span>
       </div>
 
-      <h1 className="text-4xl font-bold tracking-tight md:text-5xl">{model.title}</h1>
+      <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{model.title}</h1>
       {model.description && (
-        <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">{model.description}</p>
+        <p className="mt-4 max-w-3xl text-lg leading-8 text-muted-foreground">{model.description}</p>
       )}
       {publishedAt && (
-        <p className="mt-3 font-mono text-xs uppercase tracking-[0.16em] text-slate-500">
+        <p className="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
           {t.published} {publishedAt}
         </p>
       )}
@@ -125,7 +125,7 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
         <div className="mt-10">
           <Link
             href={modelHref}
-            className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-6 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5"
+            className="inline-flex min-h-[48px] items-center justify-center rounded-md bg-brand px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-brand/90"
           >
             {t.view3d} →
           </Link>
@@ -133,7 +133,7 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
       ) : (
         <>
           {model.previewUrl && (
-            <div className="mt-10 overflow-hidden rounded-[1.75rem] border border-line bg-slate-950/55 p-3 shadow-panel backdrop-blur-xl">
+            <div className="mt-10 overflow-hidden rounded-2xl border border-border/80 bg-card/60 p-3 shadow-panel backdrop-blur-xl">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={model.previewUrl}
@@ -142,16 +142,16 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
               />
             </div>
           )}
-          <p className="mt-4 rounded-2xl border border-line/80 bg-slate-950/55 px-5 py-4 text-sm leading-7 text-slate-400">
+          <p className="mt-4 rounded-md border border-border/80 bg-card/60 px-5 py-4 text-sm leading-7 text-muted-foreground">
             {t.noGlb}
           </p>
         </>
       )}
 
       {model.archiveUrl && (
-        <section className="mt-10 overflow-hidden rounded-2xl border border-line bg-slate-950/55 p-6 shadow-panel backdrop-blur-xl">
+        <section className="mt-10 overflow-hidden rounded-2xl border border-border/80 bg-card/60 p-6 shadow-panel backdrop-blur-xl">
           <h2 className="text-xl font-semibold">{t.downloadHow}</h2>
-          <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-7 text-slate-400">
+          <ol className="mt-4 list-decimal space-y-3 pl-5 text-sm leading-7 text-muted-foreground">
             {t.downloadSteps.map((step) => (
               <li key={step}>{step}</li>
             ))}
@@ -159,7 +159,7 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
           <a
             href={model.archiveUrl}
             download={`${model.sourceModelName}.${archiveExt}`}
-            className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-full bg-gradient-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow transition hover:-translate-y-0.5"
+            className="mt-6 inline-flex min-h-[44px] items-center justify-center rounded-md bg-brand px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-brand/90"
           >
             ↓ {t.download}
           </a>
@@ -169,13 +169,13 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
       {modelParams && (
         <section className="mt-12">
           <h2 className="text-2xl font-semibold">{t.parameters}</h2>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-line bg-slate-950/55">
+          <div className="mt-4 overflow-hidden rounded-xl border border-border/80 bg-card/60">
             <table className="w-full border-collapse text-sm">
               <tbody>
                 {Object.entries(modelParams).map(([key, val], i) => (
-                  <tr key={key} className={i > 0 ? "border-t border-line" : undefined}>
-                    <td className="w-[40%] px-4 py-3 text-slate-400">{key}</td>
-                    <td className="px-4 py-3 font-mono text-slate-200">{String(val)}</td>
+                  <tr key={key} className={i > 0 ? "border-t border-border/80" : undefined}>
+                    <td className="w-[40%] px-4 py-3 text-muted-foreground">{key}</td>
+                    <td className="px-4 py-3 font-mono text-foreground">{String(val)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -189,29 +189,29 @@ export default async function SharedModelDetailsPage({ params, searchParams }) {
           <h2 className="text-2xl font-semibold">
             {t.parts} ({parts.length})
           </h2>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-line bg-slate-950/55">
+          <div className="mt-4 overflow-hidden rounded-xl border border-border/80 bg-card/60">
             {parts.map((part, i) => (
               <div
                 key={part.name}
-                className={`flex flex-wrap items-center gap-3 px-4 py-3 ${i > 0 ? "border-t border-line" : ""}`}
+                className={`flex flex-wrap items-center gap-3 px-4 py-3 ${i > 0 ? "border-t border-border/80" : ""}`}
               >
-                <span className="font-medium text-slate-100">{part.name}</span>
-                <span className="ml-auto font-mono text-xs text-slate-500">{part.path}</span>
+                <span className="font-medium text-foreground">{part.name}</span>
+                <span className="ml-auto font-mono text-xs text-muted-foreground">{part.path}</span>
               </div>
             ))}
           </div>
         </section>
       )}
 
-      <footer className="mt-14 border-t border-line pt-6 text-sm text-slate-500">
+      <footer className="mt-14 border-t border-border/80 pt-6 text-sm text-muted-foreground">
         <p>
           {t.model}:{" "}
-          <code className="font-mono text-slate-400">{model.sourceModelName}</code>
+          <code className="font-mono text-muted-foreground">{model.sourceModelName}</code>
           {model.manifest?.kernel && (
             <>
               {" "}
               · {t.kernel}:{" "}
-              <code className="font-mono text-slate-400">{model.manifest.kernel}</code>
+              <code className="font-mono text-muted-foreground">{model.manifest.kernel}</code>
             </>
           )}
         </p>

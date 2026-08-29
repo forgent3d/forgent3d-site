@@ -13,7 +13,7 @@ export function ModelOverlayPanel({ showLabel, hideLabel, children }) {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="pointer-events-auto absolute left-3 top-3 z-30 flex h-11 min-w-11 items-center justify-center gap-2 rounded-full border border-line bg-slate-950/90 px-3 font-mono text-[11px] uppercase tracking-[0.14em] text-cyanx shadow-panel backdrop-blur-xl transition hover:border-cyanx/40 md:hidden"
+        className="pointer-events-auto absolute left-3 top-3 z-30 flex h-11 min-w-11 items-center justify-center gap-2 rounded-md border border-border/80 bg-card/90 px-3 font-mono text-[11px] uppercase tracking-[0.18em] text-brand shadow-panel backdrop-blur-xl transition-colors hover:border-brand/40 md:hidden"
         aria-expanded={open}
         aria-controls="model-info-panel"
       >
@@ -51,7 +51,7 @@ export function ModelOverlayPanel({ showLabel, hideLabel, children }) {
             : "max-md:pointer-events-none max-md:-translate-y-3 max-md:opacity-0"
         } md:translate-y-0 md:opacity-100`}
       >
-        <div className="pointer-events-auto flex max-h-[min(60dvh,calc(100dvh-5.5rem))] flex-col overflow-y-auto rounded-2xl border border-line bg-slate-950/88 p-5 shadow-panel backdrop-blur-xl md:max-h-[min(72dvh,calc(100dvh-5rem))]">
+        <div className="pointer-events-auto flex max-h-[min(60dvh,calc(100dvh-5.5rem))] flex-col overflow-y-auto rounded-2xl border border-border/80 bg-card/90 p-5 shadow-panel backdrop-blur-xl md:max-h-[min(72dvh,calc(100dvh-5rem))]">
           {children}
         </div>
       </aside>

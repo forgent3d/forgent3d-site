@@ -76,7 +76,7 @@ export default async function SharedModelPage({ params, searchParams }) {
   const publishedAt = formatPublishedAt(model.publishedAt, locale);
 
   return (
-    <main className="fixed inset-0 z-0 h-[100dvh] w-full overflow-hidden bg-[#050b14] text-slate-100">
+    <main className="fixed inset-0 z-0 h-[100dvh] w-full overflow-hidden bg-muted text-foreground">
       <div className="absolute inset-0 z-0">
         <GlbViewer
           src={glbSrc}
@@ -90,33 +90,33 @@ export default async function SharedModelPage({ params, searchParams }) {
       </div>
 
       <ModelOverlayPanel showLabel={t.showInfo} hideLabel={t.hideInfo}>
-        <span className="inline-block rounded-full border border-line bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-slate-400">
+        <span className="inline-block rounded-md border border-border/80 bg-card/60 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
           {kindLabel(model.kind, locale)}
         </span>
 
-        <h1 className="mt-4 text-xl font-bold leading-tight tracking-tight sm:text-2xl md:text-3xl">
+        <h1 className="mt-4 text-xl font-semibold leading-tight tracking-tight sm:text-2xl md:text-3xl">
           {model.title}
         </h1>
 
         {model.description && (
-          <p className="mt-3 line-clamp-4 text-sm leading-7 text-slate-300 md:line-clamp-none">
+          <p className="mt-3 line-clamp-4 text-sm leading-7 text-muted-foreground md:line-clamp-none">
             {model.description}
           </p>
         )}
 
         {publishedAt && (
-          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.14em] text-slate-500">
+          <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
             {t.published} {publishedAt}
           </p>
         )}
 
-        <div className="mt-auto border-t border-line/60 pt-4">
-          <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-cyanx/80">
+        <div className="mt-auto border-t border-border/60 pt-4">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-brand/80">
             {t.hint}
           </p>
           <Link
             href={detailsHref}
-            className="mt-3 inline-flex font-mono text-[11px] uppercase tracking-[0.16em] text-slate-400 transition hover:text-cyanx"
+            className="mt-3 inline-flex font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground transition-colors hover:text-brand"
           >
             {t.moreDetails} →
           </Link>

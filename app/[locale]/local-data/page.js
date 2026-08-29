@@ -123,18 +123,18 @@ export default async function LocalDataPage({ params }) {
   const copy = getCopy(locale);
 
   return (
-    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
-      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
+      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
         {locale === "zh" ? "← 返回首页" : "← Back home"}
       </a>
-      <p className="mt-10 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">{copy.kicker}</p>
-      <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">{copy.h1}</h1>
-      <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
+      <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
+      <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
+      <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
       <div className="mt-12 grid gap-5">
         {copy.sections.map((section) => (
-          <section key={section.title} className="rounded-[2rem] border border-line bg-white/[0.03] p-6">
-            <h2 className="text-2xl font-semibold text-white">{section.title}</h2>
-            <ul className="mt-5 space-y-3 text-slate-300">
+          <section key={section.title} className="rounded-2xl border border-border/80 bg-card/60 p-6">
+            <h2 className="text-2xl font-semibold text-foreground">{section.title}</h2>
+            <ul className="mt-5 space-y-3 text-muted-foreground">
               {section.items.map((item) => (
                 <li key={item}>- {item}</li>
               ))}
@@ -142,10 +142,10 @@ export default async function LocalDataPage({ params }) {
           </section>
         ))}
       </div>
-      <section className="mt-12 rounded-[2rem] border border-cyanx/30 bg-cyanx/[0.06] p-6">
-        <h2 className="text-2xl font-semibold text-white">{copy.ctaTitle}</h2>
-        <p className="mt-3 text-slate-300">{copy.ctaText}</p>
-        <a className="mt-5 inline-flex rounded-full bg-white px-5 py-3 text-sm font-bold text-slate-950" href={`/${locale}/quick-start`}>
+      <section className="mt-12 rounded-2xl border border-brand/30 bg-brand/[0.06] p-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.ctaTitle}</h2>
+        <p className="mt-3 text-muted-foreground">{copy.ctaText}</p>
+        <a className="mt-5 inline-flex rounded-md bg-white px-5 py-3 text-sm font-semibold text-background" href={`/${locale}/quick-start`}>
           {copy.ctaLink}
         </a>
       </section>

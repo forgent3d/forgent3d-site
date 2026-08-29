@@ -64,8 +64,8 @@ export function GlbViewer({
   if (!src) return null;
 
   const shellClass = fullscreen
-    ? `relative h-full w-full bg-[#050b14] ${className}`
-    : `relative overflow-hidden rounded-[1.75rem] border border-line bg-[#050b14] shadow-panel backdrop-blur-xl ${className}`;
+    ? `relative h-full w-full bg-muted ${className}`
+    : `relative overflow-hidden rounded-2xl border border-border/80 bg-muted shadow-panel backdrop-blur-xl ${className}`;
 
   const viewerHeight = fullscreen ? "100%" : "min(70vh, 520px)";
 
@@ -73,20 +73,20 @@ export function GlbViewer({
     <div className={shellClass}>
       {loading && !failed && (
         <div
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-[#050b14]/92 backdrop-blur-sm"
+          className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-background/92 backdrop-blur-sm"
           aria-live="polite"
           aria-busy="true"
         >
           <div
-            className="h-10 w-10 animate-spin rounded-full border-2 border-line border-t-cyanx"
+            className="h-10 w-10 animate-spin rounded-md border-2 border-border/80 border-t-brand"
             aria-hidden
           />
-          <p className="mt-4 font-mono text-xs uppercase tracking-[0.16em] text-slate-400">
+          <p className="mt-4 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
             {loadingLabel}
           </p>
-          <div className="mt-4 h-1 w-36 overflow-hidden rounded-full bg-line/40">
+          <div className="mt-4 h-1 w-36 overflow-hidden rounded-full bg-border">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-cyanx to-violetx transition-[width] duration-200"
+              className="h-full rounded-md bg-brand transition-[width] duration-200"
               style={{ width: `${Math.max(progress, 8)}%` }}
             />
           </div>
@@ -94,8 +94,8 @@ export function GlbViewer({
       )}
 
       {failed && (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#050b14]/92 px-6 text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.14em] text-slate-400">
+        <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/92 px-6 text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
             {errorLabel}
           </p>
         </div>
@@ -117,7 +117,7 @@ export function GlbViewer({
         style={{
           width: "100%",
           height: viewerHeight,
-          "--poster-color": "#050b14",
+          "--poster-color": "#edeff2",
         }}
       />
     </div>

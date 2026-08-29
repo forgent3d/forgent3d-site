@@ -125,44 +125,44 @@ export default async function QuickStartPage({ params }) {
   const copy = getCopy(locale);
 
   return (
-    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
-      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
+      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
         {locale === "zh" ? "← 返回首页" : "← Back home"}
       </a>
-      <p className="mt-10 font-mono text-xs uppercase tracking-[0.24em] text-cyanx">{copy.kicker}</p>
-      <h1 className="mt-3 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">{copy.h1}</h1>
-      <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
+      <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
+      <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
+      <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a className="js-try-link inline-flex rounded-full bg-linear-to-r from-cyanx to-violetx px-5 py-3 text-sm font-bold text-slate-950 shadow-glow" href={`https://app.forgent3d.com/try?lang=${locale}`}>
+        <a className="js-try-link inline-flex rounded-md bg-brand px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-brand/90" href={`https://app.forgent3d.com/try?lang=${locale}`}>
           {copy.tryLink}
         </a>
-        <a className="js-skills-cta inline-flex rounded-full border border-line px-5 py-3 text-sm font-bold text-white hover:border-cyanx/50" href={`/${locale}/skills`}>
+        <a className="js-skills-cta inline-flex rounded-md border border-border/80 px-5 py-3 text-sm font-semibold text-foreground hover:border-brand/50" href={`/${locale}/skills`}>
           {copy.skillsLink}
         </a>
       </div>
       <div className="mt-12 grid gap-5 md:grid-cols-3">
         {copy.steps.map((step) => (
-          <article key={step.label} className="rounded-[2rem] border border-line bg-white/[0.03] p-6">
-            <span className="font-mono text-xs text-cyanx">{step.label}</span>
-            <h2 className="mt-8 text-2xl font-semibold text-white">{step.title}</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-400">{step.text}</p>
+          <article key={step.label} className="rounded-2xl border border-border/80 bg-card/60 p-6">
+            <span className="font-mono text-xs text-brand">{step.label}</span>
+            <h2 className="mt-5 text-lg font-semibold text-foreground">{step.title}</h2>
+            <p className="mt-3 text-sm leading-6 text-muted-foreground">{step.text}</p>
           </article>
         ))}
       </div>
-      <section className="mt-12 rounded-[2rem] border border-cyanx/30 bg-slate-950/60 p-6">
-        <h2 className="text-2xl font-semibold text-white">{copy.promptTitle}</h2>
-        <pre className="mt-5 overflow-x-auto rounded-2xl border border-line bg-void p-5 text-sm leading-6 text-slate-300">
+      <section className="mt-12 rounded-2xl border border-brand/30 bg-card/60 p-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.promptTitle}</h2>
+        <pre className="mt-5 overflow-x-auto rounded-md border border-border/80 bg-background p-5 text-sm leading-6 text-muted-foreground">
           <code>{copy.prompt}</code>
         </pre>
       </section>
-      <section className="mt-12 rounded-[2rem] border border-line bg-white/[0.03] p-6">
-        <h2 className="text-2xl font-semibold text-white">{copy.checklistTitle}</h2>
-        <ul className="mt-5 space-y-3 text-slate-300">
+      <section className="mt-12 rounded-2xl border border-border/80 bg-card/60 p-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.checklistTitle}</h2>
+        <ul className="mt-5 space-y-3 text-muted-foreground">
           {copy.checklist.map((item) => (
             <li key={item}>- {item}</li>
           ))}
         </ul>
-        <a className="mt-6 inline-flex rounded-full border border-line px-5 py-3 text-sm font-bold text-white hover:border-cyanx/50" href={`/${locale}/local-data`}>
+        <a className="mt-6 inline-flex rounded-md border border-border/80 px-5 py-3 text-sm font-semibold text-foreground hover:border-brand/50" href={`/${locale}/local-data`}>
           {copy.localDataLink}
         </a>
       </section>

@@ -3,19 +3,42 @@
 @source "./**/*.{js,jsx}";
 @source "./lib/**/*.{js,jsx}";
 
+/*
+ * 站点的外观语言 = 产品里的那一套(forgent3d-platform/packages/cloud)。
+ * 这里的值是 packages/cloud/app/globals.css 里**浅色**那一档(`:root` / `.light`)的逐条搬运:
+ * 官网只有浅色一档,但用的必须是产品的同一批 token —— 改产品的调子,这里跟着改,
+ * 别在页面里就地写死颜色。
+ *
+ * 圆角同样照产品的两档走(见产品的 lib/ui-surface.ts):
+ * 控件(按钮、芯片、导航项、语言开关)一律 rounded-md,表面才是 rounded-xl / rounded-2xl。
+ * 官网原来满屏 rounded-full 的胶囊,是和产品最扎眼的一处不一致。
+ */
 @theme {
-  --font-display: "Space Grotesk", "Avenir Next", "Segoe UI", sans-serif;
-  --font-mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
 
-  --color-void: #050b14;
-  --color-panel: rgba(8, 18, 32, 0.72);
-  --color-line: rgba(117, 220, 255, 0.18);
-  --color-cyanx: #75dcff;
-  --color-violetx: #9b7cff;
-  --color-signal: #62f7b0;
+  /* 产品浅色主题的 token,原样搬过来 */
+  --color-background: hsl(220 20% 98%);
+  --color-foreground: hsl(225 18% 12%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(225 18% 12%);
+  --color-primary: hsl(225 18% 12%);
+  --color-primary-foreground: hsl(220 20% 98%);
+  --color-secondary: hsl(220 16% 94%);
+  --color-muted: hsl(220 16% 94%);
+  --color-muted-foreground: hsl(220 9% 42%);
+  --color-accent: hsl(220 16% 90%);
+  --color-border: hsl(220 14% 86%);
+  --color-ring: hsl(190 80% 38%);
 
-  --shadow-glow: 0 0 80px rgba(117, 220, 255, 0.18);
-  --shadow-panel: 0 30px 90px rgba(0, 0, 0, 0.42);
+  /* 产品口径的品牌色:一枚青,没有第二枚。原来的 violet 渐变整站退役。
+     浅色档下它是**深**青(#0886a6)—— 主按钮是它做底、近白色的 text-background 做字。 */
+  --color-brand: hsl(192 91% 34%);
+  --color-brand-foreground: hsl(194 85% 24%);
+
+  /* 表面的投影收到几乎看不见 —— 产品里卡片只有描边,官网保留一点纵深即可,
+     原来的 shadow-glow(80px 品牌辉光)是营销页做派,已删。 */
+  --shadow-panel: 0 12px 32px rgba(24, 28, 40, 0.08);
 }
 
 @import "../public/styles.css";

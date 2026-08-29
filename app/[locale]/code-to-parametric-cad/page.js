@@ -74,13 +74,13 @@ export default async function CodeToParametricCadPage({ params }) {
   const copy = getCopy(locale);
 
   return (
-    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-slate-100">
-      <a className="inline-flex rounded-full border border-line px-4 py-2 font-mono text-xs uppercase tracking-[0.16em] text-cyanx hover:border-cyanx/50" href={`/${locale}`}>
+    <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
+      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
         {locale === "zh" ? "← 返回首页" : "← Back home"}
       </a>
-      <h1 className="mt-10 text-4xl font-bold tracking-tight md:text-5xl">{copy.h1}</h1>
-      <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300">{copy.intro}</p>
-      <ul className="mt-8 space-y-3 text-slate-200">
+      <h1 className="mt-10 text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
+      <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
+      <ul className="mt-8 space-y-3 text-foreground">
         {copy.bullets.map((item) => (
           <li key={item}>- {item}</li>
         ))}
