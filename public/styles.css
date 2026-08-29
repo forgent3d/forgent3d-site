@@ -159,6 +159,14 @@ pre {
   border: 1px solid rgba(var(--line-rgb), 1);
 }
 
+/* 零件渲染图是透明底的,但底部那片接触阴影一直画到画布最后一行(y=719 处 alpha 仍有 ~27),
+   被边界齐平切断,渲染出来就是一条横贯全图的硬边("断层")。这里把最后 11% 渐隐掉,
+   让阴影自己收尾 —— 零件实体到 88% 就结束了,不会被切到。只有下边缘有这个问题,其余三边干净。 */
+.hero-preview-card img {
+  -webkit-mask-image: linear-gradient(to bottom, #000 89%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 89%, transparent 100%);
+}
+
 .hero-preview-lightbox {
   position: fixed;
   inset: 0;
