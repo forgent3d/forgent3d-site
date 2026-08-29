@@ -23,6 +23,7 @@ const COPY = {
     navDemo: "Demo",
     navFeatures: "Why Cloud",
     navSkills: "Skills",
+    navGenerators: "Generators",
     navCompare: "Two ways in",
     navPricing: "Plans",
     navContact: "Contact",
@@ -131,6 +132,7 @@ const COPY = {
     navDemo: "演示",
     navFeatures: "云端价值",
     navSkills: "Skills",
+    navGenerators: "生成器",
     navCompare: "两种用法",
     navPricing: "方案",
     navContact: "联系我们",
@@ -249,6 +251,7 @@ export function getLandingPageHtml(locale) {
           <a class="transition hover:text-cyanx" href="#agent-loop">${t.navLoop}</a>
           <a class="transition hover:text-cyanx" href="#skills">${t.navSkills}</a>
           <a class="transition hover:text-cyanx" href="#compare">${t.navCompare}</a>
+          <a class="transition hover:text-cyanx" href="/${locale}/generators">${t.navGenerators}</a>
           <a class="js-pricing-link transition hover:text-cyanx" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="transition hover:text-cyanx" href="/${locale}/contact">${t.navContact}</a>
         </nav>
