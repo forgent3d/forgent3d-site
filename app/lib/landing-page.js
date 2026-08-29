@@ -40,12 +40,11 @@ const COPY = {
     navContact: "Contact",
     navWorkbench: "Open Workbench",
     navWorkbenchShort: "Workbench",
-    heroKicker: "CLOUD CAD SANDBOX · HOSTED AI AGENT · SKILL FOR YOUR AI IDE",
+    heroKicker: "CLOUD CAD SANDBOX · HOSTED AI AGENT",
     heroTitle: "AI CAD agent in the cloud",
     heroSubtitle:
-      "Describe a part and Forgent3D writes real, editable CAD code, builds it, and hands you a 3D model — nothing to install. One command brings the same power to Claude Code, Codex, or Cursor.",
+      "Describe a part and Forgent3D writes real, editable CAD code, builds it, and hands you a 3D model — nothing to install.",
     heroTry: "Get started",
-    heroSkills: "Install the skill",
     heroGithub: "View GitHub",
     heroX: "Follow on X",
     chipExisting: "Real geometry",
@@ -134,12 +133,11 @@ const COPY = {
     navContact: "联系我们",
     navWorkbench: "进入工作台",
     navWorkbenchShort: "工作台",
-    heroKicker: "云端 CAD 沙盒 · 内置 AI Agent · 可装进你的 AI IDE",
+    heroKicker: "云端 CAD 沙盒 · 内置 AI Agent",
     heroTitle: "云端的 AI CAD Agent",
     heroSubtitle:
-      "描述一个零件，Forgent3D 就写出真正可编辑的 CAD 代码、构建出几何，给你一个 3D 模型——不用装任何东西。一条命令，还能把同样的能力装进 Claude Code、Codex、Cursor。",
+      "描述一个零件，Forgent3D 就写出真正可编辑的 CAD 代码、构建出几何，给你一个 3D 模型——不用装任何东西。",
     heroTry: "立即开始",
-    heroSkills: "安装 Skill",
     heroGithub: "查看 GitHub",
     heroX: "在 X 上关注",
     chipExisting: "真实几何",
@@ -260,7 +258,12 @@ export function getLandingPageHtml(locale) {
           <a class="${navLink}" href="/${locale}/contact">${t.navContact}</a>
         </nav>
         <div class="site-header-actions flex items-center gap-2">
-          <a class="js-workbench-link ${BRAND_BUTTON} h-9" href="https://app.forgent3d.com?lang=${locale}">
+          <!-- 顶栏这枚是**回去**的门(老用户),首屏那颗才是**开始**的门(新访客)。两颗都用品牌色
+               实心按钮时,第一屏上就是同一句话说两遍 —— 所以这里降一档,入口本身留着:首屏 CTA
+               滚上去之后,页面上仍旧随时能进工作台。
+               降的是 chip 不是纯文字链:左边那排导航是 hidden lg:flex,窄屏下整排都不在,
+               一段没有描边的灰字挨着 GitHub/EN 两枚方块,读起来是散落的文本而不是入口。 -->
+          <a class="js-workbench-link ${CHIP_SURFACE} h-9 px-3" href="https://app.forgent3d.com?lang=${locale}">
             <span class="sm:hidden">${t.navWorkbenchShort}</span>
             <span class="hidden sm:inline">${t.navWorkbench}</span>
           </a>
@@ -288,9 +291,11 @@ export function getLandingPageHtml(locale) {
               ${t.heroTitle}
             </h1>
             <p class="mt-5 max-w-xl text-base leading-7 text-muted-foreground">${t.heroSubtitle}</p>
+            <!-- 首屏只留一个动作:云端直接开始。skill 那条路仍在(导航栏、下面的 Skills 一节、
+                 /skills 页),但和「不用装任何东西」并排摆在首屏时,两条入口互相抵消 —— 第一眼
+                 该只有一件事可做。 -->
             <div class="hero-actions mt-8 flex flex-wrap gap-3">
-              <a class="js-try-link ${BRAND_BUTTON} min-h-[44px] px-5" href="https://app.forgent3d.com/try?lang=${locale}">${t.heroTry}</a>
-              <a class="js-skills-cta ${CHIP_SURFACE} min-h-[44px] px-5" href="/${locale}/skills">${t.heroSkills}</a>
+              <a class="js-try-link ${BRAND_BUTTON} min-h-[44px] px-5" href="https://app.forgent3d.com?lang=${locale}">${t.heroTry}</a>
             </div>
           </div>
 

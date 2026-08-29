@@ -74,7 +74,7 @@ applyLinks(".js-download-link", linkConfig.download, "#download");
 applyLinks(".js-github-link", linkConfig.github, "#download");
 applyLinks(".js-x-link", linkConfig.x, "#download");
 applyLinks(".js-workbench-link", linkConfig.workbench, "https://app.forgent3d.com", { includeLocale: true });
-applyLinks(".js-try-link", linkConfig.try, "#download", { includeLocale: true });
+applyLinks(".js-try-link", linkConfig.try, "https://app.forgent3d.com", { includeLocale: true });
 applyLinks(".js-skills-repo-link", linkConfig.skillsRepo, "https://github.com/forgent3d/forgent3d-skills");
 
 // Install-command copy buttons (homepage skills section and /skills).

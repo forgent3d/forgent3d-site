@@ -4,7 +4,7 @@
 // STLGears, ostat/vacuum-hose-adapter, 3dprintgenerator box), the JSON-LD, the
 // sitemap rows, and the spec handed to the CAD agents that author each model.
 // `shareSlug`: filled in once the model is published on app.forgent3d.com;
-// until then the CTA falls back to the workbench /try entry.
+// until then the CTA falls back to the workbench root (the create screen).
 
 export const APP_BASE = "https://app.forgent3d.com";
 
@@ -563,7 +563,7 @@ export function getGenerator(slug) {
 
 export function generatorAppUrl(generator, locale) {
   if (generator.shareSlug) return `${APP_BASE}/m/${generator.shareSlug}?lang=${locale}`;
-  return `${APP_BASE}/try?lang=${locale}`;
+  return `${APP_BASE}?lang=${locale}`;
 }
 
 // UI copy shared by the /generators index and every landing page.

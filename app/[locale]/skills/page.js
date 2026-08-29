@@ -242,7 +242,7 @@ export default async function SkillsPage({ params }) {
         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
           <a
             className="js-try-link inline-flex justify-center rounded-md bg-brand px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-brand/90"
-            href={`https://app.forgent3d.com/try?lang=${locale}`}
+            href={`https://app.forgent3d.com?lang=${locale}`}
           >
             {copy.ctaLink}
           </a>
