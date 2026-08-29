@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 import "./globals.css";
 
 export const metadata = {
@@ -16,7 +18,7 @@ export default function RootLayout({ children }) {
           name="keywords"
           content="Forgent3D, AI CAD, agent skills, Claude Code, Codex, Cursor, build123d, parametric CAD, 3D preview"
         />
-        <meta name="theme-color" content="#050b14" />
+        <meta name="theme-color" content="#f9fafb" />
         <meta property="og:title" content="Forgent3D" />
         <meta
           property="og:description"
@@ -25,21 +27,24 @@ export default function RootLayout({ children }) {
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/og-image.svg" />
         <meta property="og:locale" content="en_US" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        {/* 产品和官网共用同一枚 logo-mark.png(来自 forgent3d-platform/packages/cloud/public)。
+            官网原来用的是另一版带描边底板的图标,和产品头部对不上。 */}
+        <link rel="icon" type="image/png" href="/logo-mark.png" />
+        <link rel="apple-touch-icon" href="/logo-mark.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="bg-void font-display text-slate-100 antialiased">
+      <body className="bg-background font-sans text-foreground antialiased">
         {children}
-        <script src="/site-links.js"></script>
-        <script src="/script.js"></script>
+        {/* next/script(afterInteractive)代替裸 <script>:注水后按顺序注入,
+            site-links.js 先挂上 window.FORGENT_LINKS,script.js 再读。 */}
+        <Script src="/site-links.js" strategy="afterInteractive" />
+        <Script src="/script.js" strategy="afterInteractive" />
       </body>
     </html>
   );
