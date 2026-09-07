@@ -555,6 +555,85 @@ export const GENERATORS = [
       },
     },
   },
+  {
+    slug: "tool-tray-generator",
+    shareSlug: "JtaZW8df4Y",
+    icon: "▧",
+    keywords: [
+      "tool tray generator",
+      "custom toolbox insert stl",
+      "shadow foam alternative 3d print",
+      "tool drawer organizer stl",
+    ],
+    params: [
+      { key: "CORNER_R", default: "2", range: "0 \u2013 8", unit: "mm", label: { en: "Corner radius", zh: "圆角" }, desc: { en: "Rounds every corner of the traced outline \u2014 a sharp-cornered part still gets a printable inside corner.", zh: "把描出来的轮廓每个角倒圆，尖角零件也能得到能打的内角。" } },
+      { key: "CLEARANCE", default: "0.5", range: "0.1 \u2013 3", unit: "mm", label: { en: "Fit clearance", zh: "间隙" }, desc: { en: "Grown around the outline on every side; 0.25 snug, 0.5 drop-in, 1.0 loose.", zh: "沿轮廓四周外扩；0.25 紧配、0.5 好放、1.0 宽松。" } },
+      { key: "PART_DEPTH", default: "7", range: "1 \u2013 40", unit: "mm", label: { en: "Pocket depth", zh: "坑深" }, desc: { en: "How deep the part sinks. Clamped so a 1.5 mm floor always remains.", zh: "零件沉多深。自动封顶，底下永远留 1.5 mm。" } },
+      { key: "TRAY_W", default: "140", range: "60 \u2013 400", unit: "mm", label: { en: "Tray length X", zh: "托盘长 X" }, desc: { en: "Outer length \u2014 measure the drawer, not the part.", zh: "托盘外长，按抽屉内尺寸量。" } },
+      { key: "TRAY_L", default: "100", range: "60 \u2013 300", unit: "mm", label: { en: "Tray width Y", zh: "托盘宽 Y" }, desc: { en: "Outer width of the tray.", zh: "托盘外宽。" } },
+      { key: "TRAY_T", default: "10", range: "3 \u2013 60", unit: "mm", label: { en: "Tray thickness", zh: "托盘厚" }, desc: { en: "Must clear the pocket depth plus a 1.5 mm floor.", zh: "要能容下坑深，再留 1.5 mm 底。" } },
+    ],
+    copy: {
+      en: {
+        name: "Tool Tray Generator",
+        title: "Tool Tray Generator \u2014 Custom Toolbox & Drawer Inserts (STL) | Forgent3D",
+        description:
+          "Generate a tray whose pocket is cut to your part's own outline, not a rectangle. Drag eight points to your measurements, preview in 3D, export STL or STEP free.",
+        h1: "Tool tray generator: the pocket is the tool's outline, not a rectangle",
+        intro:
+          "Most tray customizers give you rectangles and circles. Here the cavity is the object's own footprint. The pocket below is a body with a tab on it \u2014 eight points carrying the four numbers you would read off a caliper: body length, body width, tab width, tab height \u2014 so dragging them on the sketch canvas turns it into YOUR part. Size the tray to your drawer, set the fit, print it flat.",
+        whyPoints: [
+          "Eight draggable points, four real dimensions: measure your part, drag, done",
+          "Measured outline and fit clearance stay two separate numbers, so a looser fit never reshapes the tool",
+          "Pocket depth is clamped so a 1.5 mm floor always survives \u2014 you cannot slice the tray in half by dragging a slider",
+          "Prints flat with no supports \u2014 and anything the sliders miss, the AI agent edits on the same model",
+        ],
+        faqs: [
+          {
+            q: "The pocket is not shaped like my part. Can I change it?",
+            a: "That is the point, and it is eight points to drag. The outline is authored as literal coordinates, so you reshape it on the sketch canvas the way you would sketch on paper \u2014 add or move points for a notch, a step, a second tab \u2014 or hand the agent measurements (or a photo) and ask for a different silhouette outright. The tray, depth and fit stay on the sliders either way.",
+          },
+          {
+            q: "How much clearance should I leave?",
+            a: "0.25 mm per side for a snug locating fit, 0.5 mm so the tool drops in one-handed, 1.0 mm if the tray will be handled with gloves. The clearance is added around the outline by the model, so the eight points stay the object's own measurements \u2014 loosening the fit never redraws the shape.",
+          },
+          {
+            q: "Does it print without supports?",
+            a: "Yes. A pocket cut down from the top face leaves a flat floor and vertical walls \u2014 nothing overhangs. Print it flat on the bed in PLA or PETG at 0.2 mm layers, no supports and no brim. Keep the depth under about two thirds of the part's height, though, or your fingers cannot grip the part to lift it out.",
+          },
+        ],
+      },
+      zh: {
+        name: "工具托盘生成器",
+        title: "工具托盘生成器 \u2014 工具箱/抽屉异形内衬在线生成 | Forgent3D",
+        description:
+          "生成一个托盘，槽形就是你零件本身的轮廓，不是矩形。拖八个点改成你量到的尺寸，浏览器 3D 预览，免费导出 STL / STEP。",
+        h1: "工具托盘生成器：槽是工具的轮廓，不是一个矩形",
+        intro:
+          "大多数托盘定制器只能给你矩形和圆。这里的坑是物体自己的轮廓。下面那个坑是个凸字形——带凸台的零件，八个点，装着你拿卡尺量出来的四个数：身长、身宽、凸台宽、凸台高。在草图画布上拖一拖，它就是你那个零件。托盘尺寸按抽屉设，配合拧好，平放开打。",
+        whyPoints: [
+          "八个可拖的点，四个真实尺寸：量一下、拖一下就完事",
+          "量到的轮廓与配合间隙是两个数，放宽间隙永远不会把工具形状改掉",
+          "坑深自动封顶，底下永远留 1.5 mm——拖滑块不可能把托盘拖穿",
+          "平放打印免支撑；滑块覆盖不到的改动，交给 AI agent 在同一个模型上继续改",
+        ],
+        faqs: [
+          {
+            q: "这个槽不是我零件的形状，能换吗？",
+            a: "这正是重点，而且只有八个点要拖。轮廓是以具体坐标写在源码里的，你在草图画布上像在纸上画一样改它就行——加点、挪点，缺口、台阶、第二个凸台都能画出来；也可以把尺寸（或一张照片）交给 agent，让它直接换一个轮廓。托盘尺寸、槽深、配合两种做法下都还在滑块上。",
+          },
+          {
+            q: "间隙留多少合适？",
+            a: "单边 0.25 mm 是定位紧配，0.5 mm 可以单手一放就进去，戴手套操作就给 1.0 mm。间隙是模型沿轮廓自动外扩的，所以那八个点始终是零件自己的实测尺寸——放宽配合不会重画形状。",
+          },
+          {
+            q: "打印需要支撑吗？",
+            a: "不需要。从顶面往下挖的坑，底是平的、壁是竖直的，没有任何悬垂。PLA 或 PETG、0.2 mm 层高、平放打印即可，不用支撑也不用裙边。但坑深别超过零件自身高度的三分之二，否则手指捏不住，拿不出来。",
+          },
+        ],
+      },
+    },
+  },
 ];
 
 export function getGenerator(slug) {
@@ -573,7 +652,7 @@ export function generatorsSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、齿轮、垫片。调参数、3D 预览、导出 STL / STEP。",
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、齿轮、垫片、工具托盘。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP / 3MF；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
@@ -601,7 +680,7 @@ export function generatorsSharedCopy(locale) {
     catalogLabel: "Generators",
     catalogTitle: "3D Print Generators — Free Parametric Model Makers | Forgent3D",
     catalogDescription:
-      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, gears and washers. Tune parameters, preview in 3D, export STL / STEP.",
+      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, gears, washers and tool trays. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP / 3MF — and for anything beyond the sliders, the AI agent edits the same model.",
