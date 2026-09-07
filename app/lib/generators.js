@@ -3,15 +3,18 @@
 // (grounded in the de-facto standard customizers: gridfinity-rebuilt-openscad,
 // STLGears, ostat/vacuum-hose-adapter, 3dprintgenerator box), the JSON-LD, the
 // sitemap rows, and the spec handed to the CAD agents that author each model.
-// `shareSlug`: filled in once the model is published on app.forgent3d.com;
-// until then the CTA falls back to the workbench root (the create screen).
+// `modelDir`: the model.py source directory in the platform repo's generator-models/.
+// The CTA links to APP_BASE/g/<modelDir>, which the app resolves to that model's share
+// page (packages/cloud/lib/generator-models.ts holds the dir -> shareSlug map). Slugs are
+// publish artifacts, so they are maintained there, not copied here; an entry with no
+// modelDir falls back to the workbench root (the create screen).
 
 export const APP_BASE = "https://app.forgent3d.com";
 
 export const GENERATORS = [
   {
     slug: "gridfinity-bin-generator",
-    shareSlug: "vpKi8MpjP0",
+    modelDir: "gridfinity-bin",
     icon: "▦",
     keywords: [
       "gridfinity bin generator",
@@ -92,7 +95,7 @@ export const GENERATORS = [
   },
   {
     slug: "gridfinity-baseplate-generator",
-    shareSlug: "hJ8B0CnJnl",
+    modelDir: "gridfinity-baseplate",
     icon: "▤",
     keywords: [
       "gridfinity baseplate generator",
@@ -169,7 +172,7 @@ export const GENERATORS = [
   },
   {
     slug: "parametric-box-generator",
-    shareSlug: "qeAqTOXRG6",
+    modelDir: "parametric-box",
     icon: "▣",
     keywords: [
       "parametric box generator",
@@ -248,7 +251,7 @@ export const GENERATORS = [
   },
   {
     slug: "hose-adapter-generator",
-    shareSlug: "dMM29PhU66",
+    modelDir: "hose-adapter",
     icon: "◎",
     keywords: [
       "hose adapter generator",
@@ -329,7 +332,7 @@ export const GENERATORS = [
   },
   {
     slug: "funnel-generator",
-    shareSlug: "LxyR3nENRh",
+    modelDir: "funnel",
     icon: "▽",
     keywords: ["funnel generator", "custom funnel stl", "3d printed funnel maker"],
     params: [
@@ -403,7 +406,7 @@ export const GENERATORS = [
   },
   {
     slug: "spur-gear-generator",
-    shareSlug: "UAaAjPHvCD",
+    modelDir: "spur-gear",
     icon: "✱",
     keywords: [
       "spur gear generator",
@@ -481,7 +484,7 @@ export const GENERATORS = [
   },
   {
     slug: "washer-spacer-generator",
-    shareSlug: "Pitsf1uupN",
+    modelDir: "washer-spacer",
     icon: "◌",
     keywords: [
       "washer generator 3d print",
@@ -557,7 +560,7 @@ export const GENERATORS = [
   },
   {
     slug: "tool-tray-generator",
-    shareSlug: "JtaZW8df4Y",
+    modelDir: "pocket",
     icon: "▧",
     keywords: [
       "tool tray generator",
@@ -641,7 +644,7 @@ export function getGenerator(slug) {
 }
 
 export function generatorAppUrl(generator, locale) {
-  if (generator.shareSlug) return `${APP_BASE}/m/${generator.shareSlug}?lang=${locale}`;
+  if (generator.modelDir) return `${APP_BASE}/g/${generator.modelDir}?lang=${locale}`;
   return `${APP_BASE}?lang=${locale}`;
 }
 
