@@ -6,15 +6,15 @@ function getCopy(locale) {
     return {
       title: "代码生成三维模型软件：云端 Agent 与 Skills | Forgent3D",
       description:
-        "Forgent3D 在云端运行 AI 生成的 CAD 代码；装上 skill，Claude Code、Codex、Cursor 也能把模型作为可维护资产长期迭代。",
+        "Forgent3D 用 AI 写出可编辑的 CAD 代码；装上 skill，Claude Code、Codex、Cursor 也能建模，模型代码留在你的仓库里长期维护。",
       ogLocale: "zh_CN",
-      h1: "代码生成三维模型，让模型成为可验证的资产",
+      h1: "代码生成三维模型，模型能像代码一样管理",
       intro:
-        "当模型由代码生成，它就可以被 Git 管理、被审查、被复用，也可以被 AI agent 持续修改。Forgent3D 把 CAD 环境放在云端，省掉全部配置；装上 skill，你已经在用的 agent 也能走同一条链路。",
+        "当模型由代码生成，它就可以被 Git 管理、被审查、被复用，也可以被 AI agent 持续修改。Forgent3D 在网页里直接能用，不用配置；装上 skill，你已经在用的 agent 也能建模。",
       bullets: [
-        "云端 Agent 适合快速试用、演示和分享，把 prompt、代码、构建、预览连成一条流程",
+        "网页版适合快速试用、演示和分享，描述、建模、预览、修改都在一个页面里",
         "Skill 适合已经在 AI IDE 里工作的人：模型代码留在自己的仓库，构建仍跑在云端",
-        "agent 可以读取真实三维反馈，再修正尺寸、结构和生成逻辑",
+        "尺寸都是参数，改一个数整个模型跟着变",
         "适合机械零件、产品原型、装配结构和可运动模型的持续迭代",
       ],
     };
@@ -25,13 +25,13 @@ function getCopy(locale) {
     description:
       "Forgent3D runs AI-generated CAD code in the cloud. Install the skill and Claude Code, Codex, or Cursor can maintain model code as a long-lived asset.",
     ogLocale: "en_US",
-    h1: "Code-generated 3D models should be verifiable assets",
+    h1: "Code-generated 3D models you manage like code",
     intro:
-      "When models are generated as code, they can be versioned, reviewed, reused, and improved by agents. Forgent3D keeps the CAD environment in the cloud so there is nothing to set up, and the skill lets the agent you already use run the same loop.",
+      "When models are generated as code, they can be versioned, reviewed, reused, and improved by agents. Forgent3D works in the browser with nothing to set up, and the skill lets the agent you already use model too.",
     bullets: [
-      "Use the cloud agent for quick trials, demos, and sharing, with prompt, code, build, and preview in one flow",
+      "Use the browser for quick trials, demos, and sharing — describe, build, preview, and revise on one page",
       "Use the skill when you already work in an AI IDE: model code stays in your repo while builds run in the cloud",
-      "Let agents read real 3D feedback before they adjust dimensions, structure, and generation logic",
+      "Every dimension is a parameter — change one number and the whole model follows",
       "Works for mechanical parts, product prototypes, assemblies, and motion-ready model iteration",
     ],
   };
@@ -75,10 +75,7 @@ export default async function CodeToParametricCadPage({ params }) {
 
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
-      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
-        {locale === "zh" ? "← 返回首页" : "← Back home"}
-      </a>
-      <h1 className="mt-10 text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
+      <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
       <ul className="mt-8 space-y-3 text-foreground">
         {copy.bullets.map((item) => (

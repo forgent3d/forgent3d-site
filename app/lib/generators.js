@@ -74,7 +74,7 @@ export const GENERATORS = [
           "严格遵循 Gridfinity 规范：42 mm 栅距、7 mm 高度单元、可堆叠唇口",
           "分隔、磁铁孔（Ø6 × 2 mm）、取物斜坡都是一键开关",
           "导出干净的 STL / STEP / 3MF，免支撑直接打印",
-          "想加标签架或异形挖槽？交给 AI agent 继续 remix",
+          "想加标签架或异形挖槽？让 AI 在这个模型上接着改",
         ],
         faqs: [
           {
@@ -131,7 +131,7 @@ export const GENERATORS = [
           },
           {
             q: "How do I cover a whole drawer?",
-            a: "Measure the drawer, divide by 42 mm to get grid counts, and print multiple plates if the drawer exceeds your printer bed. For the remainder gap, remix the model and ask the agent for a custom-width filler strip.",
+            a: "Measure the drawer, divide by 42 mm to get grid counts, and print multiple plates if the drawer exceeds your printer bed. For the remainder gap, copy the model and ask the AI for a custom-width filler strip.",
           },
           {
             q: "Are the sockets compatible with all Gridfinity bins?",
@@ -160,7 +160,7 @@ export const GENERATORS = [
           },
           {
             q: "怎么铺满整个抽屉？",
-            a: "量好抽屉内尺寸，除以 42 mm 得到格数；超出打印机幅面就分几块打印。剩余的边缝可以 remix 模型，让 agent 生成非标准宽度的补条。",
+            a: "量好抽屉内尺寸，除以 42 mm 得到格数；超出打印机幅面就分几块打印。剩余的边缝可以复制这个模型，让 AI 生成非标准宽度的补条。",
           },
           {
             q: "和所有 Gridfinity 收纳盒兼容吗？",
@@ -675,7 +675,6 @@ export function generatorsSharedCopy(locale) {
       ],
       faqTitle: "常见问题",
       relatedTitle: "更多生成器",
-      backHome: "← 返回首页",
       breadcrumbHome: "首页",
     };
   }
@@ -704,7 +703,6 @@ export function generatorsSharedCopy(locale) {
     ],
     faqTitle: "FAQ",
     relatedTitle: "More generators",
-    backHome: "← Back home",
     breadcrumbHome: "Home",
   };
 }

@@ -8,28 +8,28 @@ function getCopy(locale) {
       description:
         "Forgent3D 不用安装 CAD 环境，就能在云端生成、运行、预览可编辑 3D CAD；装上 skill，Claude Code、Codex、Cursor 也能建模。",
       ogLocale: "zh_CN",
-      h1: "AI 生成三维模型，需要可运行 CAD 代码和真实预览",
+      h1: "AI 生成三维模型，生成的是能继续改的 CAD",
       intro:
-        "Forgent3D 不把 AI 3D 停在一次性图片或不可控 mesh。云端 Agent 让你直接生成和运行 CAD；装上 skill，你已经在用的 AI agent 也能走同一条链路。",
+        "Forgent3D 生成的不是一次性图片或改不动的网格，而是尺寸能改、能导出 STEP / STL 的 CAD 模型。网页里直接用；装上 skill，你已经在用的 AI agent 也能建模。",
       points: [
-        "免安装 CAD 环境，生成结果直接在云端运行",
+        "不用安装 CAD 软件，打开浏览器就能用",
         "装上 skill，Claude Code、Codex、Cursor 就能建模，模型代码留在你的仓库",
-        "生成结果是可重建、可修改、可检查的 CAD 代码，而不是一次性图片",
+        "生成的是可编辑的 CAD 模型，而不是一次性图片",
         "适合需要反复修改的机械零件、产品原型、装配和可运动模型工作流",
       ],
       faqTitle: "常见问题",
       faqs: [
         {
           q: "Forgent3D 是 AI 模型服务吗？",
-          a: "Forgent3D 是一个云端 CAD agent：它生成可运行的模型代码、构建真实几何并给你可编辑的 3D 结果。装上 skill 后，同一个 agent 也能从你本地的 AI IDE 里发起。",
+          a: "Forgent3D 是用对话做 CAD 的工具：你描述零件，它建出可编辑的 3D 模型。装上 skill 后，也能在你本地的 AI IDE 里用。",
         },
         {
           q: "模型数据会上传到云端吗？",
-          a: "CAD 生成和构建跑在云端，模型和预览保存在你的 Forgent3D 工作区，默认私有。用 skill 时，模型代码由本地 agent 写在你自己的仓库里，构建仍在云端完成。",
+          a: "模型在云端构建，保存在你的 Forgent3D 工作区，默认私有。用 skill 时，模型代码写在你自己的仓库里。",
         },
         {
-          q: "AI 生成三维模型为什么需要验证？",
-          a: "因为生成结果需要确认是否能构建、尺寸是否合理、视图是否符合预期。Forgent3D 把这些反馈变成 agent 可读取的信息，减少凭感觉修改。",
+          q: "生成的模型能直接用吗？",
+          a: "能导出 STEP / STL 直接打印或进其他 CAD。第一版不满意的地方，接着说要怎么改，或者直接调尺寸。",
         },
       ],
     };
@@ -40,28 +40,28 @@ function getCopy(locale) {
     description:
       "Forgent3D generates, runs, and previews editable 3D CAD in the cloud without CAD setup. Install the skill and Claude Code, Codex, or Cursor can model too.",
     ogLocale: "en_US",
-    h1: "AI 3D model generation needs runnable CAD code and real preview",
+    h1: "AI 3D model generation that gives you editable CAD",
     intro:
-      "Forgent3D does not stop at disposable images or uncontrolled meshes. The cloud agent generates and runs real CAD, and the skill lets the AI agent you already use run the same loop.",
+      "Forgent3D doesn't give you a disposable image or a mesh you can't edit. It builds a CAD model whose dimensions you can change and export as STEP / STL. Use it in the browser, or install the skill so the AI agent you already use can model too.",
     points: [
-      "Run generated CAD in the cloud without installing a CAD environment",
+      "No CAD software to install — open a browser and start",
       "Install the skill so Claude Code, Codex, or Cursor can model, with code staying in your repo",
-      "Generate rebuildable, editable, inspectable CAD code instead of one-shot images",
+      "Get an editable CAD model instead of a one-shot image",
       "Works for iterative mechanical parts, product prototypes, assemblies, and motion-ready model workflows",
     ],
     faqTitle: "FAQ",
     faqs: [
       {
         q: "Is Forgent3D an AI model service?",
-        a: "Forgent3D is a cloud CAD agent: it writes runnable model code, builds real geometry, and gives you an editable 3D result. With the skill installed, the same agent can be driven from your local AI IDE.",
+        a: "Forgent3D is CAD by conversation: describe a part and it builds an editable 3D model. With the skill installed, you can use it from your local AI IDE too.",
       },
       {
         q: "Does model data upload to the cloud?",
-        a: "Generation and builds run in the cloud, and models and previews live in your Forgent3D workspace, private by default. With the skill, your local agent writes model code into your own repository while builds still run in the cloud.",
+        a: "Models are built in the cloud and stored in your Forgent3D workspace, private by default. With the skill, model code is written into your own repository.",
       },
       {
-        q: "Why does AI 3D generation need verification?",
-        a: "Generated models still need to build correctly, match expected dimensions, and look right from useful views. Forgent3D turns that feedback into information agents can read before they iterate.",
+        q: "Can I use the generated model directly?",
+        a: "Export STEP / STL to print it or take it into other CAD. If the first version isn't right, say what to change or adjust the dimensions yourself.",
       },
     ],
   };
@@ -133,10 +133,7 @@ export default async function Ai3DModelGenerationPage({ params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
-      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
-        {locale === "zh" ? "← 返回首页" : "← Back home"}
-      </a>
-      <h1 className="mt-10 text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
+      <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
       <ul className="mt-8 space-y-3 text-foreground">
         {copy.points.map((item) => (

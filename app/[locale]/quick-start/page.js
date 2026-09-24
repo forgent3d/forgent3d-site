@@ -4,41 +4,41 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Quick Start：登录即用，或装进你自己的 agent | Forgent3D",
+      title: "快速开始：登录即用，或装进你自己的 agent | Forgent3D",
       description:
         "登录 Forgent3D Agent，在云端生成并预览 CAD；或者装上 skill，让 Claude Code、Codex、Cursor 直接建模。",
       ogLocale: "zh_CN",
-      kicker: "Quick Start",
+      kicker: "快速开始",
       h1: "登录就能开始，也可以从你自己的 agent 开始",
       intro:
-        "Forgent3D Agent 是最快入口：不用安装 CAD 环境，直接在云端生成、运行和预览模型。已经在用 AI IDE 的话，装上 Forgent3D skill，同一个 CAD agent 就在你的终端里。",
+        "登录就能在网页里建模，不用装任何东西。已经在用 AI IDE 的话，装上 Forgent3D skill，在编辑器里也能建模。",
       tryLink: "立即开始",
       skillsLink: "安装 Skill",
       steps: [
         {
           label: "01",
-          title: "登录云端 Agent",
-          text: "登录后进入 Forgent3D Agent，开始托管的 CAD 生成流程。",
+          title: "登录",
+          text: "用邮箱、Google 或 GitHub 登录，进入工作台。",
         },
         {
           label: "02",
-          title: "让 agent 生成 CAD",
-          text: "描述零件、产品想法或机构，agent 会生成可编辑 CAD 代码，并在准备好的云端环境中运行。",
+          title: "描述你要的零件",
+          text: "描述零件、产品想法或机构，AI 建出可编辑的 3D 模型，哪里不对接着说。",
         },
         {
           label: "03",
           title: "想在自己的 agent 里做，就装 skill",
-          text: "一条 npx skills add forgent3d/forgent3d-skills，Claude Code、Codex、Cursor 就能建模，结果照样落到同一个工作区。",
+          text: "一条 npx skills add forgent3d/forgent3d-skills，Claude Code、Codex、Cursor 就能建模，模型出现在同一个工作区。",
         },
       ],
-      promptTitle: "可以直接给 Agent 的提示",
+      promptTitle: "可以直接试的一句话",
       prompt:
-        "Create a simple mechanical bracket model. Generate editable CAD code, run it, preview the model, and revise it until the geometry matches the request.",
+        "一块 L 型支架：两边各 80 mm，宽 60 mm，厚 5 mm，每边两个 M6 孔，内角 5 mm 圆角。",
       checklistTitle: "从网页开始，还是从 skill 开始",
       checklist: [
-        "想最快看到结果、做演示或分享，直接用网页里的 Agent。",
+        "想最快看到结果、做演示或分享，直接用网页。",
         "已经在 Claude Code、Codex、Cursor 里写代码，装 skill，让模型代码留在你的仓库。",
-        "两条路径跑的是同一个 agent 和同一套 CAD 引擎，模型都落在同一个工作区，可以随时换。",
+        "两种方式做出来的模型都在同一个工作区，可以随时换。",
         "先从简单零件开始，再尝试装配或可运动模型。",
       ],
       localDataLink: "了解云端与本地数据",
@@ -53,34 +53,34 @@ function getCopy(locale) {
     kicker: "Quick Start",
     h1: "Sign in and start, or start from the agent you already use",
     intro:
-      "Forgent3D Agent is the fastest front door: no CAD environment setup, just generate, run, and preview models in the cloud. Already working in an AI IDE? Install the Forgent3D skill and the same CAD agent runs in your terminal.",
+      "Sign in and model in the browser, with nothing to install. Already working in an AI IDE? Install the Forgent3D skill and model from your editor too.",
     tryLink: "Get started",
     skillsLink: "Install the skill",
     steps: [
       {
         label: "01",
-        title: "Sign in to the cloud Agent",
-        text: "Sign in to Forgent3D Agent, then start the hosted CAD generation loop.",
+        title: "Sign in",
+        text: "Sign in with email, Google, or GitHub to open the workbench.",
       },
       {
         label: "02",
-        title: "Let the agent generate CAD",
-        text: "Describe a part, product idea, or mechanism. The agent writes editable CAD code and runs it in a prepared cloud environment.",
+        title: "Describe the part",
+        text: "Describe a part, product idea, or mechanism. The AI builds an editable 3D model; say what's off and keep going.",
       },
       {
         label: "03",
         title: "Prefer your own agent? Install the skill",
-        text: "One npx skills add forgent3d/forgent3d-skills and Claude Code, Codex, or Cursor can model too — results land in the same workspace.",
+        text: "One npx skills add forgent3d/forgent3d-skills and Claude Code, Codex, or Cursor can model too — models show up in the same workspace.",
       },
     ],
-    promptTitle: "Prompt you can give the Agent",
+    promptTitle: "A prompt to try",
     prompt:
-      "Create a simple mechanical bracket model. Generate editable CAD code, run it, preview the model, and revise it until the geometry matches the request.",
+      "An L bracket: two 80 mm legs, 60 mm wide, 5 mm thick, two M6 holes per leg, 5 mm inside fillet.",
     checklistTitle: "Start in the browser, or start from the skill",
     checklist: [
-      "Use the browser Agent for the fastest result, demos, and sharing.",
+      "Use the browser for the fastest result, demos, and sharing.",
       "Install the skill if you already write code in Claude Code, Codex, or Cursor and want model code to live in your repo.",
-      "Both paths run the same agent and the same CAD engine, and models land in the same workspace — you can switch any time.",
+      "Either way, models end up in the same workspace — you can switch any time.",
       "Start with a simple part before trying assemblies or motion-ready models.",
     ],
     localDataLink: "Read about cloud and local data",
@@ -126,14 +126,11 @@ export default async function QuickStartPage({ params }) {
 
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
-      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
-        {locale === "zh" ? "← 返回首页" : "← Back home"}
-      </a>
-      <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
       <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
       <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a className="js-try-link inline-flex rounded-md bg-brand px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-brand/90" href={`https://app.forgent3d.com?lang=${locale}`}>
+        <a className="js-try-link inline-flex rounded-md bg-brand px-5 py-3 text-sm font-medium text-white! transition-colors hover:bg-brand/90" href={`https://app.forgent3d.com?lang=${locale}`}>
           {copy.tryLink}
         </a>
         <a className="js-skills-cta inline-flex rounded-md border border-border/80 px-5 py-3 text-sm font-semibold text-foreground hover:border-brand/50" href={`/${locale}/skills`}>

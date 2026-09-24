@@ -70,165 +70,181 @@ function applyLinks(selector, value, fallback, options = {}) {
   });
 }
 
-applyLinks(".js-download-link", linkConfig.download, "#download");
-applyLinks(".js-github-link", linkConfig.github, "#download");
-applyLinks(".js-x-link", linkConfig.x, "#download");
-applyLinks(".js-workbench-link", linkConfig.workbench, "https://app.forgent3d.com", { includeLocale: true });
-applyLinks(".js-try-link", linkConfig.try, "https://app.forgent3d.com", { includeLocale: true });
-applyLinks(".js-skills-repo-link", linkConfig.skillsRepo, "https://github.com/forgent3d/forgent3d-skills");
-
-// Install-command copy buttons (homepage skills section and /skills).
-document.querySelectorAll(".js-copy-command").forEach((node) => {
-  node.addEventListener("click", async () => {
-    const value = node.getAttribute("data-copy-value") || "";
-    const copiedLabel = node.getAttribute("data-copied-label");
-    const idleLabel = node.getAttribute("data-copy-label") || node.textContent.trim();
-    if (!value) return;
-
-    try {
-      await navigator.clipboard.writeText(value);
-    } catch {
-      // Clipboard blocked (insecure context / denied) — the command stays selectable on screen.
-      return;
-    }
-
-    trackEvent("copy_skills_command", { command: value });
-    if (!copiedLabel) return;
-    node.textContent = copiedLabel;
-    window.setTimeout(() => {
-      node.textContent = idleLabel;
-    }, 1600);
-  });
-});
-
-window.addEventListener("posthog:ready", flushPendingPostHogEvents);
-
-if (isHomepage()) {
-  trackEvent("homepage_viewed", { referrer: document.referrer || undefined });
+/** Bind a node once: client-side navigation re-runs initPage over a fresh DOM, and a node kept across
+ *  navigations must not pick up a second listener. */
+function bindOnce(node, key) {
+  const flag = `forgent${key}`;
+  if (node.dataset[flag]) return false;
+  node.dataset[flag] = "1";
+  return true;
 }
 
-[
-  [".js-try-link", "try_clicked"],
-  [".js-pricing-link", "click_pricing"],
-  [".js-skills-cta", "click_skills"],
-  [".js-skills-repo-link", "click_skills_repo"],
-  [".js-download-link", "click_download_desktop"],
-  [".js-github-link", "click_github"],
-].forEach(([selector, eventName]) => {
-  document.querySelectorAll(selector).forEach((node) => {
-    node.addEventListener("click", () => {
-      trackEvent(eventName, {
-        href: node.getAttribute("href") || undefined,
-        label: node.textContent.trim() || node.getAttribute("aria-label") || undefined,
-      }, { transport: "sendBeacon" });
-    });
-  });
-});
-
-const langToggle = document.querySelector(".js-lang-toggle");
-if (langToggle) {
-  const isZh = window.location.pathname.startsWith("/zh");
-  document.documentElement.lang = isZh ? "zh-CN" : "en";
-  langToggle.textContent = isZh ? "EN" : "中";
-  langToggle.setAttribute("aria-label", isZh ? "Switch to English" : "切换到中文");
-  langToggle.addEventListener("click", () => {
-    window.location.pathname = isZh ? "/en" : "/zh";
-  });
-}
-
-const swapNodes = document.querySelectorAll(".js-swap");
-swapNodes.forEach((node) => {
-  const values = (node.dataset.values || "").split(",").filter(Boolean);
-  if (values.length < 2) {
-    return;
-  }
-
-  let index = 0;
-  window.setInterval(() => {
-    index = (index + 1) % values.length;
-    node.textContent = values[index];
-  }, 1800);
-});
-
-const revealNodes = document.querySelectorAll(".reveal");
-const observer = new IntersectionObserver(
+const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("is-visible");
-        observer.unobserve(entry.target);
+        revealObserver.unobserve(entry.target);
       }
     });
   },
   { threshold: 0.16 }
 );
 
-revealNodes.forEach((node) => observer.observe(node));
-
-const heroPreviewTriggers = document.querySelectorAll(".js-hero-preview-trigger");
-const heroPreviewLightbox = document.querySelector(".js-hero-preview-lightbox");
-const heroPreviewSource = document.querySelector(".js-hero-preview-source");
-const heroPreviewImage = document.querySelector(".js-hero-preview-image");
-const heroPreviewCloseNodes = document.querySelectorAll(".js-hero-preview-close");
-
 let heroPreviewReturnFocus = null;
 
-if (heroPreviewTriggers.length && heroPreviewLightbox && heroPreviewImage) {
-  function openHeroPreview(trigger) {
-    const webp = trigger.dataset.previewSrc || "";
-    const fallback = trigger.dataset.previewFallback || "";
-    const alt = trigger.dataset.previewAlt || "Preview image";
-    if (heroPreviewSource) {
-      if (webp) {
-        heroPreviewSource.setAttribute("srcset", webp);
-      } else {
-        heroPreviewSource.removeAttribute("srcset");
+function closeHeroPreview() {
+  const lightbox = document.querySelector(".js-hero-preview-lightbox");
+  if (!lightbox) return;
+  lightbox.classList.remove("is-open");
+  lightbox.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("hero-preview-open");
+  if (heroPreviewReturnFocus) {
+    heroPreviewReturnFocus.focus();
+    heroPreviewReturnFocus = null;
+  }
+}
+
+function openHeroPreview(trigger) {
+  const lightbox = document.querySelector(".js-hero-preview-lightbox");
+  const source = document.querySelector(".js-hero-preview-source");
+  const image = document.querySelector(".js-hero-preview-image");
+  if (!lightbox || !image) return;
+  const webp = trigger.dataset.previewSrc || "";
+  const fallback = trigger.dataset.previewFallback || "";
+  const alt = trigger.dataset.previewAlt || "Preview image";
+  if (source) {
+    if (webp) {
+      source.setAttribute("srcset", webp);
+    } else {
+      source.removeAttribute("srcset");
+    }
+  }
+  image.setAttribute("src", fallback || webp || image.getAttribute("src") || "");
+  image.setAttribute("alt", alt);
+  lightbox.classList.add("is-open");
+  lightbox.setAttribute("aria-hidden", "false");
+  document.body.classList.add("hero-preview-open");
+}
+
+// 顶栏贴顶透明,滚起来才铺半透明底 + 磨砂 —— 和产品 AppHeader 同一套行为(components/app-header.tsx)。
+// 透明是为了让页面顶部那片品牌辉光从窗口顶连贯下来;真铺一层实底,顶上就会裁出一条色带。
+function syncHeaderScrolled() {
+  document.querySelector(".site-header")?.classList.toggle("is-scrolled", window.scrollY > 8);
+}
+
+window.addEventListener("posthog:ready", flushPendingPostHogEvents);
+window.addEventListener("scroll", syncHeaderScrolled, { passive: true });
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && document.querySelector(".js-hero-preview-lightbox.is-open")) {
+    closeHeroPreview();
+  }
+});
+
+/** Everything that touches the page's own DOM. Runs on the first load and again after every
+ *  client-side navigation (components/page-enhancer.js) — a page the router swapped in has never been
+ *  seen by this script, and its `.reveal` sections stay invisible until something observes them. */
+function initPage() {
+  applyLinks(".js-download-link", linkConfig.download, "#download");
+  applyLinks(".js-github-link", linkConfig.github, "#download");
+  applyLinks(".js-x-link", linkConfig.x, "#download");
+  applyLinks(".js-workbench-link", linkConfig.workbench, "https://app.forgent3d.com", { includeLocale: true });
+  applyLinks(".js-try-link", linkConfig.try, "https://app.forgent3d.com", { includeLocale: true });
+  applyLinks(".js-skills-repo-link", linkConfig.skillsRepo, "https://github.com/forgent3d/forgent3d-skills");
+
+  // Install-command copy buttons (homepage skills section and /skills).
+  document.querySelectorAll(".js-copy-command").forEach((node) => {
+    if (!bindOnce(node, "Copy")) return;
+    node.addEventListener("click", async () => {
+      const value = node.getAttribute("data-copy-value") || "";
+      const copiedLabel = node.getAttribute("data-copied-label");
+      const idleLabel = node.getAttribute("data-copy-label") || node.textContent.trim();
+      if (!value) return;
+
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch {
+        // Clipboard blocked (insecure context / denied) — the command stays selectable on screen.
+        return;
       }
-    }
-    heroPreviewImage.setAttribute("src", fallback || webp || heroPreviewImage.getAttribute("src") || "");
-    heroPreviewImage.setAttribute("alt", alt);
-    heroPreviewLightbox.classList.add("is-open");
-    heroPreviewLightbox.setAttribute("aria-hidden", "false");
-    document.body.classList.add("hero-preview-open");
+
+      trackEvent("copy_skills_command", { command: value });
+      if (!copiedLabel) return;
+      node.textContent = copiedLabel;
+      window.setTimeout(() => {
+        node.textContent = idleLabel;
+      }, 1600);
+    });
+  });
+
+  if (isHomepage()) {
+    trackEvent("homepage_viewed", { referrer: document.referrer || undefined });
   }
 
-  function closeHeroPreview() {
-    heroPreviewLightbox.classList.remove("is-open");
-    heroPreviewLightbox.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("hero-preview-open");
-    if (heroPreviewReturnFocus) {
-      heroPreviewReturnFocus.focus();
-      heroPreviewReturnFocus = null;
-    }
-  }
+  [
+    [".js-try-link", "try_clicked"],
+    [".js-pricing-link", "click_pricing"],
+    [".js-skills-cta", "click_skills"],
+    [".js-skills-repo-link", "click_skills_repo"],
+    [".js-download-link", "click_download_desktop"],
+    [".js-github-link", "click_github"],
+    [".js-explore-link", "click_explore"],
+  ].forEach(([selector, eventName]) => {
+    document.querySelectorAll(selector).forEach((node) => {
+      if (!bindOnce(node, `Track${eventName}`)) return;
+      node.addEventListener("click", () => {
+        trackEvent(eventName, {
+          href: node.getAttribute("href") || undefined,
+          label: node.textContent.trim() || node.getAttribute("aria-label") || undefined,
+        }, { transport: "sendBeacon" });
+      });
+    });
+  });
 
-  heroPreviewTriggers.forEach((trigger) => {
+  const isZh = window.location.pathname.startsWith("/zh");
+  document.documentElement.lang = isZh ? "zh-CN" : "en";
+  document.querySelectorAll(".js-lang-toggle").forEach((langToggle) => {
+    langToggle.textContent = isZh ? "EN" : "中";
+    langToggle.setAttribute("aria-label", isZh ? "Switch to English" : "切换到中文");
+    if (!bindOnce(langToggle, "Lang")) return;
+    langToggle.addEventListener("click", () => {
+      // Same page in the other language: /zh/pricing ↔ /en/pricing.
+      const path = window.location.pathname;
+      const target = path.startsWith("/zh") ? "en" : "zh";
+      window.location.pathname = /^\/(en|zh)(\/|$)/.test(path) ? path.replace(/^\/(en|zh)/, `/${target}`) : `/${target}`;
+    });
+  });
+
+  document.querySelectorAll(".js-swap").forEach((node) => {
+    const values = (node.dataset.values || "").split(",").filter(Boolean);
+    if (values.length < 2 || !bindOnce(node, "Swap")) return;
+
+    let index = 0;
+    const timer = window.setInterval(() => {
+      if (!node.isConnected) {
+        window.clearInterval(timer);
+        return;
+      }
+      index = (index + 1) % values.length;
+      node.textContent = values[index];
+    }, 1800);
+  });
+
+  document.querySelectorAll(".reveal:not(.is-visible)").forEach((node) => revealObserver.observe(node));
+
+  document.querySelectorAll(".js-hero-preview-trigger").forEach((trigger) => {
+    if (!bindOnce(trigger, "Preview")) return;
     trigger.addEventListener("click", () => {
       heroPreviewReturnFocus = trigger;
       openHeroPreview(trigger);
     });
   });
-
-  heroPreviewCloseNodes.forEach((node) => {
-    node.addEventListener("click", closeHeroPreview);
+  document.querySelectorAll(".js-hero-preview-close").forEach((node) => {
+    if (bindOnce(node, "PreviewClose")) node.addEventListener("click", closeHeroPreview);
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && heroPreviewLightbox.classList.contains("is-open")) {
-      closeHeroPreview();
-    }
-  });
+  syncHeaderScrolled();
 }
 
-// 顶栏贴顶透明,滚起来才铺半透明底 + 磨砂 —— 和产品 AppHeader 同一套行为(components/app-header.tsx)。
-// 透明是为了让页面顶部那片品牌辉光从窗口顶连贯下来;真铺一层实底,顶上就会裁出一条色带。
-{
-  const siteHeader = document.querySelector(".site-header");
-  if (siteHeader) {
-    const syncHeaderScrolled = () => {
-      siteHeader.classList.toggle("is-scrolled", window.scrollY > 8);
-    };
-    syncHeaderScrolled();
-    window.addEventListener("scroll", syncHeaderScrolled, { passive: true });
-  }
-}
+window.forgentInitPage = initPage;
+initPage();

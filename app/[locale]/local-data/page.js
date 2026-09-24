@@ -4,20 +4,20 @@ import { isSupportedLocale } from "../../lib/landing-page";
 function getCopy(locale) {
   if (locale === "zh") {
     return {
-      title: "Cloud & Local Data：Forgent3D 云端与 skill 如何处理数据",
+      title: "云端与本地数据：Forgent3D 云端与 skill 如何处理数据",
       description:
         "了解 Forgent3D 云端 Agent 与本地 skill 的数据边界：模型代码放在哪里、构建在哪里跑、结果存在哪里。",
       ogLocale: "zh_CN",
-      kicker: "Cloud & Local Data",
+      kicker: "云端与本地数据",
       h1: "云端负责构建，代码可以留在你自己的仓库",
       intro:
-        "Forgent3D 有两个入口：在网页里直接用云端 Agent，或者装上 skill 让本地 agent 发起。两者跑的是同一套 CAD 引擎，区别只在于模型代码从哪里来、留在哪里。",
+        "Forgent3D 有两个入口：在网页里直接用，或者装上 skill 让本地 agent 来建模。区别只在于模型代码写在哪里、留在哪里。",
       sections: [
         {
           title: "云端 Agent 如何处理数据",
           items: [
-            "prompt、生成的模型代码、构建产物和 3D 预览都保存在你的 Forgent3D 工作区里。",
-            "CAD 内核和构建环境已经准备好，你不用在本地装任何依赖。",
+            "你的对话、模型代码和 3D 预览都保存在你的 Forgent3D 工作区里。",
+            "你不用在本地装任何东西。",
             "模型默认私有，只有你显式分享或设为公开时才会出现在模型库里。",
           ],
         },
@@ -25,7 +25,7 @@ function getCopy(locale) {
           title: "本地 skill 如何处理数据",
           items: [
             "模型代码由你本地的 agent 写在你自己的仓库里，可以 Git 管理、审查和长期维护。",
-            "构建和几何测量仍然发生在云端，构建结果和 3D 链接落回同一个工作区。",
+            "模型在云端构建，结果出现在同一个工作区。",
             "适合已经在 Claude Code、Codex、Cursor 里工作、希望模型代码和其他源码放在一起的人。",
           ],
         },
@@ -38,7 +38,7 @@ function getCopy(locale) {
           ],
         },
       ],
-      ctaTitle: "先跑一遍完整链路",
+      ctaTitle: "先做一个试试",
       ctaText: "登录后在云端生成第一个模型；想让本地 agent 也会建模，再装上 skill。",
       ctaLink: "查看快速开始",
     };
@@ -52,13 +52,13 @@ function getCopy(locale) {
     kicker: "Cloud & Local Data",
     h1: "Builds run in the cloud; model code can live in your own repo",
     intro:
-      "Forgent3D has two entry points: prompt the cloud agent in the browser, or let your local agent drive it through the skill. Both run the same CAD engine — the difference is where the model code comes from and where it stays.",
+      "Forgent3D has two entry points: use it in the browser, or install the skill and let your local agent model. The difference is where the model code is written and where it stays.",
     sections: [
       {
         title: "How the cloud agent handles data",
         items: [
-          "Prompts, generated model code, build output, and 3D previews live in your Forgent3D workspace.",
-          "The CAD kernel and build environment are already running, so nothing is installed on your machine.",
+          "Your conversations, model code, and 3D previews live in your Forgent3D workspace.",
+          "Nothing is installed on your machine.",
           "Models are private by default and only appear in the public library when you explicitly share or publish them.",
         ],
       },
@@ -66,7 +66,7 @@ function getCopy(locale) {
         title: "How the local skill handles data",
         items: [
           "Your local agent writes the model code inside your own repository, where it can be versioned, reviewed, and maintained.",
-          "Builds and geometry measurement still run in the cloud, and the built result plus its 3D link land in the same workspace.",
+          "Models are built in the cloud, and the result shows up in the same workspace.",
           "It fits people already working in Claude Code, Codex, or Cursor who want model code to sit next to the rest of their source.",
         ],
       },
@@ -79,7 +79,7 @@ function getCopy(locale) {
         ],
       },
     ],
-    ctaTitle: "Run the loop once, end to end",
+    ctaTitle: "Make one to try it",
     ctaText: "Sign in and generate your first model in the cloud, then install the skill if you want your local agent to model too.",
     ctaLink: "Open Quick Start",
   };
@@ -124,10 +124,7 @@ export default async function LocalDataPage({ params }) {
 
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
-      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
-        {locale === "zh" ? "← 返回首页" : "← Back home"}
-      </a>
-      <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
       <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
       <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
       <div className="mt-12 grid gap-5">

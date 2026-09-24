@@ -52,13 +52,7 @@ export default async function GeneratorsIndexPage({ params }) {
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }} />
-      <Link
-        className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50"
-        href={`/${locale}`}
-      >
-        {t.backHome}
-      </Link>
-      <h1 className="mt-10 text-3xl font-semibold tracking-tight md:text-4xl">{t.catalogH1}</h1>
+      <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{t.catalogH1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{t.catalogIntro}</p>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">

@@ -33,6 +33,7 @@ const COPY = {
     brandSubline: "Cloud CAD agent + skills",
     navLoop: "Workflow",
     navFeatures: "Why Cloud",
+    navExplore: "Examples",
     navSkills: "Skills",
     navGenerators: "Generators",
     navCompare: "Two ways in",
@@ -40,7 +41,7 @@ const COPY = {
     navContact: "Contact",
     navWorkbench: "Open Workbench",
     navWorkbenchShort: "Workbench",
-    heroKicker: "CLOUD CAD SANDBOX · HOSTED AI AGENT",
+    heroKicker: "CHAT TO MODEL · REAL CAD GEOMETRY",
     heroTitle: "AI CAD agent in the cloud",
     heroSubtitle:
       "Describe a part and Forgent3D writes real, editable CAD code, builds it, and hands you a 3D model — nothing to install.",
@@ -54,58 +55,51 @@ const COPY = {
     loopEyebrow: "Workflow",
     loopTitle: "Prompt, run, preview, iterate",
     loopSubtitle:
-      "The cloud runs the whole loop: less setup, faster feedback, and code you can keep editing at the end of it.",
+      "Every round leaves you a model you can keep editing.",
     loopDescribeLabel: "Prompt",
     loopDescribe: "Describe a part, product idea, or mechanism directly in the browser.",
     loopGenerateLabel: "Generate",
     loopGenerate: "The AI writes parametric model code instead of producing a one-shot mesh.",
-    loopPreviewLabel: "Sandbox",
-    loopPreview: "Forgent3D runs the CAD code in a prepared cloud environment.",
+    loopPreviewLabel: "Build",
+    loopPreview: "The geometry is built in the cloud; nothing to install locally.",
     loopVerifyLabel: "Preview",
-    loopVerify: "Inspect the 3D result, then send errors, geometry, and feedback back for another pass.",
+    loopVerify: "Look at the result in 3D, say what's off, and keep going.",
     featuresEyebrow: "Why Cloud?",
-    featuresTitle: "The CAD environment is already running",
+    featuresTitle: "Open a browser and start modelling",
     featuresSubtitle:
-      "Kernels, build tooling, and the whole generate-and-check loop are hosted, so the only thing you bring is the design intent.",
+      "No environment to set up first — just say what you want to make.",
     featuresModelsTitle: "No CAD Setup",
-    featuresModels: "Run Python CAD generation without installing kernels, build tooling, or local project scaffolding first.",
-    featuresAgentsTitle: "Full Loop Built In",
-    featuresAgents: "Prompt, code generation, execution, preview, and revision are packaged into one guided flow.",
+    featuresModels: "No CAD software, Python kernel, or dependencies to install.",
+    featuresAgentsTitle: "From Description to Export",
+    featuresAgents: "Describe, build, preview, revise, and export STEP / STL, all on one page.",
     featuresLocalTitle: "Reaches Your AI IDE",
-    featuresLocal: "Install the skill and Claude Code, Codex, or Cursor models the same way, with results landing in your cloud workspace.",
-    skillsEyebrow: "Skills",
-    skillsTitle: "Give your own agent a CAD tool",
-    skillsSubtitle:
-      "One command teaches the assistant you already code with to model, check its own geometry, and hand back a 3D link.",
-    skillsCommandLabel: "Install",
-    skillsCopy: "Copy",
-    skillsCopied: "Copied",
-    skillsAgentsLabel: "Verified on",
-    skillsCta: "Skills setup guide",
+    featuresLocal: "Install the skill and Claude Code, Codex, or Cursor can model too, with models showing up in the same workspace.",
     compareEyebrow: "Two Ways In",
     compareTitle: "Prompt in the browser, or straight from your editor",
     compareSubtitle:
-      "Same CAD engine, same workspace, same result. Pick the door that matches how you already work.",
+      "Same workspace, same result. Pick whichever door suits you.",
     compareWebTitle: "Forgent3D Cloud",
     compareWebBadge: "Hosted workbench",
     compareInputLabel: "You type",
+    compareCopy: "Copy",
+    compareCopied: "Copied",
     compareWebPrompt:
       "Motor flange cover plate, 200 × 148 mm — raised centre boss with a through bore and a bolt circle around it, four mounting lugs, one braced with a rib.",
     compareWebItems: [
-      "CAD dependencies ready to run — open a tab and start",
+      "Open a tab and start — nothing to install",
       "Generate, build, and revise without leaving the tab",
       "Edit parameters, sketches, and assemblies directly in the 3D view",
     ],
     compareSkillTitle: "Forgent3D Skill",
     compareSkillBadge: "Runs in your AI IDE",
+    compareSkillCta: "Setup guide",
     compareSkillItems: [
       "No CAD kernel or extra dependencies to install",
       "Works with Claude Code, Codex, Cursor, Cline, Copilot, and Windsurf",
-      "Model code stays in your repo; the built result lands in your workspace",
+      "Model code stays in your repo; the model shows up in your workspace",
     ],
-    compareShared: "Both paths keep the important promise: editable CAD code and real 3D geometry, not disposable images.",
+    compareShared: "Either way you get an editable CAD model, not a disposable image.",
     footerTagline: "AI CAD in the cloud, and a skill that brings it to the editor you already use",
-    footerDesktopNote: "Open-source desktop app",
     guidesAi3D: "AI 3D Model Generation",
     guidesCodeCad: "Code to 3D Models",
     guidesLocalData: "Cloud & Local Data",
@@ -113,7 +107,6 @@ const COPY = {
     guidesSkills: "Skills Setup",
     navGallery: "Gallery",
     guidesGallery: "Model Gallery",
-    heroPartName: "Motor flange cover plate — generated from a single prompt",
     heroPartAlt: "Motor flange cover plate modelled by Forgent3D — bolt circle, central bore, and mounting lugs",
     imagePreviewOpenAria: "Open larger preview",
     imagePreviewDialogAria: "Image preview",
@@ -126,6 +119,7 @@ const COPY = {
     brandSubline: "云端 CAD Agent + Skills",
     navLoop: "工作流",
     navFeatures: "云端价值",
+    navExplore: "示例",
     navSkills: "Skills",
     navGenerators: "生成器",
     navCompare: "两种用法",
@@ -133,7 +127,7 @@ const COPY = {
     navContact: "联系我们",
     navWorkbench: "进入工作台",
     navWorkbenchShort: "工作台",
-    heroKicker: "云端 CAD 沙盒 · 内置 AI Agent",
+    heroKicker: "对话建模 · 真实 CAD 几何",
     heroTitle: "云端的 AI CAD Agent",
     heroSubtitle:
       "描述一个零件，Forgent3D 就写出真正可编辑的 CAD 代码、构建出几何，给你一个 3D 模型——不用装任何东西。",
@@ -146,55 +140,49 @@ const COPY = {
     chipMotion: "可编辑 CAD 代码",
     loopEyebrow: "工作流",
     loopTitle: "输入需求，运行，预览，继续迭代",
-    loopSubtitle: "整条链路都跑在云端：少配置、更快反馈，最后拿到的仍是能继续编辑的代码。",
+    loopSubtitle: "每一轮拿到的都是能继续改的模型。",
     loopDescribeLabel: "输入",
     loopDescribe: "在浏览器里描述零件、产品想法或机构。",
     loopGenerateLabel: "生成",
     loopGenerate: "AI 写出参数化的模型代码，而不是一次性 mesh。",
-    loopPreviewLabel: "Sandbox",
-    loopPreview: "Forgent3D 在准备好的云端环境中运行 CAD 代码和构建流程。",
+    loopPreviewLabel: "构建",
+    loopPreview: "几何在云端构建出来，本地不用装任何东西。",
     loopVerifyLabel: "预览",
-    loopVerify: "查看真实 3D 结果，把错误、几何和反馈丢回去，继续改下一轮。",
+    loopVerify: "在 3D 里看结果，哪里不对直接说，接着改。",
     featuresEyebrow: "为什么是云端？",
-    featuresTitle: "CAD 环境已经跑起来了",
-    featuresSubtitle: "内核、构建工具和整条生成-校验闭环都在云端，你只需要带上设计意图。",
+    featuresTitle: "打开浏览器就能建模",
+    featuresSubtitle: "不用先搭环境，你只需要说清楚要做什么。",
     featuresModelsTitle: "不用配置 CAD 环境",
-    featuresModels: "不用先安装 Python CAD 内核、构建工具和项目脚手架，就能运行 CAD 生成。",
-    featuresAgentsTitle: "内置完整闭环",
-    featuresAgents: "prompt、代码生成、运行、预览和修正被组织成一条完整流程。",
+    featuresModels: "不用安装 CAD 软件、Python 内核或任何依赖。",
+    featuresAgentsTitle: "从描述到导出",
+    featuresAgents: "描述、建模、预览、修改、导出 STEP / STL，都在同一个页面里。",
     featuresLocalTitle: "能装进你的 AI IDE",
-    featuresLocal: "装上 skill，Claude Code、Codex、Cursor 也能这样建模，结果直接落回云端工作区。",
-    skillsEyebrow: "Skills",
-    skillsTitle: "让你自己的 Agent 会做 CAD",
-    skillsSubtitle: "一条命令，你的编程助手就学会建模、自己校验几何，并把 3D 链接交给你。",
-    skillsCommandLabel: "安装",
-    skillsCopy: "复制",
-    skillsCopied: "已复制",
-    skillsAgentsLabel: "已验证",
-    skillsCta: "查看 Skills 配置指南",
+    featuresLocal: "装上 skill，Claude Code、Codex、Cursor 也能建模，模型出现在同一个工作区。",
     compareEyebrow: "两种用法",
     compareTitle: "在网页发起，或从你的编辑器发起",
-    compareSubtitle: "同一套 CAD 引擎、同一个工作区、同样的结果。选一个符合你现有习惯的入口。",
+    compareSubtitle: "同一个工作区、同样的结果，选一个顺手的入口。",
     compareWebTitle: "Forgent3D 云端",
     compareWebBadge: "托管工作台",
     compareInputLabel: "你输入的",
+    compareCopy: "复制",
+    compareCopied: "已复制",
     compareWebPrompt:
       "做一个电机法兰盖板，200 × 148 mm——中间凸台开通孔，周围一圈螺栓孔；四个安装耳，其中一个用加强筋撑住。",
     compareWebItems: [
-      "CAD 依赖和构建环境已经准备好，开一个标签页就能用",
+      "开一个标签页就能用，不用装任何东西",
       "生成、构建、修改，都不用离开这个标签页",
       "参数、草图和装配都能在 3D 视图里直接编辑",
     ],
     compareSkillTitle: "Forgent3D Skill",
     compareSkillBadge: "跑在你的 AI IDE 里",
+    compareSkillCta: "查看配置指南",
     compareSkillItems: [
       "不用再装 CAD 内核或者别的依赖",
       "支持 Claude Code、Codex、Cursor、Cline、Copilot、Windsurf",
-      "模型代码留在你的仓库，构建结果落到云端工作区",
+      "模型代码留在你的仓库，模型出现在你的工作区",
     ],
-    compareShared: "两条路径保留同一个关键承诺：可编辑 CAD 代码和真实 3D 几何，而不是一次性图片。",
+    compareShared: "两种方式做出来的都是可编辑的 CAD 模型，不是一次性图片。",
     footerTagline: "云端 AI CAD，以及把它装进你编辑器的 skill",
-    footerDesktopNote: "开源桌面版",
     guidesAi3D: "AI 生成三维模型软件",
     guidesCodeCad: "代码生成三维模型软件",
     guidesLocalData: "云端与本地数据",
@@ -202,7 +190,6 @@ const COPY = {
     guidesSkills: "Skills 配置",
     navGallery: "模型库",
     guidesGallery: "模型库",
-    heroPartName: "电机法兰盖板 —— 一句需求生成的",
     heroPartAlt: "Forgent3D 生成的电机法兰盖板:螺栓孔圈、中心轴孔和四个安装耳",
     imagePreviewOpenAria: "放大查看",
     imagePreviewDialogAria: "图片预览",
@@ -227,32 +214,23 @@ export const CARD_SURFACE = "rounded-xl border border-border/80 bg-card/60";
 export const PANEL_SURFACE = "rounded-2xl border border-border/80 bg-card/60 backdrop-blur";
 export const SECTION_TITLE = "text-3xl font-semibold tracking-tight text-foreground md:text-4xl";
 
-export function getLandingPageHtml(locale) {
+/** The site header, shared by the homepage and every localized sub-page (app/[locale]/layout.js). */
+export function getSiteHeaderHtml(locale) {
   const t = COPY[locale] || COPY.en;
   const navLink =
     "shrink-0 rounded-md px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-brand/10 hover:text-foreground";
   return `
-    <!-- 环境层:一片品牌辉光 + 向边缘淡出的网格。和产品的 AmbientBackdrop 是同一张底,
-         原来那两道青/紫径向渐变是官网独有的第二套配色,已删。 -->
-    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
-      <div class="ambient-glow absolute left-1/2 top-[-18rem] h-[36rem] w-[52rem] -translate-x-1/2 rounded-full bg-brand/15 blur-[140px]"></div>
-      <div class="absolute bottom-[-22rem] right-[-10rem] h-[32rem] w-[32rem] rounded-full bg-brand/5 blur-[130px]"></div>
-      <div class="grid-field absolute inset-0 opacity-40"></div>
-    </div>
-
     <!-- 贴顶、透明、滚起来才铺磨砂底 —— 和产品 AppHeader 同一个手势。原来是一枚浮在页面上的
          圆角药丸岛,产品里没有这种东西。高度同样钉死 h-16。 -->
     <header class="site-header sticky top-0 z-30 border-b border-border/60 transition-colors duration-200">
       <div class="mx-auto flex h-16 w-[min(1180px,calc(100vw-32px))] items-center justify-between gap-4">
-        <a class="site-brand flex min-w-0 items-center gap-2 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-foreground" href="#top" aria-label="Forgent3D Home">
+        <a class="site-brand flex min-w-0 items-center gap-2 text-sm font-semibold tracking-wide text-foreground/80 transition-colors hover:text-foreground" href="/${locale}" aria-label="Forgent3D Home">
           <!-- 产品头部那一枚,同一个文件、同一个尺寸(h-7 w-7),不再套描边底板。 -->
           <img src="/logo-mark.png" alt="" class="h-7 w-7 shrink-0 object-contain" width="28" height="28" />
           <span class="truncate">Forgent3D</span>
         </a>
         <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
-          <a class="${navLink}" href="#agent-loop">${t.navLoop}</a>
-          <a class="${navLink}" href="#skills">${t.navSkills}</a>
-          <a class="${navLink}" href="#compare">${t.navCompare}</a>
+          <a class="js-explore-link ${navLink}" href="https://app.forgent3d.com/explore?lang=${locale}">${t.navExplore}</a>
           <a class="${navLink}" href="/${locale}/generators">${t.navGenerators}</a>
           <a class="js-pricing-link ${navLink}" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="${navLink}" href="/${locale}/contact">${t.navContact}</a>
@@ -279,6 +257,19 @@ export function getLandingPageHtml(locale) {
         </div>
       </div>
     </header>
+  `;
+}
+
+export function getLandingPageHtml(locale) {
+  const t = COPY[locale] || COPY.en;
+  return `
+    <!-- 环境层:一片品牌辉光 + 向边缘淡出的网格。和产品的 AmbientBackdrop 是同一张底,
+         原来那两道青/紫径向渐变是官网独有的第二套配色,已删。 -->
+    <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+      <div class="ambient-glow absolute left-1/2 top-[-18rem] h-[36rem] w-[52rem] -translate-x-1/2 rounded-full bg-brand/15 blur-[140px]"></div>
+      <div class="absolute bottom-[-22rem] right-[-10rem] h-[32rem] w-[32rem] rounded-full bg-brand/5 blur-[130px]"></div>
+      <div class="grid-field absolute inset-0 opacity-40"></div>
+    </div>
 
     <div class="landing-page mx-auto w-[min(1180px,calc(100vw-32px))]">
       <main id="top" lang="${t.htmlLang}">
@@ -315,10 +306,9 @@ export function getLandingPageHtml(locale) {
                 <img src="/hero-part-1080.png" alt="${t.heroPartAlt}" width="2566" height="1710" class="block w-full" loading="eager" decoding="async" fetchpriority="high" />
               </picture>
             </button>
-            <!-- 这一行是图的"证词":零件叫什么、多大、能导出成什么。没有它,上面就只是一张好看的
+            <!-- 这一行是图的"证词":零件多大、能导出成什么。没有它,上面就只是一张好看的
                  渲染图;有了它,它才是"真几何"这句话的证据。数字取自 STEP 的包围盒。 -->
             <div class="mt-4 flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-xs text-muted-foreground">
-              <span>${t.heroPartName}</span>
               <span class="font-mono">200 × 148 × 45 mm · STEP / STL / GLB</span>
             </div>
           </div>
@@ -356,34 +346,6 @@ export function getLandingPageHtml(locale) {
           </div>
         </section>
 
-        <section class="landing-section py-20" id="skills">
-          <div class="reveal mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-            <div>
-              <p class="mobile-kicker mb-3 ${EYEBROW}">${t.skillsEyebrow}</p>
-              <h2 class="max-w-2xl ${SECTION_TITLE}">${t.skillsTitle}</h2>
-            </div>
-            <p class="max-w-sm text-sm leading-6 text-muted-foreground">${t.skillsSubtitle}</p>
-          </div>
-          <div class="reveal ${PANEL_SURFACE} p-6">
-            <p class="${EYEBROW}">${t.skillsCommandLabel}</p>
-            <div class="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <code class="min-w-0 flex-1 overflow-x-auto whitespace-nowrap rounded-md border border-border/80 bg-background px-4 py-3 font-mono text-sm text-foreground">${SKILLS_INSTALL_COMMAND}</code>
-              <button
-                class="js-copy-command ${CHIP_SURFACE} min-h-[44px] shrink-0 px-5"
-                type="button"
-                data-copy-value="${SKILLS_INSTALL_COMMAND}"
-                data-copy-label="${t.skillsCopy}"
-                data-copied-label="${t.skillsCopied}"
-              >${t.skillsCopy}</button>
-            </div>
-            <p class="mt-5 ${EYEBROW}">${t.skillsAgentsLabel}</p>
-            <ul class="mt-3 flex flex-wrap gap-2">
-              ${SKILLS_AGENTS.map((agent) => `<li class="rounded-md border border-border/80 bg-background/60 px-2.5 py-1 font-mono text-xs text-muted-foreground">${agent}</li>`).join("")}
-            </ul>
-          </div>
-          <a class="js-skills-cta reveal mt-5 ${CHIP_SURFACE} min-h-[44px] px-5" href="/${locale}/skills">${t.skillsCta}</a>
-        </section>
-
         <section class="landing-section py-20" id="compare">
           <div class="reveal mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
@@ -398,26 +360,36 @@ export function getLandingPageHtml(locale) {
                  只有一句"开个标签页就能开始"——读者能验证右边,验证不了左边。同一个方框、同一个
                  位置,一边是你打的那句话、一边是你敲的那条命令,这个视觉上的押韵就是这一节的论点。
                  输入框的差别只有字体:命令是等宽的,prompt 是正文字体——它不是代码,别用 mono。 -->
-            <article class="reveal rounded-2xl ${BRAND_TINT} p-6 backdrop-blur">
+            <article class="reveal flex flex-col rounded-2xl ${BRAND_TINT} p-5 backdrop-blur sm:p-6">
               <p class="${EYEBROW}">${t.compareWebBadge}</p>
-              <h3 class="mt-3 text-2xl font-semibold text-foreground">${t.compareWebTitle}</h3>
-              <p class="mt-6 ${EYEBROW}">${t.compareInputLabel}</p>
-              <p class="mt-2 rounded-md border border-border/80 bg-background px-4 py-3 text-sm leading-6 text-foreground">${t.compareWebPrompt}</p>
-              <ul class="mt-6 space-y-4 text-sm leading-6 text-foreground/80">
-                ${t.compareWebItems.map((item) => `<li class="border-t border-border/60 pt-4">${item}</li>`).join("")}
+              <h3 class="mt-2 text-xl font-semibold text-foreground sm:mt-3 sm:text-2xl">${t.compareWebTitle}</h3>
+              <p class="mt-5 ${EYEBROW} sm:mt-6">${t.compareInputLabel}</p>
+              <p class="mt-2 rounded-md border border-border/80 bg-background px-3 py-2.5 text-sm leading-6 text-foreground sm:px-4 sm:py-3">${t.compareWebPrompt}</p>
+              <ul class="mt-5 space-y-3 text-sm leading-6 text-foreground/80 sm:mt-6 sm:space-y-4">
+                ${t.compareWebItems.map((item) => `<li class="border-t border-border/60 pt-3 sm:pt-4">${item}</li>`).join("")}
               </ul>
             </article>
-            <article class="reveal ${PANEL_SURFACE} p-6">
+            <article class="reveal flex flex-col ${PANEL_SURFACE} p-5 sm:p-6">
               <p class="${EYEBROW}">${t.compareSkillBadge}</p>
-              <h3 class="mt-3 text-2xl font-semibold text-foreground">${t.compareSkillTitle}</h3>
-              <p class="mt-6 ${EYEBROW}">${t.compareInputLabel}</p>
-              <p class="mt-2 overflow-x-auto rounded-md border border-border/80 bg-background px-4 py-3 font-mono text-sm leading-6 whitespace-nowrap text-foreground">${SKILLS_INSTALL_COMMAND}</p>
-              <ul class="mt-6 space-y-4 text-sm leading-6 text-muted-foreground">
-                ${t.compareSkillItems.map((item) => `<li class="border-t border-border/60 pt-4">${item}</li>`).join("")}
+              <h3 class="mt-2 text-xl font-semibold text-foreground sm:mt-3 sm:text-2xl">${t.compareSkillTitle}</h3>
+              <p class="mt-5 ${EYEBROW} sm:mt-6">${t.compareInputLabel}</p>
+              <div class="mt-2 flex items-stretch gap-2">
+                <code class="min-w-0 flex-1 rounded-md border border-border/80 bg-background px-3 py-2.5 font-mono text-[13px] leading-6 break-all text-foreground sm:px-4 sm:py-3 sm:text-sm sm:break-normal">${SKILLS_INSTALL_COMMAND}</code>
+                <button
+                  class="js-copy-command ${CHIP_SURFACE} min-h-[44px] shrink-0 px-4"
+                  type="button"
+                  data-copy-value="${SKILLS_INSTALL_COMMAND}"
+                  data-copy-label="${t.compareCopy}"
+                  data-copied-label="${t.compareCopied}"
+                >${t.compareCopy}</button>
+              </div>
+              <ul class="mt-5 space-y-3 text-sm leading-6 text-muted-foreground sm:mt-6 sm:space-y-4">
+                ${t.compareSkillItems.map((item) => `<li class="border-t border-border/60 pt-3 sm:pt-4">${item}</li>`).join("")}
               </ul>
+              <a class="js-skills-cta mt-5 inline-flex items-center gap-1 self-start text-sm font-medium text-brand transition-colors hover:text-brand/80 sm:mt-6" href="/${locale}/skills">${t.compareSkillCta} →</a>
             </article>
           </div>
-          <p class="reveal mt-5 ${CARD_SURFACE} p-5 text-sm leading-6 text-muted-foreground">${t.compareShared}</p>
+          <p class="reveal mt-4 ${CARD_SURFACE} p-4 text-sm leading-6 text-muted-foreground sm:mt-5 sm:p-5">${t.compareShared}</p>
         </section>
 
       </main>
@@ -438,7 +410,7 @@ export function getLandingPageHtml(locale) {
         <div class="flex flex-wrap gap-5 text-xs">
           <a class="transition-colors hover:text-brand" href="#agent-loop">${t.navLoop}</a>
           <a class="transition-colors hover:text-brand" href="#features">${t.navFeatures}</a>
-          <a class="transition-colors hover:text-brand" href="#skills">${t.navSkills}</a>
+          <a class="transition-colors hover:text-brand" href="/${locale}/skills">${t.navSkills}</a>
           <a class="transition-colors hover:text-brand" href="#compare">${t.navCompare}</a>
           <a class="js-pricing-link transition-colors hover:text-brand" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/contact">${t.navContact}</a>
@@ -447,8 +419,6 @@ export function getLandingPageHtml(locale) {
           <a class="transition-colors hover:text-brand" href="/${locale}/local-data">${t.guidesLocalData}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/quick-start">${t.guidesQuickStart}</a>
           <a class="js-skills-cta transition-colors hover:text-brand" href="/${locale}/skills">${t.guidesSkills}</a>
-          <a class="js-download-link text-muted-foreground/60 transition-colors hover:text-muted-foreground" href="https://github.com/forgent3d/forgent3d/releases/latest">${t.footerDesktopNote}</a>
-          <!-- <a class="transition-colors hover:text-brand" href="/${locale}/gallery">${t.guidesGallery}</a> -->
         </div>
       </footer>
     </div>

@@ -1,5 +1,7 @@
 import Script from "next/script";
 
+import { PageEnhancer } from "./components/page-enhancer";
+
 import "./globals.css";
 
 export const metadata = {
@@ -41,6 +43,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-background font-sans text-foreground antialiased">
         {children}
+        <PageEnhancer />
         {/* next/script(afterInteractive)代替裸 <script>:注水后按顺序注入,
             site-links.js 先挂上 window.FORGENT_LINKS,script.js 再读。 */}
         <Script src="/site-links.js" strategy="afterInteractive" />

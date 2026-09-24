@@ -13,14 +13,14 @@ function getCopy(locale) {
       kicker: "Plans",
       h1: "选择适合你的 Forgent3D 工作流",
       intro:
-        "云端 Agent 免配置、打开就能用。已经在用 AI IDE 的话，装上 skill，同一个 CAD agent 就跑在你的终端里。",
+        "网页里打开就能用。已经在用 AI IDE 的话，装上 skill，在编辑器里也能建模。",
       plans: [
         {
           name: "Forgent3D Agent",
           badge: "网页运行",
           price: "开放试用",
-          text: "在浏览器里输入需求，让托管 agent 生成 CAD 代码、运行构建并预览真实 3D 结果。",
-          items: ["免安装 CAD 环境", "内置 agent 生成与修正流程", "适合快速验证、演示和团队试用"],
+          text: "在浏览器里描述零件，AI 建出可编辑的 3D 模型，接着改、导出。",
+          items: ["免安装 CAD 环境", "对话里建模、对话里改", "适合快速验证、演示和团队试用"],
           primary: "立即开始",
           primaryHref: "https://app.forgent3d.com?lang=zh",
           primaryClass: "js-try-link",
@@ -31,11 +31,11 @@ function getCopy(locale) {
           name: "Forgent3D Skill",
           badge: "跑在你的 AI IDE 里",
           price: "免费开源",
-          text: "一条命令，让 Claude Code、Codex、Cursor 拥有同一个 CAD agent：它写模型、自己校验，结果落回你的工作区。",
+          text: "一条命令，让 Claude Code、Codex、Cursor 也能建模，做出来的模型出现在你的工作区。",
           items: [
             "npx skills add forgent3d/forgent3d-skills",
             "模型代码留在你的仓库，可以 Git 管理和审查",
-            "构建和几何测量仍跑在云端，本地不用装 CAD 内核",
+            "本地不用装 CAD 软件或任何依赖",
           ],
           primary: "查看配置指南",
           primaryHref: "/zh/skills",
@@ -45,9 +45,6 @@ function getCopy(locale) {
           secondaryClass: "js-skills-repo-link",
         },
       ],
-      contactTitle: "需要更高额度、团队试用或合作？",
-      contactText: `发邮件到 ${CONTACT_EMAIL}，告诉我们你的使用场景。`,
-      contactAction: CONTACT_EMAIL,
     };
   }
 
@@ -59,14 +56,14 @@ function getCopy(locale) {
     kicker: "Pricing",
     h1: "Choose the Forgent3D workflow that fits your project",
     intro:
-      "The cloud agent needs no setup — open a tab and start. Already working in an AI IDE? Install the skill and the same CAD agent runs in your terminal.",
+      "Open a tab and start. Already working in an AI IDE? Install the skill and model from your editor too.",
     plans: [
       {
         name: "Forgent3D Agent",
         badge: "Runs in the browser",
         price: "Open beta",
-        text: "Prompt in the browser, let the hosted agent generate CAD code, run builds, and preview real 3D results.",
-        items: ["No CAD environment setup", "Built-in agent generation and revision loop", "Good for quick validation, demos, and team trials"],
+        text: "Describe a part in the browser; the AI builds an editable 3D model you keep revising and export.",
+        items: ["No CAD environment setup", "Build and revise by chatting", "Good for quick validation, demos, and team trials"],
         primary: "Get started",
         primaryHref: "https://app.forgent3d.com?lang=en",
         primaryClass: "js-try-link",
@@ -77,11 +74,11 @@ function getCopy(locale) {
         name: "Forgent3D Skill",
         badge: "Runs in your AI IDE",
         price: "Free and open source",
-        text: "One command gives Claude Code, Codex, and Cursor the same CAD agent: it writes the model, checks its own geometry, and returns the result to your workspace.",
+        text: "One command lets Claude Code, Codex, and Cursor model too, with results showing up in your workspace.",
         items: [
           "npx skills add forgent3d/forgent3d-skills",
           "Model code stays in your repo — versioned and reviewable",
-          "Builds and measurement still run in the cloud, so there is no local CAD kernel to install",
+          "No CAD software or dependencies to install locally",
         ],
         primary: "Setup guide",
         primaryHref: "/en/skills",
@@ -91,9 +88,6 @@ function getCopy(locale) {
         secondaryClass: "js-skills-repo-link",
       },
     ],
-    contactTitle: "Need higher limits, team access, or a partnership?",
-    contactText: `Email ${CONTACT_EMAIL} and tell us what you are building.`,
-    contactAction: CONTACT_EMAIL,
   };
 }
 
@@ -136,10 +130,7 @@ export default async function PricingPage({ params }) {
 
   return (
     <main className="mx-auto w-[min(1080px,calc(100vw-32px))] py-16 text-foreground">
-      <a className="inline-flex rounded-md border border-border/80 px-4 py-2 text-xs uppercase tracking-[0.18em] text-muted-foreground/80 hover:border-brand/50" href={`/${locale}`}>
-        {locale === "zh" ? "← 返回首页" : "← Back home"}
-      </a>
-      <p className="mt-10 text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
+      <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">{copy.kicker}</p>
       <h1 className="mt-3 max-w-4xl text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
       <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
 
@@ -159,7 +150,7 @@ export default async function PricingPage({ params }) {
             </ul>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a
-                className={`${plan.primaryClass || ""} inline-flex justify-center rounded-md bg-brand px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-brand/90`}
+                className={`${plan.primaryClass || ""} inline-flex justify-center rounded-md bg-brand px-5 py-3 text-sm font-medium text-white! transition-colors hover:bg-brand/90`}
                 href={plan.primaryHref}
               >
                 {plan.primary}
@@ -174,14 +165,6 @@ export default async function PricingPage({ params }) {
           </article>
         ))}
       </div>
-
-      <section className="mt-12 rounded-2xl border border-brand/30 bg-brand/[0.06] p-6">
-        <h2 className="text-2xl font-semibold text-foreground">{copy.contactTitle}</h2>
-        <p className="mt-3 text-muted-foreground">{copy.contactText}</p>
-        <a className="mt-5 inline-flex rounded-md border border-border/80 px-5 py-3 text-sm font-semibold text-foreground hover:border-brand/50" href={`mailto:${CONTACT_EMAIL}`}>
-          {copy.contactAction}
-        </a>
-      </section>
     </main>
   );
 }
