@@ -1,14 +1,21 @@
 import Script from "next/script";
 
 import { PageEnhancer } from "./components/page-enhancer";
+import { OG_BASE, SITE_URL } from "./lib/seo";
 
 import "./globals.css";
 
+const DEFAULT_DESCRIPTION =
+  "Cloud AI CAD agent for editable 3D models, plus a skill that brings it to Claude Code, Codex, and Cursor.";
+
+// og 标签只走 metadata(这里 + 各页 generateMetadata),不在 <head> 里手写 <meta>:手写的那几条排在页面
+// 自己的前面,只取第一个 og:title 的抓取端(X、Slack、微信)上,每个子页分享出去都叫 "Forgent3D"。
 export const metadata = {
-  metadataBase: new URL("https://www.forgent3d.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Forgent3D",
-  description:
-    "Cloud AI CAD agent for editable 3D models, plus a skill that brings it to Claude Code, Codex, and Cursor.",
+  description: DEFAULT_DESCRIPTION,
+  openGraph: { ...OG_BASE, type: "website", title: "Forgent3D", description: DEFAULT_DESCRIPTION },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({ children }) {
@@ -21,14 +28,6 @@ export default function RootLayout({ children }) {
           content="Forgent3D, AI CAD, agent skills, Claude Code, Codex, Cursor, build123d, parametric CAD, 3D preview"
         />
         <meta name="theme-color" content="#f9fafb" />
-        <meta property="og:title" content="Forgent3D" />
-        <meta
-          property="og:description"
-          content="Generate editable CAD in the cloud without any setup, or install the skill and let Claude Code, Codex, or Cursor build the model for you."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="/og-image.svg" />
-        <meta property="og:locale" content="en_US" />
         {/* 产品和官网共用同一枚 logo-mark.png(来自 forgent3d-platform/packages/cloud/public)。
             官网原来用的是另一版带描边底板的图标,和产品头部对不上。 */}
         <link rel="icon" type="image/png" href="/logo-mark.png" />

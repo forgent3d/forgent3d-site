@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isSupportedLocale } from "../../lib/landing-page";
 import { GENERATORS, generatorsSharedCopy } from "../../lib/generators";
+import { OG_BASE } from "../../lib/seo";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "zh" }];
@@ -24,6 +25,7 @@ export async function generateMetadata({ params }) {
       },
     },
     openGraph: {
+      ...OG_BASE,
       title: t.catalogTitle,
       description: t.catalogDescription,
       locale: locale === "zh" ? "zh_CN" : "en_US",
@@ -74,6 +76,12 @@ export default async function GeneratorsIndexPage({ params }) {
           </Link>
         ))}
       </div>
+      <p className="mt-8 text-sm text-muted-foreground">
+        {t.scadPrompt}{" "}
+        <Link className="text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-to-step`}>
+          {t.scadLink} →
+        </Link>
+      </p>
     </main>
   );
 }

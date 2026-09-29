@@ -7,6 +7,7 @@ import {
   generatorsSharedCopy,
   getGenerator,
 } from "../../../lib/generators";
+import { OG_BASE } from "../../../lib/seo";
 
 export function generateStaticParams() {
   return ["en", "zh"].flatMap((locale) =>
@@ -35,6 +36,7 @@ export async function generateMetadata({ params }) {
       },
     },
     openGraph: {
+      ...OG_BASE,
       title: copy.title,
       description: copy.description,
       locale: locale === "zh" ? "zh_CN" : "en_US",
@@ -194,6 +196,12 @@ export default async function GeneratorLandingPage({ params }) {
             </Link>
           ))}
         </div>
+        <p className="mt-6 text-sm text-muted-foreground">
+          {t.scadPrompt}{" "}
+          <Link className="text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-to-step`}>
+            {t.scadLink} →
+          </Link>
+        </p>
       </section>
     </main>
   );

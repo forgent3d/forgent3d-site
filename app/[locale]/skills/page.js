@@ -5,6 +5,7 @@ import {
   SKILLS_INSTALL_COMMAND,
   SKILLS_REPO_URL,
 } from "../../lib/landing-page";
+import { OG_BASE } from "../../lib/seo";
 
 function getCopy(locale) {
   if (locale === "zh") {
@@ -138,6 +139,7 @@ export async function generateMetadata({ params }) {
       },
     },
     openGraph: {
+      ...OG_BASE,
       title: copy.title,
       description: copy.description,
       locale: copy.ogLocale,

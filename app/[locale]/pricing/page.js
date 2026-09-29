@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { isSupportedLocale } from "../../lib/landing-page";
+import { OG_BASE } from "../../lib/seo";
 
 const CONTACT_EMAIL = "barry@forgent3d.com";
 
@@ -113,6 +114,7 @@ export async function generateMetadata({ params }) {
       },
     },
     openGraph: {
+      ...OG_BASE,
       title: copy.title,
       description: copy.description,
       locale: copy.ogLocale,

@@ -53,6 +53,7 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
 /[locale]/local-data             云端与本地数据边界
 /[locale]/ai-3d-model-generation SEO 落地页
 /[locale]/code-to-parametric-cad SEO 落地页
+/[locale]/openscad-to-step       OpenSCAD → STEP 工具落地页（CTA 进 app 的 /scad，免费、免登录）
 /[locale]/contact                联系我们
 /m/[shareSlug]                   公开模型分享页（含 details / view）
 ```

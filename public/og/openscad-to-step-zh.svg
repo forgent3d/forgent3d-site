@@ -1,0 +1,63 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- /[locale]/openscad-to-step 的社交卡片。管子的几何和页面里 TUBE 同一组数(网格 = $fn 32 的 STL,256 个三角面)。
+       改完用 sharp 渲成同名 .png:sharp('x.svg').png().toFile('x.png')。 -->
+  <rect width="1200" height="630" fill="#F9FAFB"/>
+
+  <!-- 环境层:顶部一片品牌辉光 + 淡出的网格,和首页的 AmbientBackdrop 同一张底 -->
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0" r="0.75">
+      <stop offset="0%" stop-color="#0886A6" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#0886A6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M46 0H0V46" fill="none" stroke="#D6DAE0" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="gridFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="gridMask">
+      <rect width="1200" height="630" fill="url(#gridFade)"/>
+    </mask>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)" mask="url(#gridMask)"/>
+  <rect width="1200" height="400" fill="url(#glow)"/>
+
+  <!-- 字标:一枚小等轴方块 + 名字,和右侧那枚是同一个母题 -->
+  <g stroke="#0886A6" stroke-width="2.2" stroke-linejoin="round" fill="none">
+    <path d="M89 66l17 10v19l-17 10-17-10V76z"/>
+    <path d="M89 86v19M89 86l17-10M89 86l-17-10" stroke-opacity="0.45"/>
+  </g>
+  <text x="122" y="97" fill="#191C24" font-size="27" font-weight="600" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">Forgent3D</text>
+
+  
+  <text x="72" y="212" fill="#616875" font-size="18" letter-spacing="3.2" font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">免费 · 无需注册 · 浏览器里直接转</text>
+  <text x="72" y="296" fill="#191C24" font-size="64" font-weight="600" font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">OpenSCAD</text>
+  <text x="72" y="370" fill="#0886A6" font-size="64" font-weight="600" font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">转 STEP</text>
+  <text x="72" y="432" fill="#616875" font-size="24"  font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">导出真正的 B-rep：圆柱是圆柱、孔是孔，</text>
+  <text x="72" y="466" fill="#616875" font-size="24"  font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">不是包成 STEP 的三角网格。</text>
+
+  <rect x="592" y="120" width="264" height="390" rx="16" fill="#FFFFFF" stroke="#D6DAE0"/>
+  <g transform="translate(572 150) scale(0.95)">
+    <clipPath id="hole"><path d="M220,52L218.8,56.3L215.4,60.4L209.9,64.2L202.4,67.6L193.3,70.3L183,72.3L171.7,73.6L160,74L148.3,73.6L137,72.3L126.7,70.3L117.6,67.6L110.1,64.2L104.6,60.4L101.2,56.3L100,52L101.2,47.7L104.6,43.6L110.1,39.8L117.6,36.4L126.7,33.7L137,31.7L148.3,30.4L160,30L171.7,30.4L183,31.7L193.3,33.7L202.4,36.4L209.9,39.8L215.4,43.6L218.8,47.7Z"/></clipPath>
+    <path fill="#EDEFF3" d="M280,52L277.7,60.6L270.9,68.8L259.8,76.4L244.9,83.1L226.7,88.6L205.9,92.7L183.4,95.2L160,96L136.6,95.2L114.1,92.7L93.3,88.6L75.1,83.1L60.2,76.4L49.1,68.8L42.3,60.6L40,52L40,184L42.3,192.6L49.1,200.8L60.2,208.4L75.1,215.1L93.3,220.6L114.1,224.7L136.6,227.2L160,228L183.4,227.2L205.9,224.7L226.7,220.6L244.9,215.1L259.8,208.4L270.9,200.8L277.7,192.6L280,184Z"/>
+    <g stroke="#616875" stroke-opacity="0.45" stroke-width="0.9"><line x1="280" y1="52" x2="280" y2="184"/><line x1="277.7" y1="60.6" x2="277.7" y2="192.6"/><line x1="270.9" y1="68.8" x2="270.9" y2="200.8"/><line x1="259.8" y1="76.4" x2="259.8" y2="208.4"/><line x1="244.9" y1="83.1" x2="244.9" y2="215.1"/><line x1="226.7" y1="88.6" x2="226.7" y2="220.6"/><line x1="205.9" y1="92.7" x2="205.9" y2="224.7"/><line x1="183.4" y1="95.2" x2="183.4" y2="227.2"/><line x1="160" y1="96" x2="160" y2="228"/><line x1="136.6" y1="95.2" x2="136.6" y2="227.2"/><line x1="114.1" y1="92.7" x2="114.1" y2="224.7"/><line x1="93.3" y1="88.6" x2="93.3" y2="220.6"/><line x1="75.1" y1="83.1" x2="75.1" y2="215.1"/><line x1="60.2" y1="76.4" x2="60.2" y2="208.4"/><line x1="49.1" y1="68.8" x2="49.1" y2="200.8"/><line x1="42.3" y1="60.6" x2="42.3" y2="192.6"/><line x1="40" y1="52" x2="40" y2="184"/><line x1="280" y1="52" x2="277.7" y2="192.6"/><line x1="277.7" y1="60.6" x2="270.9" y2="200.8"/><line x1="270.9" y1="68.8" x2="259.8" y2="208.4"/><line x1="259.8" y1="76.4" x2="244.9" y2="215.1"/><line x1="244.9" y1="83.1" x2="226.7" y2="220.6"/><line x1="226.7" y1="88.6" x2="205.9" y2="224.7"/><line x1="205.9" y1="92.7" x2="183.4" y2="227.2"/><line x1="183.4" y1="95.2" x2="160" y2="228"/><line x1="160" y1="96" x2="136.6" y2="227.2"/><line x1="136.6" y1="95.2" x2="114.1" y2="224.7"/><line x1="114.1" y1="92.7" x2="93.3" y2="220.6"/><line x1="93.3" y1="88.6" x2="75.1" y2="215.1"/><line x1="75.1" y1="83.1" x2="60.2" y2="208.4"/><line x1="60.2" y1="76.4" x2="49.1" y2="200.8"/><line x1="49.1" y1="68.8" x2="42.3" y2="192.6"/><line x1="42.3" y1="60.6" x2="40" y2="184"/></g>
+    <polyline fill="none" stroke="#616875" stroke-opacity="0.7" stroke-width="1.2" points="280,184 277.7,192.6 270.9,200.8 259.8,208.4 244.9,215.1 226.7,220.6 205.9,224.7 183.4,227.2 160,228 136.6,227.2 114.1,224.7 93.3,220.6 75.1,215.1 60.2,208.4 49.1,200.8 42.3,192.6 40,184"/>
+    <path fill="#191C24" fill-opacity="0.1" d="M220,52L218.8,56.3L215.4,60.4L209.9,64.2L202.4,67.6L193.3,70.3L183,72.3L171.7,73.6L160,74L148.3,73.6L137,72.3L126.7,70.3L117.6,67.6L110.1,64.2L104.6,60.4L101.2,56.3L100,52L101.2,47.7L104.6,43.6L110.1,39.8L117.6,36.4L126.7,33.7L137,31.7L148.3,30.4L160,30L171.7,30.4L183,31.7L193.3,33.7L202.4,36.4L209.9,39.8L215.4,43.6L218.8,47.7Z"/>
+    <g stroke="#616875" stroke-opacity="0.45" stroke-width="0.9" clip-path="url(#hole)"><line x1="100" y1="52" x2="100" y2="184"/><line x1="101.2" y1="47.7" x2="101.2" y2="179.7"/><line x1="104.6" y1="43.6" x2="104.6" y2="175.6"/><line x1="110.1" y1="39.8" x2="110.1" y2="171.8"/><line x1="117.6" y1="36.4" x2="117.6" y2="168.4"/><line x1="126.7" y1="33.7" x2="126.7" y2="165.7"/><line x1="137" y1="31.7" x2="137" y2="163.7"/><line x1="148.3" y1="30.4" x2="148.3" y2="162.4"/><line x1="160" y1="30" x2="160" y2="162"/><line x1="171.7" y1="30.4" x2="171.7" y2="162.4"/><line x1="183" y1="31.7" x2="183" y2="163.7"/><line x1="193.3" y1="33.7" x2="193.3" y2="165.7"/><line x1="202.4" y1="36.4" x2="202.4" y2="168.4"/><line x1="209.9" y1="39.8" x2="209.9" y2="171.8"/><line x1="215.4" y1="43.6" x2="215.4" y2="175.6"/><line x1="218.8" y1="47.7" x2="218.8" y2="179.7"/></g>
+    <path fill="#FFFFFF" stroke="#616875" stroke-opacity="0.7" stroke-width="1.2" fill-rule="evenodd" d="M280,52L277.7,60.6L270.9,68.8L259.8,76.4L244.9,83.1L226.7,88.6L205.9,92.7L183.4,95.2L160,96L136.6,95.2L114.1,92.7L93.3,88.6L75.1,83.1L60.2,76.4L49.1,68.8L42.3,60.6L40,52L42.3,43.4L49.1,35.2L60.2,27.6L75.1,20.9L93.3,15.4L114.1,11.3L136.6,8.8L160,8L183.4,8.8L205.9,11.3L226.7,15.4L244.9,20.9L259.8,27.6L270.9,35.2L277.7,43.4ZM220,52L218.8,56.3L215.4,60.4L209.9,64.2L202.4,67.6L193.3,70.3L183,72.3L171.7,73.6L160,74L148.3,73.6L137,72.3L126.7,70.3L117.6,67.6L110.1,64.2L104.6,60.4L101.2,56.3L100,52L101.2,47.7L104.6,43.6L110.1,39.8L117.6,36.4L126.7,33.7L137,31.7L148.3,30.4L160,30L171.7,30.4L183,31.7L193.3,33.7L202.4,36.4L209.9,39.8L215.4,43.6L218.8,47.7Z"/>
+    <g stroke="#616875" stroke-opacity="0.45" stroke-width="0.9"><line x1="280" y1="52" x2="220" y2="52"/><line x1="277.7" y1="60.6" x2="218.8" y2="56.3"/><line x1="270.9" y1="68.8" x2="215.4" y2="60.4"/><line x1="259.8" y1="76.4" x2="209.9" y2="64.2"/><line x1="244.9" y1="83.1" x2="202.4" y2="67.6"/><line x1="226.7" y1="88.6" x2="193.3" y2="70.3"/><line x1="205.9" y1="92.7" x2="183" y2="72.3"/><line x1="183.4" y1="95.2" x2="171.7" y2="73.6"/><line x1="160" y1="96" x2="160" y2="74"/><line x1="136.6" y1="95.2" x2="148.3" y2="73.6"/><line x1="114.1" y1="92.7" x2="137" y2="72.3"/><line x1="93.3" y1="88.6" x2="126.7" y2="70.3"/><line x1="75.1" y1="83.1" x2="117.6" y2="67.6"/><line x1="60.2" y1="76.4" x2="110.1" y2="64.2"/><line x1="49.1" y1="68.8" x2="104.6" y2="60.4"/><line x1="42.3" y1="60.6" x2="101.2" y2="56.3"/><line x1="40" y1="52" x2="100" y2="52"/><line x1="42.3" y1="43.4" x2="101.2" y2="47.7"/><line x1="49.1" y1="35.2" x2="104.6" y2="43.6"/><line x1="60.2" y1="27.6" x2="110.1" y2="39.8"/><line x1="75.1" y1="20.9" x2="117.6" y2="36.4"/><line x1="93.3" y1="15.4" x2="126.7" y2="33.7"/><line x1="114.1" y1="11.3" x2="137" y2="31.7"/><line x1="136.6" y1="8.8" x2="148.3" y2="30.4"/><line x1="160" y1="8" x2="160" y2="30"/><line x1="183.4" y1="8.8" x2="171.7" y2="30.4"/><line x1="205.9" y1="11.3" x2="183" y2="31.7"/><line x1="226.7" y1="15.4" x2="193.3" y2="33.7"/><line x1="244.9" y1="20.9" x2="202.4" y2="36.4"/><line x1="259.8" y1="27.6" x2="209.9" y2="39.8"/><line x1="270.9" y1="35.2" x2="215.4" y2="43.6"/><line x1="277.7" y1="43.4" x2="218.8" y2="47.7"/><line x1="280" y1="52" x2="218.8" y2="56.3"/><line x1="277.7" y1="60.6" x2="215.4" y2="60.4"/><line x1="270.9" y1="68.8" x2="209.9" y2="64.2"/><line x1="259.8" y1="76.4" x2="202.4" y2="67.6"/><line x1="244.9" y1="83.1" x2="193.3" y2="70.3"/><line x1="226.7" y1="88.6" x2="183" y2="72.3"/><line x1="205.9" y1="92.7" x2="171.7" y2="73.6"/><line x1="183.4" y1="95.2" x2="160" y2="74"/><line x1="160" y1="96" x2="148.3" y2="73.6"/><line x1="136.6" y1="95.2" x2="137" y2="72.3"/><line x1="114.1" y1="92.7" x2="126.7" y2="70.3"/><line x1="93.3" y1="88.6" x2="117.6" y2="67.6"/><line x1="75.1" y1="83.1" x2="110.1" y2="64.2"/><line x1="60.2" y1="76.4" x2="104.6" y2="60.4"/><line x1="49.1" y1="68.8" x2="101.2" y2="56.3"/><line x1="42.3" y1="60.6" x2="100" y2="52"/><line x1="40" y1="52" x2="101.2" y2="47.7"/><line x1="42.3" y1="43.4" x2="104.6" y2="43.6"/><line x1="49.1" y1="35.2" x2="110.1" y2="39.8"/><line x1="60.2" y1="27.6" x2="117.6" y2="36.4"/><line x1="75.1" y1="20.9" x2="126.7" y2="33.7"/><line x1="93.3" y1="15.4" x2="137" y2="31.7"/><line x1="114.1" y1="11.3" x2="148.3" y2="30.4"/><line x1="136.6" y1="8.8" x2="160" y2="30"/><line x1="160" y1="8" x2="171.7" y2="30.4"/><line x1="183.4" y1="8.8" x2="183" y2="31.7"/><line x1="205.9" y1="11.3" x2="193.3" y2="33.7"/><line x1="226.7" y1="15.4" x2="202.4" y2="36.4"/><line x1="244.9" y1="20.9" x2="209.9" y2="39.8"/><line x1="259.8" y1="27.6" x2="215.4" y2="43.6"/><line x1="270.9" y1="35.2" x2="218.8" y2="47.7"/><line x1="277.7" y1="43.4" x2="220" y2="52"/></g></g>
+  <text x="724" y="446" fill="#191C24" font-size="22" font-weight="600" text-anchor="middle" font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">网格 STEP</text>
+  <text x="724" y="478" fill="#616875" font-size="18" text-anchor="middle" font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">256 个面</text>
+
+  <rect x="872" y="120" width="264" height="390" rx="16" fill="#FFFFFF" stroke="#0886A6" stroke-opacity="0.45"/>
+  <g transform="translate(852 150) scale(0.95)">
+    <linearGradient id="side" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0886A6" stop-opacity="0.22"/><stop offset="0.45" stop-color="#0886A6" stop-opacity="0.06"/><stop offset="1" stop-color="#0886A6" stop-opacity="0.18"/></linearGradient>
+    <linearGradient id="bore" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#0886A6" stop-opacity="0.08"/><stop offset="1" stop-color="#0886A6" stop-opacity="0.3"/></linearGradient>
+    <path fill="url(#side)" d="M280,52A120,44 0 0 1 40,52L40,184A120,44 0 0 0 280,184Z"/>
+    <path fill="none" stroke="#0886A6" stroke-width="2" d="M40,52L40,184A120,44 0 0 0 280,184L280,52"/>
+    <path fill="url(#bore)" d="M220,52A60,22 0 1 1 100,52A60,22 0 1 1 220,52Z"/>
+    <path fill="#FFFFFF" stroke="#0886A6" stroke-width="2" fill-rule="evenodd" d="M280,52A120,44 0 1 1 40,52A120,44 0 1 1 280,52ZM220,52A60,22 0 1 1 100,52A60,22 0 1 1 220,52Z"/></g>
+  <text x="1004" y="446" fill="#191C24" font-size="22" font-weight="600" text-anchor="middle" font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">B-rep STEP</text>
+  <text x="1004" y="478" fill="#0886A6" font-size="18" text-anchor="middle" font-family="DejaVu Sans, PingFang SC, Microsoft YaHei, WenQuanYi Zen Hei, sans-serif">4 个面</text>
+</svg>

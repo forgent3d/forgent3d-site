@@ -17,6 +17,8 @@ export default function sitemap() {
     { url: `${base}/zh`, changeFrequency: "weekly", priority: 1.0 },
     { url: `${base}/en/skills`, changeFrequency: "weekly", priority: 0.85 },
     { url: `${base}/zh/skills`, changeFrequency: "weekly", priority: 0.85 },
+    { url: `${base}/en/openscad-to-step`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${base}/zh/openscad-to-step`, changeFrequency: "weekly", priority: 0.9 },
     ...generatorRows,
     { url: `${base}/en/ai-3d-model-generation`, changeFrequency: "weekly", priority: 0.8 },
     { url: `${base}/zh/ai-3d-model-generation`, changeFrequency: "weekly", priority: 0.8 },

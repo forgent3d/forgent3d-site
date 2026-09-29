@@ -150,6 +150,7 @@ function initPage() {
   applyLinks(".js-x-link", linkConfig.x, "#download");
   applyLinks(".js-workbench-link", linkConfig.workbench, "https://app.forgent3d.com", { includeLocale: true });
   applyLinks(".js-try-link", linkConfig.try, "https://app.forgent3d.com", { includeLocale: true });
+  applyLinks(".js-scad-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
   applyLinks(".js-skills-repo-link", linkConfig.skillsRepo, "https://github.com/forgent3d/forgent3d-skills");
 
   // Install-command copy buttons (homepage skills section and /skills).
@@ -189,6 +190,7 @@ function initPage() {
     [".js-download-link", "click_download_desktop"],
     [".js-github-link", "click_github"],
     [".js-explore-link", "click_explore"],
+    [".js-scad-link", "click_openscad_to_step"],
   ].forEach(([selector, eventName]) => {
     document.querySelectorAll(selector).forEach((node) => {
       if (!bindOnce(node, `Track${eventName}`)) return;

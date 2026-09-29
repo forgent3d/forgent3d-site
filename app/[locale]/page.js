@@ -4,6 +4,7 @@ import {
   HERO_PRODUCT_PRELOAD,
   isSupportedLocale,
 } from "../lib/landing-page";
+import { OG_BASE } from "../lib/seo";
 
 function getSeoCopy(locale) {
   if (locale === "zh") {
@@ -42,6 +43,7 @@ export async function generateMetadata({ params }) {
       },
     },
     openGraph: {
+      ...OG_BASE,
       title: seo.title,
       description: seo.description,
       locale: seo.ogLocale,

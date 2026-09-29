@@ -49,7 +49,8 @@ pnpm deploy    # opennextjs-cloudflare build && deploy
 ## 新增页面清单
 
 1. 在 `app/[locale]/<slug>/page.js` 里写 `getCopy(locale)`（中英两份）、
-   `generateStaticParams`、`generateMetadata`（canonical + hreflang）。
+   `generateStaticParams`、`generateMetadata`（canonical + hreflang；`openGraph` 里展开
+   `app/lib/seo.js` 的 `OG_BASE`，否则这一页分享出去没有卡片图）。
 2. 在 `app/sitemap.js` 补 `/en/<slug>` 和 `/zh/<slug>`。
 3. 需要的话在 `app/lib/landing-page.js` 的 footer / nav 里加链接，并在两个 locale 的
    `COPY` 里加对应文案键。
