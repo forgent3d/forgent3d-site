@@ -192,9 +192,8 @@ export function getScadCopy(locale) {
         limits: [
           "hull() 和 minkowski() 对常见形状是精确的；没有精确解的情况会做近似，构建时给出告警并写明面片数。",
           "带 twist 的 linear_extrude 没有精确的 B-rep 形式，按平面小面拼出来，和 OpenSCAD 自己的做法一样。",
-          "数值经过 OpenSCAD 的 CSG 输出，只保留 6 位有效数字——100 mm 的零件上约 0.0005 mm。",
-          "text() 使用内置的 DejaVu Sans 字体，文字可能和你电脑上的字体略有差别。",
-          "暂不支持 import() 外部 STL / DXF / SVG 文件、surface() 和 projection(cut = false)，构建会报错并指出是哪一项。",
+          "text() 由 OpenSCAD 自己排版，字形轮廓精确转换。内置的是 OpenSCAD 自带的 Liberation 字体；用了你电脑上的其他字体，把 .ttf / .otf 放进项目文件夹、用 use <> 引入，否则文字会和本机不一样。",
+          "import() 读入的 STL / DXF / SVG、surface() 高度图和 projection(cut = false) 先由 OpenSCAD 渲染，再转成面片实体：STEP 里这部分是平面小面，不是解析曲面，构建时会告警并写明面数或边数。转出的 3D 面片上限 8000 个，超过会报错。数据文件和 .scad 放在同一个项目文件夹里一起加载。",
         ],
         testTitle: "我们怎么测",
         testText: `我们用 Thingiverse 上 ${CORPUS_FILES} 份真实的 .scad 文件整批构建，并和 OpenSCAD 自己的渲染结果对照。其中 ${CORPUS_RATE} 能直接转换。`,
@@ -334,9 +333,8 @@ export function getScadCopy(locale) {
       limits: [
         "hull() and minkowski() are exact for common shapes. Where no exact form exists the result is approximated, and the build warns you with the facet count.",
         "linear_extrude with twist has no exact B-rep form, so it is built from flat facets — the same way OpenSCAD builds it.",
-        "Numbers pass through OpenSCAD's CSG output at 6 significant digits — about 0.0005 mm on a 100 mm part.",
-        "text() uses a bundled DejaVu Sans font, so lettering can differ slightly from the font on your computer.",
-        "import() of external STL, DXF or SVG files, surface() and projection(cut = false) aren't supported yet; the build stops with an error that names them.",
+        "text() is laid out by OpenSCAD itself and its glyph outlines convert exactly. OpenSCAD's own Liberation fonts are built in; if you use another font from your computer, put the .ttf / .otf in the project folder and pull it in with use <>, or the lettering will differ from what you see locally.",
+        "STL, DXF and SVG files read by import(), surface() heightmaps and projection(cut = false) are rendered by OpenSCAD first and brought in as faceted solids: that part of the STEP is flat facets, not analytic surfaces, and the build warns you with the face or edge count. Faceted 3D results are capped at 8,000 faces; above that the build stops with an error. Load data files in the same project folder as your .scad files.",
       ],
       testTitle: "How we test",
       testText: `We build ${CORPUS_FILES.toLocaleString("en-US")} real-world .scad files from Thingiverse in one batch and check the results against OpenSCAD's own render. ${CORPUS_RATE} of them convert.`,
