@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BRAND_BUTTON, isSupportedLocale } from "../../lib/landing-page";
-import { getScadCopy, scadAppUrl, scadBreadcrumbSchema, scadMetadata, scadPath } from "../../lib/openscad-to-step";
+import {
+  SCAD_EXAMPLES,
+  getScadCopy,
+  scadAppUrl,
+  scadBreadcrumbSchema,
+  scadExampleUrl,
+  scadMetadata,
+  scadPath,
+} from "../../lib/openscad-to-step";
 import { SITE_URL } from "../../lib/seo";
 import { BrepTube, MeshTube } from "./tube-figure";
 
@@ -57,6 +65,42 @@ export default async function OpenScadToStepPage({ params }) {
           {t.corpusLink} →
         </Link>
       </p>
+
+      {/* Not .js-scad-link: public/script.js rewrites that class's href to the bare converter URL,
+          which would drop ?example=. These carry their own class and click event. */}
+      <section className="mt-16">
+        <h2 className="text-2xl font-semibold">{t.examplesTitle}</h2>
+        <p className="mt-2 max-w-3xl text-muted-foreground">{t.examplesIntro}</p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {SCAD_EXAMPLES.map((name) => {
+            const example = t.examples[name];
+            return (
+              <a
+                key={name}
+                className="js-scad-example-link group overflow-hidden rounded-xl border border-border/80 bg-card transition-colors hover:border-brand/50"
+                href={scadExampleUrl(locale, name)}
+                target="_blank"
+                rel="noreferrer"
+                data-example={name}
+              >
+                <img
+                  className="block aspect-[4/3] w-full border-b border-border/60 object-cover"
+                  src={`/scad-examples/${name}.webp`}
+                  alt={example.alt}
+                  width={800}
+                  height={600}
+                  decoding="async"
+                />
+                <div className="p-4">
+                  <h3 className="font-semibold text-foreground group-hover:text-brand">{example.title}</h3>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">{example.text}</p>
+                  <p className="mt-3 font-mono text-xs uppercase tracking-[0.18em] text-brand">{t.exampleOpen} →</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
 
       <section className="mt-20">
         <h2 className="text-2xl font-semibold">{t.compareTitle}</h2>

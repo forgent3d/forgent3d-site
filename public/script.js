@@ -191,6 +191,8 @@ function initPage() {
     [".js-github-link", "click_github"],
     [".js-explore-link", "click_explore"],
     [".js-scad-link", "click_openscad_to_step"],
+    // openscad-to-step 首页的例子卡片;app 那头接着是 scad_example_opened / scad_step_export
+    [".js-scad-example-link", "click_scad_example"],
   ].forEach(([selector, eventName]) => {
     document.querySelectorAll(selector).forEach((node) => {
       if (!bindOnce(node, `Track${eventName}`)) return;
@@ -198,6 +200,7 @@ function initPage() {
         trackEvent(eventName, {
           href: node.getAttribute("href") || undefined,
           label: node.textContent.trim() || node.getAttribute("aria-label") || undefined,
+          example: node.dataset.example || undefined,
         }, { transport: "sendBeacon" });
       });
     });

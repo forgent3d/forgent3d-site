@@ -23,6 +23,17 @@ export function scadAppUrl(locale) {
   return `${APP_SCAD_URL}?lang=${locale}`;
 }
 
+// 首页的例子卡片:点开是 app 的 /scad?example=<名字>,例子载入即构建,能拧参数、能导 STEP。
+// 名字是 platform 仓库 packages/cloud/lib/scad-examples.ts 那张表的键(那边只加不改)——加例子先在那边加、发版,
+// 再在这里加名字、中英两份文案(home.examples)和 public/scad-examples/<名字>.webp。app 不认的名字只会提示找不到。
+// 缩略图:platform 里 `pnpm test:scad-examples` 留下 .scad-examples/<名字>/model.py,把零件挪离原点(原点标记就不入画)
+// 后 `cad-build snapshot --view iso`,裁掉标注、按模型居中,白底 4:3 800×600 webp。
+export const SCAD_EXAMPLES = ["pipe-flange", "spur-gears", "parametric-box"];
+
+export function scadExampleUrl(locale, name) {
+  return `${APP_SCAD_URL}?example=${encodeURIComponent(name)}&lang=${locale}`;
+}
+
 export function scadMetadata(locale, page) {
   const copy = getScadCopy(locale);
   const { title, description, keywords } = copy[page];
@@ -92,6 +103,26 @@ export function getScadCopy(locale) {
         cta: "转换 .scad 文件",
         corpus: `Thingiverse 上 ${CORPUS_FILES} 份真实 .scad 文件，${CORPUS_RATE} 能直接转换。`,
         corpusLink: "哪些能精确转换",
+        examplesTitle: "手边没有 .scad 文件？先试试这几个",
+        examplesIntro: "点开就在浏览器里构建好；拖参数面板里的滑块改尺寸，然后导出 STEP。不用登录。",
+        exampleOpen: "打开并导出 STEP",
+        examples: {
+          "pipe-flange": {
+            title: "对焊法兰",
+            text: "回转截面、锥形颈部、一圈螺栓孔：导出的 STEP 里是真圆柱、真圆锥。",
+            alt: "对焊法兰的等轴测图：圆盘上八个螺栓孔，中间是锥形颈部和通孔",
+          },
+          "spur-gears": {
+            title: "一对啮合齿轮",
+            text: "入口文件 use 了 lib/ 下的渐开线齿轮库：多文件项目按原样解析。",
+            alt: "一大一小两个啮合直齿轮的等轴测图，各带一个中心孔",
+          },
+          "parametric-box": {
+            title: "带盖参数化盒子",
+            text: "尺寸、壁厚、圆角、盖子松紧都是 Customizer 参数，拖滑块就重建。",
+            alt: "圆角盒子和它的盖子并排摆放、开口朝上的等轴测图",
+          },
+        },
         compareTitle: "网格 STEP 与 B-rep STEP",
         meshLabel: "网格包成的 STEP",
         meshStat: "256 个三角面",
@@ -232,6 +263,26 @@ export function getScadCopy(locale) {
       cta: "Convert a .scad file",
       corpus: `${CORPUS_RATE} of ${CORPUS_FILES.toLocaleString("en-US")} real Thingiverse .scad files convert.`,
       corpusLink: "What converts exactly",
+      examplesTitle: "No .scad file at hand? Start with one of these",
+      examplesIntro: "Each opens already built in your browser. Drag the Customizer sliders to resize it, then export STEP. No sign-up.",
+      exampleOpen: "Open and export STEP",
+      examples: {
+        "pipe-flange": {
+          title: "Weld-neck flange",
+          text: "A revolved profile with a tapered hub and a bolt circle — true cylinders and cones in the STEP.",
+          alt: "Isometric view of a weld-neck flange: eight bolt holes around a tapered hub with a bore",
+        },
+        "spur-gears": {
+          title: "Meshing spur gears",
+          text: "The entry file uses an involute gear library in lib/ — multi-file projects resolve as they are.",
+          alt: "Isometric view of a small and a large spur gear in mesh, each with a centre bore",
+        },
+        "parametric-box": {
+          title: "Parametric box with lid",
+          text: "Size, wall, corner radius and lid fit are Customizer parameters; drag a slider and it rebuilds.",
+          alt: "Isometric view of a rounded box and its lid side by side, open side up",
+        },
+      },
       compareTitle: "Mesh STEP vs. B-rep STEP",
       meshLabel: "Mesh wrapped in STEP",
       meshStat: "256 triangular faces",
