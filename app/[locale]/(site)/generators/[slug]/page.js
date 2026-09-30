@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { isSupportedLocale } from "../../../lib/landing-page";
+import { isSupportedLocale } from "../../../../lib/landing-page";
 import {
   GENERATORS,
   generatorAppUrl,
   generatorsSharedCopy,
   getGenerator,
-} from "../../../lib/generators";
-import { OG_BASE } from "../../../lib/seo";
+} from "../../../../lib/generators";
+import { OG_BASE } from "../../../../lib/seo";
 
 export function generateStaticParams() {
   return ["en", "zh"].flatMap((locale) =>

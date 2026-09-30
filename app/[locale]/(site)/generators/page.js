@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { isSupportedLocale } from "../../lib/landing-page";
-import { GENERATORS, generatorsSharedCopy } from "../../lib/generators";
-import { OG_BASE } from "../../lib/seo";
+import { isSupportedLocale } from "../../../lib/landing-page";
+import { GENERATORS, generatorsSharedCopy } from "../../../lib/generators";
+import { OG_BASE } from "../../../lib/seo";
 
 export function generateStaticParams() {
   return [{ locale: "en" }, { locale: "zh" }];

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { isSupportedLocale } from "../../lib/landing-page";
-import { OG_BASE } from "../../lib/seo";
+import { isSupportedLocale } from "../../../lib/landing-page";
+import { OG_BASE } from "../../../lib/seo";
 
 function getCopy(locale) {
   if (locale === "zh") {

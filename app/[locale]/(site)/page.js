@@ -3,8 +3,8 @@ import {
   getLandingPageHtml,
   HERO_PRODUCT_PRELOAD,
   isSupportedLocale,
-} from "../lib/landing-page";
-import { OG_BASE } from "../lib/seo";
+} from "../../lib/landing-page";
+import { OG_BASE } from "../../lib/seo";
 
 function getSeoCopy(locale) {
   if (locale === "zh") {

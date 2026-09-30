@@ -6,9 +6,12 @@ www.forgent3d.com。Next.js App Router，通过 `@opennextjs/cloudflare` 部署�
 
 ## 文件结构
 
-- `app/[locale]/page.js`: 首页（`en` / `zh`），内容由 `app/lib/landing-page.js` 渲染
+- `app/[locale]/(site)/page.js`: 首页（`en` / `zh`），内容由 `app/lib/landing-page.js` 渲染
 - `app/lib/landing-page.js`: 首页全部文案（`COPY`）+ HTML 模板 + skills 常量
-- `app/[locale]/{skills,quick-start,pricing,local-data,contact,...}/page.js`: 子页面，文案在各自的 `getCopy(locale)`
+- `app/[locale]/(site)/{skills,quick-start,pricing,local-data,contact,...}/page.js`: 子页面，文案在各自的 `getCopy(locale)`；
+  `(site)/layout.js` 给它们和首页挂同一条顶栏（路由组，不进 URL）
+- `app/[locale]/openscad-to-step/`: OpenSCAD → STEP 的三页（首页 / why / compatibility），**自带顶栏**，不走 `(site)`；
+  文案、路径、metadata 在 `app/lib/openscad-to-step.js`
 - `app/m/[shareSlug]/`: 公开模型分享页（3D 全屏 / 详情），数据来自 cad-agent
 - `app/lib/cad-agent.js`: 已发布模型 API 客户端
 - `app/robots.js` / `app/sitemap.js`: robots 与 sitemap（新增页面记得补 sitemap）
@@ -48,7 +51,7 @@ pnpm deploy    # opennextjs-cloudflare build && deploy
 
 ## 新增页面清单
 
-1. 在 `app/[locale]/<slug>/page.js` 里写 `getCopy(locale)`（中英两份）、
+1. 在 `app/[locale]/(site)/<slug>/page.js` 里写 `getCopy(locale)`（中英两份）、
    `generateStaticParams`、`generateMetadata`（canonical + hreflang；`openGraph` 里展开
    `app/lib/seo.js` 的 `OG_BASE`，否则这一页分享出去没有卡片图）。
 2. 在 `app/sitemap.js` 补 `/en/<slug>` 和 `/zh/<slug>`。

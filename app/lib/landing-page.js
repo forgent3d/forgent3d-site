@@ -234,7 +234,6 @@ export function getSiteHeaderHtml(locale) {
         <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
           <a class="js-explore-link ${navLink}" href="https://app.forgent3d.com/explore?lang=${locale}">${t.navExplore}</a>
           <a class="${navLink}" href="/${locale}/generators">${t.navGenerators}</a>
-          <a class="${navLink}" href="/${locale}/openscad-to-step">${t.navScadToStep}</a>
           <a class="js-pricing-link ${navLink}" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="${navLink}" href="/${locale}/contact">${t.navContact}</a>
         </nav>

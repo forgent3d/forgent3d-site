@@ -4,8 +4,8 @@ window.FORGENT_LINKS = {
   // 访客也能先打字,按下发送才要登录),留着两个是因为埋点分得开(try_clicked vs
   // workbench_clicked):首屏 CTA 和顶栏导航的转化不该混成一个数。
   try: "https://app.forgent3d.com",
-  // OpenSCAD → STEP 转换器(/[locale]/openscad-to-step 的 CTA)。app 里的路径要是改了,这里和那一页的
-  // APP_SCAD_URL 一起改:那边是服务端渲染进 HTML 的 href(爬虫看到的),这里只在运行时覆盖它。
+  // OpenSCAD → STEP 转换器(/[locale]/openscad-to-step/* 的 CTA)。app 里的路径要是改了,这里和
+  // app/lib/openscad-to-step.js 的 APP_SCAD_URL 一起改:那边是服务端渲染进 HTML 的 href(爬虫看到的),这里只在运行时覆盖它。
   scad: "https://app.forgent3d.com/scad",
   // Header/footer GitHub entry — points at the skills repo, the open-source surface we lead with.
   github: "https://github.com/forgent3d/forgent3d-skills",
