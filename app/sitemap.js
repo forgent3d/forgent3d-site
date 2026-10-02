@@ -2,39 +2,27 @@ import { GENERATORS } from "./lib/generators";
 
 const base = "https://www.forgent3d.com";
 
-const generatorRows = ["en", "zh"].flatMap((locale) => [
-  { url: `${base}/${locale}/generators`, changeFrequency: "weekly", priority: 0.85 },
-  ...GENERATORS.map((g) => ({
-    url: `${base}/${locale}/generators/${g.slug}`,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  })),
-]);
+// lastModified:只在页面正文真改了的时候往后挪。Google 只信一直准的 lastmod,别图省事写成构建时间
+// (每次部署全站都「刚改过」,等于没写)。
+const ROUTES = [
+  // [路径, changeFrequency, priority, lastModified]
+  ["", "weekly", 1.0, "2026-09-30"],
+  ["/skills", "weekly", 0.85, "2026-09-30"],
+  ["/openscad-to-step", "weekly", 0.9, "2026-09-30"],
+  ["/openscad-to-step/why-openscad-cant-export-step", "monthly", 0.7, "2026-09-30"],
+  ["/openscad-to-step/compatibility", "monthly", 0.7, "2026-09-30"],
+  ["/generators", "weekly", 0.85, "2026-09-30"],
+  ...GENERATORS.map((g) => [`/generators/${g.slug}`, "weekly", 0.8, "2026-09-30"]),
+  ["/ai-3d-model-generation", "weekly", 0.8, "2026-09-30"],
+  ["/code-to-parametric-cad", "weekly", 0.8, "2026-09-30"],
+  ["/pricing", "weekly", 0.75, "2026-09-30"],
+  ["/contact", "weekly", 0.7, "2026-09-30"],
+  ["/local-data", "weekly", 0.7, "2026-09-30"],
+  ["/quick-start", "weekly", 0.7, "2026-09-30"],
+];
 
 export default function sitemap() {
-  return [
-    { url: `${base}/en`, changeFrequency: "weekly", priority: 1.0 },
-    { url: `${base}/zh`, changeFrequency: "weekly", priority: 1.0 },
-    { url: `${base}/en/skills`, changeFrequency: "weekly", priority: 0.85 },
-    { url: `${base}/zh/skills`, changeFrequency: "weekly", priority: 0.85 },
-    { url: `${base}/en/openscad-to-step`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${base}/zh/openscad-to-step`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${base}/en/openscad-to-step/why-openscad-cant-export-step`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/zh/openscad-to-step/why-openscad-cant-export-step`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/en/openscad-to-step/compatibility`, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${base}/zh/openscad-to-step/compatibility`, changeFrequency: "monthly", priority: 0.7 },
-    ...generatorRows,
-    { url: `${base}/en/ai-3d-model-generation`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/zh/ai-3d-model-generation`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/en/code-to-parametric-cad`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/zh/code-to-parametric-cad`, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${base}/en/pricing`, changeFrequency: "weekly", priority: 0.75 },
-    { url: `${base}/zh/pricing`, changeFrequency: "weekly", priority: 0.75 },
-    { url: `${base}/en/contact`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/zh/contact`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/en/local-data`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/zh/local-data`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/en/quick-start`, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${base}/zh/quick-start`, changeFrequency: "weekly", priority: 0.7 },
-  ];
+  return ROUTES.flatMap(([path, changeFrequency, priority, lastModified]) =>
+    ["en", "zh"].map((locale) => ({ url: `${base}/${locale}${path}`, lastModified, changeFrequency, priority })),
+  );
 }

@@ -1,9 +1,9 @@
 import Script from "next/script";
 
-import { PageEnhancer } from "./components/page-enhancer";
-import { OG_BASE, SITE_URL } from "./lib/seo";
+import { PageEnhancer } from "../components/page-enhancer";
+import { OG_BASE, SITE_URL } from "../lib/seo";
 
-import "./globals.css";
+import "../globals.css";
 
 const DEFAULT_DESCRIPTION =
   "Cloud AI CAD agent for editable 3D models, plus a skill that brings it to Claude Code, Codex, and Cursor.";
@@ -18,9 +18,14 @@ export const metadata = {
   twitter: { card: "summary_large_image" },
 };
 
-export default function RootLayout({ children }) {
+/**
+ * 根布局放在 [locale] 下,<html lang> 才能跟着语言走:放在 app/ 顶层时拿不到 locale,zh 页一直标成 en
+ * (Bing、浏览器翻译条和读屏都看这个)。只负责跳转的 "/" 在 app/(root) 有自己的最小根布局。
+ */
+export default async function RootLayout({ children, params }) {
+  const { locale } = await params;
   return (
-    <html lang="en">
+    <html lang={locale === "zh" ? "zh-CN" : "en"}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
