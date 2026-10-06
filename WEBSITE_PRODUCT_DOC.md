@@ -152,9 +152,10 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 
 ### 埋点事件
 
-`homepage_viewed`、`try_clicked`、`click_pricing`、`click_skills`、`click_skills_repo`、
-`copy_skills_command`、`click_download_desktop`、`click_github`。新增 CTA 就补一条，
-别复用语义不符的事件名。
+全站自动记 PostHog 标准 `$pageview` / `$pageleave`（`instrumentation-client.js`，含客户端跳转），
+来源、utm、跳出率看它。自定义事件：`homepage_viewed`、`try_clicked`、`click_pricing`、`click_skills`、
+`click_skills_repo`、`copy_skills_command`、`click_download_desktop`、`click_github`、`click_explore`、
+`click_openscad_to_step`、`click_scad_example`。新增 CTA 就补一条，别复用语义不符的事件名。
 
 ## 5. 上线与迭代建议
 
