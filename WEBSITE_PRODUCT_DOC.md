@@ -58,6 +58,9 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
   …/why-openscad-cant-export-step  为什么 OpenSCAD 导不出 STEP、三种绕法
   …/compatibility                  哪些能精确转换、目前的限制
 /[locale]/openscad-viewer        OpenSCAD 在线预览落地页（同一个 /scad，另一个来意：看模型；和转换器页互链，不抢同一组词）
+/[locale]/blog                   文章列表;/[locale]/blog/<slug> 单篇。正文住在 content/blog/<slug>.<locale>.md
+                                 (头部 title / description / date,可选 updated;Markdown 子集见 app/lib/markdown.js),
+                                 中英各一份、同一个 slug。导航和页脚都有入口。
 /[locale]/contact                联系我们
 /m/[shareSlug]                   公开模型分享页（含 details / view）
 ```
@@ -68,7 +71,7 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 ### 首页区块顺序
 
 ```text
-[Nav]     Agent | Skills | 两种用法 | 方案 | 联系我们 | 进入工作台 | GitHub | 语言
+[Nav]     示例 | 生成器 | 方案 | 文章 | 联系我们 | 进入工作台 | GitHub | 语言
 
 [Hero]    左：标题 + 副标题 + 三个 CTA（登录 / 安装 Skill / 观看演示）
           右：产品界面大图（可点开灯箱）

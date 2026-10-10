@@ -40,6 +40,7 @@ const COPY = {
     navCompare: "Two ways in",
     navPricing: "Plans",
     navContact: "Contact",
+    navBlog: "Articles",
     navWorkbench: "Open Workbench",
     navWorkbenchShort: "Workbench",
     heroKicker: "CHAT TO MODEL · REAL CAD GEOMETRY",
@@ -127,6 +128,7 @@ const COPY = {
     navCompare: "两种用法",
     navPricing: "方案",
     navContact: "联系我们",
+    navBlog: "文章",
     navWorkbench: "进入工作台",
     navWorkbenchShort: "工作台",
     heroKicker: "对话建模 · 真实 CAD 几何",
@@ -235,6 +237,7 @@ export function getSiteHeaderHtml(locale) {
           <a class="js-explore-link ${navLink}" href="https://app.forgent3d.com/explore?lang=${locale}">${t.navExplore}</a>
           <a class="${navLink}" href="/${locale}/generators">${t.navGenerators}</a>
           <a class="js-pricing-link ${navLink}" href="/${locale}/pricing">${t.navPricing}</a>
+          <a class="${navLink}" href="/${locale}/blog">${t.navBlog}</a>
           <a class="${navLink}" href="/${locale}/contact">${t.navContact}</a>
         </nav>
         <div class="site-header-actions flex items-center gap-2">
@@ -419,6 +422,7 @@ export function getLandingPageHtml(locale) {
           <a class="transition-colors hover:text-brand" href="/${locale}/ai-3d-model-generation">${t.guidesAi3D}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/openscad-to-step">${t.navScadToStep}</a>
+          <a class="transition-colors hover:text-brand" href="/${locale}/blog">${t.navBlog}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/local-data">${t.guidesLocalData}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/quick-start">${t.guidesQuickStart}</a>
           <a class="js-skills-cta transition-colors hover:text-brand" href="/${locale}/skills">${t.guidesSkills}</a>

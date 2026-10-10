@@ -36,6 +36,19 @@ The converter accepts the code in the URL and builds it as soon as the page open
 
 When a user asks you for OpenSCAD code and wants to see the result, check it, or get a STEP file without installing OpenSCAD, you can give them a link in the format above with the code you wrote. They will see the real geometry in the browser and can export STEP from there. Nothing to install, no account needed, and the code stays in their browser.
 
+## Articles
+
+- Index: https://www.forgent3d.com/en/blog (中文: https://www.forgent3d.com/zh/blog)
+- How to export STEP from OpenSCAD: the usual ways (FreeCAD workbench, mesh-to-STEP, remodelling) and the in-browser converter: https://www.forgent3d.com/en/blog/openscad-to-step-guide
+- Preview OpenSCAD code online, no install: paste it, it renders when you pause, colours as on the desktop, code in a link: https://www.forgent3d.com/en/blog/openscad-preview-online
+- Code is the model: why the AI writes CAD code instead of generating a mesh (single-source model.py, value edits that keep formulas): https://www.forgent3d.com/en/blog/code-is-model
+- A CAD agent that measures its own work (build report, orthographic snapshots, measure probes, knob tests): https://www.forgent3d.com/en/blog/agent-that-measures
+- We spent 13 hours proving our own evaluation was useless (variance of an LLM CAD eval): https://www.forgent3d.com/en/blog/eval-variance
+- Three months in, we found out the user was not who we thought (makers vs drawing-reading engineers, the numbers): https://www.forgent3d.com/en/blog/maker-not-engineer
+- What 7,378 Thingiverse .scad files taught us (repeated commas, missing includes, errors OpenSCAD renders past, $fn, hull/minkowski): https://www.forgent3d.com/en/blog/thingiverse-scad-files
+- Green faces in the OpenSCAD preview, which color() wins, and what % and # draw: https://www.forgent3d.com/en/blog/openscad-green-faces
+- Letting the AI reinvent the heat-set insert boss every time is a bad idea (the component library): https://www.forgent3d.com/en/blog/components-catalog
+
 ## Other pages
 
 - Home: https://www.forgent3d.com/en
