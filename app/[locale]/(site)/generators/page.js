@@ -56,6 +56,7 @@ export default async function GeneratorsIndexPage({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(listSchema) }} />
       <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{t.catalogH1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{t.catalogIntro}</p>
+      <p className="mt-3 max-w-3xl text-sm text-muted-foreground">{t.licenseNote}</p>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {GENERATORS.map((g) => (

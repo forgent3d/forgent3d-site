@@ -44,7 +44,7 @@ export const GENERATORS = [
         whyPoints: [
           "True Gridfinity spec: 42 mm pitch, 7 mm height units, stackable lip",
           "Dividers, magnet holes (Ø6 × 2 mm) and scoop as simple toggles",
-          "Exports clean STL / STEP / 3MF — printable without supports",
+          "Exports clean STL / STEP — printable without supports",
           "Need a label shelf or a custom cutout? Remix it with the AI agent",
         ],
         faqs: [
@@ -73,7 +73,7 @@ export const GENERATORS = [
         whyPoints: [
           "严格遵循 Gridfinity 规范：42 mm 栅距、7 mm 高度单元、可堆叠唇口",
           "分隔、磁铁孔（Ø6 × 2 mm）、取物斜坡都是一键开关",
-          "导出干净的 STL / STEP / 3MF，免支撑直接打印",
+          "导出干净的 STL / STEP，免支撑直接打印",
           "想加标签架或异形挖槽？让 AI 在这个模型上接着改",
         ],
         faqs: [
@@ -658,7 +658,7 @@ export function generatorsSharedCopy(locale) {
         "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、齿轮、垫片、工具托盘。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
-        "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP / 3MF；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
+        "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
       openApp: "打开生成器",
       remixApp: "用 AI 继续改",
       paramsTitle: "可调参数",
@@ -671,9 +671,16 @@ export function generatorsSharedCopy(locale) {
       howSteps: [
         "打开生成器，模型在浏览器里完成首次构建（无需安装任何软件）。",
         "在参数面板里调整尺寸与选项，几何实时重建、随时 3D 预览。",
-        "导出 STL / STEP / 3MF 去打印；或让 AI agent 在同一模型上加参数外的特征。",
+        "导出 STL / STEP 去打印；或让 AI agent 在同一模型上加参数外的特征。",
       ],
       faqTitle: "常见问题",
+      sharedFaqs: [
+        {
+          q: "生成的模型可以商用吗？",
+          a: "可以。用生成器做出来的模型和导出的 STL / STEP 文件归你所有：自己打印、出售打印件、在产品里使用都没有限制，也不需要署名 Forgent3D。",
+        },
+      ],
+      licenseNote: "生成的模型可以商用，无需署名。",
       relatedTitle: "更多生成器",
       scadPrompt: "已经有自己的 .scad 文件？",
       scadLink: "OpenSCAD 转 STEP",
@@ -687,7 +694,7 @@ export function generatorsSharedCopy(locale) {
       "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, gears, washers and tool trays. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
-      "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP / 3MF — and for anything beyond the sliders, the AI agent edits the same model.",
+      "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",
     openApp: "Open the generator",
     remixApp: "Remix with AI",
     paramsTitle: "Parameters you can tune",
@@ -701,9 +708,16 @@ export function generatorsSharedCopy(locale) {
     howSteps: [
       "Open the generator — the model builds right in your browser, nothing to install.",
       "Tune dimensions and options in the parameter panel; the geometry rebuilds live in 3D.",
-      "Export STL / STEP / 3MF for printing — or ask the AI agent for features beyond the sliders.",
+      "Export STL / STEP for printing — or ask the AI agent for features beyond the sliders.",
     ],
     faqTitle: "FAQ",
+    sharedFaqs: [
+      {
+        q: "Can I sell prints made with these generators?",
+        a: "Yes. Models you generate and the STL / STEP files you export are yours: print them, sell the prints, or use them in a product. No attribution to Forgent3D is required.",
+      },
+    ],
+    licenseNote: "Models you generate are yours to use commercially, no attribution required.",
     relatedTitle: "More generators",
     scadPrompt: "Already have your own .scad file?",
     scadLink: "Convert OpenSCAD to STEP",

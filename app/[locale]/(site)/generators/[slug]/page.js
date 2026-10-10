@@ -56,11 +56,12 @@ export default async function GeneratorLandingPage({ params }) {
   const t = generatorsSharedCopy(locale);
   const appUrl = generatorAppUrl(generator, locale);
   const related = GENERATORS.filter((g) => g.slug !== slug);
+  const faqs = [...copy.faqs, ...t.sharedFaqs];
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: copy.faqs.map((faq) => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.q,
       acceptedAnswer: { "@type": "Answer", text: faq.a },
@@ -173,7 +174,7 @@ export default async function GeneratorLandingPage({ params }) {
       <section className="mt-14">
         <h2 className="text-2xl font-semibold">{t.faqTitle}</h2>
         <div className="mt-4 space-y-5">
-          {copy.faqs.map((faq) => (
+          {faqs.map((faq) => (
             <article key={faq.q}>
               <h3 className="font-semibold text-foreground">{faq.q}</h3>
               <p className="mt-1 max-w-3xl text-muted-foreground">{faq.a}</p>
