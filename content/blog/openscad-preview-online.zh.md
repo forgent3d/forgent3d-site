@@ -24,7 +24,7 @@ date: 2026-10-10
 
 预览满意了，点「复制链接」。那个链接里带着你当前的代码，谁点开，看到的就是渲染好的模型，不用再贴一遍。
 
-反过来也行。你让 ChatGPT、Gemini 或者 Claude 写一段 OpenSCAD，可以顺手让它给一个 Forgent3D 预览链接，形如 `https://app.forgent3d.com/scad#code=<代码>`。点开就是模型。链接格式在[预览页](/zh/openscad-viewer)上写着，直接复制给 AI 看就行。
+反过来也行。你让 ChatGPT、Gemini 或者 Claude 写一段 OpenSCAD，可以顺手让它给一个 Forgent3D 预览链接，形如 `https://app.forgent3d.com/scad#code=<代码>`。点开就是模型。链接格式在[预览页](/zh/openscad-viewer#open-from-link)上写着，直接复制给 AI 看就行。
 
 ## 代码不会离开你的浏览器
 

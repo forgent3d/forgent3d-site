@@ -54,10 +54,11 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
 /[locale]/ai-3d-model-generation SEO 落地页
 /[locale]/code-to-parametric-cad SEO 落地页
 /[locale]/openscad-to-step       OpenSCAD → STEP 落地页（CTA 进 app 的 /scad；自带顶栏，不挂站点导航）
-                                 含「从链接打开代码」一节：把 /scad#code=<代码> 的格式写给 AI 助手看，public/llms.txt 同步
+                                 「从链接打开代码」一节只留一句话 + /scad#code=<代码> 格式，锚点 #open-from-link 保留（AI 聊天里引用过）；完整版在 openscad-viewer 页
   …/why-openscad-cant-export-step  为什么 OpenSCAD 导不出 STEP、三种绕法
   …/compatibility                  哪些能精确转换、目前的限制
 /[locale]/openscad-viewer        OpenSCAD 在线预览落地页（同一个 /scad，另一个来意：看模型；和转换器页互链，不抢同一组词）
+                                 「从链接打开代码」完整版在这页（格式、规则、给 AI 的提示词），public/llms.txt 同步
 /[locale]/blog                   文章列表;/[locale]/blog/<slug> 单篇。正文住在 content/blog/<slug>.<locale>.md
                                  (头部 title / description / date,可选 updated;Markdown 子集见 app/lib/markdown.js),
                                  中英各一份、同一个 slug。导航和页脚都有入口。运行时不读文件系统(Worker 里没有 content/):

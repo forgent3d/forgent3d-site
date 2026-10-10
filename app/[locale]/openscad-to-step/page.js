@@ -1,15 +1,14 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { articleCards } from "../../lib/blog";
 import { BRAND_BUTTON, isSupportedLocale } from "../../lib/landing-page";
 import {
   APP_SCAD_URL,
   SCAD_EXAMPLES,
   SCAD_LINK_FORMAT,
-  SCAD_LINK_SAMPLE,
   getScadCopy,
   scadAppUrl,
   scadBreadcrumbSchema,
-  scadCodeUrl,
   scadExampleUrl,
   scadMetadata,
   scadPath,
@@ -119,36 +118,17 @@ export default async function OpenScadToStepPage({ params }) {
         </div>
       </section>
 
-      {/* 给 AI 助手(和搜索引擎)看的那一节:链接格式写成纯文本,爬虫和 LLM 都抓得到;例子链接不走 .js-scad-link
-          (它会被 public/script.js 改写成裸地址),自带 click_scad_code_link。 */}
+      {/* 「从链接打开」只留一句话和格式:完整版(规则、提示词)在预览器页的同名一节 —— 让 AI 写了代码想看效果的人是那页的来意,
+          搜 openscad to step 进来的人手里已经有 .scad。锚点 #open-from-link 留着,AI 聊天里引用过这个地址。 */}
       <section className="mt-20" id="open-from-link">
         <h2 className="text-2xl font-semibold">{t.linkTitle}</h2>
-        <p className="mt-2 max-w-3xl leading-7 text-muted-foreground">{t.linkIntro}</p>
-        <p className="mt-6 text-sm font-semibold text-foreground">{t.linkFormatLabel}</p>
-        <pre className="mt-2 overflow-x-auto rounded-xl border border-border/80 bg-card/60 p-4 font-mono text-sm text-foreground">
+        <p className="mt-2 max-w-3xl leading-7 text-muted-foreground">{t.linkText}</p>
+        <pre className="mt-4 overflow-x-auto rounded-xl border border-border/80 bg-card/60 p-4 font-mono text-sm text-foreground">
           <code>{SCAD_LINK_FORMAT}</code>
         </pre>
-        <ul className="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
-          {t.linkRules.map((rule) => (
-            <li key={rule}>{rule}</li>
-          ))}
-        </ul>
-        <p className="mt-6 text-sm font-semibold text-foreground">{t.linkPromptLabel}</p>
-        <pre className="mt-2 overflow-x-auto whitespace-pre-wrap rounded-xl border border-border/80 bg-card/60 p-4 font-mono text-sm text-foreground">
-          <code>{t.linkPrompt}</code>
-        </pre>
-        <p className="mt-6 text-sm font-semibold text-foreground">{t.linkSampleLabel}</p>
-        <pre className="mt-2 overflow-x-auto rounded-xl border border-border/80 bg-card/60 p-4 font-mono text-sm text-foreground">
-          <code>{SCAD_LINK_SAMPLE}</code>
-        </pre>
-        <a
-          className={`js-scad-code-link ${BRAND_BUTTON} mt-4 min-h-[44px] px-6`}
-          href={scadCodeUrl(locale, SCAD_LINK_SAMPLE)}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {t.linkSampleOpen} →
-        </a>
+        <Link className="mt-4 inline-block text-sm text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-viewer#open-from-link`}>
+          {t.linkMore} →
+        </Link>
       </section>
 
       <section className="mt-20">
@@ -184,16 +164,18 @@ export default async function OpenScadToStepPage({ params }) {
 
       <section className="mt-20">
         <h2 className="text-lg font-semibold">{t.moreTitle}</h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[
-            { page: "why", title: copy.why.h1, text: t.moreWhy },
-            { page: "compat", title: copy.compat.h1, text: t.moreCompat },
+            { href: scadPath(locale, "why"), title: copy.why.h1, text: t.moreWhy },
+            { href: scadPath(locale, "compat"), title: copy.compat.h1, text: t.moreCompat },
+            ...articleCards(locale, ["openscad-to-step-guide"], t.articleKicker),
           ].map((card) => (
             <Link
-              key={card.page}
+              key={card.href}
               className="group rounded-xl border border-border/80 bg-card/60 p-5 transition-colors hover:border-brand/50"
-              href={scadPath(locale, card.page)}
+              href={card.href}
             >
+              {card.kicker && <p className="mb-1 font-mono text-xs text-muted-foreground">{card.kicker}</p>}
               <h3 className="font-semibold text-foreground group-hover:text-brand">{card.title} →</h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{card.text}</p>
             </Link>

@@ -69,6 +69,14 @@ export function blogPath(locale, slug) {
   return slug ? `/${locale}/blog/${slug}` : `/${locale}/blog`;
 }
 
+/** 落地页「延伸阅读」里的文章卡片:标题和摘要都从文章来;文章没有这个语言的版本就不出卡。 */
+export function articleCards(locale, slugs, kicker) {
+  return slugs
+    .map((slug) => getPost(locale, slug))
+    .filter(Boolean)
+    .map((post) => ({ href: blogPath(locale, post.slug), kicker, title: post.title, text: post.description }));
+}
+
 /** Minutes to read, never 0. */
 export function readingMinutes(post) {
   return Math.max(1, Math.round(post.words / (post.locale === "zh" ? 400 : 220)));

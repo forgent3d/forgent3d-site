@@ -151,11 +151,17 @@ export function getViewerCopy(locale) {
         ["动画 $t", "有", "没有"],
       ],
       linkTitle: "从链接打开代码（给 AI 助手和脚本）",
-      linkText: "网址形如 https://app.forgent3d.com/scad#code=<代码>，<代码> 是百分号编码的原文（encodeURIComponent 的结果）或 base64 / base64url。放在 # 后面，代码不会发给服务器，也没有长度限制。ChatGPT、Gemini、Claude 替你写了 OpenSCAD，让它顺手附上这样的链接，点开就是渲染好的模型。",
-      linkFormat: "https://app.forgent3d.com/scad#code=<CODE>",
+      linkText:
+        "把代码放进网址，预览器打开就载入它、立刻渲染：不用文件、不用登录。这是给 AI 助手准备的：ChatGPT、Gemini、Claude 替你写了 OpenSCAD，让它顺手附上一个 Forgent3D 预览链接，点开就是渲染好的模型，能拖参数，满意了还能导 STEP。上面「带着示例代码打开」那颗按钮就是这样一个链接。",
+      linkFormatLabel: "链接格式",
+      linkRules: [
+        "<CODE> 是 .scad 源码：百分号编码的原文（encodeURIComponent 的结果）或 base64 / base64url 的 UTF-8 都行，预览器自己识别。",
+        "放在 # 后面：片段不会离开浏览器，代码不经过我们的服务器，也没有长度限制。短代码也可以写成 ?code=。",
+        "一个链接带一个文件。include / use 多文件的项目走「加载项目文件夹」；MCAD、BOSL2 这些内置库从链接打开也能用。",
+        "预览器里的「复制链接」按钮，把当前打开的代码变成这样一个链接。",
+      ],
       linkPromptLabel: "给 AI 的提示词",
       linkPrompt: "写一个 OpenSCAD 的 ___，并给我一个 Forgent3D 预览链接：https://app.forgent3d.com/scad#code=<把代码 encodeURIComponent 之后放这里>",
-      linkMore: "完整的格式说明和规则",
       faqTitle: "常见问题",
       faqs: [
         { q: "这是真的 OpenSCAD 吗？", a: "是。执行代码的就是 OpenSCAD 本体（2025 年的开发版快照，带 Manifold 几何内核），编译成 WebAssembly 在你的浏览器里运行。语言行为、内置库、Customizer 注释都和桌面版一样。" },
@@ -169,6 +175,7 @@ export function getViewerCopy(locale) {
       moreTitle: "延伸阅读",
       moreConverter: "预览满意了要 STEP：同一个工具，真正的 B-rep，Fusion、SolidWorks、FreeCAD 都能打开。",
       moreCompat: "哪些 OpenSCAD 写法能精确转成 STEP，目前还有哪些限制。",
+      articleKicker: "文章",
     };
   }
 
@@ -232,11 +239,17 @@ export function getViewerCopy(locale) {
       ["Animation ($t)", "Yes", "No"],
     ],
     linkTitle: "Open code from a link (for AI assistants and scripts)",
-    linkText: "A URL of the form https://app.forgent3d.com/scad#code=<code>, where <code> is the .scad source percent-encoded (what encodeURIComponent produces) or base64 / base64url. After # the code never leaves the browser and there is no length limit. When ChatGPT, Gemini or Claude writes OpenSCAD for you, ask it to add such a link: it opens with the model already rendered.",
-    linkFormat: "https://app.forgent3d.com/scad#code=<CODE>",
+    linkText:
+      "Put the code in the URL and the viewer opens with it loaded and rendered — no file, no sign-up. It is made for AI assistants: when ChatGPT, Gemini or Claude writes OpenSCAD for you, ask it for a Forgent3D preview link. Whoever opens it sees the model rendered, can drag the parameters and, once happy, export STEP. The “Open with sample code” button above is such a link.",
+    linkFormatLabel: "Link format",
+    linkRules: [
+      "<CODE> is the .scad source, either percent-encoded (what encodeURIComponent produces) or base64 / base64url UTF-8. The viewer tells them apart.",
+      "Put it after #: the fragment never leaves the browser, so the code is not sent to our server and there is no length limit. ?code= works too for short snippets.",
+      "One link carries one file. Projects with include / use go through “Load project folder”; MCAD, BOSL2 and the other built-in libraries work from a link.",
+      "The “Copy link” button in the viewer turns the code you have open into such a link.",
+    ],
     linkPromptLabel: "Prompt to try",
     linkPrompt: "Write OpenSCAD for a ___ and give me a Forgent3D preview link: https://app.forgent3d.com/scad#code=<the code, encodeURIComponent-encoded>",
-    linkMore: "The full format and its rules",
     faqTitle: "FAQ",
     faqs: [
       { q: "Is this real OpenSCAD?", a: "Yes. The code is executed by OpenSCAD itself — a 2025 development snapshot with the Manifold geometry kernel — compiled to WebAssembly and running in your browser. The language, the bundled libraries and the Customizer comments behave as on the desktop." },
@@ -250,5 +263,6 @@ export function getViewerCopy(locale) {
     moreTitle: "Read more",
     moreConverter: "Happy with the preview and need a STEP? The same tool, real B-rep, opens in Fusion, SolidWorks and FreeCAD.",
     moreCompat: "Which OpenSCAD features convert exactly to STEP, and the current limits.",
+    articleKicker: "Article",
   };
 }

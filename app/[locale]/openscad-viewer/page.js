@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { articleCards } from "../../lib/blog";
 import { BRAND_BUTTON, isSupportedLocale } from "../../lib/landing-page";
-import { scadPath } from "../../lib/openscad-to-step";
+import { SCAD_LINK_FORMAT, scadPath } from "../../lib/openscad-to-step";
 import {
   SCAD_EXAMPLES,
   VIEWER_SAMPLE,
@@ -120,20 +121,24 @@ export default async function OpenScadViewerPage({ params }) {
         </div>
       </section>
 
-      {/* 给 AI 助手(和搜索引擎)看的一节:格式和提示词都是纯文本,LLM 抓到就能照着写链接。完整规则在转换器页的同名一节。 */}
+      {/* 给 AI 助手(和搜索引擎)看的一节,「从链接打开」的完整版放这页:让 AI 写了代码想看效果的人是预览器的来意。
+          格式、规则、提示词都是纯文本,LLM 抓到就能照着写链接;转换器页同名锚点只留格式一行,链到这里。 */}
       <section className="mt-16 rounded-2xl border border-brand/30 bg-brand/[0.06] p-6" id="open-from-link">
         <h2 className="text-2xl font-semibold">{t.linkTitle}</h2>
         <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{t.linkText}</p>
-        <pre className="mt-4 overflow-x-auto rounded-xl border border-border/80 bg-background/70 p-4 font-mono text-sm text-foreground">
-          <code>{t.linkFormat}</code>
+        <p className="mt-6 text-sm font-semibold text-foreground">{t.linkFormatLabel}</p>
+        <pre className="mt-2 overflow-x-auto rounded-xl border border-border/80 bg-background/70 p-4 font-mono text-sm text-foreground">
+          <code>{SCAD_LINK_FORMAT}</code>
         </pre>
-        <p className="mt-4 text-sm font-semibold text-foreground">{t.linkPromptLabel}</p>
+        <ul className="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
+          {t.linkRules.map((rule) => (
+            <li key={rule}>{rule}</li>
+          ))}
+        </ul>
+        <p className="mt-6 text-sm font-semibold text-foreground">{t.linkPromptLabel}</p>
         <pre className="mt-2 overflow-x-auto whitespace-pre-wrap rounded-xl border border-border/80 bg-background/70 p-4 font-mono text-sm text-foreground">
           <code>{t.linkPrompt}</code>
         </pre>
-        <Link className="mt-4 inline-block text-sm text-brand transition-colors hover:text-brand/80" href={`${scadPath(locale)}#open-from-link`}>
-          {t.linkMore} →
-        </Link>
       </section>
 
       <section className="mt-16">
@@ -154,8 +159,10 @@ export default async function OpenScadViewerPage({ params }) {
           {[
             { href: scadPath(locale), title: t.converterLink, text: t.moreConverter },
             { href: scadPath(locale, "compat"), title: `${t.converterLink} · ${locale === "zh" ? "兼容性" : "compatibility"}`, text: t.moreCompat },
+            ...articleCards(locale, ["openscad-preview-online", "openscad-green-faces"], t.articleKicker),
           ].map((card) => (
             <Link key={card.href} className="group rounded-xl border border-border/80 bg-card/60 p-5 transition-colors hover:border-brand/50" href={card.href}>
+              {card.kicker && <p className="mb-1 font-mono text-xs text-muted-foreground">{card.kicker}</p>}
               <h3 className="font-semibold text-foreground group-hover:text-brand">{card.title} →</h3>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">{card.text}</p>
             </Link>

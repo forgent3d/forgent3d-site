@@ -35,21 +35,9 @@ export function scadExampleUrl(locale, name) {
 }
 
 // 带代码的链接:app 的 /scad 认 `#code=<代码>`(platform 仓库 packages/cloud/lib/scad-link.ts;也认 ?code=),值是百分号编码的
-// 原文或 base64 / base64url。这一页把格式写给 AI 助手看,所以文案里的格式和那边的解码规则要一起改。
+// 原文或 base64 / base64url。写给 AI 助手看的完整一节(规则、提示词)在预览器页(openscad-viewer.js 的 linkRules),
+// 转换器页只摆这一行格式再链过去;那边的解码规则变了,这两处和 public/llms.txt 要一起改。
 export const SCAD_LINK_FORMAT = `${APP_SCAD_URL}#code=<CODE>`;
-
-/** 页面上那个「从链接打开」的例子:源码短、读得懂、导出的 STEP 里有一个真圆柱孔。 */
-export const SCAD_LINK_SAMPLE = `// A spacer: 20 mm across, 8 mm tall, 6.5 mm bore
-$fn = 64;
-difference() {
-  cylinder(h = 8, d = 20);
-  translate([0, 0, -1]) cylinder(h = 10, d = 6.5);
-}`;
-
-export function scadCodeUrl(locale, code) {
-  const encoded = Buffer.from(code, "utf8").toString("base64url");
-  return `${APP_SCAD_URL}?lang=${locale}#code=${encoded}`;
-}
 
 export function scadMetadata(locale, page) {
   const copy = getScadCopy(locale);
@@ -152,20 +140,9 @@ export function getScadCopy(locale) {
           },
         },
         linkTitle: "从链接直接打开 OpenSCAD 代码",
-        linkIntro:
-          "把代码放进网址,转换器打开就载入它、立刻构建:不用文件、不用登录。这是给 AI 助手准备的:ChatGPT、Gemini、Claude 替你写了 OpenSCAD,让它顺手给一个 Forgent3D 预览链接,点开就是真实几何,能拖参数、能导 STEP。",
-        linkFormatLabel: "链接格式",
-        linkRules: [
-          "<CODE> 是 .scad 源码:百分号编码的原文(encodeURIComponent 的结果)或 base64 / base64url 的 UTF-8 都行,转换器自己识别。",
-          "放在 # 后面:片段不会离开浏览器,代码不经过我们的服务器,也没有长度限制。短代码也可以写成 ?code=。",
-          "一个链接带一个文件。include / use 多文件的项目走「加载项目文件夹」;MCAD 这些内置库从链接打开也能用。",
-          "转换器里的「复制链接」按钮,把当前打开的代码变成这样一个链接。",
-        ],
-        linkPromptLabel: "给 AI 的提示词",
-        linkPrompt:
-          "写一个 OpenSCAD 的 ___,并给我一个 Forgent3D 预览链接:https://app.forgent3d.com/scad#code=<把代码 encodeURIComponent 之后放这里>",
-        linkSampleLabel: "试一个",
-        linkSampleOpen: "从链接打开这段代码",
+        linkText:
+          "代码也可以放在网址里:转换器打开就载入它、立刻构建,不用文件、不用登录。ChatGPT、Gemini、Claude 替你写了 OpenSCAD,让它顺手给一个这样的链接,点开就是真实几何,能拖参数、能导 STEP。",
+        linkMore: "格式细节和给 AI 的提示词,见 OpenSCAD 在线预览",
         compareTitle: "网格 STEP 与 B-rep STEP",
         meshLabel: "网格包成的 STEP",
         meshStat: "256 个三角面",
@@ -205,6 +182,7 @@ export function getScadCopy(locale) {
         moreTitle: "延伸阅读",
         moreWhy: "OpenSCAD 为什么导不出 STEP，常见的几种绕法各有什么代价。",
         moreCompat: "哪些写法能精确转换，目前还有哪些限制。",
+        articleKicker: "文章",
       },
       why: {
         title: "OpenSCAD 为什么导不出 STEP：三种绕法对比 | Forgent3D",
@@ -340,20 +318,9 @@ export function getScadCopy(locale) {
         },
       },
       linkTitle: "Open OpenSCAD code straight from a link",
-      linkIntro:
-        "Put the code in the URL and the converter opens with it loaded and builds it right away — no file, no sign-up. It is made for AI assistants: when ChatGPT, Gemini or Claude writes OpenSCAD for you, ask it for a Forgent3D preview link. Whoever opens it sees the real geometry, can drag the parameters and export STEP.",
-      linkFormatLabel: "Link format",
-      linkRules: [
-        "<CODE> is the .scad source, either percent-encoded (what encodeURIComponent produces) or base64 / base64url UTF-8. The converter tells them apart.",
-        "Put it after #: the fragment never leaves the browser, so the code is not sent to our server and there is no length limit. ?code= works too for short snippets.",
-        "One link carries one file. Projects with include / use go through “Load project folder”; MCAD and the other built-in libraries work from a link.",
-        "The “Copy link” button in the converter turns the code you have open into such a link.",
-      ],
-      linkPromptLabel: "Prompt to try",
-      linkPrompt:
-        "Write OpenSCAD for a ___ and give me a Forgent3D preview link: https://app.forgent3d.com/scad#code=<the code, encodeURIComponent-encoded>",
-      linkSampleLabel: "Try one",
-      linkSampleOpen: "Open this code from a link",
+      linkText:
+        "The code can also go in the URL: the converter opens with it loaded and builds it right away — no file, no sign-up. When ChatGPT, Gemini or Claude writes OpenSCAD for you, ask it for such a link; whoever opens it sees the real geometry, can drag the parameters and export STEP.",
+      linkMore: "Format details and a prompt for the AI: see the OpenSCAD viewer page",
       compareTitle: "Mesh STEP vs. B-rep STEP",
       meshLabel: "Mesh wrapped in STEP",
       meshStat: "256 triangular faces",
@@ -393,6 +360,7 @@ export function getScadCopy(locale) {
       moreTitle: "Read more",
       moreWhy: "Why OpenSCAD has no STEP export, and what the usual workarounds cost you.",
       moreCompat: "Which OpenSCAD features convert exactly, and the current limits.",
+      articleKicker: "Article",
     },
     why: {
       title: "Why OpenSCAD Can't Export STEP — 3 Workarounds Compared | Forgent3D",

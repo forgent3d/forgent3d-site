@@ -24,7 +24,7 @@ The one difference is that it is closer to F6 than to F5: the geometry is actual
 
 Happy with the preview? Click "Copy link". The link carries the code you have open, and whoever opens it sees the rendered model without pasting anything.
 
-It works the other way too. When you ask ChatGPT, Gemini or Claude for a piece of OpenSCAD, ask it for a Forgent3D preview link as well, of the form `https://app.forgent3d.com/scad#code=<code>`. Open it and the model is there. The link format is written out on the [viewer page](/en/openscad-viewer); copy it into the chat and the assistant will follow it.
+It works the other way too. When you ask ChatGPT, Gemini or Claude for a piece of OpenSCAD, ask it for a Forgent3D preview link as well, of the form `https://app.forgent3d.com/scad#code=<code>`. Open it and the model is there. The link format is written out on the [viewer page](/en/openscad-viewer#open-from-link); copy it into the chat and the assistant will follow it.
 
 ## The code never leaves your browser
 
