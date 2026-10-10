@@ -155,7 +155,7 @@ function initPage() {
   applyLinks(".js-scad-viewer-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
   applyLinks(".js-skills-repo-link", linkConfig.skillsRepo, "https://github.com/forgent3d/forgent3d-skills");
 
-  // Install-command copy buttons (homepage skills section and /skills).
+  // Install-command copy buttons (homepage skills section, /skills, and the two OpenSCAD pages).
   document.querySelectorAll(".js-copy-command").forEach((node) => {
     if (!bindOnce(node, "Copy")) return;
     node.addEventListener("click", async () => {
@@ -171,7 +171,8 @@ function initPage() {
         return;
       }
 
-      trackEvent("copy_skills_command", { command: value });
+      // `source`: which page's button (skills / openscad-viewer / openscad-to-step; the homepage has none set)
+      trackEvent("copy_skills_command", { command: value, source: node.getAttribute("data-copy-source") || window.location.pathname });
       if (!copiedLabel) return;
       node.textContent = copiedLabel;
       window.setTimeout(() => {

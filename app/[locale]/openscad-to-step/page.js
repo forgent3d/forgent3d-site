@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articleCards } from "../../lib/blog";
-import { BRAND_BUTTON, isSupportedLocale } from "../../lib/landing-page";
+import { BRAND_BUTTON, SKILLS_INSTALL_COMMAND, isSupportedLocale } from "../../lib/landing-page";
 import {
   APP_SCAD_URL,
   SCAD_EXAMPLES,
@@ -128,6 +128,36 @@ export default async function OpenScadToStepPage({ params }) {
         </pre>
         <Link className="mt-4 inline-block text-sm text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-viewer#open-from-link`}>
           {t.linkMore} →
+        </Link>
+      </section>
+
+      {/* 用 agent 的人:同一个工具,装到 Claude Code / Codex 里。只给一条安装命令(skill 自己判断走 OpenSCAD 还是参数化模型),
+          STEP 的归属说清楚:skill 出的是 OpenSCAD 的网格,STEP 在链接打开的页面上。复制按钮带 data-copy-source,埋点分得出来源页。 */}
+      <section className="mt-20 rounded-2xl border border-border/80 bg-card/60 p-6" id="skill">
+        <h2 className="text-2xl font-semibold">{t.skillTitle}</h2>
+        <p className="mt-3 max-w-3xl leading-7 text-muted-foreground">{t.skillText}</p>
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <code className="min-w-0 flex-1 overflow-x-auto whitespace-nowrap rounded-md border border-border/80 bg-background px-4 py-3 font-mono text-sm text-foreground">
+            {SKILLS_INSTALL_COMMAND}
+          </code>
+          <button
+            className="js-copy-command inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-md border border-border/80 bg-card/60 px-5 text-sm font-semibold text-foreground transition-colors hover:border-brand/50"
+            type="button"
+            data-copy-value={SKILLS_INSTALL_COMMAND}
+            data-copy-source="openscad-to-step"
+            data-copy-label={t.skillCopy}
+            data-copied-label={t.skillCopied}
+          >
+            {t.skillCopy}
+          </button>
+        </div>
+        <ul className="mt-5 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
+          {t.skillBullets.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+        <Link className="js-skills-cta mt-5 inline-block text-sm text-brand transition-colors hover:text-brand/80" href={`/${locale}/skills`}>
+          {t.skillMore} →
         </Link>
       </section>
 

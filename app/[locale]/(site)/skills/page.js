@@ -17,12 +17,31 @@ function getCopy(locale) {
       kicker: "Skills",
       h1: "让你已经在用的 agent 会做 CAD",
       intro:
-        "装上 Forgent3D skill，你照常在 Claude Code、Codex 或 Cursor 里提需求，它就能写出可编辑的 CAD 模型，打开就能在浏览器里看、接着改。",
+        "装上 Forgent3D skill，你照常在 Claude Code、Codex 或 Cursor 里提需求。它按你的要求选路线：写一个可编辑的参数化模型，或者直接写 OpenSCAD。两条路都不用在本地装任何东西。",
       installTitle: "安装",
       installHint: "一条命令，在你想建模的目录里执行。",
-      installNote: "装完即用，不需要再装 CAD 内核或其他依赖。",
+      installNote: "装完即用：CAD 内核和 OpenSCAD 都随 skill 的命令行工具一起来，不用再装别的。",
       copy: "复制",
       copied: "已复制",
+      routesTitle: "两条路线，它自己选",
+      routesHint: "有 .scad 或提到 OpenSCAD 就走 OpenSCAD；要装配、要量尺寸、要以后在浏览器里接着改就写参数化模型。你也可以直接说要哪种。",
+      routes: [
+        {
+          title: "参数化模型",
+          badge: "build123d 方言",
+          when: "适合：尺寸以后要改、零件之间有配合或运动、要直接拿到真正的 STEP、要在浏览器里接着编辑。",
+          gets: "引擎构建并测量——孔径和孔位、每个平面在哪、壁厚——导出 STEP，模型出现在你的 Forgent3D 工作区。",
+          prompt: "用 Forgent3D skill 做一个电机安装支架：底板 80×60×6mm，四个 M4 沉头孔，立面上开一个 φ22 的轴孔。",
+        },
+        {
+          title: "OpenSCAD",
+          badge: ".scad",
+          when: "适合：你已经在用 OpenSCAD、手里有 .scad 文件、用 BOSL2 或 Customizer 参数。",
+          gets: "真正的 OpenSCAD 在本机渲染，agent 读回包围盒、体积和 echo() 的数，截图检查，导 STL / 3MF 去打印，再给你一个带代码的链接——那一页能导 STEP。",
+          prompt: "用 Forgent3D skill，在 OpenSCAD 里写一个带盖的收纳盒：内腔 80×50×30mm，壁厚 2mm，盖子松紧做成 Customizer 参数，给我预览链接。",
+        },
+      ],
+      promptLabel: "可以直接给 agent 的提示",
       agentsTitle: "支持的 agent",
       agentsHint: "任何支持 skill 的 agent 都可以。已验证：",
       flowTitle: "怎么用",
@@ -30,29 +49,26 @@ function getCopy(locale) {
         {
           label: "01",
           title: "让 agent 写零件",
-          text: "说清楚你要什么——尺寸、孔位、配合关系。它写出参数化模型，尺寸以后都能改。",
+          text: "说清楚你要什么——尺寸、孔位、配合关系。要 OpenSCAD 就提一句，它照你的语言写。",
         },
         {
           label: "02",
-          title: "它会构建和测量",
-          text: "每次改完都会构建并测量。",
+          title: "它会构建、测量、看一眼",
+          text: "每次改完都构建或渲染、读回尺寸、截一张三视图自己核对。",
         },
         {
           label: "03",
-          title: "模型出现在你的工作区",
-          text: "打开就是你自己的模型：可以在浏览器里继续调参数、编辑草图、分享和留版本。",
+          title: "拿到的东西",
+          text: "参数化模型出现在你的工作区，可以继续调参数、编辑草图、分享、留版本；OpenSCAD 零件是一个带代码的链接，打开就能拖参数、导 STEP 或 STL。",
         },
       ],
       whyTitle: "为什么值得装",
       why: [
         "模型代码留在你的仓库里，可以 Git 管理、审查和复用。",
-        "本地不用装 CAD 软件或任何依赖。",
-        "做出来的模型直接出现在 Forgent3D 工作区，和网页里生成的模型完全一样，可以继续编辑。",
+        "本地不用装 CAD 软件、OpenSCAD 或任何依赖。",
+        "参数化模型直接出现在 Forgent3D 工作区，和网页里生成的模型完全一样，可以继续编辑；OpenSCAD 零件的代码在链接里，不上传。",
         "不想用包管理器？把仓库克隆下来，让 agent 直接读里面的 skill 也可以。",
       ],
-      promptTitle: "可以直接给 agent 的提示",
-      prompt:
-        "用 Forgent3D skill 做一个电机安装支架：底板 80×60×6mm，四个 M4 沉头孔，立面上开一个 φ22 的轴孔。",
       manualTitle: "手动安装",
       manualText: "把仓库克隆下来，让 agent 直接读里面的 skill。",
       repoLink: "在 GitHub 查看",
@@ -71,12 +87,31 @@ function getCopy(locale) {
     kicker: "Skills",
     h1: "Give the agent you already use a CAD tool",
     intro:
-      "Install the Forgent3D skill and ask for a part the way you normally would in Claude Code, Codex, or Cursor. It writes an editable CAD model you can open in the browser and keep working on.",
+      "Install the Forgent3D skill and ask for a part the way you normally would in Claude Code, Codex or Cursor. It picks the route from what you ask: an editable parametric model, or plain OpenSCAD. Nothing to install locally either way.",
     installTitle: "Install",
     installHint: "One command, run where you want to build models.",
-    installNote: "That's it — no CAD kernel or extra dependencies to install.",
+    installNote: "That's it: the CAD kernel and OpenSCAD ship inside the skill's command-line tool.",
     copy: "Copy",
     copied: "Copied",
+    routesTitle: "Two routes — it picks",
+    routesHint: "A .scad file or a mention of OpenSCAD means the OpenSCAD route; assemblies, measured dimensions and parts you will keep editing in the browser mean a parametric model. Or just say which you want.",
+    routes: [
+      {
+        title: "Parametric model",
+        badge: "build123d dialect",
+        when: "For parts whose dimensions will change, parts that fit or move against each other, a real STEP straight away, or editing on in the browser.",
+        gets: "The engine builds and measures it — bore sizes and positions, where every flat face sits, wall thickness — exports STEP, and the model lands in your Forgent3D workspace.",
+        prompt: "Use the Forgent3D skill to build a motor mount bracket: 80x60x6mm base plate, four M4 counterbored holes, and a 22mm shaft bore in the upright face.",
+      },
+      {
+        title: "OpenSCAD",
+        badge: ".scad",
+        when: "For when you already work in OpenSCAD, have a .scad in hand, or use BOSL2 and Customizer parameters.",
+        gets: "The real OpenSCAD renders it on your machine; the agent reads back bounding box, volume and echo() values, checks a snapshot, exports STL / 3MF for printing, and hands you a link that carries the code — that page exports STEP.",
+        prompt: "Use the Forgent3D skill to write an OpenSCAD box with a lid: 80x50x30mm cavity, 2mm walls, lid fit as a Customizer parameter, and give me the preview link.",
+      },
+    ],
+    promptLabel: "Prompt you can give your agent",
     agentsTitle: "Works with",
     agentsHint: "Any agent that supports skills. Verified on:",
     flowTitle: "How it works",
@@ -84,29 +119,26 @@ function getCopy(locale) {
       {
         label: "01",
         title: "Ask for a part",
-        text: "Describe what you want — dimensions, hole patterns, fits. It writes a parametric model whose dimensions you can change later.",
+        text: "Describe what you want — dimensions, hole patterns, fits. Say OpenSCAD if that is what you want, and it writes in your language.",
       },
       {
         label: "02",
-        title: "It builds and measures",
-        text: "It builds and measures after every edit.",
+        title: "It builds, measures and looks",
+        text: "After every edit it builds or renders, reads the dimensions back and checks a three-view snapshot itself.",
       },
       {
         label: "03",
-        title: "It lands in your workspace",
-        text: "Open it and the model is yours: tweak parameters, edit sketches, share it, keep versions.",
+        title: "What you get",
+        text: "A parametric model lands in your workspace: tweak parameters, edit sketches, share it, keep versions. An OpenSCAD part is a link that carries the code: open it, drag the parameters, export STEP or STL.",
       },
     ],
     whyTitle: "Why install it",
     why: [
       "Model code stays in your repo — versioned, reviewable, reusable.",
-      "No CAD software or dependencies to install locally.",
-      "Models land in your Forgent3D workspace, identical to ones generated in the browser and just as editable.",
+      "No CAD software, no OpenSCAD, no dependencies to install locally.",
+      "Parametric models land in your Forgent3D workspace, identical to ones generated in the browser and just as editable; an OpenSCAD part's code travels in its link, nothing is uploaded.",
       "Prefer not to use a package manager? Clone the repository and point your agent at the skill directly.",
     ],
-    promptTitle: "Prompt you can give your agent",
-    prompt:
-      "Use the Forgent3D skill to build a motor mount bracket: 80x60x6mm base plate, four M4 counterbored holes, and a 22mm shaft bore in the upright face.",
     manualTitle: "Manual install",
     manualText: "Clone the repository and point your agent at the skill.",
     repoLink: "View on GitHub",
@@ -172,6 +204,7 @@ export default async function SkillsPage({ params }) {
             className="js-copy-command inline-flex min-h-[44px] shrink-0 items-center justify-center rounded-md border border-border/80 bg-card/60 px-5 text-sm font-semibold text-foreground transition-colors hover:border-brand/50"
             type="button"
             data-copy-value={SKILLS_INSTALL_COMMAND}
+            data-copy-source="skills"
             data-copy-label={copy.copy}
             data-copied-label={copy.copied}
           >
@@ -179,6 +212,25 @@ export default async function SkillsPage({ params }) {
           </button>
         </div>
         <p className="mt-4 text-sm text-muted-foreground">{copy.installNote}</p>
+      </section>
+
+      <section className="mt-6">
+        <h2 className="text-2xl font-semibold text-foreground">{copy.routesTitle}</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">{copy.routesHint}</p>
+        <div className="mt-5 grid gap-5 md:grid-cols-2">
+          {copy.routes.map((route) => (
+            <article key={route.title} className="flex flex-col rounded-2xl border border-border/80 bg-card/60 p-6">
+              <span className="font-mono text-xs text-brand">{route.badge}</span>
+              <h3 className="mt-3 text-lg font-semibold text-foreground">{route.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{route.when}</p>
+              <p className="mt-3 text-sm leading-6 text-foreground/80">{route.gets}</p>
+              <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground/80">{copy.promptLabel}</p>
+              <pre className="mt-2 overflow-x-auto whitespace-pre-wrap rounded-md border border-border/80 bg-background p-4 text-sm leading-6 text-muted-foreground">
+                <code>{route.prompt}</code>
+              </pre>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="mt-6 rounded-2xl border border-border/80 bg-card/60 p-6">
@@ -211,13 +263,6 @@ export default async function SkillsPage({ params }) {
             <li key={item}>- {item}</li>
           ))}
         </ul>
-      </section>
-
-      <section className="mt-6 rounded-2xl border border-brand/30 bg-card/60 p-6">
-        <h2 className="text-2xl font-semibold text-foreground">{copy.promptTitle}</h2>
-        <pre className="mt-5 overflow-x-auto rounded-md border border-border/80 bg-background p-5 text-sm leading-6 text-muted-foreground">
-          <code>{copy.prompt}</code>
-        </pre>
       </section>
 
       <section className="mt-6 rounded-2xl border border-dashed border-border/80 bg-card/60 p-6">

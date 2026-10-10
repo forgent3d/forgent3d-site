@@ -162,6 +162,17 @@ export function getViewerCopy(locale) {
       ],
       linkPromptLabel: "给 AI 的提示词",
       linkPrompt: "写一个 OpenSCAD 的 ___，并给我一个 Forgent3D 预览链接：https://app.forgent3d.com/scad#code=<把代码 encodeURIComponent 之后放这里>",
+      skillTitle: "用 Claude Code 或 Codex？装 Forgent3D skill",
+      skillText:
+        "一条命令，agent 就能在你本机用真正的 OpenSCAD 渲染 .scad：读回包围盒、体积和 echo() 的数，截一张三视图自己核对，导 STL / 3MF，最后给你一个上面那样的带代码链接。不用装 OpenSCAD。",
+      skillBullets: [
+        "写好的 .scad 就在你的目录里；include / use 和 Customizer 参数按桌面版的规矩来，MCAD、BOSL2 内置。",
+        "STEP 还是在链接打开的这一页导：skill 本身出的是 OpenSCAD 的网格。",
+        "同一个 skill 也会写 Forgent3D 的参数化模型，它按你的要求选路线。",
+      ],
+      skillCopy: "复制",
+      skillCopied: "已复制",
+      skillMore: "Skills 页：两条路线怎么选",
       faqTitle: "常见问题",
       faqs: [
         { q: "这是真的 OpenSCAD 吗？", a: "是。执行代码的就是 OpenSCAD 本体（2025 年的开发版快照，带 Manifold 几何内核），编译成 WebAssembly 在你的浏览器里运行。语言行为、内置库、Customizer 注释都和桌面版一样。" },
@@ -250,6 +261,17 @@ export function getViewerCopy(locale) {
     ],
     linkPromptLabel: "Prompt to try",
     linkPrompt: "Write OpenSCAD for a ___ and give me a Forgent3D preview link: https://app.forgent3d.com/scad#code=<the code, encodeURIComponent-encoded>",
+    skillTitle: "Using Claude Code or Codex? Install the Forgent3D skill",
+    skillText:
+      "One command, and the agent renders your .scad with the real OpenSCAD on your machine: it reads back the bounding box, volume and echo() values, checks a three-view snapshot itself, exports STL / 3MF and hands you a link like the one above. No OpenSCAD install.",
+    skillBullets: [
+      "The .scad stays in your folder; include / use and Customizer parameters work as on the desktop, MCAD and BOSL2 are built in.",
+      "STEP is still exported on the page the link opens: the skill's own output is OpenSCAD's mesh.",
+      "The same skill also writes Forgent3D's parametric models; it picks the route from what you ask.",
+    ],
+    skillCopy: "Copy",
+    skillCopied: "Copied",
+    skillMore: "Skills page: how it picks the route",
     faqTitle: "FAQ",
     faqs: [
       { q: "Is this real OpenSCAD?", a: "Yes. The code is executed by OpenSCAD itself — a 2025 development snapshot with the Manifold geometry kernel — compiled to WebAssembly and running in your browser. The language, the bundled libraries and the Customizer comments behave as on the desktop." },

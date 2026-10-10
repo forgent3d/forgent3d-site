@@ -143,6 +143,16 @@ export function getScadCopy(locale) {
         linkText:
           "代码也可以放在网址里:转换器打开就载入它、立刻构建,不用文件、不用登录。ChatGPT、Gemini、Claude 替你写了 OpenSCAD,让它顺手给一个这样的链接,点开就是真实几何,能拖参数、能导 STEP。",
         linkMore: "格式细节和给 AI 的提示词,见 OpenSCAD 在线预览",
+        skillTitle: "用 Claude Code 或 Codex？装 Forgent3D skill",
+        skillText:
+          "一条命令，agent 就能在你本机写 .scad、用真正的 OpenSCAD 渲染并核对尺寸，再给你一个带代码的链接——点开就是这个转换器，STEP 在这里导。不用装 OpenSCAD。",
+        skillBullets: [
+          "手里已有的 .scad 项目直接交给它改：include / use、Customizer 参数、BOSL2 都按桌面版的规矩来。",
+          "要机加工级的真 STEP，就让它给链接，在这一页导；它本身出的是 OpenSCAD 的网格，适合打印。",
+        ],
+        skillCopy: "复制",
+        skillCopied: "已复制",
+        skillMore: "Skills 页",
         compareTitle: "网格 STEP 与 B-rep STEP",
         meshLabel: "网格包成的 STEP",
         meshStat: "256 个三角面",
@@ -321,6 +331,16 @@ export function getScadCopy(locale) {
       linkText:
         "The code can also go in the URL: the converter opens with it loaded and builds it right away — no file, no sign-up. When ChatGPT, Gemini or Claude writes OpenSCAD for you, ask it for such a link; whoever opens it sees the real geometry, can drag the parameters and export STEP.",
       linkMore: "Format details and a prompt for the AI: see the OpenSCAD viewer page",
+      skillTitle: "Using Claude Code or Codex? Install the Forgent3D skill",
+      skillText:
+        "One command, and the agent writes the .scad on your machine, renders it with the real OpenSCAD, checks the dimensions and hands you a link that carries the code — it opens in this converter, where the STEP is exported. No OpenSCAD install.",
+      skillBullets: [
+        "Hand it a .scad project you already have: include / use, Customizer parameters and BOSL2 work as on the desktop.",
+        "For a shop-grade STEP, ask for the link and export here; the skill's own output is OpenSCAD's mesh, fine for printing.",
+      ],
+      skillCopy: "Copy",
+      skillCopied: "Copied",
+      skillMore: "Skills page",
       compareTitle: "Mesh STEP vs. B-rep STEP",
       meshLabel: "Mesh wrapped in STEP",
       meshStat: "256 triangular faces",

@@ -8,7 +8,7 @@ const base = "https://www.forgent3d.com";
 const ROUTES = [
   // [路径, changeFrequency, priority, lastModified]
   ["", "weekly", 1.0, "2026-09-30"],
-  ["/skills", "weekly", 0.85, "2026-09-30"],
+  ["/skills", "weekly", 0.85, "2026-10-10"],
   ["/openscad-to-step", "weekly", 0.9, "2026-10-10"],
   ["/openscad-to-step/why-openscad-cant-export-step", "monthly", 0.7, "2026-09-30"],
   ["/openscad-to-step/compatibility", "monthly", 0.7, "2026-09-30"],
