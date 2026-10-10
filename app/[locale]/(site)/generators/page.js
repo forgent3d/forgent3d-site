@@ -82,6 +82,10 @@ export default async function GeneratorsIndexPage({ params }) {
         <Link className="text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-to-step`}>
           {t.scadLink} →
         </Link>
+        {" · "}
+        <Link className="text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-viewer`}>
+          {t.viewerLink} →
+        </Link>
       </p>
     </main>
   );

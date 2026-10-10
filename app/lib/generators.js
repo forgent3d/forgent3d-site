@@ -684,6 +684,7 @@ export function generatorsSharedCopy(locale) {
       relatedTitle: "更多生成器",
       scadPrompt: "已经有自己的 .scad 文件？",
       scadLink: "OpenSCAD 转 STEP",
+      viewerLink: "在浏览器里预览",
       breadcrumbHome: "首页",
     };
   }
@@ -721,6 +722,7 @@ export function generatorsSharedCopy(locale) {
     relatedTitle: "More generators",
     scadPrompt: "Already have your own .scad file?",
     scadLink: "Convert OpenSCAD to STEP",
+    viewerLink: "Preview it in the browser",
     breadcrumbHome: "Home",
   };
 }
