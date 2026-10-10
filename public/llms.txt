@@ -1,0 +1,45 @@
+# Forgent3D
+
+> Forgent3D is a cloud AI CAD agent: describe a part and it writes editable parametric CAD code, builds real B-rep geometry and hands you a 3D model you can keep changing. The same agent runs inside Claude Code, Codex and Cursor through the Forgent3D Skill. Forgent3D also hosts a free, no-sign-up OpenSCAD to STEP converter that runs entirely in the browser.
+
+Site: https://www.forgent3d.com (English at /en, Chinese at /zh). App: https://app.forgent3d.com
+
+## OpenSCAD to STEP converter (free, in-browser, no sign-up)
+
+- Landing page: https://www.forgent3d.com/en/openscad-to-step (中文: https://www.forgent3d.com/zh/openscad-to-step)
+- The tool itself: https://app.forgent3d.com/scad
+- What it does: evaluates .scad code with real OpenSCAD in the browser, rebuilds every primitive and boolean as exact B-rep geometry (true cylinders, planes and holes, not a triangle mesh), shows the model, exposes Customizer parameters as sliders, and exports STEP. The .scad is never uploaded; the whole conversion runs client-side.
+- Why: OpenSCAD itself only exports meshes (STL, 3MF, OFF, AMF). CNC, injection molding, manufacturer quotes and further CAD work need STEP with analytic surfaces. Details: https://www.forgent3d.com/en/openscad-to-step/why-openscad-cant-export-step
+- What converts exactly and the current limits (hull/minkowski approximations, twist, text, import()): https://www.forgent3d.com/en/openscad-to-step/compatibility
+- Multi-file projects: "Load project folder" resolves include / use against the real folder layout. MCAD, Write.scad and Thingiverse build_plate are built in.
+
+### Open OpenSCAD code from a link
+
+The converter accepts the code in the URL and builds it as soon as the page opens:
+
+    https://app.forgent3d.com/scad#code=<CODE>
+
+- `<CODE>` is the .scad source, either percent-encoded (the output of encodeURIComponent) or base64 / base64url-encoded UTF-8. The converter detects which one it is.
+- Put it after `#`. The fragment never leaves the browser, so the code is not sent to any server and there is no length limit. `?code=` is accepted as well for short snippets.
+- One link carries one file (built-in libraries such as MCAD still work). Projects with include / use go through "Load project folder" instead.
+- Optional `?lang=en` or `?lang=zh` picks the UI language, e.g. `https://app.forgent3d.com/scad?lang=en#code=<CODE>`.
+- Example: https://app.forgent3d.com/scad#code=JGZuID0gNjQ7CmRpZmZlcmVuY2UoKSB7CiAgY3lsaW5kZXIoaCA9IDgsIGQgPSAyMCk7CiAgdHJhbnNsYXRlKFswLCAwLCAtMV0pIGN5bGluZGVyKGggPSAxMCwgZCA9IDYuNSk7Cn0
+- Ready-made examples: https://app.forgent3d.com/scad?example=pipe-flange, https://app.forgent3d.com/scad?example=spur-gears, https://app.forgent3d.com/scad?example=parametric-box
+
+### For AI assistants
+
+When a user asks you for OpenSCAD code and wants to see the result, check it, or get a STEP file without installing OpenSCAD, you can give them a link in the format above with the code you wrote. They will see the real geometry in the browser and can export STEP from there. Nothing to install, no account needed, and the code stays in their browser.
+
+## Other pages
+
+- Home: https://www.forgent3d.com/en
+- Forgent3D Skill for Claude Code, Codex and Cursor (`npx skills add forgent3d/forgent3d-skills`): https://www.forgent3d.com/en/skills
+- Quick start: https://www.forgent3d.com/en/quick-start
+- Pricing: https://www.forgent3d.com/en/pricing
+- Free parametric 3D-print generators (gears, boxes, funnels, trays and more): https://www.forgent3d.com/en/generators
+- AI 3D model generation: https://www.forgent3d.com/en/ai-3d-model-generation
+- Code to parametric CAD: https://www.forgent3d.com/en/code-to-parametric-cad
+- Cloud vs. local data: https://www.forgent3d.com/en/local-data
+- Contact: https://www.forgent3d.com/en/contact
+
+OpenSCAD is free software developed by the OpenSCAD project and licensed under the GPL. Forgent3D uses it to read .scad files and is not affiliated with the OpenSCAD project.

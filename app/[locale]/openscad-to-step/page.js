@@ -2,10 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BRAND_BUTTON, isSupportedLocale } from "../../lib/landing-page";
 import {
+  APP_SCAD_URL,
   SCAD_EXAMPLES,
+  SCAD_LINK_FORMAT,
+  SCAD_LINK_SAMPLE,
   getScadCopy,
   scadAppUrl,
   scadBreadcrumbSchema,
+  scadCodeUrl,
   scadExampleUrl,
   scadMetadata,
   scadPath,
@@ -37,6 +41,13 @@ export default async function OpenScadToStepPage({ params }) {
     description: t.description,
     applicationCategory: "DesignApplication",
     operatingSystem: "Web",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    // 机器可读的「带代码打开」入口,和下面 linkTitle 那一节说的是同一个格式
+    potentialAction: {
+      "@type": "ViewAction",
+      name: "Open OpenSCAD code in the converter",
+      target: { "@type": "EntryPoint", urlTemplate: `${APP_SCAD_URL}#code={code}` },
+    },
   };
   const faqSchema = {
     "@context": "https://schema.org",
@@ -100,6 +111,38 @@ export default async function OpenScadToStepPage({ params }) {
             );
           })}
         </div>
+      </section>
+
+      {/* 给 AI 助手(和搜索引擎)看的那一节:链接格式写成纯文本,爬虫和 LLM 都抓得到;例子链接不走 .js-scad-link
+          (它会被 public/script.js 改写成裸地址),自带 click_scad_code_link。 */}
+      <section className="mt-20" id="open-from-link">
+        <h2 className="text-2xl font-semibold">{t.linkTitle}</h2>
+        <p className="mt-2 max-w-3xl leading-7 text-muted-foreground">{t.linkIntro}</p>
+        <p className="mt-6 text-sm font-semibold text-foreground">{t.linkFormatLabel}</p>
+        <pre className="mt-2 overflow-x-auto rounded-xl border border-border/80 bg-card/60 p-4 font-mono text-sm text-foreground">
+          <code>{SCAD_LINK_FORMAT}</code>
+        </pre>
+        <ul className="mt-4 max-w-3xl list-disc space-y-2 pl-5 text-sm leading-6 text-muted-foreground">
+          {t.linkRules.map((rule) => (
+            <li key={rule}>{rule}</li>
+          ))}
+        </ul>
+        <p className="mt-6 text-sm font-semibold text-foreground">{t.linkPromptLabel}</p>
+        <pre className="mt-2 overflow-x-auto whitespace-pre-wrap rounded-xl border border-border/80 bg-card/60 p-4 font-mono text-sm text-foreground">
+          <code>{t.linkPrompt}</code>
+        </pre>
+        <p className="mt-6 text-sm font-semibold text-foreground">{t.linkSampleLabel}</p>
+        <pre className="mt-2 overflow-x-auto rounded-xl border border-border/80 bg-card/60 p-4 font-mono text-sm text-foreground">
+          <code>{SCAD_LINK_SAMPLE}</code>
+        </pre>
+        <a
+          className={`js-scad-code-link ${BRAND_BUTTON} mt-4 min-h-[44px] px-6`}
+          href={scadCodeUrl(locale, SCAD_LINK_SAMPLE)}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {t.linkSampleOpen} →
+        </a>
       </section>
 
       <section className="mt-20">

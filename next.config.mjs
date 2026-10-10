@@ -15,6 +15,10 @@ const nextConfig = {
         destination: "https://www.forgent3d.com/:path*",
         permanent: true,
       },
+      // 聊天界面把 markdown 链接连尾巴一起贴出来(Gemini 的访客就这样来过):
+      // /en/openscad-to-step](https:/forgent3d.com/… 本来是 404。砍掉 "](" 起的那段,落回正常页。
+      // 浏览器发出的路径里 "]" 就是字面的 "]"(WHATWG URL 不转义它),所以只匹配原样的那种。
+      { source: "/:locale(en|zh)/:page([^\\]]+)\\]:rest(.*)", destination: "/:locale/:page", permanent: true },
       { source: "/:locale(en|zh)/gallery", destination: "https://app.forgent3d.com/explore", permanent: true },
       { source: "/m/:shareSlug/:rest*", destination: "https://app.forgent3d.com/m/:shareSlug", permanent: true },
       { source: "/m/:shareSlug", destination: "https://app.forgent3d.com/m/:shareSlug", permanent: true },

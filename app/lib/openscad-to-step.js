@@ -34,6 +34,23 @@ export function scadExampleUrl(locale, name) {
   return `${APP_SCAD_URL}?example=${encodeURIComponent(name)}&lang=${locale}`;
 }
 
+// 带代码的链接:app 的 /scad 认 `#code=<代码>`(platform 仓库 packages/cloud/lib/scad-link.ts;也认 ?code=),值是百分号编码的
+// 原文或 base64 / base64url。这一页把格式写给 AI 助手看,所以文案里的格式和那边的解码规则要一起改。
+export const SCAD_LINK_FORMAT = `${APP_SCAD_URL}#code=<CODE>`;
+
+/** 页面上那个「从链接打开」的例子:源码短、读得懂、导出的 STEP 里有一个真圆柱孔。 */
+export const SCAD_LINK_SAMPLE = `// A spacer: 20 mm across, 8 mm tall, 6.5 mm bore
+$fn = 64;
+difference() {
+  cylinder(h = 8, d = 20);
+  translate([0, 0, -1]) cylinder(h = 10, d = 6.5);
+}`;
+
+export function scadCodeUrl(locale, code) {
+  const encoded = Buffer.from(code, "utf8").toString("base64url");
+  return `${APP_SCAD_URL}?lang=${locale}#code=${encoded}`;
+}
+
 export function scadMetadata(locale, page) {
   const copy = getScadCopy(locale);
   const { title, description, keywords } = copy[page];
@@ -96,7 +113,16 @@ export function getScadCopy(locale) {
         title: "OpenSCAD 转 STEP：导出真正的 B-rep，不是网格 | Forgent3D",
         description:
           "把 .scad 文件和多文件项目转成 STEP：真平面、真圆柱、真孔，不是三角网格。Fusion、SolidWorks、Onshape、FreeCAD 都能直接打开。",
-        keywords: ["OpenSCAD 转 STEP", "scad 转 step", "OpenSCAD 导出 STEP", "scad 文件转换", "OpenSCAD STEP 在线转换"],
+        keywords: [
+          "OpenSCAD 转 STEP",
+          "scad 转 step",
+          "OpenSCAD 导出 STEP",
+          "scad 文件转换",
+          "OpenSCAD STEP 在线转换",
+          "OpenSCAD 在线预览",
+          "OpenSCAD 在线查看器",
+          "AI 生成 OpenSCAD 代码预览",
+        ],
         h1: "OpenSCAD 转 STEP：导出真正的 B-rep，不是网格",
         intro:
           "OpenSCAD 只能导出网格。把 .scad 文件或整个项目文件夹拖进来，就能得到带真平面、真圆柱、真孔的 STEP 文件——Fusion、SolidWorks、Onshape、FreeCAD 和 CAM 软件都能直接测量、选取、加工。",
@@ -123,6 +149,21 @@ export function getScadCopy(locale) {
             alt: "圆角盒子和它的盖子并排摆放、开口朝上的等轴测图",
           },
         },
+        linkTitle: "从链接直接打开 OpenSCAD 代码",
+        linkIntro:
+          "把代码放进网址,转换器打开就载入它、立刻构建:不用文件、不用登录。这是给 AI 助手准备的:ChatGPT、Gemini、Claude 替你写了 OpenSCAD,让它顺手给一个 Forgent3D 预览链接,点开就是真实几何,能拖参数、能导 STEP。",
+        linkFormatLabel: "链接格式",
+        linkRules: [
+          "<CODE> 是 .scad 源码:百分号编码的原文(encodeURIComponent 的结果)或 base64 / base64url 的 UTF-8 都行,转换器自己识别。",
+          "放在 # 后面:片段不会离开浏览器,代码不经过我们的服务器,也没有长度限制。短代码也可以写成 ?code=。",
+          "一个链接带一个文件。include / use 多文件的项目走「加载项目文件夹」;MCAD 这些内置库从链接打开也能用。",
+          "转换器里的「复制链接」按钮,把当前打开的代码变成这样一个链接。",
+        ],
+        linkPromptLabel: "给 AI 的提示词",
+        linkPrompt:
+          "写一个 OpenSCAD 的 ___,并给我一个 Forgent3D 预览链接:https://app.forgent3d.com/scad#code=<把代码 encodeURIComponent 之后放这里>",
+        linkSampleLabel: "试一个",
+        linkSampleOpen: "从链接打开这段代码",
         compareTitle: "网格 STEP 与 B-rep STEP",
         meshLabel: "网格包成的 STEP",
         meshStat: "256 个三角面",
@@ -149,6 +190,14 @@ export function getScadCopy(locale) {
           {
             q: "SolidWorks、Fusion、FreeCAD 能打开吗？",
             a: "STEP 是所有主流 CAD / CAM 软件都支持的通用格式。导出的文件是带解析曲面的实体，孔和圆柱面导入后就是可以选取、标注的圆柱面。",
+          },
+          {
+            q: "ChatGPT、Gemini、Claude 写的 OpenSCAD 代码，不装 OpenSCAD 能预览吗？",
+            a: "能。把代码贴进转换器，或者打开形如 https://app.forgent3d.com/scad#code=<代码> 的链接：浏览器里用真正的 OpenSCAD 求值，显示几何，导出 STEP。不用安装、不用登录。你也可以直接让 AI 在回答里附上这样的链接。",
+          },
+          {
+            q: "链接里的代码、拖进来的 .scad 会上传到服务器吗？",
+            a: "不会。# 后面的内容浏览器不会发出去，而且整个转换——OpenSCAD 求值和 CAD 内核构建——都在你的浏览器里运行，.scad 文件从不上传。",
           },
         ],
         moreTitle: "延伸阅读",
@@ -256,6 +305,9 @@ export function getScadCopy(locale) {
         "convert openscad to step",
         "openscad step file",
         "openscad brep",
+        "preview openscad online",
+        "openscad online viewer",
+        "openscad code from chatgpt",
       ],
       h1: "OpenSCAD to STEP converter — real B-rep, not a mesh",
       intro:
@@ -283,6 +335,21 @@ export function getScadCopy(locale) {
           alt: "Isometric view of a rounded box and its lid side by side, open side up",
         },
       },
+      linkTitle: "Open OpenSCAD code straight from a link",
+      linkIntro:
+        "Put the code in the URL and the converter opens with it loaded and builds it right away — no file, no sign-up. It is made for AI assistants: when ChatGPT, Gemini or Claude writes OpenSCAD for you, ask it for a Forgent3D preview link. Whoever opens it sees the real geometry, can drag the parameters and export STEP.",
+      linkFormatLabel: "Link format",
+      linkRules: [
+        "<CODE> is the .scad source, either percent-encoded (what encodeURIComponent produces) or base64 / base64url UTF-8. The converter tells them apart.",
+        "Put it after #: the fragment never leaves the browser, so the code is not sent to our server and there is no length limit. ?code= works too for short snippets.",
+        "One link carries one file. Projects with include / use go through “Load project folder”; MCAD and the other built-in libraries work from a link.",
+        "The “Copy link” button in the converter turns the code you have open into such a link.",
+      ],
+      linkPromptLabel: "Prompt to try",
+      linkPrompt:
+        "Write OpenSCAD for a ___ and give me a Forgent3D preview link: https://app.forgent3d.com/scad#code=<the code, encodeURIComponent-encoded>",
+      linkSampleLabel: "Try one",
+      linkSampleOpen: "Open this code from a link",
       compareTitle: "Mesh STEP vs. B-rep STEP",
       meshLabel: "Mesh wrapped in STEP",
       meshStat: "256 triangular faces",
@@ -309,6 +376,14 @@ export function getScadCopy(locale) {
         {
           q: "Does the STEP open in SolidWorks, Fusion and FreeCAD?",
           a: "STEP is the neutral format every major CAD and CAM package imports. The exported file contains solids with analytic faces, so holes and round faces come in as cylinders you can select and dimension.",
+        },
+        {
+          q: "Can I preview OpenSCAD code from ChatGPT, Gemini or Claude without installing OpenSCAD?",
+          a: "Yes. Paste the code into the converter, or open a link of the form https://app.forgent3d.com/scad#code=<code>: it evaluates the code with real OpenSCAD in your browser, shows the geometry and exports STEP. Nothing to install, no sign-up. You can also ask the AI to include such a link in its answer.",
+        },
+        {
+          q: "Is the code in a link, or my .scad file, uploaded to your server?",
+          a: "No. Anything after # never leaves the browser, and the whole conversion — OpenSCAD evaluation and the CAD kernel build — runs in your browser too. The .scad file is never uploaded.",
         },
       ],
       moreTitle: "Read more",

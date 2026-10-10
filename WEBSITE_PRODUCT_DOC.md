@@ -54,6 +54,7 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
 /[locale]/ai-3d-model-generation SEO 落地页
 /[locale]/code-to-parametric-cad SEO 落地页
 /[locale]/openscad-to-step       OpenSCAD → STEP 落地页（CTA 进 app 的 /scad；自带顶栏，不挂站点导航）
+                                 含「从链接打开代码」一节：把 /scad#code=<代码> 的格式写给 AI 助手看，public/llms.txt 同步
   …/why-openscad-cant-export-step  为什么 OpenSCAD 导不出 STEP、三种绕法
   …/compatibility                  哪些能精确转换、目前的限制
 /[locale]/contact                联系我们
@@ -155,7 +156,7 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 全站自动记 PostHog 标准 `$pageview` / `$pageleave`（`instrumentation-client.js`，含客户端跳转），
 来源、utm、跳出率看它。自定义事件：`homepage_viewed`、`try_clicked`、`click_pricing`、`click_skills`、
 `click_skills_repo`、`copy_skills_command`、`click_download_desktop`、`click_github`、`click_explore`、
-`click_openscad_to_step`、`click_scad_example`。新增 CTA 就补一条，别复用语义不符的事件名。
+`click_openscad_to_step`、`click_scad_example`、`click_scad_code_link`。新增 CTA 就补一条，别复用语义不符的事件名。
 
 ## 5. 上线与迭代建议
 

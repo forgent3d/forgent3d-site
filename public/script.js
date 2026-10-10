@@ -193,6 +193,8 @@ function initPage() {
     [".js-scad-link", "click_openscad_to_step"],
     // openscad-to-step 首页的例子卡片;app 那头接着是 scad_example_opened / scad_step_export
     [".js-scad-example-link", "click_scad_example"],
+    // openscad-to-step 首页「从链接打开」那一节的例子;app 那头接着是 scad_link_opened
+    [".js-scad-code-link", "click_scad_code_link"],
   ].forEach(([selector, eventName]) => {
     document.querySelectorAll(selector).forEach((node) => {
       if (!bindOnce(node, `Track${eventName}`)) return;
