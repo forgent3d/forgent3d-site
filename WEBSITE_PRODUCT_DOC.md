@@ -57,6 +57,7 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
                                  含「从链接打开代码」一节：把 /scad#code=<代码> 的格式写给 AI 助手看，public/llms.txt 同步
   …/why-openscad-cant-export-step  为什么 OpenSCAD 导不出 STEP、三种绕法
   …/compatibility                  哪些能精确转换、目前的限制
+/[locale]/openscad-viewer        OpenSCAD 在线预览落地页（同一个 /scad，另一个来意：看模型；和转换器页互链，不抢同一组词）
 /[locale]/contact                联系我们
 /m/[shareSlug]                   公开模型分享页（含 details / view）
 ```
@@ -156,7 +157,7 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 全站自动记 PostHog 标准 `$pageview` / `$pageleave`（`instrumentation-client.js`，含客户端跳转），
 来源、utm、跳出率看它。自定义事件：`homepage_viewed`、`try_clicked`、`click_pricing`、`click_skills`、
 `click_skills_repo`、`copy_skills_command`、`click_download_desktop`、`click_github`、`click_explore`、
-`click_openscad_to_step`、`click_scad_example`、`click_scad_code_link`。新增 CTA 就补一条，别复用语义不符的事件名。
+`click_openscad_to_step`、`click_openscad_viewer`、`click_scad_example`、`click_scad_code_link`。新增 CTA 就补一条，别复用语义不符的事件名。
 
 ## 5. 上线与迭代建议
 
@@ -169,3 +170,13 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 - 模型库（`/[locale]/gallery`）目前在导航和 sitemap 里都是注释状态，等公开模型够多再放出来。
 - 案例页：一个零件从 prompt 到可下载 STEP 的完整过程。
 - 团队 / 额度方案说明，目前统一走联系邮箱。
+
+## IndexNow（Bing / ChatGPT 搜索）
+
+`public/f725d7c46fa8df42371a1dab25cddda5.txt` 是 IndexNow 的 key 文件（内容就是文件名里的 key）。页面上线或正文改了之后，把 URL 推给 Bing（ChatGPT 搜索用的是 Bing 的索引），不用等它自己来抓：
+
+```sh
+curl -s "https://api.indexnow.org/indexnow?url=https://www.forgent3d.com/en/openscad-viewer&key=f725d7c46fa8df42371a1dab25cddda5"
+```
+
+一次推多条用 POST（文档：https://www.indexnow.org/documentation）。Google 不认 IndexNow，Google 走 Search Console。

@@ -11,6 +11,7 @@ const ROUTES = [
   ["/openscad-to-step", "weekly", 0.9, "2026-10-10"],
   ["/openscad-to-step/why-openscad-cant-export-step", "monthly", 0.7, "2026-09-30"],
   ["/openscad-to-step/compatibility", "monthly", 0.7, "2026-09-30"],
+  ["/openscad-viewer", "weekly", 0.9, "2026-10-10"],
   ["/generators", "weekly", 0.85, "2026-09-30"],
   ...GENERATORS.map((g) => [`/generators/${g.slug}`, "weekly", 0.8, "2026-09-30"]),
   ["/ai-3d-model-generation", "weekly", 0.8, "2026-09-30"],

@@ -4,6 +4,12 @@
 
 Site: https://www.forgent3d.com (English at /en, Chinese at /zh). App: https://app.forgent3d.com
 
+## OpenSCAD viewer (free, in-browser, no sign-up)
+
+- Landing page: https://www.forgent3d.com/en/openscad-viewer (中文: https://www.forgent3d.com/zh/openscad-viewer)
+- The tool: https://app.forgent3d.com/scad — the same page as the converter below. Paste OpenSCAD code or drop a .scad file / project folder; real OpenSCAD (a 2025 development snapshot with the Manifold kernel, compiled to WebAssembly) runs in the browser and renders the model half a second after the last edit. color() follows the geometry through booleans, faces cut by difference() show green, % draws translucent grey and # translucent pink, as in the desktop F5 preview; $preview is true. Customizer parameters become sliders. MCAD, Write.scad and BOSL2 are built in. Nothing is uploaded.
+- Code can be put in the link (see "Open OpenSCAD code from a link" below): an assistant that writes OpenSCAD can give the user such a link and they see the model rendered.
+
 ## OpenSCAD to STEP converter (free, in-browser, no sign-up)
 
 - Landing page: https://www.forgent3d.com/en/openscad-to-step (中文: https://www.forgent3d.com/zh/openscad-to-step)

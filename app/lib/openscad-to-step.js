@@ -105,6 +105,8 @@ export function getScadCopy(locale) {
         ogLocale: "zh_CN",
         ogImage: "/og/openscad-to-step-zh.png",
         homeLink: "Forgent3D 首页",
+        viewerLink: "OpenSCAD 在线预览",
+        viewerHint: "只想看看模型，不要 STEP？",
         generatorsLink: "3D 打印生成器",
         credit:
           "OpenSCAD 是由 OpenSCAD 项目开发、以 GPL 协议发布的自由软件。Forgent3D 用它来读取 .scad 文件，与 OpenSCAD 项目没有隶属关系。",
@@ -290,6 +292,8 @@ export function getScadCopy(locale) {
       ogLocale: "en_US",
       ogImage: "/og/openscad-to-step-en.png",
       homeLink: "Forgent3D home",
+      viewerLink: "OpenSCAD viewer",
+      viewerHint: "Just want to see the model, no STEP?",
       generatorsLink: "3D print generators",
       credit:
         "OpenSCAD is free software developed by the OpenSCAD project and licensed under the GPL. Forgent3D uses it to read .scad files and is not affiliated with the OpenSCAD project.",

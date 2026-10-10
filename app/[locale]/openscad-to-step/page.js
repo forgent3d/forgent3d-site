@@ -76,6 +76,12 @@ export default async function OpenScadToStepPage({ params }) {
           {t.corpusLink} →
         </Link>
       </p>
+      <p className="mt-2 text-sm text-muted-foreground">
+        {copy.shared.viewerHint}{" "}
+        <Link className="text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-viewer`}>
+          {copy.shared.viewerLink} →
+        </Link>
+      </p>
 
       {/* Not .js-scad-link: public/script.js rewrites that class's href to the bare converter URL,
           which would drop ?example=. These carry their own class and click event. */}
