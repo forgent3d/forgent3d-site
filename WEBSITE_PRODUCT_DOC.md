@@ -60,7 +60,9 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
 /[locale]/openscad-viewer        OpenSCAD 在线预览落地页（同一个 /scad，另一个来意：看模型；和转换器页互链，不抢同一组词）
 /[locale]/blog                   文章列表;/[locale]/blog/<slug> 单篇。正文住在 content/blog/<slug>.<locale>.md
                                  (头部 title / description / date,可选 updated;Markdown 子集见 app/lib/markdown.js),
-                                 中英各一份、同一个 slug。导航和页脚都有入口。
+                                 中英各一份、同一个 slug。导航和页脚都有入口。运行时不读文件系统(Worker 里没有 content/):
+                                 scripts/build-blog-content.mjs 在 prebuild 把 .md 内联成 app/lib/blog-content.generated.js,
+                                 生成物提交进仓库;改了 .md 跑一次 `npm run build` 再提交。
 /[locale]/contact                联系我们
 /m/[shareSlug]                   公开模型分享页（含 details / view）
 ```

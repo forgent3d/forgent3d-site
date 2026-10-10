@@ -1,12 +1,11 @@
 // 文章住在 content/blog/<slug>.<locale>.md,头部是几行 `key: value`(title、description、date,可选 updated),
 // 正文是 app/lib/markdown.js 认的那个 Markdown 子集。中英各一份、同一个 slug;只有一种语言的文章在另一种语言下不列出。
-// 构建时读磁盘(generateStaticParams),运行时不碰文件系统。
+// 这里不读文件系统:Cloudflare 的 Worker 里没有 content/,Markdown 由 scripts/build-blog-content.mjs 在构建前
+// 内联成 blog-content.generated.js(package.json 的 prebuild;生成物也提交进仓库)。
 
-import { readdirSync, readFileSync } from "node:fs";
-import path from "node:path";
+import { BLOG_FILES } from "./blog-content.generated";
 import { markdownToText } from "./markdown";
 
-const CONTENT_DIR = path.join(process.cwd(), "content", "blog");
 const LOCALES = ["en", "zh"];
 
 function parseFrontmatter(raw, file) {
@@ -31,11 +30,8 @@ let cache = null;
 function loadAll() {
   if (cache) return cache;
   const posts = [];
-  for (const file of readdirSync(CONTENT_DIR)) {
-    const match = /^([a-z0-9-]+)\.(en|zh)\.md$/.exec(file);
-    if (!match) continue;
-    const [, slug, locale] = match;
-    const { meta, body } = parseFrontmatter(readFileSync(path.join(CONTENT_DIR, file), "utf8"), file);
+  for (const { slug, locale, file, raw } of BLOG_FILES) {
+    const { meta, body } = parseFrontmatter(raw, file);
     const text = markdownToText(body);
     posts.push({
       slug,
