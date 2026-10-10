@@ -44,8 +44,6 @@ When a user asks you for OpenSCAD code and wants to see the result, check it, or
 - Code is the model: why the AI writes CAD code instead of generating a mesh (single-source model.py, value edits that keep formulas): https://www.forgent3d.com/en/blog/code-is-model
 - A CAD agent that measures its own work (build report, orthographic snapshots, measure probes, knob tests): https://www.forgent3d.com/en/blog/agent-that-measures
 - We spent 13 hours proving our own evaluation was useless (variance of an LLM CAD eval): https://www.forgent3d.com/en/blog/eval-variance
-- Three months in, we found out the user was not who we thought (makers vs drawing-reading engineers, the numbers): https://www.forgent3d.com/en/blog/maker-not-engineer
-- What 7,378 Thingiverse .scad files taught us (repeated commas, missing includes, errors OpenSCAD renders past, $fn, hull/minkowski): https://www.forgent3d.com/en/blog/thingiverse-scad-files
 - Green faces in the OpenSCAD preview, which color() wins, and what % and # draw: https://www.forgent3d.com/en/blog/openscad-green-faces
 - Letting the AI reinvent the heat-set insert boss every time is a bad idea (the component library): https://www.forgent3d.com/en/blog/components-catalog
 
