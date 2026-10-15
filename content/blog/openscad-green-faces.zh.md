@@ -2,6 +2,7 @@
 title: OpenSCAD 预览里的绿面、color() 的优先级，还有 % 和 # 到底画了什么
 description: 挖完孔孔壁是绿的，不是你写错了。这篇讲 OpenSCAD 预览的配色约定、color() 为什么外层赢、% 和 # 在预览和渲染里各是什么下场。
 date: 2026-10-06
+app: viewer
 ---
 
 用 OpenSCAD 的人几乎都问过同一个问题：`difference()` 挖了个孔，按 F5 一看，孔的内壁是绿的，别的地方是黄的。是不是哪里写错了？

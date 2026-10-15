@@ -2,6 +2,7 @@
 title: Preview OpenSCAD code online: no install, paste it and look
 description: Seeing what a piece of OpenSCAD code looks like does not require installing OpenSCAD. Paste it into a viewer in the browser, it renders when you pause, colours match the desktop, and the code can go into a link for someone else.
 date: 2026-10-10
+app: viewer
 ---
 
 The traditional way to see what a piece of OpenSCAD code draws is: download the installer, install it, new file, paste, press F5. On your own machine that is a few minutes. On someone else's machine, on a phone, or when you only want a look at the twenty lines ChatGPT just wrote, those minutes are in the way.

@@ -2,6 +2,7 @@
 title: OpenSCAD 怎么导出 STEP：现有的几种办法，和我们做的这个
 description: OpenSCAD 只能导出 STL 这类网格，要 STEP 得绕路。FreeCAD 工作台、网格转 STEP、照尺寸重画，各有各的代价。这篇讲每条路适合谁，以及一个不用安装的在线转换器。
 date: 2026-09-30
+app: step
 ---
 
 OpenSCAD 的「导出」菜单里没有 STEP。这不是漏了，是它的设计：OpenSCAD 把所有模型算成三角面，能导的只有 STL、3MF、OFF、AMF 这类网格格式。

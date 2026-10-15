@@ -2,6 +2,7 @@
 title: Green faces in the OpenSCAD preview, which color() wins, and what % and # actually draw
 description: The walls of a hole come out green and that is not a mistake. The preview's colour conventions, why the outer color() wins, and what happens to % and # in preview and render.
 date: 2026-10-06
+app: viewer
 ---
 
 Almost everyone who uses OpenSCAD asks this at some point: I cut a hole with `difference()`, pressed F5, and the walls of the hole are green while everything else is yellow. Did I do something wrong?

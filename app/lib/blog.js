@@ -1,4 +1,5 @@
-// 文章住在 content/blog/<slug>.<locale>.md,头部是几行 `key: value`(title、description、date,可选 updated),
+// 文章住在 content/blog/<slug>.<locale>.md,头部是几行 `key: value`(title、description、date,可选 updated;
+// 可选 app: viewer | step —— 文章页标题下和文末各出一颗直达 app /scad 的按钮,见 blog/[slug]/page.js),
 // 正文是 app/lib/markdown.js 认的那个 Markdown 子集。中英各一份、同一个 slug;只有一种语言的文章在另一种语言下不列出。
 // 这里不读文件系统:Cloudflare 的 Worker 里没有 content/,Markdown 由 scripts/build-blog-content.mjs 在构建前
 // 内联成 blog-content.generated.js(package.json 的 prebuild;生成物也提交进仓库)。
@@ -21,12 +22,13 @@ function parseFrontmatter(raw, file) {
     if (!meta[required]) throw new Error(`${file}: front matter needs ${required}`);
   }
   if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.date)) throw new Error(`${file}: date must be YYYY-MM-DD`);
+  if (meta.app && !["viewer", "step"].includes(meta.app)) throw new Error(`${file}: app must be viewer or step`);
   return { meta, body: match[2].trim() };
 }
 
 let cache = null;
 
-/** Every post, every locale: { slug, locale, title, description, date, updated?, body, words }. */
+/** Every post, every locale: { slug, locale, title, description, date, updated?, app?, body, words }. */
 function loadAll() {
   if (cache) return cache;
   const posts = [];
@@ -40,6 +42,7 @@ function loadAll() {
       description: meta.description,
       date: meta.date,
       ...(meta.updated ? { updated: meta.updated } : {}),
+      ...(meta.app ? { app: meta.app } : {}),
       body,
       // a reading-time figure: Chinese counts characters, English words
       words: locale === "zh" ? text.replace(/\s/g, "").length : text.split(/\s+/).length,

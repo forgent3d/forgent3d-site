@@ -2,6 +2,7 @@
 title: How to export STEP from OpenSCAD: the usual ways, and the one we built
 description: OpenSCAD only exports meshes like STL, so getting a STEP file takes a detour. The FreeCAD workbench, mesh-to-STEP converters, remodelling by hand, each with its own cost. Which road fits which job, and an online converter that needs no install.
 date: 2026-09-30
+app: step
 ---
 
 There is no STEP in OpenSCAD's export menu. That is not an omission, it is the design: OpenSCAD turns every model into triangles, and all it can export are mesh formats, STL, 3MF, OFF, AMF.
