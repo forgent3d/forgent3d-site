@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { BRAND_BUTTON, CHIP_SURFACE, isSupportedLocale } from "../../lib/landing-page";
+import { openscadPageLinks } from "../../lib/openscad-pages";
 import { getScadCopy, scadAppUrl, scadPath } from "../../lib/openscad-to-step";
 
 /**
@@ -44,7 +45,9 @@ export default async function OpenScadToStepLayout({ children, params }) {
           <a className="transition-colors hover:text-brand" href={`/${locale}`}>{t.homeLink}</a>
           <Link className="transition-colors hover:text-brand" href={scadPath(locale, "why")}>{copy.why.h1}</Link>
           <Link className="transition-colors hover:text-brand" href={scadPath(locale, "compat")}>{copy.compat.h1}</Link>
-          <Link className="transition-colors hover:text-brand" href={`/${locale}/openscad-viewer`}>{t.viewerLink}</Link>
+          {openscadPageLinks(locale, "openscad-to-step").map((link) => (
+            <Link key={link.href} className="transition-colors hover:text-brand" href={link.href}>{link.label}</Link>
+          ))}
           <Link className="transition-colors hover:text-brand" href={`/${locale}/generators`}>{t.generatorsLink}</Link>
         </div>
         <p className="mt-4 max-w-3xl text-muted-foreground/80">

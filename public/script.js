@@ -153,6 +153,10 @@ function initPage() {
   applyLinks(".js-scad-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
   // openscad-viewer 的 CTA:同一个工具,另一个来意(看模型,不是要 STEP),所以事件分开记
   applyLinks(".js-scad-viewer-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
+  // 另外三个 OpenSCAD 落地页(app/lib/openscad-pages.js):还是同一个工具,来意各一个,事件也各记各的
+  applyLinks(".js-scad-stl-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
+  applyLinks(".js-scad-customizer-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
+  applyLinks(".js-scad-chatgpt-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
   applyLinks(".js-skills-repo-link", linkConfig.skillsRepo, "https://github.com/forgent3d/forgent3d-skills");
 
   // Install-command copy buttons (homepage skills section, /skills, and the two OpenSCAD pages).
@@ -195,9 +199,12 @@ function initPage() {
     [".js-explore-link", "click_explore"],
     [".js-scad-link", "click_openscad_to_step"],
     [".js-scad-viewer-link", "click_openscad_viewer"],
-    // openscad-to-step 首页的例子卡片;app 那头接着是 scad_example_opened / scad_step_export
+    [".js-scad-stl-link", "click_openscad_to_stl"],
+    [".js-scad-customizer-link", "click_openscad_customizer"],
+    [".js-scad-chatgpt-link", "click_chatgpt_openscad"],
+    // OpenSCAD 各落地页的例子卡片(哪一页看 path);app 那头接着是 scad_example_opened / scad_step_export
     [".js-scad-example-link", "click_scad_example"],
-    // openscad-to-step 首页「从链接打开」那一节的例子;app 那头接着是 scad_link_opened
+    // 带代码的链接:预览器页「从链接打开」那一节、ChatGPT 页的示例;app 那头接着是 scad_link_opened
     [".js-scad-code-link", "click_scad_code_link"],
   ].forEach(([selector, eventName]) => {
     document.querySelectorAll(selector).forEach((node) => {

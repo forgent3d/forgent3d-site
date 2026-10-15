@@ -59,6 +59,13 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
   …/compatibility                  哪些能精确转换、目前的限制
 /[locale]/openscad-viewer        OpenSCAD 在线预览落地页（同一个 /scad，另一个来意：看模型；和转换器页互链，不抢同一组词）
                                  「从链接打开代码」完整版在这页（格式、规则、给 AI 的提示词），public/llms.txt 同步
+/[locale]/openscad-to-stl        OpenSCAD 转 STL（同一个 /scad，来意：要给切片软件的文件）
+/[locale]/openscad-customizer    OpenSCAD Customizer 在线（来意：定制 Thingiverse 等处下载的可定制模型；只点名 Thingiverse，
+                                 不写它自己的 Customizer 怎样）
+/[locale]/chatgpt-openscad       AI 写的 OpenSCAD 转 STL（来意：ChatGPT / DeepSeek 给了一段代码；带提示词、常见错误，
+                                 一节通向 AI CAD agent）
+                                 这三页的文案各在 app/lib/<slug>.js，共用的路径、互链、metadata、JSON-LD 在
+                                 app/lib/openscad-pages.js，版块在 app/components/openscad-page.js；五个 OpenSCAD 页的页脚互链
 /[locale]/blog                   文章列表;/[locale]/blog/<slug> 单篇。正文住在 content/blog/<slug>.<locale>.md
                                  (头部 title / description / date,可选 updated;Markdown 子集见 app/lib/markdown.js),
                                  中英各一份、同一个 slug。导航和页脚都有入口。运行时不读文件系统(Worker 里没有 content/):
@@ -163,7 +170,8 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 全站自动记 PostHog 标准 `$pageview` / `$pageleave`（`instrumentation-client.js`，含客户端跳转），
 来源、utm、跳出率看它。自定义事件：`homepage_viewed`、`try_clicked`、`click_pricing`、`click_skills`、
 `click_skills_repo`、`copy_skills_command`、`click_download_desktop`、`click_github`、`click_explore`、
-`click_openscad_to_step`、`click_openscad_viewer`、`click_scad_example`、`click_scad_code_link`。新增 CTA 就补一条，别复用语义不符的事件名。
+`click_openscad_to_step`、`click_openscad_viewer`、`click_openscad_to_stl`、`click_openscad_customizer`、`click_chatgpt_openscad`、
+`click_scad_example`、`click_scad_code_link`(后两个在几个 OpenSCAD 页上都有，按 `path` 分)。新增 CTA 就补一条，别复用语义不符的事件名。
 
 ## 5. 上线与迭代建议
 

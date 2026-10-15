@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { BRAND_BUTTON, CHIP_SURFACE, isSupportedLocale } from "../../lib/landing-page";
-import { scadPath } from "../../lib/openscad-to-step";
+import { openscadPageLinks } from "../../lib/openscad-pages";
 import { getViewerCopy, viewerAppUrl, viewerPath } from "../../lib/openscad-viewer";
 
 /**
@@ -42,7 +42,9 @@ export default async function OpenScadViewerLayout({ children, params }) {
       <footer className="mx-auto w-[min(960px,calc(100vw-32px))] border-t border-border/60 py-8 text-xs leading-5 text-muted-foreground">
         <div className="flex flex-wrap gap-5">
           <a className="transition-colors hover:text-brand" href={`/${locale}`}>{t.homeLink}</a>
-          <Link className="transition-colors hover:text-brand" href={scadPath(locale)}>{t.converterLink}</Link>
+          {openscadPageLinks(locale, "openscad-viewer").map((link) => (
+            <Link key={link.href} className="transition-colors hover:text-brand" href={link.href}>{link.label}</Link>
+          ))}
           <Link className="transition-colors hover:text-brand" href={`/${locale}/generators`}>{t.generatorsLink}</Link>
         </div>
         <p className="mt-4 max-w-3xl text-muted-foreground/80">
