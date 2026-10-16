@@ -413,6 +413,13 @@ export const generators = {
           a: "PETG para uso general, nylon para mucho desgaste. Imprime en plano, con un 100 % de relleno o al menos 5 perímetros para que los dientes sean macizos; las capas de 0.15 mm dejan los flancos lisos.",
         },
       ],
+      sizes: {
+        title: "Tamaños habituales",
+        intro: "Diámetro primitivo = módulo × dientes, diámetro exterior = módulo × (dientes + 2), diámetro de fondo = módulo × (dientes − 2.5). Cada fila abre el generador con ese engranaje.",
+        head: ["Módulo", "Dientes", "Ø primitivo", "Ø exterior", "Ø de fondo", ""],
+        open: "Abrir",
+        note: "Dos engranajes engranan a una distancia entre centros = módulo × (dientes₁ + dientes₂) / 2: módulo 2 con 15 y 30 dientes da 45 mm.",
+      },
     },
     params: {
       MODULE: { label: "Módulo", desc: "Tamaño del diente; los engranajes que engranan deben compartirlo." },

@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
   return {
     title: copy.title,
     description: copy.description,
-    keywords: (generator.localKeywords?.[locale] || generator.keywords).join(", "),
+    keywords: (generator.keywords[locale] || generator.keywords.en).join(", "),
     alternates: {
       canonical: path,
       languages: {
@@ -54,6 +54,12 @@ export async function generateMetadata({ params }) {
 }
 
 const linkClass = "text-brand underline-offset-2 transition-colors hover:text-brand/80 hover:underline";
+
+/** A number in a table cell: at most two decimals, with the decimal comma German readers expect. */
+function cellNumber(value, locale) {
+  const text = String(Math.round(value * 100) / 100);
+  return locale === "de" ? text.replace(".", ",") : text;
+}
 
 export default async function GeneratorLandingPage({ params }) {
   const { locale, slug } = await params;
@@ -208,6 +214,45 @@ export default async function GeneratorLandingPage({ params }) {
           </p>
         ) : null}
       </section>
+
+      {generator.sizes && copy.sizes ? (
+        <section className="mt-14" id="sizes">
+          <h2 className="text-2xl font-semibold">{copy.sizes.title}</h2>
+          <p className="mt-2 max-w-3xl text-muted-foreground">{copy.sizes.intro}</p>
+          <div className="mt-5 overflow-x-auto rounded-xl border border-border/80">
+            <table className="w-full min-w-[520px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-border/80 bg-card/60 font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  {copy.sizes.head.map((head, i) => (
+                    <th key={i} className="px-4 py-3">{head}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {generator.sizes.map((row) => {
+                  // The row's values in this page's own link: the embedded generator opens on that part.
+                  const query = new URLSearchParams(Object.entries(row.params).map(([k, v]) => [k, String(v)])).toString();
+                  return (
+                    <tr key={query} className="border-b border-border/60 last:border-b-0">
+                      {row.cells.map((value, i) => (
+                        <td key={i} className={`px-4 py-3 font-mono ${i < 2 ? "text-foreground" : "text-muted-foreground"}`}>
+                          {cellNumber(value, locale)}
+                        </td>
+                      ))}
+                      <td className="px-4 py-3">
+                        <a className={linkClass} href={`?${query}#use-here`} data-track="generator-size" data-generator={generator.slug}>
+                          {copy.sizes.open} →
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-4 max-w-3xl text-sm text-muted-foreground">{copy.sizes.note}</p>
+        </section>
+      ) : null}
 
       {stepFacts.length ? (
         <section className="mt-14">

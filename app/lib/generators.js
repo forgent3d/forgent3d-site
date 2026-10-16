@@ -27,6 +27,15 @@ export const LOCALE_NAMES = { en: "English", zh: "中文", de: "Deutsch", es: "E
 /** og:locale per page language. */
 export const OG_LOCALES = { en: "en_US", zh: "zh_CN", de: "de_DE", es: "es_ES", ja: "ja_JP" };
 
+/** A row of a gear's common-sizes table: the link parameters, then module, teeth and the pitch, outside and root
+ *  diameters of an ISO 53 profile-A gear (tip = m(z + 2), root = m(z − 2.5)). */
+function gearSize(module, teeth) {
+  return {
+    params: { MODULE: module, TEETH: teeth },
+    cells: [module, teeth, module * teeth, module * (teeth + 2), module * (teeth - 2.5)],
+  };
+}
+
 export const GENERATORS = [
   {
     slug: "gridfinity-bin-generator",
@@ -59,12 +68,15 @@ export const GENERATORS = [
         { q: "能加标签台或者按某把工具开的槽吗？", a: "在生成器里点「AI 修改」描述一下（“前面加一条 12 mm 宽的标签台”），AI 改这只盒子的 model.py，在浏览器里重建。改动大的话，复制到你的模型里，和 AI agent 接着改。" },
       ],
     },
-    keywords: [
+    keywords: {
+      en: [
       "gridfinity bin generator",
       "custom gridfinity bins",
       "gridfinity generator online",
       "gridfinity divider bins stl",
     ],
+      zh: ["gridfinity生成器", "gridfinity在线生成器", "gridfinity收纳盒 STL", "gridfinity盒子尺寸"],
+    },
     params: [
       { key: "GRID_X", default: "3", range: "1 – 8", unit: "u", label: { en: "Grid units X", zh: "格数 X" }, desc: { en: "Bin width in 42 mm Gridfinity units.", zh: "宽度方向占多少个 42 mm 标准格。" } },
       { key: "GRID_Y", default: "2", range: "1 – 8", unit: "u", label: { en: "Grid units Y", zh: "格数 Y" }, desc: { en: "Bin depth in 42 mm Gridfinity units.", zh: "深度方向占多少个 42 mm 标准格。" } },
@@ -165,11 +177,14 @@ export const GENERATORS = [
         { q: "打印机平台比底板小怎么办？", a: "按平台大小分块生成（比如 3 × 4 和 2 × 4），在抽屉里并排一放。每块都守 42 mm 网格，收纳盒在整个抽屉里都能放。" },
       ],
     },
-    keywords: [
+    keywords: {
+      en: [
       "gridfinity baseplate generator",
       "custom gridfinity baseplate",
       "gridfinity base plate stl",
     ],
+      zh: ["gridfinity底板生成器", "gridfinity底板 STL", "gridfinity baseplate 在线生成"],
+    },
     params: [
       { key: "GRID_X", default: "4", range: "1 – 10", unit: "u", label: { en: "Grid units X", zh: "格数 X" }, desc: { en: "Baseplate width in 42 mm units.", zh: "宽度方向 42 mm 格数。" } },
       { key: "GRID_Y", default: "3", range: "1 – 10", unit: "u", label: { en: "Grid units Y", zh: "格数 Y" }, desc: { en: "Baseplate depth in 42 mm units.", zh: "深度方向 42 mm 格数。" } },
@@ -269,11 +284,14 @@ export const GENERATORS = [
         { q: "能加隔板或标签槽吗？", a: "能：在生成器里点「AI 修改」说一句（“沿宽度方向加两块隔板”“正面加一个标签槽”）。AI 在页面上改这个盒子的 model.py；要留下来、要接着让 AI agent 改，就复制到你的模型里。" },
       ],
     },
-    keywords: [
+    keywords: {
+      en: [
       "parametric box generator",
       "3d printed box with lid stl",
       "custom storage box generator",
     ],
+      zh: ["参数化盒子生成器", "3d打印收纳盒", "带盖收纳盒 STL", "铰链盒 3d打印"],
+    },
     params: [
       { key: "INNER_L", default: "80", range: "25 – 250", unit: "mm", label: { en: "Inner length", zh: "内长" }, desc: { en: "Interior length — size it to what goes inside.", zh: "内腔长度，按要装的东西量。" } },
       { key: "INNER_W", default: "50", range: "25 – 250", unit: "mm", label: { en: "Inner width", zh: "内宽" }, desc: { en: "Interior width.", zh: "内腔宽度。" } },
@@ -369,12 +387,15 @@ export const GENERATORS = [
         { q: "能做弯头，或者加倒刺、挡圈吗？", a: "在生成器里点「AI 修改」描述一下（“中间弯 45°”“端 2 加一圈 3 mm 的挡圈”），AI 在页面上改这个转接头的 model.py。改动大的话，复制到你的模型里，和 AI agent 接着改。" },
       ],
     },
-    keywords: [
+    keywords: {
+      en: [
       "hose adapter generator",
       "vacuum hose adapter stl",
       "custom pipe adapter 3d print",
       "dust collection adapter generator",
     ],
+      zh: ["软管转接头生成器", "吸尘器转接头 3d打印", "软管接头 STL"],
+    },
     params: [
       { key: "END1_D", default: "58", range: "10 – 150", unit: "mm", label: { en: "End 1 diameter", zh: "端 1 直径" }, desc: { en: "Diameter of the first port.", zh: "第一端接口直径。" } },
       { key: "END1_MODE", default: "outer", range: "inner / outer", unit: "", label: { en: "End 1 fits", zh: "端 1 配合" }, desc: { en: "outer: the port slides into a hose or socket, and END1_D is the inside diameter of that hose or socket. inner: a hose or pipe slides into the port, and END1_D is the outside diameter of that hose or pipe.", zh: "outer：本端插进软管或接口，END1_D 填软管或接口的内径；inner：软管或管子插进本端，END1_D 填软管或管子的外径。" } },
@@ -469,7 +490,10 @@ export const GENERATORS = [
         { q: "能做斜出料口、加排气槽或把手吗？", a: "在生成器里点「AI 修改」描述一下，AI 在页面上改这个漏斗的 model.py，在浏览器里重建。未登录每天也能免费改几次。" },
       ],
     },
-    keywords: ["funnel generator", "custom funnel stl", "3d printed funnel maker"],
+    keywords: {
+      en: ["funnel generator", "custom funnel stl", "3d printed funnel maker"],
+      zh: ["漏斗生成器", "3d打印漏斗", "漏斗 STL"],
+    },
     params: [
       { key: "MOUTH_D", default: "90", range: "30 – 200", unit: "mm", label: { en: "Mouth diameter", zh: "口径" }, desc: { en: "Top opening diameter.", zh: "顶部开口直径。" } },
       { key: "SPOUT_D", default: "12", range: "3 – 60", unit: "mm", label: { en: "Spout diameter", zh: "出料口径" }, desc: { en: "Inner diameter of the outlet tube.", zh: "出料管内径。" } },
@@ -548,6 +572,8 @@ export const GENERATORS = [
     updated: "2026-10-16",
     // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
     example: { params: { MODULE: "1.5", TEETH: "40", BORE_D: "6" }, label: { en: "Module 1.5, 40 teeth, 6 mm bore", zh: "模数 1.5、40 齿、6 mm 轴孔" } },
+    // Common sizes, each row a deep link (the copy's `sizes` names the columns).
+    sizes: [gearSize(1, 20), gearSize(1, 40), gearSize(1.5, 20), gearSize(1.5, 40), gearSize(2, 15), gearSize(2, 30), gearSize(2.5, 20), gearSize(3, 20)],
     // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
     step: {
       en: [
@@ -572,11 +598,14 @@ export const GENERATORS = [
         { q: "能加键槽、轮毂或顶丝孔吗？", a: "滑块里没有，说一句话就行：在生成器里点「AI 修改」，说「轴孔加一个 3 mm 宽、1.4 mm 深的键槽」。AI 直接改这只齿轮的 model.py（键槽的宽和深还能成为新的可调参数），零件在浏览器里重建，照常导出。未登录每天也能免费改几次。" },
       ],
     },
-    keywords: [
+    keywords: {
+      en: [
       "spur gear generator",
       "gear stl generator online",
       "3d printed gear generator module teeth",
     ],
+      zh: ["齿轮生成器", "在线齿轮生成器", "齿轮生成器 STEP", "直齿轮 STL", "渐开线齿轮生成"],
+    },
     params: [
       { key: "MODULE", default: "2", range: "1 – 5", unit: "mm", label: { en: "Module", zh: "模数" }, desc: { en: "Tooth size; mating gears must share it.", zh: "齿的大小；啮合齿轮模数必须一致。" } },
       { key: "TEETH", default: "20", range: "8 – 120", unit: "", label: { en: "Number of teeth", zh: "齿数" }, desc: { en: "Pitch diameter = module × teeth.", zh: "分度圆直径 = 模数 × 齿数。" } },
@@ -614,13 +643,20 @@ export const GENERATORS = [
             a: "PETG for general use, nylon for high wear. Print flat, 100% infill or at least 5 perimeters so the teeth are solid, 0.15 mm layers keep flanks smooth.",
           },
         ],
+        sizes: {
+          title: "Common sizes",
+          intro: "Pitch diameter = module × teeth, outside diameter = module × (teeth + 2), root diameter = module × (teeth − 2.5). Each row opens the generator on that gear.",
+          head: ["Module", "Teeth", "Pitch Ø", "Outside Ø", "Root Ø", ""],
+          open: "Open",
+          note: "Two gears mesh at center distance = module × (teeth₁ + teeth₂) / 2: module 2 with 15 and 30 teeth gives 45 mm.",
+        },
       },
       zh: {
         name: "直齿轮生成器",
-        title: "直齿轮生成器 — 按模数齿数生成渐开线齿轮 STL | Forgent3D",
+        title: "在线齿轮生成器 — 渐开线直齿轮，按模数齿数导出 STL / STEP | Forgent3D",
         description:
-          "在线生成渐开线直齿轮：模数、齿数、压力角、齿宽、轴孔（圆孔/六角）全可调。真渐开线齿形，免费导出 STL / STEP。",
-        h1: "直齿轮生成器：真渐开线齿形",
+          "在线齿轮生成器：渐开线直齿轮的模数、齿数、压力角、齿宽、轴孔（圆孔/六角）全可调，真渐开线齿形，免费导出 STL / STEP 文件。",
+        h1: "齿轮生成器：在线生成真渐开线直齿轮",
         intro:
           "设定模数、齿数、压力角、齿宽和轴孔，生成器计算真正的渐开线齿廓——不是装饰性的近似齿形，打出来的一对齿轮真的能啮合。生成结果是参数化 CAD：键槽、轮毂、减重孔让 agent 一句话加上。",
         whyPoints: [
@@ -643,6 +679,13 @@ export const GENERATORS = [
             a: "通用选 PETG，高磨损选尼龙。平放打印，100% 填充或至少 5 圈墙保证齿是实心的，0.15 mm 层高齿面更光滑。",
           },
         ],
+        sizes: {
+          title: "常用规格速查",
+          intro: "分度圆直径 = 模数 × 齿数，齿顶圆直径 = 模数 × (齿数 + 2)，齿根圆直径 = 模数 × (齿数 − 2.5)。点每一行直接打开那个齿轮。",
+          head: ["模数", "齿数", "分度圆 Ø", "齿顶圆 Ø", "齿根圆 Ø", ""],
+          open: "打开",
+          note: "两个齿轮的中心距 = 模数 × (齿数₁ + 齿数₂) / 2：模数 2、15 齿配 30 齿是 45 mm。",
+        },
       },
     },
   },
@@ -677,11 +720,14 @@ export const GENERATORS = [
         { q: "能做带一圈孔、带耳或带槽的垫片吗？", a: "能。在生成器里点「AI 修改」，描述一下（“在直径 22 mm 的圆上均布六个 3 mm 孔”）。AI 直接在页面上改这个垫片的 model.py，新加的尺寸会变成还能继续调的参数。未登录每天也能免费改几次。" },
       ],
     },
-    keywords: [
+    keywords: {
+      en: [
       "washer generator 3d print",
       "custom spacer stl generator",
       "plastic shim washer 3d printed",
     ],
+      zh: ["垫片生成器", "垫圈 STL", "3d打印垫片", "间隔柱 STL"],
+    },
     params: [
       { key: "INNER_D", default: "8.4", range: "2 – 60", unit: "mm", label: { en: "Inner diameter", zh: "内径" }, desc: { en: "Bolt clearance: M8 → 8.4 mm.", zh: "螺栓过孔：M8 对应 8.4 mm。" } },
       { key: "OUTER_D", default: "24", range: "6 – 120", unit: "mm", label: { en: "Outer diameter", zh: "外径" }, desc: { en: "Overall washer diameter.", zh: "垫片外径。" } },
@@ -778,12 +824,15 @@ export const GENERATORS = [
         { q: "怎样做一个 200 × 120 mm、坑深 12 mm 的托盘？", a: "https://www.forgent3d.com/zh/generators/tool-tray-generator?TRAY_L=200&TRAY_W=120&TRAY_T=15&PART_DEPTH=12 ——托盘要比坑深至少厚 1.5 mm，所以 12 mm 深的坑要 13.5 mm 以上的托盘。" },
       ],
     },
-    keywords: [
+    keywords: {
+      en: [
       "tool tray generator",
       "custom toolbox insert stl",
       "shadow foam alternative 3d print",
       "tool drawer organizer stl",
     ],
+      zh: ["工具托盘生成器", "工具收纳仿形内衬", "抽屉内衬 3d打印"],
+    },
     params: [
       { key: "CORNER_R", default: "2", range: "0 \u2013 8", unit: "mm", label: { en: "Corner radius", zh: "圆角" }, desc: { en: "Rounds every corner of the traced outline \u2014 a sharp-cornered part still gets a printable inside corner.", zh: "把描出来的轮廓每个角倒圆，尖角零件也能得到能打的内角。" } },
       { key: "CLEARANCE", default: "0.5", range: "0.1 \u2013 3", unit: "mm", label: { en: "Fit clearance", zh: "间隙" }, desc: { en: "Grown around the outline on every side; 0.25 snug, 0.5 drop-in, 1.0 loose.", zh: "沿轮廓四周外扩；0.25 紧配、0.5 好放、1.0 宽松。" } },
@@ -884,12 +933,15 @@ export const GENERATORS = [
     },
     // Evidence: generator-models/extrusion-corner-bracket/EVIDENCE.md in the platform repo
     // (titles of the top Printables / MakerWorld listings, MakerWorld CN titles, GSC 2026-10-16).
-    keywords: [
+    keywords: {
+      en: [
       "2020 corner bracket stl",
       "2020 extrusion corner bracket",
       "v-slot corner bracket 3d print",
       "custom aluminum extrusion bracket generator",
     ],
+      zh: ["2020角码", "铝型材角码 STL", "2020铝型材连接件 3d打印"],
+    },
     params: [
       { key: "SLOT", default: "6 mm", range: "6 / 5 / 4 mm", unit: "", label: { en: "Rail slot", zh: "型材槽口" }, desc: { en: "6 mm: EU / B-type / V-slot. 5 mm: I-type. 4 mm: China GB.", zh: "6 mm：欧标 / B 型 / V 槽；5 mm：I 型；4 mm：国标。" } },
       { key: "SCREW", default: "M5", range: "M3 / M4 / M5", unit: "", label: { en: "Screw", zh: "螺丝" }, desc: { en: "Clearance holes per ISO 273 medium: 3.4 / 4.5 / 5.5 mm.", zh: "按 ISO 273 中等配合开孔：3.4 / 4.5 / 5.5 mm。" } },
@@ -991,12 +1043,15 @@ export const GENERATORS = [
       ],
     },
     // Evidence: generator-models/bearing-pillow-block/EVIDENCE.md in the platform repo.
-    keywords: [
+    keywords: {
+      en: [
       "608 bearing pillow block stl",
       "pillow block bearing holder 3d print",
       "kp08 pillow block replacement",
       "parametric bearing holder generator",
     ],
+      zh: ["轴承座生成器", "608轴承座 STL", "KP08轴承座"],
+    },
     params: [
       { key: "BEARING", default: "608", range: "623 – 6201, 6800 – 6901", unit: "", label: { en: "Bearing", zh: "轴承" }, desc: { en: "14 common deep-groove bearings, sized from the DIN 625 table.", zh: "14 种常用深沟球轴承，尺寸取自 DIN 625 表。" } },
       { key: "FIT", default: "+0.10", range: "−0.20 – +0.30", unit: "mm", label: { en: "Seat fit", zh: "孔径配合" }, desc: { en: "Added to the bearing OD. +0.10 presses a metal 608 in by hand; negative is a tighter press fit.", zh: "加在轴承外径上。+0.10 手能压进金属 608；负值是更紧的压配。" } },
@@ -1097,12 +1152,15 @@ export const GENERATORS = [
       ],
     },
     // Evidence: generator-models/fan-grill/EVIDENCE.md in the platform repo.
-    keywords: [
+    keywords: {
+      en: [
       "fan grill generator",
       "120mm fan grill stl",
       "parametric fan grill",
       "pc fan cover 3d print",
     ],
+      zh: ["风扇网罩生成器", "风扇防护网 STL", "120mm风扇罩 3d打印"],
+    },
     params: [
       { key: "FAN", default: "120 mm", range: "25 – 140 mm", unit: "", label: { en: "Fan size", zh: "风扇尺寸" }, desc: { en: "Hole spacing from ARCTIC's drawings (40, 80, 92, 120, 140 mm) and NopSCADlib's measured fan table (25, 30, 50, 60, 70 mm).", zh: "孔距取自 ARCTIC 图纸（40、80、92、120、140 mm）和 NopSCADlib 实测风扇表（25、30、50、60、70 mm）。" } },
       { key: "BAR", default: "1.2", range: "0.8 – 3", unit: "mm", label: { en: "Bar width", zh: "网条宽度" }, desc: { en: "1.2 mm or more prints cleanly from a 0.4 mm nozzle.", zh: "0.4 mm 喷嘴打 1.2 mm 以上最稳。" } },
@@ -1175,8 +1233,8 @@ export const GENERATORS = [
 ];
 
 // Merge each extra language's file into the entries: copy, parameter labels and descriptions, the example's
-// label, the STEP facts, the AI FAQs and the search phrases the page is written for (`localKeywords`; en and zh
-// pages use `keywords`). Numbers, keys and links stay the English entry's.
+// label, the STEP facts, the AI FAQs and the search phrases the page is written for (`keywords`). Numbers, keys
+// and links stay the English entry's.
 //
 // A generator is in a language once its `copy` is translated. One the file does not have yet (a new generator,
 // written in en and zh) is simply missing from that language — its index lists the rest — and a parameter the
@@ -1195,7 +1253,7 @@ for (const [locale, file] of Object.entries(EXTRA_LOCALE_FILES)) {
     if (g.example) g.example.label[locale] = t.example || g.example.label.en;
     if (g.step && t.step) g.step[locale] = t.step;
     if (g.aiFaqs && t.aiFaqs) g.aiFaqs[locale] = t.aiFaqs;
-    if (t.keywords) (g.localKeywords ||= {})[locale] = t.keywords;
+    if (t.keywords) g.keywords[locale] = t.keywords;
   }
 }
 

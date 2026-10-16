@@ -417,6 +417,13 @@ export const generators = {
           a: "PETG für den allgemeinen Einsatz, Nylon bei hohem Verschleiß. Flach drucken, 100 % Infill oder mindestens 5 Perimeter, damit die Zähne massiv sind; 0,15 mm Schichthöhe hält die Flanken glatt.",
         },
       ],
+      sizes: {
+        title: "Gängige Größen",
+        intro: "Teilkreisdurchmesser = Modul × Zähnezahl, Kopfkreisdurchmesser = Modul × (Zähnezahl + 2), Fußkreisdurchmesser = Modul × (Zähnezahl − 2,5). Jede Zeile öffnet den Generator mit diesem Zahnrad.",
+        head: ["Modul", "Zähne", "Teilkreis-Ø", "Kopfkreis-Ø", "Fußkreis-Ø", ""],
+        open: "Öffnen",
+        note: "Zwei Zahnräder kämmen beim Achsabstand = Modul × (Zähnezahl₁ + Zähnezahl₂) / 2: Modul 2 mit 15 und 30 Zähnen ergibt 45 mm.",
+      },
     },
     params: {
       MODULE: { label: "Modul", desc: "Zahngröße; Zahnräder, die miteinander kämmen, brauchen dasselbe Modul." },
