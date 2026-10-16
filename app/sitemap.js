@@ -17,8 +17,9 @@ const ROUTES = [
   ["/openscad-customizer", "weekly", 0.85, "2026-10-15"],
   ["/chatgpt-openscad", "weekly", 0.85, "2026-10-15"],
   ["/blog", "weekly", 0.7, "2026-10-10"],
-  ["/generators", "weekly", 0.85, "2026-09-30"],
-  ...GENERATORS.map((g) => [`/generators/${g.slug}`, "weekly", 0.8, "2026-09-30"]),
+  ["/generators", "weekly", 0.85, "2026-10-16"],
+  // Each generator page carries its own `updated` (app/lib/generators.js): the day its copy last really changed.
+  ...GENERATORS.map((g) => [`/generators/${g.slug}`, "weekly", 0.8, g.updated]),
   ["/ai-3d-model-generation", "weekly", 0.8, "2026-09-30"],
   ["/code-to-parametric-cad", "weekly", 0.8, "2026-09-30"],
   ["/pricing", "weekly", 0.75, "2026-09-30"],

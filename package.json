@@ -5,7 +5,8 @@
     "prebuild": "node scripts/build-blog-content.mjs",
     "build": "next build",
     "preview": "wrangler dev",
-    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy"
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "check:generators": "node scripts/check-generator-params.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "^4.2.0",

@@ -219,6 +219,20 @@ function initPage() {
     });
   });
 
+  // Generator landing pages mark their buttons with data-track="<name>" (and data-generator="<slug>"): the event is the
+  // name with dashes as underscores — generator_open, generator_ai_edit. (The embedded generator reports its own
+  // opening, generator_embed_open, from components/generator-embed.js.)
+  document.querySelectorAll("[data-track]").forEach((node) => {
+    const eventName = String(node.dataset.track || "").replace(/-/g, "_");
+    if (!eventName || !bindOnce(node, `Track${eventName}`)) return;
+    node.addEventListener("click", () => {
+      trackEvent(eventName, {
+        generator: node.dataset.generator || undefined,
+        href: node.getAttribute("href") || undefined,
+      }, { transport: "sendBeacon" });
+    });
+  });
+
   const isZh = window.location.pathname.startsWith("/zh");
   document.documentElement.lang = isZh ? "zh-CN" : "en";
   document.querySelectorAll(".js-lang-toggle").forEach((langToggle) => {

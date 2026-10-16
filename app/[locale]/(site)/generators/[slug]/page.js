@@ -2,12 +2,19 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isSupportedLocale } from "../../../../lib/landing-page";
 import {
+  APP_BASE,
   GENERATORS,
+  generatorAgentUrl,
+  generatorAiEditUrl,
   generatorAppUrl,
+  generatorDeepLink,
+  generatorSchemaUrl,
   generatorsSharedCopy,
   getGenerator,
+  relatedGenerators,
 } from "../../../../lib/generators";
 import { OG_BASE } from "../../../../lib/seo";
+import { GeneratorEmbed } from "../../../../components/generator-embed";
 
 export function generateStaticParams() {
   return ["en", "zh"].flatMap((locale) =>
@@ -46,6 +53,8 @@ export async function generateMetadata({ params }) {
   };
 }
 
+const linkClass = "text-brand underline-offset-2 transition-colors hover:text-brand/80 hover:underline";
+
 export default async function GeneratorLandingPage({ params }) {
   const { locale, slug } = await params;
   if (!isSupportedLocale(locale)) notFound();
@@ -55,8 +64,13 @@ export default async function GeneratorLandingPage({ params }) {
   const copy = generator.copy[locale];
   const t = generatorsSharedCopy(locale);
   const appUrl = generatorAppUrl(generator, locale);
-  const related = GENERATORS.filter((g) => g.slug !== slug);
-  const faqs = [...copy.faqs, ...t.sharedFaqs];
+  const aiEditUrl = generatorAiEditUrl(generator, locale);
+  const deepLink = generatorDeepLink(generator, locale);
+  const schemaUrl = generatorSchemaUrl(generator);
+  const agentUrl = generatorAgentUrl(generator, locale);
+  const related = relatedGenerators(generator);
+  const faqs = [...copy.faqs, ...(generator.aiFaqs?.[locale] || []), ...t.sharedFaqs];
+  const stepFacts = generator.step?.[locale] || [];
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -73,8 +87,10 @@ export default async function GeneratorLandingPage({ params }) {
     name: copy.name,
     applicationCategory: "DesignApplication",
     operatingSystem: "Web",
+    isAccessibleForFree: true,
     offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
     description: copy.description,
+    featureList: t.featureList,
     url: `https://www.forgent3d.com/${locale}/generators/${slug}`,
   };
   const breadcrumbSchema = {
@@ -115,15 +131,30 @@ export default async function GeneratorLandingPage({ params }) {
         </a>
         <a
           className="inline-flex rounded-md border border-border/80 px-6 py-3 font-mono text-sm uppercase tracking-[0.18em] text-brand transition-colors hover:border-brand/50"
-          href={appUrl}
-          data-track="generator-remix"
+          href={aiEditUrl}
+          data-track="generator-ai-edit"
           data-generator={generator.slug}
         >
-          {t.remixApp}
+          {t.aiEditCta}
         </a>
       </div>
 
-      <ul className="mt-10 space-y-3 text-foreground">
+      <section className="mt-12" aria-labelledby="use-here">
+        <h2 id="use-here" className="text-2xl font-semibold">{t.embedTitle}</h2>
+        <p className="mt-2 max-w-3xl text-muted-foreground">{t.embedIntro}</p>
+        <div className="mt-5">
+          <GeneratorEmbed
+            appBase={APP_BASE}
+            modelDir={generator.modelDir}
+            slug={generator.slug}
+            locale={locale}
+            name={copy.name}
+            labels={{ load: t.embedLoad, note: t.embedNote }}
+          />
+        </div>
+      </section>
+
+      <ul className="mt-12 space-y-3 text-foreground">
         {copy.whyPoints.map((item) => (
           <li key={item}>- {item}</li>
         ))}
@@ -145,7 +176,11 @@ export default async function GeneratorLandingPage({ params }) {
             <tbody>
               {generator.params.map((p) => (
                 <tr key={p.key} className="border-b border-border/60 last:border-b-0">
-                  <td className="px-4 py-3 font-medium text-foreground">{p.label[locale]}</td>
+                  <td className="px-4 py-3 font-medium text-foreground">
+                    {p.label[locale]}
+                    {/* The link parameter: the constant's name in model.py, which is what a deep link sets. */}
+                    <span className="mt-0.5 block font-mono text-[11px] font-normal text-muted-foreground">{p.key}</span>
+                  </td>
                   <td className="px-4 py-3 font-mono text-muted-foreground">
                     {p.default}
                     {p.unit ? ` ${p.unit}` : ""}
@@ -156,6 +191,92 @@ export default async function GeneratorLandingPage({ params }) {
               ))}
             </tbody>
           </table>
+        </div>
+        {generator.example ? (
+          <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
+            {t.paramsLinkNote}{" "}
+            {locale === "zh" ? `${t.exampleLabel}（${generator.example.label[locale]}）：` : `${t.exampleLabel} (${generator.example.label[locale]}):`}
+            <a className={`${linkClass} mt-1 block break-all font-mono text-xs`} href={deepLink}>{deepLink}</a>
+          </p>
+        ) : null}
+      </section>
+
+      {stepFacts.length ? (
+        <section className="mt-14">
+          <h2 className="text-2xl font-semibold">{t.stepTitle}</h2>
+          <ul className="mt-4 max-w-3xl space-y-3 text-muted-foreground">
+            {stepFacts.map((fact) => (
+              <li key={fact}>- {fact}</li>
+            ))}
+          </ul>
+          <p className="mt-4 max-w-3xl text-sm text-muted-foreground">{t.stepCommon}</p>
+        </section>
+      ) : null}
+
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold">{t.compareTitle}</h2>
+        <div className="mt-5 overflow-x-auto rounded-xl border border-border/80">
+          <table className="w-full min-w-[600px] border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-border/80 bg-card/60 text-xs text-muted-foreground">
+                {t.compareHead.map((head, i) => (
+                  <th key={i} className={`px-4 py-3 ${i === 1 ? "text-foreground" : ""}`}>{head}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {t.compareRows.map((row) => (
+                <tr key={row[0]} className="border-b border-border/60 last:border-b-0">
+                  {row.map((cell, i) => (
+                    <td key={i} className={`px-4 py-3 ${i === 0 ? "font-medium text-foreground" : i === 1 ? "text-foreground" : "text-muted-foreground"}`}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mt-14" id="ai">
+        <h2 className="text-2xl font-semibold">{t.aiTitle}</h2>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          <article className="rounded-xl border border-border/80 bg-card/60 p-5">
+            <h3 className="font-semibold text-foreground">{t.aiLinkTitle}</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              {t.aiLinkBody}{" "}
+              <a className={`${linkClass} break-all font-mono text-xs`} href={schemaUrl}>{t.schemaLabel}</a>
+            </p>
+            {generator.example ? (
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                {t.exampleLabel}:{" "}
+                <a className={`${linkClass} break-all font-mono text-xs`} href={deepLink}>{deepLink}</a>
+              </p>
+            ) : null}
+          </article>
+          <article className="rounded-xl border border-border/80 bg-card/60 p-5">
+            <h3 className="font-semibold text-foreground">{t.aiEditTitle}</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{t.aiEditBody}</p>
+            <a
+              className={`${linkClass} mt-3 inline-block text-sm`}
+              href={aiEditUrl}
+              data-track="generator-ai-edit"
+              data-generator={generator.slug}
+            >
+              {t.aiEditCta} →
+            </a>
+          </article>
+          <article className="rounded-xl border border-border/80 bg-card/60 p-5">
+            <h3 className="font-semibold text-foreground">{t.aiWorkspaceTitle}</h3>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{t.aiWorkspaceBody}</p>
+            <a
+              className={`${linkClass} mt-3 inline-block text-sm`}
+              href={agentUrl}
+              data-track="generator-agent"
+              data-generator={generator.slug}
+            >
+              {t.aiWorkspaceCta} →
+            </a>
+          </article>
         </div>
       </section>
 
@@ -177,7 +298,7 @@ export default async function GeneratorLandingPage({ params }) {
           {faqs.map((faq) => (
             <article key={faq.q}>
               <h3 className="font-semibold text-foreground">{faq.q}</h3>
-              <p className="mt-1 max-w-3xl text-muted-foreground">{faq.a}</p>
+              <p className="mt-1 max-w-3xl break-words text-muted-foreground">{faq.a}</p>
             </article>
           ))}
         </div>
@@ -196,6 +317,12 @@ export default async function GeneratorLandingPage({ params }) {
               {g.copy[locale].name}
             </Link>
           ))}
+          <Link
+            className="inline-flex items-center gap-2 rounded-md px-4 py-2 font-mono text-xs text-brand transition-colors hover:text-brand/80"
+            href={`/${locale}/generators`}
+          >
+            {t.catalogH1} →
+          </Link>
         </div>
         <p className="mt-6 text-sm text-muted-foreground">
           {t.scadPrompt}{" "}

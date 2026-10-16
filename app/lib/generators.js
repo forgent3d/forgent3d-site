@@ -9,13 +9,41 @@
 // publish artifacts, so they are maintained there, not copied here; an entry with no
 // modelDir falls back to the workbench root (the create screen).
 
-export const APP_BASE = "https://app.forgent3d.com";
+// NEXT_PUBLIC_APP_BASE points the pages at a local app (http://localhost:3000) for testing; production never sets it.
+export const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || "https://app.forgent3d.com";
 
 export const GENERATORS = [
   {
     slug: "gridfinity-bin-generator",
     modelDir: "gridfinity-bin",
     icon: "▦",
+    family: "storage",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { GRID_X: "2", GRID_Y: "1", HEIGHT_U: "3", DIV_X: "3", MAGNET_HOLES: "true" }, label: { en: "2 × 1 bin, 3 units tall, three compartments, magnet holes", zh: "2 × 1 格、3U 高、分三格、带磁铁孔" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "The base feet, stacking lip and rounded corners export as exact planes, cylinders and cones — 220 faces for the default 3 × 2 bin, every 45° slope a true cone where it turns a corner.",
+        "So the bin can be measured against the Gridfinity spec in CAD, or reworked in Fusion or Onshape without fighting a mesh.",
+      ],
+      zh: [
+        "底脚、堆叠唇和圆角导出为精确的平面、圆柱面和圆锥面——默认 3 × 2 收纳盒共 220 个面，每处 45° 斜面拐角都是真圆锥面。",
+        "所以能在 CAD 里对照 Gridfinity 规范量尺寸，也能在 Fusion、Onshape 里接着改，不用跟网格较劲。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a 2 × 1 Gridfinity bin with three compartments and magnet holes?", a: "https://www.forgent3d.com/en/generators/gridfinity-bin-generator?GRID_X=2&GRID_Y=1&HEIGHT_U=3&DIV_X=3&MAGNET_HOLES=true opens exactly that bin (height in 7 mm units). Download STL to print it, or STEP to keep editing in CAD." },
+        { q: "Can I add a label shelf or a cut-out for a specific tool?", a: "Press “AI edit” in the generator and describe it (“a 12 mm label shelf along the front”); the AI edits the bin’s model.py and it rebuilds in your browser. For a bigger redesign, copy the bin into your models and keep going with the AI agent." },
+      ],
+      zh: [
+        { q: "怎样做一个分三格、带磁铁孔的 2 × 1 Gridfinity 收纳盒？", a: "https://www.forgent3d.com/zh/generators/gridfinity-bin-generator?GRID_X=2&GRID_Y=1&HEIGHT_U=3&DIV_X=3&MAGNET_HOLES=true 打开就是这只盒子（高度按 7 mm 一个单位）。下载 STL 去打印，或下载 STEP 在 CAD 里接着改。" },
+        { q: "能加标签台或者按某把工具开的槽吗？", a: "在生成器里点「AI 修改」描述一下（“前面加一条 12 mm 宽的标签台”），AI 改这只盒子的 model.py，在浏览器里重建。改动大的话，复制到你的模型里，和 AI agent 接着改。" },
+      ],
+    },
     keywords: [
       "gridfinity bin generator",
       "custom gridfinity bins",
@@ -97,6 +125,31 @@ export const GENERATORS = [
     slug: "gridfinity-baseplate-generator",
     modelDir: "gridfinity-baseplate",
     icon: "▤",
+    family: "storage",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { GRID_X: "5", GRID_Y: "4", MAGNET_HOLES: "true" }, label: { en: "5 × 4 sockets (210 × 168 mm), magnet holes", zh: "5 × 4 格（210 × 168 mm）、带磁铁孔" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Every 42 mm socket’s sloped profile exports as exact planes and cones — 310 faces for the default 4 × 3 plate — so a CAD user can trim the plate to an odd drawer outline instead of remodelling it.",
+      ],
+      zh: [
+        "每个 42 mm 格位的斜面轮廓都导出为精确的平面和圆锥面——默认 4 × 3 底板共 310 个面——在 CAD 里按不规则的抽屉轮廓裁一刀即可，不用重画。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a Gridfinity baseplate for a 220 × 180 mm drawer?", a: "Five by four sockets is 210 × 168 mm: https://www.forgent3d.com/en/generators/gridfinity-baseplate-generator?GRID_X=5&GRID_Y=4. To fill the last few millimetres, press “AI edit” in the generator and ask for a 220 × 180 mm outer border." },
+        { q: "My printer bed is smaller than the plate — what now?", a: "Generate it in pieces that fit your bed (for example 3 × 4 and 2 × 4) and lay them side by side in the drawer. Every piece keeps the 42 mm grid, so bins sit across the whole drawer." },
+      ],
+      zh: [
+        { q: "怎样给 220 × 180 mm 的抽屉做 Gridfinity 底板？", a: "5 × 4 格是 210 × 168 mm：https://www.forgent3d.com/zh/generators/gridfinity-baseplate-generator?GRID_X=5&GRID_Y=4。剩下几毫米想填满，就在生成器里点「AI 修改」，让它把外框补到 220 × 180 mm。" },
+        { q: "打印机平台比底板小怎么办？", a: "按平台大小分块生成（比如 3 × 4 和 2 × 4），在抽屉里并排一放。每块都守 42 mm 网格，收纳盒在整个抽屉里都能放。" },
+      ],
+    },
     keywords: [
       "gridfinity baseplate generator",
       "custom gridfinity baseplate",
@@ -174,76 +227,97 @@ export const GENERATORS = [
     slug: "parametric-box-generator",
     modelDir: "parametric-box",
     icon: "▣",
+    family: "storage",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { INNER_L: "120", INNER_W: "80", INNER_H: "40", LID: "sliding" }, label: { en: "120 × 80 × 40 mm inside, sliding lid", zh: "内腔 120 × 80 × 40 mm、抽拉盖" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Box and lid export as separate solids in one file — 101 exact faces for the default hinged box, the rounded corners and the hinge knuckles as true cylinders.",
+        "Open it in CAD to put a logo, a cable notch or mounting holes exactly where they belong, or hand it to a print service that wants STEP.",
+      ],
+      zh: [
+        "盒体和盖子在同一个文件里是两个独立的实体——默认铰链盒共 101 个精确面，圆角和铰链转节都是真圆柱面。",
+        "在 CAD 里打开，就能把 logo、走线缺口或安装孔放到准确的位置，也能直接交给要 STEP 的打印服务。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a 120 × 80 × 40 mm box with a sliding lid?", a: "https://www.forgent3d.com/en/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding — the sizes are the inside of the box. Download STL to print box and lid, or STEP to edit." },
+        { q: "Can I add dividers or a label slot?", a: "Yes: press “AI edit” in the generator and say it (“two dividers across the width”, “a label slot on the front”). The AI edits the box’s model.py on the page; copy it into your models to keep it and to continue with the AI agent." },
+      ],
+      zh: [
+        { q: "怎样做一个内腔 120 × 80 × 40 mm、抽拉盖的盒子？", a: "https://www.forgent3d.com/zh/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding ——尺寸是盒子的内腔。下载 STL 打印盒体和盖子，或下载 STEP 去改。" },
+        { q: "能加隔板或标签槽吗？", a: "能：在生成器里点「AI 修改」说一句（“沿宽度方向加两块隔板”“正面加一个标签槽”）。AI 在页面上改这个盒子的 model.py；要留下来、要接着让 AI agent 改，就复制到你的模型里。" },
+      ],
+    },
     keywords: [
       "parametric box generator",
       "3d printed box with lid stl",
       "custom storage box generator",
     ],
     params: [
-      { key: "INNER_L", default: "80", range: "20 – 250", unit: "mm", label: { en: "Inner length", zh: "内长" }, desc: { en: "Interior length — size it to what goes inside.", zh: "内腔长度，按要装的东西量。" } },
-      { key: "INNER_W", default: "50", range: "20 – 250", unit: "mm", label: { en: "Inner width", zh: "内宽" }, desc: { en: "Interior width.", zh: "内腔宽度。" } },
-      { key: "INNER_H", default: "30", range: "10 – 150", unit: "mm", label: { en: "Inner height", zh: "内高" }, desc: { en: "Interior height under the lid.", zh: "盖下内腔高度。" } },
-      { key: "WALL", default: "2.0", range: "1.2 – 4", unit: "mm", label: { en: "Wall thickness", zh: "壁厚" }, desc: { en: "2 mm ≈ 5 perimeters with a 0.4 nozzle.", zh: "0.4 喷嘴下 2 mm 约为 5 圈墙。" } },
-      { key: "WITH_LID", default: "True", range: "on / off", unit: "", label: { en: "Fitted lid", zh: "配盖" }, desc: { en: "Friction-fit lid printed as a second body.", zh: "摩擦配合的盖子，作为第二个零件打印。" } },
-      { key: "LID_FIT", default: "0.2", range: "0.1 – 0.4", unit: "mm", label: { en: "Lid clearance", zh: "盖配合间隙" }, desc: { en: "Per-side clearance; 0.2 suits most printers.", zh: "单边间隙，多数打印机 0.2 合适。" } },
-      { key: "CORNER_R", default: "4", range: "0 – 12", unit: "mm", label: { en: "Corner radius", zh: "圆角半径" }, desc: { en: "Outside corner rounding.", zh: "外轮廓圆角。" } },
+      { key: "INNER_L", default: "80", range: "25 – 250", unit: "mm", label: { en: "Inner length", zh: "内长" }, desc: { en: "Interior length — size it to what goes inside.", zh: "内腔长度，按要装的东西量。" } },
+      { key: "INNER_W", default: "50", range: "25 – 250", unit: "mm", label: { en: "Inner width", zh: "内宽" }, desc: { en: "Interior width.", zh: "内腔宽度。" } },
+      { key: "INNER_H", default: "30", range: "16 – 150", unit: "mm", label: { en: "Inner height", zh: "内高" }, desc: { en: "Interior height of the box, floor to rim.", zh: "盒体内腔高度，从底到口沿。" } },
+      { key: "WALL", default: "2.4", range: "2 – 4", unit: "mm", label: { en: "Wall thickness", zh: "壁厚" }, desc: { en: "2.4 mm is about six perimeters with a 0.4 mm nozzle.", zh: "0.4 喷嘴下 2.4 mm 约为六圈墙。" } },
+      { key: "LID", default: "hinged", range: "hinged / snap / lip / sliding / none", unit: "", label: { en: "Lid type", zh: "盖子类型" }, desc: { en: "A hinged lid, a snap-on lid, a lid that drops over a lip, one that slides along dovetail rails, or none.", zh: "铰链翻盖、卡扣盖、压在止口上的盖、沿燕尾导轨抽拉的盖，或者不要盖。" } },
+      { key: "HINGE", default: "print-in-place", range: "print-in-place / pin", unit: "", label: { en: "Hinge", zh: "铰链" }, desc: { en: "Hinged lid only: printed already assembled, or with a separate pin.", zh: "仅铰链盖：一体打印好就能转，或者用单独的销轴。" } },
+      { key: "LATCH", default: "clip", range: "clip / toolbox / magnet / none", unit: "", label: { en: "Latch", zh: "锁扣" }, desc: { en: "Hinged lid only: a snap clip, toolbox-style clasps, magnets, or none.", zh: "仅铰链盖：卡扣、工具箱式搭扣、磁铁，或者不要。" } },
+      { key: "LID_DEPTH", default: "10", range: "4 – 40", unit: "mm", label: { en: "Hinged lid depth", zh: "翻盖深度" }, desc: { en: "Hinged lid only: how deep the lid is.", zh: "仅铰链盖：盖子有多深。" } },
+      { key: "CORNER_R", default: "4", range: "0 – 12", unit: "mm", label: { en: "Corner radius", zh: "圆角半径" }, desc: { en: "Outside corner rounding (the sliding lid keeps square corners so it can slide out).", zh: "外轮廓圆角（抽拉盖保持直角，才抽得出来）。" } },
     ],
     copy: {
       en: {
         name: "Parametric Box Generator",
-        title: "Parametric Box Generator — Custom Box with Fitted Lid (STL) | Forgent3D",
+        title: "Parametric Box Generator — Hinged, Snap-On or Sliding Lid Boxes (STL) | Forgent3D",
         description:
-          "Generate a custom 3D-printable storage box with a friction-fit lid: exact inner dimensions, wall thickness, lid clearance and corner radius. Export STL / STEP free.",
-        h1: "Parametric box generator: exact inner size, fitted lid",
+          "Generate a custom 3D-printable box from its inside size, with a hinged lid (print-in-place or pin hinge; clip, toolbox or magnet latch), a snap-on, lip or sliding lid, or none. Preview in 3D, export STL or STEP free.",
+        h1: "Parametric box generator: exact inside size, five kinds of lid",
         intro:
-          "Enter the inner dimensions of what you need to store — the box is generated around them, with wall thickness, corner rounding and a friction-fit lid whose clearance you control. It rebuilds live as real CAD, so hinges, latches or compartments are one AI edit away.",
+          "Enter the inside dimensions of what you need to store and pick a lid: a hinged lid that comes off the printer already assembled, a snap-on or drop-over lid, a lid that slides along dovetail rails, or none. The box rebuilds live as real CAD — anything the options miss, like dividers or a label slot, is one AI edit away.",
         whyPoints: [
-          "Dimensions are interior by default — size to the thing, not the print",
-          "Tunable lid clearance so the fit matches your printer",
-          "Rounded corners and clean walls, no supports needed",
-          "Want a hinge, latch or dividers? Remix with the AI agent",
+          "Dimensions are the inside — size it to the thing, not the print",
+          "Hinged lid with a print-in-place hinge, or a separate pin",
+          "Clip, toolbox clasp or magnet latch on the hinged lid",
+          "Dividers, a label slot, a cable notch? Press “AI edit” and say it",
         ],
         faqs: [
           {
-            q: "What lid clearance should I use?",
-            a: "Start at 0.2 mm per side for a snug friction fit on a well-tuned printer. If the lid binds, step to 0.3; for a loose dust-cover fit, 0.4. Re-generate and print just the lid to dial it in.",
+            q: "Which lid should I pick?",
+            a: "The hinged lid with the print-in-place hinge for a box you open often — it comes off the printer assembled. Snap-on for a lid that must stay shut when the box is carried, the lip lid for a dust cover you lift off, the sliding lid for a pencil-box feel (it keeps square corners so it can slide out), and none for an open tray.",
           },
           {
             q: "How thick should the walls be?",
-            a: "2 mm is a good default — with a 0.4 mm nozzle that is about five perimeters, strong enough for everyday storage boxes. Go 3–4 mm for boxes that get sat on, stepped on or screwed into.",
-          },
-          {
-            q: "Can I add hinges, a latch or compartments?",
-            a: "Yes. The generated box is editable CAD code — open it in the Forgent3D workbench and ask the agent for a print-in-place hinge, a snap latch or internal dividers.",
+            a: "The default 2.4 mm is about six perimeters with a 0.4 mm nozzle — stiff enough for everyday storage. Go to 3–4 mm for boxes that get carried full or screwed to a wall.",
           },
         ],
       },
       zh: {
         name: "参数化盒子生成器",
-        title: "参数化盒子生成器 — 定制带盖收纳盒 STL 在线生成 | Forgent3D",
+        title: "参数化盒子生成器 — 铰链盖、卡扣盖、抽拉盖收纳盒 STL 在线生成 | Forgent3D",
         description:
-          "生成自定义 3D 打印收纳盒：按内腔尺寸建模，壁厚、盖子配合间隙、圆角全可调。浏览器预览，免费导出 STL / STEP。",
-        h1: "参数化盒子生成器：按内腔尺寸建模，盖子配合可调",
+          "按内腔尺寸生成 3D 打印收纳盒：铰链翻盖（一体打印铰链或销轴；卡扣、工具箱搭扣或磁铁锁扣）、卡扣盖、止口盖、抽拉盖，或不要盖。浏览器 3D 预览，免费导出 STL / STEP。",
+        h1: "参数化盒子生成器：按内腔尺寸建模，五种盖子任选",
         intro:
-          "直接输入要装的东西的尺寸——盒子围绕内腔生成，壁厚、圆角、摩擦配合盖的间隙都由你控制，实时重建。底下是真 CAD 代码：铰链、卡扣、分隔这些进阶需求，交给 AI agent 一句话改出来。",
+          "输入要装的东西的尺寸，再选一种盖子：一体打印、下了打印机就能转的铰链翻盖，卡扣盖或压在止口上的盖，沿燕尾导轨抽拉的盖，或者干脆不要盖。底下是真 CAD，实时重建——选项覆盖不到的隔板、标签槽，点「AI 修改」说一句就行。",
         whyPoints: [
-          "默认按内腔尺寸建模——量东西，不用倒推外壳",
-          "盖子间隙可调，配合松紧适配你的打印机",
-          "圆角外壳、干净墙面，免支撑打印",
-          "要铰链、卡扣、分隔？让 AI agent 继续改",
+          "尺寸是内腔——量东西，不用倒推外壳",
+          "铰链盖可以一体打印，也可以用单独的销轴",
+          "铰链盖配卡扣、工具箱式搭扣或磁铁锁扣",
+          "要隔板、标签槽、走线缺口？点「AI 修改」说一句",
         ],
         faqs: [
           {
-            q: "盖子间隙设多少合适？",
-            a: "调校良好的打印机从单边 0.2 mm 开始，是紧实的摩擦配合；偏紧就 0.3，想要松盖防尘用 0.4。只重打盖子就能快速试出手感。",
+            q: "该选哪种盖子？",
+            a: "经常开合的盒子选铰链盖加一体打印铰链——下了打印机就是装好的。装满了要拎着走、盖子必须扣牢就选卡扣盖；只是防尘、掀开就用止口盖；想要文具盒那种手感选抽拉盖（它保持直角才抽得出来）；敞口托盘就不要盖。",
           },
           {
             q: "壁厚选多少？",
-            a: "默认 2 mm：0.4 喷嘴下约五圈墙，日常收纳强度足够。要承重、踩踏或打螺丝的盒子用 3–4 mm。",
-          },
-          {
-            q: "能加铰链、卡扣或分隔吗？",
-            a: "可以。生成的盒子是可编辑 CAD 代码——在工作台打开，让 agent 加一体打印铰链、卡扣或内部分隔。",
+            a: "默认 2.4 mm：0.4 喷嘴下约六圈墙，日常收纳够硬。装满了要拎、或者要拧在墙上的盒子用 3–4 mm。",
           },
         ],
       },
@@ -253,6 +327,33 @@ export const GENERATORS = [
     slug: "hose-adapter-generator",
     modelDir: "hose-adapter",
     icon: "◎",
+    family: "fluid",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { END1_D: "35", END1_MODE: "inner", END2_D: "58", END2_MODE: "outer" }, label: { en: "a 35 mm hose slides into one end; the other end slides into a 58 mm port", zh: "35 mm 的管子插进一端，另一端插进 58 mm 的接口" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Exports as 10 exact faces: both sleeves are true cylinders, and the transition and the lead-in lips are true cones — the bore tapers with the outside, so the wall keeps its thickness.",
+        "Handy when the adapter is turned on a lathe, or has to line up with a port someone drew in CAD.",
+      ],
+      zh: [
+        "导出为 10 个精确面：两端套管是真圆柱面，过渡段和入口倒角是真圆锥面——内孔随外形一起收，壁厚处处一致。",
+        "要上车床加工，或者要和别人在 CAD 里画好的接口对齐时正好用得上。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make an adapter from a 35 mm vacuum hose to a 58 mm dust port?", a: "Decide how each end fits. The hose slides into our end — “inner”, enter the hose’s outside diameter — and our other end slides into the dust port — “outer”, enter the port’s inside diameter: https://www.forgent3d.com/en/generators/hose-adapter-generator?END1_D=35&END1_MODE=inner&END2_D=58&END2_MODE=outer. The fit allowance is added for you." },
+        { q: "Can I make it angled, or add a hose barb or a stop flange?", a: "Press “AI edit” in the generator and describe it (“bend 45° in the middle”, “a 3 mm flange at end 2”); the AI edits the adapter’s model.py on the page. For bigger changes, copy it into your models and continue with the AI agent." },
+      ],
+      zh: [
+        { q: "怎样做一个从 35 mm 吸尘器软管到 58 mm 集尘口的转接头？", a: "先想清楚每一端怎么配：软管插进我们这一端——选「内配合」（inner），填软管的外径；我们另一端插进集尘口——选「外配合」（outer），填集尘口的内径：https://www.forgent3d.com/zh/generators/hose-adapter-generator?END1_D=35&END1_MODE=inner&END2_D=58&END2_MODE=outer。配合余量模型已经替你加好。" },
+        { q: "能做弯头，或者加倒刺、挡圈吗？", a: "在生成器里点「AI 修改」描述一下（“中间弯 45°”“端 2 加一圈 3 mm 的挡圈”），AI 在页面上改这个转接头的 model.py。改动大的话，复制到你的模型里，和 AI agent 接着改。" },
+      ],
+    },
     keywords: [
       "hose adapter generator",
       "vacuum hose adapter stl",
@@ -287,15 +388,11 @@ export const GENERATORS = [
         faqs: [
           {
             q: "How do I measure my hose ends correctly?",
-            a: "For a port the hose slides OVER, measure the hose's inner diameter and set that end to \"outer\" fit. For a port that slides INTO a hose or machine, measure the receiving hole's diameter and use \"inner\" fit. Add nothing — print tolerance is built in.",
+            a: "If our end slides INTO a hose or a port, set that end to \"outer\" and enter the inside diameter of what it goes into. If a hose slides INTO our end, set \"inner\" and enter the hose's outside diameter. Add nothing — a 0.2 mm fit allowance is built in.",
           },
           {
             q: "What material should I print adapters in?",
             a: "PETG is the sweet spot: slightly flexible, so tapered ports seat airtight, and it tolerates the heat inside shop-vac hoses. PLA works for light duty; TPU only when you need a stretchy push-fit.",
-          },
-          {
-            q: "Can I make an angled or barbed adapter?",
-            a: "The generator covers straight tapered adapters. For a 45° bend, hose barbs or a stop flange, open the model in the workbench and ask the AI agent — it edits the same parametric CAD.",
           },
         ],
       },
@@ -316,15 +413,11 @@ export const GENERATORS = [
         faqs: [
           {
             q: "怎么量管口才不会做错？",
-            a: "软管套在接头外面：量软管内径，该端选「外壁配合」。接头插进软管或机器口：量接收孔直径，选「内壁配合」。不用自己加补偿，打印公差已含在模型里。",
+            a: "我们这一端插进软管或机器的接口里：该端选「外配合」（链接里写 outer），填它要插进去的那个孔的内径。软管插进我们这一端：选「内配合」（inner），填软管的外径。不用自己加补偿，0.2 mm 的配合余量已含在模型里。",
           },
           {
             q: "用什么材料打印？",
             a: "首选 PETG：略有弹性，锥形口能压紧密封，也扛得住吸尘管路的温度。轻负载 PLA 可用；需要弹性插拔时用 TPU。",
-          },
-          {
-            q: "能做弯头或带倒刺的接头吗？",
-            a: "生成器覆盖直线锥形转接。45° 弯头、软管倒刺、限位法兰这类变体，在工作台打开模型让 AI agent 改——还是同一份参数化 CAD。",
           },
         ],
       },
@@ -334,6 +427,33 @@ export const GENERATORS = [
     slug: "funnel-generator",
     modelDir: "funnel",
     icon: "▽",
+    family: "fluid",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { MOUTH_D: "120", SPOUT_D: "8", SPOUT_LEN: "30" }, label: { en: "120 mm mouth, 8 mm spout bore, 30 mm spout", zh: "口径 120 mm、出料管内径 8 mm、管长 30 mm" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Exports as 15 exact faces: the bowl and its taper into the spout are true cones, the spout and the rim true cylinders.",
+        "So the spout can be checked against a bottle neck or a filler port drawn in CAD before anything is printed.",
+      ],
+      zh: [
+        "导出为 15 个精确面：漏斗碗和收向出料管的那段是真圆锥面，出料管和口沿是真圆柱面。",
+        "打印之前就能在 CAD 里拿它和瓶口、加注口比一比，看插不插得进。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a funnel that fits a bottle with a 16 mm neck?", a: "The spout’s outside is SPOUT_D plus two walls (1.6 mm each by default), so for a 16 mm neck use SPOUT_D=12: https://www.forgent3d.com/en/generators/funnel-generator?SPOUT_D=12&MOUTH_D=100. Download STL to print it." },
+        { q: "Can it have an angled spout, an air vent or a handle?", a: "Press “AI edit” in the generator and describe it; the AI edits the funnel’s model.py on the page and it rebuilds in your browser. A few edits a day are free without signing in." },
+      ],
+      zh: [
+        { q: "怎样做一个能插进 16 mm 瓶口的漏斗？", a: "出料管的外径是 SPOUT_D 加两层壁（默认每层 1.6 mm），所以 16 mm 的瓶口用 SPOUT_D=12：https://www.forgent3d.com/zh/generators/funnel-generator?SPOUT_D=12&MOUTH_D=100。下载 STL 去打印。" },
+        { q: "能做斜出料口、加排气槽或把手吗？", a: "在生成器里点「AI 修改」描述一下，AI 在页面上改这个漏斗的 model.py，在浏览器里重建。未登录每天也能免费改几次。" },
+      ],
+    },
     keywords: ["funnel generator", "custom funnel stl", "3d printed funnel maker"],
     params: [
       { key: "MOUTH_D", default: "90", range: "30 – 200", unit: "mm", label: { en: "Mouth diameter", zh: "口径" }, desc: { en: "Top opening diameter.", zh: "顶部开口直径。" } },
@@ -408,6 +528,35 @@ export const GENERATORS = [
     slug: "spur-gear-generator",
     modelDir: "spur-gear",
     icon: "✱",
+    family: "gears",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { MODULE: "1.5", TEETH: "40", BORE_D: "6" }, label: { en: "Module 1.5, 40 teeth, 6 mm bore", zh: "模数 1.5、40 齿、6 mm 轴孔" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Every tooth flank is one smooth surface: the exact involute, swept through the face width. The default 20-tooth gear exports as 83 faces — 40 flanks, 41 cylindrical faces (tip lands, root fillets, bore) and 2 flat faces — with no facets anywhere.",
+        "The teeth are what a hob would cut: an ISO 53 profile-A rack rolled around the blank, so the root keeps the fillet of the rack tip, and pinions under about 17 teeth (at 20°) come out undercut, as real cut pinions do.",
+        "Checked against a simulated hob cut: flank shape, tooth thickness and span measurement agree to within a micrometre.",
+      ],
+      zh: [
+        "每个齿面都是一整张光滑曲面：精确的渐开线沿齿宽扫出。默认 20 齿的齿轮导出为 83 个面——40 个齿面、41 个圆柱面（齿顶、齿根圆角、轴孔）、2 个平面——没有一处是小平面拼出来的。",
+        "齿形就是滚刀切出来的样子：一把 ISO 53 A 型基本齿条绕齿坯滚切一周，所以齿根带着刀尖留下的圆角，20° 压力角下少于约 17 齿的小齿轮会像真实加工的齿轮一样出现根切。",
+        "与模拟滚切的结果逐项对照过：齿面形状、齿厚和公法线长度都在 1 微米以内一致。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I get a STEP file of a spur gear with module 2 and 30 teeth?", a: "Put the numbers in the link: https://www.forgent3d.com/en/generators/spur-gear-generator?MODULE=2&TEETH=30 opens the generator on exactly that gear. Check it in 3D, then download STEP (or STL). It is free, needs no account, and the file opens directly in SolidWorks, Fusion, FreeCAD or Inventor." },
+        { q: "Can it add a keyway, a hub or a set-screw hole?", a: "Not with a slider — with a sentence. Press “AI edit” in the generator and say “add a 3 mm keyway, 1.4 mm deep”: the AI edits the gear’s own model.py (the keyway’s width and depth can become new parameters), the part rebuilds in your browser and exports as usual. A few edits a day are free without signing in." },
+      ],
+      zh: [
+        { q: "怎样拿到模数 2、30 齿直齿轮的 STEP 文件？", a: "把数写进链接：https://www.forgent3d.com/zh/generators/spur-gear-generator?MODULE=2&TEETH=30 打开就是这只齿轮。在 3D 里看一眼，下载 STEP（或 STL）即可。免费、不用注册，文件能直接在 SolidWorks、Fusion、FreeCAD、Inventor 里打开。" },
+        { q: "能加键槽、轮毂或顶丝孔吗？", a: "滑块里没有，说一句话就行：在生成器里点「AI 修改」，说「轴孔加一个 3 mm 宽、1.4 mm 深的键槽」。AI 直接改这只齿轮的 model.py（键槽的宽和深还能成为新的可调参数），零件在浏览器里重建，照常导出。未登录每天也能免费改几次。" },
+      ],
+    },
     keywords: [
       "spur gear generator",
       "gear stl generator online",
@@ -424,7 +573,7 @@ export const GENERATORS = [
     copy: {
       en: {
         name: "Spur Gear Generator",
-        title: "Spur Gear Generator — Involute Gears by Module & Teeth (STL) | Forgent3D",
+        title: "Spur Gear Generator — Involute Gears by Module & Teeth (STL / STEP) | Forgent3D",
         description:
           "Generate involute spur gears online: module, tooth count, pressure angle, face width and bore (round or hex). True involute profile, free STL / STEP export.",
         h1: "Spur gear generator with a true involute profile",
@@ -486,6 +635,33 @@ export const GENERATORS = [
     slug: "washer-spacer-generator",
     modelDir: "washer-spacer",
     icon: "◌",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { INNER_D: "5.3", OUTER_D: "12", THICKNESS: "2" }, label: { en: "M5 spacer: 5.3 mm hole, 12 mm across, 2 mm thick", zh: "M5 垫片：5.3 mm 孔、外径 12 mm、厚 2 mm" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "A solid of revolution that exports as 8 exact faces: two flat faces, the bore and the rim as true cylinders, and the four 45° chamfers as true cones.",
+        "Because the bore is a real cylinder, CAD, CAM and inspection software read its diameter directly — useful when the spacer is turned on a lathe instead of printed.",
+      ],
+      zh: [
+        "回转体，导出为 8 个精确面：上下两个平面，内孔和外圆是真圆柱面，四处 45° 倒角是真圆锥面。",
+        "内孔是真圆柱，CAD、CAM 和检测软件能直接读出孔径——垫片要上车床加工而不是打印时正好用得上。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make an M5 spacer 12 mm across and 2 mm thick?", a: "Open https://www.forgent3d.com/en/generators/washer-spacer-generator?INNER_D=5.3&OUTER_D=12&THICKNESS=2 — 5.3 mm is the standard M5 clearance hole — then download STL to print it, or STEP for a machinist." },
+        { q: "Can I get a washer with holes around it, a tab or a slot?", a: "Yes. Press “AI edit” in the generator and describe it (“six 3 mm holes on a 22 mm circle”). The AI changes the washer’s model.py on the page, and the new sizes become parameters you can keep turning. A few edits a day are free without signing in." },
+      ],
+      zh: [
+        { q: "怎样做一个外径 12 mm、厚 2 mm 的 M5 垫片？", a: "打开 https://www.forgent3d.com/zh/generators/washer-spacer-generator?INNER_D=5.3&OUTER_D=12&THICKNESS=2 ——5.3 mm 是 M5 的标准通孔——下载 STL 去打印，或者下载 STEP 交给机加工。" },
+        { q: "能做带一圈孔、带耳或带槽的垫片吗？", a: "能。在生成器里点「AI 修改」，描述一下（“在直径 22 mm 的圆上均布六个 3 mm 孔”）。AI 直接在页面上改这个垫片的 model.py，新加的尺寸会变成还能继续调的参数。未登录每天也能免费改几次。" },
+      ],
+    },
     keywords: [
       "washer generator 3d print",
       "custom spacer stl generator",
@@ -500,7 +676,7 @@ export const GENERATORS = [
     copy: {
       en: {
         name: "Washer & Spacer Generator",
-        title: "Washer & Spacer Generator — Custom Sizes in Seconds (STL) | Forgent3D",
+        title: "Washer & Spacer Generator — Custom Sizes in Seconds (STL / STEP) | Forgent3D",
         description:
           "Generate washers, spacers and shims to exact size: inner diameter, outer diameter, thickness, chamfer. From 0.4 mm shims to tall standoffs. Free STL / STEP.",
         h1: "Washer and spacer generator: exact size, printed in minutes",
@@ -529,7 +705,7 @@ export const GENERATORS = [
       },
       zh: {
         name: "垫片/间隔柱生成器",
-        title: "垫片间隔柱生成器 — 任意尺寸秒出 STL | Forgent3D",
+        title: "垫片间隔柱生成器 — 任意尺寸秒出 STL / STEP | Forgent3D",
         description:
           "按精确尺寸生成垫片、垫圈、间隔柱：内径、外径、厚度、倒角全可调，0.4 mm 薄垫到 30 mm 高柱都行。免费导出 STL / STEP。",
         h1: "垫片/间隔柱生成器：五金店没有的尺寸，打印几分钟",
@@ -562,6 +738,31 @@ export const GENERATORS = [
     slug: "tool-tray-generator",
     modelDir: "pocket",
     icon: "▧",
+    family: "storage",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { TRAY_W: "200", TRAY_L: "120", TRAY_T: "15", PART_DEPTH: "12" }, label: { en: "200 × 120 mm tray, 15 mm thick, pocket 12 mm deep", zh: "托盘 200 × 120 mm、厚 15 mm、坑深 12 mm" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Exports as 23 exact faces: a flat floor and vertical walls, every rounded pocket corner a true cylinder of the radius you set — a CNC router can cut the tray straight from the STEP.",
+      ],
+      zh: [
+        "导出为 23 个精确面：平底、竖直的壁，坑的每个圆角都是你设定半径的真圆柱面——CNC 雕刻机可以直接拿 STEP 加工这块托盘。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "Can the pocket follow my own tool’s outline?", a: "Yes. Drag the eight outline points on the sketch canvas, or press “AI edit” and give it the measurements (“a 150 × 22 mm body with a 40 × 30 mm handle”) and it rewrites the outline. Working from a photo? Copy the tray into your models and give the photo to the AI agent." },
+        { q: "How do I make a 200 × 120 mm tray with a 12 mm deep pocket?", a: "https://www.forgent3d.com/en/generators/tool-tray-generator?TRAY_W=200&TRAY_L=120&TRAY_T=15&PART_DEPTH=12 — the tray must be at least 1.5 mm thicker than the pocket is deep, so 12 mm deep needs 13.5 mm or more." },
+      ],
+      zh: [
+        { q: "坑能按我自己工具的轮廓来吗？", a: "能。在草图画布上拖那八个轮廓点；或者点「AI 修改」把尺寸告诉它（“身长 150 × 22 mm，带一个 40 × 30 mm 的把手”），它会重写轮廓。手上只有照片？把托盘复制到你的模型里，把照片交给 AI agent。" },
+        { q: "怎样做一个 200 × 120 mm、坑深 12 mm 的托盘？", a: "https://www.forgent3d.com/zh/generators/tool-tray-generator?TRAY_W=200&TRAY_L=120&TRAY_T=15&PART_DEPTH=12 ——托盘要比坑深至少厚 1.5 mm，所以 12 mm 深的坑要 13.5 mm 以上的托盘。" },
+      ],
+    },
     keywords: [
       "tool tray generator",
       "custom toolbox insert stl",
@@ -641,6 +842,31 @@ export const GENERATORS = [
     slug: "2020-corner-bracket-generator",
     modelDir: "extrusion-corner-bracket",
     icon: "⌐",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { SLOT: "6", SCREW: "M5", LEG: "30" }, label: { en: "6 mm slot (EU / B-type / V-slot), M5 screws, 30 mm legs", zh: "6 mm 槽（欧标 / B 型 / V 槽）、M5 螺丝、腿长 30 mm" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Exports as 40 exact faces: 36 flat faces plus the rounded ends of the two slotted screw holes as true cylinders — real hole axes to mate against when the bracket goes into a frame assembly in CAD.",
+      ],
+      zh: [
+        "导出为 40 个精确面：36 个平面，加上两个长圆孔两端的真圆柱面——放进 CAD 的框架装配里，有真正的孔轴线可以配合。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a 2020 corner bracket for a 6 mm slot with M5 screws and 30 mm legs?", a: "https://www.forgent3d.com/en/generators/2020-corner-bracket-generator?SLOT=6&SCREW=M5&LEG=30 opens exactly that bracket. Download STL to print it (PETG is the usual choice), or STEP for your frame assembly." },
+        { q: "Can I get a three-way corner or an angle other than 90°?", a: "Not with the sliders — the bracket follows the cast 20 × 20 × 17 part. Press “AI edit” in the generator and describe the change, or copy the bracket into your models and work it through with the AI agent." },
+      ],
+      zh: [
+        { q: "怎样做 6 mm 槽、M5 螺丝、腿长 30 mm 的 2020 角码？", a: "https://www.forgent3d.com/zh/generators/2020-corner-bracket-generator?SLOT=6&SCREW=M5&LEG=30 打开就是这只角码。下载 STL 去打印（一般用 PETG），或下载 STEP 放进框架装配。" },
+        { q: "能做三通角码，或者不是 90° 的角码吗？", a: "滑块里没有——角码照着 20 × 20 × 17 的压铸件做。在生成器里点「AI 修改」描述要改成什么样；或者复制到你的模型里，和 AI agent 慢慢改。" },
+      ],
+    },
     // Evidence: generator-models/extrusion-corner-bracket/EVIDENCE.md in the platform repo
     // (titles of the top Printables / MakerWorld listings, MakerWorld CN titles, GSC 2026-10-16).
     keywords: [
@@ -724,6 +950,31 @@ export const GENERATORS = [
     slug: "pillow-block-bearing-holder-generator",
     modelDir: "bearing-pillow-block",
     icon: "◉",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { BEARING: "6201", SCREW: "M5" }, label: { en: "6201 bearing (12 × 32 × 10), M5 bolts", zh: "6201 轴承（12 × 32 × 10）、M5 螺栓" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Exports as 19 exact faces: the bearing seat and the bolt holes are true cylinders, and the lead-in at the open side is a true cone. The seat diameter is exactly the bearing’s outside diameter plus the fit you set.",
+      ],
+      zh: [
+        "导出为 19 个精确面：轴承座孔和螺栓孔是真圆柱面，敞口一侧的导入斜面是真圆锥面。座孔直径正好是轴承外径加上你设的配合量。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a pillow block for a 6201 bearing with M5 bolts?", a: "https://www.forgent3d.com/en/generators/pillow-block-bearing-holder-generator?BEARING=6201&SCREW=M5 — the seat fit defaults to +0.10 mm on the diameter; tune it after one test print." },
+        { q: "Can it hold two bearings, or get a grease hole or a set-screw?", a: "Two bearings side by side is a parameter (COUNT=2). For a grease hole or a set-screw, press “AI edit” in the generator and say where; the AI edits the block’s model.py on the page." },
+      ],
+      zh: [
+        { q: "怎样做装 6201 轴承、用 M5 螺栓的轴承座？", a: "https://www.forgent3d.com/zh/generators/pillow-block-bearing-holder-generator?BEARING=6201&SCREW=M5 ——座孔配合默认直径 +0.10 mm，打一个试件后再微调。" },
+        { q: "能装两个轴承，或者加注油孔、顶丝吗？", a: "并排装两个轴承是现成的参数（COUNT=2）。注油孔或顶丝就在生成器里点「AI 修改」说要加在哪，AI 在页面上改这个轴承座的 model.py。" },
+      ],
+    },
     // Evidence: generator-models/bearing-pillow-block/EVIDENCE.md in the platform repo.
     keywords: [
       "608 bearing pillow block stl",
@@ -805,6 +1056,31 @@ export const GENERATORS = [
     slug: "fan-grill-generator",
     modelDir: "fan-grill",
     icon: "◎",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-16",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { FAN: "92", SCREW: "M3" }, label: { en: "92 mm fan (82.5 mm hole spacing), M3 holes", zh: "92 mm 风扇（孔距 82.5 mm）、M3 孔" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    step: {
+      en: [
+        "Exports as 156 exact faces for the default 120 mm guard: every ring and screw hole a true cylinder, the spokes and the frame flat — real hole positions when the guard goes into an enclosure assembly in CAD.",
+      ],
+      zh: [
+        "默认 120 mm 网罩导出为 156 个精确面：每一圈环和每个螺丝孔都是真圆柱面，辐条和外框是平面——放进机箱的 CAD 装配里，孔位就是真孔位。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a fan guard for a 92 mm fan with M3 screws?", a: "https://www.forgent3d.com/en/generators/fan-grill-generator?FAN=92&SCREW=M3 — the hole spacing (82.5 mm) comes with the fan size. Download STL; it prints flat with no supports." },
+        { q: "Can I add a filter slot, a logo or a different pattern?", a: "Press “AI edit” in the generator and describe it; the AI edits the guard’s model.py on the page. Keep the openings large: the rings-and-spokes pattern is there because wire-style guards cost the least airflow." },
+      ],
+      zh: [
+        { q: "怎样给 92 mm 风扇做一个 M3 螺丝孔的防护网？", a: "https://www.forgent3d.com/zh/generators/fan-grill-generator?FAN=92&SCREW=M3 ——孔距（82.5 mm）随风扇尺寸自动给出。下载 STL，平放打印、不用支撑。" },
+        { q: "能加滤网卡槽、logo，或者换一种网格吗？", a: "在生成器里点「AI 修改」描述一下，AI 在页面上改这个网罩的 model.py。开口尽量留大：之所以用圆环加辐条，是因为钢丝网式的网罩最不挡风。" },
+      ],
+    },
     // Evidence: generator-models/fan-grill/EVIDENCE.md in the platform repo.
     keywords: [
       "fan grill generator",
@@ -892,6 +1168,43 @@ export function generatorAppUrl(generator, locale) {
   return `${APP_BASE}?lang=${locale}`;
 }
 
+/** The generator with its AI edit box already open (app: `?intent=edit`). */
+export function generatorAiEditUrl(generator, locale) {
+  return `${generatorAppUrl(generator, locale)}&intent=edit`;
+}
+
+/** Remix straight into the visitor's models, landing in the workspace next to the AI agent (app: `?intent=ai`). */
+export function generatorAgentUrl(generator, locale) {
+  return `${generatorAppUrl(generator, locale)}&intent=ai`;
+}
+
+/** The generator's parameters as JSON, derived from its model.py by the app (`/api/generators/<modelDir>`). */
+export function generatorSchemaUrl(generator) {
+  return `${APP_BASE}/api/generators/${generator.modelDir}`;
+}
+
+
+/** This landing page with `generator.example`'s values in the query: it opens the embedded generator on that part.
+ *  The knob names are the model.py constants, so the same query works on the app's /g/ URL. */
+export function generatorDeepLink(generator, locale) {
+  const query = new URLSearchParams(generator.example?.params || {}).toString();
+  return `https://www.forgent3d.com/${locale}/generators/${generator.slug}${query ? `?${query}` : ""}`;
+}
+
+/** Where "More generators" looks after the page's own family: the nearest kind of part, never the whole catalog. */
+const RELATED_FAMILIES = { gears: ["hardware"], hardware: ["gears"], storage: [], fluid: ["hardware"] };
+
+/** Same family first, then the related families, at most `max` — a link block that stays small as the catalog grows. */
+export function relatedGenerators(generator, max = 4) {
+  const others = GENERATORS.filter((g) => g.slug !== generator.slug);
+  const order = [generator.family, ...(RELATED_FAMILIES[generator.family] || [])];
+  const picked = [];
+  for (const family of order) {
+    for (const g of others) if (g.family === family && !picked.includes(g)) picked.push(g);
+  }
+  return picked.slice(0, max);
+}
+
 // UI copy shared by the /generators index and every landing page.
 export function generatorsSharedCopy(locale) {
   if (locale === "zh") {
@@ -925,6 +1238,37 @@ export function generatorsSharedCopy(locale) {
         },
       ],
       licenseNote: "生成的模型可以商用，无需署名。",
+      aiEditCta: "用 AI 修改",
+      embedTitle: "直接在这里用",
+      embedIntro: "真正的生成器就在你的浏览器里运行：调好参数，点下载按钮导出 STEP 或 STL。不用安装，不用注册。",
+      embedLoad: "在这里打开生成器",
+      embedNote: "第一次打开会下载约 20 MB 的 CAD 内核。",
+      paramsLinkNote: "每个参数都能写进网址，一个链接就能打开你要的那一件。",
+      stepTitle: "STEP 文件里是什么",
+      stepCommon:
+        "STEP AP214，毫米单位，精确 B-rep——能直接在 SolidWorks、Fusion、FreeCAD、Onshape、Inventor 里打开，也能直接交给 CNC 报价。打印用的 STL 也一样能导。",
+      compareTitle: "和其他做法比",
+      compareHead: ["", "本生成器", "常见在线 STL 生成器", "厂商 CAD 模型库"],
+      compareRows: [
+        ["范围内任意尺寸", "可以", "可以", "只有目录规格"],
+        ["精确曲面的 STEP", "有", "多数只给 STL 网格", "有"],
+        ["滑块覆盖不到的改动", "页面上「AI 修改」", "不行", "不行"],
+        ["下载要注册", "不用", "多数不用", "常常要"],
+      ],
+      aiTitle: "让 AI 接着改",
+      aiLinkTitle: "把数写进链接",
+      aiLinkBody:
+        "每个参数都是网址参数，下面这个链接打开的就是示例那一件。ChatGPT、Claude、豆包这类助手照着参数表就能写出这样的链接——参数表（名称、单位、范围）在：",
+      aiEditTitle: "在页面上用 AI 改",
+      aiEditBody:
+        "在生成器里点「AI 修改」，说要改什么——加键槽、开孔、换个形状。AI 直接改零件的 model.py，在你的浏览器里重建，改坏了能撤销。未登录每天也能免费改几次；要保存、要多轮修改，就复制到你的模型里，交给 AI agent。",
+      aiWorkspaceTitle: "在工作台里接着改",
+      aiWorkspaceBody:
+        "改动大、要改好几轮、或者要长期留着：复制到你的模型（免费注册），Forgent3D 的 AI agent 读这份 model.py、改它、重建并自己检查结果。",
+      aiWorkspaceCta: "复制并用 AI agent 继续",
+      schemaLabel: "参数表（JSON）",
+      exampleLabel: "示例",
+      featureList: ["参数化：每个尺寸都能调", "导出 STEP（AP214）和 STL", "在浏览器里运行，免安装", "用 AI 修改零件源码", "网址可携带参数值"],
       relatedTitle: "更多生成器",
       scadPrompt: "已经有自己的 .scad 文件？",
       scadLink: "OpenSCAD 转 STEP",
@@ -963,6 +1307,37 @@ export function generatorsSharedCopy(locale) {
       },
     ],
     licenseNote: "Models you generate are yours to use commercially, no attribution required.",
+    aiEditCta: "Edit with AI",
+    embedTitle: "Use it right here",
+    embedIntro: "The real generator runs in your browser: set the parameters, then download STEP or STL. Nothing to install, no sign-up.",
+    embedLoad: "Open the generator here",
+    embedNote: "The first open downloads the CAD engine (about 20 MB).",
+    paramsLinkNote: "Every parameter can go in the page's link, so one link opens exactly the part you want.",
+    stepTitle: "What's in the STEP file",
+    stepCommon:
+      "STEP AP214 in millimetres, exact B-rep — it opens directly in SolidWorks, Fusion, FreeCAD, Onshape or Inventor, and goes straight into a CNC quote form. STL for the slicer is one click too.",
+    compareTitle: "How it compares",
+    compareHead: ["", "This generator", "Typical online STL generator", "Vendor CAD library"],
+    compareRows: [
+      ["Any size within the range", "Yes", "Yes", "Catalog sizes only"],
+      ["STEP with exact surfaces", "Yes", "Usually an STL mesh only", "Yes"],
+      ["Changes the sliders don't cover", "“AI edit” on the page", "No", "No"],
+      ["Account needed to download", "No", "Usually no", "Often"],
+    ],
+    aiTitle: "Let AI change it",
+    aiLinkTitle: "Put the numbers in the link",
+    aiLinkBody:
+      "Every parameter is a link parameter; the link below opens the example part. ChatGPT, Claude or any assistant can write one like it from the parameter list (names, units, ranges) at:",
+    aiEditTitle: "Edit with AI on the page",
+    aiEditBody:
+      "Press “AI edit” in the generator and say what to change — a keyway, holes, a different shape. The AI edits the part's model.py and it rebuilds in your browser, with undo. A few edits a day are free without signing in; to keep the result or go further, copy it into your models and continue with the AI agent.",
+    aiWorkspaceTitle: "Keep going in your workspace",
+    aiWorkspaceBody:
+      "For bigger changes, several rounds, or a part you want to keep: copy it into your models (free account). The Forgent3D AI agent reads the model.py, edits it, rebuilds it and checks the result itself.",
+    aiWorkspaceCta: "Copy and continue with the AI agent",
+    schemaLabel: "parameter list (JSON)",
+    exampleLabel: "Example",
+    featureList: ["Parametric: every dimension adjustable", "STEP (AP214) and STL export", "Runs in the browser, no install", "AI edit of the part's source", "Links carry parameter values"],
     relatedTitle: "More generators",
     scadPrompt: "Already have your own .scad file?",
     scadLink: "Convert OpenSCAD to STEP",
