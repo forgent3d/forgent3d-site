@@ -637,6 +637,250 @@ export const GENERATORS = [
       },
     },
   },
+  {
+    slug: "2020-corner-bracket-generator",
+    modelDir: "extrusion-corner-bracket",
+    icon: "⌐",
+    // Evidence: generator-models/extrusion-corner-bracket/EVIDENCE.md in the platform repo
+    // (titles of the top Printables / MakerWorld listings, MakerWorld CN titles, GSC 2026-10-16).
+    keywords: [
+      "2020 corner bracket stl",
+      "2020 extrusion corner bracket",
+      "v-slot corner bracket 3d print",
+      "custom aluminum extrusion bracket generator",
+    ],
+    params: [
+      { key: "SLOT", default: "6 mm", range: "6 / 5 / 4 mm", unit: "", label: { en: "Rail slot", zh: "型材槽口" }, desc: { en: "6 mm: EU / B-type / V-slot. 5 mm: I-type. 4 mm: China GB.", zh: "6 mm：欧标 / B 型 / V 槽；5 mm：I 型；4 mm：国标。" } },
+      { key: "SCREW", default: "M5", range: "M3 / M4 / M5", unit: "", label: { en: "Screw", zh: "螺丝" }, desc: { en: "Clearance holes per ISO 273 medium: 3.4 / 4.5 / 5.5 mm.", zh: "按 ISO 273 中等配合开孔：3.4 / 4.5 / 5.5 mm。" } },
+      { key: "LEG", default: "20", range: "20 – 60", unit: "mm", label: { en: "Leg length", zh: "腿长" }, desc: { en: "20 matches the cast 20×20×17 bracket; longer legs add a hole every 20 mm.", zh: "20 对应常见的 20×20×17 压铸角码；腿越长，每 20 mm 多一个孔。" } },
+      { key: "WIDTH", default: "17", range: "15 – 20", unit: "mm", label: { en: "Width", zh: "宽度" }, desc: { en: "17 is the cast-bracket width; 20 fills the whole profile face.", zh: "17 是压铸角码的宽度；20 占满型材整个面。" } },
+      { key: "THICKNESS", default: "4", range: "2 – 6", unit: "mm", label: { en: "Plate thickness", zh: "板厚" }, desc: { en: "Cast brackets are 3 mm; printed ones are usually 4 mm or more.", zh: "压铸角码 3 mm；打印件一般 4 mm 以上。" } },
+      { key: "SLOTTED", default: "on", range: "on / off", unit: "", label: { en: "Slotted holes", zh: "长圆孔" }, desc: { en: "3 mm of travel along the leg to square up the frame.", zh: "沿腿方向 3 mm 调节量，方便把框架调方。" } },
+      { key: "TABS", default: "on", range: "on / off", unit: "", label: { en: "Locating tabs", zh: "定位舌" }, desc: { en: "Two 4 mm tabs per leg drop into the slot and stop the bracket turning.", zh: "每条腿两个 4 mm 定位舌卡进槽口，角码不会转。" } },
+      { key: "SIDE_WALLS", default: "on", range: "on / off", unit: "", label: { en: "Side walls", zh: "侧墙" }, desc: { en: "Triangular walls on both sides, like the cast bracket.", zh: "两侧三角墙，和压铸角码一样。" } },
+    ],
+    copy: {
+      en: {
+        name: "2020 Corner Bracket Generator",
+        title: "2020 Corner Bracket Generator — Printable Extrusion Brackets (STL / STEP) | Forgent3D",
+        description:
+          "Generate a 3D-printable corner bracket for 2020 aluminum extrusion: 6 / 5 / 4 mm slot, M3–M5, leg length, slotted holes, locating tabs, side walls. Free STL and STEP, no CAD install.",
+        h1: "2020 corner bracket generator: the cast bracket, printable and resizable",
+        intro:
+          "Start from the 20 × 20 × 17 cast corner bracket that Adafruit, OpenBuilds and Misumi sell, then make it fit your frame: pick your rail's slot standard and screw, lengthen the legs, thicken the plate. The model rebuilds in your browser as real CAD, so the STEP drops straight into Fusion or FreeCAD.",
+        whyPoints: [
+          "Fits EU / B-type / V-slot (6 mm), I-type (5 mm) and China GB (4 mm) slots",
+          "4 mm locating tabs, the width the cast brackets use — no forcing a tab into a tight slot",
+          "Slotted holes with 3 mm of travel to square the frame",
+          "Exports STEP as well as STL; anything the sliders don't cover, the AI agent edits",
+        ],
+        faqs: [
+          {
+            q: "Which screws and T-nuts do I need?",
+            a: "M5 is the standard for 6 mm-slot 2020 (Misumi, OpenBuilds and Alux all use M5×8 with a slide-in or drop-in T-nut). With the default 4 mm printed plate, use M5×10 — a cast bracket's 3 mm plate takes M5×8, and printed brackets on MakerWorld list M5×10, or ×12 with a washer.",
+          },
+          {
+            q: "Will the tabs fit my extrusion?",
+            a: "The tabs are 4 mm wide, the same as the OpenBuilds and Adafruit cast brackets, so they slide into 6 mm and 5 mm slots with room to spare; a 4 mm GB slot gets a 3.2 mm tab. Tight tabs are the most common complaint about printed brackets — if your rail is unusual, switch the tabs off.",
+          },
+          {
+            q: "What material and settings should I print with?",
+            a: "PETG, ASA or ABS — makers report PLA brackets slowly deforming under load. More perimeters beat more infill: 4–5 walls is the common advice. Print it lying on one side wall; nothing needs supports.",
+          },
+        ],
+      },
+      zh: {
+        name: "2020 角码生成器",
+        title: "2020 铝型材角码生成器 — 欧标 / 国标角码 STL / STEP 在线定制 | Forgent3D",
+        description:
+          "在线生成可 3D 打印的 2020 铝型材角码：6 / 5 / 4 mm 槽口、M3–M5 螺丝、腿长、长圆孔、定位舌、侧墙可调。免费导出 STL 和 STEP，免装 CAD。",
+        h1: "2020 角码生成器：压铸角码的打印版，尺寸随你改",
+        intro:
+          "从 Adafruit、OpenBuilds、米思米都在卖的 20×20×17 压铸角码出发，按你的框架改：选型材槽口标准和螺丝，加长腿、加厚板。模型在浏览器里以真 CAD 实时重建，STEP 可以直接导入 Fusion 或 FreeCAD。",
+        whyPoints: [
+          "适配欧标 / B 型 / V 槽（6 mm）、I 型（5 mm）和国标（4 mm）槽口",
+          "定位舌 4 mm 宽，和压铸角码一样，不用硬塞",
+          "长圆孔带 3 mm 调节量，方便把框架调方",
+          "除了 STL 还能导 STEP；滑块管不到的，让 AI 接着改",
+        ],
+        faqs: [
+          {
+            q: "要配什么螺丝和 T 型螺母？",
+            a: "6 mm 槽的 2020 型材标准是 M5（米思米、OpenBuilds、Alux 都用 M5×8 配 T 型螺母）。默认 4 mm 打印板用 M5×10——压铸角码 3 mm 板用 M5×8，MakerWorld 上的打印角码标注 M5×10，加垫片用 ×12。",
+          },
+          {
+            q: "定位舌能塞进我的型材吗？",
+            a: "定位舌 4 mm 宽，和 OpenBuilds、Adafruit 的压铸角码一致，6 mm 和 5 mm 槽都有余量；国标 4 mm 槽会自动收窄到 3.2 mm。舌太紧是打印角码最常见的抱怨——型材比较特殊的话，直接关掉定位舌。",
+          },
+          {
+            q: "用什么材料、怎么打印？",
+            a: "PETG、ASA 或 ABS——有人反馈 PLA 角码受力会慢慢变形。多加墙比多加填充有用，常见建议 4–5 圈墙。侧墙贴床平放打印，不需要支撑。",
+          },
+        ],
+      },
+    },
+  },
+  {
+    slug: "pillow-block-bearing-holder-generator",
+    modelDir: "bearing-pillow-block",
+    icon: "◉",
+    // Evidence: generator-models/bearing-pillow-block/EVIDENCE.md in the platform repo.
+    keywords: [
+      "608 bearing pillow block stl",
+      "pillow block bearing holder 3d print",
+      "kp08 pillow block replacement",
+      "parametric bearing holder generator",
+    ],
+    params: [
+      { key: "BEARING", default: "608", range: "623 – 6201, 6800 – 6901", unit: "", label: { en: "Bearing", zh: "轴承" }, desc: { en: "14 common deep-groove bearings, sized from the DIN 625 table.", zh: "14 种常用深沟球轴承，尺寸取自 DIN 625 表。" } },
+      { key: "FIT", default: "+0.10", range: "−0.20 – +0.30", unit: "mm", label: { en: "Seat fit", zh: "孔径配合" }, desc: { en: "Added to the bearing OD. +0.10 presses a metal 608 in by hand; negative is a tighter press fit.", zh: "加在轴承外径上。+0.10 手能压进金属 608；负值是更紧的压配。" } },
+      { key: "COUNT", default: "1", range: "1 – 2", unit: "", label: { en: "Bearings side by side", zh: "并排轴承数" }, desc: { en: "Two bearings in one block for a stiffer shaft.", zh: "一个座里放两个轴承，轴更稳。" } },
+      { key: "LIP", default: "on", range: "on / off", unit: "", label: { en: "Retaining lip", zh: "挡肩" }, desc: { en: "A 2 mm shoulder the outer ring seats against.", zh: "2 mm 挡肩，轴承外圈靠在上面定位。" } },
+      { key: "WALL", default: "3", range: "2 – 8", unit: "mm", label: { en: "Wall over bearing", zh: "轴承外壁厚" }, desc: { en: "3 mm is what a KP08 leaves over a 608.", zh: "3 mm 和 KP08 包住 608 的壁厚一样。" } },
+      { key: "BASE", default: "5", range: "3 – 8", unit: "mm", label: { en: "Foot thickness", zh: "底脚厚度" }, desc: { en: "KP08 5, KP000 6, KP001 7.", zh: "KP08 为 5，KP000 为 6，KP001 为 7。" } },
+      { key: "SCREW", default: "M4", range: "M3 – M6", unit: "", label: { en: "Mounting screw", zh: "安装螺丝" }, desc: { en: "M4 matches the KP08's Ø4.5 holes.", zh: "M4 对应 KP08 的 Ø4.5 孔。" } },
+    ],
+    copy: {
+      en: {
+        name: "Pillow Block Bearing Holder Generator",
+        title: "Pillow Block Bearing Holder Generator — 608, 625, 6000, 6800 (STL / STEP) | Forgent3D",
+        description:
+          "Generate a 3D-printable pillow block for 14 standard ball bearings. With a 608 it matches the KP08 footprint (42 mm bolts, 15 mm centre height). Adjustable press fit, lip, wall, foot. Free STL and STEP.",
+        h1: "Pillow block generator: a KP08 footprint, any common bearing",
+        intro:
+          "Pick your bearing — 608, 625, 688, 6000-series, 6800-series — and get a printed pillow block that holds it. With the default 608 it lands on the KP08's mounting holes and centre height, so it drops in where a KP08 was. The seat fit is a slider, because every printer prints holes a little differently.",
+        whyPoints: [
+          "608 default matches KP08: 55 long, 42 mm bolt spacing, 15 mm centre height, M4",
+          "14 bearings from the DIN 625 table, one or two side by side",
+          "Seat fit from −0.20 to +0.30 mm, a 2 mm retaining lip and a 0.5 mm lead-in",
+          "Prints lip face down without supports; exports STEP for your CAD",
+        ],
+        faqs: [
+          {
+            q: "What seat fit should I use?",
+            a: "Start at the default +0.10 mm: a Printables author found a 22.1 mm seat lets a metal 608 go in and come out without tools. If yours is loose, go tighter — a 2024 study pressed bearings into PETG seats 0.1 and 0.2 mm undersize. Printers differ, so step by 0.05.",
+          },
+          {
+            q: "Can it replace a KP08 pillow block?",
+            a: "It matches the KP08 footprint — 42 mm bolt spacing, 15 mm centre height, Ø4.5 holes — so it bolts to the same holes. It holds a plain 608, not the KP08's self-aligning set-screw insert, so line the shafts up carefully.",
+          },
+          {
+            q: "How do I print it and press the bearing in?",
+            a: "Print it lip face down in PETG or ABS; makers report PLA blocks cracking on a tight fit. Press the bearing in with a vise or a clamp, not a hammer — the 0.5 mm lead-in helps it start straight.",
+          },
+        ],
+      },
+      zh: {
+        name: "立式轴承座生成器",
+        title: "立式轴承座生成器 — 608 / 625 / 6000 / 6800 轴承座 STL / STEP 在线定制 | Forgent3D",
+        description:
+          "在线生成可 3D 打印的立式轴承座，支持 14 种常用深沟球轴承。默认 608 与 KP08 安装尺寸一致（孔距 42、中心高 15）。压配间隙、挡肩、壁厚、底脚可调，免费导出 STL 和 STEP。",
+        h1: "轴承座生成器：KP08 的安装尺寸，常用轴承都能装",
+        intro:
+          "选好轴承——608、625、688、6000 系、6800 系——就得到能装它的打印轴承座。默认 608 时，安装孔和中心高和 KP08 完全一致，原来装 KP08 的地方直接换上。孔径配合做成滑块，因为每台打印机打出来的孔都略有偏差。",
+        whyPoints: [
+          "默认 608 对齐 KP08：长 55、孔距 42、中心高 15、M4 螺丝",
+          "14 种 DIN 625 标准轴承，可单装或并排装两个",
+          "孔径配合 −0.20 到 +0.30 mm，2 mm 挡肩和 0.5 mm 入口倒角",
+          "挡肩面朝下打印免支撑；可导出 STEP 进 CAD",
+        ],
+        faqs: [
+          {
+            q: "孔径配合选多少？",
+            a: "先用默认的 +0.10 mm：Printables 上有作者实测 22.1 mm 的孔能让金属 608 不用工具装进取出。太松就往紧调——2024 年的一篇研究把轴承压进了比外径小 0.1 和 0.2 mm 的 PETG 孔。每台打印机不同，按 0.05 一档试。",
+          },
+          {
+            q: "能直接替换 KP08 吗？",
+            a: "安装尺寸和 KP08 一致——孔距 42、中心高 15、孔径 4.5——螺丝孔能对上。但里面装的是普通 608，不是 KP08 那种带顶丝的调心轴承，装的时候注意把轴对正。",
+          },
+          {
+            q: "怎么打印、怎么压轴承？",
+            a: "挡肩面朝下，用 PETG 或 ABS 打印；有人反馈 PLA 轴承座在紧配时开裂。用台钳或夹子把轴承压进去，别用锤子敲——0.5 mm 的入口倒角能帮它对正。",
+          },
+        ],
+      },
+    },
+  },
+  {
+    slug: "fan-grill-generator",
+    modelDir: "fan-grill",
+    icon: "◎",
+    // Evidence: generator-models/fan-grill/EVIDENCE.md in the platform repo.
+    keywords: [
+      "fan grill generator",
+      "120mm fan grill stl",
+      "parametric fan grill",
+      "pc fan cover 3d print",
+    ],
+    params: [
+      { key: "FAN", default: "120 mm", range: "25 – 140 mm", unit: "", label: { en: "Fan size", zh: "风扇尺寸" }, desc: { en: "Hole spacing from ARCTIC's drawings (40–140) and NopSCADlib's measured fan table.", zh: "孔距取自 ARCTIC 图纸（40–140）和 NopSCADlib 实测风扇表。" } },
+      { key: "BAR", default: "1.2", range: "0.8 – 3", unit: "mm", label: { en: "Bar width", zh: "网条宽度" }, desc: { en: "1.2 mm or more prints cleanly from a 0.4 mm nozzle.", zh: "0.4 mm 喷嘴打 1.2 mm 以上最稳。" } },
+      { key: "GAP", default: "4.8", range: "2.5 – 12.7", unit: "mm", label: { en: "Max opening width", zh: "最大开口宽度" }, desc: { en: "Rings are spread evenly so no gap is wider than this. 12.7 mm (½ in) is the OSHA limit for fan guards.", zh: "圆环均匀分布，任何缝都不超过这个值。12.7 mm（½ 英寸）是 OSHA 对风扇护网的上限。" } },
+      { key: "GRILL_T", default: "1.6", range: "0.8 – 4", unit: "mm", label: { en: "Grill thickness", zh: "网面厚度" }, desc: { en: "The ring layer, printed flat on the bed.", zh: "圆环那一层，贴床平打。" } },
+      { key: "STANDOFF", default: "2", range: "0 – 5", unit: "mm", label: { en: "Standoff from fan", zh: "离风扇距离" }, desc: { en: "Space between the rings and the blades; Noctua's steel guards stand 5 mm off.", zh: "圆环和扇叶之间的距离；猫头鹰的钢网离风扇 5 mm。" } },
+      { key: "SCREW", default: "auto", range: "auto / fan screw / M4 / M3", unit: "", label: { en: "Screw hole", zh: "螺丝孔" }, desc: { en: "Auto: M2.5 under 30 mm, M3 for 30–40 mm, the 5 mm fan screw from 50 mm.", zh: "自动：30 mm 以下 M2.5，30–40 mm 用 M3，50 mm 起用 5 mm 风扇自攻螺丝。" } },
+    ],
+    copy: {
+      en: {
+        name: "Fan Grill Generator",
+        title: "Fan Grill Generator — 40 / 80 / 92 / 120 / 140 mm Fan Guards (STL / STEP) | Forgent3D",
+        description:
+          "Generate a 3D-printable fan grill for 25–140 mm fans: rings and spokes like a wire guard, the hole spacing from manufacturer drawings, adjustable bar width, opening and standoff. Free STL and STEP.",
+        h1: "Fan grill generator: a wire-guard pattern you can print",
+        intro:
+          "Pick your fan size and get a printable guard that bolts to it — hole spacing from ARCTIC's drawings, a 2 mm standoff from the blades. The pattern copies the steel wire guard on purpose: in wind-tunnel tests wire guards cost almost no airflow, while a half-open honeycomb sheet cost about a fifth of it.",
+        whyPoints: [
+          "10 sizes, 25 to 140 mm, with hole spacing from manufacturer drawings",
+          "Rings and spokes like a wire guard: the pattern that cost the least airflow in tests",
+          "Every opening stays under your limit — 12.7 mm max keeps fingers out",
+          "Prints flat with no bridges; exports STEP as well as STL",
+        ],
+        faqs: [
+          {
+            q: "Why rings and spokes instead of honeycomb?",
+            a: "Because it moves more air and makes less noise. hwcooling measured a wire guard costing 0–2 % of a 120 mm fan's airflow, while a hexagonal sheet half covered in metal cost about 20 % and added 3 dBA. Puget Systems' grill test ranked wire guards best too. Nobody has measured printed grills yet, so treat thinner bars and wider openings as the safer side.",
+          },
+          {
+            q: "Which screws do I use?",
+            a: "From 50 mm up, the standard self-tapping fan screw goes through the grill into the fan; the holes are 5 mm, the size of ARCTIC's steel guard eyes. 40 mm and smaller fans use M3 (M2.5 for 25 mm). The grill adds its own thickness, so you need a screw that much longer than a bare fan takes.",
+          },
+          {
+            q: "How should I print it?",
+            a: "Flat, ring side down, exactly as it is generated — nothing bridges, so no supports. Keep the bars at 1.2 mm or wider with a 0.4 mm nozzle. Use PETG if the grill sits near a heat source.",
+          },
+        ],
+      },
+      zh: {
+        name: "风扇网罩生成器",
+        title: "风扇网罩生成器 — 4 / 8 / 9 / 12 / 14 cm 风扇防护网 STL / STEP 在线定制 | Forgent3D",
+        description:
+          "在线生成可 3D 打印的风扇网罩，适配 25–140 mm 风扇：仿钢丝网的圆环加辐条，孔距取自厂家图纸，网条宽度、开口、离风扇距离可调。免费导出 STL 和 STEP。",
+        h1: "风扇网罩生成器：能打印的钢丝网罩",
+        intro:
+          "选好风扇尺寸，就得到能直接拧上去的打印网罩——孔距取自 ARCTIC 图纸，离扇叶留 2 mm。图案特意仿钢丝网：风洞实测里钢丝网几乎不损风量，而开孔一半的蜂窝板要损失约五分之一。",
+        whyPoints: [
+          "25 到 140 mm 共 10 种尺寸，孔距取自厂家图纸",
+          "仿钢丝网的圆环加辐条：实测风量损失最小的图案",
+          "任何开口都不超过你设的上限——12.7 mm 以内手指伸不进去",
+          "平放打印没有悬空；除了 STL 还能导 STEP",
+        ],
+        faqs: [
+          {
+            q: "为什么用圆环加辐条，不用蜂窝？",
+            a: "因为风量更大、噪音更小。hwcooling 实测钢丝网只让 120 mm 风扇损失 0–2% 风量，而一半面积被盖住的蜂窝板损失约 20%，还多了 3 dBA。Puget Systems 的网罩测试也是钢丝网最好。打印网罩目前没人实测过，网条细一点、开口大一点更稳妥。",
+          },
+          {
+            q: "用什么螺丝？",
+            a: "50 mm 以上的风扇，用标准风扇自攻螺丝穿过网罩拧进风扇；孔是 5 mm，和 ARCTIC 钢丝网的安装孔一样。40 mm 及以下用 M3（25 mm 用 M2.5）。网罩本身有厚度，螺丝要比直接装风扇的长出这么多。",
+          },
+          {
+            q: "怎么打印？",
+            a: "按生成的样子平放、圆环那面朝下——没有悬空，不需要支撑。0.4 mm 喷嘴网条保持 1.2 mm 以上。靠近热源的话用 PETG。",
+          },
+        ],
+      },
+    },
+  },
 ];
 
 export function getGenerator(slug) {
@@ -655,7 +899,7 @@ export function generatorsSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、齿轮、垫片、工具托盘。调参数、3D 预览、导出 STL / STEP。",
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、齿轮、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
@@ -692,7 +936,7 @@ export function generatorsSharedCopy(locale) {
     catalogLabel: "Generators",
     catalogTitle: "3D Print Generators — Free Parametric Model Makers | Forgent3D",
     catalogDescription:
-      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, gears, washers and tool trays. Tune parameters, preview in 3D, export STL / STEP.",
+      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, gears, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks and fan grills. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",
