@@ -9,8 +9,23 @@
 // publish artifacts, so they are maintained there, not copied here; an entry with no
 // modelDir falls back to the workbench root (the create screen).
 
+import * as deLocale from "./generator-locales/de.js";
+import * as esLocale from "./generator-locales/es.js";
+import * as jaLocale from "./generator-locales/ja.js";
+
 // NEXT_PUBLIC_APP_BASE points the pages at a local app (http://localhost:3000) for testing; production never sets it.
 export const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || "https://app.forgent3d.com";
+
+/** Languages whose ONLY translated pages are the generators: the rest of the site (header links, home, blog,
+ *  OpenSCAD pages) stays English for them, and the embedded tool runs in English (the app speaks en and zh).
+ *  Each file is merged into GENERATORS below, one generator at a time (see GENERATOR_LOCALES). */
+const EXTRA_LOCALE_FILES = { de: deLocale, es: esLocale, ja: jaLocale };
+
+/** The name each language calls itself, for the language row on generator pages. */
+export const LOCALE_NAMES = { en: "English", zh: "中文", de: "Deutsch", es: "Español", ja: "日本語" };
+
+/** og:locale per page language. */
+export const OG_LOCALES = { en: "en_US", zh: "zh_CN", de: "de_DE", es: "es_ES", ja: "ja_JP" };
 
 export const GENERATORS = [
   {
@@ -57,7 +72,7 @@ export const GENERATORS = [
       { key: "DIV_X", default: "1", range: "1 – 6", unit: "", label: { en: "Compartments X", zh: "分隔 X" }, desc: { en: "Number of compartments along the width.", zh: "宽度方向分成几格。" } },
       { key: "DIV_Y", default: "1", range: "1 – 6", unit: "", label: { en: "Compartments Y", zh: "分隔 Y" }, desc: { en: "Number of compartments along the depth.", zh: "深度方向分成几格。" } },
       { key: "STACKING_LIP", default: "True", range: "on / off", unit: "", label: { en: "Stacking lip", zh: "堆叠唇" }, desc: { en: "Top lip so another bin stacks on this one.", zh: "顶部凸唇，让上层收纳盒稳定堆叠。" } },
-      { key: "MAGNET_HOLES", default: "False", range: "on / off", unit: "", label: { en: "Magnet holes", zh: "磁铁孔" }, desc: { en: "Ø6 × 2 mm magnet pockets in every base corner.", zh: "每个底座四角预留 Ø6 × 2 mm 磁铁孔位。" } },
+      { key: "MAGNET_HOLES", default: "False", range: "on / off", unit: "", label: { en: "Magnet holes", zh: "磁铁孔" }, desc: { en: "Ø6 × 2 mm magnet pockets, four per 42 mm grid unit.", zh: "每个底座四角预留 Ø6 × 2 mm 磁铁孔位。" } },
       { key: "SCOOP", default: "True", range: "on / off", unit: "", label: { en: "Scoop", zh: "取物斜坡" }, desc: { en: "Curved front floor so small parts slide out.", zh: "前壁底部做弧面，小零件一拨就出来。" } },
     ],
     copy: {
@@ -71,14 +86,14 @@ export const GENERATORS = [
           "Size a Gridfinity bin in 42 mm grid units, add dividers, magnet holes and a scoop, and watch the model rebuild in your browser. Unlike one-shot STL customizers, every bin is parametric CAD code — so when you need something the sliders don't cover, the AI agent edits the same model for you.",
         whyPoints: [
           "True Gridfinity spec: 42 mm pitch, 7 mm height units, stackable lip",
-          "Dividers, magnet holes (Ø6 × 2 mm) and scoop as simple toggles",
+          "Compartments by count; magnet holes (Ø6 × 2 mm) and a scoop at the flip of a switch",
           "Exports clean STL / STEP — printable without supports",
           "Need a label shelf or a custom cutout? Remix it with the AI agent",
         ],
         faqs: [
           {
             q: "What magnets fit the magnet holes?",
-            a: "The base pockets are sized for the de-facto Gridfinity standard: Ø6 mm × 2 mm neodymium disc magnets, one per 42 mm base corner. Glue-in is optional — bins also sit fine on a baseplate without magnets.",
+            a: "The base pockets are sized for the de-facto Gridfinity standard: Ø6 mm × 2 mm neodymium disc magnets, four per 42 mm grid unit (one near each corner). Glue-in is optional — bins also sit fine on a baseplate without magnets.",
           },
           {
             q: "Do Gridfinity bins print without supports?",
@@ -86,7 +101,7 @@ export const GENERATORS = [
           },
           {
             q: "Can I change something the parameters don't cover?",
-            a: "Yes — that is the point of Forgent3D. The bin is generated from editable CAD code, so you can open it in the workbench and ask the AI agent for label tabs, finger slots, custom cutouts or a non-standard footprint.",
+            a: "Yes — that is the point of Forgent3D. The bin is generated from editable CAD code, so you can copy it into your workspace and ask the AI agent for label tabs, finger slots, custom cutouts or a non-standard footprint.",
           },
         ],
       },
@@ -100,7 +115,7 @@ export const GENERATORS = [
           "按 42 mm 标准格设定收纳盒尺寸，加分隔、磁铁孔和取物斜坡，模型在浏览器里实时重建。和一次性 STL 定制器不同，这里每个盒子都是可编辑的参数化 CAD 代码——滑块覆盖不到的需求，让 AI agent 在同一个模型上继续改。",
         whyPoints: [
           "严格遵循 Gridfinity 规范：42 mm 栅距、7 mm 高度单元、可堆叠唇口",
-          "分隔、磁铁孔（Ø6 × 2 mm）、取物斜坡都是一键开关",
+          "隔间按数量设，磁铁孔（Ø6 × 2 mm）和取物斜坡一键开关",
           "导出干净的 STL / STEP，免支撑直接打印",
           "想加标签架或异形挖槽？让 AI 在这个模型上接着改",
         ],
@@ -276,7 +291,7 @@ export const GENERATORS = [
         title: "Parametric Box Generator — Hinged, Snap-On or Sliding Lid Boxes (STL) | Forgent3D",
         description:
           "Generate a custom 3D-printable box from its inside size, with a hinged lid (print-in-place or pin hinge; clip, toolbox or magnet latch), a snap-on, lip or sliding lid, or none. Preview in 3D, export STL or STEP free.",
-        h1: "Parametric box generator: exact inside size, five kinds of lid",
+        h1: "Parametric box generator: exact inside size, hinged, snap, lip or sliding lid",
         intro:
           "Enter the inside dimensions of what you need to store and pick a lid: a hinged lid that comes off the printer already assembled, a snap-on or drop-over lid, a lid that slides along dovetail rails, or none. The box rebuilds live as real CAD — anything the options miss, like dividers or a label slot, is one AI edit away.",
         whyPoints: [
@@ -301,7 +316,7 @@ export const GENERATORS = [
         title: "参数化盒子生成器 — 铰链盖、卡扣盖、抽拉盖收纳盒 STL 在线生成 | Forgent3D",
         description:
           "按内腔尺寸生成 3D 打印收纳盒：铰链翻盖（一体打印铰链或销轴；卡扣、工具箱搭扣或磁铁锁扣）、卡扣盖、止口盖、抽拉盖，或不要盖。浏览器 3D 预览，免费导出 STL / STEP。",
-        h1: "参数化盒子生成器：按内腔尺寸建模，五种盖子任选",
+        h1: "参数化盒子生成器：按内腔尺寸建模，铰链盖、卡扣盖、止口盖或抽拉盖",
         intro:
           "输入要装的东西的尺寸，再选一种盖子：一体打印、下了打印机就能转的铰链翻盖，卡扣盖或压在止口上的盖，沿燕尾导轨抽拉的盖，或者干脆不要盖。底下是真 CAD，实时重建——选项覆盖不到的隔板、标签槽，点「AI 修改」说一句就行。",
         whyPoints: [
@@ -362,10 +377,10 @@ export const GENERATORS = [
     ],
     params: [
       { key: "END1_D", default: "58", range: "10 – 150", unit: "mm", label: { en: "End 1 diameter", zh: "端 1 直径" }, desc: { en: "Diameter of the first port.", zh: "第一端接口直径。" } },
-      { key: "END1_MODE", default: "outer", range: "inner / outer", unit: "", label: { en: "End 1 fits", zh: "端 1 配合" }, desc: { en: "Whether END1_D is measured inside or outside the hose.", zh: "该直径量的是软管内壁还是外壁。" } },
+      { key: "END1_MODE", default: "outer", range: "inner / outer", unit: "", label: { en: "End 1 fits", zh: "端 1 配合" }, desc: { en: "outer: the port slides into a hose or socket, and END1_D is the inside diameter of that hose or socket. inner: a hose or pipe slides into the port, and END1_D is the outside diameter of that hose or pipe.", zh: "outer：本端插进软管或接口，END1_D 填软管或接口的内径；inner：软管或管子插进本端，END1_D 填软管或管子的外径。" } },
       { key: "END1_LEN", default: "40", range: "10 – 100", unit: "mm", label: { en: "End 1 length", zh: "端 1 长度" }, desc: { en: "Engagement length of the first port.", zh: "第一端插入长度。" } },
       { key: "END2_D", default: "32", range: "10 – 150", unit: "mm", label: { en: "End 2 diameter", zh: "端 2 直径" }, desc: { en: "Diameter of the second port.", zh: "第二端接口直径。" } },
-      { key: "END2_MODE", default: "inner", range: "inner / outer", unit: "", label: { en: "End 2 fits", zh: "端 2 配合" }, desc: { en: "Inside or outside measurement for end 2.", zh: "端 2 直径按内壁或外壁。" } },
+      { key: "END2_MODE", default: "inner", range: "inner / outer", unit: "", label: { en: "End 2 fits", zh: "端 2 配合" }, desc: { en: "As for end 1, with END2_D.", zh: "同端 1，对应 END2_D。" } },
       { key: "END2_LEN", default: "40", range: "10 – 100", unit: "mm", label: { en: "End 2 length", zh: "端 2 长度" }, desc: { en: "Engagement length of the second port.", zh: "第二端插入长度。" } },
       { key: "TRANSITION", default: "20", range: "5 – 80", unit: "mm", label: { en: "Transition length", zh: "过渡段长度" }, desc: { en: "Length of the tapered section between ports.", zh: "两端之间锥形过渡段的长度。" } },
       { key: "WALL", default: "2.4", range: "1.6 – 4", unit: "mm", label: { en: "Wall thickness", zh: "壁厚" }, desc: { en: "2.4 mm = six perimeters, airtight and stiff.", zh: "2.4 mm 约六圈墙，气密且够硬。" } },
@@ -446,11 +461,11 @@ export const GENERATORS = [
     // Questions people put to an AI assistant; each answer carries a working deep link.
     aiFaqs: {
       en: [
-        { q: "How do I make a funnel that fits a bottle with a 16 mm neck?", a: "The spout’s outside is SPOUT_D plus two walls (1.6 mm each by default), so for a 16 mm neck use SPOUT_D=12: https://www.forgent3d.com/en/generators/funnel-generator?SPOUT_D=12&MOUTH_D=100. Download STL to print it." },
+        { q: "How do I make a funnel for a bottle whose neck opening is 16 mm across?", a: "The spout’s outside is SPOUT_D plus two walls (1.6 mm each by default), so for a 16 mm opening use SPOUT_D=12, which is 15.2 mm outside and leaves room for air to escape: https://www.forgent3d.com/en/generators/funnel-generator?SPOUT_D=12&MOUTH_D=100. Download STL to print it." },
         { q: "Can it have an angled spout, an air vent or a handle?", a: "Press “AI edit” in the generator and describe it; the AI edits the funnel’s model.py on the page and it rebuilds in your browser. A few edits a day are free without signing in." },
       ],
       zh: [
-        { q: "怎样做一个能插进 16 mm 瓶口的漏斗？", a: "出料管的外径是 SPOUT_D 加两层壁（默认每层 1.6 mm），所以 16 mm 的瓶口用 SPOUT_D=12：https://www.forgent3d.com/zh/generators/funnel-generator?SPOUT_D=12&MOUTH_D=100。下载 STL 去打印。" },
+        { q: "怎样做一个能插进内径 16 mm 瓶口的漏斗？", a: "出料管的外径是 SPOUT_D 加两层壁（默认每层 1.6 mm），所以内径 16 mm 的瓶口用 SPOUT_D=12，外径 15.2 mm，还留出排气的缝：https://www.forgent3d.com/zh/generators/funnel-generator?SPOUT_D=12&MOUTH_D=100。下载 STL 去打印。" },
         { q: "能做斜出料口、加排气槽或把手吗？", a: "在生成器里点「AI 修改」描述一下，AI 在页面上改这个漏斗的 model.py，在浏览器里重建。未登录每天也能免费改几次。" },
       ],
     },
@@ -481,7 +496,7 @@ export const GENERATORS = [
         faqs: [
           {
             q: "Is a 3D printed funnel food safe?",
-            a: "FDM prints have layer grooves that can trap residue, so treat printed funnels as workshop tools by default. For kitchen use, print in PETG, wash promptly, and treat it as a short-lived utensil — or use it as a mold reference and buy food-grade for critical use.",
+            a: "FDM prints have layer grooves that can trap residue, so treat printed funnels as workshop tools by default. For kitchen use, print in PETG, wash promptly, and treat it as a short-lived utensil; where food safety matters, buy a food-grade funnel.",
           },
           {
             q: "How do I stop the funnel glugging?",
@@ -654,11 +669,11 @@ export const GENERATORS = [
     // Questions people put to an AI assistant; each answer carries a working deep link.
     aiFaqs: {
       en: [
-        { q: "How do I make an M5 spacer 12 mm across and 2 mm thick?", a: "Open https://www.forgent3d.com/en/generators/washer-spacer-generator?INNER_D=5.3&OUTER_D=12&THICKNESS=2 — 5.3 mm is the standard M5 clearance hole — then download STL to print it, or STEP for a machinist." },
+        { q: "How do I make an M5 spacer 12 mm across and 2 mm thick?", a: "Open https://www.forgent3d.com/en/generators/washer-spacer-generator?INNER_D=5.3&OUTER_D=12&THICKNESS=2 — 5.3 mm is the bore of a standard M5 washer (ISO 7089) — then download STL to print it, or STEP for a machinist." },
         { q: "Can I get a washer with holes around it, a tab or a slot?", a: "Yes. Press “AI edit” in the generator and describe it (“six 3 mm holes on a 22 mm circle”). The AI changes the washer’s model.py on the page, and the new sizes become parameters you can keep turning. A few edits a day are free without signing in." },
       ],
       zh: [
-        { q: "怎样做一个外径 12 mm、厚 2 mm 的 M5 垫片？", a: "打开 https://www.forgent3d.com/zh/generators/washer-spacer-generator?INNER_D=5.3&OUTER_D=12&THICKNESS=2 ——5.3 mm 是 M5 的标准通孔——下载 STL 去打印，或者下载 STEP 交给机加工。" },
+        { q: "怎样做一个外径 12 mm、厚 2 mm 的 M5 垫片？", a: "打开 https://www.forgent3d.com/zh/generators/washer-spacer-generator?INNER_D=5.3&OUTER_D=12&THICKNESS=2 ——5.3 mm 是标准 M5 垫圈（ISO 7089）的内径——下载 STL 去打印，或者下载 STEP 交给机加工。" },
         { q: "能做带一圈孔、带耳或带槽的垫片吗？", a: "能。在生成器里点「AI 修改」，描述一下（“在直径 22 mm 的圆上均布六个 3 mm 孔”）。AI 直接在页面上改这个垫片的 model.py，新加的尺寸会变成还能继续调的参数。未登录每天也能免费改几次。" },
       ],
     },
@@ -683,7 +698,7 @@ export const GENERATORS = [
         intro:
           "The hardware store never has the size you need. Set inner diameter, outer diameter and thickness — from a 0.4 mm shim to a 30 mm standoff — and print exactly the washer or spacer the assembly calls for.",
         whyPoints: [
-          "Metric bolt cheat-sheet built into the defaults (M8 → 8.4 mm bore)",
+          "Bores for M3–M10 bolts from the ISO washer standard, listed below (M8 → 8.4 mm)",
           "One model covers washers, shims, spacers and standoff tubes",
           "Chamfered edges: easy insertion, no elephant-foot cleanup",
           "Need a slot, square bore or shoulder? One agent edit away",
@@ -691,7 +706,7 @@ export const GENERATORS = [
         faqs: [
           {
             q: "What inner diameter for a given bolt?",
-            a: "Use the bolt's nominal size plus clearance: M3 → 3.4, M4 → 4.5, M5 → 5.5, M6 → 6.6, M8 → 8.4, M10 → 10.5 mm. For a snug locating fit, subtract 0.2 mm from those and ream with the bolt.",
+            a: "Standard flat washers (ISO 7089) use the fine clearance series of ISO 273: M3 → 3.2, M4 → 4.3, M5 → 5.3, M6 → 6.4, M8 → 8.4, M10 → 10.5 mm. For an easier fit, take the medium series: M3 → 3.4, M4 → 4.5, M5 → 5.5, M6 → 6.6, M8 → 9, M10 → 11 mm.",
           },
           {
             q: "Are printed washers strong enough?",
@@ -712,7 +727,7 @@ export const GENERATORS = [
         intro:
           "五金店永远缺你要的那个尺寸。设好内径、外径、厚度——从 0.4 mm 调整垫片到 30 mm 间隔柱——打印出装配正好需要的那一片。",
         whyPoints: [
-          "默认值内置公制螺栓速查（M8 → 内径 8.4 mm）",
+          "下方列出 M3–M10 螺栓对应的孔径，取自 ISO 垫圈标准（M8 → 8.4 mm）",
           "一个模型覆盖垫圈、调整垫、间隔柱、支撑管",
           "边缘倒角：好装配，也不用清首层象脚",
           "要长槽、方孔、台阶？让 agent 一句话改",
@@ -720,7 +735,7 @@ export const GENERATORS = [
         faqs: [
           {
             q: "各种螺栓配多大内径？",
-            a: "公称直径加过孔余量：M3 → 3.4、M4 → 4.5、M5 → 5.5、M6 → 6.6、M8 → 8.4、M10 → 10.5 mm。想要定位紧配合就各减 0.2 mm，用螺栓自攻到位。",
+            a: "标准平垫圈（ISO 7089）的内径就是 ISO 273 的精装配系列：M3 → 3.2、M4 → 4.3、M5 → 5.3、M6 → 6.4、M8 → 8.4、M10 → 10.5 mm。想装得松一点就用中等装配系列：M3 → 3.4、M4 → 4.5、M5 → 5.5、M6 → 6.6、M8 → 9、M10 → 11 mm。",
           },
           {
             q: "打印垫片强度够吗？",
@@ -742,7 +757,7 @@ export const GENERATORS = [
     // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
     updated: "2026-10-16",
     // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
-    example: { params: { TRAY_W: "200", TRAY_L: "120", TRAY_T: "15", PART_DEPTH: "12" }, label: { en: "200 × 120 mm tray, 15 mm thick, pocket 12 mm deep", zh: "托盘 200 × 120 mm、厚 15 mm、坑深 12 mm" } },
+    example: { params: { TRAY_L: "200", TRAY_W: "120", TRAY_T: "15", PART_DEPTH: "12" }, label: { en: "200 × 120 mm tray, 15 mm thick, pocket 12 mm deep", zh: "托盘 200 × 120 mm、厚 15 mm、坑深 12 mm" } },
     // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
     step: {
       en: [
@@ -756,11 +771,11 @@ export const GENERATORS = [
     aiFaqs: {
       en: [
         { q: "Can the pocket follow my own tool’s outline?", a: "Yes. Drag the eight outline points on the sketch canvas, or press “AI edit” and give it the measurements (“a 150 × 22 mm body with a 40 × 30 mm handle”) and it rewrites the outline. Working from a photo? Copy the tray into your models and give the photo to the AI agent." },
-        { q: "How do I make a 200 × 120 mm tray with a 12 mm deep pocket?", a: "https://www.forgent3d.com/en/generators/tool-tray-generator?TRAY_W=200&TRAY_L=120&TRAY_T=15&PART_DEPTH=12 — the tray must be at least 1.5 mm thicker than the pocket is deep, so 12 mm deep needs 13.5 mm or more." },
+        { q: "How do I make a 200 × 120 mm tray with a 12 mm deep pocket?", a: "https://www.forgent3d.com/en/generators/tool-tray-generator?TRAY_L=200&TRAY_W=120&TRAY_T=15&PART_DEPTH=12 — the tray must be at least 1.5 mm thicker than the pocket is deep, so 12 mm deep needs 13.5 mm or more." },
       ],
       zh: [
         { q: "坑能按我自己工具的轮廓来吗？", a: "能。在草图画布上拖那八个轮廓点；或者点「AI 修改」把尺寸告诉它（“身长 150 × 22 mm，带一个 40 × 30 mm 的把手”），它会重写轮廓。手上只有照片？把托盘复制到你的模型里，把照片交给 AI agent。" },
-        { q: "怎样做一个 200 × 120 mm、坑深 12 mm 的托盘？", a: "https://www.forgent3d.com/zh/generators/tool-tray-generator?TRAY_W=200&TRAY_L=120&TRAY_T=15&PART_DEPTH=12 ——托盘要比坑深至少厚 1.5 mm，所以 12 mm 深的坑要 13.5 mm 以上的托盘。" },
+        { q: "怎样做一个 200 × 120 mm、坑深 12 mm 的托盘？", a: "https://www.forgent3d.com/zh/generators/tool-tray-generator?TRAY_L=200&TRAY_W=120&TRAY_T=15&PART_DEPTH=12 ——托盘要比坑深至少厚 1.5 mm，所以 12 mm 深的坑要 13.5 mm 以上的托盘。" },
       ],
     },
     keywords: [
@@ -773,8 +788,8 @@ export const GENERATORS = [
       { key: "CORNER_R", default: "2", range: "0 \u2013 8", unit: "mm", label: { en: "Corner radius", zh: "圆角" }, desc: { en: "Rounds every corner of the traced outline \u2014 a sharp-cornered part still gets a printable inside corner.", zh: "把描出来的轮廓每个角倒圆，尖角零件也能得到能打的内角。" } },
       { key: "CLEARANCE", default: "0.5", range: "0.1 \u2013 3", unit: "mm", label: { en: "Fit clearance", zh: "间隙" }, desc: { en: "Grown around the outline on every side; 0.25 snug, 0.5 drop-in, 1.0 loose.", zh: "沿轮廓四周外扩；0.25 紧配、0.5 好放、1.0 宽松。" } },
       { key: "PART_DEPTH", default: "7", range: "1 \u2013 40", unit: "mm", label: { en: "Pocket depth", zh: "坑深" }, desc: { en: "How deep the part sinks. Clamped so a 1.5 mm floor always remains.", zh: "零件沉多深。自动封顶，底下永远留 1.5 mm。" } },
-      { key: "TRAY_W", default: "140", range: "60 \u2013 400", unit: "mm", label: { en: "Tray length X", zh: "托盘长 X" }, desc: { en: "Outer length \u2014 measure the drawer, not the part.", zh: "托盘外长，按抽屉内尺寸量。" } },
-      { key: "TRAY_L", default: "100", range: "60 \u2013 300", unit: "mm", label: { en: "Tray width Y", zh: "托盘宽 Y" }, desc: { en: "Outer width of the tray.", zh: "托盘外宽。" } },
+      { key: "TRAY_L", default: "140", range: "60 \u2013 400", unit: "mm", label: { en: "Tray length X", zh: "托盘长 X" }, desc: { en: "Outer length \u2014 measure the drawer, not the part.", zh: "托盘外长，按抽屉内尺寸量。" } },
+      { key: "TRAY_W", default: "100", range: "60 \u2013 300", unit: "mm", label: { en: "Tray width Y", zh: "托盘宽 Y" }, desc: { en: "Outer width of the tray.", zh: "托盘外宽。" } },
       { key: "TRAY_T", default: "10", range: "3 \u2013 60", unit: "mm", label: { en: "Tray thickness", zh: "托盘厚" }, desc: { en: "Must clear the pocket depth plus a 1.5 mm floor.", zh: "要能容下坑深，再留 1.5 mm 底。" } },
     ],
     copy: {
@@ -903,7 +918,7 @@ export const GENERATORS = [
         faqs: [
           {
             q: "Which screws and T-nuts do I need?",
-            a: "M5 is the standard for 6 mm-slot 2020 (Misumi, OpenBuilds and Alux all use M5×8 with a slide-in or drop-in T-nut). With the default 4 mm printed plate, use M5×10 — a cast bracket's 3 mm plate takes M5×8, and printed brackets on MakerWorld list M5×10, or ×12 with a washer.",
+            a: "M5 is the standard for 6 mm-slot 2020 (the Misumi, OpenBuilds and Alux brackets all take M5×8 with a slide-in or drop-in T-nut; Misumi also makes M4 versions). With the default 4 mm printed plate, use M5×10 — a cast bracket's 3 mm plate takes M5×8, and printed brackets on MakerWorld list M5×10, or ×12 with a washer.",
           },
           {
             q: "Will the tabs fit my extrusion?",
@@ -932,7 +947,7 @@ export const GENERATORS = [
         faqs: [
           {
             q: "要配什么螺丝和 T 型螺母？",
-            a: "6 mm 槽的 2020 型材标准是 M5（米思米、OpenBuilds、Alux 都用 M5×8 配 T 型螺母）。默认 4 mm 打印板用 M5×10——压铸角码 3 mm 板用 M5×8，MakerWorld 上的打印角码标注 M5×10，加垫片用 ×12。",
+            a: "6 mm 槽的 2020 型材标准是 M5（米思米、OpenBuilds、Alux 的角码都用 M5×8 配 T 型螺母，米思米也有 M4 款）。默认 4 mm 打印板用 M5×10——压铸角码 3 mm 板用 M5×8，MakerWorld 上的打印角码标注 M5×10，加垫片用 ×12。",
           },
           {
             q: "定位舌能塞进我的型材吗？",
@@ -1001,7 +1016,7 @@ export const GENERATORS = [
         intro:
           "Pick your bearing — 608, 625, 688, 6000-series, 6800-series — and get a printed pillow block that holds it. With the default 608 it lands on the KP08's mounting holes and centre height, so it drops in where a KP08 was. The seat fit is a slider, because every printer prints holes a little differently.",
         whyPoints: [
-          "608 default matches KP08: 55 long, 42 mm bolt spacing, 15 mm centre height, M4",
+          "608 default matches KP08: 55 mm long, 42 mm bolt spacing, 15 mm centre height, M4",
           "14 bearings from the DIN 625 table, one or two side by side",
           "Seat fit from −0.20 to +0.30 mm, a 2 mm retaining lip and a 0.5 mm lead-in",
           "Prints lip face down without supports; exports STEP for your CAD",
@@ -1030,7 +1045,7 @@ export const GENERATORS = [
         intro:
           "选好轴承——608、625、688、6000 系、6800 系——就得到能装它的打印轴承座。默认 608 时，安装孔和中心高和 KP08 完全一致，原来装 KP08 的地方直接换上。孔径配合做成滑块，因为每台打印机打出来的孔都略有偏差。",
         whyPoints: [
-          "默认 608 对齐 KP08：长 55、孔距 42、中心高 15、M4 螺丝",
+          "默认 608 对齐 KP08：长 55 mm、孔距 42 mm、中心高 15 mm、M4 螺丝",
           "14 种 DIN 625 标准轴承，可单装或并排装两个",
           "孔径配合 −0.20 到 +0.30 mm，2 mm 挡肩和 0.5 mm 入口倒角",
           "挡肩面朝下打印免支撑；可导出 STEP 进 CAD",
@@ -1089,7 +1104,7 @@ export const GENERATORS = [
       "pc fan cover 3d print",
     ],
     params: [
-      { key: "FAN", default: "120 mm", range: "25 – 140 mm", unit: "", label: { en: "Fan size", zh: "风扇尺寸" }, desc: { en: "Hole spacing from ARCTIC's drawings (40–140) and NopSCADlib's measured fan table.", zh: "孔距取自 ARCTIC 图纸（40–140）和 NopSCADlib 实测风扇表。" } },
+      { key: "FAN", default: "120 mm", range: "25 – 140 mm", unit: "", label: { en: "Fan size", zh: "风扇尺寸" }, desc: { en: "Hole spacing from ARCTIC's drawings (40, 80, 92, 120, 140 mm) and NopSCADlib's measured fan table (25, 30, 50, 60, 70 mm).", zh: "孔距取自 ARCTIC 图纸（40、80、92、120、140 mm）和 NopSCADlib 实测风扇表（25、30、50、60、70 mm）。" } },
       { key: "BAR", default: "1.2", range: "0.8 – 3", unit: "mm", label: { en: "Bar width", zh: "网条宽度" }, desc: { en: "1.2 mm or more prints cleanly from a 0.4 mm nozzle.", zh: "0.4 mm 喷嘴打 1.2 mm 以上最稳。" } },
       { key: "GAP", default: "4.8", range: "2.5 – 12.7", unit: "mm", label: { en: "Max opening width", zh: "最大开口宽度" }, desc: { en: "Rings are spread evenly so no gap is wider than this. 12.7 mm (½ in) is the OSHA limit for fan guards.", zh: "圆环均匀分布，任何缝都不超过这个值。12.7 mm（½ 英寸）是 OSHA 对风扇护网的上限。" } },
       { key: "GRILL_T", default: "1.6", range: "0.8 – 4", unit: "mm", label: { en: "Grill thickness", zh: "网面厚度" }, desc: { en: "The ring layer, printed flat on the bed.", zh: "圆环那一层，贴床平打。" } },
@@ -1101,12 +1116,12 @@ export const GENERATORS = [
         name: "Fan Grill Generator",
         title: "Fan Grill Generator — 40 / 80 / 92 / 120 / 140 mm Fan Guards (STL / STEP) | Forgent3D",
         description:
-          "Generate a 3D-printable fan grill for 25–140 mm fans: rings and spokes like a wire guard, the hole spacing from manufacturer drawings, adjustable bar width, opening and standoff. Free STL and STEP.",
+          "Generate a 3D-printable fan grill for 25–140 mm fans: rings and spokes like a wire guard, hole spacing from ARCTIC drawings and measured tables, adjustable bar width, opening and standoff. Free STL and STEP.",
         h1: "Fan grill generator: a wire-guard pattern you can print",
         intro:
-          "Pick your fan size and get a printable guard that bolts to it — hole spacing from ARCTIC's drawings, a 2 mm standoff from the blades. The pattern copies the steel wire guard on purpose: in wind-tunnel tests wire guards cost almost no airflow, while a half-open honeycomb sheet cost about a fifth of it.",
+          "Pick your fan size and get a printable guard that bolts to it — hole spacing from ARCTIC's drawings and NopSCADlib's measured fan table, a 2 mm standoff from the blades. The pattern copies the steel wire guard on purpose: in wind-tunnel tests wire guards cost almost no airflow, while a half-open honeycomb sheet cost about a fifth of it.",
         whyPoints: [
-          "10 sizes, 25 to 140 mm, with hole spacing from manufacturer drawings",
+          "10 sizes, 25 to 140 mm, hole spacing from ARCTIC drawings and measured fan tables",
           "Rings and spokes like a wire guard: the pattern that cost the least airflow in tests",
           "Every opening stays under your limit — 12.7 mm max keeps fingers out",
           "Prints flat with no bridges; exports STEP as well as STL",
@@ -1130,12 +1145,12 @@ export const GENERATORS = [
         name: "风扇网罩生成器",
         title: "风扇网罩生成器 — 4 / 8 / 9 / 12 / 14 cm 风扇防护网 STL / STEP 在线定制 | Forgent3D",
         description:
-          "在线生成可 3D 打印的风扇网罩，适配 25–140 mm 风扇：仿钢丝网的圆环加辐条，孔距取自厂家图纸，网条宽度、开口、离风扇距离可调。免费导出 STL 和 STEP。",
+          "在线生成可 3D 打印的风扇网罩，适配 25–140 mm 风扇：仿钢丝网的圆环加辐条，孔距取自 ARCTIC 图纸和实测风扇表，网条宽度、开口、离风扇距离可调。免费导出 STL 和 STEP。",
         h1: "风扇网罩生成器：能打印的钢丝网罩",
         intro:
-          "选好风扇尺寸，就得到能直接拧上去的打印网罩——孔距取自 ARCTIC 图纸，离扇叶留 2 mm。图案特意仿钢丝网：风洞实测里钢丝网几乎不损风量，而开孔一半的蜂窝板要损失约五分之一。",
+          "选好风扇尺寸，就得到能直接拧上去的打印网罩——孔距取自 ARCTIC 图纸和 NopSCADlib 实测风扇表，离扇叶留 2 mm。图案特意仿钢丝网：风洞实测里钢丝网几乎不损风量，而开孔一半的蜂窝板要损失约五分之一。",
         whyPoints: [
-          "25 到 140 mm 共 10 种尺寸，孔距取自厂家图纸",
+          "25 到 140 mm 共 10 种尺寸，孔距取自 ARCTIC 图纸和实测风扇表",
           "仿钢丝网的圆环加辐条：实测风量损失最小的图案",
           "任何开口都不超过你设的上限——12.7 mm 以内手指伸不进去",
           "平放打印没有悬空；除了 STL 还能导 STEP",
@@ -1159,13 +1174,67 @@ export const GENERATORS = [
   },
 ];
 
+// Merge each extra language's file into the entries: copy, parameter labels and descriptions, the example's
+// label, the STEP facts, the AI FAQs and the search phrases the page is written for (`localKeywords`; en and zh
+// pages use `keywords`). Numbers, keys and links stay the English entry's.
+//
+// A generator is in a language once its `copy` is translated. One the file does not have yet (a new generator,
+// written in en and zh) is simply missing from that language — its index lists the rest — and a parameter the
+// translation lacks shows its English label: neither takes any page offline. scripts/check-generator-locales.mjs
+// is what insists on complete, current translations.
+for (const [locale, file] of Object.entries(EXTRA_LOCALE_FILES)) {
+  if (!file.shared) continue;
+  for (const g of GENERATORS) {
+    const t = file.generators?.[g.slug];
+    if (!t?.copy) continue;
+    g.copy[locale] = t.copy;
+    for (const p of g.params) {
+      p.label[locale] = t.params?.[p.key]?.label || p.label.en;
+      p.desc[locale] = t.params?.[p.key]?.desc || p.desc.en;
+    }
+    if (g.example) g.example.label[locale] = t.example || g.example.label.en;
+    if (g.step && t.step) g.step[locale] = t.step;
+    if (g.aiFaqs && t.aiFaqs) g.aiFaqs[locale] = t.aiFaqs;
+    if (t.keywords) (g.localKeywords ||= {})[locale] = t.keywords;
+  }
+}
+
+/** Every language with generator pages: en and zh, plus each extra language with its shared copy and at least
+ *  one translated generator. */
+export const GENERATOR_LOCALES = ["en", "zh", ...Object.keys(EXTRA_LOCALE_FILES).filter((l) => GENERATORS.some((g) => g.copy[l]))];
+
+export function isGeneratorLocale(locale) {
+  return GENERATOR_LOCALES.includes(locale);
+}
+
+/** The languages this generator's page exists in. */
+export function generatorLocales(generator) {
+  return GENERATOR_LOCALES.filter((l) => generator.copy[l]);
+}
+
+/** The generators with a page in this language. */
+export function generatorsIn(locale) {
+  return GENERATORS.filter((g) => g.copy[locale]);
+}
+
+/** The language of everything around the generator pages (header, home, OpenSCAD pages, blog): en or zh. */
+export function siteLocale(locale) {
+  return locale === "zh" ? "zh" : "en";
+}
+
+/** The app's interface language for a page language: the app has en and zh. */
+export function appLanguage(locale) {
+  return locale === "zh" ? "zh" : "en";
+}
+
 export function getGenerator(slug) {
   return GENERATORS.find((g) => g.slug === slug) || null;
 }
 
 export function generatorAppUrl(generator, locale) {
-  if (generator.modelDir) return `${APP_BASE}/g/${generator.modelDir}?lang=${locale}`;
-  return `${APP_BASE}?lang=${locale}`;
+  const lang = appLanguage(locale);
+  if (generator.modelDir) return `${APP_BASE}/g/${generator.modelDir}?lang=${lang}`;
+  return `${APP_BASE}?lang=${lang}`;
 }
 
 /** The generator with its AI edit box already open (app: `?intent=edit`). */
@@ -1194,9 +1263,10 @@ export function generatorDeepLink(generator, locale) {
 /** Where "More generators" looks after the page's own family: the nearest kind of part, never the whole catalog. */
 const RELATED_FAMILIES = { gears: ["hardware"], hardware: ["gears"], storage: [], fluid: ["hardware"] };
 
-/** Same family first, then the related families, at most `max` — a link block that stays small as the catalog grows. */
-export function relatedGenerators(generator, max = 4) {
-  const others = GENERATORS.filter((g) => g.slug !== generator.slug);
+/** Same family first, then the related families, at most `max` — a link block that stays small as the catalog grows.
+ *  Only generators with a page in `locale`. */
+export function relatedGenerators(generator, locale, max = 4) {
+  const others = generatorsIn(locale).filter((g) => g.slug !== generator.slug);
   const order = [generator.family, ...(RELATED_FAMILIES[generator.family] || [])];
   const picked = [];
   for (const family of order) {
@@ -1207,6 +1277,12 @@ export function relatedGenerators(generator, max = 4) {
 
 // UI copy shared by the /generators index and every landing page.
 export function generatorsSharedCopy(locale) {
+  const extra = EXTRA_LOCALE_FILES[locale];
+  if (extra && isGeneratorLocale(locale)) return { ...baseSharedCopy("en"), ...extra.shared };
+  return baseSharedCopy(locale);
+}
+
+function baseSharedCopy(locale) {
   if (locale === "zh") {
     return {
       catalogLabel: "生成器",
@@ -1217,7 +1293,6 @@ export function generatorsSharedCopy(locale) {
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
       openApp: "打开生成器",
-      remixApp: "用 AI 继续改",
       paramsTitle: "可调参数",
       paramsIntro: "以下参数在生成器里逐项可调，每次修改都会重建真实几何——不是缩放网格。",
       thParam: "参数",
@@ -1285,7 +1360,6 @@ export function generatorsSharedCopy(locale) {
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",
     openApp: "Open the generator",
-    remixApp: "Remix with AI",
     paramsTitle: "Parameters you can tune",
     paramsIntro:
       "Each parameter below rebuilds real geometry on every change — this is parametric CAD, not a scaled mesh.",

@@ -220,8 +220,10 @@ export const CARD_SURFACE = "rounded-xl border border-border/80 bg-card/60";
 export const PANEL_SURFACE = "rounded-2xl border border-border/80 bg-card/60 backdrop-blur";
 export const SECTION_TITLE = "text-3xl font-semibold tracking-tight text-foreground md:text-4xl";
 
-/** The site header, shared by the homepage and every localized sub-page (app/[locale]/layout.js). */
-export function getSiteHeaderHtml(locale) {
+/** The site header, shared by the homepage and every localized sub-page (app/[locale]/layout.js).
+ *  `generatorsLocale`: where the Generators link points — the page's own language on a generator page in a
+ *  language that has only the generator pages (de, es, ja), whose header is otherwise English. */
+export function getSiteHeaderHtml(locale, generatorsLocale = locale) {
   const t = COPY[locale] || COPY.en;
   const navLink =
     "shrink-0 rounded-md px-3 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-brand/10 hover:text-foreground";
@@ -237,7 +239,7 @@ export function getSiteHeaderHtml(locale) {
         </a>
         <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
           <a class="js-explore-link ${navLink}" href="https://app.forgent3d.com/explore?lang=${locale}">${t.navExplore}</a>
-          <a class="${navLink}" href="/${locale}/generators">${t.navGenerators}</a>
+          <a class="${navLink}" href="/${generatorsLocale}/generators">${t.navGenerators}</a>
           <a class="js-pricing-link ${navLink}" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="${navLink}" href="/${locale}/blog">${t.navBlog}</a>
           <a class="${navLink}" href="/${locale}/contact">${t.navContact}</a>

@@ -22,19 +22,19 @@ function knobEntries(search) {
  * While it is open, every tuning in the generator is posted back (`forgent3d:generator-params`) and the
  * page's own URL follows, so the address bar always links to the part on screen.
  */
-export function GeneratorEmbed({ appBase, modelDir, slug, locale, name, labels }) {
+export function GeneratorEmbed({ appBase, modelDir, slug, locale, appLanguage, name, labels }) {
   const [src, setSrc] = useState(null);
 
   const open = useCallback(
     (how) => {
       const url = new URL(`/g/${encodeURIComponent(modelDir)}`, appBase);
       url.searchParams.set("embed", "1");
-      url.searchParams.set("lang", locale);
+      url.searchParams.set("lang", appLanguage);
       for (const [key, value] of knobEntries(window.location.search)) url.searchParams.set(key, value);
       setSrc(url.toString());
       window.posthog?.capture?.("generator_embed_open", { generator: slug, how, locale });
     },
-    [appBase, modelDir, slug, locale],
+    [appBase, modelDir, slug, locale, appLanguage],
   );
 
   useEffect(() => {

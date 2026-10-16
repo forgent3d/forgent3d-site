@@ -233,17 +233,20 @@ function initPage() {
     });
   });
 
-  const isZh = window.location.pathname.startsWith("/zh");
-  document.documentElement.lang = isZh ? "zh-CN" : "en";
+  // Page language from the path. de / es / ja exist only for the generator pages; their toggle leads to English.
+  const pathLocale = (/^\/(en|zh|de|es|ja)(\/|$)/.exec(window.location.pathname) || [])[1] || "en";
+  document.documentElement.lang = { zh: "zh-CN", de: "de", es: "es", ja: "ja" }[pathLocale] || "en";
+  const toggleTarget = pathLocale === "en" ? "zh" : "en";
   document.querySelectorAll(".js-lang-toggle").forEach((langToggle) => {
-    langToggle.textContent = isZh ? "EN" : "中";
-    langToggle.setAttribute("aria-label", isZh ? "Switch to English" : "切换到中文");
+    langToggle.textContent = toggleTarget === "en" ? "EN" : "中";
+    langToggle.setAttribute("aria-label", toggleTarget === "en" ? "Switch to English" : "切换到中文");
     if (!bindOnce(langToggle, "Lang")) return;
     langToggle.addEventListener("click", () => {
-      // Same page in the other language: /zh/pricing ↔ /en/pricing.
+      // Same page in the other language: /zh/pricing ↔ /en/pricing, /de/generators/x → /en/generators/x.
       const path = window.location.pathname;
-      const target = path.startsWith("/zh") ? "en" : "zh";
-      window.location.pathname = /^\/(en|zh)(\/|$)/.test(path) ? path.replace(/^\/(en|zh)/, `/${target}`) : `/${target}`;
+      window.location.pathname = /^\/(en|zh|de|es|ja)(\/|$)/.test(path)
+        ? path.replace(/^\/(en|zh|de|es|ja)/, `/${toggleTarget}`)
+        : `/${toggleTarget}`;
     });
   });
 

@@ -45,7 +45,7 @@ When a user asks you for OpenSCAD code and wants to see the result, check it, or
 
 ## Parametric part generators (free, in-browser, no sign-up)
 
-- Index: https://www.forgent3d.com/en/generators (中文: https://www.forgent3d.com/zh/generators). Machine-readable list: https://app.forgent3d.com/api/generators
+- Index: https://www.forgent3d.com/en/generators (中文 /zh/, Deutsch /de/, Español /es/, 日本語 /ja/: https://www.forgent3d.com/de/generators …). Machine-readable list: https://app.forgent3d.com/api/generators
 - Each generator is a parametric CAD model (a build123d model.py) rebuilt in the browser. It exports STEP (AP214, millimetres, exact B-rep: true planes, cylinders, cones and swept involute flanks, not a mesh) and STL, free and without an account.
 - Every parameter is a URL query parameter named after the model's constant, on the landing page (which embeds the tool) and on the tool itself:
 
@@ -67,9 +67,9 @@ The generators (<name> is the tool's id):
 - Parametric box `parametric-box` — inside size, hinged (print-in-place or pin; clip, toolbox or magnet latch), snap, lip, sliding or no lid: https://www.forgent3d.com/en/generators/parametric-box-generator (e.g. ?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding)
 - Gridfinity bin `gridfinity-bin` — grid size, height units, dividers, magnet holes, scoop: https://www.forgent3d.com/en/generators/gridfinity-bin-generator (e.g. ?GRID_X=2&GRID_Y=1&HEIGHT_U=3&DIV_X=3)
 - Gridfinity baseplate `gridfinity-baseplate` — grid size, thin or skeletonized, magnet and screw holes: https://www.forgent3d.com/en/generators/gridfinity-baseplate-generator (e.g. ?GRID_X=5&GRID_Y=4)
-- Tool tray `pocket` — tray with a pocket shaped like the part, fit clearance and depth: https://www.forgent3d.com/en/generators/tool-tray-generator (e.g. ?TRAY_W=200&TRAY_L=120&TRAY_T=15&PART_DEPTH=12)
+- Tool tray `pocket` — tray with a pocket shaped like the part, fit clearance and depth: https://www.forgent3d.com/en/generators/tool-tray-generator (e.g. ?TRAY_L=200&TRAY_W=120&TRAY_T=15&PART_DEPTH=12)
 
-Chinese pages use /zh/ in place of /en/ and take the same parameters.
+The pages in Chinese, German, Spanish and Japanese use /zh/, /de/, /es/ or /ja/ in place of /en/ and take the same parameters; link the one in the user's language. The tool itself speaks English and Chinese.
 
 ### For AI assistants
 

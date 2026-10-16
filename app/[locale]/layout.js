@@ -14,6 +14,9 @@ export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Forgent3D",
   description: DEFAULT_DESCRIPTION,
+  // Here rather than hand-written in <head>: a page's own `keywords` (the generator pages) replace it instead of
+  // following it as a second tag.
+  keywords: "Forgent3D, AI CAD, agent skills, Claude Code, Codex, Cursor, build123d, parametric CAD, 3D preview",
   openGraph: { ...OG_BASE, type: "website", title: "Forgent3D", description: DEFAULT_DESCRIPTION },
   twitter: { card: "summary_large_image" },
 };
@@ -25,13 +28,9 @@ export const metadata = {
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
   return (
-    <html lang={locale === "zh" ? "zh-CN" : "en"}>
+    <html lang={({ zh: "zh-CN", de: "de", es: "es", ja: "ja" })[locale] || "en"}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta
-          name="keywords"
-          content="Forgent3D, AI CAD, agent skills, Claude Code, Codex, Cursor, build123d, parametric CAD, 3D preview"
-        />
         <meta name="theme-color" content="#f9fafb" />
         {/* 产品和官网共用同一枚 logo-mark.png(来自 forgent3d-platform/packages/cloud/public)。
             官网原来用的是另一版带描边底板的图标,和产品头部对不上。 */}

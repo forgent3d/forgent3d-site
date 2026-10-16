@@ -6,7 +6,8 @@
     "build": "next build",
     "preview": "wrangler dev",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
-    "check:generators": "node scripts/check-generator-params.mjs"
+    "check:generators": "node scripts/check-generator-params.mjs",
+    "check:generator-locales": "node scripts/check-generator-locales.mjs"
   },
   "dependencies": {
     "@google/model-viewer": "^4.2.0",

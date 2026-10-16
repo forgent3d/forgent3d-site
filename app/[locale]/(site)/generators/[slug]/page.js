@@ -1,44 +1,44 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { isSupportedLocale } from "../../../../lib/landing-page";
 import {
   APP_BASE,
   GENERATORS,
+  OG_LOCALES,
+  appLanguage,
   generatorAgentUrl,
   generatorAiEditUrl,
   generatorAppUrl,
   generatorDeepLink,
   generatorSchemaUrl,
   generatorsSharedCopy,
+  generatorLocales,
   getGenerator,
   relatedGenerators,
+  siteLocale,
 } from "../../../../lib/generators";
 import { OG_BASE } from "../../../../lib/seo";
 import { GeneratorEmbed } from "../../../../components/generator-embed";
+import { GeneratorLanguages } from "../../../../components/generator-languages";
 
 export function generateStaticParams() {
-  return ["en", "zh"].flatMap((locale) =>
-    GENERATORS.map((g) => ({ locale, slug: g.slug }))
-  );
+  return GENERATORS.flatMap((g) => generatorLocales(g).map((locale) => ({ locale, slug: g.slug })));
 }
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
-  if (!isSupportedLocale(locale)) return {};
   const generator = getGenerator(slug);
-  if (!generator) return {};
+  if (!generator?.copy[locale]) return {};
 
   const copy = generator.copy[locale];
   const path = `/${locale}/generators/${slug}`;
   return {
     title: copy.title,
     description: copy.description,
-    keywords: generator.keywords.join(", "),
+    keywords: (generator.localKeywords?.[locale] || generator.keywords).join(", "),
     alternates: {
       canonical: path,
       languages: {
-        en: `/en/generators/${slug}`,
-        zh: `/zh/generators/${slug}`,
+        ...Object.fromEntries(generatorLocales(generator).map((l) => [l, `/${l}/generators/${slug}`])),
         "x-default": `/en/generators/${slug}`,
       },
     },
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }) {
       ...OG_BASE,
       title: copy.title,
       description: copy.description,
-      locale: locale === "zh" ? "zh_CN" : "en_US",
+      locale: OG_LOCALES[locale],
       type: "website",
       url: path,
     },
@@ -57,18 +57,20 @@ const linkClass = "text-brand underline-offset-2 transition-colors hover:text-br
 
 export default async function GeneratorLandingPage({ params }) {
   const { locale, slug } = await params;
-  if (!isSupportedLocale(locale)) notFound();
   const generator = getGenerator(slug);
-  if (!generator) notFound();
+  // Also the guard on the language: only en, zh and the translated languages have copy.
+  if (!generator?.copy[locale]) notFound();
 
   const copy = generator.copy[locale];
   const t = generatorsSharedCopy(locale);
+  // Home and the OpenSCAD pages exist in en and zh only: a de / es / ja page links to the English ones.
+  const site = siteLocale(locale);
   const appUrl = generatorAppUrl(generator, locale);
   const aiEditUrl = generatorAiEditUrl(generator, locale);
   const deepLink = generatorDeepLink(generator, locale);
   const schemaUrl = generatorSchemaUrl(generator);
   const agentUrl = generatorAgentUrl(generator, locale);
-  const related = relatedGenerators(generator);
+  const related = relatedGenerators(generator, locale);
   const faqs = [...copy.faqs, ...(generator.aiFaqs?.[locale] || []), ...t.sharedFaqs];
   const stepFacts = generator.step?.[locale] || [];
 
@@ -97,7 +99,7 @@ export default async function GeneratorLandingPage({ params }) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: t.breadcrumbHome, item: `https://www.forgent3d.com/${locale}` },
+      { "@type": "ListItem", position: 1, name: t.breadcrumbHome, item: `https://www.forgent3d.com/${site}` },
       { "@type": "ListItem", position: 2, name: t.catalogH1, item: `https://www.forgent3d.com/${locale}/generators` },
       { "@type": "ListItem", position: 3, name: copy.name, item: `https://www.forgent3d.com/${locale}/generators/${slug}` },
     ],
@@ -109,13 +111,16 @@ export default async function GeneratorLandingPage({ params }) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(appSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
 
-      <nav className="flex items-center gap-2 font-mono text-xs text-muted-foreground" aria-label="Breadcrumb">
-        <Link className="transition-colors hover:text-brand" href={`/${locale}`}>{t.breadcrumbHome}</Link>
-        <span aria-hidden>/</span>
-        <Link className="transition-colors hover:text-brand" href={`/${locale}/generators`}>{t.catalogH1}</Link>
-        <span aria-hidden>/</span>
-        <span className="text-foreground">{copy.name}</span>
-      </nav>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <nav className="flex items-center gap-2 font-mono text-xs text-muted-foreground" aria-label="Breadcrumb">
+          <Link className="transition-colors hover:text-brand" href={`/${site}`}>{t.breadcrumbHome}</Link>
+          <span aria-hidden>/</span>
+          <Link className="transition-colors hover:text-brand" href={`/${locale}/generators`}>{t.catalogH1}</Link>
+          <span aria-hidden>/</span>
+          <span className="text-foreground">{copy.name}</span>
+        </nav>
+        <GeneratorLanguages locale={locale} locales={generatorLocales(generator)} path={`/generators/${slug}`} />
+      </div>
 
       <h1 className="mt-8 text-3xl font-semibold tracking-tight md:text-4xl">{copy.h1}</h1>
       <p className="mt-5 max-w-3xl text-lg leading-8 text-muted-foreground">{copy.intro}</p>
@@ -148,6 +153,7 @@ export default async function GeneratorLandingPage({ params }) {
             modelDir={generator.modelDir}
             slug={generator.slug}
             locale={locale}
+            appLanguage={appLanguage(locale)}
             name={copy.name}
             labels={{ load: t.embedLoad, note: t.embedNote }}
           />
@@ -195,7 +201,9 @@ export default async function GeneratorLandingPage({ params }) {
         {generator.example ? (
           <p className="mt-4 max-w-3xl text-sm leading-6 text-muted-foreground">
             {t.paramsLinkNote}{" "}
-            {locale === "zh" ? `${t.exampleLabel}（${generator.example.label[locale]}）：` : `${t.exampleLabel} (${generator.example.label[locale]}):`}
+            {locale === "zh" || locale === "ja"
+              ? `${t.exampleLabel}（${generator.example.label[locale]}）：`
+              : `${t.exampleLabel} (${generator.example.label[locale]}):`}
             <a className={`${linkClass} mt-1 block break-all font-mono text-xs`} href={deepLink}>{deepLink}</a>
           </p>
         ) : null}
@@ -326,11 +334,11 @@ export default async function GeneratorLandingPage({ params }) {
         </div>
         <p className="mt-6 text-sm text-muted-foreground">
           {t.scadPrompt}{" "}
-          <Link className="text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-to-step`}>
+          <Link className="text-brand transition-colors hover:text-brand/80" href={`/${site}/openscad-to-step`}>
             {t.scadLink} →
           </Link>
           {" · "}
-          <Link className="text-brand transition-colors hover:text-brand/80" href={`/${locale}/openscad-viewer`}>
+          <Link className="text-brand transition-colors hover:text-brand/80" href={`/${site}/openscad-viewer`}>
             {t.viewerLink} →
           </Link>
         </p>

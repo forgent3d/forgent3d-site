@@ -1,4 +1,4 @@
-import { GENERATORS } from "./lib/generators";
+import { GENERATORS, GENERATOR_LOCALES, generatorLocales } from "./lib/generators";
 import { listPosts } from "./lib/blog";
 
 const base = "https://www.forgent3d.com";
@@ -17,15 +17,20 @@ const ROUTES = [
   ["/openscad-customizer", "weekly", 0.85, "2026-10-15"],
   ["/chatgpt-openscad", "weekly", 0.85, "2026-10-15"],
   ["/blog", "weekly", 0.7, "2026-10-10"],
-  ["/generators", "weekly", 0.85, "2026-10-16"],
-  // Each generator page carries its own `updated` (app/lib/generators.js): the day its copy last really changed.
-  ...GENERATORS.map((g) => [`/generators/${g.slug}`, "weekly", 0.8, g.updated]),
   ["/ai-3d-model-generation", "weekly", 0.8, "2026-09-30"],
   ["/code-to-parametric-cad", "weekly", 0.8, "2026-09-30"],
   ["/pricing", "weekly", 0.75, "2026-09-30"],
   ["/contact", "weekly", 0.7, "2026-09-30"],
   ["/local-data", "weekly", 0.7, "2026-09-30"],
   ["/quick-start", "weekly", 0.7, "2026-09-30"],
+];
+
+// The generator pages exist in more languages than the rest of the site: the index in every GENERATOR_LOCALES
+// language, each generator in the languages it is translated into. Each carries its own `updated`
+// (app/lib/generators.js): the day its copy last really changed.
+const GENERATOR_ROUTES = [
+  ["/generators", "weekly", 0.85, "2026-10-16", GENERATOR_LOCALES],
+  ...GENERATORS.map((g) => [`/generators/${g.slug}`, "weekly", 0.8, g.updated, generatorLocales(g)]),
 ];
 
 export default function sitemap() {
@@ -36,6 +41,9 @@ export default function sitemap() {
   return [
     ...ROUTES.flatMap(([path, changeFrequency, priority, lastModified]) =>
       ["en", "zh"].map((locale) => ({ url: `${base}/${locale}${path}`, lastModified, changeFrequency, priority })),
+    ),
+    ...GENERATOR_ROUTES.flatMap(([path, changeFrequency, priority, lastModified, locales]) =>
+      locales.map((locale) => ({ url: `${base}/${locale}${path}`, lastModified, changeFrequency, priority })),
     ),
     ...posts,
   ];
