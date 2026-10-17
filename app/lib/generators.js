@@ -855,7 +855,7 @@ export const GENERATORS = [
       zh: ["工具托盘生成器", "工具收纳仿形内衬", "抽屉内衬 3d打印"],
     },
     params: [
-      { key: "CORNER_R", default: "2", range: "0 \u2013 8", unit: "mm", label: { en: "Corner radius", zh: "圆角" }, desc: { en: "Rounds every corner of the traced outline \u2014 a sharp-cornered part still gets a printable inside corner.", zh: "把描出来的轮廓每个角倒圆，尖角零件也能得到能打的内角。" } },
+      { key: "CORNER_R", default: "2", range: "0 \u2013 8", unit: "mm", label: { en: "Corner radius", zh: "圆角" }, desc: { en: "Your part\u2019s own corner radius: the traced outline is rounded by it before the clearance goes on. A part with truly sharp corners fits only up to 2.4 \u00d7 the clearance (1.2 mm at 0.5); more and the corners bind.", zh: "填零件自己的圆角半径：先按它把描出来的轮廓倒圆，再加余量。真正尖角的零件，最多只能填余量的 2.4 倍（余量 0.5 时是 1.2 mm），再大角上会卡住。" } },
       { key: "CLEARANCE", default: "0.5", range: "0.1 \u2013 3", unit: "mm", label: { en: "Fit clearance", zh: "间隙" }, desc: { en: "Grown around the outline on every side; 0.25 snug, 0.5 drop-in, 1.0 loose.", zh: "沿轮廓四周外扩；0.25 紧配、0.5 好放、1.0 宽松。" } },
       { key: "PART_DEPTH", default: "7", range: "1 \u2013 40", unit: "mm", label: { en: "Pocket depth", zh: "坑深" }, desc: { en: "How deep the part sinks. Clamped so a 1.5 mm floor always remains.", zh: "零件沉多深。自动封顶，底下永远留 1.5 mm。" } },
       { key: "TRAY_L", default: "140", range: "60 \u2013 400", unit: "mm", label: { en: "Tray length X", zh: "托盘长 X" }, desc: { en: "Outer length \u2014 measure the drawer, not the part.", zh: "托盘外长，按抽屉内尺寸量。" } },

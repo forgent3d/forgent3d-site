@@ -552,7 +552,7 @@ export const generators = {
     params: {
       CORNER_R: {
         label: "Eckenradius",
-        desc: "Rundet jede Ecke der gezeichneten Kontur ab – auch ein scharfkantiges Teil bekommt so eine druckbare Innenecke.",
+        desc: "Der eigene Eckenradius Ihres Teils: Die gezeichnete Kontur wird damit abgerundet, bevor das Spiel dazukommt. Ein Teil mit wirklich scharfen Ecken passt nur bis 2,4 × Spiel (1,2 mm bei 0,5); darüber klemmen die Ecken.",
       },
       CLEARANCE: {
         label: "Passungsspiel",

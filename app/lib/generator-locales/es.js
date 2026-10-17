@@ -547,7 +547,7 @@ export const generators = {
     params: {
       CORNER_R: {
         label: "Radio de esquina",
-        desc: "Redondea cada esquina del contorno trazado: incluso una pieza con esquinas vivas obtiene una esquina interior imprimible.",
+        desc: "El radio de esquina de tu propia pieza: el contorno trazado se redondea con él antes de sumar la holgura. Una pieza con esquinas realmente vivas solo entra hasta 2,4 × la holgura (1,2 mm con 0,5); por encima, las esquinas se atascan.",
       },
       CLEARANCE: {
         label: "Holgura de ajuste",
