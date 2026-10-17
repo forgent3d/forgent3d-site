@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generatoren",
   catalogTitle: "3D-Druck-Generatoren — kostenlose parametrische Modelle | Forgent3D",
   catalogDescription:
-    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter und Filament-Spulenhalter. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
+    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken und Handyständer. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
   catalogH1: "3D-Druck-Generatoren",
   catalogIntro:
     "Jeder Generator hier ist ein echtes parametrisches CAD-Modell: Ändern Sie die Parameter, baut es sich live neu auf, und Sie exportieren STL / STEP – was über die Schieberegler hinausgeht, ändert der KI-Agent am selben Modell.",
@@ -1498,6 +1498,346 @@ export const generators = {
       "filament rollenhalter",
       "spulenhalter 608 kugellager",
       "filament halter wand",
+    ],
+  },
+
+  "shelf-bracket-generator": {
+    copy: {
+      name: "Regalhalter-Generator",
+      title: "Regalhalter-Generator — Wand-Regalwinkel mit Strebe (STL) | Forgent3D",
+      description:
+        "3D-Druck-Regalhalter passend zu Ihrem Brett: 100–250 mm tiefe Regale, Diagonalstrebe, erreichbare Senkkopfschrauben 4 oder 5 mm oder eine Haltekante. STL/STEP gratis.",
+      h1: "Regalhalter-Generator: Wandhalter passend zu Ihrem Regalbrett",
+      intro:
+        "Geben Sie die Tiefe Ihres Regalbretts ein – standardmäßig 200 mm – und Sie erhalten einen Wandhalter mit Diagonalstrebe. Der Arm endet wie bei gekauften Haltern 10 mm hinter der Vorderkante des Bretts, der Wandschenkel ist drei Viertel so lang wie der Arm, und je zwei Senkkopfschrauben gehen in die Wand und von unten ins Brett, jede mit geradem Weg für den Schraubendreher. Oder wählen Sie eine Haltekante: Ein Brett genau dieser Tiefe wird dahinter eingelegt, ohne Schrauben im Regalbrett.",
+      whyPoints: [
+        "Arm und Wandschenkel folgen der Regaltiefe, in den Proportionen gekaufter Halter (Knape & Vogt, Everbilt)",
+        "Jede Schraube ist erreichbar: ein gerader 12-mm-Weg für den Schraubendreher, die obere Wandschraube durch ein Loch in der Strebe",
+        "Schrauben von unten ins Brett, oder eine Haltekante, hinter die das Brett eingelegt wird",
+        "Auf der Seite liegend exportiert, so wie er gedruckt werden sollte",
+      ],
+      faqs: [
+        {
+          q: "Wie herum drucke ich ihn?",
+          a: "Auf der Seite, genau wie exportiert, sodass jede Schicht den ganzen Halter umfasst. Stehend gedruckt laufen die Schichten quer durch einen Schenkel: Bei einem Maker brachen drei stehend gedruckte Halter innerhalb von fünf Minuten unter 2,5 kg, und in den Tests von CNC Kitchen hielten stehend gedruckte Haken nur etwa die Hälfte der Last, die dieselben Haken liegend gedruckt hielten.",
+        },
+        {
+          q: "Welches Filament und welche Schrauben?",
+          a: "Senkkopf-Holzschrauben, 4 mm (US-Größe #8) oder 5 mm (#10). Dass Halter beim Anziehen der Schrauben reißen, ist die häufigste Beschwerde über beliebte gedruckte Halter; ein Nutzer merkt an, dass PETG nicht so leicht spaltet. Nehmen Sie lieber PETG und hören Sie auf anzuziehen, sobald der Kopf bündig sitzt.",
+        },
+        {
+          q: "Wie viel Gewicht hält er?",
+          a: "Wir nennen keine Zahl: Keiner der gedruckten Regalhalter, die wir gefunden haben, hat einen definierten Belastungstest, und das Ergebnis hängt von Filament, Wänden, Infill und Schrauben ab. Erhöhen Sie bei schweren Regalen die Stegstärke, und testen Sie Ihren Druck unter Last, bevor Sie ihm vertrauen.",
+        },
+      ],
+    },
+    params: {
+      SHELF_D: {
+        label: "Regaltiefe",
+        desc: "Das Brett, von vorn nach hinten. Halter für 8 und 10 Zoll verkaufen sich am besten; 250 passt noch auf ein 256-mm-Druckbett.",
+      },
+      FIXING: {
+        label: "Befestigung des Bretts",
+        desc: "Zwei Schrauben von unten ins Brett, oder eine Kante, hinter die das Brett eingelegt wird (genau für diese Tiefe gemacht; 7 mm länger als sie).",
+      },
+      SCREW: { label: "Holzschraube", desc: "Senkkopf-Holzschrauben, US-Größe #8 oder #10." },
+      WIDTH: { label: "Halterbreite", desc: "Entlang der Wand; 25 wie bei den meisten gedruckten Haltern." },
+      BAR_T: {
+        label: "Stegstärke",
+        desc: "Schenkel, Arm und Strebe. Dicker für schwerere Lasten; bei kleinen Haltern mit dicken Stegen wird daraus ein massives Dreieck.",
+      },
+    },
+    example: "Kräftiger Halter für ein 250-mm-Regal, 5-mm-Schrauben",
+    step: [
+      "Wird als ein exakter Körper mit 32 Flächen exportiert: 20 Ebenen, 8 echte Zylinder (die vier Schraubenlöcher, das Durchgangsloch für den Schraubendreher in der Strebe und die abgerundeten Ecken der Aussparung) und 4 Kegel (die Senkungen).",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie kann ich einen Halter für ein 20 cm tiefes Regal 3D-drucken?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/shelf-bracket-generator?SHELF_D=200 – ein Wandhalter mit Diagonalstrebe, 190 mm Arm und 142,5 mm Wandschenkel, je zwei Senkkopfschrauben 4 mm in die Wand und von unten ins Brett, jede mit geradem 12-mm-Weg für den Schraubendreher. Drucken Sie ihn auf der Seite liegend, wie exportiert.",
+      },
+      {
+        q: "Mein Regal ist ein 18-mm-Brett, 195 mm tief, und ich will keine Schrauben darin.",
+        a: "https://www.forgent3d.com/de/generators/shelf-bracket-generator?FIXING=Front%20lip&SHELF_D=195 – der Arm endet in einer 10-mm-Kante, und das 195-mm-Brett wird zwischen Wand und Kante eingelegt, mit 1 mm Luft; nur die Wandschrauben bleiben.",
+      },
+    ],
+    keywords: [
+      "regalhalter 3d druck",
+      "regalwinkel 3d druck",
+      "regalhalterung stl",
+      "regalträger 3d gedruckt",
+      "wandregal halter",
+    ],
+  },
+
+  "pegboard-hook-generator": {
+    copy: {
+      name: "Lochwandhaken-Generator",
+      title: "Lochwandhaken-Generator — für Skådis & 1/4\"-Lochwände (STL) | Forgent3D",
+      description:
+        "3D-Druck-Lochwandhaken: Skådis-kompatibel, US-Lochwand 1/4\" und 3/16\", Metall, 6-mm-Löcher im 25- oder 16-mm-Raster; Ausladung und Spitze einstellbar. STL/STEP gratis.",
+      h1: "Lochwandhaken-Generator: Haken, die zu Ihrer Lochwand passen",
+      intro:
+        "Wählen Sie Ihre Platte – standardmäßig Skådis-kompatible Schlitze, oder eine US- oder metrische Lochwand mit runden Löchern – und stellen Sie ein, wie weit der Haken nach vorn reicht und wie hoch seine Spitze nach oben steht. Der Haken hängt in zwei Öffnungen übereinander und fällt deshalb nicht herunter, wenn Sie ein Werkzeug abnehmen; nichts rastet ein oder wird verdreht, er wird so eingehängt, wie er abgenommen wird. Lochgröße, Raster und Plattenstärke stammen aus den Angaben der Plattenhersteller und von den meistgedruckten Haken für jede Platte.",
+      whyPoints: [
+        "Acht Plattentypen, von Skådis-artigen Schlitzen bis zu US-Hartfaserplatten 1/4\" und 1,2 mm starken Metallplatten",
+        "Stifte nach dem echten Loch bemessen, z. B. 9/32\" bei US-Lochwand 1/4\", mit einstellbarem Passungsspiel",
+        "Zwei Verankerungen übereinander, sodass der Haken an seinem Platz bleibt, wenn Sie ein Werkzeug abheben",
+        "Einfach- oder Doppelhaken, Ausladung 10–100 mm",
+      ],
+      faqs: [
+        {
+          q: "Der Haken sitzt zu stramm oder wackelt. Was ändere ich?",
+          a: "Platten sind verschieden: Skådis-artige Platten sind 4,5–5,5 mm stark, Metallplatten 1,2–1,7 mm. Erhöhen Sie das Passungsspiel, wenn der Haken nicht ganz sitzt; ein beliebter Designer hat den Plattenspalt auf 5,2 mm verbreitert, damit sein Haken auf 5-mm-Platten gleitet. Wackelt er auf einer dünnen Metallplatte, wählen Sie die Metallplatte in der Liste: Haken für 5-mm-Platten sitzen auf 1,2 mm Metall locker.",
+        },
+        {
+          q: "Warum sitzen Haken für metrische Lochwände in meiner US-Lochwand locker?",
+          a: "Die US-Lochwand „1/4 inch“ hat tatsächlich Löcher mit 9/32\" (7,1 mm), metrische Platten dagegen oft 6-mm-Löcher. Nutzer eines beliebten metrischen Hakensets berichten, dass sie es für US-Platten um 6,5 % hochskalieren. Wählen Sie hier die US-Platte, dann sind die Stifte für ihre Löcher bemessen.",
+        },
+        {
+          q: "Wie und womit drucke ich ihn?",
+          a: "Legen Sie ihn auf die Seite, sodass die Schichten entlang des Arms laufen – Maker berichten, dass liegend gedruckte Haken weit stabiler sind als stehend gedruckte. Mehrere bevorzugen PETG gegenüber PLA; PETG druckt außerdem etwas lockerer, sodass Sie eventuell weniger Spiel brauchen. Skådis ist eine Marke von IKEA; diese Haken sind kompatibel, aber keine IKEA-Produkte.",
+        },
+      ],
+    },
+    params: {
+      BOARD: {
+        label: "Platte",
+        desc: "Legt Lochform, Lochgröße, Raster und Plattenstärke gemeinsam fest: Skådis-artige Schlitze (5-mm-Platte oder 1,2 mm Metall), US-Lochwand 1/4\" und 3/16\", US-Metall-Lochwand, 6-mm-Löcher im 25- oder 16-mm-Raster, 5-mm-Löcher im 25-mm-Raster.",
+      },
+      CLEARANCE: {
+        label: "Passungsspiel",
+        desc: "Wird von Stiften und Laschen abgezogen; die Hälfte davon weitet den Spalt, in dem die Platte sitzt. Erhöhen Sie es, wenn der Haken nicht ganz sitzt.",
+      },
+      STYLE: { label: "Ausführung", desc: "Der Doppelhaken wiederholt den Haken um ein Lochraster entlang der Platte." },
+      REACH: { label: "Ausladung", desc: "Innere Tiefe von der Rückenplatte bis zur Spitze." },
+      TIP: { label: "Höhe der Spitze", desc: "Wie weit die Spitze nach oben steht; 0 für einen geraden Stift." },
+    },
+    example: "50-mm-Haken für US-Lochwand 1/4\"",
+    step: [
+      "Der Standardhaken, Skådis-kompatibel, wird als ein exakter Körper mit 25 Flächen exportiert: 21 Ebenen und 4 echte Zylinder (die runden Laschen, die in den Schlitzenden sitzen). Bei Platten mit runden Löchern fügt der gebogene Stift Kegel hinzu.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie mache ich einen 3D-gedruckten Haken für eine Standard-US-Lochwand mit 1/4 Zoll?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/pegboard-hook-generator?BOARD=US%20pegboard%201%2F4&REACH=50 – ein 50-mm-Haken, dessen oberer Stift durch die Platte geht und sich dahinter nach unten biegt, mit einem kurzen unteren Stift im Loch darunter. Die Stifte sind für die echten Löcher von 9/32\" (7,1 mm) der 1/4\"-Hartfaserplatte bemessen – deshalb sitzen Haken für metrische 25-mm-Platten dort locker.",
+      },
+      {
+        q: "Ich brauche einen breiten Doppelhaken für eine Skådis-artige Platte.",
+        a: "https://www.forgent3d.com/de/generators/pegboard-hook-generator?STYLE=Double%20hook&REACH=40&TIP=8 – zwei Hakenarme im Abstand eines Schlitzrasters (40 mm) auf einer gemeinsamen Rückenplatte; jeder hängt in zwei Schlitzen, mit runden Laschen, die in die Schlitzböden fallen. Gerade hineinschieben, absinken lassen, auf dieselbe Weise abheben.",
+      },
+    ],
+    keywords: [
+      "lochwand haken 3d druck",
+      "lochwandhaken",
+      "skadis haken stl",
+      "lochwand haken stl",
+      "skadis zubehör 3d druck",
+    ],
+  },
+
+  "raspberry-pi-case-generator": {
+    copy: {
+      name: "Raspberry-Pi- & Arduino-Gehäuse-Generator",
+      title: "Raspberry-Pi-Gehäuse-Generator — Pi 5, 4, Zero & Arduino (STL) | Forgent3D",
+      description:
+        "3D-Druck-Gehäuse für Raspberry Pi 5, 4 B, 3 B+, Zero 2 W oder Arduino Uno R3 / R4: alle Anschlüsse nach offiziellen Zeichnungen, verschraubter Deckel. STL/STEP gratis.",
+      h1: "Raspberry-Pi- und Arduino-Gehäuse-Generator: Öffnungen nach den offiziellen Zeichnungen",
+      intro:
+        "Wählen Sie Ihr Board – standardmäßig den Raspberry Pi 5 – und Sie erhalten ein zweiteiliges Gehäuse, angelegt nach der offiziellen Maßzeichnung oder STEP-Datei des Boards. Jeder Anschluss bekommt eine Öffnung, die bis zur Trennfuge offen ist, sodass sich der Deckel über die Buchsen stülpen lässt; die Öffnungen für USB-C und Micro-USB sind für den Stecker bemessen, nicht nur für die Buchse. Die Befestigungsschrauben des Boards halten es auf Abstandshaltern und schließen den Deckel – kein Klemmdeckel, der sich lockert.",
+      whyPoints: [
+        "Sechs Boards, jedes Loch und jeder Anschluss nach den offiziellen Zeichnungen: Pi 5, Pi 4 B, Pi 3 B+, Pi Zero 2 W, Arduino Uno R3 und R4",
+        "Öffnungen für USB-Stecker bemessen, mit einem Spiel, das Sie für klobige HDMI- oder DC-Stecker erhöhen können",
+        "Verschraubter Deckel: Die Befestigungsschrauben des Boards schließen das Gehäuse",
+        "Schlitze über den Stiftleisten, Lüftungsschlitze über dem Prozessor, die SD-Karte von außen erreichbar",
+      ],
+      faqs: [
+        {
+          q: "Welche Schrauben brauche ich?",
+          a: "Raspberry-Pi-Boards: vier Senkkopfschrauben M2,5 × 12. Arduino Uno R3: vier M3 × 16; der Uno R4 nimmt drei plus einen gedruckten Zentrierstift. Sie gehen von unten durch den Boden, die Abstandshalter und das Board in Säulen im Deckel. Klemmdeckel sind die häufigste Beschwerde über beliebte gedruckte Gehäuse („der Deckel sitzt etwas locker“), deshalb wird dieser verschraubt.",
+        },
+        {
+          q: "Passen meine Kabel?",
+          a: "Die Öffnungen für USB-C und Micro-USB sind für die Steckerumspritzung bemessen, die die USB-Spezifikationen angeben – eine häufige Beschwerde über Gehäuse mit buchsengroßen Öffnungen ist, dass Micro-HDMI-Kabel nicht passen. HDMI-, Audio- und DC-Stecker haben keine genormte Größe: Ist Ihrer klobig, erhöhen Sie das Anschlussspiel.",
+        },
+        {
+          q: "Welches Filament für einen Raspberry Pi 5?",
+          a: "PETG oder besser: Ein Maker berichtet, dass ein Pi 5 einen Boden aus PLA erweicht hat. Lassen Sie die Lüftungsschlitze im Deckel an. Das Gehäuse lässt außerdem rundum 0,5 mm Platz um das Board, denn Gehäuse, die eng an der Platine anliegen, haben beim Zusammenbau Boards zerbrochen.",
+        },
+        {
+          q: "Warum ist das ESP32 DevKit nicht in der Liste?",
+          a: "Die DevKitC-Boards von Espressif haben keine Befestigungslöcher, und für die vielen Nachbauten gibt es keine offizielle Zeichnung, nach der man arbeiten könnte. Wählen Sie das nächstliegende Board und ändern Sie es mit „AI edit“. Raspberry Pi und Arduino sind Marken ihrer jeweiligen Inhaber; dieser Generator erzeugt kompatible Gehäuse und steht in keiner Verbindung zu ihnen.",
+        },
+      ],
+    },
+    params: {
+      BOARD: {
+        label: "Board",
+        desc: "Umriss, Befestigungslöcher und jeder Anschluss stammen aus den offiziellen Zeichnungen und STEP-Dateien.",
+      },
+      WALL: { label: "Wandstärke", desc: "2 mm wie bei den meistgedruckten Gehäusen." },
+      PORT_CLEARANCE: {
+        label: "Anschlussspiel",
+        desc: "Wird rundum um jeden Anschluss freigelassen. Erhöhen Sie es für klobige HDMI-, Audio- oder DC-Stecker.",
+      },
+      HEADER_SLOTS: {
+        label: "Stiftleisten-Schlitze im Deckel",
+        desc: "Ein Schlitz über den GPIO- / Arduino-Stiftleisten für Jumperkabel.",
+      },
+      VENTS: { label: "Lüftungsschlitze im Deckel", desc: "Schlitze über dem Prozessor." },
+    },
+    example: "Pi-4-Gehäuse mit dickeren Wänden und großzügigeren Anschlussöffnungen",
+    step: [
+      "Das Gehäuse für den Raspberry Pi 5 wird als zwei exakte Körper exportiert, Unterteil und Deckel, mit 196 Flächen: 160 Ebenen, 32 echte Zylinder (Abstandshalter, Deckelsäulen, Schraubenlöcher und Vorbohrungen, abgerundete Ecken) und 4 Kegel (die Senkungen unter dem Boden).",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie bekomme ich ein Gehäuse für einen Raspberry Pi 4 zum 3D-Drucken?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/raspberry-pi-case-generator?BOARD=Raspberry%20Pi%204%20Model%20B – ein zweiteiliges Gehäuse, angelegt nach der offiziellen Maßzeichnung: Jeder Anschluss bekommt eine Öffnung, die GPIO-Leiste einen Schlitz im Deckel, und vier Senkkopfschrauben M2,5 × 12 gehen von unten durch den Boden und das Board in Säulen im Deckel – dieselben Schrauben halten das Board und schließen das Gehäuse.",
+      },
+      {
+        q: "Kann er ein Arduino-Uno-Gehäuse ohne Lüftungsschlitze erzeugen?",
+        a: "Ja: https://www.forgent3d.com/de/generators/raspberry-pi-case-generator?BOARD=Arduino%20Uno%20R3&VENTS=false – Öffnungen für USB-B und DC-Buchse, für die Stecker bemessen, Schlitze für die Stiftleisten im Deckel, verschlossen mit vier Schrauben M3 × 16. Für den Uno R4 Minima oder WiFi wählen Sie stattdessen dieses Board; eines seiner Löcher sitzt zu nah an der DC-Buchse für eine Säule, deshalb bekommt es einen Zentrierstift und drei Schrauben.",
+      },
+    ],
+    keywords: [
+      "raspberry pi gehäuse 3d druck",
+      "raspberry pi 5 gehäuse stl",
+      "raspberry pi 4 gehäuse 3d druck",
+      "arduino uno gehäuse 3d druck",
+      "raspberry pi gehäuse generator",
+    ],
+  },
+
+  "wall-hook-generator": {
+    copy: {
+      name: "Wandhaken-Generator",
+      title: "Wandhaken-Generator — Schraub-, Klebe- & Türhaken (STL) | Forgent3D",
+      description:
+        "3D-Druck-Wandhaken zum Schrauben, für Command-Klebestreifen oder über Schrank- und Zimmertüren. Einzeln, doppelt oder bis zu fünf in Reihe. STL/STEP gratis.",
+      h1: "Wandhaken-Generator: zum Schrauben, Kleben oder über die Tür",
+      intro:
+        "Wählen Sie die Befestigung – Senkkopfschrauben, einen Command-Streifen von 3M oder über eine Tür Ihrer Stärke – und stellen Sie dann Tiefe, Spitze und Breite ein. Die Schraubenlöcher sitzen über dem Haken, damit ein Schraubendreher sie erreicht; die Klebeplatte ist nach den Streifenmaßen von 3M bemessen, die Abziehlasche bleibt frei; der Türbügel passt mit 0,8 mm Luft auf die Tür. Ein Haken, zwei übereinander oder eine Reihe mit bis zu fünf.",
+      whyPoints: [
+        "Drei Befestigungsarten: Senkkopfschrauben, Command-Streifen Medium oder Large, über eine 19–45 mm starke Tür",
+        "Schraubenlöcher über dem Haken, mit dem Schraubendreher erreichbar, mit Kunststoff unter der Senkung gegen Spalten",
+        "Einzeln, doppelt übereinander oder bis zu fünf in einer Reihe für Schlüssel und Mäntel",
+        "Zum Drucken auf der Seite exportiert, sodass die Schichten entlang des Hakens laufen",
+      ],
+      faqs: [
+        {
+          q: "Wie herum drucke ich ihn?",
+          a: "Auf der Seite, sodass die Schichten um das J herum laufen. In den Tests von CNC Kitchen brachen dieselben Haken stehend gedruckt bei der Hälfte der Last oder weniger, gespalten zwischen den Schichten. Für schwere Lasten nehmen Sie PETG oder ASA und mehr Wände; von gedruckten Türhaken aus PLA wird berichtet, dass sie an der oberen Ecke reißen.",
+        },
+        {
+          q: "Wie viel hält die Klebeversion?",
+          a: "So viel wie der Streifen: 3M gibt Command-Streifen Large mit 5 lb (etwa 2,3 kg) und Medium mit 3 lb (etwa 1,4 kg) an, nicht für Feuchträume. Drücken Sie die Platte fest an, warten Sie eine Stunde, bevor Sie etwas aufhängen, und entfernen Sie den Streifen, indem Sie ihn gerade nach unten an der Wand entlang dehnen – niemals zu sich hin ziehen. Maker berichten, dass das Klebeband vor dem Kunststoff nachgibt.",
+        },
+        {
+          q: "Die Schraube hat den Haken gespalten. Was jetzt?",
+          a: "Zu fest angezogene oder zu dicke Schrauben, die die Platte spalten, sind die häufigste Beschwerde über gedruckte Wandhaken. Die Löcher hier sind Durchgangslöcher nach ISO 273 mit Senkungen für normale Holzschraubenköpfe und 3 mm Kunststoff darunter; hören Sie auf, sobald der Kopf bündig sitzt. Command ist eine Marke von 3M; die Klebeversion ist passend für deren Streifen gemacht.",
+        },
+      ],
+    },
+    params: {
+      MOUNT: {
+        label: "Befestigung",
+        desc: "Senkkopfschrauben 3,5, 4 oder 5 mm; ein Command-Streifen Medium (16 × 46) oder Large (19 × 69); oder über eine 19-mm-Schranktür oder eine 35, 40 oder 45 mm starke Tür.",
+      },
+      STYLE: { label: "Ausführung", desc: "Ein J, oder zwei übereinander auf einer Platte." },
+      HOOKS: { label: "Haken in einer Reihe", desc: "Nebeneinander auf einer Platte: ein Schlüsselbrett oder eine Garderobenleiste." },
+      DEPTH: { label: "Tiefe", desc: "Innere Tiefe von der Platte bis zur Spitze." },
+      TIP: { label: "Höhe der Spitze", desc: "Wie weit die Spitze nach oben steht; 0 für einen geraden Stift." },
+      WIDTH: { label: "Breite", desc: "Wird automatisch verbreitert, wenn ein Schraubenkopf oder ein Streifen mehr braucht." },
+      THICKNESS: { label: "Stärke", desc: "Von Platte und J; dicker für schwere Taschen und Werkzeuge." },
+    },
+    example: "Schlüsselbrett: vier kleine Haken in einer Reihe",
+    step: [
+      "Der geschraubte Standardhaken wird als ein exakter Körper mit 16 Flächen exportiert: 8 Ebenen, 6 echte Zylinder (die Schraubenlöcher sowie die Innenrundung und die Spitze des Hakens) und 2 Kegel (die Senkungen).",
+    ],
+    aiFaqs: [
+      {
+        q: "Kann ich einen Handtuchhaken 3D-drucken, der ohne Bohren hält?",
+        a: "Ja: https://www.forgent3d.com/de/generators/wall-hook-generator?MOUNT=Adhesive%20strip%2019&STYLE=Double&DEPTH=25 – zwei Haken übereinander auf einer Rückenplatte, bemessen für einen großen Command-Streifen von 3M (19 × 69 mm), die Abziehlasche bleibt unten frei. 3M gibt den großen Streifen mit 5 lb an und sagt, er sei nicht für Feuchträume gedacht – hängen Sie das Handtuch also außerhalb der Dusche auf.",
+      },
+      {
+        q: "Ich brauche einen Haken, der über eine 40 mm starke Tür gehängt wird.",
+        a: "https://www.forgent3d.com/de/generators/wall-hook-generator?MOUNT=Over%20a%2040%20mm%20door&STYLE=Double – ein 3 mm starker Bügel geht mit 0,8 mm Luft über die Türoberkante, und zwei Haken hängen auf der Innenseite. Prüfen Sie zuerst den Spalt über Ihrer Tür: Ein zu dicker Bügel verhindert, dass die Tür schließt – die häufigste Beschwerde über gedruckte Türhaken.",
+      },
+    ],
+    keywords: [
+      "wandhaken 3d druck",
+      "wandhaken stl",
+      "klebehaken 3d druck",
+      "türhaken 3d druck",
+      "command strip haken",
+    ],
+  },
+
+  "phone-stand-generator": {
+    copy: {
+      name: "Handyständer-Generator",
+      title: "Handyständer-Generator — Handyhalter für den Schreibtisch (STL) | Forgent3D",
+      description:
+        "3D-Druck-Handyständer passend zu Ihrem Handy mit Hülle: Blickwinkel 45–75°, Auflagehöhe zum Laden, Kabeldurchlass für Stecker, hoch, quer oder Tablet. STL/STEP gratis.",
+      h1: "Handyständer-Generator: ein Schreibtischständer, der zu Ihrem Handy samt Hülle passt",
+      intro:
+        "Geben Sie die Dicke Ihres Handys über der Hülle gemessen ein – standardmäßig 11 mm –, wählen Sie den Blickwinkel und die Höhe der Auflage, und Sie erhalten einen einteiligen A-förmigen Ständer wie die meistheruntergeladenen gedruckten. Die Rückenlehne ist lang genug, um das Handy über seine Mitte hinaus zu stützen, eine Lücke in der vorderen Lippe lässt die Ladebuchse und den unteren Bildschirmrand frei, und das Kabel geht hinten durch eine Öffnung hinaus, durch die der Stecker passt.",
+      whyPoints: [
+        "Die Auflage passt zu Ihrem Handy mit Hülle, nicht zum nackten Handy",
+        "Auflagehöhe zum Laden im Stehen, mit einer Kabelöffnung, durch die der Stecker passt",
+        "Rückenlehne nach dem Gerät bemessen – hochkant, quer oder Tablet –, damit nichts nach hinten kippt",
+        "Aussparungen für vier 8-mm-Gummifüße, damit er auf dem Schreibtisch nicht rutscht",
+      ],
+      faqs: [
+        {
+          q: "Mein Handy mit Hülle passt nicht in den Ständer, den ich gedruckt habe.",
+          a: "Das ist die häufigste Beschwerde über gedruckte Handyständer, und die Versionen „für dickere Handys“ beliebter Ständer werden häufiger heruntergeladen als die Originale. Messen Sie Ihr Handy über der Hülle und geben Sie diesen Wert ein; die Auflage gibt 1 mm Spiel dazu.",
+        },
+        {
+          q: "Wie lade ich das Handy, während es steht?",
+          a: "Lassen Sie den Kabelschlitz an und erhöhen Sie die Auflagehöhe, bis Ihr Stecker unter das Handy passt; Winkelstecker brauchen weniger. Die hintere Öffnung ist größer als der Freiraum für USB-C-Stecker, den Apple vorgibt (12,45 × 6,60 mm), sodass der Stecker hindurchpasst, und die Lücke in der Lippe lässt die Buchse und den unteren Bildschirmrand zum Wischen frei.",
+        },
+        {
+          q: "Wie drucke ich ihn?",
+          a: "Legen Sie ihn im Slicer auf die Seite, sodass das Profil auf dem Druckbett liegt: keine Stützen, und die Schichten laufen entlang der Biegungen. Kleben Sie vier 8-mm-Silikonfüße in die Aussparungen auf der Unterseite, wenn er auf Ihrem Schreibtisch rutscht.",
+        },
+      ],
+    },
+    params: {
+      DEVICE: {
+        label: "Gerät",
+        desc: "Bemisst die Rückenlehne: 163,3 mm für ein großes Handy hochkant, 77,9 quer, 179,5 für ein Tablet.",
+      },
+      THICKNESS: {
+        label: "Handydicke mit Hülle",
+        desc: "Über der Hülle messen: Ein Handy in einer MagSafe-Hülle hat etwa 11, in einer Outdoor-Hülle bis zu 17.",
+      },
+      ANGLE: { label: "Blickwinkel", desc: "Wie weit sich das Handy vom Tisch aus nach hinten neigt." },
+      REST_HEIGHT: { label: "Höhe der Auflage", desc: "Erhöhen, damit ein Ladestecker unter ein hochkant stehendes Handy passt." },
+      WIDTH: { label: "Ständerbreite", desc: "Breiter für Tablets." },
+      CABLE: { label: "Ladekabelschlitz", desc: "Eine Öffnung hinten für das Kabel, groß genug, dass der Stecker hindurchpasst." },
+    },
+    example: "Für ein Handy in einer dicken Hülle, etwas steiler",
+    step: [
+      "Wird als ein exakter Körper mit 33 Flächen exportiert: 27 Ebenen und 6 echte Zylinder (die beiden abgerundeten Biegungen oben und die vier Aussparungen für Gummifüße).",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie kann ich einen Handyständer 3D-drucken, in dem das Handy aufrecht laden kann?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/phone-stand-generator?THICKNESS=12&REST_HEIGHT=35&WIDTH=80 – die Auflage liegt 35 mm über dem Tisch, sodass ein USB-C-Stecker unter ein hochkant stehendes Handy passt, eine Lücke in der vorderen Lippe lässt die Buchse frei, und das Kabel geht hinten durch eine Öffnung hinaus, durch die der ganze Stecker passt. Stellen Sie THICKNESS auf die Dicke Ihres Handys, über der Hülle gemessen.",
+      },
+      {
+        q: "Kann derselbe Ständer ein Tablet in einer dicken Hülle halten?",
+        a: "Ja: https://www.forgent3d.com/de/generators/phone-stand-generator?DEVICE=Tablet%2C%20landscape&THICKNESS=16&WIDTH=100 – die Rückenlehne ist für ein quer gehaltenes Tablet bemessen (179,5 mm, die Breite eines 11-Zoll-iPads), und die Auflage nimmt 16 mm samt Hülle auf. Ständer dieser Form werden auf dieselbe Weise für Tablets verkauft, mit breiterer Auflage.",
+      },
+    ],
+    keywords: [
+      "handyständer 3d druck",
+      "handyhalter schreibtisch",
+      "handyhalterung schreibtisch stl",
+      "handyständer mit ladekabel",
+      "tablet ständer 3d druck",
     ],
   },
 };

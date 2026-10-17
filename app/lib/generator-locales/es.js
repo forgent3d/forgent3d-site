@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generadores",
   catalogTitle: "Generadores para impresión 3D — Modelos paramétricos gratis | Forgent3D",
   catalogDescription:
-    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas y portabobinas. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
+    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas, portabobinas, carcasas para Raspberry Pi y Arduino, ganchos para tablero perforado, escuadras para estantería, ganchos de pared y soportes para móvil. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
   catalogH1: "Generadores para impresión 3D",
   catalogIntro:
     "Cada generador de esta página es un modelo CAD paramétrico de verdad: ajusta los parámetros y se reconstruye al instante, exporta STL / STEP y, para todo lo que vaya más allá de los deslizadores, el agente de IA edita el mismo modelo.",
@@ -1533,6 +1533,352 @@ export const generators = {
       "soporte de bobina de filamento impreso en 3d",
       "soporte bobina filamento rodamientos 608",
       "portabobinas de pared",
+    ],
+  },
+
+  "shelf-bracket-generator": {
+    copy: {
+      name: "Generador de escuadras para estantería",
+      title: "Generador de escuadras para estantería — Soporte de balda | Forgent3D",
+      description:
+        "Escuadra de pared imprimible en 3D para baldas de 100–250 mm: tirante diagonal, tornillos avellanados de 4 o 5 mm accesibles o un tope delantero. STL / STEP gratis.",
+      h1: "Generador de escuadras para estantería: soportes de pared a la medida de tu balda",
+      intro:
+        "Introduce el fondo de tu balda (200 mm por defecto) y obtén una escuadra de pared con tirante diagonal. El brazo termina 10 mm antes del borde delantero de la balda, como en las escuadras comerciales, la pata de pared mide tres cuartos del brazo, y dos tornillos avellanados van a la pared y dos hacia arriba en la balda, cada uno con un recorrido recto para el destornillador. O elige un tope delantero: una balda de exactamente ese fondo cae detrás de él, sin tornillos en la balda.",
+      whyPoints: [
+        "Brazo y pata de pared según el fondo de la balda, en las proporciones de las escuadras comerciales (Knape & Vogt, Everbilt)",
+        "Se llega a todos los tornillos: un recorrido recto de 12 mm para el destornillador, y el tornillo superior de la pared se aprieta a través de un agujero en el tirante",
+        "Tornillos hacia arriba en la balda, o un tope delantero tras el que cae la balda",
+        "Se exporta tumbada de lado, tal como hay que imprimirla",
+      ],
+      faqs: [
+        {
+          q: "¿En qué posición la imprimo?",
+          a: "De lado, tal como se exporta, para que cada capa abarque la escuadra entera. Impresa de pie, las capas cruzan una pata: las tres escuadras impresas de pie de un maker se rompieron en menos de cinco minutos con 2.5 kg, y en las pruebas de CNC Kitchen los ganchos impresos de pie aguantaron solo cerca de la mitad de carga que los mismos ganchos impresos tumbados.",
+        },
+        {
+          q: "¿Qué filamento y qué tornillos uso?",
+          a: "Tornillos para madera de cabeza avellanada, de 4 mm (#8) o 5 mm (#10). Que la escuadra se agriete al apretar los tornillos es la queja más común en las escuadras impresas populares; un usuario señala que el PETG resiste mejor sin partirse. Mejor PETG, y deja de apretar cuando la cabeza quede a ras.",
+        },
+        {
+          q: "¿Cuánto peso aguanta?",
+          a: "No damos una cifra: ninguna de las escuadras impresas para estantería que encontramos tiene una prueba de carga definida, y el resultado depende del filamento, las paredes, el relleno y los tornillos. Sube el grosor de las barras para baldas pesadas, y prueba tu impresión con carga antes de fiarte de ella.",
+        },
+      ],
+    },
+    params: {
+      SHELF_D: {
+        label: "Fondo de la balda",
+        desc: "La balda, de delante atrás. Las escuadras de 8 y 10 pulgadas son las más vendidas; 250 aún cabe en una cama de 256 mm.",
+      },
+      FIXING: {
+        label: "Fijación de la balda",
+        desc: "Dos tornillos hacia arriba en la balda, o un tope delantero tras el que cae la balda (hecho para este fondo exacto; 7 mm más largo que él).",
+      },
+      SCREW: { label: "Tornillo para madera", desc: "Tornillos para madera de cabeza avellanada, #8 o #10 en medidas de EE. UU." },
+      WIDTH: { label: "Ancho de la escuadra", desc: "A lo largo de la pared; 25, como la mayoría de escuadras impresas." },
+      BAR_T: {
+        label: "Grosor de las barras",
+        desc: "La pata, el brazo y el tirante. Más gruesas para cargas mayores; las escuadras pequeñas con barras gruesas se convierten en una cartela maciza.",
+      },
+    },
+    example: "escuadra reforzada para una balda de 250 mm, tornillos de 5 mm",
+    step: [
+      "Se exporta como un sólido exacto de 32 caras: 20 planos, 8 cilindros reales (los cuatro agujeros de tornillo, el agujero de acceso para el destornillador a través del tirante y las esquinas redondeadas de la ventana) y 4 conos (los avellanados).",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo imprimo en 3D una escuadra para una balda de 20 cm de fondo?",
+        a: "Abre https://www.forgent3d.com/es/generators/shelf-bracket-generator?SHELF_D=200: una escuadra de pared con tirante diagonal, brazo de 190 mm y pata de pared de 142.5 mm, dos tornillos avellanados de 4 mm a la pared y dos hacia arriba en la balda, cada uno con un recorrido recto de 12 mm para el destornillador. Imprímela tumbada de lado, tal como se exporta.",
+      },
+      {
+        q: "Mi balda es un tablero de 18 mm, de 195 mm de fondo, y no quiero tornillos en ella.",
+        a: "https://www.forgent3d.com/es/generators/shelf-bracket-generator?FIXING=Front%20lip&SHELF_D=195: el brazo termina en un tope de 10 mm y la balda de 195 mm cae entre la pared y el tope con 1 mm de margen; solo quedan los tornillos de la pared.",
+      },
+    ],
+    keywords: [
+      "generador de escuadras para estantería",
+      "escuadra para estantería impresa en 3d",
+      "escuadra soporte para balda",
+      "soporte de balda stl",
+      "escuadra reforzada de pared",
+    ],
+  },
+
+  "pegboard-hook-generator": {
+    copy: {
+      name: "Generador de ganchos para tablero perforado",
+      title: "Generador de ganchos para tablero perforado — Skådis y 1/4\" | Forgent3D",
+      description:
+        "Ganchos imprimibles en 3D para tu tablero perforado: ranuras tipo Skådis, de 1/4\" y 3/16\" de EE. UU., metálicos o con agujeros de 6 mm a 25 o 16 mm. STL / STEP gratis.",
+      h1: "Generador de ganchos para tablero perforado: ganchos que encajan en tu tablero",
+      intro:
+        "Elige tu tablero (por defecto, ranuras compatibles con Skådis, o un tablero perforado de agujeros redondos estadounidense o métrico) y fija cuánto sobresale el gancho y cuánto se levanta su punta. El gancho cuelga de dos aberturas, una encima de otra, así que no se cae cuando descuelgas una herramienta; nada se encaja a presión ni se gira: se pone y se saca del mismo modo. El tamaño de los agujeros, el paso y el grosor del tablero salen de las especificaciones de los fabricantes y de los ganchos más impresos para cada tablero.",
+      whyPoints: [
+        "Ocho tipos de tablero, desde ranuras tipo Skådis hasta el tablero de fibra estadounidense de 1/4\" y los tableros metálicos de 1.2 mm",
+        "Clavijas dimensionadas para el agujero real, p. ej. 9/32\" en el tablero perforado de 1/4\", con una holgura de ajuste regulable",
+        "Dos anclajes, uno encima de otro, para que el gancho no se mueva al descolgar una herramienta",
+        "Gancho simple o doble, alcance de 10–100 mm",
+      ],
+      faqs: [
+        {
+          q: "El gancho entra demasiado justo, o baila. ¿Qué cambio?",
+          a: "Los tableros varían: los de tipo Skådis miden 4.5–5.5 mm de grosor, y los metálicos 1.2–1.7 mm. Sube la holgura de ajuste si el gancho no asienta; un diseñador popular ensanchó la ranura del tablero a 5.2 mm para que entrara en tableros de 5 mm. Si baila en un tablero metálico fino, elige el tablero metálico en la lista: los ganchos hechos para tableros de 5 mm quedan flojos en metal de 1.2 mm.",
+        },
+        {
+          q: "¿Por qué los ganchos para tableros métricos quedan flojos en mi tablero perforado estadounidense?",
+          a: "El tablero perforado estadounidense «de 1/4\"» tiene en realidad agujeros de 9/32\" (7.1 mm), mientras que los tableros métricos suelen tener agujeros de 6 mm. Usuarios de un juego popular de ganchos métricos cuentan que lo escalan un 6.5 % para los tableros estadounidenses. Elige aquí el tablero estadounidense y las clavijas quedan dimensionadas para sus agujeros.",
+        },
+        {
+          q: "¿Cómo lo imprimo, y en qué?",
+          a: "Túmbalo de lado para que las capas sigan el brazo: los makers cuentan que los ganchos impresos en plano son mucho más resistentes que los impresos de pie. Varios prefieren PETG a PLA; el PETG también sale un poco más holgado, así que puede que necesites menos holgura. Skådis es una marca registrada de IKEA; estos ganchos son compatibles, no productos de IKEA.",
+        },
+      ],
+    },
+    params: {
+      BOARD: {
+        label: "Tablero",
+        desc: "Fija a la vez la forma y el tamaño del agujero, el paso y el grosor del tablero: ranuras tipo Skådis (tablero de 5 mm o metal de 1.2 mm), tableros perforados estadounidenses de 1/4\" y 3/16\", tablero perforado metálico estadounidense, agujeros de 6 mm en cuadrículas de 25 o 16 mm, agujeros de 5 mm a 25 mm.",
+      },
+      CLEARANCE: {
+        label: "Holgura de ajuste",
+        desc: "Se resta de las clavijas y las pestañas; la mitad ensancha la ranura en la que entra el tablero. Súbela si el gancho no asienta.",
+      },
+      STYLE: { label: "Estilo", desc: "El gancho doble repite el gancho a un paso de agujero a lo largo del tablero." },
+      REACH: { label: "Alcance", desc: "Profundidad interior desde la placa trasera hasta la punta." },
+      TIP: { label: "Altura de la punta", desc: "Cuánto se levanta la punta; 0 para una clavija recta." },
+    },
+    example: "gancho de 50 mm para tablero perforado estadounidense de 1/4\"",
+    step: [
+      "El gancho compatible con Skådis por defecto se exporta como un sólido exacto de 25 caras: 21 planos y 4 cilindros reales (las pestañas redondas que asientan en los extremos de las ranuras). En los tableros de agujeros redondos, la clavija curvada añade conos.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo hago un gancho impreso en 3D para un tablero perforado estándar de 1/4\"?",
+        a: "Abre https://www.forgent3d.com/es/generators/pegboard-hook-generator?BOARD=US%20pegboard%201%2F4&REACH=50: un gancho de 50 mm cuya clavija superior atraviesa el tablero y se curva hacia abajo por detrás, con una clavija inferior corta en el agujero de debajo. Las clavijas están dimensionadas para los agujeros reales de 9/32\" (7.1 mm) del tablero de fibra de 1/4\", y por eso los ganchos hechos para tableros métricos de 25 mm quedan flojos en él.",
+      },
+      {
+        q: "Necesito un gancho doble y ancho para un tablero tipo Skådis.",
+        a: "https://www.forgent3d.com/es/generators/pegboard-hook-generator?STYLE=Double%20hook&REACH=40&TIP=8: dos brazos de gancho separados un paso de ranura (40 mm) sobre una placa trasera común, cada uno colgado de dos ranuras mediante pestañas redondas que caen hasta el fondo de las ranuras. Empújalo recto, déjalo caer y sácalo del mismo modo.",
+      },
+    ],
+    keywords: [
+      "generador de ganchos para tablero perforado",
+      "ganchos tablero perforado 3d",
+      "gancho skadis stl",
+      "ganchos para panel perforado impresos en 3d",
+      "gancho para tablero perforado de 1/4",
+    ],
+  },
+
+  "raspberry-pi-case-generator": {
+    copy: {
+      name: "Generador de carcasas para Raspberry Pi y Arduino",
+      title: "Generador de carcasas Raspberry Pi — Pi 5, Pi 4, Zero y Arduino | Forgent3D",
+      description:
+        "Carcasa imprimible en 3D para Raspberry Pi 5, 4 B, 3 B+, Zero 2 W o Arduino Uno R3 / R4: aberturas según los planos oficiales y tapa atornillada. STL / STEP gratis.",
+      h1: "Generador de carcasas para Raspberry Pi y Arduino: aberturas colocadas según los planos oficiales",
+      intro:
+        "Elige tu placa (Raspberry Pi 5 por defecto) y obtén una carcasa de dos piezas trazada a partir del plano mecánico oficial de la placa o de su archivo STEP. Cada conector tiene una abertura que llega hasta la línea de separación, así que la tapa baja por encima de los puertos; las aberturas USB-C y micro-USB están dimensionadas para la clavija, no solo para el conector de la placa. Los propios tornillos de la placa la sujetan sobre los separadores y cierran la tapa, así que no hay una tapa a presión que se afloje.",
+      whyPoints: [
+        "Seis placas, cada agujero y cada puerto según los planos oficiales: Pi 5, Pi 4 B, Pi 3 B+, Pi Zero 2 W, Arduino Uno R3 y R4",
+        "Aberturas dimensionadas para clavijas USB, con una holgura que puedes subir para clavijas HDMI o DC voluminosas",
+        "Tapa atornillada: los tornillos de montaje de la placa cierran la carcasa",
+        "Ranuras sobre los pines, rejillas sobre el procesador y la tarjeta SD accesible desde fuera",
+      ],
+      faqs: [
+        {
+          q: "¿Qué tornillos necesito?",
+          a: "Placas Raspberry Pi: cuatro tornillos avellanados M2.5 × 12. Arduino Uno R3: cuatro M3 × 16; el Uno R4 lleva tres más un pasador de centrado impreso. Suben a través del fondo, los separadores y la placa hasta columnas en la tapa. Las tapas a presión son la queja más común en las carcasas impresas populares («la tapa queda un poco floja»), por eso esta va atornillada.",
+        },
+        {
+          q: "¿Caben mis cables?",
+          a: "Las aberturas USB-C y micro-USB están dimensionadas para el sobremoldeado de la clavija que indican las especificaciones USB: una queja frecuente con las carcasas de aberturas del tamaño del conector es que los cables micro-HDMI no entran. Las clavijas HDMI, de audio y DC no tienen un tamaño estándar: si la tuya es voluminosa, sube la holgura de los puertos.",
+        },
+        {
+          q: "¿Qué filamento uso para una Raspberry Pi 5?",
+          a: "PETG o mejor: un maker cuenta que una Pi 5 ablandó una base de PLA. Deja activadas las rejillas de la tapa. La carcasa también deja 0.5 mm alrededor de toda la placa, porque las carcasas que se ciñen al PCB han agrietado placas durante el montaje.",
+        },
+        {
+          q: "¿Por qué no está el ESP32 DevKit en la lista?",
+          a: "Las placas DevKitC de Espressif no tienen agujeros de montaje, y las muchas placas clónicas no tienen un plano oficial del que partir. Elige la placa más parecida y usa “AI edit” para cambiarla. Raspberry Pi y Arduino son marcas registradas de sus respectivos propietarios; este generador hace carcasas compatibles y no tiene relación con ellos.",
+        },
+      ],
+    },
+    params: {
+      BOARD: {
+        label: "Placa",
+        desc: "El contorno de la placa, los agujeros de montaje y todos los conectores salen de los planos y archivos STEP oficiales.",
+      },
+      WALL: { label: "Grosor de pared", desc: "2 mm, como las carcasas más impresas." },
+      PORT_CLEARANCE: {
+        label: "Holgura de los puertos",
+        desc: "Se deja alrededor de cada conector. Súbela para clavijas HDMI, de audio o DC voluminosas.",
+      },
+      HEADER_SLOTS: {
+        label: "Ranuras para los pines en la tapa",
+        desc: "Una ranura sobre los pines GPIO / Arduino para cables de puente (jumpers).",
+      },
+      VENTS: { label: "Rejillas en la tapa", desc: "Ranuras de ventilación sobre el procesador." },
+    },
+    example: "carcasa para Pi 4 con paredes más gruesas y aberturas de puertos más holgadas",
+    step: [
+      "La carcasa de la Raspberry Pi 5 se exporta como dos sólidos exactos, base y tapa, con 196 caras: 160 planos, 32 cilindros reales (separadores, columnas de la tapa, agujeros de tornillo y guías, esquinas redondeadas) y 4 conos (los avellanados bajo el fondo).",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo consigo una carcasa imprimible en 3D para una Raspberry Pi 4?",
+        a: "Abre https://www.forgent3d.com/es/generators/raspberry-pi-case-generator?BOARD=Raspberry%20Pi%204%20Model%20B: una carcasa de dos piezas trazada a partir del plano mecánico oficial. Cada puerto tiene su abertura, los pines GPIO una ranura en la tapa, y cuatro tornillos avellanados M2.5 × 12 suben a través del fondo y de la placa hasta columnas en la tapa, de modo que los mismos tornillos sujetan la placa y cierran la carcasa.",
+      },
+      {
+        q: "¿Puede hacer una carcasa para Arduino Uno sin las rejillas?",
+        a: "Sí: https://www.forgent3d.com/es/generators/raspberry-pi-case-generator?BOARD=Arduino%20Uno%20R3&VENTS=false da aberturas para el USB-B y el conector DC dimensionadas para las clavijas, ranuras para los pines en la tapa, y se cierra con cuatro tornillos M3 × 16. Para el Uno R4 Minima o WiFi elige esa placa: uno de sus agujeros queda demasiado cerca del conector DC para una columna, así que lleva un pasador de centrado y tres tornillos.",
+      },
+    ],
+    keywords: [
+      "generador de carcasas raspberry pi",
+      "carcasa raspberry pi 5 stl",
+      "caja raspberry pi 4 impresa en 3d",
+      "carcasa arduino uno stl",
+      "carcasa raspberry pi impresión 3d",
+    ],
+  },
+
+  "wall-hook-generator": {
+    copy: {
+      name: "Generador de ganchos de pared",
+      title: "Generador de ganchos de pared — Tornillo, adhesivo o puerta | Forgent3D",
+      description:
+        "Ganchos de pared imprimibles en 3D: con tornillos avellanados, para tiras adhesivas Command o para puerta. Simples, dobles o hasta cinco en fila. STL / STEP gratis.",
+      h1: "Generador de ganchos de pared: con tornillos, adhesivos o para colgar de la puerta",
+      intro:
+        "Elige cómo se monta el gancho (tornillos avellanados, una tira 3M Command o sobre una puerta de tu grosor) y luego fija su profundidad, su punta y su ancho. Los agujeros de tornillo quedan por encima del gancho para que llegue el destornillador; la placa adhesiva tiene las medidas de las propias tiras de 3M, con la lengüeta de retirada libre; la pletina de puerta se ajusta a la puerta con 0.8 mm de margen. Un gancho, dos superpuestos o una fila de hasta cinco.",
+      whyPoints: [
+        "Tres formas de montaje: tornillos avellanados, tiras Command medianas o grandes, o sobre una puerta de 19–45 mm",
+        "Agujeros de tornillo por encima del gancho, al alcance del destornillador, con plástico de sobra bajo el avellanado para que no se parta",
+        "Simple, doble superpuesto o hasta cinco en fila para llaves y abrigos",
+        "Se exporta para imprimirlo de lado, con las capas siguiendo el gancho",
+      ],
+      faqs: [
+        {
+          q: "¿En qué posición lo imprimo?",
+          a: "De lado, para que las capas rodeen la J. En las pruebas de CNC Kitchen, los mismos ganchos impresos de pie se rompieron con la mitad de carga o menos, abriéndose entre capas. Para cargas pesadas usa PETG o ASA y más paredes; hay quien cuenta que los ganchos de puerta impresos en PLA se parten por la esquina superior.",
+        },
+        {
+          q: "¿Cuánto aguanta la versión adhesiva?",
+          a: "Lo que aguante la tira: 3M indica 5 lb (unos 2.3 kg) para las tiras Command grandes y 3 lb (unos 1.4 kg) para las medianas, y no son para estancias húmedas. Presiona la placa con firmeza, espera una hora antes de colgar nada y retira la tira estirándola recta hacia abajo a lo largo de la pared, nunca tirando hacia ti. Los makers cuentan que la cinta se suelta antes que el plástico.",
+        },
+        {
+          q: "El tornillo ha partido el gancho. ¿Y ahora?",
+          a: "Que los tornillos demasiado apretados o demasiado gruesos partan la placa es la queja más común sobre los ganchos de pared impresos. Aquí los agujeros son de paso según ISO 273, con avellanados para cabezas estándar de tornillo para madera y 3 mm de plástico por debajo; deja de apretar cuando la cabeza quede a ras. Command es una marca registrada de 3M; la versión adhesiva está hecha para encajar con sus tiras.",
+        },
+      ],
+    },
+    params: {
+      MOUNT: {
+        label: "Montaje",
+        desc: "Tornillos avellanados de 3.5, 4 o 5 mm; una tira Command mediana (16 × 46) o grande (19 × 69); o sobre una puerta de armario de 19 mm o una puerta de 35, 40 o 45 mm.",
+      },
+      STYLE: { label: "Estilo", desc: "Una J, o dos superpuestas en una misma placa." },
+      HOOKS: { label: "Ganchos en fila", desc: "Uno al lado de otro en una placa: un colgador de llaves o un perchero." },
+      DEPTH: { label: "Profundidad", desc: "Profundidad interior desde la placa hasta la punta." },
+      TIP: { label: "Altura de la punta", desc: "Cuánto se levanta la punta; 0 para una espiga recta." },
+      WIDTH: { label: "Ancho", desc: "Se ensancha solo cuando la cabeza de un tornillo o una tira necesita más." },
+      THICKNESS: { label: "Grosor", desc: "De la placa y de la J; más grueso para bolsos pesados y herramientas." },
+    },
+    example: "colgador de llaves: cuatro ganchos pequeños en fila",
+    step: [
+      "El gancho atornillado por defecto se exporta como un sólido exacto de 16 caras: 8 planos, 6 cilindros reales (los agujeros de tornillo, y el interior redondeado y la punta del gancho) y 2 conos (los avellanados).",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Puedo imprimir en 3D un gancho para toallas que se pegue sin taladrar?",
+        a: "Sí: https://www.forgent3d.com/es/generators/wall-hook-generator?MOUNT=Adhesive%20strip%2019&STYLE=Double&DEPTH=25 da dos ganchos superpuestos sobre una placa trasera dimensionada para una tira 3M Command grande (19 × 69 mm), con la lengüeta de retirada libre por debajo. 3M indica 5 lb (unos 2.3 kg) para la tira grande y dice que no es para estancias húmedas, así que cuelga la toalla fuera de la ducha.",
+      },
+      {
+        q: "Necesito un gancho que cuelgue sobre una puerta de 40 mm.",
+        a: "https://www.forgent3d.com/es/generators/wall-hook-generator?MOUNT=Over%20a%2040%20mm%20door&STYLE=Double da una pletina de 3 mm que pasa por encima de la puerta con 0.8 mm de holgura, y dos ganchos que cuelgan por el lado de dentro. Comprueba primero el hueco sobre tu puerta: una pletina demasiado gruesa impide cerrar la puerta, la queja más común sobre los ganchos de puerta impresos.",
+      },
+    ],
+    keywords: [
+      "generador de ganchos de pared",
+      "gancho de pared impreso en 3d",
+      "gancho adhesivo command stl",
+      "gancho para puerta 3d",
+      "colgador de pared stl",
+    ],
+  },
+
+  "phone-stand-generator": {
+    copy: {
+      name: "Generador de soportes para móvil",
+      title: "Generador de soportes para móvil — De escritorio, con carga | Forgent3D",
+      description:
+        "Soporte de móvil imprimible en 3D a la medida de tu móvil con funda: ángulo de 45–75°, altura para cargarlo y paso para el cable; también tableta. STL / STEP gratis.",
+      h1: "Generador de soportes para móvil: un soporte de escritorio para tu móvil con su funda",
+      intro:
+        "Introduce el grosor de tu móvil medido con la funda (11 mm por defecto), elige el ángulo de visión y la altura del apoyo, y obtén un soporte en A de una sola pieza como los impresos más descargados. El respaldo es lo bastante largo para sostener el móvil más allá de su mitad, un hueco en el labio delantero deja libres el puerto de carga y la parte inferior de la pantalla, y el cable sale por una abertura trasera por la que pasa el conector.",
+      whyPoints: [
+        "El apoyo se ajusta a tu móvil con su funda, no al móvil desnudo",
+        "Altura del apoyo para cargarlo en vertical, con una abertura para el cable por la que pasa el conector",
+        "Respaldo dimensionado para el dispositivo (móvil en vertical u horizontal, o tableta), para que no vuelque hacia atrás",
+        "Huecos para cuatro patas de goma de 8 mm, para que no se mueva de la mesa",
+      ],
+      faqs: [
+        {
+          q: "Mi móvil con funda no cabe en el soporte que imprimí.",
+          a: "Es la queja más común sobre los soportes para móvil impresos, y las versiones «para móviles más gruesos» de los soportes populares se descargan más que los originales. Mide tu móvil con la funda e introduce esa medida; el apoyo añade 1 mm de holgura.",
+        },
+        {
+          q: "¿Cómo lo cargo mientras está en el soporte?",
+          a: "Deja activado el hueco para el cable y sube la altura del apoyo hasta que el conector quepa bajo el móvil; los conectores acodados necesitan menos. La abertura trasera es mayor que la zona de exclusión del conector USB-C que especifica Apple (12.45 × 6.60 mm), así que el conector pasa por ella, y el hueco del labio deja libres el puerto y la parte inferior de la pantalla para deslizar el dedo.",
+        },
+        {
+          q: "¿Cómo lo imprimo?",
+          a: "Túmbalo de lado en el laminador, con el perfil sobre la cama: sin soportes, y con las capas siguiendo los pliegues. Pega cuatro patas de silicona de 8 mm en los huecos de abajo si resbala en tu mesa.",
+        },
+      ],
+    },
+    params: {
+      DEVICE: {
+        label: "Para",
+        desc: "Dimensiona el respaldo: 163.3 mm para un móvil grande en vertical, 77.9 en horizontal, 179.5 para una tableta.",
+      },
+      THICKNESS: {
+        label: "Grosor del móvil con funda",
+        desc: "Mide con la funda puesta: un móvil con funda MagSafe ronda los 11, con una funda antigolpes llega a 17.",
+      },
+      ANGLE: { label: "Ángulo de visión", desc: "Cuánto se inclina el móvil hacia atrás respecto a la mesa." },
+      REST_HEIGHT: {
+        label: "Altura del apoyo",
+        desc: "Súbela para que quepa el conector de carga bajo un móvil en vertical.",
+      },
+      WIDTH: { label: "Ancho del soporte", desc: "Más ancho para tabletas." },
+      CABLE: {
+        label: "Hueco para el cable de carga",
+        desc: "Una abertura detrás para el cable, lo bastante grande para que pase el conector.",
+      },
+    },
+    example: "para un móvil con funda gruesa, un poco más vertical",
+    step: [
+      "Se exporta como un sólido exacto de 33 caras: 27 planos y 6 cilindros reales (los dos pliegues redondeados de arriba y los cuatro huecos para patas de goma).",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo imprimo en 3D un soporte para móvil en el que pueda cargarlo mientras está en vertical?",
+        a: "Abre https://www.forgent3d.com/es/generators/phone-stand-generator?THICKNESS=12&REST_HEIGHT=35&WIDTH=80: el apoyo queda 35 mm por encima de la mesa para que quepa un conector USB-C bajo un móvil en vertical, un hueco en el labio delantero deja libre el puerto, y el cable sale por una abertura trasera por la que pasa el conector entero. Pon en THICKNESS el grosor de tu móvil medido con la funda.",
+      },
+      {
+        q: "¿El mismo soporte puede sostener una tableta con funda gruesa?",
+        a: "Sí: https://www.forgent3d.com/es/generators/phone-stand-generator?DEVICE=Tablet%2C%20landscape&THICKNESS=16&WIDTH=100 da un respaldo dimensionado para una tableta en horizontal (179.5 mm, el ancho de un iPad de 11 pulgadas) y un apoyo que admite 16 mm con la funda. Los soportes con esta forma se venden igual para tabletas, con un apoyo más ancho.",
+      },
+    ],
+    keywords: [
+      "generador de soportes para móvil",
+      "soporte para móvil impreso en 3d",
+      "soporte móvil escritorio stl",
+      "soporte para celular 3d",
+      "soporte para móvil y tablet con carga",
     ],
   },
 };

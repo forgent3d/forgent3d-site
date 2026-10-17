@@ -1147,7 +1147,7 @@ export const GENERATORS = [
     slug: "fan-grill-generator",
     modelDir: "fan-grill",
     icon: "◎",
-    family: "hardware",
+    family: "electronics",
     // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
     updated: "2026-10-16",
     // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
@@ -1767,7 +1767,7 @@ export const GENERATORS = [
     slug: "18650-battery-holder-generator",
     modelDir: "battery-holder",
     icon: "▤",
-    family: "hardware",
+    family: "electronics",
     // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
     updated: "2026-10-17",
     // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
@@ -2131,6 +2131,411 @@ export const GENERATORS = [
       },
     },
   },
+  {
+    slug: "shelf-bracket-generator",
+    modelDir: "shelf-bracket",
+    icon: "◺",
+    family: "home",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { SHELF_D: "250", SCREW: "5 mm", WIDTH: "30", BAR_T: "16" }, label: { en: "Heavy bracket for a 250 mm shelf, 5 mm screws", zh: "250 mm 深层板用的加厚支架，5 mm 螺丝" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "Exports as one exact solid of 32 faces: 20 planes, 8 true cylinders (the four screw holes, the screwdriver access hole through the brace and the window's rounded corners) and 4 cones (the countersinks).",
+      ],
+      zh: [
+        "导出为一个精确实体，32 个面：20 个平面、8 个真圆柱面（四个螺丝孔、斜撑上的起子通孔、镂空的圆角）、4 个圆锥面（沉头）。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I 3D print a bracket for a 20 cm deep shelf?", a: "Open https://www.forgent3d.com/en/generators/shelf-bracket-generator?SHELF_D=200 — a wall bracket with a diagonal brace, 190 mm arm and 142.5 mm wall leg, two countersunk 4 mm screws into the wall and two up into the board, each with a straight 12 mm path for the screwdriver. Print it lying on its side as exported." },
+        { q: "My shelf is an 18 mm board, 195 mm deep, and I don't want screws in it.", a: "https://www.forgent3d.com/en/generators/shelf-bracket-generator?FIXING=Front%20lip&SHELF_D=195 — the arm ends in a 10 mm lip and the 195 mm board drops in between the wall and the lip with 1 mm to spare; only the wall screws remain." },
+      ],
+      zh: [
+        { q: "20 cm 深的层板，怎么 3D 打印一个三角支架？", a: "打开 https://www.forgent3d.com/zh/generators/shelf-bracket-generator?SHELF_D=200 就是：带斜撑的墙上支架，托臂 190 mm、贴墙腿 142.5 mm，两颗 4 mm 沉头螺丝进墙、两颗从下往上拧进层板，每颗螺丝都留了 12 mm 的直通起子路径。按导出的姿态侧放打印。" },
+        { q: "层板是 18 mm 厚、195 mm 深的板子，不想在板上打螺丝。", a: "https://www.forgent3d.com/zh/generators/shelf-bracket-generator?FIXING=Front%20lip&SHELF_D=195 ：托臂末端有 10 mm 高的挡边，195 mm 的板子直接放进墙和挡边之间，留 1 mm 余量；只剩进墙的螺丝。" },
+      ],
+    },
+    // Evidence: generator-models/shelf-bracket/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["shelf bracket generator", "3d printed shelf bracket", "shelf support bracket stl", "wall shelf bracket with brace"],
+      zh: ["层板三角支架生成器", "墙上三角支架 3d打印", "层板托 STL", "搁板支架"],
+    },
+    params: [
+      { key: "SHELF_D", default: "200", range: "100 – 250", unit: "mm", label: { en: "Shelf depth", zh: "层板深度" }, desc: { en: "The board, front to back. 8 and 10 inch brackets sell the most; 250 still fits a 256 mm bed.", zh: "板子前后的深度。市售以 8、10 英寸（约 20、25 cm）最多；250 还能放进 256 mm 的打印平台。" } },
+      { key: "FIXING", default: "Screws from below", range: "Screws from below / Front lip", unit: "", label: { en: "Shelf fixing", zh: "层板固定方式" }, desc: { en: "Two screws up into the board, or a lip the board drops in behind (made for exactly this depth; 7 mm longer than it).", zh: "两颗螺丝从下往上拧进板子，或者用前端挡边把板子卡在里面（按这个深度做，支架比板深长 7 mm）。" } },
+      { key: "SCREW", default: "4 mm", range: "4 mm / 5 mm", unit: "", label: { en: "Wood screw", zh: "木螺丝" }, desc: { en: "Countersunk wood screws, US #8 or #10.", zh: "沉头木螺丝，对应美标 #8 / #10。" } },
+      { key: "WIDTH", default: "25", range: "18 – 40", unit: "mm", label: { en: "Bracket width", zh: "支架宽度" }, desc: { en: "Along the wall; 25 like most printed brackets.", zh: "沿墙方向的宽度；25 和多数打印支架一样。" } },
+      { key: "BAR_T", default: "12", range: "8 – 18", unit: "mm", label: { en: "Bar thickness", zh: "杆件厚度" }, desc: { en: "The leg, arm and brace. Thicker for heavier loads; small brackets with thick bars become a solid gusset.", zh: "贴墙腿、托臂和斜撑的厚度。承重大就加厚；小支架配粗杆件时自动变成实心三角。" } },
+    ],
+    copy: {
+      en: {
+        name: "Shelf Bracket Generator",
+        title: "Shelf Bracket Generator — Wall Shelf Brackets with a Brace (STL / STEP) | Forgent3D",
+        description: "A 3D printable wall shelf bracket sized to your board: 100–250 mm shelves, a diagonal brace, countersunk 4 or 5 mm screws you can actually reach, or a front lip. Free STL / STEP.",
+        h1: "Shelf bracket generator: wall brackets sized to your shelf",
+        intro: "Enter your shelf board's depth — 200 mm by default — and get a wall bracket with a diagonal brace. The arm stops 10 mm behind the board's front like commercial brackets, the wall leg is three quarters of the arm, and two countersunk screws go into the wall and two up into the board, each with a straight path for the screwdriver. Or pick a front lip: a board of exactly that depth drops in behind it, with no screws in the shelf.",
+        whyPoints: [
+          "Arm and wall leg follow the shelf depth, in the proportions of commercial brackets (Knape & Vogt, Everbilt)",
+          "Every screw is reachable: a straight 12 mm screwdriver path, the upper wall screw through a hole in the brace",
+          "Screws up into the board, or a front lip the board drops in behind",
+          "Exported lying on its side, the way it should be printed",
+        ],
+        faqs: [
+          { q: "Which way should I print it?", a: "On its side, exactly as exported, so every layer holds the whole bracket. Printed standing, the layers run across a leg: one maker's three standing brackets broke within five minutes under 2.5 kg, and in CNC Kitchen's tests hooks printed standing held only about half the load of the same hooks printed lying down." },
+          { q: "Which filament and screws?", a: "Countersunk wood screws, 4 mm (#8) or 5 mm (#10). Brackets cracking while the screws are tightened is the most common complaint on popular printed brackets; one user notes that PETG resists splitting. Prefer PETG, and stop tightening when the head sits flush." },
+          { q: "How much weight will it hold?", a: "We don't give a number: none of the printed shelf brackets we found has a defined load test, and the result depends on filament, walls, infill and screws. Raise the bar thickness for heavy shelves, and load-test your print before trusting it." },
+        ],
+      },
+      zh: {
+        name: "层板三角支架生成器",
+        title: "层板三角支架生成器 — 墙上搁板托架，按板深在线生成，导出 STL / STEP | Forgent3D",
+        description: "在线生成可 3D 打印的墙上层板三角支架：100–250 mm 深的层板，带斜撑，4 或 5 mm 沉头螺丝、每颗都拧得到，或用前端挡边免打螺丝。免费导出 STL / STEP。",
+        h1: "层板三角支架生成器：按层板深度做的墙上支架",
+        intro: "输入层板的深度——默认 200 mm——得到一个带斜撑的墙上支架：托臂和市售支架一样比板子前沿短 10 mm，贴墙腿是托臂的四分之三，两颗沉头螺丝进墙、两颗从下往上拧进板子，每颗都留了直通的起子路径。也可以选前端挡边：同样深度的板子直接放进去，板上不用打螺丝。",
+        whyPoints: [
+          "托臂和贴墙腿按层板深度算，比例和市售支架（Knape & Vogt、Everbilt）一致",
+          "每颗螺丝都拧得到：留 12 mm 的直通起子路径，上面那颗进墙螺丝从斜撑上的孔里拧",
+          "螺丝从下往上固定层板，或用前端挡边卡住",
+          "导出时就是侧放的姿态，直接按这个方向打印",
+        ],
+        faqs: [
+          { q: "应该怎么摆着打印？", a: "按导出的姿态侧放，让每一层都是一整个支架。竖着打的话层纹横穿支架腿：有人竖着打的三个支架挂 2.5 kg 不到五分钟就全断了；CNC Kitchen 的测试里，竖着打的挂钩只扛得住侧放打印的一半左右。" },
+          { q: "用什么材料、什么螺丝？", a: "沉头木螺丝，4 mm（美标 #8）或 5 mm（#10）。热门打印支架下最常见的抱怨是拧螺丝时支架裂开，有用户说 PETG 不容易裂。优先用 PETG，螺丝头和表面齐平就别再拧。" },
+          { q: "能承重多少？", a: "我们不写承重数字：找到的打印层板支架都没有正规的承重测试，结果取决于材料、墙数、填充和螺丝。层板重就加厚杆件，打印出来先试挂再放心用。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "pegboard-hook-generator",
+    modelDir: "pegboard-hook",
+    icon: "⌐",
+    family: "home",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { BOARD: "US pegboard 1/4 in holes (1/4 in board)", REACH: "50" }, label: { en: "50 mm hook for US 1/4 in pegboard", zh: "美标 1/4 英寸洞洞板用的 50 mm 挂钩" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "The default Skådis-compatible hook exports as one exact solid of 25 faces: 21 planes and 4 true cylinders (the round tabs that sit in the slot ends). On round-hole boards the curled peg adds cones.",
+      ],
+      zh: [
+        "默认的兼容 Skådis 挂钩导出为一个精确实体，25 个面：21 个平面、4 个真圆柱面（卡在长孔两端的圆形挂脚）。圆孔洞洞板的弯插脚会多出圆锥面。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a 3D printed hook for standard 1/4 inch pegboard?", a: "Open https://www.forgent3d.com/en/generators/pegboard-hook-generator?BOARD=US%20pegboard%201%2F4&REACH=50 — a 50 mm hook whose upper peg passes through the board and curls down behind it, with a short lower peg in the hole below. The pegs are sized for the real 9/32 in (7.1 mm) holes of 1/4 in hardboard, which is why hooks made for 25 mm metric boards feel loose there." },
+        { q: "I need a wide double hook for a Skådis-style board.", a: "https://www.forgent3d.com/en/generators/pegboard-hook-generator?STYLE=Double%20hook&REACH=40&TIP=8 — two hook arms one slot pitch (40 mm) apart on a shared back plate, each hanging from two slots by round tabs that drop into the slot bottoms. Push it straight in, let it drop, lift it off the same way." },
+      ],
+      zh: [
+        { q: "孔距 25 mm、6 mm 圆孔的金属洞洞板，怎么做双钩？", a: "打开 https://www.forgent3d.com/zh/generators/pegboard-hook-generator?BOARD=6%20mm%20holes%2025&STYLE=Double%20hook 就是：两只钩并排、间隔一个孔距，上插脚穿过板子后往下弯，下面一个短插脚插在下一排孔里。先量一下自己的板：国内圆孔板的孔距有 16、25、26、30、32 mm 好几种。" },
+        { q: "宜家 Skådis 那种长孔洞洞板，挂钩怎么打印？", a: "默认就是：https://www.forgent3d.com/zh/generators/pegboard-hook-generator?REACH=30&TIP=10 ，兼容 5 mm 厚的 Skådis 式长孔板，两个圆形挂脚穿过上下两个长孔，往下一落就卡在长孔底部，取下时原路抬起。挂钩侧放打印，层纹顺着钩臂走。" },
+      ],
+    },
+    // Evidence: generator-models/pegboard-hook/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["pegboard hook generator", "pegboard hooks 3d print", "skadis compatible hook stl", "1/4 inch pegboard hook"],
+      zh: ["洞洞板挂钩生成器", "洞洞板挂钩 3d打印", "宜家洞洞板挂钩", "圆孔洞洞板挂钩 孔距25"],
+    },
+    params: [
+      { key: "BOARD", default: "Skadis-compatible slots (5 mm board)", range: "8 boards: slotted, US round-hole, metric round-hole", unit: "", label: { en: "Board", zh: "洞洞板" }, desc: { en: "Sets hole shape, hole size, pitch and board thickness together: Skådis-style slots (5 mm board or 1.2 mm metal), US 1/4 in and 3/16 in pegboard, US metal pegboard, 6 mm holes on 25 or 16 mm grids, 5 mm holes on 25 mm.", zh: "一次定好孔形、孔径、孔距和板厚：Skådis 式长孔（5 mm 板或 1.2 mm 金属板）、美标 1/4 和 3/16 英寸洞洞板、美标金属洞洞板、6 mm 圆孔孔距 25 或 16 mm、5 mm 圆孔孔距 25 mm。" } },
+      { key: "CLEARANCE", default: "0.4", range: "0 – 1", unit: "mm", label: { en: "Fit clearance", zh: "配合余量" }, desc: { en: "Taken off the pegs and tabs; half of it widens the gap the board sits in. Raise it if the hook won't seat.", zh: "从插脚和挂脚上减掉；一半加到卡板的缝上。挂不进去就调大。" } },
+      { key: "STYLE", default: "Single hook", range: "Single hook / Double hook", unit: "", label: { en: "Style", zh: "款式" }, desc: { en: "The double hook repeats the hook one hole pitch along the board.", zh: "双钩沿板子隔一个孔距再放一只钩。" } },
+      { key: "REACH", default: "30", range: "10 – 100", unit: "mm", label: { en: "Reach", zh: "钩长" }, desc: { en: "Inside depth from the back plate to the tip.", zh: "从背板到钩尖的内侧深度。" } },
+      { key: "TIP", default: "10", range: "0 – 25", unit: "mm", label: { en: "Tip height", zh: "钩尖高度" }, desc: { en: "How far the tip turns up; 0 for a straight peg.", zh: "钩尖往上翘多高；0 就是直杆。" } },
+    ],
+    copy: {
+      en: {
+        name: "Pegboard Hook Generator",
+        title: "Pegboard Hook Generator — Hooks for Skådis-Style & 1/4 in Pegboards (STL / STEP) | Forgent3D",
+        description: "3D printable pegboard hooks sized to your board: Skådis-compatible slots, US 1/4 in and 3/16 in pegboard, metal pegboard, 6 mm holes on 25 or 16 mm grids. Set reach and tip, single or double. Free STL / STEP.",
+        h1: "Pegboard hook generator: hooks that fit your board",
+        intro: "Pick your board — Skådis-compatible slots by default, or US or metric round-hole pegboard — and set how far the hook reaches and how high its tip turns up. The hook hangs from two openings one above the other, so it doesn't fall off when you take a tool down; nothing snaps or twists, it goes on and lifts off the same way. Hole size, pitch and board thickness come from board makers' specs and the most-printed hooks for each board.",
+        whyPoints: [
+          "Eight board types, from Skådis-style slots to US 1/4 in hardboard and 1.2 mm metal boards",
+          "Pegs sized to the real hole, e.g. 9/32 in on 1/4 in pegboard, with a fit clearance you can tune",
+          "Two anchors one above the other, so the hook stays put when you lift a tool off",
+          "Single or double hook, reach 10–100 mm",
+        ],
+        faqs: [
+          { q: "The hook is too tight, or it wobbles. What do I change?", a: "Boards vary: Skådis-style boards measure 4.5–5.5 mm thick, and metal boards are 1.2–1.7 mm. Raise the fit clearance if the hook won't seat; one popular designer widened the board gap to 5.2 mm so it slid onto 5 mm boards. If it wobbles on a thin metal board, pick the metal board in the list: hooks made for 5 mm boards are loose on 1.2 mm metal." },
+          { q: "Why are hooks for metric pegboards loose in my US pegboard?", a: "US \"1/4 inch\" pegboard actually has 9/32 in (7.1 mm) holes, while metric boards often have 6 mm holes. Users of a popular metric hook set report scaling it up 6.5% for US boards. Pick the US board here and the pegs are sized for its holes." },
+          { q: "How should I print it, and in what?", a: "Lay it on its side so the layers run along the arm — makers report flat-printed hooks are far stronger than upright ones. Several prefer PETG over PLA; PETG also prints slightly looser, so you may need less clearance. Skådis is an IKEA trademark; these hooks are compatible, not IKEA products." },
+        ],
+      },
+      zh: {
+        name: "洞洞板挂钩生成器",
+        title: "洞洞板挂钩生成器 — 宜家 Skådis 式长孔、圆孔洞洞板挂钩在线定制，导出 STL / STEP | Forgent3D",
+        description: "在线生成可 3D 打印的洞洞板挂钩：兼容 Skådis 长孔板、6 mm 圆孔孔距 25 / 16 mm 金属板、美标 1/4 英寸洞洞板等 8 种板子，钩长、钩尖可调，单钩双钩。免费导出 STL / STEP。",
+        h1: "洞洞板挂钩生成器：按你的板子做的挂钩",
+        intro: "选你的洞洞板——默认是兼容 Skådis 的长孔板，也可以选国内常见的 6 mm 圆孔板或美标洞洞板——再定钩长和钩尖翘多高。挂钩挂在上下两个孔里，取工具时不会跟着掉下来；不靠卡扣、不用拧，怎么挂上去就怎么取下来。孔径、孔距和板厚取自板材规格和每种板上打印最多的挂钩。",
+        whyPoints: [
+          "8 种板子：Skådis 式长孔板、6 mm 圆孔孔距 25 / 16 mm 金属板、美标 1/4 英寸板等",
+          "插脚按真实孔径做，配合余量可调",
+          "上下两个孔同时受力，取工具时挂钩不跟着掉",
+          "单钩或双钩，钩长 10–100 mm",
+        ],
+        faqs: [
+          { q: "挂钩太紧插不进去，或者晃，怎么调？", a: "板子厚度不一：Skådis 式板实测 4.5–5.5 mm，金属板 1.2–1.7 mm。插不进去就把配合余量调大——有热门作者把卡板的缝加到 5.2 mm，才完美卡进 5 mm 的板。挂在薄金属板上晃，就在列表里选金属板：给 5 mm 板做的挂钩，挂在 1 mm 左右的金属板上会松垮。" },
+          { q: "我的圆孔板孔距不是 25 mm 怎么办？", a: "先量一下：国内圆孔洞洞板的孔距有 16、25、26、30、32 mm 好几种，评论区里常有人发现自己的板是 26 mm。列表里有 16 和 25 mm 两种 6 mm 孔的板；别的孔距可以点「AI 修改」，让 AI 把孔距改成你的。" },
+          { q: "怎么打印、用什么材料？", a: "侧放打印，让层纹顺着钩臂走——有作者说平放打印的挂钩比竖着打的结实得多。不少人推荐 PETG 而不是 PLA；PETG 打出来略松一点，余量可以调小。Skådis 是宜家的商标，这里的挂钩只是兼容，不是宜家产品。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "raspberry-pi-case-generator",
+    modelDir: "dev-board-enclosure",
+    icon: "▭",
+    family: "electronics",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { BOARD: "Raspberry Pi 4 Model B", WALL: "2.4", PORT_CLEARANCE: "0.8" }, label: { en: "Pi 4 case with thicker walls and roomier port openings", zh: "树莓派 4B 外壳：加厚外壁、接口开孔放宽" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "The Raspberry Pi 5 case exports as two exact solids, base and lid, with 196 faces: 160 planes, 32 true cylinders (standoffs, lid pillars, screw holes and pilots, rounded corners) and 4 cones (the countersinks under the floor).",
+      ],
+      zh: [
+        "树莓派 5 外壳导出为两个精确实体（底壳和上盖），共 196 个面：160 个平面、32 个真圆柱面（支撑柱、上盖压柱、螺丝孔和底孔、圆角）、4 个圆锥面（底板下的沉头）。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I get a 3D printable case for a Raspberry Pi 4?", a: "Open https://www.forgent3d.com/en/generators/raspberry-pi-case-generator?BOARD=Raspberry%20Pi%204%20Model%20B — a two-part case laid out from the official mechanical drawing: every port gets an opening, the GPIO header a slot in the lid, and four M2.5 × 12 countersunk screws go up through the floor and the board into pillars in the lid, so the same screws hold the board and close the case." },
+        { q: "Can it make an Arduino Uno case without the vents?", a: "Yes: https://www.forgent3d.com/en/generators/raspberry-pi-case-generator?BOARD=Arduino%20Uno%20R3&VENTS=false — USB-B and DC jack openings sized for the plugs, header slots in the lid, closed with four M3 × 16 screws. For the Uno R4 Minima or WiFi pick that board instead; one of its holes sits too close to the DC jack for a pillar, so it gets a locating pin and three screws." },
+      ],
+      zh: [
+        { q: "树莓派 4B 的外壳怎么 3D 打印？", a: "打开 https://www.forgent3d.com/zh/generators/raspberry-pi-case-generator?BOARD=Raspberry%20Pi%204%20Model%20B 就是：按官方机械图做的上下两件式外壳，每个接口都开好孔，GPIO 排针在上盖开槽，四颗 M2.5 × 12 沉头螺丝从底下穿过底板和电路板拧进上盖的压柱——同一组螺丝既固定板子又合上外壳。" },
+        { q: "Arduino Uno 的外壳，不要散热孔可以吗？", a: "可以：https://www.forgent3d.com/zh/generators/raspberry-pi-case-generator?BOARD=Arduino%20Uno%20R3&VENTS=false ，USB-B 和 DC 插座按插头大小开孔，上盖留排针槽，四颗 M3 × 16 螺丝合上。Uno R4 Minima / WiFi 请选对应的板子：它有一个孔离 DC 插座太近放不下压柱，改成定位销，用三颗螺丝。" },
+      ],
+    },
+    // Evidence: generator-models/dev-board-enclosure/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["raspberry pi case generator", "raspberry pi 5 case stl", "raspberry pi 4 case 3d print", "arduino uno case stl"],
+      zh: ["树莓派外壳生成器", "树莓派5外壳 3d打印", "树莓派4b外壳 STL", "arduino外壳", "开发板外壳"],
+    },
+    params: [
+      { key: "BOARD", default: "Raspberry Pi 5", range: "Pi 5 / Pi 4 B / Pi 3 B+ / Pi Zero 2 W / Uno R3 / Uno R4", unit: "", label: { en: "Board", zh: "开发板" }, desc: { en: "Board outline, mounting holes and every connector come from the official drawings and STEP files.", zh: "板框、安装孔和每个接口都取自官方机械图和 STEP 文件。" } },
+      { key: "WALL", default: "2", range: "1.2 – 3", unit: "mm", label: { en: "Wall thickness", zh: "壁厚" }, desc: { en: "2 mm like the most-printed cases.", zh: "2 mm，和打印最多的几款外壳一样。" } },
+      { key: "PORT_CLEARANCE", default: "0.5", range: "0.2 – 1.5", unit: "mm", label: { en: "Port clearance", zh: "接口开孔余量" }, desc: { en: "Kept all round each connector. Raise it for bulky HDMI, audio or DC plugs.", zh: "每个接口四周留的余量。HDMI、音频、DC 插头粗，就调大。" } },
+      { key: "HEADER_SLOTS", default: "on", range: "on / off", unit: "", label: { en: "Header slots in the lid", zh: "上盖排针开槽" }, desc: { en: "A slot over the GPIO / Arduino headers for jumper wires.", zh: "在 GPIO / Arduino 排针上方开槽，方便接杜邦线。" } },
+      { key: "VENTS", default: "on", range: "on / off", unit: "", label: { en: "Lid vents", zh: "上盖散热孔" }, desc: { en: "Slot vents over the processor.", zh: "处理器上方的条形散热孔。" } },
+    ],
+    copy: {
+      en: {
+        name: "Raspberry Pi & Arduino Case Generator",
+        title: "Raspberry Pi Case Generator — Pi 5, Pi 4, Zero & Arduino Uno Cases (STL / STEP) | Forgent3D",
+        description: "A 3D printable case for your board: Raspberry Pi 5, 4 B, 3 B+, Zero 2 W or Arduino Uno R3 / R4, with every port opening placed from the official drawings and a screwed lid. Free STL / STEP.",
+        h1: "Raspberry Pi and Arduino case generator: openings placed from the official drawings",
+        intro: "Pick your board — Raspberry Pi 5 by default — and get a two-part case laid out from the board's official mechanical drawing or STEP file. Every connector gets an opening open to the split line, so the lid drops over the ports; USB-C and micro-USB openings are sized for the plug, not just the socket. The board's own screws hold it on standoffs and close the lid, so there's no friction lid to work loose.",
+        whyPoints: [
+          "Six boards, every hole and port from the official drawings: Pi 5, Pi 4 B, Pi 3 B+, Pi Zero 2 W, Arduino Uno R3 and R4",
+          "Openings sized for USB plugs, with a clearance you can raise for bulky HDMI or DC plugs",
+          "Screwed lid: the board's mounting screws close the case",
+          "Slots over the headers, vents over the processor, the SD card reachable from outside",
+        ],
+        faqs: [
+          { q: "Which screws do I need?", a: "Raspberry Pi boards: four M2.5 × 12 countersunk screws. Arduino Uno R3: four M3 × 16; the Uno R4 takes three plus a printed locating pin. They go up through the floor, the standoffs and the board into pillars in the lid. Friction-fit lids are the most common complaint on popular printed cases (\"the lid is a bit loose\"), so this one is screwed." },
+          { q: "Will my cables fit?", a: "USB-C and micro-USB openings are sized for the plug overmold given in the USB specifications — a frequent complaint about cases with socket-sized openings is that micro-HDMI cables don't fit. HDMI, audio and DC plugs have no standard size: if yours is bulky, raise the port clearance." },
+          { q: "Which filament for a Raspberry Pi 5?", a: "PETG or better: one maker reports a Pi 5 softened a PLA base. Keep the lid vents on. The case also leaves 0.5 mm all round the board, because cases that hug the PCB have cracked boards during assembly." },
+          { q: "Why isn't the ESP32 DevKit in the list?", a: "Espressif's DevKitC boards have no mounting holes, and the many clone boards have no official drawing to work from. Pick the closest board and use “AI edit” to change it. Raspberry Pi and Arduino are trademarks of their owners; this generator makes compatible cases and is not affiliated with them." },
+        ],
+      },
+      zh: {
+        name: "树莓派 / Arduino 外壳生成器",
+        title: "树莓派外壳生成器 — 树莓派 5 / 4B / Zero 与 Arduino 开发板外壳，接口自动开孔，导出 STL / STEP | Forgent3D",
+        description: "在线生成可 3D 打印的开发板外壳：树莓派 5、4B、3B+、Zero 2 W，Arduino Uno R3 / R4，接口开孔按官方机械图定位，螺丝固定上盖。免费导出 STL / STEP。",
+        h1: "树莓派 / Arduino 外壳生成器：接口开孔按官方机械图定位",
+        intro: "选你的开发板——默认树莓派 5——得到按官方机械图或 STEP 文件做的上下两件式外壳。每个接口都开成通到分模线的缺口，上盖直接扣下去；USB-C 和 micro-USB 的开孔按插头大小做，不只是按插座。板子自己的安装螺丝把它固定在支撑柱上、同时合上上盖，不会有松掉的摩擦盖。",
+        whyPoints: [
+          "六种板子，孔位和接口全部取自官方图纸：树莓派 5、4B、3B+、Zero 2 W，Arduino Uno R3 和 R4",
+          "开孔按 USB 插头大小，HDMI、DC 插头粗可以调大余量",
+          "螺丝固定上盖：板子的安装螺丝同时合上外壳",
+          "排针上方开槽、处理器上方散热孔，SD 卡从外面就能插拔",
+        ],
+        faqs: [
+          { q: "需要什么螺丝？", a: "树莓派：四颗 M2.5 × 12 沉头螺丝。Arduino Uno R3：四颗 M3 × 16；Uno R4 用三颗，外加一个打印的定位销。螺丝从底下穿过底板、支撑柱和电路板，拧进上盖的压柱。热门打印外壳下最常见的抱怨是摩擦盖松（「盖子有点松」），所以这里用螺丝。" },
+          { q: "线插得进去吗？", a: "USB-C 和 micro-USB 的开孔按 USB 规范里的插头外壳尺寸做——按插座大小开孔的外壳，常有人反映 micro-HDMI 线插不进去。HDMI、音频、DC 插头没有统一尺寸：你的插头粗，就把接口开孔余量调大。" },
+          { q: "树莓派 5 用什么材料打？", a: "PETG 或更耐热的材料：有人反映树莓派 5 把 PLA 底壳烤软了。散热孔保持打开。外壳四周给板子留了 0.5 mm——贴着电路板做的外壳，有人装的时候把板子压裂了。" },
+          { q: "为什么没有 ESP32 开发板？", a: "乐鑫官方的 DevKitC 板没有安装孔，市面上大量的兼容板也没有官方图纸可依。可以选最接近的板子，再用「AI 修改」改成你的。树莓派和 Arduino 是其各自所有者的商标，这个生成器做的是兼容外壳，与它们没有关联。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "wall-hook-generator",
+    modelDir: "wall-hook",
+    icon: "ʃ",
+    family: "home",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { HOOKS: "4", DEPTH: "20", TIP: "10", WIDTH: "15" }, label: { en: "Key rack: four small hooks in a row", zh: "钥匙挂架：一排四个小钩" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "The default screw-mounted hook exports as one exact solid of 16 faces: 8 planes, 6 true cylinders (the screw holes and the hook's rounded inside and tip) and 2 cones (the countersinks).",
+      ],
+      zh: [
+        "默认的螺丝固定挂钩导出为一个精确实体，16 个面：8 个平面、6 个真圆柱面（螺丝孔、钩内弧和圆头钩尖）、2 个圆锥面（沉头）。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "Can I 3D print a towel hook that sticks on without drilling?", a: "Yes: https://www.forgent3d.com/en/generators/wall-hook-generator?MOUNT=Adhesive%20strip%2019&STYLE=Double&DEPTH=25 — two stacked hooks on a back plate sized for a large 3M Command strip (19 × 69 mm), with the pull tab left free below. 3M rates the large strip at 5 lb and says it is not for wet rooms, so hang the towel outside the shower." },
+        { q: "I need a hook that hangs over a 40 mm door.", a: "https://www.forgent3d.com/en/generators/wall-hook-generator?MOUNT=Over%20a%2040%20mm%20door&STYLE=Double — a 3 mm strap goes over the door top with 0.8 mm of clearance, and two hooks hang on the inside. Check the gap above your door first: a strap that is too thick stops the door closing, the most common complaint about printed over-door hooks." },
+      ],
+      zh: [
+        { q: "不打孔，能 3D 打印一个粘墙上的毛巾挂钩吗？", a: "可以：https://www.forgent3d.com/zh/generators/wall-hook-generator?MOUNT=Adhesive%20strip%2019&STYLE=Double&DEPTH=25 ，上下两个钩，背板按 3M Command 大号无痕胶条（19 × 69 mm）做，拉条留在下面。3M 给大号胶条标的承重是 5 磅（约 2.3 kg），并说明不适合潮湿环境，所以别装在淋浴间里。" },
+        { q: "门厚 40 mm，要一个挂在门后的挂钩。", a: "https://www.forgent3d.com/zh/generators/wall-hook-generator?MOUNT=Over%20a%2040%20mm%20door&STYLE=Double ：3 mm 厚的挂带跨过门顶，留 0.8 mm 余量，门内侧挂两个钩。先看看门顶和门框之间的缝：挂带太厚门就关不上，这是打印门后挂钩最常见的抱怨。" },
+      ],
+    },
+    // Evidence: generator-models/wall-hook/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["wall hook generator", "3d printed wall hook", "command strip hook stl", "over door hook 3d print"],
+      zh: ["墙面挂钩生成器", "挂钩 3d打印", "免打孔挂钩 STL", "门后挂钩"],
+    },
+    params: [
+      { key: "MOUNT", default: "Screws 4 mm (#8)", range: "3 screw sizes / 2 adhesive strips / 4 door thicknesses", unit: "", label: { en: "Mount", zh: "安装方式" }, desc: { en: "Countersunk 3.5, 4 or 5 mm screws; a Command Medium (16 × 46) or Large (19 × 69) strip; or over a 19 mm cabinet door or a 35, 40 or 45 mm door.", zh: "3.5、4、5 mm 沉头螺丝；3M Command 中号（16 × 46）或大号（19 × 69）胶条；或挂在 19 mm 柜门、35 / 40 / 45 mm 门上。" } },
+      { key: "STYLE", default: "Single hook", range: "Single hook / Double hook (stacked)", unit: "", label: { en: "Style", zh: "款式" }, desc: { en: "One J, or two stacked on one plate.", zh: "一个 J 形钩，或一块背板上下两个钩。" } },
+      { key: "HOOKS", default: "1", range: "1 – 5", unit: "", label: { en: "Hooks in a row", zh: "一排钩数" }, desc: { en: "Side by side on one plate: a key or coat rack.", zh: "一块背板上并排几个：钥匙架、衣帽架。" } },
+      { key: "DEPTH", default: "30", range: "10 – 100", unit: "mm", label: { en: "Depth", zh: "钩深" }, desc: { en: "Inside depth from the plate to the tip.", zh: "从背板到钩尖的内侧深度。" } },
+      { key: "TIP", default: "15", range: "0 – 40", unit: "mm", label: { en: "Tip height", zh: "钩尖上翘高度" }, desc: { en: "How far the tip turns up; 0 for a straight peg.", zh: "钩尖往上翘多高；0 就是直杆。" } },
+      { key: "WIDTH", default: "20", range: "12 – 40", unit: "mm", label: { en: "Width", zh: "宽度" }, desc: { en: "Widened automatically when a screw head or a strip needs more.", zh: "螺丝头或胶条放不下时自动加宽。" } },
+      { key: "THICKNESS", default: "6", range: "4 – 12", unit: "mm", label: { en: "Thickness", zh: "厚度" }, desc: { en: "Of the plate and the J; thicker for heavy bags and tools.", zh: "背板和钩身的厚度；挂重包、工具就加厚。" } },
+    ],
+    copy: {
+      en: {
+        name: "Wall Hook Generator",
+        title: "Wall Hook Generator — Screw, Adhesive Strip & Over-Door Hooks (STL / STEP) | Forgent3D",
+        description: "3D printable wall hooks: screw-mounted with countersunk holes, sized for Command adhesive strips, or over a cabinet or room door. Single, double or a row of up to five. Free STL / STEP.",
+        h1: "Wall hook generator: screw, adhesive or over-door hooks",
+        intro: "Choose how the hook mounts — countersunk screws, a 3M Command strip, or over a door of your thickness — then set its depth, tip and width. The screw holes sit above the hook so a screwdriver reaches them; the adhesive plate is sized to 3M's own strip dimensions with the pull tab left free; the door strap fits the door with 0.8 mm to spare. One hook, two stacked, or a row of up to five.",
+        whyPoints: [
+          "Three ways to mount: countersunk screws, Command Medium or Large strips, over a 19–45 mm door",
+          "Screw holes above the hook, reachable with a screwdriver, with plastic left under the countersink against splitting",
+          "Single, stacked double, or up to five in a row for keys and coats",
+          "Exported to print on its side, so the layers run along the hook",
+        ],
+        faqs: [
+          { q: "Which way do I print it?", a: "On its side, so the layers run around the J. In CNC Kitchen's tests the same hooks printed standing broke at half the load or less, splitting between layers. For heavy loads use PETG or ASA and more walls; printed over-door hooks in PLA are reported splitting at the top corner." },
+          { q: "How much does the adhesive version hold?", a: "As much as the strip: 3M rates Command Large strips at 5 lb and Medium at 3 lb, not for wet rooms. Press the plate on firmly, wait an hour before hanging anything, and remove the strip by stretching it straight down along the wall, never by pulling it toward you. Makers report the tape lets go before the plastic does." },
+          { q: "The screw split the hook. What now?", a: "Overtightened or oversized screws splitting the plate is the most common complaint about printed wall hooks. The holes here are ISO 273 clearance holes with countersinks for standard wood-screw heads and 3 mm of plastic below; stop when the head sits flush. Command is a 3M trademark; the adhesive version is made to fit its strips." },
+        ],
+      },
+      zh: {
+        name: "墙面挂钩生成器",
+        title: "墙面挂钩生成器 — 螺丝固定、免打孔胶条、门后挂钩在线定制，导出 STL / STEP | Forgent3D",
+        description: "在线生成可 3D 打印的墙面挂钩：沉头螺丝固定、按 3M Command 免打孔胶条尺寸做，或挂在柜门、房门上。单钩、双钩或一排最多五个。免费导出 STL / STEP。",
+        h1: "墙面挂钩生成器：螺丝、免打孔胶条或挂门安装",
+        intro: "先选安装方式——沉头螺丝、3M Command 无痕胶条，或按你的门厚挂在门上——再定钩深、钩尖和宽度。螺丝孔在钩的上方，起子拧得到；胶条背板按 3M 官方的胶条尺寸做，拉条留在外面；挂门款给门厚留 0.8 mm 余量。单钩、上下双钩，或一排最多五个。",
+        whyPoints: [
+          "三种安装：沉头螺丝、Command 中号 / 大号胶条、挂 19–45 mm 的门",
+          "螺丝孔在钩的上方，起子拧得到；沉头下面留够塑料，防止拧裂",
+          "单钩、上下双钩，或一排最多五个，挂钥匙、挂衣服",
+          "导出时就是侧放的打印姿态，层纹顺着钩身走",
+        ],
+        faqs: [
+          { q: "应该怎么摆着打印？", a: "侧放，让层纹沿着 J 形钩身绕一圈。CNC Kitchen 的测试里，同样的挂钩竖着打，承重只有侧放的一半甚至更少，都是从层间裂开。挂重物用 PETG 或 ASA、多加几圈墙；有人反映 PLA 打的门后挂钩在门顶转角处裂开。" },
+          { q: "胶条款能挂多重？", a: "取决于胶条：3M 给 Command 大号胶条标 5 磅（约 2.3 kg）、中号 3 磅（约 1.4 kg），不适合潮湿环境。背板用力压实，等一小时再挂东西；拆的时候捏住拉条贴着墙面往下慢慢拉长，别往外扯。有作者反映，先松开的往往是胶条而不是塑料件。" },
+          { q: "拧螺丝把挂钩拧裂了怎么办？", a: "螺丝拧太紧或太粗把背板撑裂，是打印墙面挂钩最常见的抱怨。这里的孔按 ISO 273 开过孔、按标准木螺丝头做沉头，沉头下面留 3 mm 塑料；螺丝头和表面齐平就别再拧。Command 是 3M 的商标，胶条款只是按它的胶条尺寸做。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "phone-stand-generator",
+    modelDir: "phone-stand",
+    icon: "◿",
+    family: "home",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { THICKNESS: "14", ANGLE: "65", REST_HEIGHT: "30" }, label: { en: "For a phone in a thick case, a little more upright", zh: "厚壳手机用，角度更直一点" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "Exports as one exact solid of 33 faces: 27 planes and 6 true cylinders (the two rounded bends at the top and the four recesses for rubber feet).",
+      ],
+      zh: [
+        "导出为一个精确实体，33 个面：27 个平面、6 个真圆柱面（顶部两道折弯圆角和四个防滑垫凹槽）。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I 3D print a phone stand I can charge in while it's upright?", a: "Open https://www.forgent3d.com/en/generators/phone-stand-generator?THICKNESS=12&REST_HEIGHT=35&WIDTH=80 — the ledge sits 35 mm above the desk so a USB-C plug fits under a portrait phone, a gap in the front lip leaves the port free, and the cable leaves through an opening at the back that the whole plug passes through. Set THICKNESS to your phone measured over its case." },
+        { q: "Can the same stand hold a tablet in a thick case?", a: "Yes: https://www.forgent3d.com/en/generators/phone-stand-generator?DEVICE=Tablet%2C%20landscape&THICKNESS=16&WIDTH=100 — the backrest is sized for a tablet held landscape (179.5 mm, an 11-inch iPad's width) and the ledge takes 16 mm with the case. Stands of this shape are sold for tablets the same way, with a wider ledge." },
+      ],
+      zh: [
+        { q: "竖着放、一边充电一边看的手机支架怎么打印？", a: "打开 https://www.forgent3d.com/zh/generators/phone-stand-generator?THICKNESS=12&REST_HEIGHT=35&WIDTH=80 就是：托板离桌 35 mm，竖放时 USB-C 插头能插在手机下面，前唇中间有豁口让出充电口，线从背后的出线孔走，整个插头都能穿过去。THICKNESS 填手机带壳的厚度。" },
+        { q: "同一个支架能放带厚壳的平板吗？", a: "可以：https://www.forgent3d.com/zh/generators/phone-stand-generator?DEVICE=Tablet%2C%20landscape&THICKNESS=16&WIDTH=100 ，靠背按平板横放的尺寸做（179.5 mm，11 英寸 iPad 的宽度），托板放得下带壳 16 mm 厚的平板。市面上这种形状的平板支架也是这样，只是托板更宽。" },
+      ],
+    },
+    // Evidence: generator-models/phone-stand/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["phone stand generator", "customizable phone stand stl", "desk phone stand 3d print", "phone stand with charging slot"],
+      zh: ["手机支架生成器", "桌面手机支架 3d打印", "手机平板支架 STL", "懒人支架"],
+    },
+    params: [
+      { key: "DEVICE", default: "Phone, portrait", range: "Phone portrait / Phone landscape / Tablet landscape", unit: "", label: { en: "Holds", zh: "放置方式" }, desc: { en: "Sizes the backrest: 163.3 mm for a large phone upright, 77.9 sideways, 179.5 for a tablet.", zh: "决定靠背长度：大屏手机竖放按 163.3 mm、横放 77.9，平板 179.5。" } },
+      { key: "THICKNESS", default: "11", range: "5 – 17", unit: "mm", label: { en: "Phone thickness with case", zh: "手机厚度（含壳）" }, desc: { en: "Measure over the case: a phone in a MagSafe case is about 11, a rugged case up to 17.", zh: "带壳量：手机加 MagSafe 壳约 11，加三防壳最厚到 17。" } },
+      { key: "ANGLE", default: "60", range: "45 – 75", unit: "°", label: { en: "Viewing angle", zh: "观看角度" }, desc: { en: "How far the phone leans back from the desk.", zh: "手机相对桌面后仰的角度。" } },
+      { key: "REST_HEIGHT", default: "25", range: "18 – 50", unit: "mm", label: { en: "Phone rest height", zh: "手机托离桌高度" }, desc: { en: "Raise it so a charging plug fits under a portrait phone.", zh: "竖放充电时调高，让插头能插在手机下面。" } },
+      { key: "WIDTH", default: "60", range: "50 – 120", unit: "mm", label: { en: "Stand width", zh: "支架宽度" }, desc: { en: "Wider for tablets.", zh: "放平板就加宽。" } },
+      { key: "CABLE", default: "on", range: "on / off", unit: "", label: { en: "Charging cable slot", zh: "充电线口" }, desc: { en: "An opening at the back for the cable, big enough for the plug to pass.", zh: "背后的出线孔，插头能整个穿过。" } },
+    ],
+    copy: {
+      en: {
+        name: "Phone Stand Generator",
+        title: "Phone Stand Generator — Desk Phone & Tablet Stands with a Charging Slot (STL / STEP) | Forgent3D",
+        description: "A 3D printable desk phone stand sized to your phone in its case: viewing angle 45–75°, ledge height for charging, a cable opening the plug fits through, portrait, landscape or tablet. Free STL / STEP.",
+        h1: "Phone stand generator: a desk stand that fits your phone and its case",
+        intro: "Enter your phone's thickness measured over its case — 11 mm by default — pick the viewing angle and how high the ledge sits, and get a one-piece A-frame stand like the most-downloaded printed ones. The backrest is long enough to support the phone past its middle, a gap in the front lip leaves the charging port and the bottom of the screen free, and the cable leaves through an opening at the back that the plug passes through.",
+        whyPoints: [
+          "The ledge fits your phone in its case, not a bare phone",
+          "Ledge height for charging upright, with a cable opening the plug passes through",
+          "Backrest sized to the device, portrait, landscape or tablet, so it doesn't tip backwards",
+          "Recesses for four 8 mm rubber feet so it stays put on the desk",
+        ],
+        faqs: [
+          { q: "My phone in its case doesn't fit the stand I printed.", a: "That is the most common complaint about printed phone stands, and the \"for thicker phones\" versions of popular stands are downloaded more than the originals. Measure your phone over its case and enter that; the ledge adds 1 mm of clearance." },
+          { q: "How do I charge it while it stands?", a: "Keep the cable slot on and raise the rest height until your plug fits under the phone; bent plugs need less. The rear opening is larger than the USB-C plug keep-out Apple specifies (12.45 × 6.60 mm), so the plug passes through it, and the gap in the lip leaves the port and the bottom of the screen free for swiping." },
+          { q: "How do I print it?", a: "Lay it on its side in the slicer, so the profile is on the bed: no supports, and the layers run along the bends. Stick four 8 mm silicone feet into the recesses underneath if it slides on your desk." },
+        ],
+      },
+      zh: {
+        name: "手机支架生成器",
+        title: "手机支架生成器 — 桌面手机 / 平板支架，带充电线口，按带壳厚度在线生成，导出 STL / STEP | Forgent3D",
+        description: "在线生成可 3D 打印的桌面手机支架：按手机带壳厚度做卡槽，观看角度 45–75°，托板高度可调方便充电，出线孔插头能穿过，竖放、横放、平板都行。免费导出 STL / STEP。",
+        h1: "手机支架生成器：按你的手机和手机壳做的桌面支架",
+        intro: "输入手机带壳的厚度——默认 11 mm——再选观看角度和托板高度，得到一个和下载量最高的打印款一样的一体 A 字支架。靠背长到能托住手机的一大半，前唇中间留豁口让出充电口和屏幕下沿，充电线从背后的出线孔走，插头能整个穿过去。",
+        whyPoints: [
+          "卡槽按带壳的厚度做，不是按裸机",
+          "托板高度可调，竖放也能边充边用，出线孔插头穿得过",
+          "靠背按设备尺寸做，竖放、横放、平板都不往后翻",
+          "底面留四个 8 mm 防滑垫凹槽，在桌上不打滑",
+        ],
+        faqs: [
+          { q: "打出来的支架，带壳的手机放不进去？", a: "这是打印手机支架最常见的抱怨，热门支架的「厚手机版」下载量甚至超过原版。带壳量手机厚度填进去，卡槽会再加 1 mm 余量。" },
+          { q: "放在支架上怎么充电？", a: "打开充电线口，把托板调高到插头能插在手机下面；弯头插头可以调低一些。背后的出线孔比苹果规定的 USB-C 插头避让区（12.45 × 6.60 mm）大，插头能穿过去；前唇的豁口让出充电口，也方便从屏幕底部上滑。" },
+          { q: "怎么打印？", a: "在切片软件里侧放，让侧面轮廓贴着平台：不用支撑，层纹顺着折弯走。在桌上打滑的话，在底面凹槽里贴四个 8 mm 硅胶垫。" },
+        ],
+      },
+    },
+  },
 ];
 
 // Merge each extra language's file into the entries: copy, parameter labels and descriptions, the example's
@@ -2220,7 +2625,7 @@ export function generatorDeepLink(generator, locale) {
 }
 
 /** Where "More generators" looks after the page's own family: the nearest kind of part, never the whole catalog. */
-const RELATED_FAMILIES = { gears: ["hardware"], hardware: ["gears"], storage: [], fluid: ["hardware"] };
+const RELATED_FAMILIES = { gears: ["hardware"], hardware: ["gears"], storage: [], fluid: ["hardware"], home: ["storage"], electronics: ["hardware"] };
 
 /** Same family first, then the related families, at most `max` — a link block that stays small as the catalog grows.
  *  Only generators with a page in `locale`. */
@@ -2247,7 +2652,7 @@ function baseSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架。调参数、3D 预览、导出 STL / STEP。",
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
@@ -2314,7 +2719,7 @@ function baseSharedCopy(locale) {
     catalogLabel: "Generators",
     catalogTitle: "3D Print Generators — Free Parametric Model Makers | Forgent3D",
     catalogDescription:
-      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders and spool holders. Tune parameters, preview in 3D, export STL / STEP.",
+      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders, spool holders, Raspberry Pi and Arduino cases, pegboard hooks, shelf brackets, wall hooks and phone stands. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",
