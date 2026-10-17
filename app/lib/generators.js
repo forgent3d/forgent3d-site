@@ -36,6 +36,27 @@ function gearSize(module, teeth) {
   };
 }
 
+/** A row of the desk grommet's common-sizes table: the link parameters, then hole, flange and cable-opening
+ *  diameters at the model's defaults (6 mm rim, 0.3 clearance, 2.4 wall) and the slot. */
+function grommetSize(hole, slot) {
+  return {
+    params: { HOLE_D: hole, SLOT_WIDTH: slot },
+    cells: [hole, hole + 12, hole - 0.3 - 4.8, slot],
+  };
+}
+
+/** A row of the battery holder's cell table: the link parameter, then cell, nominal Ø, bore (Ø + 0.3 clearance) and
+ *  pitch (bore + 1.5 wall) at the model's defaults. */
+function cellSize(cell, diameter) {
+  return { params: { CELL: cell }, cells: [cell, diameter, diameter + 0.3, diameter + 0.3 + 1.5] };
+}
+
+/** A row of the pipe clamp's DIN 3015 table: the link parameter, then pipe Ø and the size the model picks with its
+ *  STAUFF length, bolt spacing and height. */
+function pipeSize(od, size, length, spacing, height) {
+  return { params: { PIPE_OD: od }, cells: [od, size, length, spacing, height] };
+}
+
 export const GENERATORS = [
   {
     slug: "gridfinity-bin-generator",
@@ -1645,6 +1666,471 @@ export const GENERATORS = [
       },
     },
   },
+  {
+    slug: "desk-grommet-generator",
+    modelDir: "desk-grommet",
+    icon: "◎",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { HOLE_D: "50", SLOT_WIDTH: "17" }, label: { en: "50 mm hole, 17 mm cable slot", zh: "开孔 50 mm，出线口 17 mm" } },
+    // Common hole sizes: 35 / 50 / 60 / 80 saws, 53 in Chinese listings, 2½" (63.5) US desks; slots ≈ a third of the hole.
+    sizes: [grommetSize(35, 12), grommetSize(50, 17), grommetSize(53, 18), grommetSize(60, 20), grommetSize(63.5, 21.5), grommetSize(80, 27)],
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "Exports as two exact solids, sleeve and cap, with 21 faces — 10 planes, 8 true cylinders (the sleeve, the flange, the bore and the counterbore the cap sits in; the cap's rim, its skirt and the round end of the slot) and 3 cones (the chamfers) — so furniture CAD reads the hole size and the cap seat directly.",
+      ],
+      zh: [
+        "导出为两个精确实体——套管和盖板——共 21 个面：10 个平面、8 个真圆柱面（套管外圆、法兰、内孔和放盖板的沉台，盖板外圆、裙边和出线口的圆头）、3 个圆锥面（倒角）。在家具 CAD 里能直接量出孔径和盖板的位置。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I get a cable grommet for a 50 mm desk hole?", a: "Open https://www.forgent3d.com/en/generators/desk-grommet-generator?HOLE_D=50&SLOT_WIDTH=17 — a 49.7 mm sleeve for the 50 mm hole, a 62 mm flange and a cap with a 17 mm cable slot. Export STL to print it, or STEP for CAD." },
+        { q: "Can I make a blank cover, or a sleeve that reaches through a 25 mm desktop?", a: "Yes: CAP=solid gives a cap without a slot and DEPTH=25 makes the sleeve end flush with the underside — https://www.forgent3d.com/en/generators/desk-grommet-generator?CAP=solid&DEPTH=25. For any desk 16 mm or thicker the default 16 mm sleeve is enough; vendor grommets are made the same way." },
+      ],
+      zh: [
+        { q: "桌子上开的是 50 mm 的孔，怎么做穿线孔盖？", a: "打开 https://www.forgent3d.com/zh/generators/desk-grommet-generator?HOLE_D=50&SLOT_WIDTH=17 就是：套管外径 49.7 mm、法兰 62 mm、盖板带 17 mm 宽的出线口。导出 STL 打印，或者导出 STEP 放进 CAD。" },
+        { q: "能做不开口的封盖吗？桌板 25 mm 厚，套管能正好穿透吗？", a: "可以：CAP=solid 是不开口的盖板，DEPTH=25 让套管正好和桌板底面齐平——https://www.forgent3d.com/zh/generators/desk-grommet-generator?CAP=solid&DEPTH=25 。桌板 16 mm 以上的话，套管深度保持默认的 16 就够，成品孔盖也是这么做的。" },
+      ],
+    },
+    // Evidence: generator-models/desk-grommet/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["desk grommet generator", "cable grommet stl", "60mm desk grommet", "desk cable hole cover"],
+      zh: ["穿线孔盖生成器", "电脑桌穿线孔盖 3d打印", "50mm 穿线孔盖", "桌面线孔盖 STL"],
+    },
+    params: [
+      { key: "HOLE_D", default: "60", range: "30 – 100", unit: "mm", label: { en: "Hole diameter", zh: "开孔直径" }, desc: { en: "The drilled hole as measured, not the saw size.", zh: "实测的孔径，不是开孔器的标称尺寸。" } },
+      { key: "DEPTH", default: "16", range: "8 – 45", unit: "mm", label: { en: "Sleeve depth", zh: "套管深度" }, desc: { en: "How far the sleeve reaches below the desktop; at most the desk thickness.", zh: "套管伸到桌面以下的长度，不超过桌板厚度。" } },
+      { key: "RIM", default: "6", range: "3 – 15", unit: "mm", label: { en: "Rim overhang", zh: "法兰外沿" }, desc: { en: "How far the flange laps past the hole on each side.", zh: "法兰每边盖过孔边的宽度。" } },
+      { key: "CLEARANCE", default: "0.3", range: "0 – 1", unit: "mm", label: { en: "Fit clearance", zh: "配合余量" }, desc: { en: "How much smaller than the hole the sleeve comes out.", zh: "套管比孔小多少。" } },
+      { key: "CAP", default: "slot", range: "slot / solid / none", unit: "", label: { en: "Cap", zh: "盖板" }, desc: { en: "With a cable slot, solid, or no cap.", zh: "带出线口、无口封盖，或不要盖。" } },
+      { key: "SLOT_WIDTH", default: "20", range: "10 – 40", unit: "mm", label: { en: "Slot width", zh: "出线口宽度" }, desc: { en: "At most two thirds of the hole; a third is typical.", zh: "最多为孔径的三分之二，常见是三分之一。" } },
+    ],
+    copy: {
+      en: {
+        name: "Desk Grommet Generator",
+        title: "Desk Grommet Generator — Cable Hole Covers, 30–100 mm (STL / STEP) | Forgent3D",
+        description: "Generate a desk cable grommet for your hole: a press-fit sleeve and a flush cap with a cable slot, a solid cap or no cap. Enter the measured hole, 30–100 mm. Free STL / STEP.",
+        h1: "Desk grommet generator: a sleeve and cap for any desk cable hole",
+        intro: "Measure the drilled hole — 60 mm by default — and get the two pieces vendors sell as a grommet set: a flanged sleeve that presses into the hole and a cap that drops in flush with the flange, with a U-slot for the cables, a solid top or no cap at all. Set the sleeve depth to suit the desktop, then export STL to print or STEP for furniture CAD.",
+        whyPoints: [
+          "Any measured hole from 30 to 100 mm, with a clearance setting for the press fit",
+          "Cap with a cable slot, solid cap or sleeve only — the cap sits flush, as on Mockett, Häfele and Sugatsune sets",
+          "Sleeve depth 8–45 mm: 16 mm suits any desk 16 mm or thicker, or match it to your desktop",
+          "Both parts lie flat the way they print: no supports",
+        ],
+        faqs: [
+          { q: "What size do I enter: the hole saw or the hole?", a: "The hole as measured. Saws cut a little oversize — one printed “70 mm” grommet turned out to fit a 65 mm hole — so put a caliper across the hole and enter that. The sleeve comes out 0.3 mm under it by default." },
+          { q: "How tight should the sleeve be?", a: "Makers aim 0.2–0.5 mm under the hole so the sleeve slides in without forcing; the default is 0.3. If it won't go in, raise the clearance by 0.1; if it falls out, lower it by 0.1. A hole that came out oversize can still be saved with a thin bead of sealant around the sleeve." },
+          { q: "How should I print it?", a: "As the parts lie: the sleeve flange-down and the cap top-down, both without supports. PLA is what most printed grommets use; ABS or PETG give a slightly grippier press fit. Use some infill — around 15 % rather than 0 % — since the cap takes repeated pulls of cables." },
+        ],
+        sizes: {
+          title: "Common hole sizes",
+          intro: "Flange = hole + 12 mm (a 6 mm rim each side); the cable opening is the sleeve's bore, hole − 5.1 mm at the default clearance and 2.4 mm wall; slots are about a third of the hole, as on vendor caps. Each row opens the generator on that size.",
+          head: ["Hole Ø", "Flange Ø", "Opening Ø", "Slot", ""],
+          open: "Open",
+          note: "35, 50, 60 and 80 mm are the common hole-saw sizes; Chinese listings name 50 mm most often, then 53 mm, and 63.5 mm (2½\") is common on US office desks.",
+        },
+      },
+      zh: {
+        name: "穿线孔盖生成器",
+        title: "穿线孔盖生成器 — 电脑桌开孔 30–100 mm 任意尺寸，在线导出 STL / STEP | Forgent3D",
+        description: "在线生成电脑桌穿线孔盖：输入实测开孔直径（30–100 mm），得到压入式套管和齐平的盖板，盖板可选带出线口、无口封盖或不要盖，免费导出 STL / STEP。",
+        h1: "穿线孔盖生成器：任意开孔尺寸的套管和盖板",
+        intro: "量好桌面上的开孔——默认 60 mm——得到成套的两件：带法兰、压进孔里的套管，和放进去与法兰齐平的盖板。盖板可以带 U 形出线口、做成无口封盖，或者不要盖。套管深度按桌板调，导出 STL 拿去打印，或者导出 STEP 放进家具设计里。",
+        whyPoints: [
+          "实测开孔 30–100 mm 任意尺寸，另有压入配合的余量设置",
+          "带出线口的盖、无口封盖或只要套管——盖板和法兰齐平，和 Mockett、海福乐、Sugatsune 的成品一样",
+          "套管深度 8–45 mm：16 mm 适合 16 mm 以上的任何桌板，也可以设成桌板厚度",
+          "两件都按打印的姿态平放，不用支撑",
+        ],
+        faqs: [
+          { q: "填开孔器的尺寸还是孔的尺寸？", a: "填实测的孔。开孔器切出来的孔往往偏大——有人把标着 70 mm 的打印孔盖装进了 65 mm 的孔——所以用卡尺量一下孔再填。套管默认比孔小 0.3 mm。" },
+          { q: "套管要多紧？", a: "做孔盖的人一般让套管比孔小 0.2–0.5 mm，能推进去又不用硬塞，默认 0.3。推不进去就把余量加 0.1，会掉出来就减 0.1。孔开大了，也可以在套管外面打一圈薄薄的密封胶。" },
+          { q: "怎么打印？", a: "按模型里的姿态打：套管法兰朝下，盖板正面朝下，都不用支撑。打印的孔盖大多用 PLA；想让套管压得更紧一点可以用 ABS 或 PETG。填充别用 0 %，15 % 左右，盖板要经得起反复拽线。" },
+        ],
+        sizes: {
+          title: "常用开孔尺寸速查",
+          intro: "法兰外径 = 孔径 + 12 mm（每边 6 mm）；出线的通孔是套管内径，默认余量和 2.4 mm 壁厚下 = 孔径 − 5.1 mm；出线口宽度取孔径的三分之一左右，和成品盖板一样。点每一行直接打开那个尺寸。",
+          head: ["开孔 Ø", "法兰 Ø", "通孔 Ø", "出线口", ""],
+          open: "打开",
+          note: "35、50、60、80 mm 是最常见的开孔器尺寸；国内商品标题里最多的是 50 mm，也常见 53 mm；美国办公桌常见 63.5 mm（2½ 英寸）。",
+        },
+      },
+    },
+  },
+  {
+    slug: "18650-battery-holder-generator",
+    modelDir: "battery-holder",
+    icon: "▤",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { CELL: "21700", LAYOUT: "staggered" }, label: { en: "21700 cells, staggered (honeycomb)", zh: "21700 电芯，错位（蜂窝）排列" } },
+    // The three cell formats at the default clearance (0.3) and wall (1.5): bore = Ø + 0.3, pitch = bore + 1.5.
+    sizes: [cellSize(18650, 18.4), cellSize(21700, 21.5), cellSize(26650, 26.4)],
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "Each 3 × 5 plate exports as one exact solid of 188 faces — 158 planes and 30 true cylinders (the 15 cell bores and the 15 strip windows) — so pitch, bore and window read directly in CAD when you lay out the pack around it.",
+      ],
+      zh: [
+        "每块 3 × 5 的支架导出为一个精确实体，188 个面：158 个平面、30 个真圆柱面（15 个电芯孔和 15 个镍片窗口）。在 CAD 里围着它排电池组时，间距、孔径和窗口都能直接量。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I print cell holders for a 3S5P 18650 pack?", a: "Open https://www.forgent3d.com/en/generators/18650-battery-holder-generator?ROWS=3&COLS=5 — a top and a bottom plate for 15 cells on the common 20.2 mm pitch, Ø18.7 bores and 8 mm channels for the nickel strip. Print both, press the cells into one and turn the other over onto them." },
+        { q: "My pack is bigger than 3 × 5. Can I make one plate for 13S4P?", a: "One plate holds at most 3 × 5 cells; print several. With FRAME=0 the plates end exactly half a pitch past the outer cells, so they butt together on the same pitch: https://www.forgent3d.com/en/generators/18650-battery-holder-generator?ROWS=3&COLS=5&FRAME=0" },
+      ],
+      zh: [
+        { q: "怎样打印 3 串 5 并 18650 电池组的支架？", a: "打开 https://www.forgent3d.com/zh/generators/18650-battery-holder-generator?ROWS=3&COLS=5 就是：15 节电芯的上下两片支架，常见的 20.2 mm 间距、Ø18.7 孔，外侧带 8 mm 宽的镍片槽。两片都打，电芯压进一片，另一片翻过来扣上。" },
+        { q: "电池组比 3 × 5 大，能做 13 串 4 并的一整片吗？", a: "一片最多 3 × 5 节，大的电池组打几片拼起来。FRAME=0 时每片的边缘正好在最外一排电芯外半个间距，几片并排还是同一个间距：https://www.forgent3d.com/zh/generators/18650-battery-holder-generator?ROWS=3&COLS=5&FRAME=0" },
+      ],
+    },
+    // Evidence: generator-models/battery-holder/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["18650 battery holder generator", "18650 cell spacer stl", "21700 battery holder 3d print", "battery pack cell holder parametric"],
+      zh: ["18650 电池支架生成器", "18650 支架 3d打印", "21700 电池支架 STL", "电池组 拼接支架 错位"],
+    },
+    params: [
+      { key: "CELL", default: "18650", range: "18650 / 21700 / 26650", unit: "", label: { en: "Cell", zh: "电芯" }, desc: { en: "18.4 / 21.5 / 26.4 mm nominal diameter.", zh: "标称直径 18.4 / 21.5 / 26.4 mm。" } },
+      { key: "CLEARANCE", default: "0.3", range: "0 – 0.6", unit: "mm", label: { en: "Bore clearance", zh: "孔径余量" }, desc: { en: "Added to the cell diameter: 18.7 mm bores for 18650.", zh: "加在电芯直径上：18650 的孔是 18.7 mm。" } },
+      { key: "LAYOUT", default: "square", range: "square / staggered", unit: "", label: { en: "Layout", zh: "排列" }, desc: { en: "Square grid, or staggered (honeycomb) rows shifted half a pitch.", zh: "方阵，或隔排错开半个间距的错位（蜂窝）排列。" } },
+      { key: "ROWS", default: "3", range: "1 – 3", unit: "", label: { en: "Rows", zh: "行数" }, desc: { en: "Up to 3 per plate; print several plates for bigger packs.", zh: "每片最多 3 行，大电池组打几片。" } },
+      { key: "COLS", default: "5", range: "1 – 5", unit: "", label: { en: "Columns", zh: "列数" }, desc: { en: "Up to 5 per plate.", zh: "每片最多 5 列。" } },
+      { key: "WALL", default: "1.5", range: "1 – 3", unit: "mm", label: { en: "Wall between cells", zh: "孔间壁厚" }, desc: { en: "1.5 gives the common 20.2 mm pitch for 18650.", zh: "1.5 时 18650 是常见的 20.2 mm 间距。" } },
+      { key: "WIRE_HOLES", default: "off", range: "on / off", unit: "", label: { en: "Balance-wire holes", zh: "均衡线孔" }, desc: { en: "Ø3 holes between cells for BMS leads.", zh: "电芯之间 Ø3 的孔，走 BMS 均衡线。" } },
+      { key: "HEIGHT", default: "10", range: "5 – 40", unit: "mm", label: { en: "Holder height", zh: "支架高度" }, desc: { en: "How deep each cell sits in the plate.", zh: "电芯插进支架的深度。" } },
+      { key: "FRAME", default: "0", range: "0 – 3", unit: "mm", label: { en: "Outer frame", zh: "外框" }, desc: { en: "0 lets plates butt together on the pitch.", zh: "0 时几片可以按同一间距拼接。" } },
+      { key: "END", default: "open", range: "open / closed", unit: "", label: { en: "End", zh: "端面" }, desc: { en: "Open with a lip for spot welding, or a closed floor for storage.", zh: "开口带挡边（点焊用），或封底（收纳用）。" } },
+      { key: "LIP", default: "3", range: "1.5 – 4", unit: "mm", label: { en: "Lip overlap", zh: "挡边宽度" }, desc: { en: "How far the lip laps over the cell end; the rest is the strip window.", zh: "挡边压住电芯端面的宽度，中间留给镍片。" } },
+      { key: "STRIP_WIDTH", default: "8", range: "0 – 10", unit: "mm", label: { en: "Strip channel width", zh: "镍片槽宽" }, desc: { en: "0.8 mm deep channels for 7–8 mm nickel strip; 0 for a flat face.", zh: "0.8 mm 深的槽，放 7–8 mm 宽的镍片；0 为平面。" } },
+    ],
+    copy: {
+      en: {
+        name: "18650 Battery Holder Generator",
+        title: "18650 Battery Holder Generator — Cell Spacers for DIY Packs (STL / STEP) | Forgent3D",
+        description: "Generate 18650, 21700 or 26650 cell holders for spot-welded packs: square or staggered, nickel-strip channels, balance-wire holes, top and bottom plates. Free STL / STEP.",
+        h1: "18650 battery holder generator: cell spacers for building packs",
+        intro: "Pick the cell and the grid — 3 × 5 18650 cells by default — and get the pair of plates a pack is built in: each cell sits in a bore with a lip on the outside, the lip leaves a window for the nickel strip and an 8 mm channel guides the strip across the plate. The bottom plate is laid out so it lines up when you turn it over onto the cells.",
+        whyPoints: [
+          "18650, 21700 and 26650 cells, square grid or staggered (honeycomb) rows",
+          "20.2 mm pitch by default, the common bracket and pre-punched strip pitch, never under 1 mm between cells",
+          "Channels for 7–8 mm nickel strip, optional balance-wire holes, open for welding or closed for storage",
+          "Plates tile on the pitch for packs bigger than one plate",
+        ],
+        faqs: [
+          { q: "Which filament should I print it in?", a: "PETG, ASA or ABS. Cells are allowed to discharge at up to 60 °C ambient with the can reaching 75 °C, and printed PLA starts to give at about 60 °C — fine for storage, not inside a working pack." },
+          { q: "Why can't I set the 19 mm pitch some staggered holders use?", a: "Samsung's cell datasheets ask for more than 1 mm between cells, and a 19 mm pitch leaves about half that. The smallest wall here (1 mm plus the bore clearance) keeps that spacing; the default 20.2 mm also matches the pre-punched nickel strip sold for that pitch." },
+          { q: "How do the two plates go together?", a: "Press the cells into one plate, lip side out, then turn the second plate over onto the other ends: it is generated as the mirror image, so the bores line up even for staggered layouts with an even number of rows." },
+        ],
+        sizes: {
+          title: "Cell formats",
+          intro: "Bore = cell diameter + 0.3 mm clearance; pitch = bore + 1.5 mm wall, both at the defaults. Each row opens the generator for that cell.",
+          head: ["Cell", "Cell Ø", "Bore Ø", "Pitch", ""],
+          open: "Open",
+          note: "Cells vary by maker: 18650s run 18.4–18.6 mm at most, protected cells wider. Raise the clearance if yours don't go in.",
+        },
+      },
+      zh: {
+        name: "18650 电池支架生成器",
+        title: "18650 电池支架生成器 — 电池组拼接支架，方阵或错位，在线导出 STL / STEP | Forgent3D",
+        description: "在线生成 18650 / 21700 / 26650 电池支架：方阵或错位（蜂窝）排列，镍片槽、均衡线孔，上下两片，适合点焊组装电池组，免费导出 STL / STEP。",
+        h1: "18650 电池支架生成器：组装电池组用的电芯支架",
+        intro: "选电芯和排数——默认 3 × 5 节 18650——得到组装电池组用的上下两片支架：每节电芯插进一个孔，外侧有挡边，挡边中间留出镍片窗口，8 mm 宽的槽引着镍片走过整片。下面那片按翻过来扣上的方向生成，孔位正好对上。",
+        whyPoints: [
+          "18650、21700、26650 电芯，方阵或错位（蜂窝）排列",
+          "默认 20.2 mm 间距，和常见支架、预冲孔镍片一致；电芯间距始终大于 1 mm",
+          "7–8 mm 镍片槽、可选均衡线孔，开口点焊用或封底收纳用",
+          "超过一片的电池组可以几片按间距拼接",
+        ],
+        faqs: [
+          { q: "用什么材料打？", a: "PETG、ASA 或 ABS。电芯允许在 60 °C 环境下放电、外壳到 75 °C，打印的 PLA 在 60 °C 左右就开始变软——收纳可以，放进工作中的电池组不行。" },
+          { q: "为什么不能设成有些错位支架的 19 mm 间距？", a: "三星的电芯规格书要求电芯之间留 1 mm 以上，19 mm 间距只剩一半左右。这里最小的壁厚（1 mm 加上孔径余量）保证这个间距；默认的 20.2 mm 也正好对上按这个间距预冲孔的镍片。" },
+          { q: "两片怎么装？", a: "把电芯压进一片（挡边朝外），另一片翻过来扣在电芯另一端：它是按镜像生成的，错位排列、偶数行时孔位也对得上。" },
+        ],
+        sizes: {
+          title: "电芯规格",
+          intro: "孔径 = 电芯直径 + 0.3 mm 余量；间距 = 孔径 + 1.5 mm 壁厚，都按默认值。点每一行打开那种电芯。",
+          head: ["电芯", "电芯 Ø", "孔 Ø", "间距", ""],
+          open: "打开",
+          note: "不同厂家的电芯直径不一样：18650 最大 18.4–18.6 mm，带保护板的更粗。塞不进去就把余量调大。",
+        },
+      },
+    },
+  },
+  {
+    slug: "pipe-clamp-generator",
+    modelDir: "pipe-clamp",
+    icon: "⊓",
+    family: "fluid",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { TYPE: "saddle", PIPE_OD: "25" }, label: { en: "Two-hole saddle for a 25 mm pipe", zh: "25 mm 管子用的骑马卡" } },
+    // DIN 3015-1 size per pipe, picked by the model's rule (STAUFF table; a bore that leaves < 0.5 mm beside the M6
+    // hole moves up a size), at the default 0.4 clearance.
+    sizes: [pipeSize(12, 1, 37, 20, 27), pipeSize(16, 2, 42, 26, 33), pipeSize(20, 3, 50, 33, 36), pipeSize(25, 3, 50, 33, 36), pipeSize(32, 4, 59, 40, 42), pipeSize(40, 5, 71, 52, 58), pipeSize(50, 6, 86, 66, 66), pipeSize(63, 7, 121, 94, 93)],
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "A DIN 3015 jaw exports as one exact solid of 10 faces — 7 planes and 3 true cylinders (the half bore and the two M6 holes) — the same jaw twice in the file. The saddle is 18 faces: 12 planes, 4 cylinders and 2 cones for the countersinks.",
+      ],
+      zh: [
+        "一块 DIN 3015 夹块导出为一个精确实体，10 个面：7 个平面、3 个真圆柱面（半圆孔和两个 M6 孔），文件里是同一块用两次。骑马卡是 18 个面：12 个平面、4 个圆柱面、2 个沉头锥面。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I get a DIN 3015 clamp for a 20 mm tube?", a: "Open https://www.forgent3d.com/en/generators/pipe-clamp-generator?PIPE_OD=20 — the two plastic jaws of a size 3 light-series clamp: 50 × 30 mm, M6 bolts 33 mm apart, a 20.4 mm bore. The steel cover and weld plates and the bolts are bought parts; export STEP to place it in CAD." },
+        { q: "I need a two-hole strap for 25 mm conduit with M4 screws.", a: "https://www.forgent3d.com/en/generators/pipe-clamp-generator?TYPE=saddle&PIPE_OD=25&SCREW=M4 — a U strap 25 mm wide with countersunk M4 holes in both tabs. It prints on its side so the layers run around the arch." },
+      ],
+      zh: [
+        { q: "20 mm 的管子，怎么做一个 DIN 3015 管夹？", a: "打开 https://www.forgent3d.com/zh/generators/pipe-clamp-generator?PIPE_OD=20 就是：3 号轻型塑料管夹的上下两块夹块，50 × 30 mm，两个 M6 螺栓孔中心距 33 mm，孔径 20.4 mm。钢制盖板、焊接底板和螺栓是外购件；导出 STEP 可以直接放进 CAD。" },
+        { q: "25 mm 的线管，要一个 M4 螺丝固定的骑马卡。", a: "https://www.forgent3d.com/zh/generators/pipe-clamp-generator?TYPE=saddle&PIPE_OD=25&SCREW=M4 ：25 mm 宽的 U 形管卡，两边耳片各一个 M4 沉头孔。侧放打印，层纹顺着拱形走。" },
+      ],
+    },
+    // Evidence: generator-models/pipe-clamp/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["pipe clamp generator", "din 3015 pipe clamp stl", "pipe saddle clamp 3d print", "two hole pipe strap stl"],
+      zh: ["管夹生成器", "DIN 3015 塑料管夹 STEP", "液压管夹 3d打印", "骑马卡 管夹 STL"],
+    },
+    params: [
+      { key: "PIPE_OD", default: "20", range: "6 – 101.6", unit: "mm", label: { en: "Pipe outside diameter", zh: "管外径" }, desc: { en: "Measure the pipe; for DIN 3015 it picks the clamp size.", zh: "量管子外径；DIN 3015 款按它选规格。" } },
+      { key: "TYPE", default: "din3015", range: "din3015 / saddle", unit: "", label: { en: "Clamp type", zh: "管夹类型" }, desc: { en: "DIN 3015-1 plastic clamp jaws, or a two-hole saddle strap.", zh: "DIN 3015-1 塑料管夹夹块，或两孔骑马卡。" } },
+      { key: "CLEARANCE", default: "0.4", range: "0 – 1", unit: "mm", label: { en: "Bore clearance", zh: "孔径余量" }, desc: { en: "Added to the pipe diameter; plastic pipe often measures a little over nominal.", zh: "加在管外径上；塑料管实测常比标称略大。" } },
+      { key: "WIDTH", default: "25", range: "12 – 40", unit: "mm", label: { en: "Strap width (saddle)", zh: "管卡宽度（骑马卡）" }, desc: { en: "Along the pipe.", zh: "沿管子方向的宽度。" } },
+      { key: "TAB", default: "14", range: "12 – 30", unit: "mm", label: { en: "Tab length (saddle)", zh: "耳片长度（骑马卡）" }, desc: { en: "Each screw tab beyond the arch.", zh: "拱形两侧每个螺丝耳片的长度。" } },
+      { key: "SCREW", default: "M4", range: "M3 / M4 / M5", unit: "", label: { en: "Screw (saddle)", zh: "螺丝（骑马卡）" }, desc: { en: "ISO 273 medium clearance holes.", zh: "按 ISO 273 中等系列开过孔。" } },
+      { key: "COUNTERSINK", default: "on", range: "on / off", unit: "", label: { en: "Countersunk holes (saddle)", zh: "沉头孔（骑马卡）" }, desc: { en: "Seats for ISO 10642 countersunk heads.", zh: "按 ISO 10642 沉头螺钉做沉孔。" } },
+    ],
+    copy: {
+      en: {
+        name: "Pipe Clamp Generator",
+        title: "Pipe Clamp Generator — DIN 3015 Clamps & Saddle Straps (STL / STEP) | Forgent3D",
+        description: "Pipe clamps for 6–101.6 mm pipe: DIN 3015-1 plastic clamp jaws sized from the standard table, or a two-hole saddle strap with countersunk holes. Free STL / STEP.",
+        h1: "Pipe clamp generator: DIN 3015 clamp jaws and two-hole saddles",
+        intro: "Enter the pipe's outside diameter — 20 mm by default — and get either the plastic jaws of a DIN 3015-1 light-series clamp, sized from the standard's table with M6 bolt holes, or a one-piece two-hole saddle strap for screwing a pipe or conduit to a wall. The DIN jaws stand apart by the standard's tension clearance, so tightening the bolts grips the pipe.",
+        whyPoints: [
+          "DIN 3015-1 sizes 1–8 picked from the pipe diameter: body length, bolt spacing and height from STAUFF's table",
+          "Two-hole saddle strap with ISO 273 holes and ISO 10642 countersinks for M3–M5",
+          "Bore clearance for pipe that measures over nominal",
+          "Exact STEP for plant and machine CAD, STL for printing",
+        ],
+        faqs: [
+          { q: "What do I need besides the printed jaws?", a: "A DIN 3015-1 clamp is the two jaws between a steel cover plate on top and a weld plate (or rail) underneath, held by two M6 bolts; size 3 uses M6 × 40. The plates and bolts are standard bought parts — the generator makes the plastic jaws." },
+          { q: "How far apart should the clamps be?", a: "HYDAC's recommended spacing for light-series clamps grows with the pipe: 1.0 m up to 12.7 mm, 1.2 m to 22 mm, 1.5 m to 32 mm, 2.0 m to 38 mm, 2.7 m to 57 mm, 3.0 m to 75 mm." },
+          { q: "Why is there a gap between the two jaws?", a: "That is DIN 3015's tension clearance (0.4–0.8 mm by size on STAUFF's bodies): the jaws touch the pipe before they touch each other, so tightening the bolts clamps the pipe. Leave it — don't sand the faces flat." },
+        ],
+        sizes: {
+          title: "DIN 3015 sizes for common pipes",
+          intro: "The size the generator picks at the default 0.4 mm clearance, with the jaw-pair length, M6 bolt spacing and height from STAUFF's table (all 30 mm wide). Each row opens the generator on that pipe.",
+          head: ["Pipe Ø", "Size", "Length", "Bolt spacing", "Height", ""],
+          open: "Open",
+          note: "PPR water pipe: 20 (½\"), 25 (¾\"), 32 (1\"); a bore that would leave under 0.5 mm of plastic beside a bolt hole moves up one size.",
+        },
+      },
+      zh: {
+        name: "管夹生成器",
+        title: "管夹生成器 — DIN 3015 塑料管夹与骑马卡，管外径 6–101.6 mm，在线导出 STL / STEP | Forgent3D",
+        description: "在线生成管夹：管外径 6–101.6 mm 任意，DIN 3015-1 轻型塑料管夹按标准表选规格，或两孔骑马卡带沉头螺丝孔，水管、PVC 管、液压油管都能用，免费导出 STL / STEP。",
+        h1: "管夹生成器：DIN 3015 塑料管夹和两孔骑马卡",
+        intro: "输入管子外径——默认 20 mm——得到 DIN 3015-1 轻型管夹的两块塑料夹块（按标准表定尺寸，带 M6 螺栓孔），或者一体的两孔骑马卡，把水管、线管固定到墙上。DIN 夹块之间按标准留出预紧间隙，拧紧螺栓就夹住管子。",
+        whyPoints: [
+          "DIN 3015-1 的 1–8 号规格按管径自动选：夹块长度、螺栓间距和高度按 STAUFF 的标准表",
+          "两孔骑马卡：按 ISO 273 开螺丝过孔、按 ISO 10642 做 M3–M5 沉头",
+          "孔径余量，应对实测比标称略大的管子",
+          "精确 STEP 给管路、设备 CAD 用，STL 拿去打印",
+        ],
+        faqs: [
+          { q: "除了打印的夹块，还需要什么？", a: "一套 DIN 3015-1 管夹是两块夹块，上面一块钢制盖板，下面焊接底板（或导轨），用两颗 M6 螺栓穿起来，3 号用 M6 × 40。盖板、底板和螺栓都是标准外购件，生成器做的是塑料夹块。" },
+          { q: "管夹隔多远装一个？", a: "HYDAC 给轻型管夹的推荐间距随管径变大：12.7 mm 以下 1.0 m，到 22 mm 1.2 m，到 32 mm 1.5 m，到 38 mm 2.0 m，到 57 mm 2.7 m，到 75 mm 3.0 m。" },
+          { q: "两块夹块之间为什么有缝？", a: "这是 DIN 3015 的预紧间隙（STAUFF 按规格 0.4–0.8 mm）：夹块先碰到管子、再碰到彼此，所以拧紧螺栓能把管子夹紧。别把接合面磨平。" },
+        ],
+        sizes: {
+          title: "常用管径对应的 DIN 3015 规格",
+          intro: "默认 0.4 mm 余量下生成器选的规格，以及 STAUFF 标准表里的夹块总长、M6 螺栓间距和高度（宽度都是 30 mm）。点每一行直接打开那种管径。",
+          head: ["管 Ø", "规格", "长度", "螺栓间距", "高度", ""],
+          open: "打开",
+          note: "PPR 水管：20（4 分）、25（6 分）、32（1 寸）；孔边离螺栓孔不到 0.5 mm 塑料时，自动换大一号。",
+        },
+      },
+    },
+  },
+  {
+    slug: "hex-bit-holder-generator",
+    modelDir: "bit-holder",
+    icon: "⬡",
+    family: "storage",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { MOUNT: "wall", COLUMNS: "8", ROWS: "3" }, label: { en: "24 bits on a wall / pegboard plate", zh: "24 个批头的挂墙（洞洞板）款" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "The default 20-bit block exports as one exact solid of 270 faces, 266 of them planes — every hexagon wall and entry chamfer is a true flat face, so CAD measures the across-flats size and the hole pitch directly. The Gridfinity version adds the cylinders and cones of the standard feet (320 faces).",
+      ],
+      zh: [
+        "默认 20 孔的块导出为一个精确实体，270 个面，其中 266 个是平面——每个六角孔的孔壁和入口倒角都是真平面，在 CAD 里能直接量出对边尺寸和孔距。Gridfinity 款多了标准底脚的圆柱面和圆锥面（共 320 个面）。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a Gridfinity holder for 1/4\" screwdriver bits?", a: "Open https://www.forgent3d.com/en/generators/hex-bit-holder-generator?MOUNT=gridfinity — 20 upright hex holes spread over a 2 × 1 Gridfinity block with the same feet as our Gridfinity bins, so it drops into a standard baseplate. Change COLUMNS and ROWS for more or fewer bits." },
+        { q: "My printed bit holder is too tight (or too loose). What do I change?", a: "The hole clearance: printers differ, and holes that worked for other makers range from 6.25 to about 6.9 mm across flats for 6.35 mm bits. Print a three-hole tester first — https://www.forgent3d.com/en/generators/hex-bit-holder-generator?COLUMNS=3&ROWS=1&CLEARANCE=0.05 — and move CLEARANCE in 0.05 mm steps until a bit holds." },
+      ],
+      zh: [
+        { q: "怎样做一个放 1/4 英寸批头的 Gridfinity 收纳块？", a: "打开 https://www.forgent3d.com/zh/generators/hex-bit-holder-generator?MOUNT=gridfinity 就是：20 个竖直的六角孔，均匀铺在 2 × 1 的 Gridfinity 块上，底脚和我们的 Gridfinity 收纳盒一样，能直接放进标准底板。要多放少放就改 COLUMNS 和 ROWS。" },
+        { q: "打出来的批头孔太紧（或太松），改哪个参数？", a: "改孔的余量：每台打印机不一样，别人用着合适的孔，对 6.35 mm 的批头从 6.25 到 6.9 mm 左右（对边）都有。先打一个三孔的试块——https://www.forgent3d.com/zh/generators/hex-bit-holder-generator?COLUMNS=3&ROWS=1&CLEARANCE=0.05 ——按 0.05 mm 一档调 CLEARANCE，直到批头插得稳。" },
+      ],
+    },
+    // Evidence: generator-models/bit-holder/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["hex bit holder generator", "screwdriver bit holder stl", "gridfinity bit holder", "1/4 hex bit organizer 3d print"],
+      zh: ["批头收纳生成器", "批头收纳 3d打印", "螺丝刀批头收纳 Gridfinity", "六角批头架 STL"],
+    },
+    params: [
+      { key: "BIT_SIZE", default: "1/4in", range: "4mm / 1/4in / 5/16in", unit: "", label: { en: "Bit shank", zh: "批头柄" }, desc: { en: "Hex shank across flats per ISO 1173: 3.96 / 6.35 / 7.93 mm.", zh: "六角柄对边，按 ISO 1173：3.96 / 6.35 / 7.93 mm。" } },
+      { key: "CLEARANCE", default: "0.15", range: "-0.1 – 0.6", unit: "mm", label: { en: "Hole clearance", zh: "孔余量" }, desc: { en: "Added across flats; 0.15 is the median of published holders.", zh: "加在对边上；0.15 是公开设计的中位数。" } },
+      { key: "DEPTH", default: "10", range: "6 – 20", unit: "mm", label: { en: "Hole depth", zh: "孔深" }, desc: { en: "How deep each bit sits, over a 2 mm floor.", zh: "批头插入的深度，下面是 2 mm 的底。" } },
+      { key: "COLUMNS", default: "5", range: "1 – 10", unit: "", label: { en: "Columns", zh: "列数" }, desc: { en: "Bits per row.", zh: "每排的批头数。" } },
+      { key: "ROWS", default: "4", range: "1 – 8", unit: "", label: { en: "Rows", zh: "排数" }, desc: { en: "Up to 80 bits in one block.", zh: "一块最多 80 个批头。" } },
+      { key: "GAP", default: "2", range: "1.2 – 6", unit: "mm", label: { en: "Wall between holes", zh: "孔间壁厚" }, desc: { en: "More gap = easier to grip a bit.", zh: "间隔越大，越好捏住批头。" } },
+      { key: "PATTERN", default: "square", range: "square / staggered", unit: "", label: { en: "Pattern", zh: "排列" }, desc: { en: "Square grid or staggered (honeycomb) rows.", zh: "方阵或错位（蜂窝）排列。" } },
+      { key: "MOUNT", default: "none", range: "none / gridfinity / wall", unit: "", label: { en: "Mount", zh: "安装方式" }, desc: { en: "Free-standing, Gridfinity feet, or a screw plate on the 25 mm pegboard pitch.", zh: "直接摆放、Gridfinity 底脚，或按 25 mm 洞洞板孔距的挂墙板。" } },
+    ],
+    copy: {
+      en: {
+        name: "Hex Bit Holder Generator",
+        title: "Hex Bit Holder Generator — 1/4\" Bit Organizer, Gridfinity or Wall (STL / STEP) | Forgent3D",
+        description: "A holder for 1/4\", 4 mm or 5/16\" hex bits: up to 80 upright hex holes with a fit clearance, free-standing, on Gridfinity feet or as a pegboard plate. Free STL / STEP.",
+        h1: "Hex bit holder generator: a block of hex holes for screwdriver bits",
+        intro: "Choose the bit size and the grid — 20 1/4\" bits by default — and get a block of upright hex holes sized from the ISO 1173 shank, 10 mm deep with an entry chamfer. Stand it on the bench, drop it into a Gridfinity baseplate, or screw it to the wall or a pegboard. The hole clearance is a setting because printers differ.",
+        whyPoints: [
+          "1/4\" (6.35), 4 mm and 5/16\" hex shanks, holes sized from ISO 1173",
+          "Up to 10 × 8 bits, square or staggered, with an adjustable wall between holes",
+          "Gridfinity feet identical to our Gridfinity bins, or a wall plate on the 25 mm pegboard pitch",
+          "Prints upright as it stands, no supports",
+        ],
+        faqs: [
+          { q: "How tight will the bits sit?", a: "That depends on your printer: holes that held bits for other makers range from 6.25 to about 6.9 mm across flats, and one maker found 6.5 mm too loose. The default is 6.35 + 0.15 = 6.5. Print a small block first and move the clearance in 0.05 mm steps." },
+          { q: "Will long power bits fit?", a: "Yes. Insert bits are 25 mm long and power bits 50, 70 or 90 mm (Bosch, Wiha, Vessel, DeWalt), but they share the same 1/4\" hex shank, so they sit in the same holes — the long ones just stand taller." },
+          { q: "What screws hold the wall version?", a: "Countersunk wood screws of about 3.5 mm (#6): the plate has 3.9 mm holes with 8.3 mm countersinks, 25 mm apart to match pegboard." },
+        ],
+      },
+      zh: {
+        name: "批头收纳生成器",
+        title: "批头收纳生成器 — 1/4 英寸六角批头收纳块，可做 Gridfinity 或挂墙款，在线导出 STL / STEP | Forgent3D",
+        description: "在线生成批头收纳块：1/4 英寸、4 mm、5/16 英寸六角批头，竖直六角孔，方阵或错位，最多 80 个，可直接摆放、加 Gridfinity 底脚或做挂墙/洞洞板款，孔余量可调，免费导出 STL / STEP。",
+        h1: "批头收纳生成器：放螺丝刀批头的六角孔块",
+        intro: "选批头规格和排数——默认 20 个 1/4 英寸批头——得到一块竖直六角孔的收纳块，孔按 ISO 1173 的六角柄尺寸做，10 mm 深，带入口倒角。可以摆在桌上、放进 Gridfinity 底板，或者用螺丝挂到墙上、洞洞板上。孔的余量可调，因为每台打印机都不一样。",
+        whyPoints: [
+          "1/4 英寸（6.35）、4 mm、5/16 英寸六角柄，孔按 ISO 1173 定尺寸",
+          "最多 10 × 8 个，方阵或错位，孔间壁厚可调",
+          "Gridfinity 底脚和我们的 Gridfinity 收纳盒一致，或按 25 mm 洞洞板孔距做挂墙板",
+          "按摆放的姿态直接打印，不用支撑",
+        ],
+        faqs: [
+          { q: "批头插进去松紧怎么样？", a: "取决于你的打印机：别人用着合适的孔，对边从 6.25 到 6.9 mm 左右都有，也有人觉得 6.5 mm 太松。默认是 6.35 + 0.15 = 6.5。先打一个小块试试，按 0.05 mm 一档调余量。" },
+          { q: "长的电动批头能放吗？", a: "能。短批头长 25 mm，电动批头 50、70、90 mm（博世、Wiha、Vessel、得伟），但六角柄都是同一个 1/4 英寸，插进同样的孔，只是露出来更高。" },
+          { q: "挂墙款用什么螺丝？", a: "3.5 mm 左右的沉头木螺丝：挂板上是 3.9 mm 的孔、8.3 mm 的沉头，孔距 25 mm，对得上洞洞板。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "spool-holder-generator",
+    modelDir: "spool-holder",
+    icon: "◍",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { SPOOL_D: "250", SPOOL_W: "110" }, label: { en: "Roller stand for 3 kg spools (Ø250 × 110)", zh: "3 kg 料盘用的滚轮架（Ø250 × 110）" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "Exports as three exact solids — side frame, roller and spacer, placed as often as the stand needs them — with 33 faces: 19 planes, 12 true cylinders (the bearing pockets, axle and guard holes, the rollers) and 2 cones (the pocket lead-ins).",
+      ],
+      zh: [
+        "导出为三种精确实体——侧板、滚轮、垫圈，按需要的数量摆放——共 33 个面：19 个平面、12 个真圆柱面（轴承孔、轴孔和防跳杆孔、滚轮）、2 个圆锥面（轴承孔的入口倒角）。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a roller spool holder for 1 kg spools?", a: "Open https://www.forgent3d.com/en/generators/spool-holder-generator?SPOOL_D=200&SPOOL_W=70 — two side frames and two rollers with 608 bearings in their ends; a Ø200 × 70 spool rests on its rims at the geometry measured on Lattenberg's widely printed roller holder. You add four 608 bearings, M8 threaded rod with nuts for the axles and a Ø22 rod as the guard bar." },
+        { q: "Can it make wall brackets for a rod that holds several spools?", a: "Yes: https://www.forgent3d.com/en/generators/spool-holder-generator?TYPE=wall&ROD_D=16 gives two brackets for a 16 mm rod, its centre far enough from the wall for a Ø200 spool. Pick a rod that passes your spools' hub holes — 1 kg spools have 50–72 mm holes, but 5–8 kg spools only 32–36 mm." },
+      ],
+      zh: [
+        { q: "怎么做一个放 1 kg 料盘的滚轮料架？", a: "打开 https://www.forgent3d.com/zh/generators/spool-holder-generator?SPOOL_D=200&SPOOL_W=70 就是：两块侧板、两根两端装 608 轴承的滚轮，Ø200 × 70 的料盘靠两边料盘沿压在滚轮上，几何按打印量很大的 Lattenberg 滚轮架实测。另外准备 4 个 608 轴承、M8 螺纹杆和螺母当轴，一根 Ø22 的杆当防跳杆。" },
+        { q: "能做挂墙的支架、用一根杆挂好几盘吗？", a: "可以：https://www.forgent3d.com/zh/generators/spool-holder-generator?TYPE=wall&ROD_D=16 是一对放 16 mm 杆的挂墙支架，杆中心离墙的距离够挂 Ø200 的料盘。杆要穿得过料盘中孔——1 kg 料盘的孔是 50–72 mm，5–8 kg 的只有 32–36 mm。" },
+      ],
+    },
+    // Evidence: generator-models/spool-holder/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["spool holder generator", "filament spool holder stl", "spool roller holder 608 bearing", "wall mounted spool holder 3d print"],
+      zh: ["料盘架生成器", "耗材架 3d打印", "料盘支架 608 轴承", "挂墙料盘架 STL"],
+    },
+    params: [
+      { key: "TYPE", default: "rollers", range: "rollers / wall", unit: "", label: { en: "Holder type", zh: "料架类型" }, desc: { en: "A roller stand, or wall brackets for a rod.", zh: "滚轮架，或挂一根杆的挂墙支架。" } },
+      { key: "SPOOL_D", default: "200", range: "120 – 300", unit: "mm", label: { en: "Largest spool diameter", zh: "最大料盘直径" }, desc: { en: "1 kg spools are about 195–203 mm, 3 kg about 250, 5 kg 300.", zh: "1 kg 料盘约 195–203 mm，3 kg 约 250，5 kg 300。" } },
+      { key: "SPOOL_W", default: "70", range: "40 – 170", unit: "mm", label: { en: "Widest spool", zh: "最宽料盘" }, desc: { en: "1 kg spools are 57–69 mm wide.", zh: "1 kg 料盘宽 57–69 mm。" } },
+      { key: "BEARING", default: "608", range: "608 / 626 / 6001", unit: "", label: { en: "Bearing", zh: "轴承" }, desc: { en: "Two per roller, pressed into its ends.", zh: "每根滚轮两端各压一个。" } },
+      { key: "BEARING_FIT", default: "0.2", range: "-0.1 – 0.4", unit: "mm", label: { en: "Bearing pocket fit", zh: "轴承孔余量" }, desc: { en: "Added to the bearing's outside diameter.", zh: "加在轴承外径上。" } },
+      { key: "COUNT", default: "1", range: "1 – 4", unit: "", label: { en: "Spools side by side", zh: "并排料盘数" }, desc: { en: "Bays in one stand.", zh: "一个料架放几盘。" } },
+      { key: "ROD_D", default: "22", range: "8 – 32", unit: "mm", label: { en: "Rod diameter", zh: "杆直径" }, desc: { en: "The guard bar (rollers) or the spool rod (wall).", zh: "防跳杆（滚轮架）或挂料盘的杆（挂墙）。" } },
+      { key: "ROD_FIT", default: "0.2", range: "0 – 0.6", unit: "mm", label: { en: "Rod hole fit", zh: "杆孔余量" }, desc: { en: "Added to the rod diameter.", zh: "加在杆直径上。" } },
+    ],
+    copy: {
+      en: {
+        name: "Spool Holder Generator",
+        title: "Spool Holder Generator — Filament Roller Stands & Wall Brackets (STL / STEP) | Forgent3D",
+        description: "A filament spool holder sized to your spools: a roller stand on 608 bearings with a guard bar, 1–5 kg spools, up to four side by side, or wall rod brackets. Free STL / STEP.",
+        h1: "Spool holder generator: roller stands and wall brackets sized to your spools",
+        intro: "Enter the largest and widest spool you use — Ø200 × 70 mm by default — and get a roller stand: the spool rests on its rims on two rollers turning on 608 bearings, never touching the hub hole that varies most between brands, and a guard bar stops a nearly empty spool from climbing off. Or get a pair of wall brackets for a rod. The rollers sit at the geometry measured on Lattenberg's popular holder.",
+        whyPoints: [
+          "Roller spacing and height worked out from the spool size: a Ø200 spool sits at 42.5°, as on Lattenberg's holder",
+          "608, 626 or 6001 bearings in the roller ends, on bought threaded rod — no printed axles to snap",
+          "Guard bar against a near-empty spool lifting off",
+          "One to four spools side by side, or wall brackets for a rod",
+        ],
+        faqs: [
+          { q: "What do I need besides the printed parts?", a: "For one roller stand: four bearings (two per roller), two threaded rods with nuts as axles (M8 for 608), and a rod or dowel for the guard bar. Printed axles were left out on purpose — users of printed-pin holders report them breaking." },
+          { q: "Which filament and settings should I print it with?", a: "The popular wall-rod brackets are printed in PETG; roller stands are commonly printed with 4–5 walls and 15–25 % infill, and one maker's 3-wall, 20 % holder broke straight away. Print the wall brackets on their side as laid out: printed upright, the layers can snap under a full spool's weight." },
+          { q: "Will small and large spools both fit?", a: "The stand carries everything from the largest spool you enter down to a derived smallest one (about Ø150 at the default Ø200), so a 1 kg spool also fits a 3–5 kg stand. For 250–500 g mini spools, set the spool diameter to the mini size." },
+        ],
+      },
+      zh: {
+        name: "料盘架生成器",
+        title: "料盘架生成器 — 3D 打印耗材滚轮料架与挂墙支架，按料盘尺寸生成，在线导出 STL / STEP | Forgent3D",
+        description: "在线生成料盘架：608 轴承滚轮架带防跳杆，适合 1–5 kg 料盘，最多并排四盘；或一对挂墙杆支架。按你的料盘尺寸生成，免费导出 STL / STEP。",
+        h1: "料盘架生成器：按料盘尺寸做的滚轮料架和挂墙支架",
+        intro: "输入你用的最大、最宽的料盘——默认 Ø200 × 70 mm——得到一个滚轮料架：料盘靠两边的盘沿压在两根装 608 轴承的滚轮上，完全不碰各家尺寸最不统一的中孔；防跳杆挡住快用完的料盘，不让它被拽下滚轮。也可以生成一对挂墙杆支架。滚轮的位置按打印量很大的 Lattenberg 料架实测。",
+        whyPoints: [
+          "滚轮间距和高度按料盘尺寸算：Ø200 的料盘压在 42.5° 的位置，和 Lattenberg 的料架一样",
+          "608、626 或 6001 轴承装在滚轮两端，套在外购的螺纹杆上——没有会断的打印轴",
+          "防跳杆，防止快用完的料盘被拽起",
+          "一到四盘并排，或挂墙杆支架",
+        ],
+        faqs: [
+          { q: "除了打印件还需要什么？", a: "一个滚轮架：4 个轴承（每根滚轮两个），两根带螺母的螺纹杆当轴（608 用 M8），一根杆或木棍当防跳杆。特意没用打印的轴——用打印轴的料架，有用户反映轴会断。" },
+          { q: "用什么材料、什么参数打？", a: "热门的挂墙杆支架用 PETG 打；滚轮架常见 4–5 圈墙、15–25 % 填充，有人用 3 圈墙、20 % 打的料架一装上就断了。挂墙支架按模型里的姿态侧着打：竖着打的话，满盘的重量可能把层间压断。" },
+          { q: "大小料盘都能放吗？", a: "料架能放从你填的最大料盘到一个推算出的最小料盘（默认 Ø200 时约 Ø150），所以 1 kg 的料盘也能放在 3–5 kg 的料架上。250–500 g 的小料盘，就把料盘直径设成小料盘的尺寸。" },
+        ],
+      },
+    },
+  },
 ];
 
 // Merge each extra language's file into the entries: copy, parameter labels and descriptions, the example's
@@ -1761,7 +2247,7 @@ function baseSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩。调参数、3D 预览、导出 STL / STEP。",
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
@@ -1828,7 +2314,7 @@ function baseSharedCopy(locale) {
     catalogLabel: "Generators",
     catalogTitle: "3D Print Generators — Free Parametric Model Makers | Forgent3D",
     catalogDescription:
-      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks and fan grills. Tune parameters, preview in 3D, export STL / STEP.",
+      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders and spool holders. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",

@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generadores",
   catalogTitle: "Generadores para impresión 3D — Modelos paramétricos gratis | Forgent3D",
   catalogDescription:
-    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras y rejillas de ventilador. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
+    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas y portabobinas. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
   catalogH1: "Generadores para impresión 3D",
   catalogIntro:
     "Cada generador de esta página es un modelo CAD paramétrico de verdad: ajusta los parámetros y se reconstruye al instante, exporta STL / STEP y, para todo lo que vaya más allá de los deslizadores, el agente de IA edita el mismo modelo.",
@@ -1160,6 +1160,379 @@ export const generators = {
       "acople 5x8 impreso en 3d",
       "acoplamiento rígido 5 a 8 mm",
       "acoplador husillo t8 stl",
+    ],
+  },
+
+  "desk-grommet-generator": {
+    copy: {
+      name: "Generador de pasacables de escritorio",
+      title: "Generador de pasacables de escritorio — Agujeros de 30–100 mm | Forgent3D",
+      description:
+        "Pasacables de escritorio a la medida de tu agujero: casquillo a presión y tapa enrasada con ranura para cables, ciega o sin tapa. Agujero de 30–100 mm. STL / STEP gratis.",
+      h1: "Generador de pasacables de escritorio: casquillo y tapa para cualquier agujero de cables",
+      intro:
+        "Mide el agujero taladrado (60 mm por defecto) y obtén las dos piezas que los fabricantes venden como juego de pasacables: un casquillo con reborde que entra a presión en el agujero y una tapa que queda enrasada con el reborde, con una ranura en U para los cables, cerrada o sin tapa. Ajusta la profundidad del casquillo al tablero de tu mesa y exporta STL para imprimir o STEP para el CAD de muebles.",
+      whyPoints: [
+        "Cualquier agujero medido de 30 a 100 mm, con un ajuste de holgura para el encaje a presión",
+        "Tapa con ranura para cables, tapa ciega o solo el casquillo: la tapa queda enrasada, como en los juegos de Mockett, Häfele y Sugatsune",
+        "Profundidad del casquillo de 8–45 mm: 16 mm sirven para cualquier tablero de 16 mm o más, o iguálala al grosor de tu tablero",
+        "Las dos piezas se apoyan en plano tal como se imprimen: sin soportes",
+      ],
+      faqs: [
+        {
+          q: "¿Qué medida pongo: la de la sierra de corona o la del agujero?",
+          a: "La del agujero, medida. Las sierras de corona cortan un poco de más (un pasacables impreso “de 70 mm” acabó encajando en un agujero de 65 mm), así que mide el agujero con un calibre y escribe esa medida. Por defecto, el casquillo sale 0.3 mm más pequeño que el agujero.",
+        },
+        {
+          q: "¿Con cuánto ajuste debe entrar el casquillo?",
+          a: "Quienes los diseñan dejan el casquillo 0.2–0.5 mm por debajo del agujero para que entre sin forzarlo; el valor por defecto es 0.3. Si no entra, sube la holgura 0.1; si se sale, bájala 0.1. Un agujero que quedó demasiado grande aún tiene arreglo con un cordón fino de sellador alrededor del casquillo.",
+        },
+        {
+          q: "¿Cómo lo imprimo?",
+          a: "Tal como vienen colocadas las piezas: el casquillo con el reborde hacia abajo y la tapa boca abajo, ambas sin soportes. La mayoría de los pasacables impresos son de PLA; el ABS o el PETG dan un encaje a presión con algo más de agarre. Usa algo de relleno (en torno al 15 % en lugar de 0 %), porque la tapa aguanta tirones repetidos de los cables.",
+        },
+      ],
+      sizes: {
+        title: "Medidas de agujero habituales",
+        intro:
+          "Reborde = agujero + 12 mm (6 mm de vuelo por cada lado); el paso de cables es el interior del casquillo, agujero − 5.1 mm con la holgura por defecto y una pared de 2.4 mm; las ranuras miden más o menos un tercio del agujero, como en las tapas comerciales. Cada fila abre el generador con esa medida.",
+        head: ["Ø agujero", "Ø reborde", "Ø paso de cables", "Ranura", ""],
+        open: "Abrir",
+        note: "35, 50, 60 y 80 mm son las medidas de sierra de corona más comunes; los anuncios chinos citan sobre todo 50 mm, luego 53 mm, y 63.5 mm (2½\") es habitual en las mesas de oficina de EE. UU.",
+      },
+    },
+    params: {
+      HOLE_D: { label: "Diámetro del agujero", desc: "El agujero taladrado tal como lo mides, no la medida de la sierra." },
+      DEPTH: {
+        label: "Profundidad del casquillo",
+        desc: "Cuánto baja el casquillo por debajo del tablero; como máximo, el grosor del tablero.",
+      },
+      RIM: { label: "Vuelo del reborde", desc: "Cuánto sobresale el reborde del agujero por cada lado." },
+      CLEARANCE: { label: "Holgura de ajuste", desc: "Cuánto más pequeño que el agujero sale el casquillo." },
+      CAP: { label: "Tapa", desc: "Con ranura para cables, ciega o sin tapa." },
+      SLOT_WIDTH: { label: "Ancho de la ranura", desc: "Como máximo dos tercios del agujero; lo típico es un tercio." },
+    },
+    example: "agujero de 50 mm, ranura para cables de 17 mm",
+    step: [
+      "Se exporta como dos sólidos exactos, casquillo y tapa, con 21 caras: 10 planos, 8 cilindros reales (el casquillo, el reborde, el interior y el rebaje en el que asienta la tapa; el borde de la tapa, su faldón y el extremo redondo de la ranura) y 3 conos (los chaflanes), así que el CAD de muebles lee directamente la medida del agujero y el asiento de la tapa.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo consigo un pasacables para un agujero de 50 mm en la mesa?",
+        a: "Abre https://www.forgent3d.com/es/generators/desk-grommet-generator?HOLE_D=50&SLOT_WIDTH=17: un casquillo de 49.7 mm para el agujero de 50 mm, un reborde de 62 mm y una tapa con una ranura para cables de 17 mm. Exporta STL para imprimirlo, o STEP para CAD.",
+      },
+      {
+        q: "¿Puedo hacer una tapa ciega, o un casquillo que atraviese un tablero de 25 mm?",
+        a: "Sí: CAP=solid da una tapa sin ranura y DEPTH=25 hace que el casquillo termine enrasado con la cara inferior: https://www.forgent3d.com/es/generators/desk-grommet-generator?CAP=solid&DEPTH=25. Para cualquier mesa de 16 mm o más basta el casquillo de 16 mm por defecto; los pasacables comerciales se hacen igual.",
+      },
+    ],
+    keywords: [
+      "generador de pasacables",
+      "pasacables de escritorio stl",
+      "tapa pasacables 60mm",
+      "pasacables para mesa impreso en 3d",
+      "pasacables de escritorio a medida",
+    ],
+  },
+
+  "18650-battery-holder-generator": {
+    copy: {
+      name: "Generador de soportes 18650",
+      title: "Generador de soportes 18650 — Separadores para packs de batería | Forgent3D",
+      description:
+        "Soportes para celdas 18650, 21700 o 26650 para packs soldados por puntos: en cuadrícula o escalonados, canales para tira de níquel, cables de balance. STL / STEP gratis.",
+      h1: "Generador de soportes 18650: separadores de celdas para montar packs",
+      intro:
+        "Elige la celda y la cuadrícula (3 × 5 celdas 18650 por defecto) y obtén la pareja de placas en la que se monta un pack: cada celda asienta en un alojamiento con un reborde por fuera; el reborde deja una ventana para la tira de níquel, y un canal de 8 mm guía la tira a lo largo de la placa. La placa inferior está dispuesta para que coincida al darle la vuelta sobre las celdas.",
+      whyPoints: [
+        "Celdas 18650, 21700 y 26650, en cuadrícula o en filas escalonadas (en panal)",
+        "Paso de 20.2 mm por defecto, el de los soportes comerciales y la tira de níquel troquelada; nunca menos de 1 mm entre celdas",
+        "Canales para tira de níquel de 7–8 mm, agujeros opcionales para cables de balance, abierto para soldar o cerrado para almacenar",
+        "Las placas se juntan manteniendo el paso para packs más grandes que una placa",
+      ],
+      faqs: [
+        {
+          q: "¿En qué filamento lo imprimo?",
+          a: "PETG, ASA o ABS. Las celdas pueden descargarse a hasta 60 °C de temperatura ambiente, con la carcasa llegando a 75 °C, y el PLA impreso empieza a ceder hacia los 60 °C: sirve para almacenar, no dentro de un pack en funcionamiento.",
+        },
+        {
+          q: "¿Por qué no puedo poner el paso de 19 mm que usan algunos soportes escalonados?",
+          a: "Las hojas de datos de las celdas de Samsung piden más de 1 mm entre celdas, y un paso de 19 mm deja más o menos la mitad. La pared mínima de este generador (1 mm más la holgura del alojamiento) mantiene esa separación; los 20.2 mm por defecto coinciden además con la tira de níquel troquelada que se vende para ese paso.",
+        },
+        {
+          q: "¿Cómo se montan las dos placas?",
+          a: "Mete las celdas a presión en una placa, con el reborde hacia fuera, y luego da la vuelta a la segunda placa sobre los otros extremos: se genera como imagen especular, así que los alojamientos coinciden incluso en disposiciones escalonadas con un número par de filas.",
+        },
+      ],
+      sizes: {
+        title: "Formatos de celda",
+        intro:
+          "Alojamiento = diámetro de la celda + 0.3 mm de holgura; paso = alojamiento + 1.5 mm de pared, ambos con los valores por defecto. Cada fila abre el generador con esa celda.",
+        head: ["Celda", "Ø celda", "Ø alojamiento", "Paso", ""],
+        open: "Abrir",
+        note: "Las celdas varían según el fabricante: las 18650 miden como mucho 18.4–18.6 mm, y las protegidas son más gruesas. Sube la holgura si las tuyas no entran.",
+      },
+    },
+    params: {
+      CELL: { label: "Celda", desc: "Diámetro nominal de 18.4 / 21.5 / 26.4 mm." },
+      CLEARANCE: {
+        label: "Holgura del alojamiento",
+        desc: "Se suma al diámetro de la celda: alojamientos de 18.7 mm para 18650.",
+      },
+      LAYOUT: { label: "Disposición", desc: "Cuadrícula, o filas escalonadas (en panal) desplazadas medio paso." },
+      ROWS: { label: "Filas", desc: "Hasta 3 por placa; imprime varias placas para packs más grandes." },
+      COLS: { label: "Columnas", desc: "Hasta 5 por placa." },
+      WALL: { label: "Pared entre celdas", desc: "1.5 da el paso habitual de 20.2 mm para 18650." },
+      WIRE_HOLES: { label: "Agujeros para cables de balance", desc: "Agujeros de Ø3 entre celdas para los cables del BMS." },
+      HEIGHT: { label: "Altura del soporte", desc: "Cuánto entra cada celda en la placa." },
+      FRAME: { label: "Marco exterior", desc: "Con 0, las placas se juntan a tope manteniendo el paso." },
+      END: {
+        label: "Extremo",
+        desc: "Abierto con reborde para soldar por puntos, o con fondo cerrado para almacenar.",
+      },
+      LIP: {
+        label: "Ancho del reborde",
+        desc: "Cuánto cubre el reborde el extremo de la celda; el resto es la ventana para la tira.",
+      },
+      STRIP_WIDTH: {
+        label: "Ancho del canal para la tira",
+        desc: "Canales de 0.8 mm de profundidad para tira de níquel de 7–8 mm; 0 para una cara plana.",
+      },
+    },
+    example: "celdas 21700, escalonadas (en panal)",
+    step: [
+      "Cada placa de 3 × 5 se exporta como un sólido exacto de 188 caras: 158 planos y 30 cilindros reales (los 15 alojamientos de las celdas y las 15 ventanas para la tira), así que el paso, el alojamiento y la ventana se leen directamente en CAD cuando diseñas el pack a su alrededor.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo imprimo soportes para un pack 3S5P de celdas 18650?",
+        a: "Abre https://www.forgent3d.com/es/generators/18650-battery-holder-generator?ROWS=3&COLS=5: una placa superior y otra inferior para 15 celdas con el paso habitual de 20.2 mm, alojamientos de Ø18.7 y canales de 8 mm para la tira de níquel. Imprime las dos, mete las celdas a presión en una y da la vuelta a la otra sobre ellas.",
+      },
+      {
+        q: "Mi pack es más grande que 3 × 5. ¿Puedo hacer una sola placa para un 13S4P?",
+        a: "Una placa admite como máximo 3 × 5 celdas; imprime varias. Con FRAME=0, las placas terminan justo medio paso más allá de las celdas exteriores, así que se juntan a tope manteniendo el paso: https://www.forgent3d.com/es/generators/18650-battery-holder-generator?ROWS=3&COLS=5&FRAME=0",
+      },
+    ],
+    keywords: [
+      "generador de soportes 18650",
+      "soporte 18650 stl",
+      "separador de celdas 18650 impreso en 3d",
+      "soporte celdas 21700 stl",
+      "soporte para pack de baterías 18650 paramétrico",
+    ],
+  },
+
+  "pipe-clamp-generator": {
+    copy: {
+      name: "Generador de abrazaderas para tubo",
+      title: "Generador de abrazaderas para tubo — DIN 3015 y omega, Ø6–101.6 | Forgent3D",
+      description:
+        "Abrazaderas para tubo de 6 a 101.6 mm de diámetro: semiabrazaderas de plástico DIN 3015-1 según la norma, u omega de dos agujeros avellanados. STL / STEP gratis.",
+      h1: "Generador de abrazaderas para tubo: semiabrazaderas DIN 3015 y omegas de dos agujeros",
+      intro:
+        "Introduce el diámetro exterior del tubo (20 mm por defecto) y obtén las semiabrazaderas de plástico de una abrazadera DIN 3015-1 de serie ligera, dimensionadas según la tabla de la norma y con agujeros para tornillos M6, o una abrazadera omega de una pieza con dos agujeros para atornillar a la pared una tubería o un tubo eléctrico. Las semiabrazaderas DIN quedan separadas por la holgura de apriete de la norma, así que al apretar los tornillos sujetan el tubo.",
+      whyPoints: [
+        "Tamaños 1–8 de la DIN 3015-1 elegidos a partir del diámetro del tubo: largo del cuerpo, distancia entre tornillos y altura según la tabla de STAUFF",
+        "Abrazadera omega de dos agujeros, con agujeros según ISO 273 y avellanados según ISO 10642 para M3–M5",
+        "Holgura del agujero para tubos que miden más que su medida nominal",
+        "STEP exacto para el CAD de instalaciones y máquinas, STL para imprimir",
+      ],
+      faqs: [
+        {
+          q: "¿Qué necesito además de las semiabrazaderas impresas?",
+          a: "Una abrazadera DIN 3015-1 son las dos semiabrazaderas entre una placa de cubierta de acero arriba y una placa para soldar (o un carril) abajo, unidas por dos tornillos M6; el tamaño 3 lleva M6 × 40. Las placas y los tornillos son piezas estándar que se compran: el generador hace las semiabrazaderas de plástico.",
+        },
+        {
+          q: "¿Cada cuánto pongo una abrazadera?",
+          a: "La separación que recomienda HYDAC para las abrazaderas de serie ligera crece con el tubo: 1.0 m hasta 12.7 mm, 1.2 m hasta 22 mm, 1.5 m hasta 32 mm, 2.0 m hasta 38 mm, 2.7 m hasta 57 mm y 3.0 m hasta 75 mm.",
+        },
+        {
+          q: "¿Por qué queda un hueco entre las dos semiabrazaderas?",
+          a: "Es la holgura de apriete de la DIN 3015 (0.4–0.8 mm según el tamaño en los cuerpos de STAUFF): las semiabrazaderas tocan el tubo antes de tocarse entre sí, así que al apretar los tornillos se sujeta el tubo. Déjalo así: no lijes las caras de unión hasta dejarlas a ras.",
+        },
+      ],
+      sizes: {
+        title: "Tamaños DIN 3015 para tubos habituales",
+        intro:
+          "El tamaño que elige el generador con la holgura por defecto de 0.4 mm, con el largo de la pareja de semiabrazaderas, la distancia entre tornillos M6 y la altura según la tabla de STAUFF (todas de 30 mm de ancho). Cada fila abre el generador con ese tubo.",
+        head: ["Ø tubo", "Tamaño", "Largo", "Entre tornillos", "Altura", ""],
+        open: "Abrir",
+        note: "Tubo de agua PPR: 20 (½\"), 25 (¾\"), 32 (1\"); un agujero que dejaría menos de 0.5 mm de plástico junto a un agujero de tornillo pasa al tamaño siguiente.",
+      },
+    },
+    params: {
+      PIPE_OD: {
+        label: "Diámetro exterior del tubo",
+        desc: "Mide el tubo; en la DIN 3015 decide el tamaño de la abrazadera.",
+      },
+      TYPE: { label: "Tipo de abrazadera", desc: "Semiabrazaderas de plástico DIN 3015-1, u omega de dos agujeros." },
+      CLEARANCE: {
+        label: "Holgura del agujero",
+        desc: "Se suma al diámetro del tubo; el tubo de plástico suele medir un poco más que su medida nominal.",
+      },
+      WIDTH: { label: "Ancho (omega)", desc: "A lo largo del tubo." },
+      TAB: { label: "Largo de la pestaña (omega)", desc: "Cada pestaña para tornillo, más allá del arco." },
+      SCREW: { label: "Tornillo (omega)", desc: "Agujeros de paso según ISO 273, serie media." },
+      COUNTERSINK: { label: "Agujeros avellanados (omega)", desc: "Asientos para cabezas avellanadas según ISO 10642." },
+    },
+    example: "omega de dos agujeros para un tubo de 25 mm",
+    step: [
+      "Una semiabrazadera DIN 3015 se exporta como un sólido exacto de 10 caras (7 planos y 3 cilindros reales: el medio agujero y los dos agujeros M6), y el archivo lleva la misma semiabrazadera dos veces. La omega tiene 18 caras: 12 planos, 4 cilindros y 2 conos para los avellanados.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo consigo una abrazadera DIN 3015 para un tubo de 20 mm?",
+        a: "Abre https://www.forgent3d.com/es/generators/pipe-clamp-generator?PIPE_OD=20: las dos semiabrazaderas de plástico de una abrazadera de serie ligera de tamaño 3, de 50 × 30 mm, con tornillos M6 a 33 mm entre sí y un agujero de 20.4 mm. Las placas de acero (de cubierta y para soldar) y los tornillos se compran; exporta STEP para colocarla en CAD.",
+      },
+      {
+        q: "Necesito una omega de dos agujeros para un tubo eléctrico de 25 mm, con tornillos M4.",
+        a: "https://www.forgent3d.com/es/generators/pipe-clamp-generator?TYPE=saddle&PIPE_OD=25&SCREW=M4: una abrazadera en U de 25 mm de ancho con agujeros avellanados para M4 en las dos pestañas. Se imprime de lado para que las capas sigan el arco.",
+      },
+    ],
+    keywords: [
+      "generador de abrazaderas para tubo",
+      "abrazadera din 3015 stl",
+      "abrazadera para tubo hidráulico impresa en 3d",
+      "abrazadera omega stl",
+      "abrazadera para tubería impresa en 3d",
+    ],
+  },
+
+  "hex-bit-holder-generator": {
+    copy: {
+      name: "Generador de soportes para puntas",
+      title: "Generador de soportes para puntas — 1/4\", Gridfinity o pared | Forgent3D",
+      description:
+        "Soporte para puntas hexagonales de 1/4\", 4 mm o 5/16\": agujeros en cuadrícula o escalonados, hasta 80 puntas, de sobremesa, Gridfinity o de pared. STL / STEP gratis.",
+      h1: "Generador de soportes para puntas: un bloque de agujeros hexagonales para puntas de destornillador",
+      intro:
+        "Elige la medida de las puntas y la cuadrícula (20 puntas de 1/4\" por defecto) y obtén un bloque de agujeros hexagonales verticales dimensionados a partir del vástago ISO 1173, de 10 mm de profundidad y con chaflán de entrada. Déjalo sobre el banco, mételo en una placa base Gridfinity o atorníllalo a la pared o a un panel perforado. La holgura de los agujeros es un parámetro porque cada impresora es distinta.",
+      whyPoints: [
+        "Vástagos hexagonales de 1/4\" (6.35), 4 mm y 5/16\", con agujeros según ISO 1173",
+        "Hasta 10 × 8 puntas, en cuadrícula o escalonadas, con pared ajustable entre agujeros",
+        "Pies Gridfinity idénticos a los de nuestros contenedores Gridfinity, o una placa de pared con el paso de 25 mm de los paneles perforados",
+        "Se imprime de pie, tal como se usa, sin soportes",
+      ],
+      faqs: [
+        {
+          q: "¿Con cuánto ajuste quedarán las puntas?",
+          a: "Depende de tu impresora: los agujeros que les han funcionado a otros van de 6.25 a unos 6.9 mm entre caras, y alguien encontró demasiado holgado uno de 6.5 mm. El valor por defecto es 6.35 + 0.15 = 6.5. Imprime primero un bloque pequeño y mueve la holgura de 0.05 en 0.05 mm.",
+        },
+        {
+          q: "¿Caben las puntas largas para atornillador?",
+          a: "Sí. Las puntas de inserción miden 25 mm y las puntas largas para atornillador 50, 70 o 90 mm (Bosch, Wiha, Vessel, DeWalt), pero comparten el mismo vástago hexagonal de 1/4\", así que entran en los mismos agujeros: las largas simplemente sobresalen más.",
+        },
+        {
+          q: "¿Qué tornillos sujetan la versión de pared?",
+          a: "Tornillos para madera de cabeza avellanada de unos 3.5 mm (#6): la placa tiene agujeros de 3.9 mm con avellanados de 8.3 mm, separados 25 mm para coincidir con el panel perforado.",
+        },
+      ],
+    },
+    params: {
+      BIT_SIZE: {
+        label: "Vástago de la punta",
+        desc: "Vástago hexagonal, medida entre caras según ISO 1173: 3.96 / 6.35 / 7.93 mm.",
+      },
+      CLEARANCE: {
+        label: "Holgura del agujero",
+        desc: "Se suma a la medida entre caras; 0.15 es la mediana de los soportes publicados.",
+      },
+      DEPTH: { label: "Profundidad del agujero", desc: "Cuánto entra cada punta, sobre un fondo de 2 mm." },
+      COLUMNS: { label: "Columnas", desc: "Puntas por fila." },
+      ROWS: { label: "Filas", desc: "Hasta 80 puntas en un bloque." },
+      GAP: { label: "Pared entre agujeros", desc: "Más separación = más fácil agarrar una punta." },
+      PATTERN: { label: "Disposición", desc: "Cuadrícula o filas escalonadas (en panal)." },
+      MOUNT: {
+        label: "Montaje",
+        desc: "De sobremesa, con pies Gridfinity o una placa para atornillar con el paso de 25 mm de los paneles perforados.",
+      },
+    },
+    example: "24 puntas en una placa de pared / panel perforado",
+    step: [
+      "El bloque de 20 puntas por defecto se exporta como un sólido exacto de 270 caras, 266 de ellas planas: cada pared hexagonal y cada chaflán de entrada es una cara plana real, así que el CAD mide directamente la medida entre caras y el paso entre agujeros. La versión Gridfinity añade los cilindros y los conos de los pies estándar (320 caras).",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo hago un soporte Gridfinity para puntas de destornillador de 1/4\"?",
+        a: "Abre https://www.forgent3d.com/es/generators/hex-bit-holder-generator?MOUNT=gridfinity: 20 agujeros hexagonales verticales repartidos sobre un bloque Gridfinity de 2 × 1 con los mismos pies que nuestros contenedores Gridfinity, así que encaja en una placa base estándar. Cambia COLUMNS y ROWS para más o menos puntas.",
+      },
+      {
+        q: "Mi soporte de puntas impreso queda demasiado justo (o demasiado holgado). ¿Qué cambio?",
+        a: "La holgura del agujero: cada impresora es distinta, y los agujeros que les han funcionado a otros van de 6.25 a unos 6.9 mm entre caras para puntas de 6.35 mm. Imprime primero una probeta de tres agujeros (https://www.forgent3d.com/es/generators/hex-bit-holder-generator?COLUMNS=3&ROWS=1&CLEARANCE=0.05) y mueve CLEARANCE de 0.05 en 0.05 mm hasta que la punta quede sujeta.",
+      },
+    ],
+    keywords: [
+      "generador de soportes para puntas",
+      "soporte para puntas de destornillador stl",
+      "organizador de puntas impreso en 3d",
+      "soporte puntas gridfinity",
+      "organizador de puntas hexagonales 1/4",
+    ],
+  },
+
+  "spool-holder-generator": {
+    copy: {
+      name: "Generador de portabobinas",
+      title: "Generador de portabobinas — Soporte de bobina de filamento | Forgent3D",
+      description:
+        "Portabobinas a tu medida: rodillos sobre rodamientos 608 con barra de seguridad, para bobinas de 1–5 kg y hasta cuatro a la vez, o soportes de pared. STL / STEP gratis.",
+      h1: "Generador de portabobinas: soportes de rodillos y de pared a la medida de tus bobinas",
+      intro:
+        "Introduce la bobina más grande y la más ancha que uses (Ø200 × 70 mm por defecto) y obtén un soporte de rodillos: la bobina apoya por sus bordes sobre dos rodillos que giran sobre rodamientos 608, sin tocar nunca el agujero central, que es lo que más varía de una marca a otra, y una barra de seguridad impide que una bobina casi vacía se salga trepando. O bien obtén un par de soportes de pared para una barra. Los rodillos están colocados según la geometría medida en el popular soporte de Lattenberg.",
+      whyPoints: [
+        "Separación y altura de los rodillos calculadas a partir de la bobina: una bobina de Ø200 apoya a 42.5°, como en el soporte de Lattenberg",
+        "Rodamientos 608, 626 o 6001 en los extremos de los rodillos, sobre varilla roscada comprada: sin ejes impresos que se partan",
+        "Barra de seguridad para que una bobina casi vacía no se levante",
+        "De una a cuatro bobinas una al lado de otra, o soportes de pared para una barra",
+      ],
+      faqs: [
+        {
+          q: "¿Qué necesito además de las piezas impresas?",
+          a: "Para un soporte de rodillos: cuatro rodamientos (dos por rodillo), dos varillas roscadas con tuercas como ejes (M8 para el 608) y una varilla o un listón redondo para la barra de seguridad. Los ejes impresos se dejaron fuera a propósito: quienes usan soportes con pasadores impresos cuentan que se rompen.",
+        },
+        {
+          q: "¿En qué filamento lo imprimo?",
+          a: "Los soportes de pared para barra más populares se imprimen en PETG; los soportes de rodillos suelen imprimirse con 4–5 paredes y 15–25 % de relleno, y el soporte de un maker con 3 paredes y 20 % se rompió enseguida. Imprime los soportes de pared de lado, tal como vienen colocados: impresos de pie, las capas pueden partirse con el peso de una bobina llena.",
+        },
+        {
+          q: "¿Caben tanto bobinas pequeñas como grandes?",
+          a: "El soporte admite desde la bobina más grande que indiques hasta una mínima calculada a partir de ella (unos Ø150 con los Ø200 por defecto), así que una bobina de 1 kg también cabe en un soporte para 3–5 kg. Para minibobinas de 250–500 g, pon como diámetro de bobina el de la minibobina.",
+        },
+      ],
+    },
+    params: {
+      TYPE: { label: "Tipo de soporte", desc: "Un soporte de rodillos, o soportes de pared para una barra." },
+      SPOOL_D: {
+        label: "Diámetro de la bobina más grande",
+        desc: "Las bobinas de 1 kg miden unos 195–203 mm; las de 3 kg, unos 250; las de 5 kg, 300.",
+      },
+      SPOOL_W: { label: "Bobina más ancha", desc: "Las bobinas de 1 kg miden 57–69 mm de ancho." },
+      BEARING: { label: "Rodamiento", desc: "Dos por rodillo, metidos a presión en sus extremos." },
+      BEARING_FIT: { label: "Ajuste del alojamiento del rodamiento", desc: "Se suma al diámetro exterior del rodamiento." },
+      COUNT: { label: "Bobinas una al lado de otra", desc: "Puestos en un mismo soporte." },
+      ROD_D: { label: "Diámetro de la barra", desc: "La barra de seguridad (rodillos) o la barra para las bobinas (pared)." },
+      ROD_FIT: { label: "Ajuste del agujero de la barra", desc: "Se suma al diámetro de la barra." },
+    },
+    example: "soporte de rodillos para bobinas de 3 kg (Ø250 × 110)",
+    step: [
+      "Se exporta como tres sólidos exactos (lateral, rodillo y separador, colocados tantas veces como los necesita el soporte) con 33 caras: 19 planos, 12 cilindros reales (los alojamientos de los rodamientos, los agujeros del eje y de la barra de seguridad, los rodillos) y 2 conos (las entradas de los alojamientos).",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo hago un portabobinas de rodillos para bobinas de 1 kg?",
+        a: "Abre https://www.forgent3d.com/es/generators/spool-holder-generator?SPOOL_D=200&SPOOL_W=70: dos laterales y dos rodillos con rodamientos 608 en sus extremos; una bobina de Ø200 × 70 apoya por sus bordes con la geometría medida en el soporte de rodillos de Lattenberg, uno de los más impresos. Tú pones cuatro rodamientos 608, varilla roscada M8 con tuercas para los ejes y una varilla de Ø22 como barra de seguridad.",
+      },
+      {
+        q: "¿Puede hacer soportes de pared para una barra que sostenga varias bobinas?",
+        a: "Sí: https://www.forgent3d.com/es/generators/spool-holder-generator?TYPE=wall&ROD_D=16 da dos soportes para una barra de 16 mm, con su centro lo bastante lejos de la pared para una bobina de Ø200. Elige una barra que pase por el agujero central de tus bobinas: las de 1 kg tienen agujeros de 50–72 mm, pero las de 5–8 kg solo de 32–36 mm.",
+      },
+    ],
+    keywords: [
+      "generador de portabobinas",
+      "portabobinas filamento stl",
+      "soporte de bobina de filamento impreso en 3d",
+      "soporte bobina filamento rodamientos 608",
+      "portabobinas de pared",
     ],
   },
 };

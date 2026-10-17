@@ -76,6 +76,11 @@ The generators (<name> is the tool's id):
 - Gridfinity bin `gridfinity-bin` — grid size, height units, dividers, magnet holes, scoop: https://www.forgent3d.com/en/generators/gridfinity-bin-generator (e.g. ?GRID_X=2&GRID_Y=1&HEIGHT_U=3&DIV_X=3)
 - Gridfinity baseplate `gridfinity-baseplate` — grid size, thin or skeletonized, magnet and screw holes: https://www.forgent3d.com/en/generators/gridfinity-baseplate-generator (e.g. ?GRID_X=5&GRID_Y=4)
 - Tool tray `pocket` — tray with a pocket shaped like the part, fit clearance and depth: https://www.forgent3d.com/en/generators/tool-tray-generator (e.g. ?TRAY_L=200&TRAY_W=120&TRAY_T=15&PART_DEPTH=12)
+- Desk grommet `desk-grommet` — press-fit sleeve and flush cap (cable slot, solid or none) for any measured desk hole 30–100 mm, sleeve depth 8–45 mm: https://www.forgent3d.com/en/generators/desk-grommet-generator (e.g. ?HOLE_D=50&SLOT_WIDTH=17)
+- 18650 battery holder `battery-holder` — top and bottom cell-holder plates for spot-welded packs, 18650 / 21700 / 26650, square or staggered, up to 3 × 5 cells per plate (plates tile on the pitch), nickel-strip channels: https://www.forgent3d.com/en/generators/18650-battery-holder-generator (e.g. ?CELL=21700&LAYOUT=staggered)
+- Pipe clamp `pipe-clamp` — DIN 3015-1 light-series plastic clamp jaws sized from the standard table by pipe OD (6–101.6 mm, M6 bolts), or a two-hole saddle strap with M3–M5 countersunk holes: https://www.forgent3d.com/en/generators/pipe-clamp-generator (e.g. ?PIPE_OD=20 or ?TYPE=saddle&PIPE_OD=25)
+- Hex bit holder `bit-holder` — block of upright hex holes for 1/4", 4 mm or 5/16" bits (ISO 1173), up to 10 × 8, free-standing, on Gridfinity feet or as a pegboard/wall plate, hole clearance setting: https://www.forgent3d.com/en/generators/hex-bit-holder-generator (e.g. ?MOUNT=gridfinity)
+- Spool holder `spool-holder` — filament roller stand on 608/626/6001 bearings with a guard bar for spools up to Ø300 × 170, 1–4 side by side, or wall brackets for a rod: https://www.forgent3d.com/en/generators/spool-holder-generator (e.g. ?SPOOL_D=250&SPOOL_W=110)
 
 The pages in Chinese, German, Spanish and Japanese use /zh/, /de/, /es/ or /ja/ in place of /en/ and take the same parameters; link the one in the user's language. The tool itself speaks English and Chinese.
 

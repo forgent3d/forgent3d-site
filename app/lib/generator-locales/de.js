@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generatoren",
   catalogTitle: "3D-Druck-Generatoren — kostenlose parametrische Modelle | Forgent3D",
   catalogDescription:
-    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager und Lüftergitter. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
+    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter und Filament-Spulenhalter. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
   catalogH1: "3D-Druck-Generatoren",
   catalogIntro:
     "Jeder Generator hier ist ein echtes parametrisches CAD-Modell: Ändern Sie die Parameter, baut es sich live neu auf, und Sie exportieren STL / STEP – was über die Schieberegler hinausgeht, ändert der KI-Agent am selben Modell.",
@@ -1140,6 +1140,364 @@ export const generators = {
       "starre wellenkupplung 3d druck",
       "wellenkupplung stl",
       "kupplung gewindespindel schrittmotor",
+    ],
+  },
+
+  "desk-grommet-generator": {
+    copy: {
+      name: "Kabeldurchführungs-Generator",
+      title: "Kabeldurchführungs-Generator — Schreibtisch, Ø30–100 mm (STL) | Forgent3D",
+      description:
+        "Kabeldurchführung für Ihr Tischloch: Hülse zum Einpressen und bündiger Deckel mit Kabelschlitz, geschlossen oder ohne. Gemessenes Loch 30–100 mm. STL/STEP gratis.",
+      h1: "Kabeldurchführungs-Generator: Hülse und Deckel für jedes Kabelloch im Schreibtisch",
+      intro:
+        "Messen Sie das gebohrte Loch – standardmäßig 60 mm – und Sie erhalten die zwei Teile, die Hersteller als Kabeldurchführung verkaufen: eine Hülse mit Kragen, die ins Loch gepresst wird, und einen Deckel, der bündig mit dem Kragen darin liegt – mit U-Schlitz für die Kabel, geschlossen oder ganz ohne Deckel. Stellen Sie die Hülsentiefe passend zur Tischplatte ein und exportieren Sie STL zum Drucken oder STEP für das Möbel-CAD.",
+      whyPoints: [
+        "Jedes gemessene Loch von 30 bis 100 mm, mit einstellbarem Spiel für die Presspassung",
+        "Deckel mit Kabelschlitz, geschlossener Deckel oder nur die Hülse – der Deckel liegt bündig, wie bei den Sets von Mockett, Häfele und Sugatsune",
+        "Hülsentiefe 8–45 mm: 16 mm passt zu jeder Tischplatte ab 16 mm Stärke, oder Sie stellen die Stärke Ihrer Platte ein",
+        "Beide Teile liegen so, wie sie gedruckt werden: keine Stützen",
+      ],
+      faqs: [
+        {
+          q: "Welches Maß gebe ich ein: die Lochsäge oder das Loch?",
+          a: "Das gemessene Loch. Lochsägen schneiden etwas größer – eine gedruckte Kabeldurchführung für „70 mm“ passte am Ende in ein 65-mm-Loch –, messen Sie das Loch also mit dem Messschieber und geben Sie diesen Wert ein. Die Hülse wird standardmäßig 0,3 mm kleiner.",
+        },
+        {
+          q: "Wie stramm soll die Hülse sitzen?",
+          a: "Maker legen die Hülse 0,2–0,5 mm unter das Lochmaß, damit sie sich ohne Kraft einschieben lässt; Standard ist 0,3. Geht sie nicht hinein, erhöhen Sie das Spiel um 0,1; fällt sie heraus, verringern Sie es um 0,1. Ein zu groß geratenes Loch lässt sich noch mit einer dünnen Raupe Dichtmasse um die Hülse retten.",
+        },
+        {
+          q: "Wie soll ich sie drucken?",
+          a: "So, wie die Teile liegen: die Hülse mit dem Kragen nach unten, den Deckel mit der Oberseite nach unten, beide ohne Stützen. Die meisten gedruckten Kabeldurchführungen sind aus PLA; ABS oder PETG ergeben eine etwas griffigere Presspassung. Drucken Sie mit etwas Infill – um 15 % statt 0 % –, denn am Deckel wird immer wieder an Kabeln gezogen.",
+        },
+      ],
+      sizes: {
+        title: "Gängige Lochgrößen",
+        intro: "Kragen = Loch + 12 mm (6 mm Rand je Seite); die Kabelöffnung ist der Innendurchmesser der Hülse, bei Standardspiel und 2,4 mm Wand also Loch − 5,1 mm; der Schlitz ist etwa ein Drittel des Lochs, wie bei Herstellerdeckeln. Jede Zeile öffnet den Generator mit dieser Größe.",
+        head: ["Loch-Ø", "Kragen-Ø", "Öffnungs-Ø", "Schlitz", ""],
+        open: "Öffnen",
+        note: "35, 50, 60 und 80 mm sind die gängigen Lochsägengrößen; chinesische Angebote nennen am häufigsten 50 mm, dann 53 mm, und 63,5 mm (2½\") ist bei US-Bürotischen verbreitet.",
+      },
+    },
+    params: {
+      HOLE_D: { label: "Lochdurchmesser", desc: "Das gebohrte Loch wie gemessen, nicht das Maß der Lochsäge." },
+      DEPTH: { label: "Hülsentiefe", desc: "Wie weit die Hülse unter die Tischoberfläche reicht; höchstens die Plattenstärke." },
+      RIM: { label: "Kragenüberstand", desc: "Wie weit der Kragen auf jeder Seite über das Loch greift." },
+      CLEARANCE: { label: "Passungsspiel", desc: "Um so viel fällt die Hülse kleiner aus als das Loch." },
+      CAP: { label: "Deckel", desc: "Mit Kabelschlitz (slot), geschlossen (solid) oder ohne Deckel (none)." },
+      SLOT_WIDTH: { label: "Schlitzbreite", desc: "Höchstens zwei Drittel des Lochs; üblich ist ein Drittel." },
+    },
+    example: "50-mm-Loch, 17-mm-Kabelschlitz",
+    step: [
+      "Wird als zwei exakte Körper exportiert, Hülse und Deckel, mit 21 Flächen – 10 Ebenen, 8 echte Zylinder (Hülse, Kragen, Bohrung und die Ansenkung, in der der Deckel sitzt; Rand und Schürze des Deckels und das runde Ende des Schlitzes) und 3 Kegel (die Fasen) –, sodass Möbel-CAD das Lochmaß und den Sitz des Deckels direkt abliest.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie bekomme ich eine Kabeldurchführung für ein 50-mm-Loch im Schreibtisch?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/desk-grommet-generator?HOLE_D=50&SLOT_WIDTH=17 – eine Hülse mit 49,7 mm für das 50-mm-Loch, ein Kragen mit 62 mm und ein Deckel mit 17 mm breitem Kabelschlitz. Exportieren Sie STL zum Drucken oder STEP für das CAD.",
+      },
+      {
+        q: "Geht auch ein geschlossener Deckel oder eine Hülse, die durch eine 25 mm starke Tischplatte reicht?",
+        a: "Ja: CAP=solid ergibt einen Deckel ohne Schlitz, und mit DEPTH=25 schließt die Hülse bündig mit der Unterseite ab – https://www.forgent3d.com/de/generators/desk-grommet-generator?CAP=solid&DEPTH=25. Bei jeder Tischplatte ab 16 mm Stärke reicht die voreingestellte 16-mm-Hülse; Kabeldurchführungen der Hersteller sind genauso gebaut.",
+      },
+    ],
+    keywords: [
+      "kabeldurchführung schreibtisch",
+      "kabeldurchführung 3d druck",
+      "kabeldurchlass schreibtisch",
+      "kabeldurchführung 60 mm",
+      "kabeldurchführung stl",
+    ],
+  },
+
+  "18650-battery-holder-generator": {
+    copy: {
+      name: "18650-Akkuhalter-Generator",
+      title: "18650-Akkuhalter-Generator — Zellenhalter für Akkupacks (STL) | Forgent3D",
+      description:
+        "Zellenhalter 18650, 21700 oder 26650 für punktgeschweißte Akkupacks: gerade oder versetzt, Nickelband-Kanäle, Balancerkabel-Löcher, Ober- und Unterteil. STL/STEP gratis.",
+      h1: "18650-Akkuhalter-Generator: Zellenhalter für den Bau von Akkupacks",
+      intro:
+        "Wählen Sie Zelle und Raster – standardmäßig 3 × 5 Zellen 18650 – und Sie erhalten die zwei Platten, in denen ein Akkupack gebaut wird: Jede Zelle sitzt in einer Bohrung mit einem Rand auf der Außenseite, der Rand lässt ein Fenster für das Nickelband frei, und ein 8 mm breiter Kanal führt das Band über die Platte. Die untere Platte ist so angelegt, dass sie passt, wenn Sie sie umgedreht auf die Zellen setzen.",
+      whyPoints: [
+        "Zellen 18650, 21700 und 26650, gerades Raster oder versetzte Reihen (Wabenmuster)",
+        "Standardmäßig 20,2 mm Zellabstand – das übliche Maß von Haltern und vorgestanztem Nickelband –, nie unter 1 mm zwischen den Zellen",
+        "Kanäle für 7–8 mm breites Nickelband, optional Löcher für Balancerkabel, offen zum Punktschweißen oder geschlossen zur Aufbewahrung",
+        "Platten lassen sich im Zellabstand aneinandersetzen, für Packs, die größer als eine Platte sind",
+      ],
+      faqs: [
+        {
+          q: "Mit welchem Filament soll ich drucken?",
+          a: "PETG, ASA oder ABS. Zellen dürfen bei bis zu 60 °C Umgebungstemperatur entladen werden, wobei der Zellbecher 75 °C erreicht, und gedrucktes PLA gibt ab etwa 60 °C nach – gut für die Aufbewahrung, nicht im arbeitenden Akkupack.",
+        },
+        {
+          q: "Warum kann ich nicht die 19 mm Zellabstand einstellen, die manche versetzten Halter nutzen?",
+          a: "Die Zelldatenblätter von Samsung verlangen mehr als 1 mm zwischen den Zellen, und bei 19 mm Zellabstand bleibt etwa die Hälfte davon. Die kleinste Wand hier (1 mm plus Bohrungsspiel) hält diesen Abstand ein; die voreingestellten 20,2 mm passen außerdem zu vorgestanztem Nickelband, das für diesen Abstand verkauft wird.",
+        },
+        {
+          q: "Wie werden die beiden Platten zusammengesetzt?",
+          a: "Drücken Sie die Zellen in eine Platte, Rand nach außen, und setzen Sie dann die zweite Platte umgedreht auf die anderen Zellenden: Sie wird spiegelbildlich erzeugt, sodass die Bohrungen auch bei versetzten Anordnungen mit gerader Reihenzahl übereinstimmen.",
+        },
+      ],
+      sizes: {
+        title: "Zellformate",
+        intro: "Bohrung = Zelldurchmesser + 0,3 mm Spiel; Zellabstand = Bohrung + 1,5 mm Wand, beides mit den Standardwerten. Jede Zeile öffnet den Generator für diese Zelle.",
+        head: ["Zelle", "Zell-Ø", "Bohrungs-Ø", "Zellabstand", ""],
+        open: "Öffnen",
+        note: "Zellen unterscheiden sich je nach Hersteller: 18650er messen höchstens 18,4–18,6 mm, geschützte Zellen sind dicker. Passen Ihre nicht hinein, erhöhen Sie das Spiel.",
+      },
+    },
+    params: {
+      CELL: { label: "Zelle", desc: "Nenndurchmesser 18,4 / 21,5 / 26,4 mm." },
+      CLEARANCE: { label: "Bohrungsspiel", desc: "Wird zum Zelldurchmesser addiert: 18,7-mm-Bohrungen bei 18650." },
+      LAYOUT: {
+        label: "Anordnung",
+        desc: "Gerades Raster (square) oder versetzte Reihen (staggered, Wabenmuster), um einen halben Zellabstand verschoben.",
+      },
+      ROWS: { label: "Reihen", desc: "Bis zu 3 pro Platte; für größere Packs mehrere Platten drucken." },
+      COLS: { label: "Spalten", desc: "Bis zu 5 pro Platte." },
+      WALL: { label: "Wand zwischen den Zellen", desc: "1,5 ergibt bei 18650 den üblichen Zellabstand von 20,2 mm." },
+      WIRE_HOLES: { label: "Löcher für Balancerkabel", desc: "Ø3-Löcher zwischen den Zellen für die BMS-Leitungen." },
+      HEIGHT: { label: "Halterhöhe", desc: "Wie tief jede Zelle in der Platte sitzt." },
+      FRAME: { label: "Außenrahmen", desc: "Mit 0 lassen sich Platten im Zellabstand aneinandersetzen." },
+      END: {
+        label: "Abschluss",
+        desc: "Offen mit Rand zum Punktschweißen (open) oder mit geschlossenem Boden zur Aufbewahrung (closed).",
+      },
+      LIP: {
+        label: "Randüberdeckung",
+        desc: "Wie weit der Rand über das Zellende greift; der Rest ist das Fenster für das Nickelband.",
+      },
+      STRIP_WIDTH: {
+        label: "Breite des Bandkanals",
+        desc: "0,8 mm tiefe Kanäle für 7–8 mm breites Nickelband; 0 für eine glatte Fläche.",
+      },
+    },
+    example: "Zellen 21700, versetzt (Wabenmuster)",
+    step: [
+      "Jede 3 × 5-Platte wird als ein exakter Körper mit 188 Flächen exportiert – 158 Ebenen und 30 echte Zylinder (die 15 Zellbohrungen und die 15 Bandfenster) –, sodass Zellabstand, Bohrung und Fenster im CAD direkt ablesbar sind, wenn Sie den Akkupack darum herum planen.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie drucke ich Zellenhalter für einen 18650-Akkupack 3S5P?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/18650-battery-holder-generator?ROWS=3&COLS=5 – eine obere und eine untere Platte für 15 Zellen mit dem üblichen Zellabstand von 20,2 mm, Ø18,7-Bohrungen und 8-mm-Kanälen für das Nickelband. Drucken Sie beide, drücken Sie die Zellen in die eine und setzen Sie die andere umgedreht darauf.",
+      },
+      {
+        q: "Mein Pack ist größer als 3 × 5. Kann ich eine Platte für 13S4P erstellen?",
+        a: "Eine Platte fasst höchstens 3 × 5 Zellen; drucken Sie mehrere. Mit FRAME=0 enden die Platten genau einen halben Zellabstand hinter den äußeren Zellen und lassen sich daher im selben Abstand aneinandersetzen: https://www.forgent3d.com/de/generators/18650-battery-holder-generator?ROWS=3&COLS=5&FRAME=0",
+      },
+    ],
+    keywords: [
+      "18650 akkuhalter",
+      "18650 zellenhalter",
+      "18650 halter 3d druck",
+      "21700 zellenhalter stl",
+      "akkupack zellenhalter",
+    ],
+  },
+
+  "pipe-clamp-generator": {
+    copy: {
+      name: "Rohrschellen-Generator",
+      title: "Rohrschellen-Generator — DIN 3015 & Rohrbügel, Ø6–101,6 mm | Forgent3D",
+      description:
+        "Rohrschellen für Außendurchmesser von 6 bis 101,6 mm: Kunststoff-Schellenhälften nach DIN 3015-1 aus der Normtabelle oder Rohrbügel mit zwei Senklöchern. STL/STEP gratis.",
+      h1: "Rohrschellen-Generator: Schellenhälften nach DIN 3015 und Rohrbügel mit zwei Laschen",
+      intro:
+        "Geben Sie den Außendurchmesser des Rohrs ein – standardmäßig 20 mm – und Sie erhalten entweder die Kunststoff-Schellenhälften einer Rohrschelle nach DIN 3015-1, leichte Baureihe, aus der Normtabelle bemessen und mit M6-Schraubenlöchern, oder einen einteiligen Rohrbügel mit zwei Laschen, um ein Rohr oder Elektroinstallationsrohr an die Wand zu schrauben. Die DIN-Hälften stehen um den Spannspalt der Norm auseinander, sodass das Anziehen der Schrauben das Rohr klemmt.",
+      whyPoints: [
+        "Baugrößen 1–8 nach DIN 3015-1, aus dem Rohrdurchmesser gewählt: Körperlänge, Schraubenabstand und Höhe aus der Tabelle von STAUFF",
+        "Rohrbügel mit zwei Laschen, Durchgangslöchern nach ISO 273 und Senkungen nach ISO 10642 für M3–M5",
+        "Bohrungsspiel für Rohre, die über Nennmaß messen",
+        "Exakte STEP für Anlagen- und Maschinen-CAD, STL zum Drucken",
+      ],
+      faqs: [
+        {
+          q: "Was brauche ich außer den gedruckten Schellenhälften?",
+          a: "Eine Rohrschelle nach DIN 3015-1 besteht aus den zwei Schellenhälften zwischen einer Deckplatte aus Stahl oben und einer Schweißplatte (oder Tragschiene) unten, zusammengehalten von zwei M6-Schrauben; Baugröße 3 nimmt M6 × 40. Platten und Schrauben sind genormte Kaufteile – der Generator erzeugt die Kunststoff-Schellenhälften.",
+        },
+        {
+          q: "In welchem Abstand setze ich die Rohrschellen?",
+          a: "Der von HYDAC empfohlene Abstand für Schellen der leichten Baureihe wächst mit dem Rohr: 1,0 m bis 12,7 mm, 1,2 m bis 22 mm, 1,5 m bis 32 mm, 2,0 m bis 38 mm, 2,7 m bis 57 mm, 3,0 m bis 75 mm.",
+        },
+        {
+          q: "Warum ist zwischen den beiden Hälften ein Spalt?",
+          a: "Das ist der Spannspalt der DIN 3015 (0,4–0,8 mm je nach Baugröße bei den Schellenkörpern von STAUFF): Die Hälften berühren das Rohr, bevor sie einander berühren, sodass das Anziehen der Schrauben das Rohr klemmt. Lassen Sie ihn – schleifen Sie die Flächen nicht plan.",
+        },
+      ],
+      sizes: {
+        title: "DIN-3015-Baugrößen für gängige Rohre",
+        intro: "Die Baugröße, die der Generator beim Standardspiel von 0,4 mm wählt, mit der Länge des Hälftenpaars, dem Abstand der M6-Schrauben und der Höhe aus der Tabelle von STAUFF (alle 30 mm breit). Jede Zeile öffnet den Generator mit diesem Rohr.",
+        head: ["Rohr-Ø", "Baugröße", "Länge", "Schraubenabstand", "Höhe", ""],
+        open: "Öffnen",
+        note: "PP-R-Wasserrohr: 20 (½\"), 25 (¾\"), 32 (1\"); eine Bohrung, die neben einem Schraubenloch weniger als 0,5 mm Kunststoff ließe, rückt eine Baugröße höher.",
+      },
+    },
+    params: {
+      PIPE_OD: { label: "Rohraußendurchmesser", desc: "Messen Sie das Rohr; bei DIN 3015 bestimmt er die Baugröße." },
+      TYPE: {
+        label: "Schellentyp",
+        desc: "Kunststoff-Schellenhälften nach DIN 3015-1 (din3015) oder Rohrbügel mit zwei Laschen (saddle).",
+      },
+      CLEARANCE: {
+        label: "Bohrungsspiel",
+        desc: "Wird zum Rohrdurchmesser addiert; Kunststoffrohr misst oft etwas über Nennmaß.",
+      },
+      WIDTH: { label: "Bügelbreite (Rohrbügel)", desc: "Entlang des Rohrs gemessen." },
+      TAB: { label: "Laschenlänge (Rohrbügel)", desc: "Jede Schraubenlasche jenseits des Bogens." },
+      SCREW: { label: "Schraube (Rohrbügel)", desc: "Durchgangslöcher nach ISO 273, Reihe mittel." },
+      COUNTERSINK: { label: "Senklöcher (Rohrbügel)", desc: "Senkungen für Senkkopfschrauben nach ISO 10642." },
+    },
+    example: "Rohrbügel mit zwei Laschen für ein 25-mm-Rohr",
+    step: [
+      "Eine Schellenhälfte nach DIN 3015 wird als ein exakter Körper mit 10 Flächen exportiert – 7 Ebenen und 3 echte Zylinder (die halbe Bohrung und die beiden M6-Löcher) –, dieselbe Hälfte zweimal in der Datei. Der Rohrbügel hat 18 Flächen: 12 Ebenen, 4 Zylinder und 2 Kegel für die Senkungen.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie bekomme ich eine Rohrschelle nach DIN 3015 für ein 20-mm-Rohr?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/pipe-clamp-generator?PIPE_OD=20 – die zwei Kunststoff-Schellenhälften einer Schelle der leichten Baureihe, Baugröße 3: 50 × 30 mm, M6-Schrauben im Abstand von 33 mm, 20,4-mm-Bohrung. Deckplatte und Schweißplatte aus Stahl sowie die Schrauben sind Kaufteile; exportieren Sie STEP, um die Schelle im CAD zu platzieren.",
+      },
+      {
+        q: "Ich brauche einen Rohrbügel mit zwei Laschen für ein 25-mm-Elektrorohr und M4-Schrauben.",
+        a: "https://www.forgent3d.com/de/generators/pipe-clamp-generator?TYPE=saddle&PIPE_OD=25&SCREW=M4 – ein U-förmiger Bügel, 25 mm breit, mit Senklöchern für M4 in beiden Laschen. Er wird auf der Seite liegend gedruckt, sodass die Schichten um den Bogen herum laufen.",
+      },
+    ],
+    keywords: [
+      "rohrschelle 3d druck",
+      "din 3015 rohrschelle",
+      "rohrschellen din 3015 stl",
+      "kunststoff rohrschelle",
+      "rohrschelle stl",
+    ],
+  },
+
+  "hex-bit-holder-generator": {
+    copy: {
+      name: "Bithalter-Generator",
+      title: "Bithalter-Generator — Bit-Aufbewahrung 1/4\", Gridfinity, Wand | Forgent3D",
+      description:
+        "Halter für Sechskant-Bits 1/4\", 4 mm, 5/16\": senkrechte Löcher, gerade oder versetzt, bis 80 Bits, freistehend, auf Gridfinity-Füßen oder an der Wand. STL/STEP gratis.",
+      h1: "Bithalter-Generator: ein Block mit Sechskantlöchern für Schrauberbits",
+      intro:
+        "Wählen Sie Bitgröße und Raster – standardmäßig 20 Bits mit 1/4\" – und Sie erhalten einen Block mit senkrechten Sechskantlöchern, bemessen nach dem Sechskantschaft der ISO 1173, 10 mm tief und mit Einführfase. Stellen Sie ihn auf die Werkbank, setzen Sie ihn in eine Gridfinity-Baseplate oder schrauben Sie ihn an die Wand oder eine Lochwand. Das Lochspiel ist einstellbar, weil jeder Drucker anders druckt.",
+      whyPoints: [
+        "Sechskantschäfte 1/4\" (6,35), 4 mm und 5/16\", Löcher nach ISO 1173 bemessen",
+        "Bis zu 10 × 8 Bits, gerade oder versetzt, mit einstellbarer Wand zwischen den Löchern",
+        "Gridfinity-Füße identisch mit unseren Gridfinity-Bins, oder eine Wandplatte im 25-mm-Raster der Lochwand",
+        "Wird so gedruckt, wie er steht, ohne Stützen",
+      ],
+      faqs: [
+        {
+          q: "Wie fest sitzen die Bits?",
+          a: "Das hängt von Ihrem Drucker ab: Löcher, die bei anderen Makern Bits hielten, reichen von 6,25 bis etwa 6,9 mm Schlüsselweite, und einem Maker waren 6,5 mm zu locker. Standard ist 6,35 + 0,15 = 6,5. Drucken Sie zuerst einen kleinen Block und verstellen Sie das Spiel in Schritten von 0,05 mm.",
+        },
+        {
+          q: "Passen auch lange Power-Bits?",
+          a: "Ja. Einsatzbits sind 25 mm lang, Power-Bits 50, 70 oder 90 mm (Bosch, Wiha, Vessel, DeWalt), aber sie haben denselben 1/4\"-Sechskantschaft und sitzen daher in denselben Löchern – die langen stehen nur höher.",
+        },
+        {
+          q: "Welche Schrauben halten die Wandversion?",
+          a: "Senkkopf-Holzschrauben mit etwa 3,5 mm (US-Größe #6): Die Platte hat 3,9-mm-Löcher mit 8,3-mm-Senkungen im Abstand von 25 mm, passend zur Lochwand.",
+        },
+      ],
+    },
+    params: {
+      BIT_SIZE: { label: "Bitschaft", desc: "Sechskantschaft, Schlüsselweite nach ISO 1173: 3,96 / 6,35 / 7,93 mm." },
+      CLEARANCE: { label: "Lochspiel", desc: "Wird zur Schlüsselweite addiert; 0,15 ist der Median veröffentlichter Halter." },
+      DEPTH: { label: "Lochtiefe", desc: "Wie tief jedes Bit sitzt, über einem 2 mm starken Boden." },
+      COLUMNS: { label: "Spalten", desc: "Bits pro Reihe." },
+      ROWS: { label: "Reihen", desc: "Bis zu 80 Bits in einem Block." },
+      GAP: { label: "Wand zwischen den Löchern", desc: "Mehr Abstand = die Bits lassen sich leichter greifen." },
+      PATTERN: { label: "Anordnung", desc: "Gerades Raster (square) oder versetzte Reihen (staggered, Wabenmuster)." },
+      MOUNT: {
+        label: "Befestigung",
+        desc: "Freistehend (none), Gridfinity-Füße (gridfinity) oder Schraubplatte im 25-mm-Raster der Lochwand (wall).",
+      },
+    },
+    example: "24 Bits auf einer Wand- / Lochwandplatte",
+    step: [
+      "Der Standardblock für 20 Bits wird als ein exakter Körper mit 270 Flächen exportiert, 266 davon Ebenen – jede Sechskantwand und jede Einführfase ist eine echte ebene Fläche, sodass das CAD Schlüsselweite und Lochabstand direkt misst. Die Gridfinity-Version fügt die Zylinder und Kegel der Standardfüße hinzu (320 Flächen).",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie erstelle ich einen Gridfinity-Halter für 1/4\"-Schrauberbits?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/hex-bit-holder-generator?MOUNT=gridfinity – 20 senkrechte Sechskantlöcher, verteilt auf einen Gridfinity-Block 2 × 1 mit denselben Füßen wie unsere Gridfinity-Bins, sodass er in eine Standard-Baseplate passt. Ändern Sie COLUMNS und ROWS für mehr oder weniger Bits.",
+      },
+      {
+        q: "Mein gedruckter Bithalter ist zu stramm (oder zu locker). Was ändere ich?",
+        a: "Das Lochspiel: Drucker sind verschieden, und Löcher, die bei anderen Makern funktionierten, reichen für 6,35-mm-Bits von 6,25 bis etwa 6,9 mm Schlüsselweite. Drucken Sie zuerst einen Testblock mit drei Löchern – https://www.forgent3d.com/de/generators/hex-bit-holder-generator?COLUMNS=3&ROWS=1&CLEARANCE=0.05 – und verstellen Sie CLEARANCE in Schritten von 0,05 mm, bis ein Bit hält.",
+      },
+    ],
+    keywords: [
+      "bithalter 3d druck",
+      "bit halter stl",
+      "bit aufbewahrung gridfinity",
+      "bithalter wand",
+      "bit organizer 3d druck",
+    ],
+  },
+
+  "spool-holder-generator": {
+    copy: {
+      name: "Filament-Spulenhalter-Generator",
+      title: "Filament-Spulenhalter-Generator — Abroller & Wandhalter (STL) | Forgent3D",
+      description:
+        "Filament-Spulenhalter: Abroller auf 608-Lagern mit Sicherungsstange für 1–5-kg-Spulen, bis zu vier nebeneinander, oder Wandhalter für eine Stange. STL/STEP gratis.",
+      h1: "Spulenhalter-Generator: Abroller und Wandhalter, passend zu Ihren Spulen",
+      intro:
+        "Geben Sie die größte und die breiteste Spule ein, die Sie verwenden – standardmäßig Ø200 × 70 mm –, und Sie erhalten einen Abroller: Die Spule liegt mit ihren Rändern auf zwei Rollen, die sich auf 608-Lagern drehen, und berührt nie das Nabenloch, das sich von Marke zu Marke am stärksten unterscheidet; eine Sicherungsstange verhindert, dass eine fast leere Spule von den Rollen klettert. Oder Sie erhalten zwei Wandhalter für eine Stange. Die Rollen sitzen in der Geometrie, die am beliebten Halter von Lattenberg gemessen wurde.",
+      whyPoints: [
+        "Rollenabstand und -höhe aus der Spulengröße berechnet: Eine Ø200-Spule liegt bei 42,5°, wie beim Halter von Lattenberg",
+        "Lager 608, 626 oder 6001 in den Rollenenden, auf gekaufter Gewindestange – keine gedruckten Achsen, die brechen",
+        "Sicherungsstange gegen das Abheben einer fast leeren Spule",
+        "Ein bis vier Spulen nebeneinander, oder Wandhalter für eine Stange",
+      ],
+      faqs: [
+        {
+          q: "Was brauche ich außer den gedruckten Teilen?",
+          a: "Für einen Abroller: vier Lager (zwei pro Rolle), zwei Gewindestangen mit Muttern als Achsen (M8 bei 608) und eine Stange oder einen Rundstab als Sicherungsstange. Gedruckte Achsen wurden absichtlich weggelassen – Nutzer von Haltern mit gedruckten Stiften berichten, dass sie brechen.",
+        },
+        {
+          q: "Mit welchem Filament soll ich drucken?",
+          a: "Die beliebten Wandhalter für Stangen werden in PETG gedruckt; Abroller meist mit 4–5 Wänden und 15–25 % Infill, und der Halter eines Makers mit 3 Wänden und 20 % brach sofort. Drucken Sie die Wandhalter auf der Seite liegend, so wie sie angeordnet sind: Stehend gedruckt können die Schichten unter dem Gewicht einer vollen Spule brechen.",
+        },
+        {
+          q: "Passen kleine und große Spulen?",
+          a: "Der Halter trägt alles von der größten eingegebenen Spule bis zu einer daraus abgeleiteten kleinsten (etwa Ø150 beim Standard von Ø200), sodass eine 1-kg-Spule auch auf einen Halter für 3–5 kg passt. Für Minispulen mit 250–500 g stellen Sie den Spulendurchmesser auf die Minigröße ein.",
+        },
+      ],
+    },
+    params: {
+      TYPE: { label: "Haltertyp", desc: "Abroller (rollers) oder Wandhalter für eine Stange (wall)." },
+      SPOOL_D: { label: "Größter Spulendurchmesser", desc: "1-kg-Spulen haben etwa 195–203 mm, 3 kg etwa 250, 5 kg 300." },
+      SPOOL_W: { label: "Breiteste Spule", desc: "1-kg-Spulen sind 57–69 mm breit." },
+      BEARING: { label: "Lager", desc: "Zwei pro Rolle, in die Enden eingepresst." },
+      BEARING_FIT: { label: "Passung der Lageraufnahme", desc: "Wird zum Außendurchmesser des Lagers addiert." },
+      COUNT: { label: "Spulen nebeneinander", desc: "Plätze in einem Halter." },
+      ROD_D: { label: "Stangendurchmesser", desc: "Die Sicherungsstange (Abroller) oder die Spulenstange (Wandhalter)." },
+      ROD_FIT: { label: "Passung des Stangenlochs", desc: "Wird zum Stangendurchmesser addiert." },
+    },
+    example: "Abroller für 3-kg-Spulen (Ø250 × 110)",
+    step: [
+      "Wird als drei exakte Körper exportiert – Seitenteil, Rolle und Distanzring, so oft platziert, wie der Halter sie braucht – mit 33 Flächen: 19 Ebenen, 12 echte Zylinder (die Lageraufnahmen, die Löcher für Achse und Sicherungsstange, die Rollen) und 2 Kegel (die Einführungen der Lageraufnahmen).",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie erstelle ich einen Abroller für 1-kg-Spulen?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/spool-holder-generator?SPOOL_D=200&SPOOL_W=70 – zwei Seitenteile und zwei Rollen mit 608-Lagern in den Enden; eine Spule Ø200 × 70 liegt mit ihren Rändern in der Geometrie auf, die am vielfach gedruckten Rollenhalter von Lattenberg gemessen wurde. Dazu kommen vier 608-Lager, M8-Gewindestange mit Muttern für die Achsen und eine Ø22-Stange als Sicherungsstange.",
+      },
+      {
+        q: "Kann er Wandhalter für eine Stange erzeugen, die mehrere Spulen trägt?",
+        a: "Ja: https://www.forgent3d.com/de/generators/spool-holder-generator?TYPE=wall&ROD_D=16 ergibt zwei Halter für eine 16-mm-Stange, deren Mitte weit genug von der Wand entfernt ist für eine Ø200-Spule. Wählen Sie eine Stange, die durch die Nabenlöcher Ihrer Spulen passt – 1-kg-Spulen haben 50–72 mm große Löcher, 5–8-kg-Spulen aber nur 32–36 mm.",
+      },
+    ],
+    keywords: [
+      "filament spulenhalter",
+      "spulenhalter 3d druck",
+      "filament rollenhalter",
+      "spulenhalter 608 kugellager",
+      "filament halter wand",
     ],
   },
 };
