@@ -627,7 +627,7 @@ export const GENERATORS = [
           "Real involute flanks — pairs with matching module mesh correctly",
           "20° or 25° pressure angle, 8 to 120 teeth",
           "Round or hex bore for shafts and standard hardware",
-          "Need a keyway, hub or matching rack? Ask the AI agent",
+          "Matching rack: the gear rack generator uses the same tooth form",
         ],
         faqs: [
           {
@@ -663,7 +663,7 @@ export const GENERATORS = [
           "真渐开线齿面，同模数的一对齿轮正确啮合",
           "压力角 20° / 25°，齿数 8–120",
           "圆孔或六角孔，适配轴与标准件",
-          "要键槽、轮毂或配套齿条？交给 AI agent",
+          "配套齿条：齿条生成器用的是同一套齿形",
         ],
         faqs: [
           {
@@ -1230,6 +1230,421 @@ export const GENERATORS = [
       },
     },
   },
+  {
+    slug: "gear-rack-generator",
+    modelDir: "gear-rack",
+    icon: "▭",
+    family: "gears",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { MODULE: "1.5", TEETH: "40", HOLES: "2" }, label: { en: "Module 1.5, 40 teeth (188.5 mm), 2 mounting holes", zh: "模数 1.5、40 齿（188.5 mm）、2 个安装孔" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "The default 15-tooth rack exports as 96 exact faces: every tooth flank is a true plane — the straight-sided ISO 53 rack form — and every root fillet a true cylinder (66 planes, 30 cylinders), so CAD measures the flank angle and the pitch-line height directly.",
+        "The length is a whole number of pitches (15 × π × 2 = 94.25 mm) and both ends fall in the middle of a tooth space, as on KHK's SRF and MISUMI's RGEA joinable racks, so two racks butt end to end with the pitch running on.",
+      ],
+      zh: [
+        "默认 15 齿的齿条导出为 96 个精确面：每个齿面都是真平面——ISO 53 直边齿条齿形——每个齿根圆角都是真圆柱面（66 个平面、30 个圆柱面），在 CAD 里能直接量齿形角和节线高度。",
+        "长度是整数个齿距（15 × π × 2 = 94.25 mm），两端都落在齿槽正中，和 KHK SRF、米思米 RGEA 可拼接齿条一样，两根齿条首尾相接，齿距照样连续。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a module 2 rack about 200 mm long for a 20-tooth pinion?", a: "200 / (π × 2) rounds down to 31 teeth, 194.78 mm: https://www.forgent3d.com/en/generators/gear-rack-generator?MODULE=2&TEETH=31 — the pinion's centre then sits 18 + 20 = 38 mm above the rack's bottom (pitch-line height + pitch radius). Make the pinion with the spur gear generator at the same module." },
+        { q: "Can I join printed racks for a longer run?", a: "Yes: every rack here is a whole number of pitches with both ends mid-space. Butt them, mesh a short piece of rack across the joint to set the pitch — the method KHK and MISUMI give for their racks — then screw or pin both to the base." },
+      ],
+      zh: [
+        { q: "怎样做一根约 200 mm 长、配 20 齿小齿轮的模数 2 齿条？", a: "200 / (π × 2) 向下取整是 31 齿、194.78 mm：https://www.forgent3d.com/zh/generators/gear-rack-generator?MODULE=2&TEETH=31 ——小齿轮中心离齿条底面 18 + 20 = 38 mm（节线高度 + 分度圆半径）。小齿轮用直齿轮生成器、同一个模数来做。" },
+        { q: "打印的齿条能拼成更长的吗？", a: "能：这里每根齿条都是整数个齿距、两端在齿槽正中。首尾相接，拿一小段齿条跨着接缝啮合把齿距对准——KHK 和米思米给自家齿条的做法——再把两根都用螺丝或销钉固定到底座上。" },
+      ],
+    },
+    // Evidence: generator-models/gear-rack/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["gear rack generator", "rack and pinion generator", "gear rack stl", "module 1 gear rack 3d print"],
+      zh: ["齿条生成器", "齿轮齿条 STL", "模数1齿条", "直齿条 3d打印"],
+    },
+    params: [
+      { key: "MODULE", default: "2", range: "1 – 5", unit: "mm", label: { en: "Module", zh: "模数" }, desc: { en: "Must match the pinion's.", zh: "必须和小齿轮一致。" } },
+      { key: "PRESSURE_ANGLE", default: "20", range: "20 / 25", unit: "°", label: { en: "Pressure angle", zh: "压力角" }, desc: { en: "20° on every catalogue rack; 25° only to match a 25° pinion.", zh: "市售齿条都是 20°；25° 只为配 25° 的小齿轮。" } },
+      { key: "TEETH", default: "15", range: "2 – 120", unit: "", label: { en: "Number of teeth", zh: "齿数" }, desc: { en: "Length = teeth × π × module; 15 at module 2 is MISUMI's 100 mm stock rack (94.25 mm).", zh: "长度 = 齿数 × π × 模数；模数 2、15 齿就是米思米 100 mm 规格（94.25 mm）。" } },
+      { key: "FACE_WIDTH", default: "10", range: "3 – 40", unit: "mm", label: { en: "Face width", zh: "齿宽" }, desc: { en: "At least the pinion's face width.", zh: "不小于小齿轮的齿宽。" } },
+      { key: "PITCH_HEIGHT", default: "18", range: "9 – 60", unit: "mm", label: { en: "Height to pitch line", zh: "节线高度" }, desc: { en: "18 at module 2 is the pitch line of a square-section rack (HPC, MISUMI stainless: 9 × module); KHK and MISUMI steel racks use 23.", zh: "模数 2 时 18 是方截面齿条的节线高度（HPC、米思米不锈钢：9 × 模数）；KHK、米思米钢齿条是 23。" } },
+      { key: "HOLES", default: "0", range: "0 – 6", unit: "", label: { en: "Mounting holes", zh: "安装孔" }, desc: { en: "Sideways through the face width, evenly spaced, like KHK SRFD racks.", zh: "横穿齿宽、均匀分布，和 KHK SRFD 齿条一样。" } },
+      { key: "SCREW", default: "M4", range: "M3 / M4 / M5 / M6", unit: "", label: { en: "Screw", zh: "螺丝" }, desc: { en: "Hole and counterbore sizes from MISUMI's rack tables.", zh: "孔径和沉孔尺寸取自米思米齿条表。" } },
+      { key: "COUNTERBORE", default: "on", range: "on / off", unit: "", label: { en: "Counterbored", zh: "沉孔" }, desc: { en: "Sinks the screw heads into the -Y face.", zh: "螺丝头沉进 -Y 侧面。" } },
+    ],
+    copy: {
+      en: {
+        name: "Gear Rack Generator",
+        title: "Gear Rack Generator — Racks That Mesh With Our Spur Gears (STL / STEP) | Forgent3D",
+        description: "Generate a gear rack by module and tooth count: ISO 53 teeth that mesh with our spur gears, whole-pitch ends for joining segments, optional side mounting holes. Free STL / STEP.",
+        h1: "Gear rack generator: racks that mesh with the spur gears",
+        intro: "Pick your pinion's module and pressure angle, then the number of teeth — the rack is exactly that many pitches long, with both ends in the middle of a tooth space, so printed segments join into a longer run. It uses the ISO 53 tooth form our spur gears are hobbed from, so the pair meshes with the designed 0.2 mm of backlash.",
+        whyPoints: [
+          "Same ISO 53 tooth form as the spur gear generator — the pair meshes as designed",
+          "Whole-pitch length, mid-space ends: segments butt end to end",
+          "20 mm tall at module 2 by default, pitch line at 18 as on square-section racks; any height you need",
+          "Optional M3–M6 side mounting holes, counterbored like KHK and MISUMI racks",
+        ],
+        faqs: [
+          { q: "Where does the pinion go?", a: "Its centre sits at the rack's pitch-line height plus the pinion's pitch radius (module × teeth / 2): with the defaults, 18 + 20 = 38 mm for a 20-tooth module-2 pinion. That is the mounting distance KHK gives for any rack and pinion." },
+          { q: "How long a rack can I print in one piece?", a: "At module 2, 40 teeth (251.33 mm) lying straight on a 256 mm bed, or 53 teeth across its diagonal; 35 teeth (219.91 mm, no room left for a brim) on a 220 mm bed. For a longer run, print segments and join them — the ends are made for it." },
+          { q: "Which way up should I print it?", a: "Gear printing guides lay the tooth profile flat on the bed — smooth flanks, strong roots — so print the rack lying on its side; the side mounting holes then come out as clean vertical holes. PETG for a working rack, 4 or more walls." },
+        ],
+      },
+      zh: {
+        name: "齿条生成器",
+        title: "齿条生成器 — 与直齿轮啮合的齿条，在线导出 STL / STEP | Forgent3D",
+        description: "在线齿条生成器：按模数和齿数生成齿条，ISO 53 齿形和直齿轮生成器的齿轮啮合，整齿距端面可拼接，可选侧面安装孔，免费导出 STL / STEP。",
+        h1: "齿条生成器：和直齿轮啮合的齿条",
+        intro: "选好小齿轮的模数和压力角，再定齿数——齿条正好是这么多个齿距长，两端落在齿槽正中，打印的几段能拼成更长的一根。齿形用的是直齿轮生成器滚齿用的 ISO 53 基本齿条，所以两者按设计的 0.2 mm 侧隙啮合。",
+        whyPoints: [
+          "和直齿轮生成器同一套 ISO 53 齿形——成对啮合",
+          "整齿距长度、端面在齿槽正中：几段首尾相接",
+          "默认模数 2 时高 20 mm、节线高 18，和方截面齿条一样；高度随意设",
+          "可选 M3–M6 侧面安装孔，像 KHK、米思米齿条一样带沉孔",
+        ],
+        faqs: [
+          { q: "小齿轮装在哪儿？", a: "小齿轮中心在齿条节线高度加上小齿轮分度圆半径（模数 × 齿数 / 2）的位置：默认参数下，20 齿模数 2 的小齿轮是 18 + 20 = 38 mm。这就是 KHK 给齿轮齿条的安装距离。" },
+          { q: "一次能打印多长的齿条？", a: "模数 2 时，256 mm 的热床直放 40 齿（251.33 mm），斜放 53 齿；220 mm 的热床 35 齿（219.91 mm，没给 brim 留余地）。要更长就分段打印再拼——端面就是为拼接做的。" },
+          { q: "齿条朝哪个方向打印？", a: "齿轮打印指南都是把齿廓平放在热床上——齿面光、齿根结实——所以齿条侧躺着打印；侧面安装孔这时是竖直孔，打得干净。受力的齿条用 PETG，4 圈以上墙。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "helical-gear-generator",
+    modelDir: "helical-gear",
+    icon: "✲",
+    family: "gears",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { MODULE: "1.5", TEETH: "30", HELIX_ANGLE: "20", HAND: "left" }, label: { en: "Module 1.5, 30 teeth, 20° left-hand helix", zh: "模数 1.5、30 齿、20° 左旋" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "Every tooth surface is one smooth B-spline face that follows the helix: the default 20-tooth gear exports as 83 faces — 80 tooth surfaces, the two end faces, and the bore as a true cylinder, cut after the twist so its diameter reads exactly in CAD.",
+      ],
+      zh: [
+        "每个齿面都是一整块沿螺旋线走的光滑 B 样条面：默认 20 齿的齿轮导出为 83 个面——80 个齿面、两个端面，以及一个真圆柱轴孔（扭转之后再开孔，所以在 CAD 里孔径能直接量准）。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a pair of helical gears, 15 and 30 teeth, module 2?", a: "Open https://www.forgent3d.com/en/generators/helical-gear-generator?MODULE=2&TEETH=15&HAND=right and https://www.forgent3d.com/en/generators/helical-gear-generator?MODULE=2&TEETH=30&HAND=left — parallel shafts need the same helix angle and opposite hands. At the default 20° they mesh at 2 × (15 + 30) / (2 × cos 20°) = 47.89 mm." },
+        { q: "Which helix angle should I use?", a: "Catalogue gears for parallel shafts use 15° (KHK SH) to 21.5° (KHK KHG); printed helical gears sit at 15–30° and print flat without supports. For shafts crossed at 90°, use 45° on both gears with the same hand, as MISUMI and HPC do: https://www.forgent3d.com/en/generators/helical-gear-generator?HELIX_ANGLE=45&FACE_WIDTH=10" },
+      ],
+      zh: [
+        { q: "怎样做一对 15 齿和 30 齿、模数 2 的斜齿轮？", a: "打开 https://www.forgent3d.com/zh/generators/helical-gear-generator?MODULE=2&TEETH=15&HAND=right 和 https://www.forgent3d.com/zh/generators/helical-gear-generator?MODULE=2&TEETH=30&HAND=left ——平行轴要螺旋角相同、旋向相反。默认 20° 时中心距是 2 × (15 + 30) / (2 × cos 20°) = 47.89 mm。" },
+        { q: "螺旋角选多大？", a: "平行轴的市售斜齿轮用 15°（KHK SH）到 21.5°（KHK KHG）；打印的斜齿轮多在 15–30°，平放打印不用支撑。两轴 90° 交错时两个齿轮都用 45°、同旋向，米思米和 HPC 就是这样：https://www.forgent3d.com/zh/generators/helical-gear-generator?HELIX_ANGLE=45&FACE_WIDTH=10" },
+      ],
+    },
+    // Evidence: generator-models/helical-gear/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["helical gear generator", "helical gear stl", "3d printed helical gear", "helical gear module helix angle"],
+      zh: ["斜齿轮生成器", "斜齿轮 STL", "斜齿轮 3d打印", "斜齿轮 模数 螺旋角"],
+    },
+    params: [
+      { key: "MODULE", default: "2", range: "1 – 5", unit: "mm", label: { en: "Module (normal)", zh: "模数（法向）" }, desc: { en: "Normal module, as KHK SH, MISUMI and Chinese catalogues list it; mating gears share it.", zh: "法向模数，KHK SH、米思米和国内样本都这样标；配对的齿轮要相同。" } },
+      { key: "TEETH", default: "20", range: "8 – 40", unit: "", label: { en: "Number of teeth", zh: "齿数" }, desc: { en: "Pitch diameter = module × teeth / cos(helix angle).", zh: "分度圆直径 = 模数 × 齿数 / cos(螺旋角)。" } },
+      { key: "PRESSURE_ANGLE", default: "20", range: "20 / 25", unit: "°", label: { en: "Pressure angle (normal)", zh: "压力角（法向）" }, desc: { en: "20° standard.", zh: "标准 20°。" } },
+      { key: "HELIX_ANGLE", default: "20", range: "5 – 45", unit: "°", label: { en: "Helix angle", zh: "螺旋角" }, desc: { en: "15–21.5° on catalogue parallel-shaft gears; 45° for shafts crossed at 90°.", zh: "平行轴市售件 15–21.5°；两轴 90° 交错用 45°。" } },
+      { key: "HAND", default: "right", range: "right / left", unit: "", label: { en: "Hand", zh: "旋向" }, desc: { en: "Parallel shafts: opposite hands. 90° crossed shafts: the same hand.", zh: "平行轴：旋向相反；90° 交错轴：旋向相同。" } },
+      { key: "FACE_WIDTH", default: "20", range: "3 – 40", unit: "mm", label: { en: "Face width", zh: "齿宽" }, desc: { en: "20 at module 2 and 20° spans one axial pitch (overlap ratio ≈ 1), like catalogue gears.", zh: "模数 2、20° 时 20 mm 正好跨一个轴向齿距（重合度 ≈ 1），和市售件一样。" } },
+      { key: "BORE_STYLE", default: "circular", range: "none / circular / hex", unit: "", label: { en: "Bore style", zh: "轴孔样式" }, desc: { en: "Round shaft or hex socket.", zh: "圆轴或六角孔。" } },
+      { key: "BORE_D", default: "5", range: "2 – 30", unit: "mm", label: { en: "Bore size", zh: "孔径" }, desc: { en: "Shaft diameter, or hex across flats; 5 fits a NEMA 17 motor.", zh: "轴径，或六角对边距；5 mm 配 NEMA 17 电机。" } },
+    ],
+    copy: {
+      en: {
+        name: "Helical Gear Generator",
+        title: "Helical Gear Generator — Module, Helix Angle & Hand (STL / STEP) | Forgent3D",
+        description: "Generate involute helical gears online: normal module, tooth count, helix angle, left or right hand, face width and bore. Hob-generated teeth, free STL / STEP.",
+        h1: "Helical gear generator with true involute teeth",
+        intro: "Set the normal module, tooth count, helix angle and hand — the generator cuts the tooth across the axis with the same ISO 53 rack as our spur gears, then twists it along the axis, so a left-hand and a right-hand gear with the same module and helix angle mesh on parallel shafts. Helical teeth take up the load gradually, so a pair runs quieter than spur gears.",
+        whyPoints: [
+          "Normal module and pressure angle — the way KHK SH, MISUMI and Chinese catalogues list them",
+          "Left or right hand: parallel shafts take opposite hands, 90° crossed shafts the same hand at 45°",
+          "Default face width spans one axial pitch (overlap ratio ≈ 1), like catalogue gears",
+          "Round or hex bore, cut as a true cylinder or prism after the twist",
+        ],
+        faqs: [
+          { q: "What centre distance do two helical gears need?", a: "Normal module × (teeth₁ + teeth₂) / (2 × cos helix angle). KHK's own centre-distance table matches it to the hundredth: their SH2-15 with SH2-20 at 15° sit 36.23 mm apart." },
+          { q: "Do helical gears print without supports?", a: "Yes: every printed helical and herringbone gear we found that states its settings prints flat on the bed with no supports, at helix angles of 15–30°. Use 4–6 walls, 0.16–0.2 mm layers, PETG or nylon for load." },
+          { q: "Why does it stop at 40 teeth?", a: "Each change rebuilds the gear in your browser, and the twisted tooth surfaces add about 0.12 s per tooth to the rest of the build: at 40 teeth the slowest allowed gear takes about 6 s. 8–40 covers pinions and wheels up to Wade's 39-tooth extruder gear; for a bigger wheel, copy the gear into your models and ask the AI agent — it just rebuilds more slowly." },
+        ],
+      },
+      zh: {
+        name: "斜齿轮生成器",
+        title: "斜齿轮生成器 — 模数、螺旋角、旋向可调，在线导出 STL / STEP | Forgent3D",
+        description: "在线斜齿轮生成器：法向模数、齿数、螺旋角、左旋或右旋、齿宽和轴孔都可调，滚齿生成的渐开线齿形，免费导出 STL / STEP。",
+        h1: "斜齿轮生成器：真渐开线齿形",
+        intro: "设定法向模数、齿数、螺旋角和旋向——生成器在端面用和直齿轮同一根 ISO 53 齿条切出齿形，再沿轴线扭转，所以模数和螺旋角相同、一左一右的两个斜齿轮能在平行轴上啮合。斜齿是逐渐进入啮合的，一对斜齿轮比直齿轮转得更安静。",
+        whyPoints: [
+          "法向模数和法向压力角——和 KHK SH、米思米、国内样本的标法一致",
+          "左旋或右旋：平行轴旋向相反，90° 交错轴同旋向、各 45°",
+          "默认齿宽跨一个轴向齿距（重合度 ≈ 1），和市售件一样",
+          "圆孔或六角孔，扭转之后按真圆柱 / 棱柱开孔",
+        ],
+        faqs: [
+          { q: "两个斜齿轮的中心距是多少？", a: "法向模数 × (齿数₁ + 齿数₂) / (2 × cos 螺旋角)。KHK 自己的中心距表与之分毫不差：15° 的 SH2-15 配 SH2-20 中心距 36.23 mm。" },
+          { q: "斜齿轮打印要支撑吗？", a: "不要：我们找到的写明参数的打印斜齿轮和人字齿轮，都是平放在热床上、不加支撑，螺旋角 15–30°。墙 4–6 圈，层高 0.16–0.2 mm，受力用 PETG 或尼龙。" },
+          { q: "为什么齿数最多 40？", a: "每改一次参数，齿轮都在你的浏览器里重建，扭转的齿面在其余构建之外每个齿再加约 0.12 s：40 齿时允许范围内最慢的齿轮约 6 s。8–40 齿覆盖小齿轮和大到 Wade 挤出机 39 齿的大齿轮；要更大的，复制到你的模型里让 AI agent 改——只是重建慢一些。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "bevel-gear-generator",
+    modelDir: "bevel-gear",
+    icon: "◭",
+    family: "gears",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { TEETH: "15", MATE_TEETH: "30" }, label: { en: "15-tooth pinion of a 1:2 pair (its mate: 30 teeth)", zh: "1:2 一对中的 15 齿小锥齿轮（配 30 齿）" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "The default gear exports as 85 exact faces: 40 tooth flanks, and the tip and root lands as 40 true cones that all point at the pitch-cone apex — straight-bevel geometry, not a stack of slices — plus 3 flat faces and the hub and bore as true cylinders.",
+      ],
+      zh: [
+        "默认齿轮导出为 85 个精确面：40 个齿面，齿顶和齿根是 40 个指向节锥顶点的真圆锥面——这就是直齿锥齿轮的几何，不是一层层切片——另有 3 个平面，轮毂和轴孔是真圆柱面。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make a pair of 90° bevel gears with a 1:2 ratio?", a: "Make both from the same page: https://www.forgent3d.com/en/generators/bevel-gear-generator?TEETH=15&MATE_TEETH=30 is the pinion and https://www.forgent3d.com/en/generators/bevel-gear-generator?TEETH=30&MATE_TEETH=15 its mate — KHK's stock 1:2 pair. Mount them so their cone apexes meet where the shafts cross." },
+        { q: "Can I make miter gears for shafts at 60° or 120°?", a: "Yes, set the shaft angle: https://www.forgent3d.com/en/generators/bevel-gear-generator?SHAFT_ANGLE=60 — KHK sells angular miters at 45°, 60° and 120°, and the generator takes anything from 45° to 120°." },
+      ],
+      zh: [
+        { q: "怎样做一对 90°、传动比 1:2 的锥齿轮？", a: "两个都在同一个页面做：https://www.forgent3d.com/zh/generators/bevel-gear-generator?TEETH=15&MATE_TEETH=30 是小齿轮，https://www.forgent3d.com/zh/generators/bevel-gear-generator?TEETH=30&MATE_TEETH=15 是配对的大齿轮——就是 KHK 的 1:2 现货组合。安装时让两个锥顶重合在两轴交点上。" },
+        { q: "能做轴交角 60° 或 120° 的锥齿轮吗？", a: "能，设好轴交角：https://www.forgent3d.com/zh/generators/bevel-gear-generator?SHAFT_ANGLE=60 ——KHK 卖 45°、60°、120° 的非直角伞齿轮，生成器支持 45° 到 120° 之间任意角度。" },
+      ],
+    },
+    // Evidence: generator-models/bevel-gear/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["bevel gear generator", "miter gear stl", "bevel gear stl 3d print", "bevel gear pair module ratio"],
+      zh: ["锥齿轮生成器", "伞齿轮 STL", "锥齿轮 3d打印", "直齿锥齿轮 模数 传动比"],
+    },
+    params: [
+      { key: "MODULE", default: "1.5", range: "1 – 3", unit: "mm", label: { en: "Module (large end)", zh: "模数（大端）" }, desc: { en: "Measured at the large end, as KHK and MISUMI list it; both gears share it.", zh: "按大端计，和 KHK、米思米的标法一样；一对齿轮要相同。" } },
+      { key: "TEETH", default: "20", range: "12 – 40", unit: "", label: { en: "Number of teeth", zh: "齿数" }, desc: { en: "This gear.", zh: "本齿轮的齿数。" } },
+      { key: "MATE_TEETH", default: "20", range: "12 – 60", unit: "", label: { en: "Mating gear teeth", zh: "配对齿轮齿数" }, desc: { en: "The other gear; with the shaft angle it sets both pitch cones.", zh: "另一个齿轮的齿数；和轴交角一起决定两个节锥。" } },
+      { key: "SHAFT_ANGLE", default: "90", range: "45 – 120", unit: "°", label: { en: "Shaft angle", zh: "轴交角" }, desc: { en: "Angle between the two shafts.", zh: "两根轴之间的夹角。" } },
+      { key: "PRESSURE_ANGLE", default: "20", range: "20 / 25", unit: "°", label: { en: "Pressure angle", zh: "压力角" }, desc: { en: "20° on every catalogue bevel gear.", zh: "市售锥齿轮都是 20°。" } },
+      { key: "BORE_STYLE", default: "circular", range: "none / circular / hex", unit: "", label: { en: "Bore style", zh: "轴孔样式" }, desc: { en: "Round shaft or hex socket.", zh: "圆轴或六角孔。" } },
+      { key: "BORE_D", default: "8", range: "2 – 20", unit: "mm", label: { en: "Bore size", zh: "孔径" }, desc: { en: "Shaft diameter, or hex across flats; KHK's PM1.5-20 is bored 8.", zh: "轴径，或六角对边距；KHK PM1.5-20 的孔是 8。" } },
+      { key: "HUB_LENGTH", default: "13", range: "0 – 30", unit: "mm", label: { en: "Hub length", zh: "轮毂长度" }, desc: { en: "Hub on the back, sized like KHK's PM1.5-20 (Ø26 × 13) but kept just inside the tooth roots: Ø24.1 at the defaults.", zh: "背面轮毂，尺寸参照 KHK PM1.5-20（Ø26 × 13），但收在齿根以内：默认 Ø24.1。" } },
+    ],
+    copy: {
+      en: {
+        name: "Bevel Gear Generator",
+        title: "Bevel Gear Generator — Miter & Bevel Gear Pairs by Module (STL / STEP) | Forgent3D",
+        description: "Generate straight bevel gears online: module, the tooth counts of both gears, shaft angle 45–120°, bore and hub. Miter pairs and 1:2 or 1:3 ratios, free STL / STEP.",
+        h1: "Bevel gear generator for miter and bevel gear pairs",
+        intro: "Give the module, this gear's tooth count and its mate's, and the shaft angle — the generator sets both pitch cones from them, so the two gears you make meet at a common apex and mesh. The teeth are our spur gears' hob-generated involute, laid on each gear's back cone (Tredgold's method) and running straight to the apex.",
+        whyPoints: [
+          "Any pair: miters (1:1) or 1:1.5, 1:2, 1:3 — make the mate by swapping the two tooth counts",
+          "Shaft angles from 45° to 120°, like KHK's angular miters",
+          "Face width a third of the cone distance at most, as KHK sizes them",
+          "Back hub and bore like KHK's PM1.5-20; 0.1 mm of backlash per gear",
+        ],
+        faqs: [
+          { q: "How do I mount a pair of bevel gears?", a: "Their pitch cones must share one apex, where the two shafts cross. With the defaults (module 1.5, 20/20 at 90°) the apex sits 15 mm above the gear's large end — 28 mm above the bottom of its 13 mm hub." },
+          { q: "Which way up should I print a bevel gear?", a: "On its back — hub down, teeth up — as makers print them; one maker who printed small bevels teeth-down on a ring had teeth shear off. No supports needed; 3–6 walls, PETG for gears that work." },
+          { q: "Why does it make one gear at a time?", a: "Each change rebuilds the gear in your browser, and building only the one you are looking at keeps that quick. Both gears come from the same page: swap TEETH and MATE_TEETH for the mate." },
+        ],
+      },
+      zh: {
+        name: "锥齿轮生成器",
+        title: "锥齿轮生成器 — 伞齿轮、直齿锥齿轮成对设计，在线导出 STL / STEP | Forgent3D",
+        description: "在线锥齿轮生成器：模数、两个齿轮的齿数、轴交角 45–120°、轴孔和轮毂都可调。等齿数伞齿轮、1:2、1:3 传动比，免费导出 STL / STEP。",
+        h1: "锥齿轮生成器：成对的伞齿轮和直齿锥齿轮",
+        intro: "给出模数、本齿轮和配对齿轮的齿数、轴交角——生成器据此算出两个节锥，做出来的两个齿轮锥顶重合、正确啮合。齿形是直齿轮生成器滚齿得到的渐开线，铺在各自的背锥上（Tredgold 法），一直延伸到锥顶。",
+        whyPoints: [
+          "任意一对：1:1 伞齿轮，或 1:1.5、1:2、1:3——配对齿轮把两个齿数对调即可",
+          "轴交角 45° 到 120°，和 KHK 的非直角伞齿轮一样",
+          "齿宽不超过锥距的三分之一，和 KHK 的取法一致",
+          "背面轮毂和轴孔参照 KHK PM1.5-20；每个齿轮 0.1 mm 侧隙",
+        ],
+        faqs: [
+          { q: "一对锥齿轮怎么装？", a: "两个节锥的锥顶必须重合在两轴交点上。默认参数（模数 1.5、20/20、90°）下，锥顶在齿轮大端上方 15 mm——离 13 mm 轮毂底面 28 mm。" },
+          { q: "锥齿轮朝哪个方向打印？", a: "背面朝下——轮毂朝下、齿朝上——大家都这么打；有人把小锥齿轮齿朝下架在垫圈上打，结果齿被剪断。不用支撑；3–6 圈墙，真正受力的用 PETG。" },
+          { q: "为什么一次只做一个齿轮？", a: "每改一次参数，齿轮都在你的浏览器里重建，只做眼前这一个就快。两个齿轮都在同一个页面做：把 TEETH 和 MATE_TEETH 对调就是配对的那个。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "gt2-pulley-generator",
+    modelDir: "timing-pulley",
+    icon: "◎",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { TEETH: "40", BORE_D: "8" }, label: { en: "40 teeth, 8 mm bore", zh: "40 齿、8 mm 轴孔" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "Each of the 20 grooves exports as one smooth extruded face — a spline, not a polygon — and the lands between them as true cylinders at the 12.22 mm outside diameter: 63 faces in all, so CAD measures the outside diameter, the bore and the flange directly.",
+      ],
+      zh: [
+        "20 个齿槽各导出为一整块光滑的拉伸面——样条，不是多边形——齿槽之间的齿顶是外径 12.22 mm 处的真圆柱面：一共 63 个面，在 CAD 里外径、孔径、挡边都能直接量。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I get a 20-tooth GT2 pulley for a 5 mm motor shaft and a 6 mm belt?", a: "https://www.forgent3d.com/en/generators/gt2-pulley-generator?TEETH=20&BORE_D=5&BELT_WIDTH=6 — 12.22 mm outside diameter like the aluminium ones, flanges, and two M3 set screws in captive nut traps. Download STL to print it flange down, no supports." },
+        { q: "My printed pulley is too tight on the belt, or the belt skips. What do I change?", a: "FIT widens every groove: start at 0.2 (droftarts' default) and move 0.1 at a time — https://www.forgent3d.com/en/generators/gt2-pulley-generator?FIT=0.3 — then print the teeth with 0.1–0.16 mm layers, external perimeters first and 4 or more walls." },
+      ],
+      zh: [
+        { q: "怎样做一个配 5 mm 电机轴、6 mm 皮带的 20 齿 GT2 同步轮？", a: "https://www.forgent3d.com/zh/generators/gt2-pulley-generator?TEETH=20&BORE_D=5&BELT_WIDTH=6 ——外径 12.22 mm，和铝同步轮一样，带挡边，两颗 M3 顶丝配内嵌螺母。下载 STL，挡边朝下打印，不用支撑。" },
+        { q: "打印的同步轮装皮带太紧，或者皮带跳齿，改哪里？", a: "FIT 会把每个齿槽加宽：从 0.2（droftarts 的默认值）开始，每次调 0.1——https://www.forgent3d.com/zh/generators/gt2-pulley-generator?FIT=0.3 ——齿部用 0.1–0.16 mm 层高、先打外圈、4 圈以上墙。" },
+      ],
+    },
+    // Evidence: generator-models/timing-pulley/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["GT2 pulley generator", "gt2 pulley stl", "timing pulley generator", "20 tooth gt2 pulley 5mm bore"],
+      zh: ["同步带轮生成器", "2GT同步轮 STL", "同步轮 3d打印", "2GT 20齿 同步轮"],
+    },
+    params: [
+      { key: "PROFILE", default: "GT2 2 mm", range: "GT2 2 mm / GT2 3 mm", unit: "", label: { en: "Belt profile", zh: "带型" }, desc: { en: "2 mm pitch is the 3D-printer belt.", zh: "2 mm 齿距就是 3D 打印机用的皮带。" } },
+      { key: "TEETH", default: "20", range: "16 – 60", unit: "", label: { en: "Number of teeth", zh: "齿数" }, desc: { en: "Outside diameter = teeth × 2 / π − 0.508 (20 teeth: 12.22 mm); one turn moves teeth × 2 mm of belt. Up to 60, MISUMI's largest stock 2GT pulley.", zh: "外径 = 齿数 × 2 / π − 0.508（20 齿：12.22 mm）；转一圈走 齿数 × 2 mm 皮带。最多 60 齿，米思米 2GT 现货最大规格。" } },
+      { key: "BELT_WIDTH", default: "6", range: "4 – 15", unit: "mm", label: { en: "Belt width", zh: "带宽" }, desc: { en: "The toothed part is 1 mm wider, as on MISUMI pulleys.", zh: "齿部比皮带宽 1 mm，和米思米同步轮一样。" } },
+      { key: "FIT", default: "0.2", range: "−0.1 – 0.3", unit: "mm", label: { en: "Groove fit", zh: "齿槽余量" }, desc: { en: "Widens every groove for printing; move in 0.1 steps.", zh: "为打印加宽每个齿槽；每次调 0.1。" } },
+      { key: "FLANGES", default: "both", range: "both / bottom / none", unit: "", label: { en: "Flanges", zh: "挡边" }, desc: { en: "Outside diameter + 5 mm, 1.5 mm thick: they keep the belt on.", zh: "外径 + 5 mm、厚 1.5 mm：防止皮带跑偏脱落。" } },
+      { key: "BORE_D", default: "5", range: "2 – 8", unit: "mm", label: { en: "Bore", zh: "孔径" }, desc: { en: "Shaft size; 0.15 mm of print clearance is added. 5 for NEMA 17 motors.", zh: "轴径，另加 0.15 mm 打印余量。NEMA 17 电机用 5。" } },
+      { key: "HUB", default: "hub", range: "hub / none", unit: "", label: { en: "Hub", zh: "轮毂" }, desc: { en: "None makes an idler: just the toothed body and flanges.", zh: "选 none 就是惰轮：只有齿部和挡边。" } },
+      { key: "SET_SCREWS", default: "2", range: "0 – 2", unit: "", label: { en: "Set screws", zh: "顶丝" }, desc: { en: "In the hub, 90° apart, with captive nut traps; M3 up to a 5 mm bore, M4 above.", zh: "在轮毂上，相隔 90°，带内嵌螺母槽；5 mm 以下孔用 M3，以上用 M4。" } },
+    ],
+    copy: {
+      en: {
+        name: "GT2 Pulley Generator",
+        title: "GT2 Pulley Generator — Flanges, Hub & Set Screws (STL / STEP) | Forgent3D",
+        description: "Generate GT2 timing pulleys for 2 mm or 3 mm belts: any tooth count, belt width, flanges, a 2–8 mm bore and a hub with set screws in captive nuts, plus a groove-fit setting. Free STL / STEP.",
+        h1: "GT2 pulley generator for 3D printers and small CNC",
+        intro: "Choose the tooth count, belt width and bore — the outside diameter comes out exactly as on aluminium GT2 pulleys (20 teeth: 12.22 mm), with flanges, a hub and two set screws in captive nut traps. Gates doesn't publish the GT2 groove, so each groove is built from the belt's published tooth shape, with a fit setting for your printer.",
+        whyPoints: [
+          "Outside diameter = pitch diameter − 2 × 0.254, checked against MISUMI, SDP/SI and Adafruit pulleys",
+          "Grooves from the published GT2 belt tooth, plus a fit setting you tune 0.1 mm at a time",
+          "Flanges at outside diameter + 5, a hub with two set screws 90° apart in captive nuts",
+          "Idler mode: no hub, just the toothed body and flanges",
+        ],
+        faqs: [
+          { q: "What is the smallest GT2 pulley worth printing?", a: "This generator goes down to 16 teeth. Below about 20 the belt has few teeth in mesh, and the pulley's tooth tips are only a few tenths of a millimetre wide at any tooth count — about one 0.4 mm line — so many makers print 20 or more." },
+          { q: "How do I print a GT2 pulley well?", a: "Flat on the bed, flange down, no supports; 0.1–0.16 mm layers for the teeth, external perimeters first, at least 4 walls. PETG, ABS, ASA or nylon; PLA for light loads only." },
+          { q: "What steps/mm does a 20-tooth pulley need?", a: "One turn moves teeth × 2 mm of belt: 40 mm for 20 teeth. A 200-step motor at 16 microsteps makes 3200 steps per turn, so 3200 / 40 = 80 steps/mm." },
+        ],
+      },
+      zh: {
+        name: "同步带轮生成器",
+        title: "同步带轮生成器 — GT2 同步轮带挡边、轮毂和顶丝，在线导出 STL / STEP | Forgent3D",
+        description: "在线同步带轮生成器：GT2 2 mm / 3 mm 带型，齿数、带宽、挡边、2–8 mm 轴孔、带顶丝和内嵌螺母的轮毂都可调，还有齿槽余量设置，免费导出 STL / STEP。",
+        h1: "同步带轮生成器：3D 打印机和小型 CNC 用的 GT2 同步轮",
+        intro: "选齿数、带宽和孔径——外径和铝制 GT2 同步轮完全一样（20 齿：12.22 mm），带挡边、轮毂和两颗配内嵌螺母的顶丝。Gates 没有公开 GT2 的轮齿槽形，所以每个齿槽按公开的皮带齿形来做，再留一个按你打印机调的余量。",
+        whyPoints: [
+          "外径 = 节圆直径 − 2 × 0.254，对过米思米、SDP/SI、Adafruit 的同步轮",
+          "齿槽按公开的 GT2 皮带齿形做，另有按 0.1 mm 一档调的余量设置",
+          "挡边外径 + 5 mm，轮毂上两颗相隔 90° 的顶丝配内嵌螺母",
+          "惰轮模式：不要轮毂，只有齿部和挡边",
+        ],
+        faqs: [
+          { q: "GT2 同步轮最小打几齿合适？", a: "这个生成器最小 16 齿。20 齿以下皮带啮合的齿数少，而且不管几齿，轮齿顶都只有零点几毫米宽——差不多一条 0.4 mm 的线——所以很多人打 20 齿以上。" },
+          { q: "GT2 同步轮怎么打印效果好？", a: "平放、挡边朝下、不加支撑；齿部用 0.1–0.16 mm 层高、先打外圈、至少 4 圈墙。用 PETG、ABS、ASA 或尼龙；PLA 只适合轻载。" },
+          { q: "20 齿同步轮的 steps/mm 是多少？", a: "转一圈走 齿数 × 2 mm 皮带：20 齿是 40 mm。200 步电机 16 细分一圈 3200 步，所以 3200 / 40 = 80 steps/mm。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "shaft-coupling-generator",
+    modelDir: "shaft-coupling",
+    icon: "⊜",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-17",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: { params: { BORE_1: "6.35", BORE_2: "8" }, label: { en: "6.35 mm (1/4\") to 8 mm, clamp", zh: "6.35 mm（1/4\"）转 8 mm，夹紧式" } },
+    // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
+    step: {
+      en: [
+        "Exports as 36 exact faces — 27 planes and 9 true cylinders (both bores, the outside, the screw holes and counterbores) — so CAD reads each bore's diameter and the screw positions directly.",
+      ],
+      zh: [
+        "导出为 36 个精确面——27 个平面、9 个真圆柱面（两个孔、外圆、螺丝孔和沉头孔）——在 CAD 里能直接量出两个孔径和螺丝位置。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I print a coupler for a NEMA 17 motor (5 mm) and a T8 lead screw (8 mm)?", a: "https://www.forgent3d.com/en/generators/shaft-coupling-generator?BORE_1=5&BORE_2=8 is exactly that: a rigid 20 × 25 mm clamp coupler with an M3 screw and nut per shaft. Print it standing up in PETG, 4 perimeters, at least 35 % infill." },
+        { q: "My printed coupler slips on the motor shaft. What helps?", a: "Print it in PETG rather than PLA (a warm stepper shaft softens PLA at 50–60 °C, PETG at 70–80 °C), use the clamp rather than set screws — or set screws 90° apart: https://www.forgent3d.com/en/generators/shaft-coupling-generator?FASTENING=set-screws — and lower CLEARANCE if the bore is loose. For a D-shaped motor shaft, press “AI edit” and give it your shaft's flat." },
+      ],
+      zh: [
+        { q: "怎样打印一个连接 NEMA 17 电机（5 mm）和 T8 丝杆（8 mm）的联轴器？", a: "https://www.forgent3d.com/zh/generators/shaft-coupling-generator?BORE_1=5&BORE_2=8 就是：20 × 25 mm 的刚性夹紧式联轴器，每根轴一颗 M3 螺丝加螺母。竖着打印，用 PETG，4 圈墙，填充至少 35 %。" },
+        { q: "打印的联轴器在电机轴上打滑，怎么办？", a: "用 PETG 别用 PLA（电机轴发热，PLA 50–60 °C 就软，PETG 是 70–80 °C），用夹紧式而不是顶丝——或者顶丝相隔 90°：https://www.forgent3d.com/zh/generators/shaft-coupling-generator?FASTENING=set-screws ——孔松就把 CLEARANCE 调小。电机轴是 D 形的话，点「AI 修改」告诉它你轴上切平面的尺寸。" },
+      ],
+    },
+    // Evidence: generator-models/shaft-coupling/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["shaft coupling generator", "5mm to 8mm coupler stl", "rigid shaft coupler 3d print", "lead screw coupler stl"],
+      zh: ["联轴器生成器", "5转8联轴器 STL", "3d打印联轴器", "丝杆联轴器 3d打印"],
+    },
+    params: [
+      { key: "BORE_1", default: "5", range: "3 – 14", unit: "mm", label: { en: "Bore 1 (motor)", zh: "孔 1（电机侧）" }, desc: { en: "5 for a NEMA 17 motor.", zh: "NEMA 17 电机是 5。" } },
+      { key: "BORE_2", default: "8", range: "3 – 14", unit: "mm", label: { en: "Bore 2 (lead screw)", zh: "孔 2（丝杆侧）" }, desc: { en: "8 for a T8 lead screw.", zh: "T8 丝杆是 8。" } },
+      { key: "CLEARANCE", default: "0.3", range: "0 – 0.6", unit: "mm", label: { en: "Bore clearance", zh: "孔径余量" }, desc: { en: "Added to both bores: printed holes come out small.", zh: "两个孔都加上：打印的孔会偏小。" } },
+      { key: "FASTENING", default: "clamp", range: "clamp / set-screws", unit: "", label: { en: "Fastening", zh: "紧固方式" }, desc: { en: "Clamp: a slit and one screw per shaft. Set screws: two per shaft, 90° apart.", zh: "夹紧：开缝，每根轴一颗螺丝。顶丝：每根轴两颗，相隔 90°。" } },
+      { key: "LENGTH", default: "25", range: "20 – 40", unit: "mm", label: { en: "Length", zh: "长度" }, desc: { en: "Each shaft goes in half the length.", zh: "每根轴插入一半长度。" } },
+      { key: "SCREW", default: "M3", range: "M2.5 / M3 / M4", unit: "", label: { en: "Screw", zh: "螺丝" }, desc: { en: "With a nut in a hex trap; the body grows past 20 mm when bore and screw need it.", zh: "配六角槽里的螺母；孔和螺丝需要时，外径会从 20 mm 加大。" } },
+    ],
+    copy: {
+      en: {
+        name: "Shaft Coupling Generator",
+        title: "Shaft Coupling Generator — 5 × 8 mm Motor to Lead Screw Couplers (STL / STEP) | Forgent3D",
+        description: "Generate rigid shaft couplings: any two bores from 3 to 14 mm, split clamp or set screws, M2.5–M4 with captive nuts, bore clearance for printing. Free STL / STEP.",
+        h1: "Shaft coupling generator: rigid couplers for motors and lead screws",
+        intro: "Enter the two shaft sizes — 5 mm motor to 8 mm lead screw by default — and get a rigid coupler with a split clamp or set screws, nuts held in printed traps. Rigid on purpose: on a 3D printer's Z axis a flexible coupler can show up as banding, and printed helical beams are too weak to be worth it.",
+        whyPoints: [
+          "Any two bores from 3 to 14 mm, plus a clearance setting for printed holes",
+          "Split clamp like BuildModHack's and Ruland's one-piece couplings, or two set screws 90° apart",
+          "Hex nut traps and counterbores sized for M2.5, M3 or M4",
+          "20 × 25 mm by default, growing only when the bore and screw need more wall",
+        ],
+        faqs: [
+          { q: "Rigid or flexible coupler?", a: "Rigid for a 3D printer's Z axis: Ooznest notes that a flexible coupler there can reduce print quality, and spiral couplers are not meant to carry the axial load. Flexible couplers make up for misalignment on machines that need it — a printed rigid one does not." },
+          { q: "How much bore clearance do I need?", a: "Start at the default +0.3 mm (5.3 for a 5 mm shaft): makers use +0.25–0.4 on small printed holes, PETG a little more than PLA. Too loose and it slips, too tight and it splits." },
+          { q: "How should I print it?", a: "Standing up, so the bores print as round vertical holes; 4 perimeters, at least 35 % infill, PETG. No supports needed." },
+        ],
+      },
+      zh: {
+        name: "联轴器生成器",
+        title: "联轴器生成器 — 5 转 8 mm 电机与丝杆刚性联轴器，在线导出 STL / STEP | Forgent3D",
+        description: "在线联轴器生成器：两个孔径 3–14 mm 任选，夹紧式或顶丝式，M2.5–M4 配内嵌螺母，孔径余量方便打印，免费导出 STL / STEP。",
+        h1: "联轴器生成器：电机和丝杆用的刚性联轴器",
+        intro: "输入两根轴的尺寸——默认 5 mm 电机轴转 8 mm 丝杆——得到一个夹紧式或顶丝式的刚性联轴器，螺母卡在打印出来的槽里。特意做成刚性：3D 打印机的 Z 轴上，弹性联轴器可能带来层纹，打印的螺旋式弹性联轴器又太弱。",
+        whyPoints: [
+          "两个孔径 3–14 mm 任选，另有打印孔的余量设置",
+          "夹紧式（类似 BuildModHack 和 Ruland 一体式），或两颗相隔 90° 的顶丝",
+          "六角螺母槽和沉头孔按 M2.5、M3、M4 定尺寸",
+          "默认 20 × 25 mm，孔和螺丝需要更厚的壁时才加粗",
+        ],
+        faqs: [
+          { q: "用刚性还是弹性联轴器？", a: "3D 打印机 Z 轴用刚性：Ooznest 提到 Z 轴用弹性联轴器可能降低打印质量，螺旋式联轴器也不是用来承受轴向力的。弹性联轴器是给需要补偿偏心的机器用的——打印的刚性件做不到这一点。" },
+          { q: "孔径余量留多少？", a: "从默认的 +0.3 mm 开始（5 mm 轴打 5.3）：小孔大家一般留 +0.25–0.4，PETG 比 PLA 稍多一点。太松会打滑，太紧会裂。" },
+          { q: "怎么打印？", a: "竖着打，孔是竖直的圆孔；4 圈墙，填充至少 35 %，用 PETG，不用支撑。" },
+        ],
+      },
+    },
+  },
 ];
 
 // Merge each extra language's file into the entries: copy, parameter labels and descriptions, the example's
@@ -1346,7 +1761,7 @@ function baseSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、齿轮、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩。调参数、3D 预览、导出 STL / STEP。",
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
@@ -1413,7 +1828,7 @@ function baseSharedCopy(locale) {
     catalogLabel: "Generators",
     catalogTitle: "3D Print Generators — Free Parametric Model Makers | Forgent3D",
     catalogDescription:
-      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, gears, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks and fan grills. Tune parameters, preview in 3D, export STL / STEP.",
+      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks and fan grills. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",

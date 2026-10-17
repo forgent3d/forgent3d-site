@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generatoren",
   catalogTitle: "3D-Druck-Generatoren — kostenlose parametrische Modelle | Forgent3D",
   catalogDescription:
-    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Zahnräder, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager und Lüftergitter. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
+    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager und Lüftergitter. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
   catalogH1: "3D-Druck-Generatoren",
   catalogIntro:
     "Jeder Generator hier ist ein echtes parametrisches CAD-Modell: Ändern Sie die Parameter, baut es sich live neu auf, und Sie exportieren STL / STEP – was über die Schieberegler hinausgeht, ändert der KI-Agent am selben Modell.",
@@ -401,7 +401,7 @@ export const generators = {
         "Echte Evolventenflanken – Paare mit gleichem Modul kämmen korrekt",
         "Eingriffswinkel 20° oder 25°, 8 bis 120 Zähne",
         "Runde oder Sechskantbohrung für Wellen und Normteile",
-        "Passfedernut, Nabe oder passende Zahnstange gebraucht? Fragen Sie den KI-Agenten",
+        "Passende Zahnstange: Der Zahnstangen-Generator nutzt dieselbe Zahnform",
       ],
       faqs: [
         {
@@ -787,6 +787,359 @@ export const generators = {
       "lüfterschutzgitter drucken",
       "lüftergitter generator",
       "pc lüfter gitter stl",
+    ],
+  },
+
+  "gear-rack-generator": {
+    copy: {
+      name: "Zahnstangen-Generator",
+      title: "Zahnstangen-Generator — passend zu den Zahnrädern (STL / STEP) | Forgent3D",
+      description:
+        "Zahnstange nach Modul und Zähnezahl: Zähne nach ISO 53, die mit unseren Stirnrädern kämmen, anreihbare Enden, seitliche Befestigungslöcher. STL / STEP gratis.",
+      h1: "Zahnstangen-Generator: Zahnstangen, die mit den Stirnrädern kämmen",
+      intro:
+        "Wählen Sie Modul und Eingriffswinkel Ihres Ritzels, dann die Zähnezahl – die Zahnstange ist genau so viele Teilungen lang, und beide Enden liegen mitten in einer Zahnlücke, sodass sich gedruckte Stücke zu einer längeren Strecke aneinanderreihen lassen. Sie nutzt die Zahnform nach ISO 53, mit der unsere Stirnräder wälzgefräst werden; das Paar kämmt also mit den vorgesehenen 0,2 mm Flankenspiel.",
+      whyPoints: [
+        "Dieselbe Zahnform nach ISO 53 wie beim Zahnrad-Generator – das Paar kämmt wie ausgelegt",
+        "Länge in ganzen Teilungen, Enden mitten in der Zahnlücke: Stücke lassen sich stumpf aneinandersetzen",
+        "Standardmäßig 20 mm hoch bei Modul 2, Wälzgerade auf 18 wie bei Zahnstangen mit quadratischem Querschnitt; jede Höhe einstellbar",
+        "Optional seitliche Befestigungslöcher M3–M6 mit Senkbohrung, wie bei den Zahnstangen von KHK und MISUMI",
+      ],
+      faqs: [
+        {
+          q: "Wo sitzt das Ritzel?",
+          a: "Seine Mitte liegt auf der Höhe der Wälzgeraden der Zahnstange plus dem Teilkreisradius des Ritzels (Modul × Zähnezahl / 2): mit den Standardwerten 18 + 20 = 38 mm für ein Ritzel mit 20 Zähnen und Modul 2. Das ist das Einbaumaß, das KHK für jede Paarung aus Zahnstange und Ritzel angibt.",
+        },
+        {
+          q: "Wie lang kann ich eine Zahnstange am Stück drucken?",
+          a: "Bei Modul 2 passen 40 Zähne (251,33 mm) gerade auf ein 256-mm-Druckbett oder 53 Zähne über dessen Diagonale; auf ein 220-mm-Druckbett 35 Zähne (219,91 mm, ohne Platz für einen Brim). Für eine längere Strecke drucken Sie Teilstücke und setzen sie aneinander – die Enden sind genau dafür gemacht.",
+        },
+        {
+          q: "Wie herum soll ich sie drucken?",
+          a: "Anleitungen zum Zahnraddruck legen das Zahnprofil flach aufs Druckbett – glatte Flanken, feste Zahnfüße –; drucken Sie die Zahnstange also auf der Seite liegend. Die seitlichen Befestigungslöcher werden dann zu sauberen senkrechten Bohrungen. PETG für eine Zahnstange im Einsatz, 4 oder mehr Wände.",
+        },
+      ],
+    },
+    params: {
+      MODULE: { label: "Modul", desc: "Muss dem Modul des Ritzels entsprechen." },
+      PRESSURE_ANGLE: { label: "Eingriffswinkel", desc: "20° bei jeder Katalog-Zahnstange; 25° nur passend zu einem Ritzel mit 25°." },
+      TEETH: {
+        label: "Zähnezahl",
+        desc: "Länge = Zähnezahl × π × Modul; 15 bei Modul 2 ist die 100-mm-Standardzahnstange von MISUMI (94,25 mm).",
+      },
+      FACE_WIDTH: { label: "Zahnbreite", desc: "Mindestens so breit wie das Ritzel." },
+      PITCH_HEIGHT: {
+        label: "Höhe bis zur Wälzgeraden",
+        desc: "18 ist bei Modul 2 die Wälzgerade einer Zahnstange mit quadratischem Querschnitt (HPC, MISUMI Edelstahl: 9 × Modul); die Stahlzahnstangen von KHK und MISUMI haben 23.",
+      },
+      HOLES: { label: "Befestigungslöcher", desc: "Seitlich quer durch die Zahnbreite, gleichmäßig verteilt, wie bei den Zahnstangen SRFD von KHK." },
+      SCREW: { label: "Schraube", desc: "Loch- und Senkungsmaße aus den Zahnstangentabellen von MISUMI." },
+      COUNTERBORE: { label: "Senkbohrung", desc: "Versenkt die Schraubenköpfe in der -Y-Seite." },
+    },
+    example: "Modul 1,5, 40 Zähne (188,5 mm), 2 Befestigungslöcher",
+    step: [
+      "Die Standard-Zahnstange mit 15 Zähnen wird als 96 exakte Flächen exportiert: Jede Zahnflanke ist eine echte Ebene – die geradflankige Zahnstangenform nach ISO 53 – und jede Fußrundung ein echter Zylinder (66 Ebenen, 30 Zylinder); im CAD lassen sich Flankenwinkel und Höhe der Wälzgeraden also direkt messen.",
+      "Die Länge ist eine ganze Zahl von Teilungen (15 × π × 2 = 94,25 mm), und beide Enden liegen mitten in einer Zahnlücke – wie bei den anreihbaren Zahnstangen SRF von KHK und RGEA von MISUMI –, sodass zwei Zahnstangen stumpf aneinanderstoßen und die Teilung durchläuft.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie erstelle ich eine Zahnstange mit Modul 2 und etwa 200 mm Länge für ein Ritzel mit 20 Zähnen?",
+        a: "200 / (π × 2) abgerundet ergibt 31 Zähne, 194,78 mm: https://www.forgent3d.com/de/generators/gear-rack-generator?MODULE=2&TEETH=31 – die Mitte des Ritzels liegt dann 18 + 20 = 38 mm über der Unterseite der Zahnstange (Höhe der Wälzgeraden + Teilkreisradius). Das Ritzel erstellen Sie mit dem Zahnrad-Generator im selben Modul.",
+      },
+      {
+        q: "Kann ich gedruckte Zahnstangen zu einer längeren Strecke verbinden?",
+        a: "Ja: Jede Zahnstange hier ist eine ganze Zahl von Teilungen lang, mit beiden Enden mitten in der Zahnlücke. Setzen Sie sie stumpf aneinander, legen Sie ein kurzes Stück Zahnstange kämmend über die Stoßstelle, um die Teilung auszurichten – so beschreiben es KHK und MISUMI für ihre Zahnstangen –, und schrauben oder verstiften Sie dann beide auf der Unterlage.",
+      },
+    ],
+    keywords: [
+      "zahnstange 3d druck",
+      "zahnstange stl",
+      "zahnstange generator",
+      "zahnstange modul 1",
+      "zahnstange und ritzel 3d druck",
+    ],
+  },
+
+  "helical-gear-generator": {
+    copy: {
+      name: "Schrägzahnrad-Generator",
+      title: "Schrägzahnrad-Generator — Modul, Schrägungswinkel, links/rechts | Forgent3D",
+      description:
+        "Schrägverzahnte Evolventen-Zahnräder online: Normalmodul, Zähnezahl, Schrägungswinkel, links- oder rechtssteigend, Zahnbreite, Bohrung. Wälzgefräst, STL/STEP gratis.",
+      h1: "Schrägzahnrad-Generator mit echter Evolventenverzahnung",
+      intro:
+        "Stellen Sie Normalmodul, Zähnezahl, Schrägungswinkel und Flankenrichtung ein – der Generator schneidet den Zahn quer zur Achse mit derselben Zahnstange nach ISO 53 wie unsere Stirnräder und verdreht ihn dann entlang der Achse; ein links- und ein rechtssteigendes Zahnrad mit gleichem Modul und Schrägungswinkel kämmen so auf parallelen Wellen. Schräge Zähne nehmen die Last allmählich auf, ein Paar läuft daher leiser als geradverzahnte Stirnräder.",
+      whyPoints: [
+        "Normalmodul und Normaleingriffswinkel – so, wie KHK SH, MISUMI und chinesische Kataloge sie angeben",
+        "Links- oder rechtssteigend: Parallele Wellen brauchen entgegengesetzte Flankenrichtungen, um 90° gekreuzte Wellen dieselbe bei 45°",
+        "Die Standard-Zahnbreite umfasst eine Axialteilung (Sprungüberdeckung ≈ 1), wie bei Katalogzahnrädern",
+        "Runde oder Sechskantbohrung, nach dem Verdrehen als echter Zylinder bzw. echtes Prisma geschnitten",
+      ],
+      faqs: [
+        {
+          q: "Welchen Achsabstand brauchen zwei Schrägzahnräder?",
+          a: "Normalmodul × (Zähnezahl₁ + Zähnezahl₂) / (2 × cos Schrägungswinkel). Die Achsabstandstabelle von KHK stimmt damit auf das Hundertstel überein: SH2-15 und SH2-20 mit 15° liegen 36,23 mm auseinander.",
+        },
+        {
+          q: "Lassen sich Schrägzahnräder ohne Stützen drucken?",
+          a: "Ja: Jedes gedruckte Schräg- und Pfeilzahnrad mit angegebenen Druckeinstellungen, das wir gefunden haben, wird flach auf dem Druckbett ohne Stützen gedruckt, bei Schrägungswinkeln von 15–30°. Nehmen Sie 4–6 Wände, 0,16–0,2 mm Schichthöhe und für Last PETG oder Nylon.",
+        },
+        {
+          q: "Warum ist bei 40 Zähnen Schluss?",
+          a: "Jede Änderung baut das Zahnrad in Ihrem Browser neu auf, und die verdrehten Zahnflächen kosten zusätzlich zum übrigen Aufbau etwa 0,12 s pro Zahn: Bei 40 Zähnen braucht das langsamste zulässige Zahnrad etwa 6 s. 8–40 deckt Ritzel und Räder bis zum Extruderzahnrad von Wade mit 39 Zähnen ab; für ein größeres Rad kopieren Sie das Zahnrad in Ihre Modelle und bitten den KI-Agenten darum – es baut sich nur langsamer neu auf.",
+        },
+      ],
+    },
+    params: {
+      MODULE: {
+        label: "Normalmodul",
+        desc: "Normalmodul, wie es KHK SH, MISUMI und chinesische Kataloge angeben; Zahnräder, die miteinander kämmen, haben dasselbe.",
+      },
+      TEETH: { label: "Zähnezahl", desc: "Teilkreisdurchmesser = Modul × Zähnezahl / cos(Schrägungswinkel)." },
+      PRESSURE_ANGLE: { label: "Normaleingriffswinkel", desc: "20° ist Standard." },
+      HELIX_ANGLE: {
+        label: "Schrägungswinkel",
+        desc: "15–21,5° bei Katalogzahnrädern für parallele Wellen; 45° für um 90° gekreuzte Wellen.",
+      },
+      HAND: {
+        label: "Flankenrichtung",
+        desc: "Parallele Wellen: entgegengesetzte Richtungen. Um 90° gekreuzte Wellen: dieselbe Richtung.",
+      },
+      FACE_WIDTH: {
+        label: "Zahnbreite",
+        desc: "20 umfasst bei Modul 2 und 20° eine Axialteilung (Sprungüberdeckung ≈ 1), wie bei Katalogzahnrädern.",
+      },
+      BORE_STYLE: { label: "Bohrungsart", desc: "Rund für die Welle oder als Sechskantaufnahme." },
+      BORE_D: { label: "Bohrungsmaß", desc: "Wellendurchmesser oder Schlüsselweite des Sechskants; 5 passt auf einen NEMA-17-Motor." },
+    },
+    example: "Modul 1,5, 30 Zähne, Schrägungswinkel 20°, linkssteigend",
+    step: [
+      "Jede Zahnfläche ist eine einzige glatte B-Spline-Fläche, die der Schraubenlinie folgt: Das Standardzahnrad mit 20 Zähnen wird als 83 Flächen exportiert – 80 Zahnflächen, die beiden Stirnflächen und die Bohrung als echter Zylinder, nach dem Verdrehen geschnitten, sodass sich ihr Durchmesser im CAD exakt ablesen lässt.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie erstelle ich ein Paar Schrägzahnräder mit 15 und 30 Zähnen, Modul 2?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/helical-gear-generator?MODULE=2&TEETH=15&HAND=right und https://www.forgent3d.com/de/generators/helical-gear-generator?MODULE=2&TEETH=30&HAND=left – parallele Wellen brauchen denselben Schrägungswinkel und entgegengesetzte Flankenrichtungen. Beim voreingestellten Winkel von 20° kämmen sie bei 2 × (15 + 30) / (2 × cos 20°) = 47,89 mm Achsabstand.",
+      },
+      {
+        q: "Welchen Schrägungswinkel soll ich nehmen?",
+        a: "Katalogzahnräder für parallele Wellen haben 15° (KHK SH) bis 21,5° (KHK KHG); gedruckte Schrägzahnräder liegen bei 15–30° und werden flach ohne Stützen gedruckt. Für um 90° gekreuzte Wellen nehmen Sie an beiden Zahnrädern 45° mit derselben Flankenrichtung, wie MISUMI und HPC: https://www.forgent3d.com/de/generators/helical-gear-generator?HELIX_ANGLE=45&FACE_WIDTH=10",
+      },
+    ],
+    keywords: [
+      "schrägzahnrad 3d druck",
+      "schrägverzahntes zahnrad stl",
+      "schrägverzahnung generator",
+      "schrägstirnrad",
+      "zahnrad schrägverzahnt 3d druck",
+    ],
+  },
+
+  "bevel-gear-generator": {
+    copy: {
+      name: "Kegelrad-Generator",
+      title: "Kegelrad-Generator — Kegelradpaare nach Modul & Übersetzung | Forgent3D",
+      description:
+        "Gerade Kegelräder online: Modul, Zähnezahlen beider Räder, Achswinkel 45–120°, Bohrung und Nabe. Kegelradpaare 1:1 sowie 1:2 oder 1:3, STL / STEP gratis.",
+      h1: "Kegelrad-Generator für Kegelradpaare – mit und ohne Übersetzung",
+      intro:
+        "Geben Sie Modul, die Zähnezahl dieses Rads und die des Gegenrads sowie den Achswinkel an – daraus legt der Generator beide Teilkegel fest, sodass sich die zwei Räder, die Sie erzeugen, in einer gemeinsamen Kegelspitze treffen und kämmen. Die Zähne sind die wälzgefräste Evolvente unserer Stirnräder, auf den Rückenkegel jedes Rads gelegt (Tredgold-Näherung) und gerade bis zur Kegelspitze geführt.",
+      whyPoints: [
+        "Jedes Paar: 1:1 oder 1:1,5, 1:2, 1:3 – das Gegenrad entsteht, wenn Sie die beiden Zähnezahlen tauschen",
+        "Achswinkel von 45° bis 120°, wie bei den 1:1-Kegelrädern von KHK für schräge Achsen",
+        "Zahnbreite höchstens ein Drittel der Teilkegellänge, so wie KHK sie auslegt",
+        "Nabe auf der Rückseite und Bohrung wie beim PM1.5-20 von KHK; 0,1 mm Flankenspiel pro Rad",
+      ],
+      faqs: [
+        {
+          q: "Wie baue ich ein Kegelradpaar ein?",
+          a: "Die Teilkegel beider Räder müssen eine gemeinsame Spitze haben – dort, wo sich die beiden Wellen kreuzen. Mit den Standardwerten (Modul 1,5, 20/20 bei 90°) liegt die Kegelspitze 15 mm über dem großen Ende der Verzahnung – 28 mm über der Unterseite der 13 mm langen Nabe.",
+        },
+        {
+          q: "Wie herum soll ich ein Kegelrad drucken?",
+          a: "Auf dem Rücken – Nabe unten, Zähne oben –, so wie Maker sie drucken; einem Maker, der kleine Kegelräder mit den Zähnen nach unten auf einem Ring druckte, sind Zähne abgeschert. Keine Stützen nötig; 3–6 Wände, PETG für Zahnräder im Einsatz.",
+        },
+        {
+          q: "Warum entsteht immer nur ein Rad?",
+          a: "Jede Änderung baut das Rad in Ihrem Browser neu auf, und nur das eine aufzubauen, das Sie gerade ansehen, hält das schnell. Beide Räder entstehen auf derselben Seite: Für das Gegenrad tauschen Sie TEETH und MATE_TEETH.",
+        },
+      ],
+    },
+    params: {
+      MODULE: { label: "Modul (großes Ende)", desc: "Am großen Ende gemessen, wie KHK und MISUMI es angeben; beide Räder haben dasselbe." },
+      TEETH: { label: "Zähnezahl", desc: "Die dieses Rads." },
+      MATE_TEETH: {
+        label: "Zähnezahl des Gegenrads",
+        desc: "Das andere Rad; zusammen mit dem Achswinkel legt sie beide Teilkegel fest.",
+      },
+      SHAFT_ANGLE: { label: "Achswinkel", desc: "Winkel zwischen den beiden Wellen." },
+      PRESSURE_ANGLE: { label: "Eingriffswinkel", desc: "20° bei jedem Katalog-Kegelrad." },
+      BORE_STYLE: { label: "Bohrungsart", desc: "Rund für die Welle oder als Sechskantaufnahme." },
+      BORE_D: {
+        label: "Bohrungsmaß",
+        desc: "Wellendurchmesser oder Schlüsselweite des Sechskants; das PM1.5-20 von KHK hat eine 8-mm-Bohrung.",
+      },
+      HUB_LENGTH: {
+        label: "Nabenlänge",
+        desc: "Nabe auf der Rückseite, bemessen wie beim PM1.5-20 von KHK (Ø26 × 13), aber knapp innerhalb der Zahnfüße: Ø24,1 bei den Voreinstellungen.",
+      },
+    },
+    example: "Ritzel mit 15 Zähnen aus einem Paar 1:2 (Gegenrad: 30 Zähne)",
+    step: [
+      "Das Standardrad wird als 85 exakte Flächen exportiert: 40 Zahnflanken, dazu die Kopf- und Fußflächen als 40 echte Kegelflächen, die alle auf die Spitze des Teilkegels zeigen – die Geometrie eines geradverzahnten Kegelrads, kein Stapel von Scheiben –, außerdem 3 Planflächen sowie Nabe und Bohrung als echte Zylinder.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie erstelle ich ein Paar 90°-Kegelräder mit Übersetzung 1:2?",
+        a: "Beide auf derselben Seite: https://www.forgent3d.com/de/generators/bevel-gear-generator?TEETH=15&MATE_TEETH=30 ist das Ritzel und https://www.forgent3d.com/de/generators/bevel-gear-generator?TEETH=30&MATE_TEETH=15 sein Gegenrad – das 1:2-Paar, das KHK ab Lager führt. Bauen Sie sie so ein, dass sich ihre Kegelspitzen dort treffen, wo sich die Wellen kreuzen.",
+      },
+      {
+        q: "Kann ich 1:1-Kegelräder für Wellen unter 60° oder 120° erstellen?",
+        a: "Ja, stellen Sie den Achswinkel ein: https://www.forgent3d.com/de/generators/bevel-gear-generator?SHAFT_ANGLE=60 – KHK verkauft 1:1-Kegelräder für 45°, 60° und 120°, und der Generator nimmt jeden Wert von 45° bis 120°.",
+      },
+    ],
+    keywords: [
+      "kegelrad 3d druck",
+      "kegelrad stl",
+      "kegelrad generator",
+      "kegelzahnrad stl",
+      "kegelradgetriebe 3d druck",
+    ],
+  },
+
+  "gt2-pulley-generator": {
+    copy: {
+      name: "GT2-Riemenscheiben-Generator",
+      title: "GT2-Riemenscheiben-Generator — Nabe & Madenschrauben (STL) | Forgent3D",
+      description:
+        "GT2-Zahnriemenscheiben für 2- oder 3-mm-Riemen: Zähnezahl, Riemenbreite, Bordscheiben, Bohrung 2–8 mm, Nabe mit Madenschrauben, Passung der Zahnlücken. STL/STEP gratis.",
+      h1: "GT2-Riemenscheiben-Generator für 3D-Drucker und kleine CNC-Maschinen",
+      intro:
+        "Wählen Sie Zähnezahl, Riemenbreite und Bohrung – der Außendurchmesser wird genau wie bei GT2-Riemenscheiben aus Aluminium (20 Zähne: 12,22 mm), mit Bordscheiben, einer Nabe und zwei Madenschrauben in Mutterntaschen. Gates veröffentlicht das Profil der GT2-Zahnlücke nicht; jede Zahnlücke entsteht daher aus der veröffentlichten Zahnform des Riemens, mit einer Passung, die Sie auf Ihren Drucker abstimmen.",
+      whyPoints: [
+        "Außendurchmesser = Teilkreisdurchmesser − 2 × 0,254, geprüft an Riemenscheiben von MISUMI, SDP/SI und Adafruit",
+        "Zahnlücken nach dem veröffentlichten Zahn des GT2-Riemens, dazu eine Passung, die Sie in Schritten von 0,1 mm einstellen",
+        "Bordscheiben mit Außendurchmesser + 5, eine Nabe mit zwei um 90° versetzten Madenschrauben in Mutterntaschen",
+        "Umlenkrollen-Modus: keine Nabe, nur der verzahnte Körper und die Bordscheiben",
+      ],
+      faqs: [
+        {
+          q: "Welches ist die kleinste GT2-Riemenscheibe, die sich zu drucken lohnt?",
+          a: "Dieser Generator geht bis 16 Zähne hinunter. Unter etwa 20 sind nur wenige Riemenzähne im Eingriff, und die Zahnköpfe der Riemenscheibe sind bei jeder Zähnezahl nur wenige Zehntelmillimeter breit – etwa eine einzige 0,4-mm-Linie –; viele Maker drucken daher 20 oder mehr.",
+        },
+        {
+          q: "Wie drucke ich eine GT2-Riemenscheibe sauber?",
+          a: "Flach auf dem Druckbett, Bordscheibe nach unten, ohne Stützen; 0,1–0,16 mm Schichthöhe für die Zähne, Außenwände zuerst, mindestens 4 Wände. PETG, ABS, ASA oder Nylon; PLA nur für leichte Lasten.",
+        },
+        {
+          q: "Wie viele Schritte/mm braucht eine Riemenscheibe mit 20 Zähnen?",
+          a: "Eine Umdrehung bewegt Zähnezahl × 2 mm Riemen: 40 mm bei 20 Zähnen. Ein Motor mit 200 Schritten macht bei 16 Mikroschritten 3200 Schritte pro Umdrehung, also 3200 / 40 = 80 Schritte/mm.",
+        },
+      ],
+    },
+    params: {
+      PROFILE: { label: "Riemenprofil", desc: "2 mm Teilung ist der Riemen der 3D-Drucker." },
+      TEETH: {
+        label: "Zähnezahl",
+        desc: "Außendurchmesser = Zähnezahl × 2 / π − 0,508 (20 Zähne: 12,22 mm); eine Umdrehung bewegt Zähnezahl × 2 mm Riemen. Bis 60, die größte MISUMI-2GT-Scheibe ab Lager.",
+      },
+      BELT_WIDTH: { label: "Riemenbreite", desc: "Der verzahnte Teil ist 1 mm breiter, wie bei den Riemenscheiben von MISUMI." },
+      FIT: { label: "Passung der Zahnlücken", desc: "Weitet jede Zahnlücke für den Druck; in Schritten von 0,1 verstellen." },
+      FLANGES: { label: "Bordscheiben", desc: "Außendurchmesser + 5 mm, 1,5 mm dick: Sie halten den Riemen auf der Scheibe." },
+      BORE_D: { label: "Bohrung", desc: "Wellenmaß; 0,15 mm Druckspiel werden hinzugefügt. 5 für NEMA-17-Motoren." },
+      HUB: { label: "Nabe", desc: "Ohne Nabe (none) entsteht eine Umlenkrolle: nur der verzahnte Körper und die Bordscheiben." },
+      SET_SCREWS: {
+        label: "Madenschrauben",
+        desc: "In der Nabe, um 90° versetzt, mit Mutterntaschen; M3 bis 5 mm Bohrung, darüber M4.",
+      },
+    },
+    example: "40 Zähne, 8-mm-Bohrung",
+    step: [
+      "Jede der 20 Zahnlücken wird als eine einzige glatte extrudierte Fläche exportiert – ein Spline, kein Polygon –, die Zahnköpfe dazwischen als echte Zylinder auf dem Außendurchmesser von 12,22 mm: insgesamt 63 Flächen, sodass das CAD Außendurchmesser, Bohrung und Bordscheibe direkt misst.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie bekomme ich eine GT2-Riemenscheibe mit 20 Zähnen für eine 5-mm-Motorwelle und einen 6-mm-Riemen?",
+        a: "https://www.forgent3d.com/de/generators/gt2-pulley-generator?TEETH=20&BORE_D=5&BELT_WIDTH=6 – 12,22 mm Außendurchmesser wie bei den Aluminiumscheiben, Bordscheiben und zwei M3-Madenschrauben in Mutterntaschen. Laden Sie STL herunter und drucken Sie die Scheibe mit der Bordscheibe nach unten, ohne Stützen.",
+      },
+      {
+        q: "Meine gedruckte Riemenscheibe ist zu stramm für den Riemen, oder der Riemen springt über. Was ändere ich?",
+        a: "FIT weitet jede Zahnlücke: Beginnen Sie bei 0,2 (dem Standardwert von droftarts) und verstellen Sie in Schritten von 0,1 – https://www.forgent3d.com/de/generators/gt2-pulley-generator?FIT=0.3 – und drucken Sie die Zähne dann mit 0,1–0,16 mm Schichthöhe, Außenwänden zuerst und 4 oder mehr Wänden.",
+      },
+    ],
+    keywords: [
+      "gt2 riemenscheibe stl",
+      "gt2 zahnriemenscheibe 3d druck",
+      "gt2 pulley stl",
+      "gt2 riemenscheibe 20 zähne",
+      "zahnriemenscheibe drucken",
+    ],
+  },
+
+  "shaft-coupling-generator": {
+    copy: {
+      name: "Wellenkupplungs-Generator",
+      title: "Wellenkupplungs-Generator — 5 × 8 mm, Motor auf Gewindespindel | Forgent3D",
+      description:
+        "Starre Wellenkupplungen: zwei Bohrungen 3–14 mm, Klemmschlitz oder Madenschrauben, M2,5–M4 mit eingelegten Muttern, Bohrungsspiel für den Druck. STL / STEP gratis.",
+      h1: "Wellenkupplungs-Generator: starre Kupplungen für Motoren und Gewindespindeln",
+      intro:
+        "Geben Sie die beiden Wellenmaße ein – standardmäßig 5-mm-Motorwelle auf 8-mm-Gewindespindel – und Sie erhalten eine starre Kupplung mit Klemmschlitz oder Madenschrauben, die Muttern sitzen in gedruckten Mutterntaschen. Starr mit Absicht: An der Z-Achse eines 3D-Druckers kann sich eine flexible Kupplung als Streifenbildung (Banding) im Druck zeigen, und gedruckte Wendelkupplungen sind zu schwach, um sich zu lohnen.",
+      whyPoints: [
+        "Zwei beliebige Bohrungen von 3 bis 14 mm, dazu eine Spieleinstellung für gedruckte Löcher",
+        "Geschlitzte Klemmung wie bei den einteiligen Kupplungen von BuildModHack und Ruland – oder zwei um 90° versetzte Madenschrauben",
+        "Mutterntaschen für Sechskantmuttern und Senkbohrungen, bemessen für M2,5, M3 oder M4",
+        "Standardmäßig 20 × 25 mm; größer nur, wenn Bohrung und Schraube mehr Wandstärke brauchen",
+      ],
+      faqs: [
+        {
+          q: "Starre oder flexible Kupplung?",
+          a: "Starr für die Z-Achse eines 3D-Druckers: Ooznest weist darauf hin, dass eine flexible Kupplung dort die Druckqualität verschlechtern kann, und Wendelkupplungen sind nicht dafür gedacht, die axiale Last zu tragen. Flexible Kupplungen gleichen Fluchtfehler an Maschinen aus, die das brauchen – eine gedruckte starre Kupplung kann das nicht.",
+        },
+        {
+          q: "Wie viel Bohrungsspiel brauche ich?",
+          a: "Beginnen Sie mit den voreingestellten +0,3 mm (5,3 für eine 5-mm-Welle): Maker geben kleinen gedruckten Löchern +0,25–0,4, bei PETG etwas mehr als bei PLA. Zu locker, und die Kupplung rutscht durch; zu stramm, und sie reißt auf.",
+        },
+        {
+          q: "Wie soll ich sie drucken?",
+          a: "Stehend, damit die Bohrungen als runde, senkrechte Löcher entstehen; 4 Perimeter, mindestens 35 % Infill, PETG. Keine Stützen nötig.",
+        },
+      ],
+    },
+    params: {
+      BORE_1: { label: "Bohrung 1 (Motor)", desc: "5 für einen NEMA-17-Motor." },
+      BORE_2: { label: "Bohrung 2 (Gewindespindel)", desc: "8 für eine T8-Gewindespindel." },
+      CLEARANCE: { label: "Bohrungsspiel", desc: "Wird zu beiden Bohrungen addiert: Gedruckte Löcher fallen zu klein aus." },
+      FASTENING: {
+        label: "Befestigung",
+        desc: "Klemmung (clamp): ein Schlitz und eine Schraube pro Welle. Madenschrauben (set-screws): zwei pro Welle, um 90° versetzt.",
+      },
+      LENGTH: { label: "Länge", desc: "Jede Welle reicht bis zur halben Länge hinein." },
+      SCREW: {
+        label: "Schraube",
+        desc: "Mit Mutter in einer Sechskanttasche; der Körper wird dicker als 20 mm, wenn Bohrung und Schraube es verlangen.",
+      },
+    },
+    example: "6,35 mm (1/4\") auf 8 mm, Klemmung",
+    step: [
+      "Wird als 36 exakte Flächen exportiert – 27 Ebenen und 9 echte Zylinder (beide Bohrungen, der Außenmantel, die Schraubenlöcher und Senkbohrungen) –, sodass das CAD den Durchmesser jeder Bohrung und die Lage der Schrauben direkt abliest.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie drucke ich eine Kupplung für einen NEMA-17-Motor (5 mm) und eine T8-Gewindespindel (8 mm)?",
+        a: "https://www.forgent3d.com/de/generators/shaft-coupling-generator?BORE_1=5&BORE_2=8 ist genau das: eine starre Klemmkupplung, 20 × 25 mm, mit einer M3-Schraube und Mutter pro Welle. Drucken Sie sie stehend in PETG, 4 Perimeter, mindestens 35 % Infill.",
+      },
+      {
+        q: "Meine gedruckte Kupplung rutscht auf der Motorwelle durch. Was hilft?",
+        a: "Drucken Sie sie in PETG statt PLA (eine warme Schrittmotorwelle macht PLA bei 50–60 °C weich, PETG bei 70–80 °C), nehmen Sie die Klemmung statt Madenschrauben – oder Madenschrauben um 90° versetzt: https://www.forgent3d.com/de/generators/shaft-coupling-generator?FASTENING=set-screws – und verringern Sie CLEARANCE, wenn die Bohrung zu locker ist. Bei einer Motorwelle mit D-Abflachung klicken Sie auf „AI edit“ und geben die Abflachung Ihrer Welle an.",
+      },
+    ],
+    keywords: [
+      "wellenkupplung 5mm 8mm",
+      "kupplung 5 auf 8 mm",
+      "starre wellenkupplung 3d druck",
+      "wellenkupplung stl",
+      "kupplung gewindespindel schrittmotor",
     ],
   },
 };

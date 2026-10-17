@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generadores",
   catalogTitle: "Generadores para impresión 3D — Modelos paramétricos gratis | Forgent3D",
   catalogDescription:
-    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras y rejillas de ventilador. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
+    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras y rejillas de ventilador. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
   catalogH1: "Generadores para impresión 3D",
   catalogIntro:
     "Cada generador de esta página es un modelo CAD paramétrico de verdad: ajusta los parámetros y se reconstruye al instante, exporta STL / STEP y, para todo lo que vaya más allá de los deslizadores, el agente de IA edita el mismo modelo.",
@@ -397,7 +397,7 @@ export const generators = {
         "Flancos de evolvente (involuta) reales: dos engranajes del mismo módulo engranan correctamente",
         "Ángulo de presión de 20° o 25°, de 8 a 120 dientes",
         "Agujero redondo o hexagonal para ejes y tornillería estándar",
-        "¿Necesitas un chavetero, un cubo o la cremallera a juego? Pídeselo al agente de IA",
+        "Cremallera a juego: el generador de cremalleras usa la misma forma de diente",
       ],
       faqs: [
         {
@@ -791,6 +791,375 @@ export const generators = {
       "protector de ventilador impreso en 3d",
       "rejilla de ventilador paramétrica",
       "rejilla ventilador pc 3d",
+    ],
+  },
+
+  "gear-rack-generator": {
+    copy: {
+      name: "Generador de cremalleras",
+      title: "Generador de cremalleras — Para engranajes rectos (STL / STEP) | Forgent3D",
+      description:
+        "Cremalleras por módulo y dientes: perfil ISO 53 que engrana con nuestros engranajes rectos, extremos para unir tramos y agujeros de montaje opcionales. STL / STEP gratis.",
+      h1: "Generador de cremalleras: cremalleras que engranan con los engranajes rectos",
+      intro:
+        "Elige el módulo y el ángulo de presión de tu piñón y luego el número de dientes: la cremallera mide exactamente ese número de pasos, con los dos extremos en mitad de un hueco entre dientes, así que los tramos impresos se unen en un recorrido más largo. Usa el perfil ISO 53 con el que se tallan nuestros engranajes rectos, así que la pareja engrana con el juego de 0.2 mm previsto en el diseño.",
+      whyPoints: [
+        "El mismo perfil de diente ISO 53 que el generador de engranajes rectos: la pareja engrana tal como se diseñó",
+        "Largo en pasos enteros y extremos en mitad de un hueco: los tramos se unen a tope",
+        "20 mm de alto con módulo 2 por defecto, línea primitiva a 18 como en las cremalleras de sección cuadrada; la altura que necesites",
+        "Agujeros de montaje laterales M3–M6 opcionales, con rebaje para la cabeza como en las cremalleras de KHK y MISUMI",
+      ],
+      faqs: [
+        {
+          q: "¿Dónde va el piñón?",
+          a: "Su centro queda a la altura de la línea primitiva de la cremallera más el radio primitivo del piñón (módulo × dientes / 2): con los valores por defecto, 18 + 20 = 38 mm para un piñón de módulo 2 y 20 dientes. Es la distancia de montaje que da KHK para cualquier pareja de cremallera y piñón.",
+        },
+        {
+          q: "¿Qué largo de cremallera puedo imprimir de una sola pieza?",
+          a: "Con módulo 2, 40 dientes (251.33 mm) caben rectos en una cama de 256 mm, o 53 dientes en su diagonal; en una cama de 220 mm, 35 dientes (219.91 mm, sin margen para un brim). Para un recorrido más largo, imprime varios tramos y únelos: los extremos están hechos para eso.",
+        },
+        {
+          q: "¿En qué orientación la imprimo?",
+          a: "Las guías de impresión de engranajes apoyan el perfil del diente en plano sobre la cama (flancos lisos, pies resistentes), así que imprime la cremallera tumbada de lado; así los agujeros de montaje laterales salen como agujeros verticales limpios. PETG para una cremallera que vaya a trabajar, con 4 paredes o más.",
+        },
+      ],
+    },
+    params: {
+      MODULE: { label: "Módulo", desc: "Debe coincidir con el del piñón." },
+      PRESSURE_ANGLE: {
+        label: "Ángulo de presión",
+        desc: "20° en todas las cremalleras de catálogo; 25° solo para engranar con un piñón de 25°.",
+      },
+      TEETH: {
+        label: "Número de dientes",
+        desc: "Largo = dientes × π × módulo; 15 con módulo 2 es la cremallera estándar de 100 mm de MISUMI (94.25 mm).",
+      },
+      FACE_WIDTH: { label: "Ancho de cara", desc: "Como mínimo, el ancho de cara del piñón." },
+      PITCH_HEIGHT: {
+        label: "Altura a la línea primitiva",
+        desc: "18 con módulo 2 es la línea primitiva de una cremallera de sección cuadrada (HPC, MISUMI inoxidable: 9 × módulo); las cremalleras de acero de KHK y MISUMI usan 23.",
+      },
+      HOLES: {
+        label: "Agujeros de montaje",
+        desc: "Atraviesan de lado el ancho de cara, espaciados de forma uniforme, como en las cremalleras SRFD de KHK.",
+      },
+      SCREW: { label: "Tornillo", desc: "Medidas del agujero y del rebaje según las tablas de cremalleras de MISUMI." },
+      COUNTERBORE: { label: "Rebaje para la cabeza", desc: "Embute las cabezas de los tornillos en la cara -Y." },
+    },
+    example: "módulo 1.5, 40 dientes (188.5 mm), 2 agujeros de montaje",
+    step: [
+      "La cremallera de 15 dientes por defecto se exporta como 96 caras exactas: cada flanco de diente es un plano real (el perfil de cremallera ISO 53, de flancos rectos) y cada redondeo del pie, un cilindro real (66 planos, 30 cilindros), así que el CAD mide directamente el ángulo del flanco y la altura de la línea primitiva.",
+      "El largo es un número entero de pasos (15 × π × 2 = 94.25 mm) y los dos extremos caen en mitad de un hueco entre dientes, como en las cremalleras empalmables SRF de KHK y RGEA de MISUMI, así que dos cremalleras se unen a tope y el paso continúa sin saltos.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo hago una cremallera de módulo 2 de unos 200 mm de largo para un piñón de 20 dientes?",
+        a: "200 / (π × 2) redondeado hacia abajo da 31 dientes, 194.78 mm: https://www.forgent3d.com/es/generators/gear-rack-generator?MODULE=2&TEETH=31 (el centro del piñón queda entonces a 18 + 20 = 38 mm sobre la base de la cremallera: altura de la línea primitiva + radio primitivo). Haz el piñón con el generador de engranajes rectos, con el mismo módulo.",
+      },
+      {
+        q: "¿Puedo unir cremalleras impresas para un recorrido más largo?",
+        a: "Sí: aquí cada cremallera es un número entero de pasos con los dos extremos en mitad de un hueco. Júntalas a tope, engrana un trozo corto de cremallera sobre la junta para fijar el paso (el método que indican KHK y MISUMI para sus cremalleras) y luego atornilla o fija con pasadores las dos a la base.",
+      },
+    ],
+    keywords: [
+      "generador de cremalleras",
+      "cremallera módulo 2 stl",
+      "cremallera y piñón impresos en 3d",
+      "cremallera de engranaje stl",
+      "cremallera dentada imprimible",
+    ],
+  },
+
+  "helical-gear-generator": {
+    copy: {
+      name: "Generador de engranajes helicoidales",
+      title: "Generador de engranajes helicoidales — Módulo, hélice y sentido | Forgent3D",
+      description:
+        "Engranajes helicoidales de evolvente: módulo normal, dientes, ángulo y sentido de la hélice, ancho de cara y agujero. Dientes tallados con fresa madre. STL / STEP gratis.",
+      h1: "Generador de engranajes helicoidales con dientes de evolvente reales",
+      intro:
+        "Fija el módulo normal, el número de dientes, el ángulo de hélice y su sentido: el generador talla el diente en el plano transversal al eje con la misma cremallera ISO 53 que nuestros engranajes rectos y luego lo retuerce a lo largo del eje, así que un engranaje con hélice izquierda y otro con hélice derecha, del mismo módulo y el mismo ángulo de hélice, engranan en ejes paralelos. Los dientes helicoidales toman la carga de forma progresiva, así que una pareja hace menos ruido que unos engranajes rectos.",
+      whyPoints: [
+        "Módulo normal y ángulo de presión normal: como los dan KHK SH, MISUMI y los catálogos chinos",
+        "Hélice izquierda o derecha: los ejes paralelos llevan sentidos opuestos; los ejes cruzados a 90°, el mismo sentido a 45°",
+        "El ancho de cara por defecto abarca un paso axial (relación de recubrimiento ≈ 1), como en los engranajes de catálogo",
+        "Agujero redondo o hexagonal, cortado como un cilindro o un prisma reales después de la torsión",
+      ],
+      faqs: [
+        {
+          q: "¿Qué distancia entre centros necesitan dos engranajes helicoidales?",
+          a: "Módulo normal × (dientes₁ + dientes₂) / (2 × cos ángulo de hélice). La propia tabla de distancias entre centros de KHK coincide hasta la centésima: su SH2-15 con su SH2-20 a 15° quedan a 36.23 mm.",
+        },
+        {
+          q: "¿Los engranajes helicoidales se imprimen sin soportes?",
+          a: "Sí: todos los engranajes helicoidales y en espina de pescado impresos que hemos encontrado con sus ajustes indicados se imprimen en plano sobre la cama y sin soportes, con ángulos de hélice de 15–30°. Usa 4–6 paredes, capas de 0.16–0.2 mm y PETG o nylon si van a soportar carga.",
+        },
+        {
+          q: "¿Por qué se queda en 40 dientes?",
+          a: "Cada cambio reconstruye el engranaje en tu navegador, y las superficies retorcidas de los dientes añaden unos 0.12 s por diente al resto de la construcción: con 40 dientes, el engranaje permitido más lento tarda unos 6 s. De 8 a 40 dientes cubre piñones y ruedas hasta el engranaje de 39 dientes del extrusor Wade; para una rueda más grande, copia el engranaje a tus modelos y pídeselo al agente de IA: simplemente se reconstruye más despacio.",
+        },
+      ],
+    },
+    params: {
+      MODULE: {
+        label: "Módulo (normal)",
+        desc: "Módulo normal, como lo dan KHK SH, MISUMI y los catálogos chinos; los engranajes que engranan entre sí lo comparten.",
+      },
+      TEETH: { label: "Número de dientes", desc: "Diámetro primitivo = módulo × dientes / cos(ángulo de hélice)." },
+      PRESSURE_ANGLE: { label: "Ángulo de presión (normal)", desc: "20° es el estándar." },
+      HELIX_ANGLE: {
+        label: "Ángulo de hélice",
+        desc: "15–21.5° en los engranajes de catálogo para ejes paralelos; 45° para ejes cruzados a 90°.",
+      },
+      HAND: { label: "Sentido de la hélice", desc: "Ejes paralelos: sentidos opuestos. Ejes cruzados a 90°: el mismo sentido." },
+      FACE_WIDTH: {
+        label: "Ancho de cara",
+        desc: "20 con módulo 2 y 20° abarca un paso axial (relación de recubrimiento ≈ 1), como en los engranajes de catálogo.",
+      },
+      BORE_STYLE: { label: "Tipo de agujero", desc: "Eje redondo o alojamiento hexagonal." },
+      BORE_D: {
+        label: "Medida del agujero",
+        desc: "Diámetro del eje, o medida entre caras del hexágono; 5 encaja en un motor NEMA 17.",
+      },
+    },
+    example: "módulo 1.5, 30 dientes, hélice izquierda de 20°",
+    step: [
+      "Cada superficie de diente es una sola cara B-spline lisa que sigue la hélice: el engranaje de 20 dientes por defecto se exporta como 83 caras (80 superficies de dientes, las dos caras de los extremos y el agujero como un cilindro real, cortado después de la torsión para que su diámetro se lea exacto en CAD).",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo hago una pareja de engranajes helicoidales de 15 y 30 dientes, módulo 2?",
+        a: "Abre https://www.forgent3d.com/es/generators/helical-gear-generator?MODULE=2&TEETH=15&HAND=right y https://www.forgent3d.com/es/generators/helical-gear-generator?MODULE=2&TEETH=30&HAND=left (los ejes paralelos necesitan el mismo ángulo de hélice y sentidos opuestos). Con los 20° por defecto, engranan a 2 × (15 + 30) / (2 × cos 20°) = 47.89 mm.",
+      },
+      {
+        q: "¿Qué ángulo de hélice uso?",
+        a: "Los engranajes de catálogo para ejes paralelos usan de 15° (KHK SH) a 21.5° (KHK KHG); los engranajes helicoidales impresos van de 15 a 30° y se imprimen en plano sin soportes. Para ejes cruzados a 90°, usa 45° en los dos engranajes con el mismo sentido, como hacen MISUMI y HPC: https://www.forgent3d.com/es/generators/helical-gear-generator?HELIX_ANGLE=45&FACE_WIDTH=10",
+      },
+    ],
+    keywords: [
+      "generador de engranajes helicoidales",
+      "engranaje helicoidal stl",
+      "engranajes helicoidales impresos en 3d",
+      "engrane helicoidal",
+      "engranaje helicoidal por módulo y ángulo de hélice",
+    ],
+  },
+
+  "bevel-gear-generator": {
+    copy: {
+      name: "Generador de engranajes cónicos",
+      title: "Generador de engranajes cónicos — Pares por módulo (STL / STEP) | Forgent3D",
+      description:
+        "Engranajes cónicos rectos: módulo, dientes de ambos engranajes, ángulo entre ejes de 45–120°, agujero y cubo. Pares de inglete y relaciones 1:2 o 1:3. STL / STEP gratis.",
+      h1: "Generador de engranajes cónicos para pares de inglete y pares cónicos",
+      intro:
+        "Indica el módulo, el número de dientes de este engranaje y el de su pareja, y el ángulo entre ejes: el generador calcula con ellos los dos conos primitivos, así que los dos engranajes que hagas se encuentran en un vértice común y engranan. Los dientes son la evolvente tallada con fresa madre de nuestros engranajes rectos, colocada sobre el cono complementario de cada engranaje (método de Tredgold) y prolongada en línea recta hasta el vértice.",
+      whyPoints: [
+        "Cualquier pareja: de inglete (1:1) o 1:1.5, 1:2, 1:3; la pareja se hace intercambiando los dos números de dientes",
+        "Ángulos entre ejes de 45° a 120°, como los engranajes de inglete angulares de KHK",
+        "Ancho de cara de un tercio de la generatriz del cono primitivo como máximo, como lo dimensiona KHK",
+        "Cubo trasero y agujero como en el PM1.5-20 de KHK; 0.1 mm de juego por engranaje",
+      ],
+      faqs: [
+        {
+          q: "¿Cómo monto una pareja de engranajes cónicos?",
+          a: "Sus conos primitivos deben compartir un mismo vértice, en el punto donde se cruzan los dos ejes. Con los valores por defecto (módulo 1.5, 20/20 a 90°), el vértice queda 15 mm por encima del extremo mayor del engranaje: 28 mm por encima de la base de su cubo de 13 mm.",
+        },
+        {
+          q: "¿En qué orientación imprimo un engranaje cónico?",
+          a: "Apoyado sobre la parte trasera, con el cubo abajo y los dientes arriba, como lo hace la gente que los imprime; a alguien que imprimió engranajes cónicos pequeños con los dientes hacia abajo sobre un anillo se le partieron dientes. No necesita soportes; 3–6 paredes y PETG para engranajes que vayan a trabajar.",
+        },
+        {
+          q: "¿Por qué hace un solo engranaje cada vez?",
+          a: "Cada cambio reconstruye el engranaje en tu navegador, y construir solo el que estás viendo hace que vaya rápido. Los dos engranajes salen de la misma página: intercambia TEETH y MATE_TEETH para hacer la pareja.",
+        },
+      ],
+    },
+    params: {
+      MODULE: {
+        label: "Módulo (extremo mayor)",
+        desc: "Medido en el extremo mayor, como lo dan KHK y MISUMI; los dos engranajes lo comparten.",
+      },
+      TEETH: { label: "Número de dientes", desc: "Los de este engranaje." },
+      MATE_TEETH: {
+        label: "Dientes de la pareja",
+        desc: "Los del otro engranaje; junto con el ángulo entre ejes, fija los dos conos primitivos.",
+      },
+      SHAFT_ANGLE: { label: "Ángulo entre ejes", desc: "Ángulo que forman los dos ejes." },
+      PRESSURE_ANGLE: { label: "Ángulo de presión", desc: "20° en todos los engranajes cónicos de catálogo." },
+      BORE_STYLE: { label: "Tipo de agujero", desc: "Eje redondo o alojamiento hexagonal." },
+      BORE_D: {
+        label: "Medida del agujero",
+        desc: "Diámetro del eje, o medida entre caras del hexágono; el PM1.5-20 de KHK lleva un agujero de 8.",
+      },
+      HUB_LENGTH: {
+        label: "Largo del cubo",
+        desc: "Cubo en la parte trasera, dimensionado como el del PM1.5-20 de KHK (Ø26 × 13) pero justo dentro del pie de los dientes: Ø24.1 con los valores por defecto.",
+      },
+    },
+    example: "piñón de 15 dientes de una pareja 1:2 (su pareja: 30 dientes)",
+    step: [
+      "El engranaje por defecto se exporta como 85 caras exactas: 40 flancos de diente, y las cabezas y los fondos de los dientes como 40 conos reales que apuntan todos al vértice del cono primitivo (geometría de engranaje cónico recto, no una pila de cortes), más 3 caras planas y el cubo y el agujero como cilindros reales.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo hago una pareja de engranajes cónicos a 90° con relación 1:2?",
+        a: "Haz los dos en la misma página: https://www.forgent3d.com/es/generators/bevel-gear-generator?TEETH=15&MATE_TEETH=30 es el piñón y https://www.forgent3d.com/es/generators/bevel-gear-generator?TEETH=30&MATE_TEETH=15 su pareja (la pareja 1:2 de stock de KHK). Móntalos de modo que los vértices de sus conos coincidan donde se cruzan los ejes.",
+      },
+      {
+        q: "¿Puedo hacer engranajes de inglete para ejes a 60° o 120°?",
+        a: "Sí, fija el ángulo entre ejes: https://www.forgent3d.com/es/generators/bevel-gear-generator?SHAFT_ANGLE=60 (KHK vende engranajes de inglete angulares a 45°, 60° y 120°, y el generador admite cualquier ángulo de 45° a 120°).",
+      },
+    ],
+    keywords: [
+      "generador de engranajes cónicos",
+      "engranaje cónico stl",
+      "engranajes cónicos impresos en 3d",
+      "piñón cónico stl",
+      "engrane cónico",
+      "pareja de engranajes cónicos por módulo y relación",
+    ],
+  },
+
+  "gt2-pulley-generator": {
+    copy: {
+      name: "Generador de poleas GT2",
+      title: "Generador de poleas GT2 — Pestañas, cubo y prisioneros (STL) | Forgent3D",
+      description:
+        "Poleas GT2 de paso 2 o 3 mm: dientes, ancho de correa, pestañas, agujero de 2–8 mm, cubo con prisioneros en tuercas cautivas y ajuste de ranura. STL / STEP gratis.",
+      h1: "Generador de poleas GT2 para impresoras 3D y pequeñas CNC",
+      intro:
+        "Elige el número de dientes, el ancho de correa y el agujero: el diámetro exterior sale exactamente igual que en las poleas GT2 de aluminio (20 dientes: 12.22 mm), con pestañas, un cubo y dos prisioneros en alojamientos para tuerca cautiva. Gates no publica la ranura de GT2, así que cada ranura se construye a partir de la forma publicada del diente de la correa, con un ajuste para tu impresora.",
+      whyPoints: [
+        "Diámetro exterior = diámetro primitivo − 2 × 0.254, contrastado con poleas de MISUMI, SDP/SI y Adafruit",
+        "Ranuras a partir del diente publicado de la correa GT2, más un ajuste que vas moviendo de 0.1 en 0.1 mm",
+        "Pestañas de diámetro exterior + 5 y un cubo con dos prisioneros a 90° en tuercas cautivas",
+        "Modo polea loca: sin cubo, solo el cuerpo dentado y las pestañas",
+      ],
+      faqs: [
+        {
+          q: "¿Cuál es la polea GT2 más pequeña que vale la pena imprimir?",
+          a: "Este generador baja hasta 16 dientes. Por debajo de unos 20, la correa tiene pocos dientes engranados, y las puntas de los dientes de la polea miden solo unas décimas de milímetro de ancho con cualquier número de dientes (más o menos una línea de 0.4 mm), así que mucha gente imprime 20 o más.",
+        },
+        {
+          q: "¿Cómo imprimo bien una polea GT2?",
+          a: "En plano sobre la cama, con una pestaña hacia abajo y sin soportes; capas de 0.1–0.16 mm para los dientes, perímetros externos primero y al menos 4 paredes. PETG, ABS, ASA o nylon; PLA solo para cargas ligeras.",
+        },
+        {
+          q: "¿Cuántos pasos/mm necesita una polea de 20 dientes?",
+          a: "Una vuelta mueve dientes × 2 mm de correa: 40 mm con 20 dientes. Un motor de 200 pasos a 16 micropasos da 3200 pasos por vuelta, así que 3200 / 40 = 80 pasos/mm.",
+        },
+      ],
+    },
+    params: {
+      PROFILE: { label: "Perfil de correa", desc: "El paso de 2 mm es el de la correa de las impresoras 3D." },
+      TEETH: {
+        label: "Número de dientes",
+        desc: "Diámetro exterior = dientes × 2 / π − 0.508 (20 dientes: 12.22 mm); una vuelta mueve dientes × 2 mm de correa. Hasta 60, la polea 2GT de stock más grande de MISUMI.",
+      },
+      BELT_WIDTH: { label: "Ancho de correa", desc: "La parte dentada es 1 mm más ancha, como en las poleas de MISUMI." },
+      FIT: { label: "Ajuste de ranura", desc: "Ensancha cada ranura para la impresión; muévelo de 0.1 en 0.1." },
+      FLANGES: { label: "Pestañas", desc: "Diámetro exterior + 5 mm, 1.5 mm de grosor: evitan que la correa se salga." },
+      BORE_D: {
+        label: "Agujero",
+        desc: "Medida del eje; se añaden 0.15 mm de holgura de impresión. 5 para motores NEMA 17.",
+      },
+      HUB: { label: "Cubo", desc: "None (sin cubo) da una polea loca: solo el cuerpo dentado y las pestañas." },
+      SET_SCREWS: {
+        label: "Prisioneros",
+        desc: "En el cubo, a 90° entre sí, con alojamientos para tuerca cautiva; M3 hasta un agujero de 5 mm, M4 por encima.",
+      },
+    },
+    example: "40 dientes, agujero de 8 mm",
+    step: [
+      "Cada una de las 20 ranuras se exporta como una sola cara extruida lisa (una spline, no un polígono), y los tramos entre ellas, como cilindros reales en el diámetro exterior de 12.22 mm: 63 caras en total, así que el CAD mide directamente el diámetro exterior, el agujero y la pestaña.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo consigo una polea GT2 de 20 dientes para un eje de motor de 5 mm y una correa de 6 mm?",
+        a: "https://www.forgent3d.com/es/generators/gt2-pulley-generator?TEETH=20&BORE_D=5&BELT_WIDTH=6 da 12.22 mm de diámetro exterior, como las de aluminio, con pestañas y dos prisioneros M3 en alojamientos para tuerca cautiva. Descarga el STL e imprímela con la pestaña hacia abajo, sin soportes.",
+      },
+      {
+        q: "La polea impresa queda demasiado justa con la correa, o la correa salta. ¿Qué cambio?",
+        a: "FIT ensancha cada ranura: empieza en 0.2 (el valor por defecto de droftarts) y muévelo de 0.1 en 0.1. Luego imprime los dientes con capas de 0.1–0.16 mm, perímetros externos primero y 4 paredes o más. Con 0.3, por ejemplo: https://www.forgent3d.com/es/generators/gt2-pulley-generator?FIT=0.3",
+      },
+    ],
+    keywords: [
+      "generador de poleas gt2",
+      "polea gt2 stl",
+      "polea gt2 20 dientes 5mm",
+      "polea dentada gt2 impresa en 3d",
+      "polea gt2 imprimible",
+    ],
+  },
+
+  "shaft-coupling-generator": {
+    copy: {
+      name: "Generador de acopladores de eje",
+      title: "Generador de acopladores de eje — Motor 5 mm a husillo 8 mm | Forgent3D",
+      description:
+        "Acopladores de eje rígidos: dos agujeros de 3 a 14 mm, abrazadera partida o prisioneros, M2.5–M4 con tuercas cautivas y holgura de impresión. STL / STEP gratis.",
+      h1: "Generador de acopladores de eje: acopladores rígidos para motores y husillos",
+      intro:
+        "Introduce las dos medidas de eje (por defecto, motor de 5 mm a husillo de 8 mm) y obtén un acoplador rígido con abrazadera partida o con prisioneros, con las tuercas sujetas en alojamientos impresos. Rígido a propósito: en el eje Z de una impresora 3D, un acoplador flexible puede notarse como bandas en la pieza, y las vigas helicoidales impresas son demasiado débiles para que merezcan la pena.",
+      whyPoints: [
+        "Dos agujeros cualesquiera de 3 a 14 mm, más un ajuste de holgura para agujeros impresos",
+        "Abrazadera partida como en los acopladores de una pieza de BuildModHack y Ruland, o dos prisioneros a 90° entre sí",
+        "Alojamientos para tuerca hexagonal y rebajes para la cabeza a medida de M2.5, M3 o M4",
+        "20 × 25 mm por defecto; solo crece cuando el agujero y el tornillo necesitan más pared",
+      ],
+      faqs: [
+        {
+          q: "¿Acoplador rígido o flexible?",
+          a: "Rígido para el eje Z de una impresora 3D: Ooznest señala que ahí un acoplador flexible puede empeorar la calidad de impresión, y los acopladores en espiral no están pensados para soportar la carga axial. Los acopladores flexibles compensan la desalineación en las máquinas que lo necesitan; uno rígido impreso no lo hace.",
+        },
+        {
+          q: "¿Cuánta holgura necesita el agujero?",
+          a: "Empieza con los +0.3 mm por defecto (5.3 para un eje de 5 mm): en agujeros impresos pequeños se suele dejar +0.25–0.4, un poco más con PETG que con PLA. Demasiado holgado, patina; demasiado justo, se raja.",
+        },
+        {
+          q: "¿Cómo lo imprimo?",
+          a: "De pie, para que los agujeros salgan como agujeros verticales redondos; 4 perímetros, al menos un 35 % de relleno y PETG. No necesita soportes.",
+        },
+      ],
+    },
+    params: {
+      BORE_1: { label: "Agujero 1 (motor)", desc: "5 para un motor NEMA 17." },
+      BORE_2: { label: "Agujero 2 (husillo)", desc: "8 para un husillo T8." },
+      CLEARANCE: {
+        label: "Holgura del agujero",
+        desc: "Se suma a los dos agujeros: los agujeros impresos salen pequeños.",
+      },
+      FASTENING: {
+        label: "Sujeción",
+        desc: "Abrazadera: un corte y un tornillo por eje. Prisioneros: dos por eje, a 90° entre sí.",
+      },
+      LENGTH: { label: "Largo", desc: "Cada eje entra la mitad del largo." },
+      SCREW: {
+        label: "Tornillo",
+        desc: "Con una tuerca en un alojamiento hexagonal; el cuerpo pasa de 20 mm cuando el agujero y el tornillo lo necesitan.",
+      },
+    },
+    example: "6.35 mm (1/4\") a 8 mm, abrazadera",
+    step: [
+      "Se exporta como 36 caras exactas: 27 planos y 9 cilindros reales (los dos agujeros, el exterior, los agujeros de los tornillos y los rebajes para la cabeza), así que el CAD lee directamente el diámetro de cada agujero y la posición de los tornillos.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo imprimo un acoplador para un motor NEMA 17 (5 mm) y un husillo T8 (8 mm)?",
+        a: "https://www.forgent3d.com/es/generators/shaft-coupling-generator?BORE_1=5&BORE_2=8 es justo eso: un acoplador rígido de abrazadera de 20 × 25 mm con un tornillo M3 y su tuerca por eje. Imprímelo de pie en PETG, con 4 perímetros y al menos un 35 % de relleno.",
+      },
+      {
+        q: "Mi acoplador impreso patina en el eje del motor. ¿Qué ayuda?",
+        a: "Imprímelo en PETG en vez de PLA (un eje de motor paso a paso caliente ablanda el PLA a 50–60 °C y el PETG a 70–80 °C), usa la abrazadera en lugar de prisioneros, o prisioneros a 90°: https://www.forgent3d.com/es/generators/shaft-coupling-generator?FASTENING=set-screws y baja CLEARANCE si el agujero queda holgado. Para un eje de motor en D, pulsa “AI edit” y dale la medida del plano de tu eje.",
+      },
+    ],
+    keywords: [
+      "generador de acopladores de eje",
+      "acoplador 5mm a 8mm stl",
+      "acople 5x8 impreso en 3d",
+      "acoplamiento rígido 5 a 8 mm",
+      "acoplador husillo t8 stl",
     ],
   },
 };

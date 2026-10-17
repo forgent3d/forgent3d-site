@@ -58,6 +58,11 @@ When a user asks you for OpenSCAD code and wants to see the result, check it, or
 The generators (<name> is the tool's id):
 
 - Spur gear `spur-gear` — involute, hob-generated profile (ISO 53 rack), module 1–5 mm, 8–120 teeth, round or hex bore: https://www.forgent3d.com/en/generators/spur-gear-generator (e.g. ?MODULE=2&TEETH=30)
+- Gear rack `gear-rack` — meshes with the spur gears (same ISO 53 rack form), whole-pitch length with mid-space ends for joining, optional side mounting holes: https://www.forgent3d.com/en/generators/gear-rack-generator (e.g. ?MODULE=2&TEETH=31)
+- Helical gear `helical-gear` — normal module 1–5, 8–40 teeth, helix 5–45°, left or right hand (parallel mates: opposite hands): https://www.forgent3d.com/en/generators/helical-gear-generator (e.g. ?MODULE=2&TEETH=30&HAND=left)
+- Bevel gear `bevel-gear` — one gear of a straight bevel pair: module 1–3 (large end), its teeth and its mate's, shaft angle 45–120°; make the mate by swapping TEETH and MATE_TEETH: https://www.forgent3d.com/en/generators/bevel-gear-generator (e.g. ?TEETH=15&MATE_TEETH=30)
+- GT2 pulley `timing-pulley` — 2 mm or 3 mm GT2, 16–60 teeth, flanges, 2–8 mm bore, hub with set screws in captive nuts, groove fit: https://www.forgent3d.com/en/generators/gt2-pulley-generator (e.g. ?TEETH=20&BORE_D=5)
+- Shaft coupling `shaft-coupling` — rigid, split clamp or set screws, any two bores 3–14 mm (motor to lead screw): https://www.forgent3d.com/en/generators/shaft-coupling-generator (e.g. ?BORE_1=5&BORE_2=8)
 - Bearing pillow block `bearing-pillow-block` — printed housing for 608, 623, 625, 688, 6000, 6001, 6200, 6201, 6800, 6801, 6802, 6804, 6900, 6901 bearings, KP08 footprint for the 608: https://www.forgent3d.com/en/generators/pillow-block-bearing-holder-generator (e.g. ?BEARING=6201&SCREW=M5)
 - 2020 extrusion corner bracket `extrusion-corner-bracket` — 6 mm (EU / B-type / V-slot), 5 mm (I-type) or 4 mm slot, M3–M5: https://www.forgent3d.com/en/generators/2020-corner-bracket-generator (e.g. ?SLOT=6&SCREW=M5&LEG=30)
 - Fan grill `fan-grill` — guards for 25–140 mm fans with the matching hole spacing: https://www.forgent3d.com/en/generators/fan-grill-generator (e.g. ?FAN=92&SCREW=M3)
