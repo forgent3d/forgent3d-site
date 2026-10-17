@@ -13,7 +13,7 @@ const PAGES = ["openscad-viewer", "openscad-to-step", "openscad-to-stl", "opensc
 
 const LABELS = {
   en: {
-    "openscad-viewer": "OpenSCAD viewer",
+    "openscad-viewer": "OpenSCAD online viewer",
     "openscad-to-step": "OpenSCAD to STEP",
     "openscad-to-stl": "OpenSCAD to STL",
     "openscad-customizer": "OpenSCAD Customizer",

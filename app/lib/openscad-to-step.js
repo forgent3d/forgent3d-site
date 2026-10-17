@@ -280,7 +280,7 @@ export function getScadCopy(locale) {
       ogLocale: "en_US",
       ogImage: "/og/openscad-to-step-en.png",
       homeLink: "Forgent3D home",
-      viewerLink: "OpenSCAD viewer",
+      viewerLink: "OpenSCAD online viewer",
       viewerHint: "Just want to see the model, no STEP?",
       generatorsLink: "3D print generators",
       credit:

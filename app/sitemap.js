@@ -12,7 +12,7 @@ const ROUTES = [
   ["/openscad-to-step", "weekly", 0.9, "2026-10-10"],
   ["/openscad-to-step/why-openscad-cant-export-step", "monthly", 0.7, "2026-09-30"],
   ["/openscad-to-step/compatibility", "monthly", 0.7, "2026-09-30"],
-  ["/openscad-viewer", "weekly", 0.9, "2026-10-10"],
+  ["/openscad-viewer", "weekly", 0.9, "2026-10-17"],
   ["/openscad-to-stl", "weekly", 0.85, "2026-10-15"],
   ["/openscad-customizer", "weekly", 0.85, "2026-10-15"],
   ["/chatgpt-openscad", "weekly", 0.85, "2026-10-15"],

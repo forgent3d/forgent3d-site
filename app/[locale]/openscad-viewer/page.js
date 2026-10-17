@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articleCards } from "../../lib/blog";
 import { BRAND_BUTTON, SKILLS_INSTALL_COMMAND, isSupportedLocale } from "../../lib/landing-page";
+import { cheatsheetRows } from "../../lib/openscad-cheatsheet";
+import { scadCodeUrl } from "../../lib/openscad-pages";
 import { SCAD_LINK_FORMAT, scadPath } from "../../lib/openscad-to-step";
 import {
   SCAD_EXAMPLES,
@@ -95,6 +97,34 @@ export default async function OpenScadViewerPage({ params }) {
             );
           })}
         </div>
+      </section>
+
+      {/* 常用写法速查:每行一句话讲清写法和坑,「在线打开」是带代码的链接(同上面示例的 #code=),例子都用真 OpenSCAD 渲染过。
+          说明是整句话,窄屏上三列表格会把它挤成一条缝:窄屏逐条堆叠,sm 起才排成三列(表头也只在那时出现)。
+          链接用 js-scad-code-link(不是 js-scad-viewer-link,那个会被改写成光秃的工具地址、丢掉 #code=),data-example 分得出是哪一行。 */}
+      <section className="mt-16" id="cheatsheet">
+        <h2 className="text-2xl font-semibold">{t.cheatTitle}</h2>
+        <p className="mt-2 max-w-3xl text-muted-foreground">{t.cheatIntro}</p>
+        <div className="mt-6 overflow-hidden rounded-2xl border border-border/80 text-sm">
+          <div className="hidden bg-card/60 px-4 py-3 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground/80 sm:grid sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:gap-6">
+            {t.cheatHead.map((head, index) => (
+              <span key={index}>{head}</span>
+            ))}
+          </div>
+          <ul>
+            {cheatsheetRows(locale).map((row) => (
+              <li key={row.id} className="border-t border-border/60 px-4 py-4 first:border-t-0 sm:grid sm:grid-cols-[14rem_minmax(0,1fr)_auto] sm:gap-6 sm:first:border-t">
+                <code className="block font-mono text-xs font-medium leading-6 text-foreground">{row.syntax}</code>
+                <p className="mt-1 leading-6 text-muted-foreground sm:mt-0">{row.text}</p>
+                {/* 颜色放在里层 span:public/styles.css 的 a { color: inherit } 不分层,压得过 a 上的 text-brand(示例卡片同样这么做) */}
+                <a className="js-scad-code-link group mt-2 inline-block whitespace-nowrap font-medium leading-6 sm:mt-0" href={scadCodeUrl(locale, row.code)} target="_blank" rel="noreferrer" data-example={`cheatsheet-${row.id}`}>
+                  <span className="text-brand transition-colors group-hover:text-brand/80">{t.cheatOpen} →</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <p className="mt-4 max-w-3xl text-sm text-muted-foreground">{t.cheatNote}</p>
       </section>
 
       <section className="mt-16">

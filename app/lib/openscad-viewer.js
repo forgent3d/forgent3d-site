@@ -2,6 +2,10 @@
 // the sibling of openscad-to-step. Same tool in the app (/scad), a different search intent: "openscad viewer / online /
 // preview / open a .scad file" wants to SEE the model, not a STEP. The two pages link each other and must not chase
 // the same keywords. Copy for both locales, the path and the metadata live here.
+//
+// Its head term is "openscad在线" / "openscad online" (Bing's query data: platform docs/generator-seo-research.md §1.9),
+// so the titles lead with it, and the page carries what someone who wants to use OpenSCAD online can use on landing:
+// the cheat sheet (openscad-cheatsheet.js), every row a link that opens its example rendered.
 
 import { APP_SCAD_URL, SCAD_EXAMPLES, scadExampleUrl, scadPath } from "./openscad-to-step";
 import { OG_BASE, SITE_URL } from "./seo";
@@ -112,11 +116,11 @@ export function getViewerCopy(locale) {
       generatorsLink: "3D 打印生成器",
       credit:
         "OpenSCAD 是由 OpenSCAD 项目开发、以 GPL 协议发布的自由软件。Forgent3D 在浏览器里运行它来预览 .scad 文件，与 OpenSCAD 项目没有隶属关系。",
-      title: "OpenSCAD 在线预览：浏览器里直接看 .scad 模型，不用安装 | Forgent3D",
+      title: "OpenSCAD 在线预览与编辑 — 浏览器里写代码实时渲染，导出 STL / STEP | Forgent3D",
       description:
-        "在线预览 OpenSCAD 代码和 .scad 文件：真正的 OpenSCAD 在浏览器里运行，边写边渲染，color()、% 和 # 和桌面版 F5 一样。不用安装、不用登录、不上传。",
-      keywords: ["OpenSCAD 在线预览", "OpenSCAD 在线查看器", "在线运行 OpenSCAD", "scad 文件预览", "OpenSCAD 网页版", "OpenSCAD 浏览器", "打开 scad 文件"],
-      h1: "OpenSCAD 在线预览：浏览器里直接看 .scad 模型",
+        "在线运行 OpenSCAD：真正的 OpenSCAD 在浏览器里跑，贴代码或拖进 .scad 文件，边写边渲染，拖滑块改参数，导出 STL / STEP。附常用写法速查。不用安装、不用登录、不上传。",
+      keywords: ["openscad在线", "OpenSCAD 在线预览", "OpenSCAD 在线编辑", "在线运行 OpenSCAD", "OpenSCAD 网页版", "OpenSCAD 在线查看器", "scad 在线浏览", "打开 scad 文件", "OpenSCAD 常用写法"],
+      h1: "OpenSCAD 在线预览与编辑：浏览器里写代码、直接看模型",
       intro:
         "把代码贴进来，或者拖进一个 .scad 文件、整个项目文件夹：真正的 OpenSCAD 在你的浏览器里运行，停下来半秒就渲染出来。color()、% 背景、# 高亮和桌面版按 F5 看到的一样。不用安装，不用登录，文件不上传。",
       cta: "打开预览器",
@@ -139,6 +143,11 @@ export function getViewerCopy(locale) {
         "spur-gears": { title: "一对啮合齿轮", text: "入口文件 use 了 lib/ 下的渐开线齿轮库：多文件项目按原样解析。", alt: "一大一小两个啮合直齿轮的等轴测图，各带一个中心孔" },
         "parametric-box": { title: "带盖参数化盒子", text: "尺寸、壁厚、圆角、盖子松紧都是 Customizer 参数，拖滑块就重建。", alt: "圆角盒子和它的盖子并排摆放、开口朝上的等轴测图" },
       },
+      cheatTitle: "OpenSCAD 常用写法速查",
+      cheatIntro: "最常用的几种写法，每条说清怎么用、哪里容易错。点「在线打开」，例子就在预览器里渲染好，改个数字马上看到变化。",
+      cheatHead: ["写法", "怎么用", ""],
+      cheatOpen: "在线打开",
+      cheatNote: "这些写法在桌面版 OpenSCAD 里一样能用。",
       compareTitle: "和桌面版 OpenSCAD 比",
       compareHead: ["", "桌面版 OpenSCAD", "这个预览器"],
       compare: [
@@ -175,9 +184,11 @@ export function getViewerCopy(locale) {
       skillMore: "Skills 页：两条路线怎么选",
       faqTitle: "常见问题",
       faqs: [
+        { q: "不装 OpenSCAD，能在线写代码、导出 STL 吗？", a: "能。这个预览器就是 OpenSCAD 本体编译成 WebAssembly，在浏览器里运行：写代码、渲染、拖参数、导出 STL 都在网页上完成，要给 CAD 软件用还能导出 STEP。不用安装，也不用登录。" },
         { q: "这是真的 OpenSCAD 吗？", a: "是。执行代码的就是 OpenSCAD 本体（2025 年的开发版快照，带 Manifold 几何内核），编译成 WebAssembly 在你的浏览器里运行。语言行为、内置库、Customizer 注释都和桌面版一样。" },
         { q: "为什么孔的内壁是绿色的？", a: "这是 OpenSCAD 预览（F5）的约定：被 difference() 减掉的物体留下的面用「背面色」显示，默认配色里是绿色。预览器照着这个约定画，color() 过的物体仍按自己的颜色显示。" },
         { q: "能打开 Thingiverse、Printables 上下载的 .scad 文件吗？", a: "能。把下载的整个文件夹拖进来，被 include 的文件才会一起带上。MCAD、Write.scad 和 BOSL2 已经内置。" },
+        { q: "text() 里写中文，为什么出来是方框？", a: "预览器内置的是 OpenSCAD 自带的 Liberation 字体，里面没有汉字，缺的字会画成方框。把一个中文字体文件（.ttf 或 .otf；.ttc 字体集不认）和 .scad 放进同一个文件夹一起拖进来，代码里写 use <字体文件名.ttf>，再在 text() 里用 font = \"字体名\" 指定。字体名是字体自己的名字，不是文件名：比如 Windows 自带的 simhei.ttf 是 font = \"SimHei\"。" },
         { q: "我的代码会上传到服务器吗？", a: "不会。OpenSCAD 在你的浏览器里运行，.scad 文件不上传；链接里 # 后面的代码也不会发给服务器。" },
         { q: "多大的模型跑得动？", a: "一般模型一秒以内。展平后超过 15 万个节点的模型（把循环展开后）在浏览器里跑不动，会直接告诉你。耗时的渲染随时可以停。" },
         { q: "预览和导出的 STEP 有什么区别？", a: "预览是 OpenSCAD 自己的渲染，圆是 $fn 个面片。导出 STEP 时由 CAD 内核把每个图元和布尔运算重建成精确几何，圆就是真圆柱。导出的 STL 就是预览那批三角面。颜色只在预览里，STL 和 STEP 都不带。" },
@@ -202,20 +213,22 @@ export function getViewerCopy(locale) {
     generatorsLink: "3D print generators",
     credit:
       "OpenSCAD is free software developed by the OpenSCAD project and licensed under the GPL. Forgent3D runs it in the browser to preview .scad files and is not affiliated with the OpenSCAD project.",
-    title: "OpenSCAD Viewer Online — Preview .scad Files in Your Browser | Forgent3D",
+    title: "OpenSCAD Online — Viewer & Editor in Your Browser (STL / STEP) | Forgent3D",
     description:
-      "Preview OpenSCAD code and .scad files online: real OpenSCAD runs in your browser and renders as you type, with color(), % and # as in the desktop F5 preview. No install, no sign-up, nothing uploaded.",
+      "Run OpenSCAD online — the real OpenSCAD, in your browser. Paste code or drop in a .scad file: it renders as you type, sliders change the parameters, and it exports STL or STEP. Cheat sheet included. No install, no sign-up.",
     keywords: [
-      "openscad viewer",
       "openscad online",
+      "openscad viewer",
+      "openscad online editor",
+      "openscad viewer online",
       "openscad preview online",
       "open scad file online",
       "openscad in browser",
       "run openscad online",
       "scad file viewer",
-      "openscad web",
+      "openscad cheat sheet",
     ],
-    h1: "OpenSCAD viewer online — preview .scad files in your browser",
+    h1: "OpenSCAD online — view and edit .scad files in your browser",
     intro:
       "Paste code, or drop in a .scad file or a whole project folder: real OpenSCAD runs in your browser and renders the model half a second after you stop typing. color(), % background and # highlight look as they do when you press F5 on the desktop. No install, no sign-up, and nothing is uploaded.",
     cta: "Open the viewer",
@@ -238,6 +251,11 @@ export function getViewerCopy(locale) {
       "spur-gears": { title: "Meshing spur gears", text: "The entry file uses an involute gear library in lib/ — multi-file projects resolve as they are.", alt: "Isometric view of a small and a large spur gear in mesh, each with a centre bore" },
       "parametric-box": { title: "Parametric box with lid", text: "Size, wall, corner radius and lid fit are Customizer parameters; drag a slider and it rebuilds.", alt: "Isometric view of a rounded box and its lid side by side, open side up" },
     },
+    cheatTitle: "OpenSCAD cheat sheet",
+    cheatIntro: "The statements you will use most, each with how it works and where it trips people up. “Open online” loads the example into the viewer already rendered — change a number and watch it redraw.",
+    cheatHead: ["Statement", "How to use it", ""],
+    cheatOpen: "Open online",
+    cheatNote: "All of it works the same in desktop OpenSCAD.",
     compareTitle: "Compared with desktop OpenSCAD",
     compareHead: ["", "Desktop OpenSCAD", "This viewer"],
     compare: [
@@ -274,9 +292,11 @@ export function getViewerCopy(locale) {
     skillMore: "Skills page: how it picks the route",
     faqTitle: "FAQ",
     faqs: [
+      { q: "Can I write OpenSCAD and export an STL online, without installing it?", a: "Yes. The viewer is OpenSCAD itself, compiled to WebAssembly and running in your browser: writing code, rendering, dragging parameters and exporting STL all happen on the page, and STEP is there too for CAD software. No install and no sign-up." },
       { q: "Is this real OpenSCAD?", a: "Yes. The code is executed by OpenSCAD itself — a 2025 development snapshot with the Manifold geometry kernel — compiled to WebAssembly and running in your browser. The language, the bundled libraries and the Customizer comments behave as on the desktop." },
       { q: "Why are the walls of a hole green?", a: "That is OpenSCAD's own preview (F5) convention: faces left behind by an object subtracted with difference() are drawn in the “back face” colour, green in the default scheme. The viewer keeps the convention; an object with its own color() keeps that colour." },
       { q: "Can I open .scad files downloaded from Thingiverse or Printables?", a: "Yes. Drop in the whole downloaded folder so the files it includes come along. MCAD, Write.scad and BOSL2 are built in." },
+      { q: "Can text() use other fonts, or scripts such as Chinese?", a: "The viewer ships OpenSCAD's own Liberation fonts, which have Latin, Greek and Cyrillic letters; a character the font lacks comes out as an empty box. For another font, drop its .ttf or .otf file into the project folder next to the .scad (.ttc collections are not read), add use <file.ttf> to the code and pick it with font = \"Family Name\" — the font's own name, not the file name: Windows' simhei.ttf, for example, is font = \"SimHei\"." },
       { q: "Is my code uploaded to a server?", a: "No. OpenSCAD runs in your browser and the .scad files are never uploaded; code after # in a link is not sent to the server either." },
       { q: "How large a model can it handle?", a: "A typical model renders in under a second. A model that flattens to more than 150,000 nodes (loops unrolled) is beyond the in-browser build and says so. A long render can be stopped at any time." },
       { q: "How does the preview differ from the exported STEP?", a: "The preview is OpenSCAD's own render, with circles as $fn facets. For the STEP export a CAD kernel rebuilds every primitive and boolean as exact geometry, so a circle is a true cylinder. The exported STL is the preview's own triangles. Colours exist only in the preview; neither the STL nor the STEP carries them." },

@@ -37,7 +37,7 @@ const COPY = {
     navSkills: "Skills",
     navGenerators: "Generators",
     navScadToStep: "OpenSCAD → STEP",
-    navScadViewer: "OpenSCAD viewer",
+    navScadViewer: "OpenSCAD online viewer",
     navCompare: "Two ways in",
     navPricing: "Plans",
     navContact: "Contact",
