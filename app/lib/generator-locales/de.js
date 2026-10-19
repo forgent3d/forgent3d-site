@@ -220,7 +220,7 @@ export const generators = {
       faqs: [
         {
           q: "Welchen Deckel soll ich wählen?",
-          a: "Den Schiebedeckel für das Gefühl eines klassischen Federkastens – er rastet in der Endlage ein und hat Griffrillen zum Aufziehen. Den Scharnierdeckel für eine Box, die Sie oft öffnen: Mit Print-in-Place-Scharnier kommt sie fertig montiert vom Drucker; das Stiftscharnier ist die robuste Wahl für große Boxen oder einen Drucker, bei dem Scharniere verschmelzen. Den Stülpdeckel als einfachen Staubschutz, den Schnappdeckel, wenn der Deckel beim Tragen zubleiben muss, den Magnetdeckel für einen abnehmbaren Deckel, den acht Magnete auf die Box ziehen (er löst sich mit einem kräftigen Zug – für die Tasche nehmen Sie den Scharnierdeckel mit Clip oder Kofferverschlüssen), und keinen Deckel für Schalen und stapelbare Boxen. Stülp- und Magnetdeckel haben am linken Ende eine Griffmulde.",
+          a: "Den Schiebedeckel für das Gefühl eines klassischen Federkastens – er rastet in der Endlage ein und hat Griffrillen zum Aufziehen. Den Scharnierdeckel für eine Box, die Sie oft öffnen: Mit Print-in-Place-Scharnier kommt sie fertig montiert vom Drucker; das Stiftscharnier ist die robuste Wahl für große Boxen oder einen Drucker, bei dem Scharniere verschmelzen. Den Stülpdeckel als einfachen Staubschutz; für eine Box, die in der Tasche mitfährt, den Schnappdeckel oder einen Scharnierdeckel mit Clip oder Kofferverschlüssen; den Magnetdeckel für einen abnehmbaren Deckel, den acht Magnete auf die Box ziehen (er löst sich mit einem kräftigen Zug); keinen Deckel für Schalen und stapelbare Boxen. Stülp- und Magnetdeckel haben am linken Ende eine Griffmulde, der Schnappdeckel dort eine Daumenlasche.",
         },
         {
           q: "Mein Deckel war zu stramm (oder zu locker) – was ändere ich?",
@@ -278,30 +278,33 @@ export const generators = {
       },
       LATCH: {
         label: "Verschluss",
-        desc: "Nur Scharnierdeckel. Clip: schnappt zu und öffnet auf Druck – bleibt auch in der Tasche zu (braucht ein Unterteil von 15 mm Tiefe). Kofferverschlüsse (Toolbox clasps): greifen über eine Schraube, die festeste Variante; jeder braucht zwei Schrauben M3 × 30. Magnete (Magnets): halten den Deckel unten, er löst sich mit einem kräftigen Zug. Bis 100 mm Länge ein Verschluss, bis 200 zwei, darüber drei.",
+        desc: "Nur Scharnierdeckel. Clip: steht auf der Box und rastet in den Deckel ein; zum Öffnen die Spitze herausziehen – bleibt auch in der Tasche zu (braucht ein Unterteil mit 11 mm Innentiefe und macht den Deckel mindestens 6,4 tief). Kofferverschlüsse (Toolbox clasps): greifen über eine Schraube, die festeste Variante; jeder braucht zwei Schrauben M3 × 30. Magnete (Magnets): halten den Deckel unten, er löst sich mit einem kräftigen Zug. Bis 100 mm Länge ein Verschluss, bis 200 zwei, darüber drei.",
       },
       LID_DEPTH: {
         label: "Deckeltiefe",
-        desc: "Nur Scharnierdeckel: wie tief der Deckel innen ist – mindestens 4 mm (von selbst tiefer, wo das Scharnier es braucht), nie tiefer als das Unterteil.",
+        desc: "Nur Scharnierdeckel: wie tief der Deckel innen ist – mindestens 4 mm (von selbst tiefer, wo das Scharnier oder der Clip es braucht), nie tiefer als das Unterteil.",
       },
       MAGNET: {
         label: "Magnete (Durchmesser × Dicke)",
         desc: "Magnetdeckel: acht Magnete – vier in Säulen in den Ecken der Box, bündig mit dem Falz, vier im Deckel. Magnetverschluss des Scharnierdeckels: vier. 6 × 2 ist der Gridfinity-Magnet; die Aufnahmen sind 0,2 mm größer als der Magnet, für einen Tropfen Kleber.",
       },
-      DIV_X: { label: "Fächer entlang der Länge", desc: "Fächer nebeneinander entlang der Länge (1 = keine Trennwände)." },
+      DIV_X: {
+        label: "Fächer entlang der Länge",
+        desc: "Fächer nebeneinander entlang der Länge (1 = keine Trennwände). Trennwände sind 1,6 mm dick, jedes Fach ist also (Länge − 1,6 × (Anzahl − 1)) ÷ Anzahl breit: 7 Fächer in 116 mm sind je 15,2 mm.",
+      },
       CELLS_X: {
         label: "Relative Breiten entlang der Länge",
-        desc: "Ungleiche Fächer: relative Breiten, eine pro Fach – 1 2 1 macht das mittlere doppelt so breit (Breiten in mm, die zusammen das Innenmaß ergeben, gehen auch).",
+        desc: "Ungleiche Fächer: relative Breiten, eine pro Fach – 1 2 1 macht das mittlere doppelt so breit. Breiten in mm werden genauso auf den Innenraum skaliert; exakt werden sie, wenn sie zusammen die Länge minus 1,6 mm pro Trennwand ergeben.",
       },
       DIV_Y: { label: "Fächer entlang der Breite", desc: "Anzahl der Fächer entlang der Breite." },
       CELLS_Y: { label: "Relative Breiten entlang der Breite", desc: "Ungleiche Fächer entlang der Breite, wie oben." },
       DIV_H: {
         label: "Höhe der Trennwände",
-        desc: "Niedrigere Trennwände machen Kleinteile leichter greifbar. Bei 100 % enden sie 0,2–0,5 mm unter dem Deckel, sodass keine Kleinteile darüberhüpfen.",
+        desc: "Niedrigere Trennwände machen Kleinteile leichter greifbar. Bei 100 % enden sie 0,2–0,5 mm unter dem Deckel, sodass keine Kleinteile darüberhüpfen – ein Scharnierdeckel bekommt auf denselben Linien Rippen, die auch seine eigene Tiefe abschließen.",
       },
       LABEL: {
         label: "Beschriftungstext",
-        desc: "Wird in den Deckel graviert und ist bei geschlossenem Deckel richtig herum zu lesen (bei einer offenen Box steht er auf der Vorderseite). Buchstaben ohne Umlaute und ß, Ziffern und gängige Sonderzeichen.",
+        desc: "Wird in den Deckel graviert und ist bei geschlossenem Deckel richtig herum zu lesen (bei einer offenen Box steht er auf der Vorderseite), so groß, wie es passt: Buchstaben bis zu einem Drittel der Innenbreite hoch, bei langem Text kleiner. Buchstaben A–Z ohne Akzente, Umlaute und ß, Ziffern und gängige Sonderzeichen.",
       },
       LABEL_STYLE: {
         label: "Beschriftungsart",
@@ -317,7 +320,7 @@ export const generators = {
       },
       FIT_TEST: {
         label: "Nur Passprobe drucken",
-        desc: "Eine Box von 40 × 30 mm mit demselben Deckel und Passungsspiel, derselben Wandstärke und denselben Ecken – rund zwanzig Minuten Druckzeit, um vor dem richtigen Druck die Passung zu prüfen; kleben Sie auch ihre Magnete ein.",
+        desc: "Eine Box von 40 × 30 mm (innen) mit demselben Deckel und Passungsspiel, derselben Wandstärke und denselben Ecken – rund zwanzig Minuten Druckzeit, um vor dem richtigen Druck die Passung zu prüfen; kleben Sie auch ihre Magnete ein.",
       },
     },
     example: "Innenmaß 120 × 80 × 40 mm, Schiebedeckel, 3 Fächer",

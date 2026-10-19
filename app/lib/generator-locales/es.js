@@ -221,7 +221,7 @@ export const generators = {
       faqs: [
         {
           q: "¿Qué tapa elijo?",
-          a: "Deslizante, para el tacto clásico de estuche escolar: hace clic al llegar al tope y tiene ranuras para los dedos con las que abrirla. Con bisagra, para una caja que abres a menudo: la bisagra print-in-place sale de la impresora ya montada, y la de pasador es la opción robusta para cajas grandes o si tu impresora tiende a soldar las bisagras. Sobre reborde, como simple cubierta antipolvo; a presión, para una tapa que debe seguir cerrada cuando llevas la caja de un sitio a otro; magnética, para una tapa que se levanta y que ocho imanes atraen hacia abajo (se suelta con un tirón: para llevarla en una bolsa, elige la tapa con bisagra con clip o con cierres de caja de herramientas); y ninguna, para bandejas y contenedores apilables. Las tapas sobre reborde y magnéticas tienen una muesca para el dedo en el extremo izquierdo.",
+          a: "Deslizante, para el tacto clásico de estuche escolar: hace clic al llegar al tope y tiene ranuras para los dedos con las que abrirla. Con bisagra, para una caja que abres a menudo: la bisagra print-in-place sale de la impresora ya montada, y la de pasador es la opción robusta para cajas grandes o si tu impresora tiende a soldar las bisagras. Sobre reborde, como simple cubierta antipolvo; para una caja que va dentro de una bolsa, a presión o con bisagra y clip o cierres de caja de herramientas; magnética, para una tapa que se levanta y que ocho imanes atraen hacia abajo (se suelta con un tirón); y ninguna, para bandejas y contenedores apilables. Las tapas sobre reborde y magnéticas tienen una muesca para el dedo en el extremo izquierdo, y la tapa a presión, una pestaña para el pulgar en ese mismo extremo.",
         },
         {
           q: "La tapa quedó demasiado justa (o demasiado floja). ¿Qué cambio?",
@@ -282,11 +282,11 @@ export const generators = {
       },
       LATCH: {
         label: "Cierre",
-        desc: "Solo tapa con bisagra. Clip: se cierra a presión y se abre apretándolo; no se abre dentro de una bolsa (necesita una base de 15 mm de profundidad). Toolbox clasps (cierres de caja de herramientas): se enganchan en un tornillo, los más firmes; cada uno lleva dos tornillos M3 × 30. Magnets (imanes): sujetan la tapa abajo y se abre con un tirón. Un cierre hasta 100 mm de largo, dos hasta 200 y tres por encima.",
+        desc: "Solo tapa con bisagra. Clip: sale de la caja y encaja con un clic en la tapa; para abrir, tira de su punta hacia fuera. No se abre dentro de una bolsa (necesita una base de 11 mm de profundidad interior y hace que la tapa tenga al menos 6.4). Toolbox clasps (cierres de caja de herramientas): se enganchan en un tornillo, los más firmes; cada uno lleva dos tornillos M3 × 30. Magnets (imanes): sujetan la tapa abajo y se abre con un tirón. Un cierre hasta 100 mm de largo, dos hasta 200 y tres por encima.",
       },
       LID_DEPTH: {
         label: "Profundidad de la tapa",
-        desc: "Solo tapa con bisagra: la profundidad interior de la tapa; al menos 4 mm (se hace más profunda sola donde la bisagra lo necesita) y nunca más que la base.",
+        desc: "Solo tapa con bisagra: la profundidad interior de la tapa; al menos 4 mm (se hace más profunda sola donde la bisagra o el clip lo necesitan) y nunca más que la base.",
       },
       MAGNET: {
         label: "Imanes (diámetro × grosor)",
@@ -294,21 +294,21 @@ export const generators = {
       },
       DIV_X: {
         label: "Compartimentos a lo largo",
-        desc: "Compartimentos uno al lado de otro a lo largo de la caja (1 = sin divisores).",
+        desc: "Compartimentos uno al lado de otro a lo largo de la caja (1 = sin divisores). Los divisores tienen 1.6 mm de grosor, así que cada compartimento mide (largo − 1.6 × (número − 1)) ÷ número: 7 en 116 mm salen de 15.2 mm cada uno.",
       },
       CELLS_X: {
         label: "Proporciones a lo largo",
-        desc: "Compartimentos desiguales: un ancho relativo por compartimento; 1 2 1 hace el del medio el doble de ancho (también valen anchos en mm que sumen el interior).",
+        desc: "Compartimentos desiguales: un ancho relativo por compartimento; 1 2 1 hace el del medio el doble de ancho. Los anchos en mm se escalan igual para llenar el interior, así que salen exactos cuando suman el largo menos 1.6 mm por divisor.",
       },
       DIV_Y: { label: "Compartimentos a lo ancho", desc: "Compartimentos a lo ancho de la caja." },
       CELLS_Y: { label: "Proporciones a lo ancho", desc: "Compartimentos desiguales a lo ancho, igual que arriba." },
       DIV_H: {
         label: "Altura de los divisores",
-        desc: "Con divisores más bajos es más fácil sacar las piezas pequeñas. Al 100 % se quedan a 0.2–0.5 mm de la tapa, así que las piezas pequeñas no pueden saltar por encima.",
+        desc: "Con divisores más bajos es más fácil sacar las piezas pequeñas. Al 100 % se quedan a 0.2–0.5 mm de la tapa, así que las piezas pequeñas no pueden saltar por encima; una tapa con bisagra lleva nervios en las mismas líneas para cerrar también su propia profundidad.",
       },
       LABEL: {
         label: "Texto de la etiqueta",
-        desc: "Se graba en la tapa de modo que se lee al derecho con la tapa cerrada (una caja sin tapa lo lleva en el frente). Letras sin tildes ni ñ, números y símbolos comunes.",
+        desc: "Se graba en la tapa de modo que se lee al derecho con la tapa cerrada (una caja sin tapa lo lleva en el frente), tan grande como quepa: letras de hasta un tercio del ancho interior de alto, más pequeñas si el texto es largo. Letras A–Z sin tildes ni ñ, números y símbolos comunes.",
       },
       LABEL_STYLE: {
         label: "Estilo de la etiqueta",
@@ -324,7 +324,7 @@ export const generators = {
       },
       FIT_TEST: {
         label: "Solo imprimir la prueba de ajuste",
-        desc: "Una caja de 40 × 30 mm con la misma tapa, holgura, pared y esquinas: unos veinte minutos de impresión para comprobar el ajuste antes de imprimir la de verdad; pega también sus imanes.",
+        desc: "Una caja de 40 × 30 mm (interior) con la misma tapa, holgura, pared y esquinas: unos veinte minutos de impresión para comprobar el ajuste antes de imprimir la de verdad; pega también sus imanes.",
       },
     },
     example: "120 × 80 × 40 mm de interior, tapa deslizante, 3 compartimentos",
