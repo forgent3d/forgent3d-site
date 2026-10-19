@@ -203,73 +203,147 @@ export const generators = {
   "parametric-box-generator": {
     copy: {
       name: "Parametrischer Box-Generator",
-      title: "Box-Generator — Scharnier-, Schnapp- oder Schiebedeckel (STL) | Forgent3D",
+      title: "Box-Generator für 3D-Druck — Schiebe-, Scharnier-, Magnetdeckel | Forgent3D",
       description:
-        "Box nach Innenmaß: Scharnierdeckel (Print-in-Place/Stift; Clip-, Koffer-, Magnetverschluss), Schnapp-, Stülp-, Schiebedeckel oder keiner. 3D-Vorschau, STL/STEP gratis.",
-      h1: "Parametrischer Box-Generator: exaktes Innenmaß, Scharnier-, Schnapp-, Stülp- oder Schiebedeckel",
+        "3D-Druck-Box mit Deckel nach Maß: Schiebe-, Scharnier-, Stülp-, Schnapp- oder Magnetdeckel, Fächer, Gravur, 20-Minuten-Passprobe, passend fürs Druckbett. STL/STEP gratis.",
+      h1: "Parametrischer Box-Generator: der Innenraum, den Sie brauchen, der Deckel, den Sie wollen – auf Ihren Drucker zugeschnitten",
       intro:
-        "Geben Sie die Innenmaße passend zu dem ein, was Sie aufbewahren möchten, und wählen Sie einen Deckel: einen Scharnierdeckel, der fertig montiert vom Drucker kommt, einen Schnapp- oder Stülpdeckel, einen Schiebedeckel in Schwalbenschwanzführung – oder keinen. Die Box baut sich live als echtes CAD neu auf; was die Optionen nicht abdecken, etwa Trennwände oder ein Beschriftungsschlitz, ist nur eine KI-Änderung entfernt.",
+        "Geben Sie an, was hineinpassen muss – oder wie groß die geschlossene Box sein darf –, und wählen Sie einen Deckel: einen Schiebedeckel, der mit einem Klick einrastet, einen Scharnierdeckel, der fertig montiert vom Drucker kommt, einen Stülp-, Schnapp- oder Magnetdeckel – oder keinen. Fügen Sie Fächer und eine Beschriftung hinzu, stellen Sie ein einziges Passungsspiel für alle Deckel, Schienen und Scharniere ein und drucken Sie zuerst eine kleine Passprobe. Die Box baut sich live als echtes CAD neu auf, und jede Kombination ist geprüft: Der Deckel schließt sauber, das Scharnier schwenkt frei, der Schiebedeckel rastet in der Endlage ein.",
       whyPoints: [
-        "Alle Maße sind Innenmaße – Sie messen den Inhalt, nicht den Druck",
-        "Scharnierdeckel mit Print-in-Place-Scharnier oder separatem Stift",
-        "Clip-, Koffer- oder Magnetverschluss am Scharnierdeckel",
-        "Trennwände, ein Beschriftungsschlitz, eine Kabelkerbe? Klicken Sie auf „AI edit“ und sagen Sie es",
+        "Innen- oder Außenmaße – je nachdem, was hineinpassen muss oder worin die Box Platz finden muss",
+        "Ein Passungsspiel für alle Deckel, Schienen und Scharniere – und eine Passprobe, die in 20 Minuten gedruckt ist",
+        "Schiebe-, Scharnier-, Stülp-, Schnapp- oder Magnetdeckel; Fächer, auch ungleich breite",
+        "Eine Beschriftung, die bei geschlossenem Deckel richtig herum steht – graviert oder in einer zweiten Farbe",
+        "Auf Ihr Druckbett abgestimmt: Der Deckel kommt dorthin, wo er Platz hat, oder auf eine eigene Druckplatte",
+        "STL und STEP kostenlos, ohne Anmeldung – und „AI edit“ für alles, was die Optionen nicht abdecken",
       ],
       faqs: [
         {
           q: "Welchen Deckel soll ich wählen?",
-          a: "Den Scharnierdeckel mit Print-in-Place-Scharnier für eine Box, die Sie oft öffnen – sie kommt fertig montiert vom Drucker. Den Schnappdeckel, wenn der Deckel beim Tragen zubleiben muss, den Stülpdeckel als Staubschutz zum Abheben, den Schiebedeckel für das Gefühl eines Federkastens (die Ecken bleiben dabei ungerundet, damit er herausgleiten kann) und keinen Deckel für eine offene Schale.",
+          a: "Den Schiebedeckel für das Gefühl eines klassischen Federkastens – er rastet in der Endlage ein und hat Griffrillen zum Aufziehen. Den Scharnierdeckel für eine Box, die Sie oft öffnen: Mit Print-in-Place-Scharnier kommt sie fertig montiert vom Drucker; das Stiftscharnier ist die robuste Wahl für große Boxen oder einen Drucker, bei dem Scharniere verschmelzen. Den Stülpdeckel als einfachen Staubschutz, den Schnappdeckel, wenn der Deckel beim Tragen zubleiben muss, den Magnetdeckel für einen abnehmbaren Deckel, den acht Magnete auf die Box ziehen (er löst sich mit einem kräftigen Zug – für die Tasche nehmen Sie den Scharnierdeckel mit Clip oder Kofferverschlüssen), und keinen Deckel für Schalen und stapelbare Boxen. Stülp- und Magnetdeckel haben am linken Ende eine Griffmulde.",
         },
         {
-          q: "Wie dick sollten die Wände sein?",
-          a: "Die voreingestellten 2,4 mm entsprechen etwa sechs Perimetern bei einer 0,4-mm-Düse – steif genug für die alltägliche Aufbewahrung. Gehen Sie auf 3–4 mm für Boxen, die voll getragen oder an eine Wand geschraubt werden.",
+          q: "Mein Deckel war zu stramm (oder zu locker) – was ändere ich?",
+          a: "Das Passungsspiel, also den Spalt pro Seite zwischen Teilen, die gleiten oder sich drehen. 0,25 mm passen zu einem gut eingestellten Drucker mit PLA; bei PETG oder einem Drucker, der überextrudiert, geben Sie 0,05–0,1 dazu, und klappert der Deckel, nehmen Sie 0,05 weg. Scharniere bekommen immer 0,1 mehr und nie weniger als 0,3. Schalten Sie „Fit test print only“ (nur Passprobe drucken) ein, um vor dem langen Druck in etwa zwanzig Minuten eine Box von 40 × 30 mm mit demselben Deckel zu drucken.",
+        },
+        {
+          q: "Sind die Maße Innen- oder Außenmaße?",
+          a: "Das entscheiden Sie. Innen (Inside, der Standard) ist das, was hineinkommt: Länge × Breite × Höhe, vom Boden bis zum geschlossenen Deckel. Außen (Outside) ist die ganze geschlossene Box – Deckel, Scharnierrolle und Verschluss eingeschlossen – für eine Schublade oder ein Regal: Ziehen Sie 1–2 mm vom Innenmaß der Schublade ab, damit die Box hineingleitet. Bei einer Box mit Scharnierdeckel gilt die Höhe für das Unterteil, und die Deckeltiefe kommt für den Deckel hinzu.",
+        },
+        {
+          q: "Das Print-in-Place-Scharnier ist beim Druck verschmolzen – warum?",
+          a: "Meist überbrücken Überextrusion, Elefantenfuß oder Fuzzy Skin den Spalt. Beim voreingestellten Passungsspiel bekommt das Scharnier 0,35 mm; schalten Sie Fuzzy Skin aus, skalieren Sie die Datei nie im Slicer (das verändert die Spaltmaße – ändern Sie die Größe stattdessen hier), und verschmilzt es dann immer noch, erhöhen Sie das Passungsspiel oder wählen Sie das Stiftscharnier (ein gedruckter Stift, eine M3-Schraube oder 1,75-mm-Filament).",
+        },
+        {
+          q: "Warum meldet der Generator, dass meine Box nicht auf meinen Drucker passt?",
+          a: "Wählen Sie das Druckbett Ihres Druckers. Der Deckel wird neben der Box in der Richtung angeordnet, in der er Platz hat; passen beide nicht zusammen auf eine Druckplatte, heißt der Deckel „lid (second plate)“ (Deckel, zweite Druckplatte) – trennen Sie ihn im Slicer ab. Eine Box mit Print-in-Place-Scharnier wird aufgeklappt in einem Stück gedruckt und muss deshalb nebeneinander aufs Druckbett passen – oder Sie nehmen das Stiftscharnier.",
+        },
+        {
+          q: "Wie drucke ich die Box?",
+          a: "Ohne Stützen: Deckel werden mit der Oberseite nach unten gedruckt, die Beschriftung zum Druckbett hin, Führungsschienen und Falze sind 45° schräg, und jede Kante auf dem Druckbett hat eine kleine Fase gegen den Elefantenfuß. 0,2 mm Schichthöhe und mindestens drei Perimeter; bei Boxen über 150 mm aus PETG einen Brim. Drücken Sie die Magnete mit einem Tropfen Kleber ein und achten Sie auf die Polung – die Magnete im Deckel müssen die in der Box anziehen.",
         },
       ],
     },
     params: {
-      INNER_L: { label: "Innenlänge", desc: "Länge innen – richten Sie sie nach dem Inhalt." },
-      INNER_W: { label: "Innenbreite", desc: "Breite innen." },
-      INNER_H: { label: "Innenhöhe", desc: "Innenhöhe der Box, vom Boden bis zum Rand." },
-      WALL: { label: "Wandstärke", desc: "2,4 mm sind etwa sechs Perimeter bei einer 0,4-mm-Düse." },
+      SIZE: {
+        label: "Maßangabe",
+        desc: "Innen (Inside): was in die Box passen muss. Außen (Outside): die geschlossene Box – mit Deckel, Scharnier und Verschluss – für eine Schublade oder ein Regal; ziehen Sie 1–2 mm vom Innenmaß der Schublade ab, damit die Box hineingleitet.",
+      },
+      INNER_L: { label: "Länge", desc: "Länge innen (oder außen). Die Box muss auf Ihr Druckbett passen – wählen Sie es weiter unten." },
+      INNER_W: { label: "Breite", desc: "Breite innen (oder außen)." },
+      INNER_H: {
+        label: "Höhe",
+        desc: "Innen (Inside): vom Boden bis zum geschlossenen Deckel (bei einer Box mit Scharnierdeckel das Unterteil – die Deckeltiefe kommt oben für den Deckel dazu). Außen (Outside): die ganze Höhe der geschlossenen Box.",
+      },
+      WALL: {
+        label: "Wandstärke",
+        desc: "2 mm sind fünf Perimeter zu je 0,4 mm. Schnapp-, Stülp- und Magnetdeckel haben ihre Nut oder ihren Falz in der Wand und brauchen etwas mehr als 1,2.",
+      },
+      FLOOR: { label: "Bodenstärke", desc: "Standardmäßig acht Schichten zu je 0,2 mm; dicker für schweren Inhalt." },
+      CORNER_R: {
+        label: "Eckenradius",
+        desc: "Rundung der Außenecken; innen ist der Radius um die Wandstärke kleiner. Der Schiebedeckel ist wie die Box gerundet.",
+      },
       LID: {
         label: "Deckelart",
-        desc: "Scharnierdeckel (hinged), Schnappdeckel (snap), Stülpdeckel über einem Falz (lip), Schiebedeckel in Schwalbenschwanzführung (sliding) oder keiner (none).",
+        desc: "Schiebedeckel mit Rastung und Griffrillen (Sliding), Scharnierdeckel (Hinged), Stülpdeckel, der über einem Falz sitzt und sich abheben lässt (Lip), Schnappdeckel (Snap-on), abnehmbarer Deckel, den acht Magnete halten (Magnetic), oder keiner (None).",
+      },
+      CLEARANCE: {
+        label: "Passungsspiel",
+        desc: "Spalt pro Seite zwischen Teilen, die gleiten oder sich drehen. 0,25 passt zu einem gut eingestellten Drucker mit PLA; für PETG 0,05–0,1 mehr. Scharniere bekommen 0,1 mehr, nie unter 0,3.",
       },
       HINGE: {
         label: "Scharnier",
-        desc: "Nur Scharnierdeckel: fertig montiert gedruckt (print-in-place) oder mit separatem Stift (pin).",
+        desc: "Nur Scharnierdeckel: fertig montiert gedruckt (Print-in-place) oder mit einem Stift, den Sie einschieben – einem gedruckten Stift oder einer M3-Schraube (Pin) oder einem Stück 1,75-mm-Filament (Filament pin).",
       },
       LATCH: {
         label: "Verschluss",
-        desc: "Nur Scharnierdeckel: Schnappclip (clip), Kofferverschlüsse (toolbox), Magnete (magnet) oder keiner (none).",
+        desc: "Nur Scharnierdeckel. Clip: schnappt zu und öffnet auf Druck – bleibt auch in der Tasche zu (braucht ein Unterteil von 15 mm Tiefe). Kofferverschlüsse (Toolbox clasps): greifen über eine Schraube, die festeste Variante; jeder braucht zwei Schrauben M3 × 30. Magnete (Magnets): halten den Deckel unten, er löst sich mit einem kräftigen Zug. Bis 100 mm Länge ein Verschluss, bis 200 zwei, darüber drei.",
       },
-      LID_DEPTH: { label: "Tiefe des Scharnierdeckels", desc: "Nur Scharnierdeckel: wie tief der Deckel ist." },
-      CORNER_R: {
-        label: "Eckenradius",
-        desc: "Rundung der Außenecken (mit Schiebedeckel bleiben die Ecken ungerundet, damit er herausgleiten kann).",
+      LID_DEPTH: {
+        label: "Deckeltiefe",
+        desc: "Nur Scharnierdeckel: wie tief der Deckel innen ist – mindestens 4 mm (von selbst tiefer, wo das Scharnier es braucht), nie tiefer als das Unterteil.",
+      },
+      MAGNET: {
+        label: "Magnete (Durchmesser × Dicke)",
+        desc: "Magnetdeckel: acht Magnete – vier in Säulen in den Ecken der Box, bündig mit dem Falz, vier im Deckel. Magnetverschluss des Scharnierdeckels: vier. 6 × 2 ist der Gridfinity-Magnet; die Aufnahmen sind 0,2 mm größer als der Magnet, für einen Tropfen Kleber.",
+      },
+      DIV_X: { label: "Fächer entlang der Länge", desc: "Fächer nebeneinander entlang der Länge (1 = keine Trennwände)." },
+      CELLS_X: {
+        label: "Relative Breiten entlang der Länge",
+        desc: "Ungleiche Fächer: relative Breiten, eine pro Fach – 1 2 1 macht das mittlere doppelt so breit (Breiten in mm, die zusammen das Innenmaß ergeben, gehen auch).",
+      },
+      DIV_Y: { label: "Fächer entlang der Breite", desc: "Anzahl der Fächer entlang der Breite." },
+      CELLS_Y: { label: "Relative Breiten entlang der Breite", desc: "Ungleiche Fächer entlang der Breite, wie oben." },
+      DIV_H: {
+        label: "Höhe der Trennwände",
+        desc: "Niedrigere Trennwände machen Kleinteile leichter greifbar. Bei 100 % enden sie 0,2–0,5 mm unter dem Deckel, sodass keine Kleinteile darüberhüpfen.",
+      },
+      LABEL: {
+        label: "Beschriftungstext",
+        desc: "Wird in den Deckel graviert und ist bei geschlossenem Deckel richtig herum zu lesen (bei einer offenen Box steht er auf der Vorderseite). Buchstaben ohne Umlaute und ß, Ziffern und gängige Sonderzeichen.",
+      },
+      LABEL_STYLE: {
+        label: "Beschriftungsart",
+        desc: "0,6 mm tief graviert (Engraved) oder eingelegt (Inlay): die Buchstaben als eigenes Teil, bündig in der Gravur, in einer zweiten Farbe – für einen Drucker, der zwei Filamente in einer Schicht druckt (AMS, MMU).",
+      },
+      STACKABLE: {
+        label: "Stapelbar",
+        desc: "Nur offene Boxen: Der Boden ist mit einer 45°-Schulter eingezogen und setzt sich so in den Rand der Box darunter.",
+      },
+      BED: {
+        label: "Druckbett",
+        desc: "Der Deckel wird neben der Box in der Richtung angeordnet, in der er Platz hat, mit 6 mm Abstand und 2 mm vom Rand des Druckbetts; passt er nicht mit auf die Druckplatte, heißt er „lid (second plate)“ (Deckel, zweite Druckplatte). Eine Box mit Print-in-Place-Scharnier wird aufgeklappt in einem Stück gedruckt und muss deshalb nebeneinander passen.",
+      },
+      FIT_TEST: {
+        label: "Nur Passprobe drucken",
+        desc: "Eine Box von 40 × 30 mm mit demselben Deckel und Passungsspiel, derselben Wandstärke und denselben Ecken – rund zwanzig Minuten Druckzeit, um vor dem richtigen Druck die Passung zu prüfen; kleben Sie auch ihre Magnete ein.",
       },
     },
-    example: "Innenmaß 120 × 80 × 40 mm, Schiebedeckel",
+    example: "Innenmaß 120 × 80 × 40 mm, Schiebedeckel, 3 Fächer",
     step: [
-      "Box und Deckel werden als getrennte Volumenkörper in einer Datei exportiert – 101 exakte Flächen bei der Standardbox mit Scharnierdeckel, die abgerundeten Ecken und die Scharnieraugen als echte Zylinder.",
-      "Öffnen Sie die Datei im CAD, um ein Logo, eine Kabelkerbe oder Befestigungslöcher genau dort zu platzieren, wo sie hingehören – oder geben Sie sie an einen Druckdienstleister, der STEP verlangt.",
+      "Box und Deckel werden als zwei getrennte Volumenkörper in einer Datei exportiert – 101 exakte Flächen bei der Standardbox mit Schiebedeckel: 67 Ebenen, 24 Zylinder (die abgerundeten Ecken, die Rastnoppen und ihre Mulden, die Griffrillen) und 10 Kegel (die 45°-Fase der Bodenkante, wo sie um die Ecken läuft).",
+      "Öffnen Sie die Datei im CAD, um ein Logo, eine Kabelkerbe oder Befestigungslöcher genau dort anzubringen, wo sie hingehören, oder um einen Einsatz zu konstruieren, der genau in den Innenraum passt – oder geben Sie sie an einen Druckdienstleister, der STEP verlangt.",
     ],
     aiFaqs: [
       {
-        q: "Wie erstelle ich eine Box mit 120 × 80 × 40 mm und Schiebedeckel?",
-        a: "https://www.forgent3d.com/de/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding – die Maße sind die Innenmaße der Box. Laden Sie STL herunter, um Box und Deckel zu drucken, oder STEP zum Weiterbearbeiten.",
+        q: "Wie erstelle ich eine Box mit 120 × 80 × 40 mm, Schiebedeckel und drei Fächern?",
+        a: "https://www.forgent3d.com/de/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding&DIV_X=3 – die Maße sind die Innenmaße der Box. Laden Sie STL herunter, um Box und Deckel zu drucken, oder STEP zum Weiterbearbeiten.",
       },
       {
-        q: "Kann ich Trennwände oder einen Beschriftungsschlitz hinzufügen?",
-        a: "Ja: Klicken Sie im Generator auf „AI edit“ und sagen Sie es („zwei Trennwände quer über die Breite“, „ein Beschriftungsschlitz vorne“). Die KI ändert die model.py der Box direkt auf der Seite; kopieren Sie die Box in Ihre Modelle, um sie zu behalten und mit dem KI-Agenten weiterzuarbeiten.",
+        q: "Wie erstelle ich eine Box, die in eine Schublade mit 200 × 100 × 60 mm passt?",
+        a: "https://www.forgent3d.com/de/generators/parametric-box-generator?SIZE=outside&INNER_L=200&INNER_W=100&INNER_H=60&LID=none&DIV_X=3 – mit der Maßangabe Außen (Outside) beschreiben die Zahlen die ganze Box, sodass sie in die Schublade passt; innen bleibt, was die Wände übrig lassen.",
       },
     ],
     keywords: [
       "box generator 3d druck",
-      "box mit deckel 3d druck",
-      "box mit scharnierdeckel stl",
-      "box mit schiebedeckel stl",
-      "parametrische box",
+      "3d druck box generator kostenlos",
+      "3d druck box mit deckel",
+      "3d druck box mit schiebedeckel",
+      "box mit scharnierdeckel",
+      "box mit fächern",
+      "3d druck box erstellen",
+      "stl box erstellen",
     ],
   },
 

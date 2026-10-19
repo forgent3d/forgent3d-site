@@ -204,67 +204,154 @@ export const generators = {
   "parametric-box-generator": {
     copy: {
       name: "Generador de cajas paramétricas",
-      title: "Generador de cajas — Tapa abatible, a presión o corrediza (STL) | Forgent3D",
+      title: "Generador de cajas 3D — Tapa deslizante, con bisagra o imanes | Forgent3D",
       description:
-        "Generador de cajas paramétricas imprimibles en 3D por su medida interior: tapa con bisagra, a presión, sobre reborde, deslizante o sin tapa. STL o STEP gratis.",
-      h1: "Generador de cajas paramétricas: medida interior exacta y tapa con bisagra, a presión, sobre reborde o deslizante",
+        "Caja imprimible en 3D a medida: tapa deslizante, con bisagra, a presión o con imanes; compartimentos, texto grabado y prueba de ajuste de 20 minutos. STL / STEP gratis.",
+      h1: "Generador de cajas paramétricas: el interior que necesitas, la tapa que quieres, a la medida de tu impresora",
       intro:
-        "Introduce las medidas interiores de lo que necesitas guardar y elige una tapa: una tapa con bisagra que sale de la impresora ya montada, una tapa a presión o una que se apoya encima, una tapa que se desliza por guías de cola de milano, o ninguna. La caja se reconstruye al instante como CAD real, y lo que las opciones no cubren, como divisores o una ranura para etiqueta, está a una edición con IA de distancia.",
+        "Indica qué tiene que caber dentro, o qué tamaño puede tener la caja cerrada, y elige una tapa: una deslizante que cierra con un clic, una con bisagra que sale de la impresora ya montada, una sobre reborde que se levanta sin más, una a presión o una magnética, o ninguna. Añade compartimentos y una etiqueta, fija una sola holgura de ajuste para todas las tapas, guías y bisagras, e imprime primero una pequeña prueba de ajuste. La caja se reconstruye al instante como CAD real y cada combinación está comprobada: la tapa cierra sin interferencias, la bisagra gira sin rozar y la tapa deslizante hace clic al llegar al tope.",
       whyPoints: [
-        "Las medidas son interiores: dimensiona según el objeto, no según la pieza impresa",
-        "Tapa con bisagra impresa ya montada (print-in-place) o con un pasador aparte",
-        "Cierre de clip, de tipo caja de herramientas o magnético en la tapa con bisagra",
-        "¿Divisores, una ranura para etiqueta, una muesca para cables? Pulsa “AI edit” y dilo",
+        "Medidas interiores o exteriores: lo que tiene que caber dentro, o dónde tiene que caber la caja",
+        "Una sola holgura de ajuste para todas las tapas, guías y bisagras, y una prueba de ajuste que se imprime en 20 minutos",
+        "Tapa deslizante, con bisagra, sobre reborde, a presión o magnética; compartimentos, también desiguales",
+        "Una etiqueta que se lee al derecho con la tapa cerrada, grabada o incrustada en un segundo color",
+        "Distribuida según la cama de tu impresora: la tapa va donde quepa, o en una placa aparte",
+        "STL y STEP gratis, sin registrarte, y “AI edit” para todo lo que no cubren las opciones",
       ],
       faqs: [
         {
           q: "¿Qué tapa elijo?",
-          a: "La tapa con bisagra print-in-place para una caja que abres a menudo: sale de la impresora ya montada. A presión para una tapa que debe quedarse cerrada cuando llevas la caja de un lado a otro; la tapa sobre reborde, como cubierta antipolvo que simplemente levantas; la deslizante, para un tacto de estuche escolar (mantiene las esquinas en ángulo recto para poder deslizarse); y ninguna, para una bandeja abierta.",
+          a: "Deslizante, para el tacto clásico de estuche escolar: hace clic al llegar al tope y tiene ranuras para los dedos con las que abrirla. Con bisagra, para una caja que abres a menudo: la bisagra print-in-place sale de la impresora ya montada, y la de pasador es la opción robusta para cajas grandes o si tu impresora tiende a soldar las bisagras. Sobre reborde, como simple cubierta antipolvo; a presión, para una tapa que debe seguir cerrada cuando llevas la caja de un sitio a otro; magnética, para una tapa que se levanta y que ocho imanes atraen hacia abajo (se suelta con un tirón: para llevarla en una bolsa, elige la tapa con bisagra con clip o con cierres de caja de herramientas); y ninguna, para bandejas y contenedores apilables. Las tapas sobre reborde y magnéticas tienen una muesca para el dedo en el extremo izquierdo.",
         },
         {
-          q: "¿Qué grosor deben tener las paredes?",
-          a: "Los 2.4 mm por defecto son unos seis perímetros con una boquilla de 0.4 mm: rigidez suficiente para el almacenamiento diario. Sube a 3–4 mm para cajas que se transportan llenas o se atornillan a una pared.",
+          q: "La tapa quedó demasiado justa (o demasiado floja). ¿Qué cambio?",
+          a: "La holgura de ajuste: la separación por lado entre las piezas que se deslizan o giran. 0.25 mm va bien en una impresora bien calibrada con PLA; suma 0.05–0.1 para PETG o para una impresora que sobreextruye, y resta 0.05 si la tapa baila. Las bisagras siempre llevan 0.1 más y nunca menos de 0.3. Activa “Fit test print only” (solo imprimir la prueba de ajuste) para imprimir en unos veinte minutos una caja de 40 × 30 con la misma tapa antes de lanzar la impresión larga.",
+        },
+        {
+          q: "¿Las medidas son interiores o exteriores?",
+          a: "Tú eliges. “Inside” (interior, la opción por defecto) es lo que va dentro: largo × ancho × alto, del fondo a la tapa cerrada. “Outside” (exterior) es la caja cerrada entera, con la tapa, el cilindro de la bisagra y el cierre incluidos, para un cajón o una estantería: resta 1–2 mm a la medida interior del cajón para que la caja entre deslizando. En una caja con bisagra, el alto es el de la base y la profundidad de la tapa se suma por encima.",
+        },
+        {
+          q: "La bisagra print-in-place salió soldada. ¿Por qué?",
+          a: "Casi siempre por sobreextrusión, pata de elefante o piel difusa (fuzzy skin) que cierran la separación. Con la holgura por defecto, la bisagra tiene 0.35 mm; desactiva la piel difusa, no escales nunca el archivo en el laminador (eso cambia las separaciones: cambia el tamaño aquí) y, si aún se suelda, sube la holgura o elige la bisagra con pasador (un pasador impreso, un tornillo M3 o filamento de 1.75 mm).",
+        },
+        {
+          q: "¿Por qué dice que mi caja no cabe en mi impresora?",
+          a: "Elige la cama de tu impresora. La tapa se coloca junto a la caja en la dirección en la que quepa; cuando las dos no caben en una misma placa, la tapa se llama “lid (second plate)” (tapa, segunda placa): sepárala en tu laminador y pásala a otra placa. Una caja con bisagra print-in-place se imprime abierta y en una sola pieza, así que caja y tapa tienen que caber una al lado de la otra; si no, usa la bisagra con pasador.",
+        },
+        {
+          q: "¿Cómo la imprimo?",
+          a: "Sin soportes: las tapas se imprimen boca abajo, con la etiqueta en la cara que apoya en la cama; las guías deslizantes y los rebordes están a 45°, y cada borde que toca la cama lleva un pequeño chaflán contra la pata de elefante. Capas de 0.2 mm y tres perímetros o más; brim para las cajas de más de 150 mm en PETG. Mete los imanes a presión con una gota de pegamento y fíjate en los polos: los de la tapa tienen que atraer a los de la caja.",
         },
       ],
     },
     params: {
-      INNER_L: { label: "Largo interior", desc: "Longitud interior: dimensiónala según lo que va dentro." },
-      INNER_W: { label: "Ancho interior", desc: "Ancho del interior." },
-      INNER_H: { label: "Alto interior", desc: "Altura interior de la caja, del fondo al borde." },
-      WALL: { label: "Grosor de pared", desc: "2.4 mm son unos seis perímetros con una boquilla de 0.4 mm." },
-      LID: {
-        label: "Tipo de tapa",
-        desc: "Tapa con bisagra, tapa a presión, tapa que se apoya sobre un reborde, tapa que se desliza por guías de cola de milano, o ninguna.",
+      SIZE: {
+        label: "Medidas",
+        desc: "Inside (interior): lo que tiene que caber en la caja. Outside (exterior): la caja cerrada, con tapa, bisagra y cierre incluidos, para un cajón o una estantería; resta 1–2 mm a la medida interior del cajón para que la caja entre deslizando.",
       },
-      HINGE: { label: "Bisagra", desc: "Solo tapa con bisagra: impresa ya montada o con un pasador aparte." },
-      LATCH: { label: "Cierre", desc: "Solo tapa con bisagra: clip a presión, cierres tipo caja de herramientas, imanes o ninguno." },
-      LID_DEPTH: { label: "Profundidad de la tapa con bisagra", desc: "Solo tapa con bisagra: qué profundidad tiene la tapa." },
+      INNER_L: {
+        label: "Largo",
+        desc: "Largo interior (o exterior). La caja tiene que caber en la cama de tu impresora: elígela más abajo.",
+      },
+      INNER_W: { label: "Ancho", desc: "Ancho interior (o exterior)." },
+      INNER_H: {
+        label: "Alto",
+        desc: "Inside: del fondo a la tapa cerrada (en una caja con bisagra, la base; la profundidad de la tapa añade la tapa por encima). Outside: la altura total de la caja cerrada.",
+      },
+      WALL: {
+        label: "Grosor de pared",
+        desc: "2 mm son cinco perímetros de 0.4 mm. Las tapas a presión, sobre reborde y magnéticas llevan su ranura o su reborde en la pared, así que necesitan algo más de 1.2.",
+      },
+      FLOOR: { label: "Grosor del fondo", desc: "Ocho capas de 0.2 mm por defecto; más grueso para contenido pesado." },
       CORNER_R: {
         label: "Radio de esquina",
-        desc: "Redondeo de las esquinas exteriores (la tapa deslizante mantiene las esquinas en ángulo recto para poder salir deslizándose).",
+        desc: "Esquinas exteriores; el interior se redondea con este radio menos el grosor de pared. La tapa deslizante se redondea con la caja.",
+      },
+      LID: {
+        label: "Tipo de tapa",
+        desc: "Una tapa deslizante con clic y ranuras para los dedos, una tapa con bisagra, una que se levanta de un reborde, una tapa a presión, una que se levanta y se sujeta con ocho imanes, o ninguna.",
+      },
+      CLEARANCE: {
+        label: "Holgura de ajuste",
+        desc: "Separación por lado entre las piezas que se deslizan o giran. 0.25 va bien en una impresora bien calibrada con PLA; suma 0.05–0.1 para PETG. Las bisagras llevan 0.1 más, nunca menos de 0.3.",
+      },
+      HINGE: {
+        label: "Bisagra",
+        desc: "Solo tapa con bisagra: impresa ya montada, o con un pasador que metes después (uno impreso o un tornillo M3, o un trozo de filamento de 1.75 mm).",
+      },
+      LATCH: {
+        label: "Cierre",
+        desc: "Solo tapa con bisagra. Clip: se cierra a presión y se abre apretándolo; no se abre dentro de una bolsa (necesita una base de 15 mm de profundidad). Toolbox clasps (cierres de caja de herramientas): se enganchan en un tornillo, los más firmes; cada uno lleva dos tornillos M3 × 30. Magnets (imanes): sujetan la tapa abajo y se abre con un tirón. Un cierre hasta 100 mm de largo, dos hasta 200 y tres por encima.",
+      },
+      LID_DEPTH: {
+        label: "Profundidad de la tapa",
+        desc: "Solo tapa con bisagra: la profundidad interior de la tapa; al menos 4 mm (se hace más profunda sola donde la bisagra lo necesita) y nunca más que la base.",
+      },
+      MAGNET: {
+        label: "Imanes (diámetro × grosor)",
+        desc: "Tapa magnética: ocho imanes, cuatro en columnas en las esquinas de la caja, enrasados con el reborde, y cuatro en la tapa. Cierre magnético de la tapa con bisagra: cuatro. 6 × 2 es el imán de Gridfinity; los huecos miden 0.2 mm más que el imán, para una gota de pegamento.",
+      },
+      DIV_X: {
+        label: "Compartimentos a lo largo",
+        desc: "Compartimentos uno al lado de otro a lo largo de la caja (1 = sin divisores).",
+      },
+      CELLS_X: {
+        label: "Proporciones a lo largo",
+        desc: "Compartimentos desiguales: un ancho relativo por compartimento; 1 2 1 hace el del medio el doble de ancho (también valen anchos en mm que sumen el interior).",
+      },
+      DIV_Y: { label: "Compartimentos a lo ancho", desc: "Compartimentos a lo ancho de la caja." },
+      CELLS_Y: { label: "Proporciones a lo ancho", desc: "Compartimentos desiguales a lo ancho, igual que arriba." },
+      DIV_H: {
+        label: "Altura de los divisores",
+        desc: "Con divisores más bajos es más fácil sacar las piezas pequeñas. Al 100 % se quedan a 0.2–0.5 mm de la tapa, así que las piezas pequeñas no pueden saltar por encima.",
+      },
+      LABEL: {
+        label: "Texto de la etiqueta",
+        desc: "Se graba en la tapa de modo que se lee al derecho con la tapa cerrada (una caja sin tapa lo lleva en el frente). Letras sin tildes ni ñ, números y símbolos comunes.",
+      },
+      LABEL_STYLE: {
+        label: "Estilo de la etiqueta",
+        desc: "Grabada a 0.6 mm de profundidad, o incrustada: las letras como pieza aparte, enrasadas en el grabado, en un segundo color, para una impresora que imprime dos filamentos en una misma capa (AMS, MMU).",
+      },
+      STACKABLE: {
+        label: "Apilable",
+        desc: "Solo cajas sin tapa: la base se estrecha con un escalón a 45°, para que encaje en el borde de la caja de abajo.",
+      },
+      BED: {
+        label: "Cama de la impresora",
+        desc: "La tapa se coloca junto a la caja en la dirección en la que quepa, a 6 mm de ella y a 2 mm del borde de la cama; si no cabe en la misma placa, se llama “lid (second plate)” (tapa, segunda placa). Una caja con bisagra print-in-place se imprime abierta y en una sola pieza, así que caja y tapa tienen que caber una al lado de la otra.",
+      },
+      FIT_TEST: {
+        label: "Solo imprimir la prueba de ajuste",
+        desc: "Una caja de 40 × 30 mm con la misma tapa, holgura, pared y esquinas: unos veinte minutos de impresión para comprobar el ajuste antes de imprimir la de verdad; pega también sus imanes.",
       },
     },
-    example: "120 × 80 × 40 mm de interior, tapa deslizante",
+    example: "120 × 80 × 40 mm de interior, tapa deslizante, 3 compartimentos",
     step: [
-      "La caja y la tapa se exportan como sólidos separados en un mismo archivo: 101 caras exactas para la caja con bisagra por defecto, con las esquinas redondeadas y los nudillos de la bisagra como cilindros reales.",
-      "Abre el archivo en CAD para poner un logotipo, una muesca para cables o agujeros de montaje justo donde van, o entrégalo a un servicio de impresión que pida STEP.",
+      "La caja y la tapa se exportan como dos sólidos separados en un mismo archivo: 101 caras exactas para la caja con tapa deslizante por defecto, con 67 planos, 24 cilindros (las esquinas redondeadas, los salientes del clic y sus hoyuelos, las ranuras para los dedos) y 10 conos (el chaflán de 45° del borde inferior allí donde rodea las esquinas).",
+      "Abre el archivo en CAD para poner un logotipo, una muesca para cables o agujeros de montaje justo donde van, para hacer un inserto que encaje en el interior, o entrégalo a un servicio de impresión que pida STEP.",
     ],
     aiFaqs: [
       {
-        q: "¿Cómo hago una caja de 120 × 80 × 40 mm con tapa deslizante?",
-        a: "Abre https://www.forgent3d.com/es/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding (las medidas son las del interior de la caja). Descarga el STL para imprimir la caja y la tapa, o el STEP para editarlas.",
+        q: "¿Cómo hago una caja de 120 × 80 × 40 mm con tapa deslizante y tres compartimentos?",
+        a: "Abre https://www.forgent3d.com/es/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding&DIV_X=3: las medidas son las del interior de la caja. Descarga el STL para imprimir la caja y la tapa, o el STEP para editarlas.",
       },
       {
-        q: "¿Puedo añadir divisores o una ranura para etiqueta?",
-        a: "Sí: pulsa “AI edit” en el generador y dilo (“dos divisores a lo ancho”, “una ranura para etiqueta en el frente”). La IA edita el model.py de la caja en la página; cópiala a tus modelos para conservarla y seguir con el agente de IA.",
+        q: "¿Cómo hago una caja que quepa en un cajón de 200 × 100 × 60 mm?",
+        a: "Abre https://www.forgent3d.com/es/generators/parametric-box-generator?SIZE=outside&INNER_L=200&INNER_W=100&INNER_H=60&LID=none&DIV_X=3: con las medidas en “Outside” (exteriores), los números son los de la caja entera, así que entra en el cajón; el interior es lo que dejan las paredes.",
       },
     ],
     keywords: [
+      "generador de cajas 3d",
       "generador de cajas paramétricas",
-      "caja con tapa para imprimir en 3d stl",
-      "caja con bisagra impresa en 3d",
+      "caja con tapa para imprimir en 3d",
       "caja con tapa deslizante stl",
-      "generador de cajas a medida",
+      "caja con bisagra impresa en 3d",
+      "caja con bisagra print in place",
+      "caja organizadora con divisiones stl",
+      "caja con tapa magnética 3d",
+      "caja apilable stl",
     ],
   },
 

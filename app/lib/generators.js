@@ -280,98 +280,155 @@ export const GENERATORS = [
     icon: "▣",
     family: "storage",
     // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
-    updated: "2026-10-16",
+    updated: "2026-10-19",
     // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
-    example: { params: { INNER_L: "120", INNER_W: "80", INNER_H: "40", LID: "sliding" }, label: { en: "120 × 80 × 40 mm inside, sliding lid", zh: "内腔 120 × 80 × 40 mm、抽拉盖" } },
-    // Read off the default part's STEP export (cad-build export, 2026-10-16): faces by surface type.
+    example: {
+      params: { INNER_L: "120", INNER_W: "80", INNER_H: "40", LID: "sliding", DIV_X: "3" },
+      label: { en: "120 × 80 × 40 mm inside, sliding lid, 3 compartments", zh: "内腔 120 × 80 × 40 mm、滑盖、3 格" },
+    },
+    // Read off the default part's STEP export (cad-build export, 2026-10-19): faces by surface type.
     step: {
       en: [
-        "Box and lid export as separate solids in one file — 101 exact faces for the default hinged box, the rounded corners and the hinge knuckles as true cylinders.",
-        "Open it in CAD to put a logo, a cable notch or mounting holes exactly where they belong, or hand it to a print service that wants STEP.",
+        "Box and lid export as two separate solids in one file — 101 exact faces for the default sliding-lid box: 67 planes, 24 cylinders (the rounded corners, the click pegs and their dimples, the finger grooves) and 10 cones (the 45° bottom edge going round the corners).",
+        "Open it in CAD to add a logo, a cable notch or mounting holes exactly where they belong, to make an insert that fits the inside, or hand it to a print service that wants STEP.",
       ],
       zh: [
-        "盒体和盖子在同一个文件里是两个独立的实体——默认铰链盒共 101 个精确面，圆角和铰链转节都是真圆柱面。",
-        "在 CAD 里打开，就能把 logo、走线缺口或安装孔放到准确的位置，也能直接交给要 STEP 的打印服务。",
+        "盒体和盖子在同一个文件里是两个独立的实体——默认滑盖盒共 101 个精确面：67 个平面，24 个圆柱面（圆角、定位卡点和它的凹窝、拉手指槽），10 个圆锥面（底边 45° 倒角绕过圆角的那一段）。",
+        "在 CAD 里打开，就能把 logo、走线缺口或安装孔放到准确的位置，照着内腔做内衬，也能直接交给要 STEP 的打印服务。",
       ],
     },
     // Questions people put to an AI assistant; each answer carries a working deep link.
     aiFaqs: {
       en: [
-        { q: "How do I make a 120 × 80 × 40 mm box with a sliding lid?", a: "https://www.forgent3d.com/en/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding — the sizes are the inside of the box. Download STL to print box and lid, or STEP to edit." },
-        { q: "Can I add dividers or a label slot?", a: "Yes: press “AI edit” in the generator and say it (“two dividers across the width”, “a label slot on the front”). The AI edits the box’s model.py on the page; copy it into your models to keep it and to continue with the AI agent." },
+        { q: "How do I make a 120 × 80 × 40 mm box with a sliding lid and three compartments?", a: "https://www.forgent3d.com/en/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding&DIV_X=3 — the sizes are the inside of the box. Download STL to print box and lid, or STEP to edit." },
+        { q: "How do I make a box that fits a 200 × 100 × 60 mm drawer?", a: "https://www.forgent3d.com/en/generators/parametric-box-generator?SIZE=outside&INNER_L=200&INNER_W=100&INNER_H=60&LID=none&DIV_X=3 — with Sizes set to Outside the numbers are the whole box, so it drops into the drawer; the inside is what the walls leave." },
       ],
       zh: [
-        { q: "怎样做一个内腔 120 × 80 × 40 mm、抽拉盖的盒子？", a: "https://www.forgent3d.com/zh/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding ——尺寸是盒子的内腔。下载 STL 打印盒体和盖子，或下载 STEP 去改。" },
-        { q: "能加隔板或标签槽吗？", a: "能：在生成器里点「AI 修改」说一句（“沿宽度方向加两块隔板”“正面加一个标签槽”）。AI 在页面上改这个盒子的 model.py；要留下来、要接着让 AI agent 改，就复制到你的模型里。" },
+        { q: "怎样做一个内腔 120 × 80 × 40 mm、滑盖、分 3 格的盒子？", a: "https://www.forgent3d.com/zh/generators/parametric-box-generator?INNER_L=120&INNER_W=80&INNER_H=40&LID=sliding&DIV_X=3 ——尺寸是盒子的内腔。下载 STL 打印盒体和盖子，或下载 STEP 去改。" },
+        { q: "怎样做一个刚好放进 200 × 100 × 60 mm 抽屉的收纳盒？", a: "https://www.forgent3d.com/zh/generators/parametric-box-generator?SIZE=outside&INNER_L=200&INNER_W=100&INNER_H=60&LID=none&DIV_X=3 ——「尺寸按」选外形时，数字就是整个盒子的外形，正好放进抽屉；内腔是墙厚之外剩下的。" },
       ],
     },
     keywords: {
       en: [
-      "parametric box generator",
-      "3d printed box with lid stl",
-      "custom storage box generator",
-    ],
-      zh: ["参数化盒子生成器", "3d打印收纳盒", "带盖收纳盒 STL", "铰链盒 3d打印"],
+        "parametric box generator",
+        "box generator 3d print",
+        "3d print box with slide lid",
+        "hinged box generator",
+        "box with lid generator",
+        "storage box with dividers stl",
+        "print in place box generator",
+      ],
+      zh: ["3d打印收纳盒", "收纳盒生成器", "3d打印盒子怎么做盖子", "滑盖收纳盒", "分格收纳盒", "一体打印铰链盒", "磁吸收纳盒", "可堆叠收纳盒"],
     },
     params: [
-      { key: "INNER_L", default: "80", range: "25 – 250", unit: "mm", label: { en: "Inner length", zh: "内长" }, desc: { en: "Interior length — size it to what goes inside.", zh: "内腔长度，按要装的东西量。" } },
-      { key: "INNER_W", default: "50", range: "25 – 250", unit: "mm", label: { en: "Inner width", zh: "内宽" }, desc: { en: "Interior width.", zh: "内腔宽度。" } },
-      { key: "INNER_H", default: "30", range: "16 – 150", unit: "mm", label: { en: "Inner height", zh: "内高" }, desc: { en: "Interior height of the box, floor to rim.", zh: "盒体内腔高度，从底到口沿。" } },
-      { key: "WALL", default: "2.4", range: "2 – 4", unit: "mm", label: { en: "Wall thickness", zh: "壁厚" }, desc: { en: "2.4 mm is about six perimeters with a 0.4 mm nozzle.", zh: "0.4 喷嘴下 2.4 mm 约为六圈墙。" } },
-      { key: "LID", default: "hinged", range: "hinged / snap / lip / sliding / none", unit: "", label: { en: "Lid type", zh: "盖子类型" }, desc: { en: "A hinged lid, a snap-on lid, a lid that drops over a lip, one that slides along dovetail rails, or none.", zh: "铰链翻盖、卡扣盖、压在止口上的盖、沿燕尾导轨抽拉的盖，或者不要盖。" } },
-      { key: "HINGE", default: "print-in-place", range: "print-in-place / pin", unit: "", label: { en: "Hinge", zh: "铰链" }, desc: { en: "Hinged lid only: printed already assembled, or with a separate pin.", zh: "仅铰链盖：一体打印好就能转，或者用单独的销轴。" } },
-      { key: "LATCH", default: "clip", range: "clip / toolbox / magnet / none", unit: "", label: { en: "Latch", zh: "锁扣" }, desc: { en: "Hinged lid only: a snap clip, toolbox-style clasps, magnets, or none.", zh: "仅铰链盖：卡扣、工具箱式搭扣、磁铁，或者不要。" } },
-      { key: "LID_DEPTH", default: "10", range: "4 – 40", unit: "mm", label: { en: "Hinged lid depth", zh: "翻盖深度" }, desc: { en: "Hinged lid only: how deep the lid is.", zh: "仅铰链盖：盖子有多深。" } },
-      { key: "CORNER_R", default: "4", range: "0 – 12", unit: "mm", label: { en: "Corner radius", zh: "圆角半径" }, desc: { en: "Outside corner rounding (the sliding lid keeps square corners so it can slide out).", zh: "外轮廓圆角（抽拉盖保持直角，才抽得出来）。" } },
+      { key: "SIZE", default: "Inside", range: "Inside / Outside", unit: "", label: { en: "Sizes are", zh: "尺寸按" }, desc: { en: "Inside: what has to fit in the box. Outside: the closed box — lid, hinge and latch included — for a drawer or a shelf; take 1–2 mm off the drawer's inside so the box slides in.", zh: "内腔：要放进去的东西。外形：盖好后的整个盒子（含盖、铰链和锁扣），用来放进抽屉或格子；按抽屉内尺寸减 1–2 mm，盒子才推得进去。" } },
+      { key: "INNER_L", default: "80", range: "20 – 300", unit: "mm", label: { en: "Length", zh: "长" }, desc: { en: "Inside (or outside) length. The box must fit your printer's bed — pick it below.", zh: "内腔（或外形）长度。盒子要放得进你的打印床——在下面选。" } },
+      { key: "INNER_W", default: "50", range: "20 – 300", unit: "mm", label: { en: "Width", zh: "宽" }, desc: { en: "Inside (or outside) width.", zh: "内腔（或外形）宽度。" } },
+      { key: "INNER_H", default: "30", range: "10 – 250", unit: "mm", label: { en: "Height", zh: "高" }, desc: { en: "Inside: from the floor to the closed lid (on a hinged box the base — Lid depth adds the lid on top). Outside: the closed box's whole height.", zh: "内腔：从盒底到合上的盖子（铰链盒指盒身深度，盖深另加在上面）。外形：盖好后整个盒子的高度。" } },
+      { key: "WALL", default: "2", range: "1.2 – 8", unit: "mm", label: { en: "Wall", zh: "壁厚" }, desc: { en: "2 mm is five 0.4 mm lines. Snap-on, lift-off and magnetic lids keep their groove or lip in the wall and need a little more than 1.2.", zh: "2 mm 约五道 0.4 线宽。卡扣盖、止口盖、磁吸盖的槽或止口在墙里，墙要比 1.2 厚一点。" } },
+      { key: "FLOOR", default: "1.6", range: "1.2 – 16", unit: "mm", label: { en: "Floor", zh: "底厚" }, desc: { en: "Eight 0.2 mm layers by default; thicker for heavy contents.", zh: "默认 8 层 0.2 mm；装重物就加厚。" } },
+      { key: "CORNER_R", default: "3", range: "0 – 20", unit: "mm", label: { en: "Corner radius", zh: "圆角半径" }, desc: { en: "Outside corners; the inside rounds by this less the wall. The sliding lid rounds with the box.", zh: "外角圆角；内腔圆角为它减去壁厚。滑盖跟着盒子一起倒圆。" } },
+      { key: "LID", default: "Sliding", range: "Sliding / Hinged / Lip / Snap-on / Magnetic / None", unit: "", label: { en: "Lid type", zh: "盖子类型" }, desc: { en: "A sliding lid with a click and finger grooves, a hinged lid, a lid that lifts off a lip, a snap-on lid, a lift-off lid held by eight magnets, or none.", zh: "带卡点和指槽的滑盖、铰链翻盖、从止口上直接提起的盖、卡扣盖、八颗磁铁吸住的提起式盖，或者不要盖。" } },
+      { key: "CLEARANCE", default: "0.25", range: "0.1 – 0.5", unit: "mm", label: { en: "Fit clearance", zh: "配合间隙" }, desc: { en: "Gap per side between parts that slide or turn. 0.25 suits a tuned printer in PLA; add 0.05–0.1 for PETG. Hinges get 0.1 more, never under 0.3.", zh: "滑动或转动件之间每边的间隙。调好的打印机打 PLA 用 0.25；PETG 加 0.05–0.1。铰链再加 0.1，且不小于 0.3。" } },
+      { key: "HINGE", default: "Print-in-place", range: "Print-in-place / Pin / Filament pin", unit: "", label: { en: "Hinge", zh: "铰链" }, desc: { en: "Hinged lid only: printed already assembled, or with a pin you push in — a printed pin or an M3 screw, or a length of 1.75 mm filament.", zh: "仅铰链盖：一体打印好就能转，或者装一根销——打印的销或 M3 螺丝，或者一段 1.75 mm 耗材。" } },
+      { key: "LATCH", default: "Clip", range: "Clip / Toolbox clasps / Magnets / None", unit: "", label: { en: "Latch", zh: "锁扣" }, desc: { en: "Hinged lid only. Clip: snaps shut and you press it to open — stays shut in a bag (needs the base 15 mm deep). Toolbox clasps: hook over a screw, the firmest; each takes two M3 × 30 screws. Magnets: hold the lid down, lift with a tug. One latch up to 100 mm long, two up to 200, three above.", zh: "仅铰链盖。卡扣：合上咔哒扣住，按一下才开——放书包里也不会开（盒身至少深 15 mm）。工具箱搭扣：挂在螺丝上，最牢；每个用两颗 M3 × 30 螺丝。磁铁：吸住盖子，一拉就开。100 mm 以下一个锁扣，200 以下两个，再长三个。" } },
+      { key: "LID_DEPTH", default: "10", range: "4 – 60", unit: "mm", label: { en: "Lid depth", zh: "盖深" }, desc: { en: "Hinged lid only: how deep the lid is inside — at least 4 mm (deeper on its own where the hinge needs it), never deeper than the base.", zh: "仅铰链盖：盖子内深——至少 4 mm（铰链需要时会自动加深），不超过盒身。" } },
+      { key: "MAGNET", default: "6x2 mm", range: "6x2 / 6x3 / 8x2 / 8x3 / 10x2 / 10x3", unit: "", label: { en: "Magnets (diameter × thickness)", zh: "磁铁（直径 × 厚度）" }, desc: { en: "Magnetic lid: eight magnets — four in posts in the box's corners, flush with the lip, four in the lid. Hinged lid's magnet latch: four. 6 × 2 is the Gridfinity magnet; pockets are 0.2 mm over size for a drop of glue.", zh: "磁吸盖：八颗——四颗在盒内四角的立柱顶上、与止口齐平，四颗在盖子里。铰链盖的磁铁锁扣：四颗。6 × 2 就是 Gridfinity 用的磁铁；孔比磁铁大 0.2 mm，点一滴胶固定。" } },
+      { key: "DIV_X", default: "1", range: "1 – 12", unit: "", label: { en: "Compartments along the length", zh: "长度方向分格数" }, desc: { en: "Compartments side by side along the length (1 = no dividers).", zh: "沿长度方向并排几格（1 = 不分格）。" } },
+      { key: "CELLS_X", default: "", range: "e.g. 1 2 1", unit: "", label: { en: "Relative widths along the length", zh: "长度方向各格宽度比" }, desc: { en: "Uneven compartments: relative widths, one per compartment — 1 2 1 makes the middle one twice as wide (widths in mm that add up to the inside work too).", zh: "不等宽分格：每格一个相对宽度——1 2 1 就是中间那格是两边的两倍宽（直接写加起来等于内长的 mm 数也行）。" } },
+      { key: "DIV_Y", default: "1", range: "1 – 12", unit: "", label: { en: "Compartments along the width", zh: "宽度方向分格数" }, desc: { en: "Compartments along the width.", zh: "沿宽度方向几格。" } },
+      { key: "CELLS_Y", default: "", range: "e.g. 2 1", unit: "", label: { en: "Relative widths along the width", zh: "宽度方向各格宽度比" }, desc: { en: "Uneven compartments along the width, as above.", zh: "宽度方向的不等宽分格，同上。" } },
+      { key: "DIV_H", default: "100", range: "20 – 100", unit: "%", label: { en: "Divider height", zh: "隔板高度" }, desc: { en: "Lower dividers make small parts easier to pick out. At 100 % they stop 0.2–0.5 mm under the lid, so small parts cannot hop over.", zh: "隔板矮一点，小零件更好拿。100 % 时停在盖子下面 0.2–0.5 mm，小零件跳不过去。" } },
+      { key: "LABEL", default: "", range: "text", unit: "", label: { en: "Label text", zh: "刻字内容" }, desc: { en: "Engraved into the lid so it reads the right way when the lid is shut (an open box carries it on the front). Letters A–Z without accents, numbers and common symbols.", zh: "刻在盖子上，合上盖时读起来是正的（无盖盒刻在正面）。支持英文字母、数字和常用符号。" } },
+      { key: "LABEL_STYLE", default: "Engraved", range: "Engraved / Inlay", unit: "", label: { en: "Label style", zh: "刻字方式" }, desc: { en: "Engraved 0.6 mm deep, or an inlay: the letters as a separate part flush in the engraving, in a second colour — for a printer that prints two filaments in one layer (AMS, MMU).", zh: "阴刻 0.6 mm，或者嵌字：字作为单独的零件平嵌在刻槽里，用第二种颜色——要能在同一层打两种耗材的打印机（AMS、MMU）。" } },
+      { key: "STACKABLE", default: "off", range: "on / off", unit: "", label: { en: "Stackable", zh: "可堆叠" }, desc: { en: "Open boxes only: the bottom steps in with a 45° shoulder, so it drops into the rim of the box below.", zh: "仅无盖盒：底部内收、带 45° 斜肩，能落进下面那个盒子的口里。" } },
+      { key: "BED", default: "256 x 256", range: "180 – 320 (7 printers)", unit: "", label: { en: "Printer bed", zh: "打印床" }, desc: { en: "The lid is laid out beside the box in whichever direction fits, 6 mm apart and 2 mm clear of the bed's edge; if it cannot share the plate it is named “lid (second plate)”. A print-in-place hinged box prints open in one piece, so it has to fit side by side.", zh: "盖子摆在盒子旁边放得下的方向，两件相距 6 mm、离床边 2 mm；放不下就叫「盖子（另起一盘打印）」。一体打印的铰链盒要打开平摊一次打完，所以必须并排放得下。" } },
+      { key: "FIT_TEST", default: "off", range: "on / off", unit: "", label: { en: "Fit test print only", zh: "只打试配件" }, desc: { en: "A 40 × 30 mm box with the same lid, clearance, wall and corners — about twenty minutes of print to check the fit before the real one; glue its magnets in too.", zh: "同样的盖子、间隙、壁厚和圆角做成 40 × 30 mm 的小盒——打二十分钟，先确认配合再打正式的；有磁铁就也装上。" } },
     ],
     copy: {
       en: {
         name: "Parametric Box Generator",
-        title: "Parametric Box Generator — Hinged, Snap-On or Sliding Lid Boxes (STL) | Forgent3D",
+        title: "Parametric Box Generator — Sliding, Hinged or Magnetic Lid, Dividers & Label (STL / STEP) | Forgent3D",
         description:
-          "Generate a custom 3D-printable box from its inside size, with a hinged lid (print-in-place or pin hinge; clip, toolbox or magnet latch), a snap-on, lip or sliding lid, or none. Preview in 3D, export STL or STEP free.",
-        h1: "Parametric box generator: exact inside size, hinged, snap, lip or sliding lid",
+          "Design a 3D-printable box from the inside out: sliding, hinged, lift-off, snap-on or magnetic lid, compartments (uneven too), an engraved label, one fit clearance and a 20-minute fit test, laid out for your printer's bed. Free STL / STEP.",
+        h1: "Parametric box generator: the inside you need, the lid you want, sized for your printer",
         intro:
-          "Enter the inside dimensions of what you need to store and pick a lid: a hinged lid that comes off the printer already assembled, a snap-on or drop-over lid, a lid that slides along dovetail rails, or none. The box rebuilds live as real CAD — anything the options miss, like dividers or a label slot, is one AI edit away.",
+          "Say what has to fit inside — or how big the closed box may be — and pick a lid: a sliding lid that clicks shut, a hinged lid printed already assembled, a lift-off, snap-on or magnetic lid, or none. Add compartments and a label, set one fit clearance for every lid, rail and hinge, and print a small fit test first. The box rebuilds live as real CAD and every combination is checked: the lid closes clean, the hinge swings clear, the slide clicks home.",
         whyPoints: [
-          "Dimensions are the inside — size it to the thing, not the print",
-          "Hinged lid with a print-in-place hinge, or a separate pin",
-          "Clip, toolbox clasp or magnet latch on the hinged lid",
-          "Dividers, a label slot, a cable notch? Press “AI edit” and say it",
+          "Inside or outside sizes — what has to fit in it, or what it has to fit into",
+          "One fit clearance for every lid, rail and hinge, and a 20-minute fit-test print",
+          "Sliding, hinged, lift-off, snap-on or magnetic lid; compartments, uneven ones too",
+          "A label that reads the right way once the lid is shut — engraved or in a second colour",
+          "Laid out for your printer's bed: the lid goes where it fits, or on its own plate",
+          "Free STL and STEP, no sign-up — and AI edit for anything the options miss",
         ],
         faqs: [
           {
             q: "Which lid should I pick?",
-            a: "The hinged lid with the print-in-place hinge for a box you open often — it comes off the printer assembled. Snap-on for a lid that must stay shut when the box is carried, the lip lid for a dust cover you lift off, the sliding lid for a pencil-box feel (it keeps square corners so it can slide out), and none for an open tray.",
+            a: "Sliding for the classic pencil-box feel — it clicks home and has finger grooves to pull it open. Hinged for a box you open often: print-in-place comes off the printer assembled; the pin hinge is the robust choice for big boxes or a printer that fuses hinges. Lift-off for a simple dust cover, snap-on for a lid that must stay shut when carried, magnetic for a lift-off lid that pulls down onto eight magnets (it comes off with a tug — for a bag take the hinged clip or toolbox clasps), and none for trays and stackable bins. Lift-off and magnetic lids have a finger notch at the left end.",
           },
           {
-            q: "How thick should the walls be?",
-            a: "The default 2.4 mm is about six perimeters with a 0.4 mm nozzle — stiff enough for everyday storage. Go to 3–4 mm for boxes that get carried full or screwed to a wall.",
+            q: "My lid was too tight (or too loose) — what do I change?",
+            a: "The fit clearance: the gap per side between parts that slide or turn. 0.25 mm suits a tuned printer in PLA; add 0.05–0.1 for PETG or a printer that over-extrudes, take 0.05 off if the lid rattles. Hinges always get 0.1 more and never less than 0.3. Switch on “Fit test print only” to print a 40 × 30 box with the same lid in about twenty minutes before the long print.",
+          },
+          {
+            q: "Are the sizes inside or outside?",
+            a: "Your choice. Inside (the default) is what goes in: Length × Width × Height from the floor to the closed lid. Outside is the whole closed box — lid, hinge barrel and latch included — for a drawer or a shelf: take 1–2 mm off the drawer's inside so the box slides in. On a hinged box, Height is the base and Lid depth adds the lid.",
+          },
+          {
+            q: "The print-in-place hinge came out fused — why?",
+            a: "Usually over-extrusion, elephant's foot or fuzzy skin bridging the gap. The hinge gets 0.35 mm at the default clearance; turn fuzzy skin off, never scale the file in the slicer (that changes the gaps — change the size here instead), and if it still fuses raise the clearance or pick the pin hinge (a printed pin, an M3 screw or 1.75 mm filament).",
+          },
+          {
+            q: "Why does it say my box does not fit my printer?",
+            a: "Pick your printer's bed. The lid is laid out beside the box in the direction that fits; when the two cannot share one plate the lid is named “lid (second plate)” — split it off in your slicer. A print-in-place hinged box prints open in one piece, so it has to fit side by side, or use the pin hinge.",
+          },
+          {
+            q: "How do I print it?",
+            a: "No supports: lids print face down with the label on the bed side, sliding rails and lips are 45°, and every edge on the bed has a small chamfer against elephant's foot. 0.2 mm layers and three or more walls; a brim for boxes over 150 mm in PETG. Press magnets in with a drop of glue and mind the poles — the lid's must attract the box's.",
           },
         ],
       },
       zh: {
-        name: "参数化盒子生成器",
-        title: "参数化盒子生成器 — 铰链盖、卡扣盖、抽拉盖收纳盒 STL 在线生成 | Forgent3D",
+        name: "3D打印收纳盒生成器",
+        title: "3D打印收纳盒生成器 — 在线定制滑盖、铰链翻盖、磁吸盖、分格、刻字 STL / STEP | Forgent3D",
         description:
-          "按内腔尺寸生成 3D 打印收纳盒：铰链翻盖（一体打印铰链或销轴；卡扣、工具箱搭扣或磁铁锁扣）、卡扣盖、止口盖、抽拉盖，或不要盖。浏览器 3D 预览，免费导出 STL / STEP。",
-        h1: "参数化盒子生成器：按内腔尺寸建模，铰链盖、卡扣盖、止口盖或抽拉盖",
+          "按要装的东西（或要放进的抽屉）定尺寸，在线生成能直接3D打印的收纳盒：滑盖、铰链翻盖、止口盖、卡扣盖、磁吸盖或无盖；分格（可不等宽）、刻字；一个配合间隙管所有盖子，先打二十分钟的试配件；按你的打印床排版，免费导出 STL / STEP。",
+        h1: "3D打印收纳盒生成器：内腔按你要装的，盖子按你要的，排版按你的打印机",
         intro:
-          "输入要装的东西的尺寸，再选一种盖子：一体打印、下了打印机就能转的铰链翻盖，卡扣盖或压在止口上的盖，沿燕尾导轨抽拉的盖，或者干脆不要盖。底下是真 CAD，实时重建——选项覆盖不到的隔板、标签槽，点「AI 修改」说一句就行。",
+          "说清楚要放进什么——或者盖好后的盒子最大能多大——再选盖子：合上会咔哒一声的滑盖、一体打印好就能转的铰链翻盖、止口盖、卡扣盖、磁吸盖，或者不要盖。加上分格和刻字，用一个配合间隙管住所有盖子、导轨和铰链，先打一个小试配件。底下是真 CAD，实时重建，每种组合都验过：盖子合得上不干涉，铰链转得过去，滑盖推到底会卡住。",
         whyPoints: [
-          "尺寸是内腔——量东西，不用倒推外壳",
-          "铰链盖可以一体打印，也可以用单独的销轴",
-          "铰链盖配卡扣、工具箱式搭扣或磁铁锁扣",
-          "要隔板、标签槽、走线缺口？点「AI 修改」说一句",
+          "尺寸按内腔或外形——要装什么，或者要放进哪里",
+          "一个配合间隙管所有盖子、导轨和铰链，二十分钟试配件先打一个",
+          "滑盖、铰链翻盖、止口盖、卡扣盖、磁吸盖；可分格，也可不等宽",
+          "刻字在盖子合上时读起来是正的——阴刻，或者第二种颜色嵌字",
+          "按你的打印床排版：盖子摆在放得下的地方，放不下就另起一盘",
+          "免费 STL / STEP，无需注册——选项做不到的，点「AI 修改」说一句",
         ],
         faqs: [
           {
             q: "该选哪种盖子？",
-            a: "经常开合的盒子选铰链盖加一体打印铰链——下了打印机就是装好的。装满了要拎着走、盖子必须扣牢就选卡扣盖；只是防尘、掀开就用止口盖；想要文具盒那种手感选抽拉盖（它保持直角才抽得出来）；敞口托盘就不要盖。",
+            a: "要文具盒那种手感选滑盖——推到底咔哒卡住，盖头有指槽好拉。经常开合选铰链翻盖：一体打印下了打印机就是装好的；盒子大、或者你的机器容易把铰链粘死，就选销轴铰链更稳。只防尘选止口盖，装满了拎着走、盖子必须扣牢选卡扣盖，想要提起式又吸得住选磁吸盖（八颗磁铁；一拉就开，放书包里请选铰链盖配卡扣或工具箱搭扣），托盘和可堆叠的收纳格选无盖。止口盖和磁吸盖左端有一个抠手的指槽。",
           },
           {
-            q: "壁厚选多少？",
-            a: "默认 2.4 mm：0.4 喷嘴下约六圈墙，日常收纳够硬。装满了要拎、或者要拧在墙上的盒子用 3–4 mm。",
+            q: "盖子太紧（或太松）怎么办？",
+            a: "改配合间隙：滑动或转动件之间每边的间隙。调好的打印机打 PLA 用 0.25 mm；PETG 或者出料偏多的机器加 0.05–0.1，盖子晃就减 0.05。铰链总是再加 0.1、且不小于 0.3。打开「只打试配件」，二十分钟打一个同样盖子的 40 × 30 小盒，确认了再打正式的。",
+          },
+          {
+            q: "尺寸是内腔还是外形？",
+            a: "你来选。内腔（默认）是要放进去的东西：长 × 宽 × 高，高从盒底到合上的盖子。外形是盖好后的整个盒子——含盖子、铰链筒和锁扣——用来放进抽屉或格子：按抽屉内尺寸减 1–2 mm，盒子才推得进去。铰链盒的「高」是盒身，「盖深」另加在上面。",
+          },
+          {
+            q: "一体打印的铰链粘死了，为什么？",
+            a: "多半是出料偏多、象脚，或者绒毛表面（fuzzy skin）把缝填上了。默认间隙下铰链有 0.35 mm；关掉绒毛表面，别在切片软件里缩放（缩放会改间隙——要改尺寸就在这里改），还粘就加大间隙，或者换销轴铰链（打印销、M3 螺丝或 1.75 mm 耗材）。",
+          },
+          {
+            q: "为什么提示盒子放不进我的打印机？",
+            a: "先选你的打印床。盖子会摆在盒子旁边放得下的方向；两件放不进同一盘时，盖子会叫「盖子（另起一盘打印）」——在切片软件里拆成两个对象分两盘打。一体打印的铰链盒要打开平摊一次打完，所以必须并排放得下，不然就换销轴铰链。",
+          },
+          {
+            q: "怎么打印？",
+            a: "不用支撑：盖子朝下打、刻字在贴床那面，滑轨和止口都是 45°，贴床的每条边都有小倒角防象脚。层高 0.2 mm、三圈墙以上；超过 150 mm 的盒子用 PETG 时加个 brim。磁铁点一滴胶压进去，注意磁极——盖子上的要和盒子上的相吸。",
           },
         ],
       },
@@ -2652,7 +2709,7 @@ function baseSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、参数化盒子、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架。调参数、3D 预览、导出 STL / STEP。",
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、带盖收纳盒（滑盖、铰链、磁吸、分格）、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
