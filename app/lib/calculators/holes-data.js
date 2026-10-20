@@ -100,7 +100,7 @@ export const INSERT_SIZES = [...new Set(INSERTS.map((r) => r.screw))];
 /**
  * The catalog component the insert half hands off to — app /c/heat-set-boss (platform
  * catalog/components/fasteners/heat-set-boss): its SCREW choices and its LENGTH ("standard" / "short"; short exists
- * for M3 / M4 / M5). Its hole table is the ruthex / McMaster one (M4 5.6, M5 6.4, M6 8.0) and its lengths CNC Kitchen's.
+ * for M3 / M4 / M5). Its table is CNC Kitchen's current one (M4 5.7, M5 6.5, M6 8.1), lengths included (platform 10-20).
  */
 export const HEAT_SET_BOSS = { dir: "heat-set-boss", screws: ["M2", "M2.5", "M3", "M4", "M5", "M6"], short: ["M3", "M4", "M5"] };
 
