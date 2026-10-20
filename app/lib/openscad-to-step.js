@@ -9,10 +9,13 @@ export const APP_SCAD_URL = "https://app.forgent3d.com/scad";
 const SLUG = "openscad-to-step";
 const SUBPAGES = { home: "", why: "why-openscad-cant-export-step", compat: "compatibility" };
 
-// Thingiverse 语料(platform 仓库 scripts/scad-thingiverse.mjs --select all)。95% 是上线口径:
-// 切到 OpenSCAD 单链路之后还没整批重测(切之前两条路合计实测 83.6%)。重测出数后改这里,中英两份都读它。
+// Thingiverse 语料(platform 仓库 packages/scad-transpile/scripts/scad-thingiverse.mjs --select all)。口径 = 建成且
+// 体积/包围盒对上 OpenSCAD 自己的渲染。10-07 全量(full-1007-p12-merged,超时件低负载补跑)6361/7378 = 86.2%;
+// 分母去掉 OpenSCAD 自己也渲染不出的 553 份(语法错 / 缺库或 include / 渲染为空 / 参照超时)= 6361/6825 = 93.2%。
+// 文案必须带着这个分母说,不能把 93% 说成「全部文件」。只写实测数;重测出新数后改这里,中英两份都读它。
 const CORPUS_FILES = 7378;
-const CORPUS_RATE = "95%";
+const CORPUS_RENDERABLE = 6825;
+const CORPUS_RATE = "93%";
 
 export function scadPath(locale, page = "home") {
   const sub = SUBPAGES[page];
@@ -117,7 +120,7 @@ export function getScadCopy(locale) {
         intro:
           "OpenSCAD 只能导出网格。把 .scad 文件或整个项目文件夹拖进来，就能得到带真平面、真圆柱、真孔的 STEP 文件——Fusion、SolidWorks、Onshape、FreeCAD 和 CAM 软件都能直接测量、选取、加工。",
         cta: "转换 .scad 文件",
-        corpus: `Thingiverse 上 ${CORPUS_FILES} 份真实 .scad 文件，${CORPUS_RATE} 能直接转换。`,
+        corpus: `Thingiverse 上 OpenSCAD 自己能渲染的 ${CORPUS_RENDERABLE} 份真实 .scad 文件，${CORPUS_RATE} 能直接转换。`,
         corpusLink: "哪些能精确转换",
         examplesTitle: "手边没有 .scad 文件？先试试这几个",
         examplesIntro: "点开就在浏览器里构建好；拖参数面板里的滑块改尺寸，然后导出 STEP。不用登录。",
@@ -170,7 +173,7 @@ export function getScadCopy(locale) {
           },
           {
             q: "Thingiverse、Printables 上下载的模型能转吗？",
-            a: `大多数可以。我们用 Thingiverse 上的 ${CORPUS_FILES} 份 .scad 文件做测试，${CORPUS_RATE} 能直接转换。把下载的整个文件夹拖进来，被 include 的文件才会一起带上。`,
+            a: `大多数可以。我们用 Thingiverse 上的 .scad 文件做测试：OpenSCAD 自己能渲染的 ${CORPUS_RENDERABLE} 份里，${CORPUS_RATE} 能直接转换。把下载的整个文件夹拖进来，被 include 的文件才会一起带上。`,
           },
           {
             q: "转出来的 STEP 还能编辑吗？",
@@ -266,7 +269,7 @@ export function getScadCopy(locale) {
           "import() 读入的 STL / DXF / SVG、surface() 高度图和 projection(cut = false) 先由 OpenSCAD 渲染，再转成面片实体：STEP 里这部分是平面小面，不是解析曲面，构建时会告警并写明面数或边数。转出的 3D 面片上限 8000 个，超过会报错。数据文件和 .scad 放在同一个项目文件夹里一起加载。",
         ],
         testTitle: "我们怎么测",
-        testText: `我们用 Thingiverse 上 ${CORPUS_FILES} 份真实的 .scad 文件整批构建，并和 OpenSCAD 自己的渲染结果对照。其中 ${CORPUS_RATE} 能直接转换。`,
+        testText: `我们用 Thingiverse 上 ${CORPUS_FILES} 份真实的 .scad 文件整批构建，并和 OpenSCAD 自己的渲染结果对照。去掉 OpenSCAD 自己也渲染不出的（语法错误、缺库文件、渲染为空或超时），剩下 ${CORPUS_RENDERABLE} 份里 ${CORPUS_RATE} 能直接转换，体积和包围盒都对得上。`,
       },
     };
   }
@@ -305,7 +308,7 @@ export function getScadCopy(locale) {
       intro:
         "OpenSCAD only exports meshes. Drop in a .scad file or a whole project folder and get a STEP file with true planes, cylinders and holes — geometry that Fusion, SolidWorks, Onshape, FreeCAD and CAM software can measure, select and machine.",
       cta: "Convert a .scad file",
-      corpus: `${CORPUS_RATE} of ${CORPUS_FILES.toLocaleString("en-US")} real Thingiverse .scad files convert.`,
+      corpus: `${CORPUS_RATE} of the ${CORPUS_RENDERABLE.toLocaleString("en-US")} real Thingiverse .scad files that OpenSCAD itself renders convert.`,
       corpusLink: "What converts exactly",
       examplesTitle: "No .scad file at hand? Start with one of these",
       examplesIntro: "Each opens already built in your browser. Drag the Customizer sliders to resize it, then export STEP. No sign-up.",
@@ -358,7 +361,7 @@ export function getScadCopy(locale) {
         },
         {
           q: "Does it work with models from Thingiverse or Printables?",
-          a: `Usually, yes. We test against ${CORPUS_FILES.toLocaleString("en-US")} .scad files from Thingiverse, and ${CORPUS_RATE} of them convert. Drop in the whole downloaded folder so the files they include come along.`,
+          a: `Usually, yes. We test against .scad files from Thingiverse: of the ${CORPUS_RENDERABLE.toLocaleString("en-US")} that OpenSCAD itself renders, ${CORPUS_RATE} convert. Drop in the whole downloaded folder so the files they include come along.`,
         },
         {
           q: "Can I edit the STEP file afterwards?",
@@ -455,7 +458,7 @@ export function getScadCopy(locale) {
         "STL, DXF and SVG files read by import(), surface() heightmaps and projection(cut = false) are rendered by OpenSCAD first and brought in as faceted solids: that part of the STEP is flat facets, not analytic surfaces, and the build warns you with the face or edge count. Faceted 3D results are capped at 8,000 faces; above that the build stops with an error. Load data files in the same project folder as your .scad files.",
       ],
       testTitle: "How we test",
-      testText: `We build ${CORPUS_FILES.toLocaleString("en-US")} real-world .scad files from Thingiverse in one batch and check the results against OpenSCAD's own render. ${CORPUS_RATE} of them convert.`,
+      testText: `We build ${CORPUS_FILES.toLocaleString("en-US")} real-world .scad files from Thingiverse in one batch and check the results against OpenSCAD's own render. Leaving out the ones OpenSCAD can't render either (syntax errors, missing libraries, empty output or timeouts), ${CORPUS_RATE} of the remaining ${CORPUS_RENDERABLE.toLocaleString("en-US")} convert with matching volume and bounding box.`,
     },
   };
 }
