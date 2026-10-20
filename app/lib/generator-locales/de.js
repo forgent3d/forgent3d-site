@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generatoren",
   catalogTitle: "3D-Druck-Generatoren — kostenlose parametrische Modelle | Forgent3D",
   catalogDescription:
-    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken und Handyständer. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
+    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken, Handyständer und Lochkreis-Flansche. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
   catalogH1: "3D-Druck-Generatoren",
   catalogIntro:
     "Jeder Generator hier ist ein echtes parametrisches CAD-Modell: Ändern Sie die Parameter, baut es sich live neu auf, und Sie exportieren STL / STEP – was über die Schieberegler hinausgeht, ändert der KI-Agent am selben Modell.",
@@ -1915,6 +1915,98 @@ export const generators = {
       "handyhalterung schreibtisch stl",
       "handyständer mit ladekabel",
       "tablet ständer 3d druck",
+    ],
+  },
+
+  "bolt-circle-flange-generator": {
+    copy: {
+      name: "Flansch-Generator",
+      title: "Flansch-Generator — Lochkreis-Flansche & Adapter (STL / STEP) | Forgent3D",
+      description:
+        "Flansch mit freiem Lochkreis: 2–12 Bohrungen M2–M16 nach ISO 273, Startwinkel, Mittelbohrung, Nabe, Zylindersenkungen. Für IEC-Motoren und EN 1092-1. STL / STEP gratis.",
+      h1: "Flansch-Generator: eine Lochkreisplatte zum Drucken oder Fräsen",
+      intro:
+        "Stellen Sie den Lochkreis, die Lochanzahl und die Lage der Bohrung 1 ein – dieselben drei Zahlen wie im Lochkreis-Rechner –, dann die Schraube, die Mittelbohrung und bei Bedarf eine Nabe für ein Rohr oder eine Welle. Sie erhalten einen runden Flansch mit exakten Durchgangsbohrungen nach ISO 273: eine Adapterplatte für den Flansch eines IEC- oder Servomotors, einen gedruckten Rohr- oder Lüftungsflansch, der auf einen Stahlflansch passt, eine Nabenplatte für ein Rad oder ein Drehtellerlager.",
+      whyPoints: [
+        "Bohrungen nach der Konvention des Lochkreis-Rechners: Bohrung 1 beim Startwinkel ab +X, die übrigen gegen den Uhrzeigersinn",
+        "Durchgangsbohrungen nach ISO 273 fein / mittel / grob für M2–M16, dazu ein Druckaufmaß, das Sie festlegen",
+        "Zylindersenkungen für Innensechskantschrauben nach ISO 4762, eine Nabe für ein Rohr oder eine Welle – oder ein Blindflansch",
+        "Lehnt ab, was nicht hält – Bohrungen, die in den Rand, die Mittelbohrung oder ineinander laufen – und sagt, was zu ändern ist",
+      ],
+      faqs: [
+        {
+          q: "Wie weit vom Rand setzt er die Bohrungen?",
+          a: "Mindestens eine halbe Bohrung Kunststoff außerhalb jeder Bohrung (oder ihrer Zylindersenkung): Ist der Außendurchmesser kleiner, wächst die Platte auf dieses Maß. Rohrflansche aus Stahl halten etwa dasselbe ein – EN 1092-1 DN15 lässt 8 mm neben einer 14-mm-Bohrung. Für eine stabilere gedruckte Platte sehen Sie 1,5 Bohrungsdurchmesser von der Bohrungsmitte bis zum Rand vor; diesen Außendurchmesser schlägt der Lochkreis-Rechner vor.",
+        },
+        {
+          q: "Kann ein gedruckter Flansch einen Rohrflansch aus Stahl ersetzen?",
+          a: "Nicht unter Druck. Er passt auf die Bohrbilder nach EN 1092-1 oder ASME und lässt sich daher mit ihnen verschrauben – für Lüftungskanäle, Niederdruckluft, Prüfvorrichtungen, Deckel und Bohrschablonen. Kunststoff gibt unter der Schraubenkraft außerdem nach: In einem Versuch verloren PETG-Platten in einer Woche 11,5 % ihrer Klemmkraft, PLA 3,3 %. Verwenden Sie Unterlegscheiben und prüfen Sie die Schrauben.",
+        },
+        {
+          q: "Wie drucke ich ihn?",
+          a: "Flach auf dem Druckbett, Nabe und Zylindersenkungen nach oben – ohne Stützen. Nehmen Sie mehr Wände als üblich (5 oder mehr) und 30 % Infill oder mehr, damit die Schrauben auf massivem Kunststoff aufliegen; PETG oder ASA für warme Umgebungen.",
+        },
+      ],
+    },
+    params: {
+      PCD: {
+        label: "Lochkreisdurchmesser",
+        desc: "Der Kreis durch die Bohrungsmitten. 65 entspricht einem IEC-Motorflansch FT65 und einem Rohrflansch EN 1092-1 DN15.",
+      },
+      HOLES: { label: "Anzahl der Bohrungen", desc: "Gleichmäßig verteilt. 4 bei kleinen Flanschen, 8 ab DN65, 12 bei DN200 PN16." },
+      START_ANGLE: {
+        label: "Winkel der Bohrung 1",
+        desc: "Ab +X, gegen den Uhrzeigersinn. 45 bei 4 Bohrungen legt sie beiderseits der Mittellinien, wie ASME B16.5 es für Rohrflansche verlangt.",
+      },
+      SCREW: { label: "Schraube", desc: "Legt die Durchgangsbohrung nach ISO 273 fest (M5 mittel: 5,5)." },
+      FIT: { label: "Reihe der Durchgangsbohrung (ISO 273)", desc: "Fein zum Positionieren, mittel als Regelfall, grob für lockere Ausrichtung." },
+      HOLE_ALLOWANCE: {
+        label: "Druckaufmaß der Bohrungen",
+        desc: "Gedruckte Bohrungen fallen etwa 0,2 mm zu klein aus; stellen Sie ein, was Ihr Drucker verliert.",
+      },
+      HEAD: {
+        label: "Schraubenköpfe",
+        desc: "Zylindersenkung: flacher Grund, Kopf-Ø nach ISO 4762 + 0,5, so tief, wie der Kopf hoch ist, damit Innensechskantköpfe bündig sitzen.",
+      },
+      OUTER_D: {
+        label: "Außendurchmesser",
+        desc: "80 wie bei FT65. Wächst von selbst, wenn die Bohrungen mehr Rand brauchen (eine halbe Bohrung Kunststoff außerhalb jeder Bohrung).",
+      },
+      BORE_D: {
+        label: "Mittelbohrung",
+        desc: "50 ist der Ø des Zentrierbunds von FT65; für eine Passung darüber Ihr Druckaufmaß addieren. 0 ergibt einen Blindflansch.",
+      },
+      THICKNESS: { label: "Plattendicke", desc: "Servoflansche haben 5–8 mm; 8 nimmt eine Zylindersenkung für M5 auf." },
+      HUB_H: {
+        label: "Nabenhöhe",
+        desc: "Ein Rohrstück um die Mittelbohrung – die Aufnahme, in die ein Rohr oder eine Welle gesteckt wird. 0 ergibt eine flache Platte.",
+      },
+      HUB_WALL: { label: "Wandstärke der Nabe", desc: "Erscheint mit einer Nabe. Sie muss die Schraubenköpfe frei lassen." },
+    },
+    example: "6 × M5 mit Zylindersenkung auf einem Lochkreis von 75 mm, 20 mm hohe Nabe für ein Rohr mit 21,3 mm",
+    step: [
+      "Die Standardplatte wird als 8 exakte Flächen exportiert – 2 Ebenen und 6 echte Zylinder: der Rand, die Mittelbohrung und die vier Bohrungen –, sodass das CAD Durchmesser und Lage jeder Bohrung direkt aus der Datei abliest und ein CNC-Angebot echte Bohrungen sieht, kein Mesh.",
+      "Mit Nabe und Zylindersenkungen (der Beispiel-Link) sind es 24 Flächen: 9 Ebenen und 15 Zylinder; jede Zylindersenkung ist ein Zylinder mit flachem Grund und dem Kopf-Ø nach ISO 4762 + 0,5.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie baue ich eine Adapterplatte für einen IEC-Motorflansch FT65?",
+        a: "Das ist die Standardeinstellung dieses Generators, mit einem Druckaufmaß an der Mittelbohrung: https://www.forgent3d.com/de/generators/bolt-circle-flange-generator?PCD=65&HOLES=4&START_ANGLE=45&SCREW=M5&BORE_D=50.2 – 4 Bohrungen für M5 auf dem Lochkreis von 65 mm ab 45°, Ø50,2 zum Aufschieben auf den Zentrierbund von 50 mm, 80 mm Außendurchmesser, 8 mm dick. Laden Sie STEP für die Fertigung oder STL zum Drucken herunter.",
+      },
+      {
+        q: "Kann ich einen Flansch drucken, der zu einem Rohrflansch EN 1092-1 DN25 PN16 passt?",
+        a: "Ja: https://www.forgent3d.com/de/generators/bolt-circle-flange-generator?PCD=85&HOLES=4&START_ANGLE=45&SCREW=M12&FIT=coarse&OUTER_D=115&BORE_D=33.7 hat das Bohrbild von DN25 (4 × M12 auf 85 mm, außen 115). Mit HUB_H=30 kommt eine Aufnahme dazu, in die das Rohr mit 33,7 mm gleitet. Gedruckt ist er für Niederdruckluft, Lüftungskanäle und Vorrichtungen gedacht – nicht als Druckflansch.",
+      },
+    ],
+    // Semrush DE 2026-10-20: Flansch 8,100 (buying intent), Flansch Maße 90, Flansch berechnen 20, Lochkreis 1,600;
+    // Flansch 3D Druck no data. MakerWorld DE titles say "Rohrflansch" and "Flansch Adapter".
+    keywords: [
+      "flansch generator",
+      "lochkreis flansch",
+      "flansch 3d druck",
+      "rohrflansch stl",
+      "flansch adapter",
+      "motorflansch adapterplatte",
     ],
   },
 };

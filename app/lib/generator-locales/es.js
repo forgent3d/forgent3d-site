@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generadores",
   catalogTitle: "Generadores para impresión 3D — Modelos paramétricos gratis | Forgent3D",
   catalogDescription:
-    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas, portabobinas, carcasas para Raspberry Pi y Arduino, ganchos para tablero perforado, escuadras para estantería, ganchos de pared y soportes para móvil. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
+    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas, portabobinas, carcasas para Raspberry Pi y Arduino, ganchos para tablero perforado, escuadras para estantería, ganchos de pared, soportes para móvil y bridas circulares con círculo de pernos. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
   catalogH1: "Generadores para impresión 3D",
   catalogIntro:
     "Cada generador de esta página es un modelo CAD paramétrico de verdad: ajusta los parámetros y se reconstruye al instante, exporta STL / STEP y, para todo lo que vaya más allá de los deslizadores, el agente de IA edita el mismo modelo.",
@@ -1966,6 +1966,99 @@ export const generators = {
       "soporte móvil escritorio stl",
       "soporte para celular 3d",
       "soporte para móvil y tablet con carga",
+    ],
+  },
+
+  "bolt-circle-flange-generator": {
+    copy: {
+      name: "Generador de bridas circulares",
+      title: "Generador de bridas circulares — Tubería y motor (STL / STEP) | Forgent3D",
+      description:
+        "Brida circular con cualquier círculo de pernos: 2–12 agujeros ISO 273 M2–M16, ángulo libre, agujero central, cubo y rebajes. Taladrado IEC y EN 1092-1. STL / STEP gratis.",
+      h1: "Generador de bridas circulares: una placa con círculo de pernos para imprimir o mecanizar",
+      intro:
+        "Fija el círculo de pernos, el número de agujeros y dónde va el agujero 1 (los mismos tres números que en la calculadora de círculo de pernos), luego el tornillo, el agujero central y, si lo necesitas, un cubo para un tubo o un eje. Obtienes una brida circular con agujeros de paso ISO 273 exactos: una placa adaptadora para la cara de un motor IEC o de un servomotor, una brida impresa para tubería o conducto que coincide con una de acero, o una placa de cubo para una rueda o un rodamiento de plato giratorio.",
+      whyPoints: [
+        "Agujeros con la convención de la calculadora de círculo de pernos: el agujero 1 en el ángulo inicial medido desde +X, el resto en sentido antihorario",
+        "Agujeros ISO 273 de serie fina / media / gruesa para M2–M16, más la holgura de impresión que tú fijes",
+        "Rebajes para cabezas Allen ISO 4762, un cubo para un tubo o un eje, o una brida ciega",
+        "Rechaza lo que no aguantaría (agujeros que cortan el borde, el agujero central u otro agujero) y te dice qué cambiar",
+      ],
+      faqs: [
+        {
+          q: "¿A qué distancia del borde pone los agujeros?",
+          a: "Al menos medio agujero de plástico por fuera de cada agujero (o de su rebaje): si el diámetro exterior es menor, la placa crece hasta ese valor. Las bridas de tubería de acero dejan más o menos lo mismo: la DN15 de la EN 1092-1 deja 8 mm junto a un agujero de 14 mm. Para una placa impresa más resistente, deja 1.5 diámetros de agujero desde el centro del agujero hasta el borde; la calculadora de círculo de pernos sugiere ese diámetro exterior.",
+        },
+        {
+          q: "¿Una brida impresa puede sustituir a una brida de tubería de acero?",
+          a: "No bajo presión. Coincide con los taladrados EN 1092-1 o ASME, así que se atornilla a ellos: para conductos, aire a baja presión, utillajes de prueba, tapas y plantillas de taladrado. Además, el plástico se relaja bajo la carga de los tornillos: en una prueba, las placas de PETG perdieron un 11.5 % de su apriete en una semana, y las de PLA un 3.3 %. Usa arandelas y revisa los tornillos.",
+        },
+        {
+          q: "¿Cómo la imprimo?",
+          a: "En plano sobre la cama, con el cubo y los rebajes hacia arriba: sin soportes. Usa más paredes de lo habitual (5 o más) y un 30 % de relleno o más para que los tornillos apoyen sobre plástico macizo; PETG o ASA para lugares cálidos.",
+        },
+      ],
+    },
+    params: {
+      PCD: {
+        label: "Diámetro del círculo de pernos",
+        desc: "El círculo que pasa por los centros de los agujeros. 65 es la brida de motor IEC FT65 y la brida de tubería DN15 de la EN 1092-1.",
+      },
+      HOLES: { label: "Número de agujeros", desc: "Equidistantes. 4 en bridas pequeñas, 8 desde DN65, 12 en DN200 PN16." },
+      START_ANGLE: {
+        label: "Ángulo del agujero 1",
+        desc: "Desde +X, en sentido antihorario. Con 4 agujeros, 45 los deja a ambos lados de los ejes, como pide la ASME B16.5 para las bridas de tubería.",
+      },
+      SCREW: { label: "Tornillo", desc: "Fija el agujero de paso ISO 273 (M5 serie media: 5.5)." },
+      FIT: {
+        label: "Serie de agujeros (ISO 273)",
+        desc: "Fina para posicionar, media para lo habitual, gruesa para una alineación holgada.",
+      },
+      HOLE_ALLOWANCE: {
+        label: "Holgura de impresión en los agujeros",
+        desc: "Los agujeros impresos salen unos 0.2 mm más pequeños; pon lo que pierde tu impresora.",
+      },
+      HEAD: {
+        label: "Cabezas de tornillo",
+        desc: "Rebaje: de fondo plano, Ø de la cabeza ISO 4762 + 0.5 y tan profundo como alta es la cabeza, para que las cabezas Allen queden enrasadas.",
+      },
+      OUTER_D: {
+        label: "Diámetro exterior",
+        desc: "80, el de la FT65. Crece solo cuando los agujeros necesitan más borde (medio agujero de plástico por fuera de cada agujero).",
+      },
+      BORE_D: {
+        label: "Agujero central",
+        desc: "50 es el Ø del centrador de la FT65; suma tu holgura de impresión para que encaje sobre él. 0 da una brida ciega.",
+      },
+      THICKNESS: { label: "Grosor de la placa", desc: "Las bridas de servomotor tienen 5–8 mm; 8 admite un rebaje para M5." },
+      HUB_H: {
+        label: "Altura del cubo",
+        desc: "Un tubo alrededor del agujero central: el casquillo en el que entra un tubo o un eje. 0 es una placa plana.",
+      },
+      HUB_WALL: { label: "Pared del cubo", desc: "Se muestra con cubo. Debe quedar libre de las cabezas de los tornillos." },
+    },
+    example: "6 × M5 con rebaje en un círculo de pernos de 75 mm, cubo de 20 mm para un tubo de 21.3 mm",
+    step: [
+      "La placa por defecto se exporta como 8 caras exactas: 2 planos y 6 cilindros reales (el borde, el agujero central y los cuatro agujeros), así que el CAD lee el diámetro y la posición de cada agujero directamente del archivo, y un presupuesto de CNC ve agujeros reales, no una malla.",
+      "Con cubo y rebajes (el enlace del ejemplo) son 24 caras: 9 planos y 15 cilindros; cada rebaje es un cilindro de fondo plano con el Ø de la cabeza ISO 4762 + 0.5.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo hago una placa adaptadora para una brida de motor IEC FT65?",
+        a: "Es el valor por defecto de este generador, con holgura de impresión en el agujero central: https://www.forgent3d.com/es/generators/bolt-circle-flange-generator?PCD=65&HOLES=4&START_ANGLE=45&SCREW=M5&BORE_D=50.2 da 4 agujeros M5 en el círculo de pernos de 65 mm a partir de 45°, Ø50.2 para encajar sobre el centrador de 50 mm, 80 mm de diámetro exterior y 8 mm de grosor. Descarga el STEP para mecanizarla o el STL para imprimirla.",
+      },
+      {
+        q: "¿Puedo imprimir una brida que coincida con una brida de tubería EN 1092-1 DN25 PN16?",
+        a: "Sí: https://www.forgent3d.com/es/generators/bolt-circle-flange-generator?PCD=85&HOLES=4&START_ANGLE=45&SCREW=M12&FIT=coarse&OUTER_D=115&BORE_D=33.7 tiene el taladrado DN25 (4 × M12 en 85 mm, 115 de diámetro exterior). Añade HUB_H=30 para un cubo en el que entre el tubo de 33.7 mm. Impresa, sirve para aire a baja presión, conductos y utillajes, no como brida a presión.",
+      },
+    ],
+    keywords: [
+      "generador de bridas circulares",
+      "brida de tubería stl",
+      "brida ciega",
+      "brida para motor",
+      "círculo de pernos",
+      "bridas EN 1092-1",
     ],
   },
 };

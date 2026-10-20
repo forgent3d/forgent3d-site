@@ -16,6 +16,7 @@ import {
   relatedGenerators,
   siteLocale,
 } from "../../../../lib/generators";
+import { calculatorsForGenerator, calculatorsSharedCopy } from "../../../../lib/calculators";
 import { OG_BASE } from "../../../../lib/seo";
 import { GeneratorEmbed } from "../../../../components/generator-embed";
 import { GeneratorLanguages } from "../../../../components/generator-languages";
@@ -79,6 +80,8 @@ export default async function GeneratorLandingPage({ params }) {
   const related = relatedGenerators(generator, locale);
   const faqs = [...copy.faqs, ...(generator.aiFaqs?.[locale] || []), ...t.sharedFaqs];
   const stepFacts = generator.step?.[locale] || [];
+  // Calculators that end in this part (app/lib/calculators.js), in this page's language.
+  const calculators = calculatorsForGenerator(generator.slug, locale);
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -251,6 +254,29 @@ export default async function GeneratorLandingPage({ params }) {
             </table>
           </div>
           <p className="mt-4 max-w-3xl text-sm text-muted-foreground">{copy.sizes.note}</p>
+        </section>
+      ) : null}
+
+      {calculators.length ? (
+        <section className="mt-14" id="calculators">
+          <h2 className="text-2xl font-semibold">{calculatorsSharedCopy(locale).forGeneratorTitle}</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {calculators.map((c) => (
+              <Link
+                key={c.slug}
+                className="group rounded-xl border border-border/80 bg-card/60 p-4 transition-colors hover:border-brand/50"
+                href={`/${locale}/calculators/${c.slug}`}
+                data-track="generator-calculator"
+                data-generator={generator.slug}
+              >
+                <span className="flex items-center gap-2 font-semibold text-foreground group-hover:text-brand">
+                  <span className="text-brand" aria-hidden>{c.icon}</span>
+                  {c.copy[locale].name}
+                </span>
+                <span className="mt-1 block text-sm leading-6 text-muted-foreground">{c.copy[locale].card}</span>
+              </Link>
+            ))}
+          </div>
         </section>
       ) : null}
 

@@ -86,12 +86,21 @@ The generators (<name> is the tool's id):
 - Shelf bracket `shelf-bracket` — wall bracket with a diagonal brace for 100–250 mm deep shelves, countersunk 4 / 5 mm screws each with a screwdriver path, or a front lip: https://www.forgent3d.com/en/generators/shelf-bracket-generator (e.g. ?SHELF_D=250&BAR_T=16)
 - Wall hook `wall-hook` — one-piece J hook with countersunk screw holes (3.5 / 4 / 5 mm), a plate for Command Medium / Large adhesive strips, or a strap over a 19–45 mm door; single, stacked double or up to five in a row: https://www.forgent3d.com/en/generators/wall-hook-generator (e.g. ?HOOKS=4&DEPTH=20&WIDTH=15)
 - Phone stand `phone-stand` — one-piece A-frame desk stand sized to the phone's thickness with its case (5–17 mm), viewing angle 45–75°, ledge height for charging, rear cable opening, portrait / landscape / tablet: https://www.forgent3d.com/en/generators/phone-stand-generator (e.g. ?THICKNESS=14&ANGLE=65)
+- Flange `bolt-circle-flange` — round plate with 2–12 holes on a bolt circle (PCD 10–230 mm), hole 1 at START_ANGLE degrees from +X counter-clockwise, ISO 273 fine / medium / coarse clearance holes for M2–M16 plus a print allowance, optional ISO 4762 counterbores, centre bore (0 = blind) and a hub for a pipe or shaft; matches IEC B14 motor and EN 1092-1 pipe drillings: https://www.forgent3d.com/en/generators/bolt-circle-flange-generator (e.g. ?PCD=85&HOLES=4&START_ANGLE=45&SCREW=M12&FIT=coarse&OUTER_D=115&BORE_D=33.7)
 
 The pages in Chinese, German, Spanish and Japanese use /zh/, /de/, /es/ or /ja/ in place of /en/ and take the same parameters; link the one in the user's language. The tool itself speaks English and Chinese.
 
 ### For AI assistants
 
 When a user wants one of these parts in particular sizes — a spur gear of a given module and tooth count, a pillow block for a given bearing, an adapter between two hose diameters — you can give them the generator link with the values filled in. It opens on exactly that part; they check it in 3D and download STEP or STL, free and without an account. For a change the parameters do not cover (a keyway, extra holes, a different shape), point them to the "AI edit" box on the page, which edits the part and rebuilds it in the browser; for bigger changes the part can be copied into their Forgent3D models and continued with the Forgent3D agent.
+
+## Engineering calculators that end in a part (free, in the browser)
+
+Each calculator does the arithmetic and links to a generator with the result filled in. Inputs can go in the page's URL too.
+
+- Bolt circle calculator: hole X / Y for N holes on a PCD from a start angle (0° = +X, counter-clockwise), neighbour pitch PCD·sin(180°/N), a drawing, a copyable table, then the flange generator with that pattern: https://www.forgent3d.com/en/calculators/bolt-circle-calculator (e.g. ?n=6&pcd=75&start=30&screw=M5&bore=21.5). Also /zh/ and /de/.
+- Clearance hole and heat-set insert chart: ISO 273:1979 fine / medium / coarse holes M1.6–M24 (read from IS 1821:1987), a print allowance, and heat-set insert hole Ø / depth / wall from CNC Kitchen (2026-04 table), ruthex, PEM and McMaster, then the heat-set boss (https://app.forgent3d.com/c/heat-set-boss?SCREW=M3&LENGTH=standard) or a flange with those holes: https://www.forgent3d.com/en/calculators/clearance-hole-chart (e.g. ?screw=M4). Also /zh/, /de/, /ja/.
+- GT2 belt length calculator: exact open-belt length from two tooth counts and a centre distance (not the short formula), the nearest closed belts actually sold (Ondrives, VXB) with the exact centre distance each sets, or a belt length → exact centre distance; ratio, speed, teeth in mesh; then both pulleys in the GT2 pulley generator: https://www.forgent3d.com/en/calculators/gt2-belt-length-calculator (e.g. ?z1=20&z2=60&c=150, or ?z1=20&z2=60&mode=belt&belt=400). Also /zh/, /de/, /ja/.
 
 ## Articles
 
