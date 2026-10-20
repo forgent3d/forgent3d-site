@@ -1,3 +1,4 @@
+import { CALCULATORS, CALCULATOR_LOCALES, calculatorLocales } from "./lib/calculators";
 import { GENERATORS, GENERATOR_LOCALES, generatorLocales } from "./lib/generators";
 import { listPosts } from "./lib/blog";
 
@@ -31,6 +32,9 @@ const ROUTES = [
 const GENERATOR_ROUTES = [
   ["/generators", "weekly", 0.85, "2026-10-16", GENERATOR_LOCALES],
   ...GENERATORS.map((g) => [`/generators/${g.slug}`, "weekly", 0.8, g.updated, generatorLocales(g)]),
+  // Calculators: each in the languages its copy has; the index in every language that has one.
+  ["/calculators", "weekly", 0.75, CALCULATORS.map((c) => c.updated).sort().at(-1), CALCULATOR_LOCALES],
+  ...CALCULATORS.map((c) => [`/calculators/${c.slug}`, "weekly", 0.8, c.updated, calculatorLocales(c)]),
 ];
 
 export default function sitemap() {

@@ -8,6 +8,7 @@ import {
   isGeneratorLocale,
   siteLocale,
 } from "../../../lib/generators";
+import { calculatorsIn, calculatorsSharedCopy } from "../../../lib/calculators";
 import { OG_BASE } from "../../../lib/seo";
 import { GeneratorLanguages } from "../../../components/generator-languages";
 
@@ -48,6 +49,8 @@ export default async function GeneratorsIndexPage({ params }) {
   const generators = generatorsIn(locale);
   // The OpenSCAD pages exist in en and zh only.
   const site = siteLocale(locale);
+  const calculators = calculatorsIn(locale);
+  const calc = calculatorsSharedCopy(locale);
 
   const listSchema = {
     "@context": "https://schema.org",
@@ -87,6 +90,25 @@ export default async function GeneratorsIndexPage({ params }) {
           </Link>
         ))}
       </div>
+      {calculators.length ? (
+        <section className="mt-12">
+          <h2 className="text-xl font-semibold">{calc.indexH1}</h2>
+          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+            {calculators.map((c) => (
+              <Link
+                key={c.slug}
+                className="group rounded-xl border border-border/80 bg-card/60 p-4 transition-colors hover:border-brand/50"
+                href={`/${locale}/calculators/${c.slug}`}
+              >
+                <span className="flex items-center gap-2 font-semibold text-foreground group-hover:text-brand">
+                  <span className="text-brand" aria-hidden>{c.icon}</span>
+                  {c.copy[locale].name}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
       <p className="mt-8 text-sm text-muted-foreground">
         {t.scadPrompt}{" "}
         <Link className="text-brand transition-colors hover:text-brand/80" href={`/${site}/openscad-to-step`}>

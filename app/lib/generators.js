@@ -14,7 +14,8 @@ import * as esLocale from "./generator-locales/es.js";
 import * as jaLocale from "./generator-locales/ja.js";
 
 // NEXT_PUBLIC_APP_BASE points the pages at a local app (http://localhost:3000) for testing; production never sets it.
-export const APP_BASE = process.env.NEXT_PUBLIC_APP_BASE || "https://app.forgent3d.com";
+import { APP_BASE } from "./app-base.js";
+export { APP_BASE };
 
 /** Languages whose ONLY translated pages are the generators: the rest of the site (header links, home, blog,
  *  OpenSCAD pages) stays English for them, and the embedded tool runs in English (the app speaks en and zh).
@@ -2593,6 +2594,98 @@ export const GENERATORS = [
       },
     },
   },
+  {
+    slug: "bolt-circle-flange-generator",
+    modelDir: "bolt-circle-flange",
+    icon: "◍",
+    family: "hardware",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-20",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
+    example: {
+      params: { PCD: "75", HOLES: "6", START_ANGLE: "30", HEAD: "counterbore", OUTER_D: "95", BORE_D: "21.5", HUB_H: "20" },
+      label: { en: "6 × M5 counterbored on a 75 mm bolt circle, 20 mm hub for a 21.3 mm pipe", zh: "75 mm 分布圆上 6 个 M5 沉头孔，20 mm 高轮毂插 21.3 mm 管" },
+    },
+    // Read off the STEP export (cad-build export, 2026-10-20): faces by surface type.
+    step: {
+      en: [
+        "The default plate exports as 8 exact faces — 2 planes and 6 true cylinders: the rim, the bore and the four holes — so CAD reads every hole's diameter and position straight off the file, and a CNC quote sees real holes, not a mesh.",
+        "With a hub and counterbores (the example link) it is 24 faces: 9 planes and 15 cylinders, each counterbore a flat-bottomed cylinder of the ISO 4762 head Ø + 0.5.",
+      ],
+      zh: [
+        "默认的法兰盘导出为 8 个精确面——2 个平面、6 个真圆柱面：外圆、中心孔和四个螺栓孔——在 CAD 里每个孔的直径和位置都能直接读出，CNC 报价看到的也是真孔，不是网格。",
+        "加轮毂和沉头孔（示例链接）是 24 个面：9 个平面、15 个圆柱面，每个沉头孔是平底圆柱，直径为 ISO 4762 螺丝头 + 0.5。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I make an adapter plate for an IEC FT65 motor flange?", a: "It is this generator's default with a printed fit on the bore: https://www.forgent3d.com/en/generators/bolt-circle-flange-generator?PCD=65&HOLES=4&START_ANGLE=45&SCREW=M5&BORE_D=50.2 — 4 × M5 holes on the 65 mm bolt circle at 45°, Ø50.2 to slip over the 50 mm spigot, 80 mm across, 8 mm thick. Download STEP to have it machined or STL to print." },
+        { q: "Can I print a flange that matches an EN 1092-1 DN25 PN16 pipe flange?", a: "Yes: https://www.forgent3d.com/en/generators/bolt-circle-flange-generator?PCD=85&HOLES=4&START_ANGLE=45&SCREW=M12&FIT=coarse&OUTER_D=115&BORE_D=33.7 has the DN25 drilling (4 × M12 on 85 mm, 115 outside). Add HUB_H=30 for a socket the 33.7 mm pipe slides into. Printed, it is for low-pressure air, ducting and fixtures — not a pressure flange." },
+      ],
+      zh: [
+        { q: "怎样做一块配 IEC FT65 电机法兰的转接板？", a: "就是生成器的默认件，中心孔加上打印余量：https://www.forgent3d.com/zh/generators/bolt-circle-flange-generator?PCD=65&HOLES=4&START_ANGLE=45&SCREW=M5&BORE_D=50.2 ——65 mm 分布圆上 4 个 M5 孔、从 45° 开始，中心 Ø50.2 套在 50 mm 止口上，外径 80、厚 8 mm。下载 STEP 拿去加工，或下载 STL 打印。" },
+        { q: "能打印一个和 EN 1092-1 DN25 PN16 管法兰对得上的法兰吗？", a: "能：https://www.forgent3d.com/zh/generators/bolt-circle-flange-generator?PCD=85&HOLES=4&START_ANGLE=45&SCREW=M12&FIT=coarse&OUTER_D=115&BORE_D=33.7 就是 DN25 的孔位（85 mm 分布圆上 4 个 M12，外径 115）。加 HUB_H=30 就有插 33.7 mm 管子的轮毂。打印件适合低压风管、通风和工装——不能当承压法兰用。" },
+      ],
+    },
+    // Evidence: generator-models/bolt-circle-flange/EVIDENCE.md in the platform repo.
+    keywords: {
+      en: ["flange generator", "bolt circle flange stl", "parametric flange", "motor adapter plate stl", "3d printed flange"],
+      zh: ["法兰盘生成器", "参数化法兰", "法兰盘 3d打印", "电机法兰转接板", "法兰 STL STEP"],
+    },
+    params: [
+      { key: "PCD", default: "65", range: "10 – 230", unit: "mm", label: { en: "Bolt circle diameter", zh: "分布圆直径" }, desc: { en: "The circle through the hole centres. 65 is an IEC FT65 motor flange and an EN 1092-1 DN15 pipe flange.", zh: "穿过各孔中心的圆。65 是 IEC FT65 电机法兰，也是 EN 1092-1 DN15 管法兰。" } },
+      { key: "HOLES", default: "4", range: "2 – 12", unit: "", label: { en: "Number of holes", zh: "孔数" }, desc: { en: "Equally spaced. 4 on small flanges, 8 from DN65, 12 on DN200 PN16.", zh: "均布。小法兰 4 个，DN65 起 8 个，DN200 PN16 是 12 个。" } },
+      { key: "START_ANGLE", default: "45", range: "0 – 359.5", unit: "°", label: { en: "Angle of hole 1", zh: "1 号孔角度" }, desc: { en: "From +X, counter-clockwise. 45 for 4 holes straddles the centre lines, as ASME B16.5 asks of pipe flanges.", zh: "从 +X 起逆时针。4 孔取 45°，孔骑在中心线两侧，和 ASME B16.5 对管法兰的要求一致。" } },
+      { key: "SCREW", default: "M5", range: "M2 – M16", unit: "", label: { en: "Screw", zh: "螺丝" }, desc: { en: "Sets the ISO 273 clearance hole (M5 medium: 5.5).", zh: "决定 ISO 273 通孔（M5 中等装配：5.5）。" } },
+      { key: "FIT", default: "medium", range: "fine / medium / coarse", unit: "", label: { en: "Hole series (ISO 273)", zh: "通孔系列（ISO 273）" }, desc: { en: "Fine to locate, medium as usual, coarse for loose alignment.", zh: "精装配用于定位，中等装配是常规，粗装配对位要求低。" } },
+      { key: "HOLE_ALLOWANCE", default: "0.2", range: "0 – 0.6", unit: "mm", label: { en: "Print allowance on holes", zh: "孔的打印余量" }, desc: { en: "Printed holes come out about 0.2 mm small; set what your printer loses.", zh: "打印的孔大约小 0.2 mm；按你的打印机实测调整。" } },
+      { key: "HEAD", default: "plain", range: "plain / counterbore", unit: "", label: { en: "Screw heads", zh: "螺丝头" }, desc: { en: "Counterbore: flat-bottomed, ISO 4762 head Ø + 0.5, as deep as the head is tall, so socket heads sit flush.", zh: "沉头孔：平底，ISO 4762 螺丝头直径 + 0.5，深度等于头高，内六角螺丝头齐平。" } },
+      { key: "OUTER_D", default: "80", range: "15 – 250", unit: "mm", label: { en: "Outside diameter", zh: "外径" }, desc: { en: "FT65's 80. Grows by itself when the holes need more rim (half a hole of plastic outside each hole).", zh: "FT65 的 80。孔需要更宽的边时会自动加大（每个孔外侧至少留半个孔径）。" } },
+      { key: "BORE_D", default: "50", range: "0 – 220", unit: "mm", label: { en: "Centre bore", zh: "中心孔" }, desc: { en: "50 is the FT65 spigot Ø; add your print allowance for a fit over it. 0 makes a blind flange.", zh: "50 是 FT65 止口直径；要套在止口上，再加上打印余量。0 是盲板。" } },
+      { key: "THICKNESS", default: "8", range: "2 – 20", unit: "mm", label: { en: "Plate thickness", zh: "板厚" }, desc: { en: "Servo flanges run 5–8 mm; 8 takes an M5 counterbore.", zh: "伺服电机法兰 5–8 mm；8 mm 能做 M5 沉头孔。" } },
+      { key: "HUB_H", default: "0", range: "0 – 50", unit: "mm", label: { en: "Hub height", zh: "轮毂高度" }, desc: { en: "A tube around the bore — the socket a pipe or shaft goes into. 0 is a flat plate.", zh: "中心孔外的一圈管——插管子或轴的轮毂。0 是平板。" } },
+      { key: "HUB_WALL", default: "3", range: "1.5 – 20", unit: "mm", label: { en: "Hub wall", zh: "轮毂壁厚" }, desc: { en: "Shown with a hub. It must stay clear of the screw heads.", zh: "有轮毂时显示。不能挡住螺丝头。" } },
+    ],
+    copy: {
+      en: {
+        name: "Flange Generator",
+        title: "Flange Generator — Bolt Circle Plates, Motor Adapters & Pipe Flanges (STL / STEP) | Forgent3D",
+        description: "Generate a round flange with any bolt circle: 2–12 ISO 273 clearance holes M2–M16 at any start angle, centre bore, optional hub and counterbores. Matches IEC motor and EN 1092-1 drillings. Free STL / STEP.",
+        h1: "Flange generator: a bolt circle plate you can print or machine",
+        intro: "Set the bolt circle, the number of holes and where hole 1 sits — the same three numbers as the bolt circle calculator — then the screw, the centre bore and, if you need one, a hub for a pipe or shaft. You get a round flange with exact ISO 273 clearance holes: an adapter plate for an IEC or servo motor face, a printed pipe or duct flange that lines up with a steel one, a hub plate for a wheel or a lazy-susan bearing.",
+        whyPoints: [
+          "Holes from the bolt circle calculator's convention: hole 1 at the start angle from +X, the rest counter-clockwise",
+          "ISO 273 fine / medium / coarse holes for M2–M16, plus a print allowance you set",
+          "Counterbores for ISO 4762 socket heads, a hub for a pipe or a shaft, or a blind flange",
+          "Refuses what won't hold — holes into the rim, the bore or each other — and tells you what to change",
+        ],
+        faqs: [
+          { q: "How far from the edge does it put the holes?", a: "At least half a hole of plastic outside each hole (or its counterbore): with a smaller outside diameter the plate grows to that. Steel pipe flanges keep about the same — EN 1092-1 DN15 leaves 8 mm beside a 14 mm hole. For a stronger printed plate, give it 1.5 hole diameters from hole centre to edge; the bolt circle calculator suggests that outside diameter." },
+          { q: "Can a printed flange replace a steel pipe flange?", a: "Not under pressure. It lines up with EN 1092-1 or ASME drillings, so it bolts to them — for ducting, low-pressure air, test fixtures, covers and drilling templates. Plastic also relaxes under bolt load: in one test PETG plates lost 11.5 % of their clamp in a week, PLA 3.3 %. Use washers and check the bolts." },
+          { q: "How should I print it?", a: "Flat on the bed, hub and counterbores up — no supports. Use more walls than usual (5 or more) and 30 % infill or more so the bolts bear on solid plastic; PETG or ASA for warm places." },
+        ],
+      },
+      zh: {
+        name: "法兰盘生成器",
+        title: "法兰盘生成器 — 螺栓孔分布圆法兰、电机转接板、管法兰，在线导出 STL / STEP | Forgent3D",
+        description: "在线生成任意分布圆的圆形法兰盘：2–12 个 M2–M16 的 ISO 273 通孔，起始角任意，中心孔、可选轮毂和沉头孔。对得上 IEC 电机法兰和 EN 1092-1 管法兰孔位。免费导出 STL / STEP。",
+        h1: "法兰盘生成器：可打印也可加工的螺栓孔分布圆板",
+        intro: "设定分布圆直径、孔数和 1 号孔的位置——和螺栓孔分布圆计算器的三个数一样——再选螺丝、中心孔，需要的话加一个插管子或轴的轮毂。得到一块带精确 ISO 273 通孔的圆形法兰盘：IEC 或伺服电机端面的转接板，能和钢法兰对上孔的打印管法兰、风管法兰，轮子或转盘轴承的连接板。",
+        whyPoints: [
+          "孔位和分布圆计算器同一约定：1 号孔在起始角（从 +X 量），其余逆时针排列",
+          "M2–M16 按 ISO 273 精 / 中 / 粗三档开孔，另加你设定的打印余量",
+          "ISO 4762 内六角螺丝沉头孔，插管或轴的轮毂，也能做盲板",
+          "做不成的组合会拒绝——孔切到外缘、中心孔或彼此——并告诉你改什么",
+        ],
+        faqs: [
+          { q: "孔离边缘多远？", a: "每个孔（或沉头孔）外侧至少留半个孔径的材料：外径不够时会自动加大到这个值。钢制管法兰也差不多——EN 1092-1 DN15 在 14 mm 孔旁边留 8 mm。想要更结实的打印件，孔中心离边缘留 1.5 倍孔径；螺栓孔分布圆计算器给出的建议外径就按这个算。" },
+          { q: "打印的法兰能代替钢制管法兰吗？", a: "承压不行。它的孔位和 EN 1092-1、ASME 法兰对得上，可以连在一起——用于风管、低压气路、测试工装、盖板和钻孔模板。塑料在螺栓压紧下还会松弛：有试验里 PETG 板一周后夹紧力降了 11.5 %，PLA 降了 3.3 %。加垫圈，定期检查螺栓。" },
+          { q: "怎么打印？", a: "平放，轮毂和沉头孔朝上——不用支撑。墙比平时多（5 圈以上）、填充 30 % 以上，让螺栓压在实心塑料上；温度高的地方用 PETG 或 ASA。" },
+        ],
+      },
+    },
+  },
 ];
 
 // Merge each extra language's file into the entries: copy, parameter labels and descriptions, the example's
@@ -2709,7 +2802,7 @@ function baseSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、带盖收纳盒（滑盖、铰链、磁吸、分格）、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架。调参数、3D 预览、导出 STL / STEP。",
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、带盖收纳盒（滑盖、铰链、磁吸、分格）、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架、法兰盘。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
@@ -2776,7 +2869,7 @@ function baseSharedCopy(locale) {
     catalogLabel: "Generators",
     catalogTitle: "3D Print Generators — Free Parametric Model Makers | Forgent3D",
     catalogDescription:
-      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders, spool holders, Raspberry Pi and Arduino cases, pegboard hooks, shelf brackets, wall hooks and phone stands. Tune parameters, preview in 3D, export STL / STEP.",
+      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders, spool holders, Raspberry Pi and Arduino cases, pegboard hooks, shelf brackets, wall hooks, phone stands and bolt circle flanges. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",
