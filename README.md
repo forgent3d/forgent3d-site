@@ -12,6 +12,9 @@ www.forgent3d.com。Next.js App Router，通过 `@opennextjs/cloudflare` 部署�
   `(site)/layout.js` 给它们和首页挂同一条顶栏（路由组，不进 URL）
 - `app/[locale]/openscad-to-step/`: OpenSCAD → STEP 的三页（首页 / why / compatibility），**自带顶栏**，不走 `(site)`；
   文案、路径、metadata 在 `app/lib/openscad-to-step.js`
+- `app/[locale]/step-to-stl/`、`app/[locale]/stl-to-step/`: STEP ↔ STL 转换器(app `/convert`)的两页落地,**en / zh / de / ja 四种语言**,
+  自带顶栏(`app/components/step-tools-page.js`);共用的路径、metadata、实测数字(`SURVEY`,出处 platform `docs/step-tools.md` §4)在
+  `app/lib/step-tools.js`,文案在 `app/lib/step-to-stl.js`、`app/lib/stl-to-step.js`
 - `app/m/[shareSlug]/`: 公开模型分享页（3D 全屏 / 详情），数据来自 cad-agent
 - `app/lib/cad-agent.js`: 已发布模型 API 客户端
 - `app/robots.js` / `app/sitemap.js`: robots 与 sitemap（新增页面记得补 sitemap）

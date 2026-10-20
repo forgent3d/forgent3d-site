@@ -198,6 +198,7 @@ export default async function OpenScadToStepPage({ params }) {
           {[
             { href: scadPath(locale, "why"), title: copy.why.h1, text: t.moreWhy },
             { href: scadPath(locale, "compat"), title: copy.compat.h1, text: t.moreCompat },
+            { href: `/${locale}/stl-to-step`, title: t.moreStlTitle, text: t.moreStl },
             ...articleCards(locale, ["openscad-to-step-guide"], t.articleKicker),
           ].map((card) => (
             <Link

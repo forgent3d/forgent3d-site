@@ -195,6 +195,8 @@ export function getScadCopy(locale) {
         moreTitle: "延伸阅读",
         moreWhy: "OpenSCAD 为什么导不出 STEP，常见的几种绕法各有什么代价。",
         moreCompat: "哪些写法能精确转换，目前还有哪些限制。",
+        moreStlTitle: "STL 转 STEP",
+        moreStl: "手里只有 STL？能转，但只会是平面拼成的实体——这一页讲清楚能得到什么。",
         articleKicker: "文章",
       },
       why: {
@@ -383,6 +385,8 @@ export function getScadCopy(locale) {
       moreTitle: "Read more",
       moreWhy: "Why OpenSCAD has no STEP export, and what the usual workarounds cost you.",
       moreCompat: "Which OpenSCAD features convert exactly, and the current limits.",
+      moreStlTitle: "STL to STEP",
+      moreStl: "Only have the STL? It converts, but to a faceted solid — what you can and cannot get from a mesh.",
       articleKicker: "Article",
     },
     why: {
