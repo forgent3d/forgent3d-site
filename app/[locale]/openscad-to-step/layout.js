@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { OpenScadCredit } from "../../components/openscad-page";
 import { BRAND_BUTTON, CHIP_SURFACE, isSupportedLocale } from "../../lib/landing-page";
 import { openscadPageLinks } from "../../lib/openscad-pages";
 import { getScadCopy, scadAppUrl, scadPath } from "../../lib/openscad-to-step";
@@ -50,12 +51,7 @@ export default async function OpenScadToStepLayout({ children, params }) {
           ))}
           <Link className="transition-colors hover:text-brand" href={`/${locale}/generators`}>{t.generatorsLink}</Link>
         </div>
-        <p className="mt-4 max-w-3xl text-muted-foreground/80">
-          {t.credit}{" "}
-          <a className="underline underline-offset-2 hover:text-brand" href="https://openscad.org" rel="noreferrer" target="_blank">
-            openscad.org
-          </a>
-        </p>
+        <OpenScadCredit locale={locale} credit={t.credit} />
       </footer>
     </>
   );
