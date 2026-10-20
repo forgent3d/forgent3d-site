@@ -1,5 +1,6 @@
 import { GENERATORS, GENERATOR_LOCALES, generatorLocales } from "./lib/generators";
 import { listPosts } from "./lib/blog";
+import { STEP_TOOL_LOCALES, STEP_TOOL_SLUGS } from "./lib/step-tools";
 
 const base = "https://www.forgent3d.com";
 
@@ -33,6 +34,9 @@ const GENERATOR_ROUTES = [
   ...GENERATORS.map((g) => [`/generators/${g.slug}`, "weekly", 0.8, g.updated, generatorLocales(g)]),
 ];
 
+// The STEP ↔ STL pages (app/lib/step-tools.js) are in en, zh, de and ja.
+const STEP_TOOL_ROUTES = STEP_TOOL_SLUGS.map((slug) => [`/${slug}`, "weekly", 0.85, "2026-10-20", STEP_TOOL_LOCALES]);
+
 export default function sitemap() {
   // 文章的 lastmod 是文章头部的 updated(没有就是 date),改正文时记得改它
   const posts = ["en", "zh"].flatMap((locale) =>
@@ -42,7 +46,7 @@ export default function sitemap() {
     ...ROUTES.flatMap(([path, changeFrequency, priority, lastModified]) =>
       ["en", "zh"].map((locale) => ({ url: `${base}/${locale}${path}`, lastModified, changeFrequency, priority })),
     ),
-    ...GENERATOR_ROUTES.flatMap(([path, changeFrequency, priority, lastModified, locales]) =>
+    ...[...GENERATOR_ROUTES, ...STEP_TOOL_ROUTES].flatMap(([path, changeFrequency, priority, lastModified, locales]) =>
       locales.map((locale) => ({ url: `${base}/${locale}${path}`, lastModified, changeFrequency, priority })),
     ),
     ...posts,

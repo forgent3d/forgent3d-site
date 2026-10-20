@@ -206,6 +206,9 @@ function initPage() {
     [".js-scad-example-link", "click_scad_example"],
     // 带代码的链接:预览器页「从链接打开」那一节、ChatGPT 页的示例;app 那头接着是 scad_link_opened
     [".js-scad-code-link", "click_scad_code_link"],
+    // STEP ↔ STL 的两页(app/lib/step-tools.js):同一个工具 /convert,来意各一个;app 那头接着是 convert_file / convert_download
+    [".js-step-to-stl-link", "click_step_to_stl"],
+    [".js-stl-to-step-link", "click_stl_to_step"],
   ].forEach(([selector, eventName]) => {
     document.querySelectorAll(selector).forEach((node) => {
       if (!bindOnce(node, `Track${eventName}`)) return;
