@@ -104,6 +104,8 @@ When a user wants one of these parts in particular sizes — a spur gear of a gi
 - We spent 13 hours proving our own evaluation was useless (variance of an LLM CAD eval): https://www.forgent3d.com/en/blog/eval-variance
 - Green faces in the OpenSCAD preview, which color() wins, and what % and # draw: https://www.forgent3d.com/en/blog/openscad-green-faces
 - Letting the AI reinvent the heat-set insert boss every time is a bad idea (the component library): https://www.forgent3d.com/en/blog/components-catalog
+- B-rep is not for transformers: why the AI writes CAD code that a kernel compiles instead of generating B-rep (pointers, numbers that must agree in several places, many spellings of one solid, no intent; measured on our own parts): https://www.forgent3d.com/en/blog/brep-not-for-transformers
+- A CAD IR for language models should not be a feature tree (seven requirements for the layer between model and kernel, Zoo's KCL compared, what a feature tree never stored): https://www.forgent3d.com/en/blog/cad-ir
 
 ## Other pages
 
