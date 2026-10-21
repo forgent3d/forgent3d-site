@@ -1903,7 +1903,7 @@ export const generators = {
       },
       {
         q: "Gibt es ein ESP32-DevKit-Gehäuse zum Anschrauben an die Wand, mit Kabelverschraubung?",
-        a: "Ja: https://www.forgent3d.com/de/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true – das Gehäuse für das DOIT DevKit V1 mit 30 Pins, mit einem 12,8-mm-Loch für eine PG7-Kabelverschraubung in der hinteren Stirnwand, Platz innen für Gegenmuttern bis 19,05 mm Schlüsselweite und zwei Laschen mit Senklöchern für M3 an den Längsseiten, 39,1 mm auseinander. Der Deckel wird höher, damit die Gegenmutter Platz hat: 23,6 mm hoch, vier Schrauben M3 × 20. Mit seinen Lüftungsschlitzen und der verschraubten Fuge ist es kein dichtes oder wasserdichtes Gehäuse.",
+        a: "Ja: https://www.forgent3d.com/de/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true – das Gehäuse für das DOIT DevKit V1 mit 30 Pins, mit einem 12,8-mm-Loch für eine PG7-Kabelverschraubung in der hinteren Stirnwand, Platz innen für Gegenmuttern bis 19,05 mm Schlüsselweite und zwei Laschen mit Senklöchern für M3 an den Längsseiten, 44,1 mm auseinander. Der Deckel wird höher, damit die Gegenmutter Platz hat: 23,6 mm hoch, vier Schrauben M3 × 20. Mit seinen Lüftungsschlitzen und der verschraubten Fuge ist es kein dichtes oder wasserdichtes Gehäuse.",
       },
     ],
     keywords: [

@@ -1630,7 +1630,7 @@ export const generators = {
       },
       {
         q: "壁にネジ留めできて、ケーブルグランドが付いたESP32 DevKitのケースは作れますか？",
-        a: "作れます。 https://www.forgent3d.com/ja/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true で、30ピンのDOIT DevKit V1用ケースができます。奥側の端の壁にPG7ケーブルグランド用の12.8mmの穴があり、内側には二面幅19.05mmまでのロックナットが入る空間、長辺には39.1mm間隔でM3の皿穴付きの取り付け耳が2つ付きます。ロックナットを収めるためにフタが高くなり、高さ23.6mm、ネジはM3×20を4本使います。通気口とネジ留めの合わせ目があるので、密閉・防水のケースではありません。",
+        a: "作れます。 https://www.forgent3d.com/ja/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true で、30ピンのDOIT DevKit V1用ケースができます。奥側の端の壁にPG7ケーブルグランド用の12.8mmの穴があり、内側には二面幅19.05mmまでのロックナットが入る空間、長辺には44.1mm間隔でM3の皿穴付きの取り付け耳が2つ付きます。ロックナットを収めるためにフタが高くなり、高さ23.6mm、ネジはM3×20を4本使います。通気口とネジ留めの合わせ目があるので、密閉・防水のケースではありません。",
       },
     ],
     keywords: ["esp32 ケース", "ESP32 ケース 3Dプリント", "ESP32 ケース STL", "ESP32-CAM ケース", "ESP32 DevKit ケース", "XIAO ESP32 ケース"],

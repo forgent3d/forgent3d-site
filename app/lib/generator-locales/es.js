@@ -1949,7 +1949,7 @@ export const generators = {
       },
       {
         q: "¿Puedo tener una carcasa para ESP32 DevKit que se atornille a la pared, con prensaestopas?",
-        a: "Sí: https://www.forgent3d.com/es/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true es la carcasa para la DOIT DevKit V1 de 30 pines con un agujero de 12.8 mm para un prensaestopas PG7 en la pared del extremo opuesto, sitio dentro para contratuercas de hasta 19.05 mm entre caras, y dos pestañas con agujeros avellanados M3 en los lados largos, a 39.1 mm una de otra. La tapa crece para alojar la contratuerca: 23.6 mm de alto y cuatro tornillos M3 × 20. Con sus rejillas y su junta atornillada, no es una carcasa estanca ni resistente al agua.",
+        a: "Sí: https://www.forgent3d.com/es/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true es la carcasa para la DOIT DevKit V1 de 30 pines con un agujero de 12.8 mm para un prensaestopas PG7 en la pared del extremo opuesto, sitio dentro para contratuercas de hasta 19.05 mm entre caras, y dos pestañas con agujeros avellanados M3 en los lados largos, a 44.1 mm una de otra. La tapa crece para alojar la contratuerca: 23.6 mm de alto y cuatro tornillos M3 × 20. Con sus rejillas y su junta atornillada, no es una carcasa estanca ni resistente al agua.",
       },
     ],
     keywords: [
