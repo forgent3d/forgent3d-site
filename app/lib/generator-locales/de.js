@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generatoren",
   catalogTitle: "3D-Druck-Generatoren — kostenlose parametrische Modelle | Forgent3D",
   catalogDescription:
-    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken und Handyständer. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
+    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, ESP32-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken und Handyständer. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
   catalogH1: "3D-Druck-Generatoren",
   catalogIntro:
     "Jeder Generator hier ist ein echtes parametrisches CAD-Modell: Ändern Sie die Parameter, baut es sich live neu auf, und Sie exportieren STL / STEP – was über die Schieberegler hinausgeht, ändert der KI-Agent am selben Modell.",
@@ -1742,8 +1742,8 @@ export const generators = {
           a: "PETG oder besser: Ein Maker berichtet, dass ein Pi 5 einen Boden aus PLA erweicht hat. Lassen Sie die Lüftungsschlitze im Deckel an. Das Gehäuse lässt außerdem rundum 0,5 mm Platz um das Board, denn Gehäuse, die eng an der Platine anliegen, haben beim Zusammenbau Boards zerbrochen.",
         },
         {
-          q: "Warum ist das ESP32 DevKit nicht in der Liste?",
-          a: "Die DevKitC-Boards von Espressif haben keine Befestigungslöcher, und für die vielen Nachbauten gibt es keine offizielle Zeichnung, nach der man arbeiten könnte. Wählen Sie das nächstliegende Board und ändern Sie es mit „AI edit“. Raspberry Pi und Arduino sind Marken ihrer jeweiligen Inhaber; dieser Generator erzeugt kompatible Gehäuse und steht in keiner Verbindung zu ihnen.",
+          q: "Gibt es ein Gehäuse für ein ESP32 DevKit?",
+          a: "Ja, auf einer eigenen Seite: dem ESP32-Gehäuse-Generator (bisher auf Englisch und Chinesisch). Die DevKitC-Boards von Espressif haben keine Befestigungslöcher, und bei den Nachbauten weichen die Lochpositionen von Quelle zu Quelle ab; deshalb hält jener Generator jedes seiner 15 ESP32-Boards – DevKit V1, DevKitC, S3, C3 SuperMini, XIAO, ESP32-CAM und weitere – an seinem Umriss statt mit Schrauben durch die Platine. Raspberry Pi und Arduino sind Marken ihrer jeweiligen Inhaber; dieser Generator erzeugt kompatible Gehäuse und steht in keiner Verbindung zu ihnen.",
         },
       ],
     },

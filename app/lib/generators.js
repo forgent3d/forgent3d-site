@@ -57,6 +57,14 @@ function pipeSize(od, size, length, spacing, height) {
   return { params: { PIPE_OD: od }, cells: [od, size, length, spacing, height] };
 }
 
+/** A row of the ESP32 case's board table: the link parameter (a unique prefix of the board's name, without the
+ *  bracket a link-detector would cut off), then the case at the model's defaults as built with cad-build: outside
+ *  size, size over the screw bosses, height with pins down / no pins / jumper wires, and the M3 screw length. The
+ *  board's name and data source are in the page's language (`copy.sizes.rows`). */
+function espBoard(board, outside, bosses, heights, screw) {
+  return { params: { BOARD: board }, cells: [outside, bosses, heights, `4 × M3 × ${screw}`] };
+}
+
 export const GENERATORS = [
   {
     slug: "gridfinity-bin-generator",
@@ -2354,7 +2362,7 @@ export const GENERATORS = [
     icon: "▭",
     family: "electronics",
     // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
-    updated: "2026-10-17",
+    updated: "2026-10-21",
     // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part.
     example: { params: { BOARD: "Raspberry Pi 4 Model B", WALL: "2.4", PORT_CLEARANCE: "0.8" }, label: { en: "Pi 4 case with thicker walls and roomier port openings", zh: "树莓派 4B 外壳：加厚外壁、接口开孔放宽" } },
     // Read off the default part's STEP export (cad-build export, 2026-10-17): faces by surface type.
@@ -2406,7 +2414,7 @@ export const GENERATORS = [
           { q: "Which screws do I need?", a: "Raspberry Pi boards: four M2.5 × 12 countersunk screws. Arduino Uno R3: four M3 × 16; the Uno R4 takes three plus a printed locating pin. They go up through the floor, the standoffs and the board into pillars in the lid. Friction-fit lids are the most common complaint on popular printed cases (\"the lid is a bit loose\"), so this one is screwed." },
           { q: "Will my cables fit?", a: "USB-C and micro-USB openings are sized for the plug overmold given in the USB specifications — a frequent complaint about cases with socket-sized openings is that micro-HDMI cables don't fit. HDMI, audio and DC plugs have no standard size: if yours is bulky, raise the port clearance." },
           { q: "Which filament for a Raspberry Pi 5?", a: "PETG or better: one maker reports a Pi 5 softened a PLA base. Keep the lid vents on. The case also leaves 0.5 mm all round the board, because cases that hug the PCB have cracked boards during assembly." },
-          { q: "Why isn't the ESP32 DevKit in the list?", a: "Espressif's DevKitC boards have no mounting holes, and the many clone boards have no official drawing to work from. Pick the closest board and use “AI edit” to change it. Raspberry Pi and Arduino are trademarks of their owners; this generator makes compatible cases and is not affiliated with them." },
+          { q: "Is there a case for an ESP32 DevKit?", a: "Yes, on its own page: the ESP32 Case Generator, linked under “More generators” below. Espressif's DevKitC boards have no mounting holes and on the clone boards the hole positions disagree from one source to the next, so that generator holds each of its 15 ESP32 boards — DevKit V1, DevKitC, S3, C3 SuperMini, XIAO, ESP32-CAM and more — by its outline instead of with screws through the board. Raspberry Pi and Arduino are trademarks of their owners; this generator makes compatible cases and is not affiliated with them." },
         ],
       },
       zh: {
@@ -2425,7 +2433,173 @@ export const GENERATORS = [
           { q: "需要什么螺丝？", a: "树莓派：四颗 M2.5 × 12 沉头螺丝。Arduino Uno R3：四颗 M3 × 16；Uno R4 用三颗，外加一个打印的定位销。螺丝从底下穿过底板、支撑柱和电路板，拧进上盖的压柱。热门打印外壳下最常见的抱怨是摩擦盖松（「盖子有点松」），所以这里用螺丝。" },
           { q: "线插得进去吗？", a: "USB-C 和 micro-USB 的开孔按 USB 规范里的插头外壳尺寸做——按插座大小开孔的外壳，常有人反映 micro-HDMI 线插不进去。HDMI、音频、DC 插头没有统一尺寸：你的插头粗，就把接口开孔余量调大。" },
           { q: "树莓派 5 用什么材料打？", a: "PETG 或更耐热的材料：有人反映树莓派 5 把 PLA 底壳烤软了。散热孔保持打开。外壳四周给板子留了 0.5 mm——贴着电路板做的外壳，有人装的时候把板子压裂了。" },
-          { q: "为什么没有 ESP32 开发板？", a: "乐鑫官方的 DevKitC 板没有安装孔，市面上大量的兼容板也没有官方图纸可依。可以选最接近的板子，再用「AI 修改」改成你的。树莓派和 Arduino 是其各自所有者的商标，这个生成器做的是兼容外壳，与它们没有关联。" },
+          { q: "有 ESP32 开发板的外壳吗？", a: "有，在单独的一页：ESP32 外壳生成器，见下方「更多生成器」。乐鑫的 DevKitC 板没有安装孔，兼容板的孔位在不同来源之间对不上，所以那个生成器按外形卡住它支持的 15 款 ESP32 开发板——DevKit V1、DevKitC、S3、C3 SuperMini、XIAO、ESP32-CAM 等——不靠穿过电路板的螺丝。树莓派和 Arduino 是其各自所有者的商标，这个生成器做的是兼容外壳，与它们没有关联。" },
+        ],
+      },
+    },
+  },
+  {
+    slug: "esp32-case-generator",
+    modelDir: "esp32-case",
+    icon: "▤",
+    family: "electronics",
+    // Last real change to this page's copy (sitemap lastmod) — move it only when the text changes.
+    updated: "2026-10-21",
+    // A deep link: these values in the page URL (or the app's /g/ URL) open exactly this part. Board and choice
+    // values are unique prefixes without brackets (a link-detector cuts a trailing ")"), which the app accepts.
+    example: {
+      params: { BOARD: "ESP32-DevKitC V4", PINS: "Jumper", WIRE_EXIT: "Slot", EARS: "true" },
+      label: { en: "DevKitC V4 case with room for jumper wires, a wire slot and wall-mount ears", zh: "DevKitC V4 外壳：板下插得下杜邦线，端面出线槽，带安装耳" },
+    },
+    // The 15 boards at the defaults, each row a deep link; built with cad-build 2026-10-21 (the copy's `sizes`
+    // names the columns and gives each board's name and data source in the page's language).
+    sizes: [
+      espBoard("ESP32 DevKit V1", "58.6 × 33.1", "65.5 × 40.0", "21.6 / 17.1 / 33.6", 16),
+      espBoard("ESP32-DevKitC V4", "60.9 × 32.5", "67.8 × 39.5", "21.6 / 17.1 / 33.6", 16),
+      espBoard("ESP32-S3-DevKitC-1", "75.8 × 30.0", "82.7 × 37.4", "21.6 / 17.1 / 33.6", 16),
+      espBoard("YD-ESP32-S3", "70.0 × 32.5", "76.9 × 39.5", "20.5 / 17.1 / 32.5", 16),
+      espBoard("ESP32-C3 SuperMini", "30.6 × 22.6", "37.6 × 29.5", "21.0 / 17.1 / 33.0", 16),
+      espBoard("ESP32-C6-DevKitC-1", "64.8 × 30.0", "71.7 × 40.2", "21.0 / 17.1 / 33.0", 16),
+      espBoard("ESP32-C3-DevKitM-1", "50.9 × 30.0", "57.9 × 36.9", "21.6 / 17.1 / 33.6", 16),
+      espBoard("Waveshare ESP32-S3-Zero", "30.1 × 22.6", "37.0 × 29.5", "20.6 / 17.1 / 32.6", 16),
+      espBoard("Seeed XIAO ESP32S3", "27.7 × 22.4", "34.7 × 29.3", "20.2 / 17.1 / 32.2", 16),
+      espBoard("Seeed XIAO ESP32S3 Sense", "30.9 × 22.4", "37.8 × 29.3", "22.5 / 17.1 / 34.5", 16),
+      espBoard("Seeed XIAO ESP32C6", "27.6 × 22.4", "34.5 × 29.3", "20.2 / 17.1 / 32.2", 16),
+      espBoard("Seeed XIAO ESP32C3", "27.6 × 22.4", "34.5 × 29.3", "20.2 / 17.1 / 32.2", 16),
+      espBoard("Arduino Nano ESP32", "49.8 × 22.4", "56.7 × 29.3", "20.8 / 17.1 / 32.8", 16),
+      espBoard("LilyGO T-Display-S3", "67.4 × 30.5", "74.3 × 37.5", "20.6 / 17.1 / 32.6", 16),
+      espBoard("ESP32-CAM", "47.1 × 31.6", "54.0 × 38.5", "23.7 / 21.1 / 35.7", 20),
+    ],
+    // Read off the STEP export (cad-build export, 2026-10-21): faces by surface type.
+    step: {
+      en: [
+        "The default case (ESP32 DevKit V1) exports as two exact solids, base and lid, with 149 faces: 121 planes, 24 true cylinders (the screw clearance holes and pilots, the corner bosses, the button poke holes, the pocket corners) and 4 cones (the countersinks for the M3 heads), and no spline surfaces. CAD reads every opening, pocket wall and screw hole straight off the file — the place to start if you want to add a mount or a cut-out of your own.",
+        "The ESP32-CAM case is 159 faces: 126 planes, 29 cylinders and 4 cones.",
+      ],
+      zh: [
+        "默认外壳（ESP32 DevKit V1）导出为两个精确实体（底壳和上盖），共 149 个面：121 个平面、24 个真圆柱面（螺丝过孔和底孔、四角螺丝柱、按键孔、卡槽圆角）、4 个圆锥面（M3 沉头），没有样条曲面。每个开孔、卡槽壁和螺丝孔在 CAD 里都能直接量出来——要自己加安装座或开孔，就从这份 STEP 开始。",
+        "ESP32-CAM 外壳是 159 个面：126 个平面、29 个圆柱面、4 个圆锥面。",
+      ],
+    },
+    // Questions people put to an AI assistant; each answer carries a working deep link.
+    aiFaqs: {
+      en: [
+        { q: "How do I get a 3D printed case for an ESP32-CAM?", a: "Open https://www.forgent3d.com/en/generators/esp32-case-generator?BOARD=ESP32-CAM — a two-part case for the AI-Thinker ESP32-CAM: a slot over the lens (9 to 10.5 mm from the SD end, which covers the lens positions of three sources), a window for the flash LED, the microSD card in and out through the end wall, a floor hole for the reset button and a wire slot, because the board is powered through its pins. It is 54.0 × 38.5 mm over the screw bosses and 23.7 mm tall, closed with four M3 × 20 countersunk screws. Print it in PETG; the flash LED softened a PLA case in one user's report. The ESP32-CAM-MB programmer base is not supported." },
+        { q: "Can I get an ESP32 DevKit case that screws to a wall, with a cable gland?", a: "Yes: https://www.forgent3d.com/en/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true — the 30-pin DOIT DevKit V1 case with a 12.8 mm hole for a PG7 cable gland in the far end wall, room inside for locknuts up to 19.05 mm across flats, and two ears with M3 countersunk holes on the long sides, 39.1 mm apart. The lid grows to hold the locknut: 23.6 mm tall, four M3 × 20 screws. With its vents and screwed seam it is not a sealed or waterproof case." },
+      ],
+      zh: [
+        { q: "ESP32-CAM 的外壳怎么 3D 打印？", a: "打开 https://www.forgent3d.com/zh/generators/esp32-case-generator?BOARD=ESP32-CAM 就是：安信可 ESP32-CAM 的上下两件式外壳——镜头上方开槽（离 SD 卡那端 9 到 10.5 mm，覆盖三个来源给的镜头位置），闪光灯开窗，microSD 卡从端面插拔，底部开复位键孔，还有出线槽，因为这块板靠排针供电。螺丝柱外廓 54.0 × 38.5 mm，高 23.7 mm，四颗 M3 × 20 沉头螺丝合上。请用 PETG 打印：有用户反映闪光灯把 PLA 外壳烤软了。不支持 ESP32-CAM-MB 下载底板。" },
+        { q: "想要一个能用螺丝挂墙、带 PG7 防水接头孔的 ESP32 DevKit 外壳？", a: "可以：https://www.forgent3d.com/zh/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true ——30 针 DOIT DevKit V1 外壳，远端端面开 12.8 mm 的 PG7 防水接头孔，内部留出对边最大 19.05 mm 的锁紧螺母空间；两条长边各有一个带 M3 沉头孔的安装耳，孔距 39.1 mm。为放下锁紧螺母，上盖会加高：总高 23.6 mm，用四颗 M3 × 20 螺丝。外壳有散热孔和螺丝合缝，本身不密封、不防水。" },
+      ],
+    },
+    // Evidence: generator-models/esp32-case/EVIDENCE.md in the platform repo (§5: 外壳 is the Chinese term).
+    keywords: {
+      en: ["esp32 case", "esp32 case generator", "esp32 3d printed case", "esp32 case stl", "esp32 cam case", "esp32 enclosure", "esp32 mount"],
+      zh: ["esp32外壳", "ESP32 外壳生成器", "esp32-cam外壳", "ESP32-S3 外壳", "esp32外壳 3d打印", "开发板外壳"],
+    },
+    params: [
+      { key: "BOARD", default: "ESP32 DevKit V1", range: "15 boards (table below)", unit: "", label: { en: "Board", zh: "开发板" }, desc: { en: "The 30-pin DOIT DevKit V1 by default: the most-downloaded ESP32 cases on MakerWorld are for these DevKit boards. Each board's outline, pins, antenna, connectors and buttons come from its own data, listed in the table below.", zh: "默认 30 针 DOIT DevKit V1：MakerWorld 上下载最多的 ESP32 外壳都是给这类 DevKit 板做的。每块板的外形、排针、天线、接口和按键都取自它自己的数据，见下表。" } },
+      { key: "PINS", default: "Pins soldered", range: "pins down / no pins / jumper wires", unit: "", label: { en: "Under the board", zh: "板下空间" }, desc: { en: "Pins pointing down is how most boards are sold; their tips reach 8.54 mm below the board, and the base leaves 1 mm more. Jumper wires adds room for 14 mm Dupont housings and a 5 mm wire bend. No pins gives the flattest case.", zh: "多数板子出厂就焊好排针、针脚朝下；针尖最深到板下 8.54 mm，底壳再多留 1 mm。选杜邦线，就再给 14 mm 长的杜邦头和 5 mm 的线弯留空间。不焊排针，外壳最薄。" } },
+      { key: "FIT", default: "0.3", range: "0.1 – 1", unit: "mm", label: { en: "Fit clearance", zh: "装配间隙" }, desc: { en: "Gap per side between the board and its pocket. 0.3 is the padding of the YAPP case library's ESP32-CAM box; users of tighter cases scale them 101–110 % to get clone boards in. Raise it if your board is a little bigger.", zh: "板子和卡槽之间每边的间隙。0.3 取自 YAPP 外壳库 ESP32-CAM 盒子的余量；用紧的外壳时，有人放大到 101–110 % 才装得下兼容板。你的板子偏大就调大。" } },
+      { key: "WALL", default: "2", range: "1.2 – 3", unit: "mm", label: { en: "Wall thickness", zh: "壁厚" }, desc: { en: "2 mm like the popular cases (YAPP 2.0, the open-source C3 SuperMini case 2); 1.2 is three 0.4 mm perimeters.", zh: "2 mm，和热门外壳一样（YAPP 2.0、开源的 C3 SuperMini 外壳 2）；1.2 是三圈 0.4 mm 的外墙。" } },
+      { key: "ROOM", default: "2", range: "0 – 15", unit: "mm", label: { en: "Room past the antenna", zh: "天线端留空" }, desc: { en: "Free space past the module's antenna end, across the full width. Popular cases leave 0.3–1 mm and users asked for 1–2 more; 15 is the clearance Espressif recommends round the antenna inside a housing.", zh: "模组天线那一端外面留的空，整个宽度都空。热门外壳只留 0.3–1 mm，有用户要求再多 1–2 mm；15 是乐鑫建议外壳内天线周围留的净空。" } },
+      { key: "WIRE_EXIT", default: "None", range: "none / slot / PG7", unit: "", label: { en: "Wire exit", zh: "出线口" }, desc: { en: "In the far end wall: a 5.5 mm slot from the floor to the split (three 20 AWG wires, Dupont housings pass), or a 12.8 mm hole for a PG7 cable gland with room inside for its locknut. The ESP32-CAM always gets the slot: it is powered through its pins.", zh: "开在远端端面：从底到分模线的 5.5 mm 槽（三根 20 AWG 线，杜邦头也能穿过），或 12.8 mm 的 PG7 防水接头孔，内部留出锁紧螺母的位置。ESP32-CAM 总是带出线槽：它靠排针供电。" } },
+      { key: "EARS", default: "off", range: "on / off", unit: "", label: { en: "Mounting ears", zh: "安装耳" }, desc: { en: "Two 3 mm ears at floor level on the long sides, each with an M3 countersunk hole, for a wall or a panel. Off by default, so the case stands on a desk with nothing sticking out.", zh: "两条长边贴地各一个 3 mm 厚的安装耳，带 M3 沉头孔，用来固定在墙上或面板上。默认关，放在桌上没有凸出的部分。" } },
+      { key: "VENTS", default: "on", range: "on / off", unit: "", label: { en: "Lid vents", zh: "上盖散热孔" }, desc: { en: "2 mm slots across the lid, kept clear of the ribs, windows and poke holes. On by default: an ESP32-CAM user reports that the flash LED \"heats very much\".", zh: "上盖上横向的 2 mm 条形孔，避开压筋、开窗和按键孔。默认开：有 ESP32-CAM 用户反映闪光灯「发热很厉害」。" } },
+    ],
+    copy: {
+      en: {
+        name: "ESP32 Case Generator",
+        title: "ESP32 Case Generator — 3D Printed Cases for DevKit, S3, C3, XIAO & ESP32-CAM (STL) | Forgent3D",
+        description: "A 3D printed case for your ESP32 board: 15 boards from the DOIT DevKit V1 and Espressif DevKitC to the C3 SuperMini, XIAO and ESP32-CAM, held by the board's outline, with room for header pins or jumper wires and a screwed lid. Free STL, exact STEP.",
+        h1: "ESP32 case generator: a 3D printed case for 15 ESP32 boards, held by the board's outline",
+        intro: "Pick your board — the 30-pin DOIT ESP32 DevKit V1 by default — and get a two-part case: a base the board drops into and a lid whose ribs stop 0.3 mm above the module shield and the USB shell, closed by four M3 countersunk screws from the top. The board is held by its outline, not its mounting holes: Espressif's DevKitC boards have none, and on the DOIT clones the hole positions differ by up to 1.4 mm from one source to the next. Say whether the header pins point down, the board is bare or jumper wires stay plugged in, and the base gets that much room underneath.",
+        whyPoints: [
+          "15 boards: DOIT DevKit V1, ESP32-DevKitC V4, the ESP32-S3, C6 and C3 DevKits, YD-ESP32-S3, C3 SuperMini, S3-Zero, four Seeed XIAO, Arduino Nano ESP32, LilyGO T-Display-S3 and ESP32-CAM",
+          "Held in a pocket that follows the board's outline with 0.3 mm a side and pressed down by ribs in the lid — no pegs to cut off",
+          "Room underneath for soldered pins or for female jumper wires, set by one choice",
+          "USB openings sized for the plug, poke holes over the buttons, openings for the camera, the display and the SD card where the board has them",
+          "Optional wire slot or PG7 cable gland hole, wall-mount ears and lid vents",
+        ],
+        sizes: {
+          title: "The 15 boards and their cases",
+          intro: "Each case at the defaults (fit 0.3, wall 2, room past the antenna 2, no wire exit), in mm; the height is base and lid together with the pins pointing down / no pins / jumper wires. A board is in the list only when its geometry is real: vendor CAD (STEP or DXF) that we measured, an official drawing, or, for clone boards, at least two independent sources that agree — with the pocket covering the spread between them. Each row opens the generator on that board.",
+          head: ["Board", "Board data from", "Case outside", "Over the screw bosses", "Height", "Screws", ""],
+          rows: [
+            ["ESP32 DevKit V1 (DOIT 30-pin)", "Clone board: a full STEP with every part, outline from five sources (51.4–52.0 × 27.9–28.5); the pocket covers the spread"],
+            ["ESP32-DevKitC V4 (38-pin)", "Espressif dimension DXF and PCB layout (nothing under the board); connector heights from other boards' STEPs"],
+            ["ESP32-S3-DevKitC-1", "Espressif dimension DXF and PCB layout (nothing under the board); connector heights from other boards' STEPs"],
+            ["YD-ESP32-S3 (N16R8 44-pin)", "The maker's drawing and an independent STEP, which agree; the USB-C openings cover both"],
+            ["ESP32-C3 SuperMini", "Clone board: seller drawing and a community STEP; the pocket takes boards up to 1.5 mm longer"],
+            ["ESP32-C6-DevKitC-1", "Espressif dimension DXF and PCB layout (nothing under the board); connector heights from other boards' STEPs"],
+            ["ESP32-C3-DevKitM-1", "Espressif dimension DXF and PCB layout (nothing under the board); connector heights from other boards' STEPs"],
+            ["Waveshare ESP32-S3-Zero", "Waveshare drawing and STEP"],
+            ["Seeed XIAO ESP32S3", "Seeed STEP and DXF (external u.FL antenna)"],
+            ["Seeed XIAO ESP32S3 Sense", "Seeed STEP of the camera stack; the camera pokes 3.76 mm through the lid; no microSD opening (the slot is not in the STEP)"],
+            ["Seeed XIAO ESP32C6", "Seeed's own STEP and KiCad PCB"],
+            ["Seeed XIAO ESP32C3", "Community STEP checked against Seeed's KiCad PCB; PCB thickness not published, the case assumes 1.25"],
+            ["Arduino Nano ESP32", "Arduino STEP and datasheet"],
+            ["LilyGO T-Display-S3", "LilyGO PCB and full STEP; window over the display glass"],
+            ["ESP32-CAM (AI-Thinker)", "Ai-Thinker drawing and a community STEP; the pocket covers the 40–40.5 length spread"],
+          ],
+          open: "Open",
+          note: "Where a board's PCB thickness is not published, the case assumes 1.6 mm, the top of the measured range: a thinner board sits a little lower and gets up to about 0.7 mm of play under the ribs, it is never crushed. With a PG7 gland the lid grows to hold the locknut and the screws can get longer (DevKit V1: M3 × 20, 23.6 mm tall).",
+        },
+        faqs: [
+          { q: "Why does the board sit in a pocket instead of on pegs or screws?", a: "Espressif's DevKitC boards have no mounting holes, and on the DOIT clones the hole positions differ by up to 1.4 mm between sources. On the most-downloaded ESP32 case on MakerWorld, at least 12 comments say they had to cut the pegs out. So the pocket follows the board's outline with 0.3 mm a side, the board rests on pads where its underside is free, and ribs under the lid hold it down. If your clone is a little bigger, raise the fit clearance — users of other cases scale them 101–110 %." },
+          { q: "Will it fit with the header pins soldered on, or with jumper wires plugged in?", a: "Most boards are sold with the pins soldered pointing down, so that is the default: the pin tips reach 8.54 mm below the board and the base leaves 1 mm more. \"Not enough room underneath for Dupont connector cables\" is a common complaint on other cases — choose \"Jumper wires on the pins\" and the base makes room for 14 mm Dupont housings and a 5 mm wire bend (33.6 mm tall on a DevKit V1). XIAO, C3 SuperMini, S3-Zero, Nano ESP32 and T-Display-S3 boards are sold without headers fitted; \"No pins\" gives the flattest case." },
+          { q: "Does the case hurt Wi-Fi?", a: "We have not measured it, and the page makes no claim about the signal. Espressif's hardware design guidelines recommend at least 15 mm of clearance round a PCB antenna inside a housing, in all directions, and say the end product should be tested for throughput and range. \"Room past the antenna\" goes up to 15 mm past the antenna end, across the full width (an ESP32-S3-DevKitC-1 case grows from 75.8 to 88.8 mm); the sides stay at the pocket wall. In about 1,000 comments on popular ESP32 cases we found no complaint about reception; the antenna complaints were about the board not fitting." },
+          { q: "Which screws and which filament?", a: "Four M3 countersunk screws (ISO 10642 / DIN 7991) go down through the lid into self-tapping pilots in the base: M3 × 16 for every board except the ESP32-CAM, which takes M3 × 20 (a PG7 gland can lengthen them too). The generator picks the shortest standard length that leaves 6 mm of thread in the base. Print like the top-listed cases: PLA or PETG, 0.2 mm layers, no supports — the base floor-down and the lid ceiling-down, as they lie on the plate; the only bridges are over the vents and windows. Use PETG for the ESP32-CAM." },
+          { q: "Does the ESP32-CAM case fit the CAM-MB programmer base?", a: "No. There is no CAD file or drawing of the ESP32-CAM-MB, only retail sizes that disagree (40 × 27 × 10, 39.8 × 27, 40 × 25), so the case is for the bare board powered through its pins, and it always has a wire slot for those wires. Program the board on the MB base outside the case." },
+          { q: "Why isn't my ESP32 board in the list?", a: "A board goes in only when its geometry is real: vendor CAD, an official drawing, or two independent sources that agree. Left out for now: the 38-pin USB-C clones (no CAD, lengths from 48.26 to 51 mm), the USB-C version of the DOIT DevKit V1, the ESP32-S3 SuperMini, NodeMCU-32S, the LOLIN mini boards (connectors not dimensioned), the original LilyGO T-Display and the Freenove and M5Stack camera boards. Pick the closest board and use “AI edit” to change it. ESP32 is a trademark of Espressif Systems and the board names belong to their makers; this generator makes compatible cases and is not affiliated with them." },
+          { q: "Has this case been printed and tested?", a: "Not yet. The 11 boards that have a vendor or community STEP file (all but the four Espressif DevKits, which come as DXF drawings) were placed in their cases with zero overlap with base and lid, and 14 automated checks pass on every board and pin mode — but no case has been printed. Still to check on real prints: the 0.3 mm fit on each board, whether the ribs leave a thin board rattling (a dab of hot glue is the users' own fix), the M3 screws self-tapping in printed pilots, reaching the buttons with a paperclip, the ESP32-CAM lens slot, flash window and SD card, the XIAO Sense camera window, the T-Display-S3 glass rim, real plugs in the openings, the PG7 gland, and Wi-Fi through the case." },
+        ],
+      },
+      zh: {
+        name: "ESP32 外壳生成器",
+        title: "ESP32 外壳生成器 — DevKit、S3、C3、XIAO、ESP32-CAM 开发板 3D 打印外壳，导出 STL | Forgent3D",
+        description: "在线生成可 3D 打印的 ESP32 外壳：DOIT DevKit V1、乐鑫 DevKitC、C3 SuperMini、XIAO、ESP32-CAM 等 15 款开发板，按板子外形卡住，排针或杜邦线留足空间，螺丝固定上盖。免费导出 STL，另有精确 STEP。",
+        h1: "ESP32 外壳生成器：15 款 ESP32 开发板的 3D 打印外壳，按板子外形卡住",
+        intro: "选你的开发板——默认 30 针 DOIT ESP32 DevKit V1——得到上下两件式外壳：板子放进底壳的卡槽，上盖的压筋停在模组屏蔽罩和 USB 外壳上方 0.3 mm，四颗 M3 沉头螺丝从上面拧紧。板子靠外形固定，不靠安装孔：乐鑫的 DevKitC 板没有安装孔，DOIT 兼容板的孔位在不同来源之间能差 1.4 mm。再选排针朝下、不焊排针还是插着杜邦线，底壳就在板下留出对应的空间。",
+        whyPoints: [
+          "15 款板子：DOIT DevKit V1、ESP32-DevKitC V4、ESP32-S3 / C6 / C3 官方 DevKit、YD-ESP32-S3、C3 SuperMini、S3-Zero、四款 Seeed XIAO、Arduino Nano ESP32、LilyGO T-Display-S3、ESP32-CAM",
+          "按板子外形做卡槽、每边 0.3 mm，上盖压筋压住——没有要剪掉的定位柱",
+          "板下空间一项选好：已焊排针，或插着杜邦线",
+          "USB 开孔按插头大小，按键上方开孔，有摄像头、屏幕、SD 卡的板子就开对应的窗",
+          "可选出线槽或 PG7 防水接头孔、安装耳、上盖散热孔",
+        ],
+        sizes: {
+          title: "15 款开发板和它们的外壳",
+          intro: "每款外壳都按默认值（间隙 0.3、壁厚 2、天线端留空 2、无出线口），单位 mm；高度是底壳加上盖，依次为排针朝下 / 不焊排针 / 插杜邦线。只有几何数据是真的板子才进列表：我们实测过的厂商 CAD（STEP 或 DXF）、官方图纸，或者兼容板至少两个互相独立且一致的来源——卡槽覆盖它们之间的差异。点每一行直接打开那块板的外壳。",
+          head: ["开发板", "板子数据来源", "外壳外廓", "螺丝柱外廓", "高度", "螺丝", ""],
+          rows: [
+            ["ESP32 DevKit V1（DOIT 30 针）", "兼容板：含全部元件的 STEP，外形取五个来源（51.4–52.0 × 27.9–28.5），卡槽覆盖这个范围"],
+            ["ESP32-DevKitC V4（38 针）", "乐鑫尺寸 DXF 和 PCB 布局图（板底无元件）；接口高度取自其他板子的 STEP"],
+            ["ESP32-S3-DevKitC-1", "乐鑫尺寸 DXF 和 PCB 布局图（板底无元件）；接口高度取自其他板子的 STEP"],
+            ["YD-ESP32-S3（N16R8 44 针）", "厂家图纸和一份独立的 STEP，两者一致；USB-C 开孔同时覆盖两者"],
+            ["ESP32-C3 SuperMini", "兼容板：卖家图纸和社区 STEP；卡槽能放下长 1.5 mm 以内的板子"],
+            ["ESP32-C6-DevKitC-1", "乐鑫尺寸 DXF 和 PCB 布局图（板底无元件）；接口高度取自其他板子的 STEP"],
+            ["ESP32-C3-DevKitM-1", "乐鑫尺寸 DXF 和 PCB 布局图（板底无元件）；接口高度取自其他板子的 STEP"],
+            ["微雪 ESP32-S3-Zero", "微雪图纸和 STEP"],
+            ["Seeed XIAO ESP32S3", "Seeed STEP 和 DXF（外接 u.FL 天线）"],
+            ["Seeed XIAO ESP32S3 Sense", "Seeed 摄像头组件 STEP；摄像头从上盖伸出 3.76 mm；不开 microSD 口（STEP 里没有卡槽）"],
+            ["Seeed XIAO ESP32C6", "Seeed 官方 STEP 和 KiCad PCB"],
+            ["Seeed XIAO ESP32C3", "社区 STEP，已对照 Seeed KiCad PCB；板厚未公布，外壳按 1.25 做"],
+            ["Arduino Nano ESP32", "Arduino STEP 和规格书"],
+            ["LilyGO T-Display-S3", "LilyGO PCB 和整板 STEP；屏幕玻璃上方开窗"],
+            ["ESP32-CAM（安信可）", "安信可图纸和社区 STEP；卡槽覆盖 40–40.5 的长度差异"],
+          ],
+          open: "打开",
+          note: "板厚没有公布的板子，外壳按 1.6 mm 做，即实测范围的上限：薄一些的板子会稍低，压筋下最多约 0.7 mm 的晃动，但绝不会压坏板子。选 PG7 防水接头时，上盖加高放锁紧螺母，螺丝可能变长（DevKit V1：M3 × 20，高 23.6 mm）。",
+        },
+        faqs: [
+          { q: "为什么板子放在卡槽里，而不是用定位柱或螺丝固定？", a: "乐鑫的 DevKitC 板没有安装孔，DOIT 兼容板的孔位在不同来源之间能差 1.4 mm。MakerWorld 上下载最多的 ESP32 外壳，至少 12 条评论说得把定位柱剪掉。所以卡槽按板子外形做、每边留 0.3 mm，板子底面空着的地方有支撑垫，上盖下的压筋把它压住。你的兼容板偏大一点，就把装配间隙调大——用别的外壳时，有人要放大到 101–110 %。" },
+          { q: "焊了排针、或者插着杜邦线，装得下吗？", a: "多数板子出厂就焊好排针、针脚朝下，所以这是默认：针尖到板下 8.54 mm，底壳再多留 1 mm。别的外壳下常见的抱怨是「板下没地方插杜邦线」——选「排针上插杜邦线」，底壳会给 14 mm 长的杜邦头和 5 mm 的线弯留出空间（DevKit V1 总高 33.6 mm）。XIAO、C3 SuperMini、S3-Zero、Nano ESP32、T-Display-S3 出厂没有焊排针；选「不焊排针」外壳最薄。" },
+          { q: "外壳会影响 Wi-Fi 吗？", a: "我们没有测过，页面也不对信号做任何承诺。乐鑫的硬件设计指南建议：外壳内 PCB 天线四周各方向至少留 15 mm 净空，并且成品要实测吞吐量和通信距离。「天线端留空」最多能在天线那一端外面留 15 mm，整个宽度都空（ESP32-S3-DevKitC-1 的外壳从 75.8 mm 长到 88.8 mm）；两侧仍是卡槽壁。在热门 ESP32 外壳的约 1,000 条评论里，我们没找到抱怨信号的；和天线有关的抱怨都是板子装不进去。" },
+          { q: "用什么螺丝、什么材料？", a: "四颗 M3 沉头螺丝（ISO 10642 / DIN 7991）从上盖往下拧进底壳的自攻底孔：除 ESP32-CAM 用 M3 × 20 外，其他板子都是 M3 × 16（加 PG7 防水接头也可能变长）。生成器会选在底壳里留够 6 mm 螺纹的最短标准长度。和热门外壳一样打：PLA 或 PETG、0.2 mm 层高、不用支撑——底壳底面朝下、上盖顶面朝下，就按打印板上摆好的方向；只有散热孔和开窗处是搭桥。ESP32-CAM 请用 PETG。" },
+          { q: "ESP32-CAM 外壳能连 CAM-MB 下载底板一起装吗？", a: "不能。ESP32-CAM-MB 没有 CAD 文件也没有图纸，只有互相对不上的商品尺寸（40 × 27 × 10、39.8 × 27、40 × 25），所以外壳是给单独一块、靠排针供电的板子做的，并且总带出线槽走这几根线。烧录请在外壳外面插 MB 底板进行。" },
+          { q: "为什么没有我的 ESP32 板子？", a: "只有几何数据是真的板子才进列表：厂商 CAD、官方图纸，或两个互相独立且一致的来源。暂时没有：38 针 USB-C 兼容板（没有 CAD，长度 48.26 到 51 mm 不等）、USB-C 版 DOIT DevKit V1、ESP32-S3 SuperMini、NodeMCU-32S、LOLIN mini 系列（接口没标尺寸）、初代 LilyGO T-Display，以及 Freenove、M5Stack 的摄像头板。可以选最接近的板子，再用「AI 修改」改成你的。ESP32 是乐鑫科技的商标，各板子名称归其厂商所有；这个生成器做的是兼容外壳，与它们没有关联。" },
+          { q: "这个外壳实际打印验证过吗？", a: "还没有。有厂商或社区 STEP 文件的 11 块板（除四款乐鑫 DevKit，它们只有 DXF 图纸）都放进外壳里检查过，和底壳、上盖零干涉；每块板、每种板下空间都过了 14 项自动检查——但还没有实际打印。还要在实物上确认：每块板 0.3 mm 间隙的松紧；薄板在压筋下会不会晃（用户自己的办法是点一点热熔胶）；M3 螺丝在打印底孔里自攻；回形针能不能按到按键；ESP32-CAM 的镜头槽、闪光灯窗和 SD 卡；XIAO Sense 的摄像头窗；T-Display-S3 的玻璃压边；真插头插进开孔；PG7 防水接头；以及隔着外壳的 Wi-Fi。" },
         ],
       },
     },
@@ -2709,7 +2883,7 @@ function baseSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、带盖收纳盒（滑盖、铰链、磁吸、分格）、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架。调参数、3D 预览、导出 STL / STEP。",
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、带盖收纳盒（滑盖、铰链、磁吸、分格）、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、ESP32 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
@@ -2776,7 +2950,7 @@ function baseSharedCopy(locale) {
     catalogLabel: "Generators",
     catalogTitle: "3D Print Generators — Free Parametric Model Makers | Forgent3D",
     catalogDescription:
-      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders, spool holders, Raspberry Pi and Arduino cases, pegboard hooks, shelf brackets, wall hooks and phone stands. Tune parameters, preview in 3D, export STL / STEP.",
+      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders, spool holders, Raspberry Pi and Arduino cases, ESP32 cases, pegboard hooks, shelf brackets, wall hooks and phone stands. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",

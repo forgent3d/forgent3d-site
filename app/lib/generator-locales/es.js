@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generadores",
   catalogTitle: "Generadores para impresión 3D — Modelos paramétricos gratis | Forgent3D",
   catalogDescription:
-    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas, portabobinas, carcasas para Raspberry Pi y Arduino, ganchos para tablero perforado, escuadras para estantería, ganchos de pared y soportes para móvil. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
+    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas, portabobinas, carcasas para Raspberry Pi y Arduino, carcasas para ESP32, ganchos para tablero perforado, escuadras para estantería, ganchos de pared y soportes para móvil. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
   catalogH1: "Generadores para impresión 3D",
   catalogIntro:
     "Cada generador de esta página es un modelo CAD paramétrico de verdad: ajusta los parámetros y se reconstruye al instante, exporta STL / STEP y, para todo lo que vaya más allá de los deslizadores, el agente de IA edita el mismo modelo.",
@@ -1787,8 +1787,8 @@ export const generators = {
           a: "PETG o mejor: un maker cuenta que una Pi 5 ablandó una base de PLA. Deja activadas las rejillas de la tapa. La carcasa también deja 0.5 mm alrededor de toda la placa, porque las carcasas que se ciñen al PCB han agrietado placas durante el montaje.",
         },
         {
-          q: "¿Por qué no está el ESP32 DevKit en la lista?",
-          a: "Las placas DevKitC de Espressif no tienen agujeros de montaje, y las muchas placas clónicas no tienen un plano oficial del que partir. Elige la placa más parecida y usa “AI edit” para cambiarla. Raspberry Pi y Arduino son marcas registradas de sus respectivos propietarios; este generador hace carcasas compatibles y no tiene relación con ellos.",
+          q: "¿Hay una carcasa para el ESP32 DevKit?",
+          a: "Sí, en su propia página: el generador de carcasas para ESP32 (por ahora en inglés y chino). Las placas DevKitC de Espressif no tienen agujeros de montaje y en las placas clónicas la posición de los agujeros cambia de una fuente a otra, así que ese generador sujeta cada una de sus 15 placas ESP32 (DevKit V1, DevKitC, S3, C3 SuperMini, XIAO, ESP32-CAM y otras) por su contorno, no con tornillos que atraviesen la placa. Raspberry Pi y Arduino son marcas registradas de sus respectivos propietarios; este generador hace carcasas compatibles y no tiene relación con ellos.",
         },
       ],
     },

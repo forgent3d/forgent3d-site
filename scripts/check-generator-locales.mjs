@@ -3,7 +3,7 @@
 // translations of the English entries in app/lib/generators.js. This fails on what a translation must not change
 // and on what would leave a page half translated:
 //
-//   - shape: `shared` has exactly the English keys, with the same array lengths; every generator is there with
+//   - shape: `shared` has exactly the English keys, with the same array lengths; every translated generator has
 //     name/title/description/h1/intro, as many whyPoints, faqs, STEP facts and AI FAQs as English, a label and a
 //     description for every parameter, and the example's label;
 //   - facts: every number in an English text is in its translation (a decimal comma counts as the point);
@@ -11,7 +11,8 @@
 //     prefix (/de/generators/…) and every other link unchanged;
 //   - titles end with " | Forgent3D"; every generator names the search phrases it is written for (`keywords`).
 //
-// Warnings (exit 0): a long text left in English, a title or description longer than search results show.
+// Warnings (exit 0): a generator with no page in the language yet, a long text left in English, a title or
+// description longer than search results show.
 //
 //   node scripts/check-generator-locales.mjs          # every language
 //   node scripts/check-generator-locales.mjs ja       # one
@@ -85,7 +86,9 @@ for (const lang of langs) {
   for (const g of GENERATORS) {
     const t = byslug[g.slug];
     if (!t) {
-      problems.push(`${g.slug}: missing`);
+      // Not translated yet: the page just does not exist in this language (generatorLocales) and nothing on it is
+      // half done, so it is listed, not failed. A translation that is there gets every check below.
+      warnings.push(`${g.slug}: no ${lang} page yet`);
       continue;
     }
     sameShape(g.copy.en, t.copy, `${g.slug}.copy`, problems);
