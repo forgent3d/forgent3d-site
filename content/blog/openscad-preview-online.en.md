@@ -2,6 +2,7 @@
 title: Preview OpenSCAD code online: no install, paste it and look
 description: Seeing what a piece of OpenSCAD code looks like does not require installing OpenSCAD. Paste it into a viewer in the browser, it renders when you pause, colours match the desktop, and the code can go into a link for someone else.
 date: 2026-10-10
+updated: 2026-10-21
 app: viewer
 ---
 
@@ -11,9 +12,9 @@ The traditional way to see what a piece of OpenSCAD code draws is: download the 
 
 ## How it works
 
-Open the page and paste the code into the editor at the bottom. There is nothing to click. Half a second after you stop typing the model appears above. Change a number and it redraws half a second later.
+Open the page and paste the code into the editor. There is nothing to click. Half a second after you stop typing the model appears beside it (above it on a phone). Change a number and it redraws half a second later.
 
-If you have a file, drop the .scad in. If you have a whole project, drop the folder in; `include` and `use` find their files in the real directory layout, and the common libraries, MCAD, Write.scad, BOSL2, are built in. Parameters declared with Customizer comments at the top of the file show up in the panel on the left; drag a slider and the source follows.
+If you have a file, drop the .scad in. If you have a whole project, drop the folder in; `include` and `use` find their files in the real directory layout, and the common libraries, MCAD, Write.scad, BOSL2, are built in. Parameters declared with Customizer comments at the top of the file show up as sliders in the parameters panel; drag one and the source follows.
 
 ## What you see is what the desktop shows
 
