@@ -2,6 +2,7 @@
 title: Letting the AI reinvent the heat-set insert boss every time is a bad idea
 description: When the agent makes a box, ten times out of ten it needs insert bosses on the base and a catch on the lid, and it derives the numbers from scratch each time. One wrong number is one failed print. So we made the most common 3D-print joints into a library.
 date: 2026-10-09
+updated: 2026-10-21
 ---
 
 Read enough agent session logs and one thing stands out: most of what it makes is not "a part", it is "a part plus a few small structures that let it be assembled". A box needs a lid, and the lid has to snap or catch. A base plate needs insert bosses, a PCB needs standoffs, a case needs a USB cutout and vent slots in its side, two panels need to turn on a pin.
@@ -41,3 +42,5 @@ A side benefit: the components work on their own. Without the agent, open the co
 Mostly the kind of failure. A box with a lid used to fail at the lid not catching or the boss being too thin, errors the user only finds after printing. With the library those should largely stop, and the failures that remain go back to the part itself: a dimension misread, a shape misunderstood. Those, at least, are visible on screen.
 
 The library will grow, but only with what is genuinely common.
+
+*Update, 21 October 2026:* the library has grown to 38 components in ten groups. The new ones are more kinds of snap fit, living hinges, quick-release parts (a bayonet, a side-release buckle, a cam lever, a toolbox latch) and aluminium-extrusion parts. The peg-and-socket registration listed above is now a fit setting of the pin-and-bore component.
