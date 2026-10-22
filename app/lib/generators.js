@@ -2976,7 +2976,7 @@ function baseSharedCopy(locale) {
       catalogLabel: "生成器",
       catalogTitle: "3D 打印生成器 — 参数化模型在线定制 | Forgent3D",
       catalogDescription:
-"免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、带盖收纳盒（滑盖、铰链、磁吸、分格）、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、ESP32 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架、法兰盘。调参数、3D 预览、导出 STL / STEP。"
+        "免费的在线 3D 打印生成器合集：Gridfinity 收纳盒与底板、带盖收纳盒（滑盖、铰链、磁吸、分格）、软管转接头、漏斗、直齿轮、斜齿轮、锥齿轮、齿条、GT2 同步带轮、联轴器、垫片、工具托盘、2020 型材角码、轴承座、风扇网罩、穿线孔盖、18650 电池支架、管夹、批头收纳、料盘架、树莓派 / Arduino 外壳、ESP32 外壳、洞洞板挂钩、层板三角支架、墙面挂钩、手机支架、法兰盘。调参数、3D 预览、导出 STL / STEP。",
       catalogH1: "3D 打印生成器",
       catalogIntro:
         "每个生成器都是一份真实的参数化 CAD 模型：拧参数实时重建，导出 STL / STEP；参数覆盖不到的需求，交给 AI agent 在同一个模型上继续改。",
@@ -3043,7 +3043,7 @@ function baseSharedCopy(locale) {
     catalogLabel: "Generators",
     catalogTitle: "3D Print Generators — Free Parametric Model Makers | Forgent3D",
     catalogDescription:
-"Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders, spool holders, Raspberry Pi and Arduino cases, ESP32 cases, pegboard hooks, shelf brackets, wall hooks, phone stands and bolt circle flanges. Tune parameters, preview in 3D, export STL / STEP."
+      "Free online 3D print generators: Gridfinity bins and baseplates, parametric boxes, hose adapters, funnels, spur, helical and bevel gears, gear racks, GT2 pulleys, shaft couplings, washers, tool trays, 2020 extrusion corner brackets, bearing pillow blocks, fan grills, desk grommets, 18650 battery holders, pipe clamps, hex bit holders, spool holders, Raspberry Pi and Arduino cases, ESP32 cases, pegboard hooks, shelf brackets, wall hooks, phone stands and bolt circle flanges. Tune parameters, preview in 3D, export STL / STEP.",
     catalogH1: "3D print generators",
     catalogIntro:
       "Every generator here is a real parametric CAD model: tune the parameters and it rebuilds live, export STL / STEP — and for anything beyond the sliders, the AI agent edits the same model.",
