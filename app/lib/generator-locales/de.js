@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generatoren",
   catalogTitle: "3D-Druck-Generatoren — kostenlose parametrische Modelle | Forgent3D",
   catalogDescription:
-"Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, ESP32-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken, Handyständer und Lochkreis-Flansche. Parameter einstellen, in 3D prüfen, STL / STEP exportieren."
+"Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, ESP32-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken, Handyständer und Lochkreis-Flansche. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
   catalogH1: "3D-Druck-Generatoren",
   catalogIntro:
     "Jeder Generator hier ist ein echtes parametrisches CAD-Modell: Ändern Sie die Parameter, baut es sich live neu auf, und Sie exportieren STL / STEP – was über die Schieberegler hinausgeht, ändert der KI-Agent am selben Modell.",
