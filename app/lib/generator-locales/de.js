@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generatoren",
   catalogTitle: "3D-Druck-Generatoren — kostenlose parametrische Modelle | Forgent3D",
   catalogDescription:
-    "Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken, Handyständer und Lochkreis-Flansche. Parameter einstellen, in 3D prüfen, STL / STEP exportieren.",
+"Kostenlose 3D-Druck-Generatoren online: Gridfinity-Bins und -Baseplates, parametrische Boxen, Schlauchadapter, Trichter, Stirn-, Schrägzahn- und Kegelräder, Zahnstangen, GT2-Riemenscheiben, Wellenkupplungen, Unterlegscheiben, Werkzeugeinlagen, Winkelverbinder für 2020-Aluprofile, Stehlager, Lüftergitter, Kabeldurchführungen für den Schreibtisch, 18650-Akkuhalter, Rohrschellen, Bithalter, Filament-Spulenhalter, Raspberry-Pi- und Arduino-Gehäuse, ESP32-Gehäuse, Lochwandhaken, Regalhalter, Wandhaken, Handyständer und Lochkreis-Flansche. Parameter einstellen, in 3D prüfen, STL / STEP exportieren."
   catalogH1: "3D-Druck-Generatoren",
   catalogIntro:
     "Jeder Generator hier ist ein echtes parametrisches CAD-Modell: Ändern Sie die Parameter, baut es sich live neu auf, und Sie exportieren STL / STEP – was über die Schieberegler hinausgeht, ändert der KI-Agent am selben Modell.",
@@ -1742,8 +1742,8 @@ export const generators = {
           a: "PETG oder besser: Ein Maker berichtet, dass ein Pi 5 einen Boden aus PLA erweicht hat. Lassen Sie die Lüftungsschlitze im Deckel an. Das Gehäuse lässt außerdem rundum 0,5 mm Platz um das Board, denn Gehäuse, die eng an der Platine anliegen, haben beim Zusammenbau Boards zerbrochen.",
         },
         {
-          q: "Warum ist das ESP32 DevKit nicht in der Liste?",
-          a: "Die DevKitC-Boards von Espressif haben keine Befestigungslöcher, und für die vielen Nachbauten gibt es keine offizielle Zeichnung, nach der man arbeiten könnte. Wählen Sie das nächstliegende Board und ändern Sie es mit „AI edit“. Raspberry Pi und Arduino sind Marken ihrer jeweiligen Inhaber; dieser Generator erzeugt kompatible Gehäuse und steht in keiner Verbindung zu ihnen.",
+          q: "Gibt es ein Gehäuse für ein ESP32 DevKit?",
+          a: "Ja, auf einer eigenen Seite: dem ESP32-Gehäuse-Generator, unten unter „Weitere Generatoren“ verlinkt. Die DevKitC-Boards von Espressif haben keine Befestigungslöcher, und bei den Nachbauten weichen die Lochpositionen von Quelle zu Quelle ab; deshalb hält jener Generator jedes seiner 15 ESP32-Boards – DevKit V1, DevKitC, S3, C3 SuperMini, XIAO, ESP32-CAM und weitere – an seinem Umriss statt mit Schrauben durch die Platine. Raspberry Pi und Arduino sind Marken ihrer jeweiligen Inhaber; dieser Generator erzeugt kompatible Gehäuse und steht in keiner Verbindung zu ihnen.",
         },
       ],
     },
@@ -1783,6 +1783,137 @@ export const generators = {
       "raspberry pi 4 gehäuse 3d druck",
       "arduino uno gehäuse 3d druck",
       "raspberry pi gehäuse generator",
+    ],
+  },
+
+  "esp32-case-generator": {
+    copy: {
+      name: "ESP32-Gehäuse-Generator",
+      title: "ESP32-Gehäuse-Generator — 3D-Druck für DevKit, XIAO & CAM (STL) | Forgent3D",
+      description:
+        "ESP32-Gehäuse für den 3D-Druck: 15 Boards vom DOIT DevKit V1 und DevKitC bis C3 SuperMini, XIAO und ESP32-CAM, am Umriss gehalten, verschraubter Deckel. STL/STEP gratis.",
+      h1: "ESP32-Gehäuse-Generator: 3D-Druck-Gehäuse für 15 ESP32-Boards, am Umriss der Platine gehalten",
+      intro:
+        "Wählen Sie Ihr Board – standardmäßig das DOIT ESP32 DevKit V1 mit 30 Pins – und Sie erhalten ein zweiteiliges Gehäuse: ein Unterteil, in das das Board eingelegt wird, und einen Deckel, dessen Rippen 0,3 mm über der Abschirmung des Moduls und dem Blech der USB-Buchse enden, verschlossen mit vier Senkkopfschrauben M3 von oben. Gehalten wird das Board an seinem Umriss, nicht an seinen Befestigungslöchern: Die DevKitC-Boards von Espressif haben keine, und bei den DOIT-Nachbauten weichen die Lochpositionen von Quelle zu Quelle um bis zu 1,4 mm ab. Geben Sie an, ob die Stiftleisten nach unten zeigen, das Board ohne Stifte ist oder Jumperkabel gesteckt bleiben – das Unterteil bekommt darunter entsprechend Platz.",
+      whyPoints: [
+        "15 Boards: DOIT DevKit V1, ESP32-DevKitC V4, die DevKits für ESP32-S3, C6 und C3, YD-ESP32-S3, C3 SuperMini, S3-Zero, vier Seeed XIAO, Arduino Nano ESP32, LilyGO T-Display-S3 und ESP32-CAM",
+        "Gehalten in einer Aufnahme, die dem Umriss des Boards mit 0,3 mm je Seite folgt, und von Rippen im Deckel niedergehalten – keine Zapfen, die man herausschneiden muss",
+        "Platz unter dem Board für eingelötete Stiftleisten oder für gesteckte Jumperkabel, mit einer einzigen Auswahl eingestellt",
+        "USB-Öffnungen für den Stecker bemessen, Löcher über den Tastern, Öffnungen für Kamera, Display und SD-Karte, wo das Board sie hat",
+        "Auf Wunsch ein Kabelschlitz oder ein Loch für eine PG7-Kabelverschraubung, Laschen für die Wandmontage und Lüftungsschlitze im Deckel",
+      ],
+      sizes: {
+        title: "Die 15 Boards und ihre Gehäuse",
+        intro: "Jedes Gehäuse mit den Standardwerten (Passungsspiel 0,3, Wand 2, Platz hinter der Antenne 2, kein Kabelausgang), in mm; die Höhe gilt für Unterteil und Deckel zusammen, mit Stiften nach unten / ohne Stifte / mit Jumperkabeln. Ein Board kommt nur in die Liste, wenn seine Geometrie echt ist: Hersteller-CAD (STEP oder DXF), das wir vermessen haben, eine offizielle Zeichnung oder – bei Nachbauten – mindestens zwei unabhängige Quellen, die übereinstimmen, wobei die Aufnahme die Streuung zwischen ihnen abdeckt. Jede Zeile öffnet den Generator mit diesem Board.",
+        head: ["Board", "Board-Daten aus", "Gehäuse außen", "Über die Schraubendome", "Höhe", "Schrauben", ""],
+        rows: [
+          ["ESP32 DevKit V1 (DOIT, 30 Pins)", "Nachbau: eine vollständige STEP-Datei mit allen Bauteilen, Umriss aus fünf Quellen (51,4–52,0 × 27,9–28,5); die Aufnahme deckt die Streuung ab"],
+          ["ESP32-DevKitC V4 (38 Pins)", "Maß-DXF und Platinenlayout von Espressif (nichts unter dem Board); Höhen der Anschlüsse aus den STEP-Dateien anderer Boards"],
+          ["ESP32-S3-DevKitC-1", "Maß-DXF und Platinenlayout von Espressif (nichts unter dem Board); Höhen der Anschlüsse aus den STEP-Dateien anderer Boards"],
+          ["YD-ESP32-S3 (N16R8, 44 Pins)", "Zeichnung des Herstellers und eine unabhängige STEP-Datei, die übereinstimmen; die USB-C-Öffnungen decken beide ab"],
+          ["ESP32-C3 SuperMini", "Nachbau: Zeichnung des Verkäufers und eine STEP-Datei aus der Community; die Aufnahme nimmt auch bis zu 1,5 mm längere Boards auf"],
+          ["ESP32-C6-DevKitC-1", "Maß-DXF und Platinenlayout von Espressif (nichts unter dem Board); Höhen der Anschlüsse aus den STEP-Dateien anderer Boards"],
+          ["ESP32-C3-DevKitM-1", "Maß-DXF und Platinenlayout von Espressif (nichts unter dem Board); Höhen der Anschlüsse aus den STEP-Dateien anderer Boards"],
+          ["Waveshare ESP32-S3-Zero", "Zeichnung und STEP-Datei von Waveshare"],
+          ["Seeed XIAO ESP32S3", "STEP und DXF von Seeed (externe u.FL-Antenne)"],
+          ["Seeed XIAO ESP32S3 Sense", "STEP von Seeed mit dem Kameraaufbau; die Kamera ragt 3,76 mm durch den Deckel; keine microSD-Öffnung (der Kartenslot fehlt in der STEP-Datei)"],
+          ["Seeed XIAO ESP32C6", "Eigene STEP-Datei und KiCad-Platine von Seeed"],
+          ["Seeed XIAO ESP32C3", "STEP aus der Community, geprüft an der KiCad-Platine von Seeed; Platinenstärke nicht veröffentlicht, das Gehäuse rechnet mit 1,25"],
+          ["Arduino Nano ESP32", "STEP und Datenblatt von Arduino"],
+          ["LilyGO T-Display-S3", "Platine und vollständige STEP-Datei von LilyGO; Fenster über dem Displayglas"],
+          ["ESP32-CAM (AI-Thinker)", "Zeichnung von Ai-Thinker und eine STEP-Datei aus der Community; die Aufnahme deckt die Längenstreuung von 40–40,5 ab"],
+        ],
+        open: "Öffnen",
+        note: "Wo die Platinenstärke eines Boards nicht veröffentlicht ist, rechnet das Gehäuse mit 1,6 mm, dem oberen Ende des gemessenen Bereichs: Ein dünneres Board sitzt etwas tiefer und hat unter den Rippen bis zu etwa 0,7 mm Spiel, gequetscht wird es nie. Mit einer PG7-Kabelverschraubung wird der Deckel höher, damit die Gegenmutter Platz hat, und die Schrauben können länger werden (DevKit V1: M3 × 20, 23,6 mm hoch).",
+      },
+      faqs: [
+        {
+          q: "Warum liegt das Board in einer Aufnahme statt auf Zapfen oder an Schrauben?",
+          a: "Die DevKitC-Boards von Espressif haben keine Befestigungslöcher, und bei den DOIT-Nachbauten weichen die Lochpositionen zwischen den Quellen um bis zu 1,4 mm ab. Beim meistgeladenen ESP32-Gehäuse auf MakerWorld schreiben mindestens 12 Kommentare, dass sie die Zapfen herausschneiden mussten. Deshalb folgt die Aufnahme dem Umriss des Boards mit 0,3 mm je Seite, das Board liegt auf Auflagen dort, wo seine Unterseite frei ist, und Rippen unter dem Deckel halten es nieder. Ist Ihr Nachbau etwas größer, erhöhen Sie das Passungsspiel – Nutzer anderer Gehäuse skalieren diese auf 101–110 %.",
+        },
+        {
+          q: "Passt es mit eingelöteten Stiftleisten oder mit gesteckten Jumperkabeln?",
+          a: "Die meisten Boards werden mit nach unten eingelöteten Stiften verkauft, deshalb ist das der Standard: Die Stiftspitzen reichen 8,54 mm unter das Board, und das Unterteil lässt 1 mm mehr. „Unten nicht genug Platz für Dupont-Kabel“ ist eine häufige Beschwerde über andere Gehäuse – wählen Sie „Jumper wires on the pins“, und das Unterteil schafft Platz für 14 mm lange Dupont-Stecker und eine Kabelbiegung von 5 mm (33,6 mm hoch bei einem DevKit V1). XIAO, C3 SuperMini, S3-Zero, Nano ESP32 und T-Display-S3 werden ohne aufgelötete Stiftleisten verkauft; „No pins“ ergibt das flachste Gehäuse.",
+        },
+        {
+          q: "Verschlechtert das Gehäuse das WLAN?",
+          a: "Wir haben es nicht gemessen, und die Seite verspricht nichts über das Signal. Die Hardware-Designrichtlinien von Espressif empfehlen in einem Gehäuse mindestens 15 mm Freiraum rund um eine Leiterplattenantenne, in alle Richtungen, und sagen, dass das Endprodukt auf Durchsatz und Reichweite getestet werden sollte. „Platz hinter der Antenne“ reicht bis 15 mm über das Antennenende hinaus, über die ganze Breite (ein Gehäuse für das ESP32-S3-DevKitC-1 wächst von 75,8 auf 88,8 mm); an den Seiten bleibt es bei der Wand der Aufnahme. In rund 1.000 Kommentaren zu beliebten ESP32-Gehäusen haben wir keine Beschwerde über den Empfang gefunden; die Beschwerden zur Antenne betrafen Boards, die nicht hineinpassten.",
+        },
+        {
+          q: "Welche Schrauben und welches Filament?",
+          a: "Vier Senkkopfschrauben M3 (ISO 10642 / DIN 7991) gehen von oben durch den Deckel in Vorbohrungen im Unterteil, in die sie ihr Gewinde selbst schneiden: M3 × 16 für jedes Board außer dem ESP32-CAM, das M3 × 20 braucht (auch eine PG7-Kabelverschraubung kann sie verlängern). Der Generator wählt die kürzeste Normlänge, die 6 mm Gewinde im Unterteil lässt. Gedruckt wird wie bei den bestplatzierten Gehäusen: PLA oder PETG, 0,2 mm Schichthöhe, ohne Stützen – das Unterteil mit dem Boden nach unten, der Deckel mit der Oberseite nach unten, so wie sie auf der Druckplatte liegen; Brücken gibt es nur über den Lüftungsschlitzen und Fenstern. Für das ESP32-CAM nehmen Sie PETG.",
+        },
+        {
+          q: "Passt das ESP32-CAM-Gehäuse auf die Programmierplatine CAM-MB?",
+          a: "Nein. Vom ESP32-CAM-MB gibt es weder eine CAD-Datei noch eine Zeichnung, nur Händlermaße, die sich widersprechen (40 × 27 × 10, 39,8 × 27, 40 × 25). Das Gehäuse ist deshalb für das nackte Board gedacht, das über seine Stifte versorgt wird, und hat immer einen Kabelschlitz für diese Leitungen. Programmieren Sie das Board auf der MB-Platine außerhalb des Gehäuses.",
+        },
+        {
+          q: "Warum ist mein ESP32-Board nicht in der Liste?",
+          a: "Ein Board kommt nur hinein, wenn seine Geometrie echt ist: Hersteller-CAD, eine offizielle Zeichnung oder zwei unabhängige Quellen, die übereinstimmen. Vorerst fehlen: die Nachbauten mit 38 Pins und USB-C (kein CAD, Längen von 48,26 bis 51 mm), die USB-C-Version des DOIT DevKit V1, das ESP32-S3 SuperMini, das NodeMCU-32S, die LOLIN-mini-Boards (Anschlüsse nicht bemaßt), das ursprüngliche LilyGO T-Display sowie die Kameraboards von Freenove und M5Stack. Wählen Sie das nächstliegende Board und ändern Sie es mit „AI edit“. ESP32 ist eine Marke von Espressif Systems, und die Boardnamen gehören ihren Herstellern; dieser Generator erzeugt kompatible Gehäuse und steht in keiner Verbindung zu ihnen.",
+        },
+        {
+          q: "Wurde dieses Gehäuse gedruckt und getestet?",
+          a: "Noch nicht. Die 11 Boards, für die es eine STEP-Datei vom Hersteller oder aus der Community gibt (alle außer den vier DevKits von Espressif, die als DXF-Zeichnungen vorliegen), wurden in ihre Gehäuse gesetzt – ohne jede Überschneidung mit Unterteil und Deckel –, und 14 automatische Prüfungen bestehen für jedes Board und jede Variante unter dem Board; gedruckt wurde aber noch kein Gehäuse. Am echten Druck noch zu prüfen: das Spiel von 0,3 mm bei jedem Board, ob ein dünnes Board unter den Rippen klappert (ein Tropfen Heißkleber ist die Lösung, die Nutzer selbst gefunden haben), ob die M3-Schrauben ihr Gewinde in die gedruckten Vorbohrungen schneiden, ob man die Taster mit einer Büroklammer erreicht, Linsenschlitz, Blitzfenster und SD-Karte des ESP32-CAM, das Kamerafenster des XIAO Sense, der Glasrand des T-Display-S3, echte Stecker in den Öffnungen, die PG7-Kabelverschraubung und das WLAN durch das Gehäuse.",
+        },
+      ],
+    },
+    params: {
+      BOARD: {
+        label: "Board",
+        desc: "Standardmäßig das DOIT DevKit V1 mit 30 Pins: Die meistgeladenen ESP32-Gehäuse auf MakerWorld sind für diese DevKit-Boards. Umriss, Stifte, Antenne, Anschlüsse und Taster jedes Boards stammen aus seinen eigenen Daten, aufgeführt in der Tabelle unten.",
+      },
+      PINS: {
+        label: "Unter dem Board",
+        desc: "Stifte nach unten – so werden die meisten Boards verkauft; ihre Spitzen reichen 8,54 mm unter das Board, und das Unterteil lässt 1 mm mehr. „Jumper wires on the pins“ schafft zusätzlich Platz für 14 mm lange Dupont-Stecker und eine Kabelbiegung von 5 mm. „No pins“ ergibt das flachste Gehäuse.",
+      },
+      FIT: {
+        label: "Passungsspiel",
+        desc: "Spalt je Seite zwischen Board und Aufnahme. 0,3 ist die Zugabe der ESP32-CAM-Box aus der Gehäusebibliothek YAPP; Nutzer engerer Gehäuse skalieren diese auf 101–110 %, damit Nachbauten hineinpassen. Erhöhen Sie den Wert, wenn Ihr Board etwas größer ist.",
+      },
+      WALL: {
+        label: "Wandstärke",
+        desc: "2 mm wie bei den beliebten Gehäusen (YAPP: 2,0; das Open-Source-Gehäuse für das C3 SuperMini: 2); 1,2 sind drei Perimeter à 0,4 mm.",
+      },
+      ROOM: {
+        label: "Platz hinter der Antenne",
+        desc: "Freiraum hinter dem Antennenende des Moduls, über die ganze Breite. Beliebte Gehäuse lassen 0,3–1 mm, und Nutzer haben 1–2 mm mehr verlangt; 15 ist der Freiraum, den Espressif in einem Gehäuse rund um die Antenne empfiehlt.",
+      },
+      WIRE_EXIT: {
+        label: "Kabelausgang",
+        desc: "In der hinteren Stirnwand: ein 5,5 mm breiter Schlitz vom Boden bis zur Trennfuge (drei Litzen 20 AWG, Dupont-Stecker passen durch) oder ein 12,8-mm-Loch für eine PG7-Kabelverschraubung, mit Platz innen für ihre Gegenmutter. Das ESP32-CAM bekommt immer den Schlitz: Es wird über seine Stifte versorgt.",
+      },
+      EARS: {
+        label: "Befestigungslaschen",
+        desc: "Zwei 3 mm dicke Laschen auf Bodenhöhe an den Längsseiten, jede mit einem Senkloch für M3, für eine Wand oder eine Montageplatte. Standardmäßig aus, damit das Gehäuse ohne Überstände auf dem Tisch steht.",
+      },
+      VENTS: {
+        label: "Lüftungsschlitze im Deckel",
+        desc: "2 mm breite Schlitze quer über den Deckel, mit Abstand zu Rippen, Fenstern und Tasterlöchern. Standardmäßig an: Ein Nutzer des ESP32-CAM berichtet, dass die Blitz-LED „sehr heiß wird“.",
+      },
+    },
+    example: "DevKitC-V4-Gehäuse mit Platz für Jumperkabel, Kabelschlitz und Laschen für die Wandmontage",
+    step: [
+      "Das Standardgehäuse (ESP32 DevKit V1) wird als zwei exakte Körper exportiert, Unterteil und Deckel, mit 149 Flächen: 121 Ebenen, 24 echte Zylinder (Durchgangslöcher und Vorbohrungen der Schrauben, die Schraubendome in den Ecken, die Tasterlöcher, die Ecken der Aufnahme) und 4 Kegel (die Senkungen für die M3-Köpfe), ohne Spline-Flächen. CAD liest jede Öffnung, jede Wand der Aufnahme und jedes Schraubenloch direkt aus der Datei ab – der Ausgangspunkt, wenn Sie eine eigene Halterung oder einen eigenen Ausschnitt ergänzen möchten.",
+      "Das Gehäuse für das ESP32-CAM hat 159 Flächen: 126 Ebenen, 29 Zylinder und 4 Kegel.",
+    ],
+    aiFaqs: [
+      {
+        q: "Wie bekomme ich ein Gehäuse für ein ESP32-CAM zum 3D-Drucken?",
+        a: "Öffnen Sie https://www.forgent3d.com/de/generators/esp32-case-generator?BOARD=ESP32-CAM – ein zweiteiliges Gehäuse für das ESP32-CAM von AI-Thinker: ein Schlitz über der Linse (9 bis 10,5 mm vom SD-Ende, was die Linsenpositionen aus drei Quellen abdeckt), ein Fenster für die Blitz-LED, die microSD-Karte wird durch die Stirnwand gesteckt und entnommen, ein Loch im Boden für den Reset-Taster und ein Kabelschlitz, weil das Board über seine Stifte versorgt wird. Es misst 54,0 × 38,5 mm über die Schraubendome und ist 23,7 mm hoch, verschlossen mit vier Senkkopfschrauben M3 × 20. Drucken Sie es in PETG; laut dem Bericht eines Nutzers hat die Blitz-LED ein PLA-Gehäuse erweicht. Die Programmierplatine ESP32-CAM-MB wird nicht unterstützt.",
+      },
+      {
+        q: "Gibt es ein ESP32-DevKit-Gehäuse zum Anschrauben an die Wand, mit Kabelverschraubung?",
+        a: "Ja: https://www.forgent3d.com/de/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true – das Gehäuse für das DOIT DevKit V1 mit 30 Pins, mit einem 12,8-mm-Loch für eine PG7-Kabelverschraubung in der hinteren Stirnwand, Platz innen für Gegenmuttern bis 19,05 mm Schlüsselweite und zwei Laschen mit Senklöchern für M3 an den Längsseiten, 44,1 mm auseinander. Der Deckel wird höher, damit die Gegenmutter Platz hat: 23,6 mm hoch, vier Schrauben M3 × 20. Mit seinen Lüftungsschlitzen und der verschraubten Fuge ist es kein dichtes oder wasserdichtes Gehäuse.",
+      },
+    ],
+    keywords: [
+      "esp32 gehäuse",
+      "esp32 case 3d print",
+      "esp32 case",
+      "esp32 gehäuse 3d druck",
+      "esp32 cam gehäuse",
+      "esp32 s3 gehäuse",
+      "esp32 gehäuse generator",
     ],
   },
 

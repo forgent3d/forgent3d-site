@@ -56,10 +56,11 @@ export async function generateMetadata({ params }) {
 
 const linkClass = "text-brand underline-offset-2 transition-colors hover:text-brand/80 hover:underline";
 
-/** A number in a table cell: at most two decimals, with the decimal comma German readers expect. */
+/** A number in a table cell: at most two decimals, with the decimal comma German readers expect. A text cell
+ *  ("58.6 × 33.1", a board's name) is shown as written, its decimal points turned into commas for German too. */
 function cellNumber(value, locale) {
-  const text = String(Math.round(value * 100) / 100);
-  return locale === "de" ? text.replace(".", ",") : text;
+  const text = typeof value === "number" ? String(Math.round(value * 100) / 100) : String(value);
+  return locale === "de" ? text.replace(/(\d)\.(\d)/g, "$1,$2") : text;
 }
 
 export default async function GeneratorLandingPage({ params }) {
@@ -232,13 +233,20 @@ export default async function GeneratorLandingPage({ params }) {
                 </tr>
               </thead>
               <tbody>
-                {generator.sizes.map((row) => {
+                {generator.sizes.map((row, index) => {
                   // The row's values in this page's own link: the embedded generator opens on that part.
                   const query = new URLSearchParams(Object.entries(row.params).map(([k, v]) => [k, String(v)])).toString();
+                  // Cells in this page's language (`copy.sizes.rows`, one array per row) lead the row: a board's name
+                  // and where its data comes from; `row.cells` are the language-neutral values after them.
+                  const lead = copy.sizes.rows?.[index] || [];
+                  const cells = [...lead, ...row.cells];
                   return (
                     <tr key={query} className="border-b border-border/60 last:border-b-0">
-                      {row.cells.map((value, i) => (
-                        <td key={i} className={`px-4 py-3 font-mono ${i < 2 ? "text-foreground" : "text-muted-foreground"}`}>
+                      {cells.map((value, i) => (
+                        <td
+                          key={i}
+                          className={`px-4 py-3 ${i < lead.length ? (i === 0 ? "font-medium text-foreground" : "text-muted-foreground") : `font-mono ${lead.length === 0 && i < 2 ? "text-foreground" : "text-muted-foreground"}`}`}
+                        >
                           {cellNumber(value, locale)}
                         </td>
                       ))}

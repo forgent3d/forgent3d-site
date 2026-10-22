@@ -5,7 +5,7 @@ export const shared = {
   catalogLabel: "Generadores",
   catalogTitle: "Generadores para impresión 3D — Modelos paramétricos gratis | Forgent3D",
   catalogDescription:
-    "Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas, portabobinas, carcasas para Raspberry Pi y Arduino, ganchos para tablero perforado, escuadras para estantería, ganchos de pared, soportes para móvil y bridas circulares con círculo de pernos. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP.",
+"Generadores gratis online para impresión 3D: contenedores y placas base Gridfinity, cajas paramétricas, adaptadores de manguera, embudos, engranajes rectos, helicoidales y cónicos, cremalleras, poleas GT2, acopladores de eje, arandelas, bandejas para herramientas, escuadras para perfil 2020, chumaceras, rejillas de ventilador, pasacables de escritorio, soportes 18650, abrazaderas para tubo, soportes para puntas, portabobinas, carcasas para Raspberry Pi y Arduino, carcasas para ESP32, ganchos para tablero perforado, escuadras para estantería, ganchos de pared, soportes para móvil y bridas circulares con círculo de pernos. Ajusta parámetros, previsualiza en 3D y exporta STL / STEP."
   catalogH1: "Generadores para impresión 3D",
   catalogIntro:
     "Cada generador de esta página es un modelo CAD paramétrico de verdad: ajusta los parámetros y se reconstruye al instante, exporta STL / STEP y, para todo lo que vaya más allá de los deslizadores, el agente de IA edita el mismo modelo.",
@@ -1787,8 +1787,8 @@ export const generators = {
           a: "PETG o mejor: un maker cuenta que una Pi 5 ablandó una base de PLA. Deja activadas las rejillas de la tapa. La carcasa también deja 0.5 mm alrededor de toda la placa, porque las carcasas que se ciñen al PCB han agrietado placas durante el montaje.",
         },
         {
-          q: "¿Por qué no está el ESP32 DevKit en la lista?",
-          a: "Las placas DevKitC de Espressif no tienen agujeros de montaje, y las muchas placas clónicas no tienen un plano oficial del que partir. Elige la placa más parecida y usa “AI edit” para cambiarla. Raspberry Pi y Arduino son marcas registradas de sus respectivos propietarios; este generador hace carcasas compatibles y no tiene relación con ellos.",
+          q: "¿Hay una carcasa para el ESP32 DevKit?",
+          a: "Sí, en su propia página: el generador de carcasas para ESP32, enlazado en «Más generadores» más abajo. Las placas DevKitC de Espressif no tienen agujeros de montaje y en las placas clónicas la posición de los agujeros cambia de una fuente a otra, así que ese generador sujeta cada una de sus 15 placas ESP32 (DevKit V1, DevKitC, S3, C3 SuperMini, XIAO, ESP32-CAM y otras) por su contorno, no con tornillos que atraviesen la placa. Raspberry Pi y Arduino son marcas registradas de sus respectivos propietarios; este generador hace carcasas compatibles y no tiene relación con ellos.",
         },
       ],
     },
@@ -1828,6 +1828,138 @@ export const generators = {
       "caja raspberry pi 4 impresa en 3d",
       "carcasa arduino uno stl",
       "carcasa raspberry pi impresión 3d",
+    ],
+  },
+
+  "esp32-case-generator": {
+    copy: {
+      name: "Generador de carcasas para ESP32",
+      title: "Generador de carcasas ESP32 — DevKit, XIAO y ESP32-CAM (STL) | Forgent3D",
+      description:
+        "Carcasa imprimible en 3D para 15 placas ESP32 (DOIT DevKit V1, DevKitC, C3 SuperMini, XIAO, ESP32-CAM…), sujeta por su contorno y con tapa atornillada. STL / STEP gratis.",
+      h1: "Generador de carcasas para ESP32: una carcasa impresa en 3D para 15 placas ESP32, sujetas por su contorno",
+      intro:
+        "Elige tu placa (la ESP32 DevKit V1 de DOIT de 30 pines por defecto) y obtén una carcasa de dos piezas: una base en la que la placa se encaja sin más y una tapa cuyos nervios se quedan a 0.3 mm por encima del blindaje del módulo y de la carcasa metálica del USB, cerrada con cuatro tornillos avellanados M3 desde arriba. La placa se sujeta por su contorno, no por sus agujeros de montaje: las placas DevKitC de Espressif no los tienen, y en los clones de DOIT la posición de los agujeros cambia hasta 1.4 mm de una fuente a otra. Indica si los pines apuntan hacia abajo, si la placa va sin pines o si los cables de puente se quedan conectados, y la base deja ese espacio por debajo.",
+      whyPoints: [
+        "15 placas: DOIT DevKit V1, ESP32-DevKitC V4, las DevKit de ESP32-S3, C6 y C3, YD-ESP32-S3, C3 SuperMini, S3-Zero, cuatro Seeed XIAO, Arduino Nano ESP32, LilyGO T-Display-S3 y ESP32-CAM",
+        "Sujeta en un alojamiento que sigue el contorno de la placa con 0.3 mm por lado y presionada por nervios de la tapa: no hay pasadores que cortar",
+        "Espacio por debajo para pines soldados o para cables de puente hembra, con una sola opción",
+        "Aberturas USB dimensionadas para la clavija, agujeros sobre los botones y aberturas para la cámara, la pantalla y la tarjeta SD donde la placa las tiene",
+        "Opcional: ranura para cables o agujero para prensaestopas PG7, pestañas de montaje en pared y rejillas en la tapa",
+      ],
+      sizes: {
+        title: "Las 15 placas y sus carcasas",
+        intro:
+          "Cada carcasa con los valores por defecto (holgura 0.3, pared 2, espacio tras la antena 2, sin salida de cables), en mm; la altura es base y tapa juntas, con los pines hacia abajo / sin pines / con cables de puente. Una placa entra en la lista solo si su geometría es real: CAD del fabricante (STEP o DXF) que hemos medido, un plano oficial o, para las placas clónicas, al menos dos fuentes independientes que coinciden, con un alojamiento que cubre la diferencia entre ellas. Cada fila abre el generador con esa placa.",
+        head: ["Placa", "Datos de la placa", "Exterior de la carcasa", "Sobre las columnas de tornillo", "Altura", "Tornillos", ""],
+        rows: [
+          ["ESP32 DevKit V1 (DOIT, 30 pines)", "Placa clónica: un STEP completo con todos los componentes, contorno de cinco fuentes (51.4–52.0 × 27.9–28.5); el alojamiento cubre la diferencia"],
+          ["ESP32-DevKitC V4 (38 pines)", "DXF de dimensiones y diseño del PCB de Espressif (nada bajo la placa); alturas de los conectores tomadas de los STEP de otras placas"],
+          ["ESP32-S3-DevKitC-1", "DXF de dimensiones y diseño del PCB de Espressif (nada bajo la placa); alturas de los conectores tomadas de los STEP de otras placas"],
+          ["YD-ESP32-S3 (N16R8, 44 pines)", "El plano del fabricante y un STEP independiente, que coinciden; las aberturas USB-C cubren ambos"],
+          ["ESP32-C3 SuperMini", "Placa clónica: plano del vendedor y un STEP de la comunidad; el alojamiento admite placas hasta 1.5 mm más largas"],
+          ["ESP32-C6-DevKitC-1", "DXF de dimensiones y diseño del PCB de Espressif (nada bajo la placa); alturas de los conectores tomadas de los STEP de otras placas"],
+          ["ESP32-C3-DevKitM-1", "DXF de dimensiones y diseño del PCB de Espressif (nada bajo la placa); alturas de los conectores tomadas de los STEP de otras placas"],
+          ["Waveshare ESP32-S3-Zero", "Plano y STEP de Waveshare"],
+          ["Seeed XIAO ESP32S3", "STEP y DXF de Seeed (antena u.FL externa)"],
+          ["Seeed XIAO ESP32S3 Sense", "STEP de Seeed del conjunto con cámara; la cámara asoma 3.76 mm por encima de la tapa; sin abertura para la microSD (la ranura no está en el STEP)"],
+          ["Seeed XIAO ESP32C6", "STEP y PCB de KiCad del propio Seeed"],
+          ["Seeed XIAO ESP32C3", "STEP de la comunidad comprobado con el PCB de KiCad de Seeed; el grosor del PCB no está publicado y la carcasa supone 1.25"],
+          ["Arduino Nano ESP32", "STEP y hoja de datos de Arduino"],
+          ["LilyGO T-Display-S3", "PCB y STEP completo de LilyGO; ventana sobre el cristal de la pantalla"],
+          ["ESP32-CAM (AI-Thinker)", "Plano de Ai-Thinker y un STEP de la comunidad; el alojamiento cubre la diferencia de longitud de 40–40.5"],
+        ],
+        open: "Abrir",
+        note: "Si el grosor del PCB de una placa no está publicado, la carcasa supone 1.6 mm, el máximo del rango medido: una placa más fina queda un poco más baja y tiene hasta unos 0.7 mm de juego bajo los nervios, pero nunca se aplasta. Con un prensaestopas PG7, la tapa crece para alojar la contratuerca y los tornillos pueden alargarse (DevKit V1: M3 × 20, 23.6 mm de alto).",
+      },
+      faqs: [
+        {
+          q: "¿Por qué la placa va en un alojamiento y no sobre pasadores o tornillos?",
+          a: "Las placas DevKitC de Espressif no tienen agujeros de montaje, y en los clones de DOIT la posición de los agujeros cambia hasta 1.4 mm entre fuentes. En la carcasa para ESP32 más descargada de MakerWorld, al menos 12 comentarios cuentan que tuvieron que cortar los pasadores. Por eso el alojamiento sigue el contorno de la placa con 0.3 mm por lado, la placa descansa sobre apoyos donde su cara inferior está libre y unos nervios bajo la tapa la sujetan. Si tu clon es un poco más grande, sube la holgura de ajuste: con otras carcasas, hay quien las escala al 101–110 %.",
+        },
+        {
+          q: "¿Cabe con los pines soldados o con cables de puente conectados?",
+          a: "La mayoría de las placas se venden con los pines soldados hacia abajo, así que esa es la opción por defecto: las puntas de los pines llegan a 8.54 mm por debajo de la placa y la base deja 1 mm más. «No hay sitio debajo para los cables con conector Dupont» es una queja habitual en otras carcasas: elige cables de puente en los pines («Jumper wires on the pins») y la base deja sitio para conectores Dupont de 14 mm y una curva de cable de 5 mm (33.6 mm de alto en una DevKit V1). Las placas XIAO, C3 SuperMini, S3-Zero, Nano ESP32 y T-Display-S3 se venden sin los pines soldados; sin pines («No pins») sale la carcasa más plana.",
+        },
+        {
+          q: "¿La carcasa empeora el Wi-Fi?",
+          a: "No lo hemos medido, y esta página no promete nada sobre la señal. Las guías de diseño de hardware de Espressif recomiendan al menos 15 mm de espacio libre alrededor de una antena de PCB dentro de una carcasa, en todas las direcciones, y dicen que el producto final debe probarse en rendimiento y alcance. «Espacio tras la antena» llega hasta 15 mm más allá del extremo de la antena, en todo el ancho (la carcasa de una ESP32-S3-DevKitC-1 pasa de 75.8 a 88.8 mm); los lados se quedan en la pared del alojamiento. En unos 1.000 comentarios de carcasas para ESP32 populares no encontramos ninguna queja sobre la recepción; las quejas relacionadas con la antena eran de placas que no entraban.",
+        },
+        {
+          q: "¿Qué tornillos y qué filamento?",
+          a: "Cuatro tornillos avellanados M3 (ISO 10642 / DIN 7991) bajan a través de la tapa hasta agujeros guía en la base, donde se roscan solos: M3 × 16 para todas las placas excepto la ESP32-CAM, que lleva M3 × 20 (un prensaestopas PG7 también puede alargarlos). El generador elige la longitud estándar más corta que deja 6 mm de rosca en la base. Imprímela como las carcasas más populares: PLA o PETG, capas de 0.2 mm, sin soportes; la base con el fondo sobre la cama y la tapa boca abajo, tal como vienen colocadas; los únicos puentes están sobre las rejillas y las ventanas. Para la ESP32-CAM, usa PETG.",
+        },
+        {
+          q: "¿La carcasa de la ESP32-CAM admite la base programadora CAM-MB?",
+          a: "No. No hay archivo CAD ni plano de la ESP32-CAM-MB, solo medidas de tienda que no coinciden (40 × 27 × 10, 39.8 × 27, 40 × 25), así que la carcasa es para la placa sola, alimentada por sus pines, y siempre lleva una ranura para esos cables. Programa la placa en la base MB fuera de la carcasa.",
+        },
+        {
+          q: "¿Por qué mi placa ESP32 no está en la lista?",
+          a: "Una placa entra solo si su geometría es real: CAD del fabricante, un plano oficial o dos fuentes independientes que coinciden. Fuera por ahora: los clones de 38 pines con USB-C (sin CAD, longitudes de 48.26 a 51 mm), la versión USB-C de la DOIT DevKit V1, la ESP32-S3 SuperMini, la NodeMCU-32S, las placas mini de LOLIN (conectores sin acotar), la LilyGO T-Display original y las placas con cámara de Freenove y M5Stack. Elige la placa más parecida y usa “AI edit” para cambiarla. ESP32 es una marca registrada de Espressif Systems y los nombres de las placas pertenecen a sus fabricantes; este generador hace carcasas compatibles y no tiene relación con ellos.",
+        },
+        {
+          q: "¿Se ha impreso y probado esta carcasa?",
+          a: "Todavía no. Las 11 placas que tienen un archivo STEP del fabricante o de la comunidad (todas menos las cuatro DevKit de Espressif, que vienen como planos DXF) se colocaron en sus carcasas sin ninguna interferencia con la base ni con la tapa, y 14 comprobaciones automáticas pasan en cada placa y cada opción de pines, pero aún no se ha impreso ninguna carcasa. Falta comprobar en impresiones reales: la holgura de 0.3 mm en cada placa, si los nervios dejan bailar una placa fina (un punto de pegamento caliente es el arreglo de los propios usuarios), los tornillos M3 roscándose en los agujeros guía impresos, llegar a los botones con un clip, la ranura de la lente, la ventana del flash y la tarjeta SD de la ESP32-CAM, la ventana de la cámara de la XIAO Sense, el marco del cristal de la T-Display-S3, clavijas reales en las aberturas, el prensaestopas PG7 y el Wi-Fi a través de la carcasa.",
+        },
+      ],
+    },
+    params: {
+      BOARD: {
+        label: "Placa",
+        desc: "La DOIT DevKit V1 de 30 pines por defecto: las carcasas para ESP32 más descargadas de MakerWorld son para estas placas DevKit. El contorno, los pines, la antena, los conectores y los botones de cada placa salen de sus propios datos, indicados en la tabla de abajo.",
+      },
+      PINS: {
+        label: "Bajo la placa",
+        desc: "Con los pines hacia abajo es como se venden la mayoría de las placas; sus puntas llegan a 8.54 mm por debajo de la placa y la base deja 1 mm más. Con cables de puente se añade sitio para conectores Dupont de 14 mm y una curva de cable de 5 mm. Sin pines sale la carcasa más plana.",
+      },
+      FIT: {
+        label: "Holgura de ajuste",
+        desc: "Separación por lado entre la placa y su alojamiento. 0.3 es el margen de la caja para ESP32-CAM de la biblioteca de carcasas YAPP; con carcasas más justas, hay quien las escala al 101–110 % para que entren las placas clónicas. Súbela si tu placa es un poco más grande.",
+      },
+      WALL: {
+        label: "Grosor de pared",
+        desc: "2 mm, como las carcasas populares (YAPP, 2.0; la carcasa de código abierto para la C3 SuperMini, 2); 1.2 son tres perímetros de 0.4 mm.",
+      },
+      ROOM: {
+        label: "Espacio tras la antena",
+        desc: "Espacio libre más allá del extremo de la antena del módulo, en todo el ancho. Las carcasas populares dejan 0.3–1 mm y hay usuarios que pidieron 1–2 más; 15 es el espacio libre que Espressif recomienda alrededor de la antena dentro de una carcasa.",
+      },
+      WIRE_EXIT: {
+        label: "Salida de cables",
+        desc: "En la pared del extremo opuesto: una ranura de 5.5 mm desde el fondo hasta la línea de separación (tres cables de 20 AWG; los conectores Dupont pasan), o un agujero de 12.8 mm para un prensaestopas PG7 con sitio dentro para su contratuerca. La ESP32-CAM siempre lleva la ranura: se alimenta por sus pines.",
+      },
+      EARS: {
+        label: "Pestañas de montaje",
+        desc: "Dos pestañas de 3 mm a ras del suelo en los lados largos, cada una con un agujero avellanado M3, para una pared o un panel. Desactivadas por defecto, para que la carcasa se apoye en la mesa sin nada que sobresalga.",
+      },
+      VENTS: {
+        label: "Rejillas en la tapa",
+        desc: "Ranuras de 2 mm a lo ancho de la tapa, apartadas de los nervios, las ventanas y los agujeros de los botones. Activadas por defecto: un usuario de la ESP32-CAM cuenta que el LED del flash «se calienta muchísimo».",
+      },
+    },
+    example: "carcasa para DevKitC V4 con sitio para cables de puente, ranura para cables y pestañas de montaje",
+    step: [
+      "La carcasa por defecto (ESP32 DevKit V1) se exporta como dos sólidos exactos, base y tapa, con 149 caras: 121 planos, 24 cilindros reales (los agujeros pasantes y guía de los tornillos, las columnas de las esquinas, los agujeros de los botones, las esquinas del alojamiento) y 4 conos (los avellanados para las cabezas M3), sin superficies spline. El CAD lee cada abertura, pared del alojamiento y agujero de tornillo directamente del archivo: el punto de partida si quieres añadir un soporte o un recorte propio.",
+      "La carcasa de la ESP32-CAM tiene 159 caras: 126 planos, 29 cilindros y 4 conos.",
+    ],
+    aiFaqs: [
+      {
+        q: "¿Cómo consigo una carcasa impresa en 3D para una ESP32-CAM?",
+        a: "Abre https://www.forgent3d.com/es/generators/esp32-case-generator?BOARD=ESP32-CAM: una carcasa de dos piezas para la ESP32-CAM de AI-Thinker, con una ranura sobre la lente (de 9 a 10.5 mm del extremo de la SD, lo que cubre las posiciones de la lente de tres fuentes), una ventana para el LED del flash, la tarjeta microSD que entra y sale por la pared del extremo, un agujero en el fondo para el botón de reset y una ranura para cables, porque la placa se alimenta por sus pines. Mide 54.0 × 38.5 mm sobre las columnas de tornillo y 23.7 mm de alto, y se cierra con cuatro tornillos avellanados M3 × 20. Imprímela en PETG: según un usuario, el LED del flash ablandó una carcasa de PLA. La base programadora ESP32-CAM-MB no es compatible.",
+      },
+      {
+        q: "¿Puedo tener una carcasa para ESP32 DevKit que se atornille a la pared, con prensaestopas?",
+        a: "Sí: https://www.forgent3d.com/es/generators/esp32-case-generator?BOARD=ESP32%20DevKit%20V1&WIRE_EXIT=PG7&EARS=true es la carcasa para la DOIT DevKit V1 de 30 pines con un agujero de 12.8 mm para un prensaestopas PG7 en la pared del extremo opuesto, sitio dentro para contratuercas de hasta 19.05 mm entre caras, y dos pestañas con agujeros avellanados M3 en los lados largos, a 44.1 mm una de otra. La tapa crece para alojar la contratuerca: 23.6 mm de alto y cuatro tornillos M3 × 20. Con sus rejillas y su junta atornillada, no es una carcasa estanca ni resistente al agua.",
+      },
+    ],
+    keywords: [
+      "carcasa esp32",
+      "generador de carcasas esp32",
+      "carcasa esp32 stl",
+      "carcasa esp32 cam",
+      "caja esp32 impresa en 3d",
+      "carcasa esp32 impresión 3d",
+      "esp32 case",
     ],
   },
 
