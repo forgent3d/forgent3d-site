@@ -1,7 +1,7 @@
 ---
 title: A CAD IR for language models should not be a feature tree
 description: If the model should not write B-rep, what should it write? The layer between the language model and the kernel, a CAD IR. What that layer has to carry, how Zoo's KCL answers it, and why a feature tree written as text is not enough.
-date: 2026-10-21
+date: 2026-10-22
 ---
 
 [The previous article](/en/blog/brep-not-for-transformers) ended on code that a CAD kernel compiles. That puts a layer between the language model and the kernel: the model writes it, the kernel turns it into B-rep, and a person reads and edits it, by hand or through an interface. Compilers call this kind of layer an intermediate representation. For CAD, call it a CAD IR.

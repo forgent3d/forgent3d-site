@@ -1,7 +1,7 @@
 ---
 title: B-rep is not for transformers: why our AI does not write it directly
 description: A B-rep is exact and every CAD program reads it, so why not have the model generate one? We measured what it is made of on our own parts: pointers that must all land, numbers that must agree in several places at once, many spellings of the same solid, and no record of what anything is for.
-date: 2026-10-21
+date: 2026-10-19
 ---
 
 After [the article on why our AI writes CAD code instead of a mesh](/en/blog/code-is-model), the next question is always the same. Fine, a mesh does not know what it is. A B-rep does: it is exact, it is what a STEP file holds, and Fusion, SolidWorks and every CAM program read it. So why have the model write code at all? Why not generate the B-rep directly?
