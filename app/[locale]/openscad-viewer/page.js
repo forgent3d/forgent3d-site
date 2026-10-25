@@ -1,35 +1,40 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { articleCards } from "../../lib/blog";
-import { BRAND_BUTTON, SKILLS_INSTALL_COMMAND, isSupportedLocale } from "../../lib/landing-page";
+import { BRAND_BUTTON, SKILLS_INSTALL_COMMAND } from "../../lib/landing-page";
 import { cheatsheetRows } from "../../lib/openscad-cheatsheet";
 import { scadCodeUrl } from "../../lib/openscad-pages";
 import { SCAD_LINK_FORMAT, scadPath } from "../../lib/openscad-to-step";
 import {
   SCAD_EXAMPLES,
+  VIEWER_LOCALES,
   VIEWER_SAMPLE,
   getViewerCopy,
+  isViewerLocale,
   scadExampleUrl,
   viewerAppUrl,
   viewerMetadata,
   viewerSampleUrl,
   viewerSchemas,
+  viewerSiteLocale,
 } from "../../lib/openscad-viewer";
 
 export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "zh" }];
+  return VIEWER_LOCALES.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
-  if (!isSupportedLocale(locale)) return {};
+  if (!isViewerLocale(locale)) return {};
   return viewerMetadata(locale);
 }
 
 export default async function OpenScadViewerPage({ params }) {
   const { locale } = await params;
-  if (!isSupportedLocale(locale)) notFound();
+  if (!isViewerLocale(locale)) notFound();
   const t = getViewerCopy(locale);
+  // The app, the converter pages, skills and the blog speak en / zh: a ko / de / ja / es page links their English.
+  const site = viewerSiteLocale(locale);
 
   return (
     <main className="mx-auto w-[min(960px,calc(100vw-32px))] py-16 text-foreground">
@@ -82,7 +87,7 @@ export default async function OpenScadViewerPage({ params }) {
               <a
                 key={name}
                 className="js-scad-example-link group overflow-hidden rounded-xl border border-border/80 bg-card transition-colors hover:border-brand/50"
-                href={scadExampleUrl(locale, name)}
+                href={scadExampleUrl(site, name)}
                 target="_blank"
                 rel="noreferrer"
                 data-example={name}
@@ -117,7 +122,7 @@ export default async function OpenScadViewerPage({ params }) {
                 <code className="block font-mono text-xs font-medium leading-6 text-foreground">{row.syntax}</code>
                 <p className="mt-1 leading-6 text-muted-foreground sm:mt-0">{row.text}</p>
                 {/* 颜色放在里层 span:public/styles.css 的 a { color: inherit } 不分层,压得过 a 上的 text-brand(示例卡片同样这么做) */}
-                <a className="js-scad-code-link group mt-2 inline-block whitespace-nowrap font-medium leading-6 sm:mt-0" href={scadCodeUrl(locale, row.code)} target="_blank" rel="noreferrer" data-example={`cheatsheet-${row.id}`}>
+                <a className="js-scad-code-link group mt-2 inline-block whitespace-nowrap font-medium leading-6 sm:mt-0" href={scadCodeUrl(site, row.code)} target="_blank" rel="noreferrer" data-example={`cheatsheet-${row.id}`}>
                   <span className="text-brand transition-colors group-hover:text-brand/80">{t.cheatOpen} →</span>
                 </a>
               </li>
@@ -196,7 +201,7 @@ export default async function OpenScadViewerPage({ params }) {
             <li key={item}>{item}</li>
           ))}
         </ul>
-        <Link className="js-skills-cta mt-5 inline-block text-sm text-brand transition-colors hover:text-brand/80" href={`/${locale}/skills`}>
+        <Link className="js-skills-cta mt-5 inline-block text-sm text-brand transition-colors hover:text-brand/80" href={`/${site}/skills`}>
           {t.skillMore} →
         </Link>
       </section>
@@ -217,8 +222,8 @@ export default async function OpenScadViewerPage({ params }) {
         <h2 className="text-lg font-semibold">{t.moreTitle}</h2>
         <div className="mt-4 grid gap-4 sm:grid-cols-2">
           {[
-            { href: scadPath(locale), title: t.converterLink, text: t.moreConverter },
-            { href: scadPath(locale, "compat"), title: `${t.converterLink} · ${locale === "zh" ? "兼容性" : "compatibility"}`, text: t.moreCompat },
+            { href: scadPath(site), title: t.converterLink, text: t.moreConverter },
+            { href: scadPath(site, "compat"), title: `${t.converterLink} · ${t.compatLabel}`, text: t.moreCompat },
             ...articleCards(locale, ["openscad-preview-online", "openscad-green-faces"], t.articleKicker),
           ].map((card) => (
             <Link key={card.href} className="group rounded-xl border border-border/80 bg-card/60 p-5 transition-colors hover:border-brand/50" href={card.href}>

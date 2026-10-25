@@ -6,7 +6,7 @@ Site: https://www.forgent3d.com (English at /en, Chinese at /zh). App: https://a
 
 ## OpenSCAD viewer (free, in-browser, no sign-up)
 
-- Landing page: https://www.forgent3d.com/en/openscad-viewer (中文: https://www.forgent3d.com/zh/openscad-viewer)
+- Landing page: https://www.forgent3d.com/en/openscad-viewer (中文: https://www.forgent3d.com/zh/openscad-viewer · 한국어: https://www.forgent3d.com/ko/openscad-viewer · Deutsch: https://www.forgent3d.com/de/openscad-viewer · 日本語: https://www.forgent3d.com/ja/openscad-viewer · Español: https://www.forgent3d.com/es/openscad-viewer)
 - The tool: https://app.forgent3d.com/scad — the same page as the converter below. Paste OpenSCAD code or drop a .scad file / project folder; real OpenSCAD (a 2025 development snapshot with the Manifold kernel, compiled to WebAssembly) runs in the browser and renders the model half a second after the last edit. color() follows the geometry through booleans, faces cut by difference() show green, % draws translucent grey and # translucent pink, as in the desktop F5 preview; $preview is true. Customizer parameters become sliders. MCAD, Write.scad and BOSL2 are built in. Nothing is uploaded.
 - Exports: STL (the triangles of the render) and STEP (exact B-rep; see the converter below).
 - text(): OpenSCAD's own Liberation fonts are built in (Latin, Greek and Cyrillic letters); a character the font lacks renders as an empty box. For another font or script such as Chinese, put its .ttf or .otf in the project folder, add `use <file.ttf>` and select it with `font = "Family Name"` (the font's own name, not the file name). .ttc collections are not read.

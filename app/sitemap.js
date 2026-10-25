@@ -2,6 +2,7 @@ import { CALCULATORS, CALCULATOR_LOCALES, calculatorLocales } from "./lib/calcul
 import { GENERATORS, GENERATOR_LOCALES, generatorLocales } from "./lib/generators";
 import { listPosts } from "./lib/blog";
 import { STEP_TOOL_LOCALES, STEP_TOOL_SLUGS } from "./lib/step-tools";
+import { VIEWER_LOCALES } from "./lib/openscad-viewer";
 
 const base = "https://www.forgent3d.com";
 
@@ -14,7 +15,6 @@ const ROUTES = [
   ["/openscad-to-step", "weekly", 0.9, "2026-10-10"],
   ["/openscad-to-step/why-openscad-cant-export-step", "monthly", 0.7, "2026-09-30"],
   ["/openscad-to-step/compatibility", "monthly", 0.7, "2026-09-30"],
-  ["/openscad-viewer", "weekly", 0.9, "2026-10-17"],
   ["/openscad-to-stl", "weekly", 0.85, "2026-10-15"],
   ["/openscad-customizer", "weekly", 0.85, "2026-10-15"],
   ["/chatgpt-openscad", "weekly", 0.85, "2026-10-15"],
@@ -41,6 +41,13 @@ const GENERATOR_ROUTES = [
 // The STEP ↔ STL pages (app/lib/step-tools.js) are in en, zh, de and ja.
 const STEP_TOOL_ROUTES = STEP_TOOL_SLUGS.map((slug) => [`/${slug}`, "weekly", 0.85, "2026-10-20", STEP_TOOL_LOCALES]);
 
+// The OpenSCAD viewer (app/lib/openscad-viewer.js) is in six languages; en and zh last changed on 10-17, the
+// translations went up on 10-25.
+const VIEWER_ROUTES = [
+  ["/openscad-viewer", "weekly", 0.9, "2026-10-17", ["en", "zh"]],
+  ["/openscad-viewer", "weekly", 0.9, "2026-10-25", VIEWER_LOCALES.filter((l) => l !== "en" && l !== "zh")],
+];
+
 export default function sitemap() {
   // 文章的 lastmod 是文章头部的 updated(没有就是 date),改正文时记得改它
   const posts = ["en", "zh"].flatMap((locale) =>
@@ -50,7 +57,7 @@ export default function sitemap() {
     ...ROUTES.flatMap(([path, changeFrequency, priority, lastModified]) =>
       ["en", "zh"].map((locale) => ({ url: `${base}/${locale}${path}`, lastModified, changeFrequency, priority })),
     ),
-    ...[...GENERATOR_ROUTES, ...STEP_TOOL_ROUTES].flatMap(([path, changeFrequency, priority, lastModified, locales]) =>
+    ...[...GENERATOR_ROUTES, ...STEP_TOOL_ROUTES, ...VIEWER_ROUTES].flatMap(([path, changeFrequency, priority, lastModified, locales]) =>
       locales.map((locale) => ({ url: `${base}/${locale}${path}`, lastModified, changeFrequency, priority })),
     ),
     ...posts,

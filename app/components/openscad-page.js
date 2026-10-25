@@ -58,8 +58,9 @@ export function OpenScadPageChrome({ locale, slug, toolName, cta, credit, childr
  * The footer's word on OpenSCAD: whose it is and its licence (the page's `credit`), openscad.org, and the app's
  * /licenses — the one place that names the exact fork commit we run and links its source (GPL), so the link here
  * never goes stale. Every OpenSCAD page's footer ends with this, including the two with layouts of their own.
+ * `licences` is the link's label in a language beyond en / zh (the viewer's); the app page itself is en or zh.
  */
-export function OpenScadCredit({ locale, credit }) {
+export function OpenScadCredit({ locale, credit, licences }) {
   return (
     <p className="mt-4 max-w-3xl text-muted-foreground/80">
       {credit}{" "}
@@ -68,7 +69,7 @@ export function OpenScadCredit({ locale, credit }) {
       </a>
       {" · "}
       <a className="underline underline-offset-2 hover:text-brand" href={`https://app.forgent3d.com/licenses?lang=${locale === "zh" ? "zh" : "en"}`}>
-        {locale === "zh" ? "我们运行的构建：许可证与源码" : "Licences and source of the build we run"}
+        {licences ?? (locale === "zh" ? "我们运行的构建：许可证与源码" : "Licences and source of the build we run")}
       </a>
     </p>
   );

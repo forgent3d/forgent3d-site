@@ -59,6 +59,9 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
   …/compatibility                  哪些能精确转换、目前的限制
 /[locale]/openscad-viewer        OpenSCAD 在线预览落地页（同一个 /scad，另一个来意：看模型；和转换器页互链，不抢同一组词）
                                  「从链接打开代码」完整版在这页（格式、规则、给 AI 的提示词），public/llms.txt 同步
+                                 六种语言：en / zh / ko / de / ja / es（OpenSCAD 大词在各语言自有搜索量）；只有这一页翻了，
+                                 新语言页上的首页、其他 OpenSCAD 页链英文版并注明；文案 app/lib/openscad-viewer-copy/，
+                                 改完跑 npm run check:openscad-locales
 /[locale]/openscad-to-stl        OpenSCAD 转 STL（同一个 /scad，来意：要给切片软件的文件）
 /[locale]/openscad-customizer    OpenSCAD Customizer 在线（来意：定制 Thingiverse 等处下载的可定制模型；只点名 Thingiverse，
                                  不写它自己的 Customizer 怎样）

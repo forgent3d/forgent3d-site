@@ -5,11 +5,17 @@
 // page's — and every page's footer links all the others.
 
 import { scadAppUrl } from "./openscad-to-step";
+import { VIEWER_LOCALES } from "./openscad-viewer";
 import { OG_BASE, SITE_URL } from "./seo";
 
 export { scadAppUrl };
 
 const PAGES = ["openscad-viewer", "openscad-to-step", "openscad-to-stl", "openscad-customizer", "chatgpt-openscad"];
+
+// The languages a page is in. Only the viewer has more than en and zh (openscad-viewer.js); from a ko / de / ja / es
+// page the others link to English, and their labels below say so.
+const PAGE_LOCALES = { "openscad-viewer": VIEWER_LOCALES };
+const pageLocales = (slug) => PAGE_LOCALES[slug] ?? ["en", "zh"];
 
 const LABELS = {
   en: {
@@ -26,15 +32,46 @@ const LABELS = {
     "openscad-customizer": "OpenSCAD 在线定制",
     "chatgpt-openscad": "AI 写的 OpenSCAD 转 STL",
   },
+  ko: {
+    "openscad-viewer": "OpenSCAD 온라인 뷰어",
+    "openscad-to-step": "OpenSCAD → STEP (영어)",
+    "openscad-to-stl": "OpenSCAD → STL (영어)",
+    "openscad-customizer": "OpenSCAD Customizer (영어)",
+    "chatgpt-openscad": "ChatGPT OpenSCAD → STL (영어)",
+  },
+  de: {
+    "openscad-viewer": "OpenSCAD Online-Viewer",
+    "openscad-to-step": "OpenSCAD to STEP (Englisch)",
+    "openscad-to-stl": "OpenSCAD to STL (Englisch)",
+    "openscad-customizer": "OpenSCAD Customizer (Englisch)",
+    "chatgpt-openscad": "ChatGPT OpenSCAD to STL (Englisch)",
+  },
+  ja: {
+    "openscad-viewer": "OpenSCAD オンラインビューア",
+    "openscad-to-step": "OpenSCAD to STEP（英語）",
+    "openscad-to-stl": "OpenSCAD to STL（英語）",
+    "openscad-customizer": "OpenSCAD Customizer（英語）",
+    "chatgpt-openscad": "ChatGPT OpenSCAD to STL（英語）",
+  },
+  es: {
+    "openscad-viewer": "Visor OpenSCAD online",
+    "openscad-to-step": "OpenSCAD to STEP (en inglés)",
+    "openscad-to-stl": "OpenSCAD to STL (en inglés)",
+    "openscad-customizer": "OpenSCAD Customizer (en inglés)",
+    "chatgpt-openscad": "ChatGPT OpenSCAD to STL (en inglés)",
+  },
 };
 
 export function openscadPagePath(locale, slug) {
   return `/${locale}/${slug}`;
 }
 
-/** Footer links: every OpenSCAD page but `except`, the one being shown. */
+/** Footer links: every OpenSCAD page but `except`, the one being shown — in this language where it exists, else in English. */
 export function openscadPageLinks(locale, except) {
-  return PAGES.filter((slug) => slug !== except).map((slug) => ({ href: openscadPagePath(locale, slug), label: LABELS[locale][slug] }));
+  return PAGES.filter((slug) => slug !== except).map((slug) => ({
+    href: openscadPagePath(pageLocales(slug).includes(locale) ? locale : "en", slug),
+    label: LABELS[locale][slug],
+  }));
 }
 
 /** "Related" cards for a page body: `slugs` in the order given, each with the page's own one-line pitch. */

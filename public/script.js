@@ -236,9 +236,10 @@ function initPage() {
     });
   });
 
-  // Page language from the path. de / es / ja exist only for the generator pages; their toggle leads to English.
-  const pathLocale = (/^\/(en|zh|de|es|ja)(\/|$)/.exec(window.location.pathname) || [])[1] || "en";
-  document.documentElement.lang = { zh: "zh-CN", de: "de", es: "es", ja: "ja" }[pathLocale] || "en";
+  // Page language from the path. de / es / ja exist only for the generator, calculator, STEP and OpenSCAD viewer pages,
+  // ko only for the viewer; their toggle leads to English.
+  const pathLocale = (/^\/(en|zh|ko|de|es|ja)(\/|$)/.exec(window.location.pathname) || [])[1] || "en";
+  document.documentElement.lang = { zh: "zh-CN", ko: "ko", de: "de", es: "es", ja: "ja" }[pathLocale] || "en";
   const toggleTarget = pathLocale === "en" ? "zh" : "en";
   document.querySelectorAll(".js-lang-toggle").forEach((langToggle) => {
     langToggle.textContent = toggleTarget === "en" ? "EN" : "中";
@@ -247,8 +248,8 @@ function initPage() {
     langToggle.addEventListener("click", () => {
       // Same page in the other language: /zh/pricing ↔ /en/pricing, /de/generators/x → /en/generators/x.
       const path = window.location.pathname;
-      window.location.pathname = /^\/(en|zh|de|es|ja)(\/|$)/.test(path)
-        ? path.replace(/^\/(en|zh|de|es|ja)/, `/${toggleTarget}`)
+      window.location.pathname = /^\/(en|zh|ko|de|es|ja)(\/|$)/.test(path)
+        ? path.replace(/^\/(en|zh|ko|de|es|ja)/, `/${toggleTarget}`)
         : `/${toggleTarget}`;
     });
   });

@@ -28,7 +28,7 @@ export const metadata = {
 export default async function RootLayout({ children, params }) {
   const { locale } = await params;
   return (
-    <html lang={({ zh: "zh-CN", de: "de", es: "es", ja: "ja" })[locale] || "en"}>
+    <html lang={({ zh: "zh-CN", ko: "ko", de: "de", es: "es", ja: "ja" })[locale] || "en"}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#f9fafb" />

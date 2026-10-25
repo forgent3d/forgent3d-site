@@ -8,6 +8,7 @@
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "check:generators": "node scripts/check-generator-params.mjs",
     "check:generator-locales": "node scripts/check-generator-locales.mjs",
+    "check:openscad-locales": "node scripts/check-openscad-viewer-locales.mjs",
     "test:calculators": "node --test scripts/calculators.test.mjs"
   },
   "dependencies": {

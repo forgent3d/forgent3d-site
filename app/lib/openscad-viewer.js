@@ -1,16 +1,44 @@
 // OpenSCAD viewer: one page under /[locale]/openscad-viewer with its own header (app/[locale]/openscad-viewer/layout.js),
 // the sibling of openscad-to-step. Same tool in the app (/scad), a different search intent: "openscad viewer / online /
 // preview / open a .scad file" wants to SEE the model, not a STEP. The two pages link each other and must not chase
-// the same keywords. Copy for both locales, the path and the metadata live here.
+// the same keywords. The path, the metadata and the languages live here; the copy, one file per language, in
+// openscad-viewer-copy/.
 //
 // Its head term is "openscad在线" / "openscad online" (Bing's query data: platform docs/generator-seo-research.md §1.9),
 // so the titles lead with it, and the page carries what someone who wants to use OpenSCAD online can use on landing:
 // the cheat sheet (openscad-cheatsheet.js), every row a link that opens its example rendered.
+//
+// Six languages: en and zh like the rest of the site, plus ko, de, ja and es — the OpenSCAD head term has its own
+// volume in each (Semrush 10-20: 오픈scad 14,800, de 6,600, es 2,900, jp 1,900 a month; platform
+// docs/generator-seo-research.md §1.11, A4). Only this page is translated: from a ko / de / ja / es page the other
+// OpenSCAD pages and the home page are the English ones, and say so; the app speaks English to them.
 
 import { APP_SCAD_URL, SCAD_EXAMPLES, scadExampleUrl, scadPath } from "./openscad-to-step";
 import { OG_BASE, SITE_URL } from "./seo";
+import de from "./openscad-viewer-copy/de";
+import en from "./openscad-viewer-copy/en";
+import es from "./openscad-viewer-copy/es";
+import ja from "./openscad-viewer-copy/ja";
+import ko from "./openscad-viewer-copy/ko";
+import zh from "./openscad-viewer-copy/zh";
 
 export { SCAD_EXAMPLES, scadExampleUrl };
+
+const COPY = { en, zh, ko, de, ja, es };
+
+export const VIEWER_LOCALES = ["en", "zh", "ko", "de", "ja", "es"];
+
+/** Each language named in itself, for the footer's language list. */
+export const VIEWER_LOCALE_NAMES = { en: "English", zh: "中文", ko: "한국어", de: "Deutsch", ja: "日本語", es: "Español" };
+
+export function isViewerLocale(locale) {
+  return VIEWER_LOCALES.includes(locale);
+}
+
+/** The rest of the site (home, the other OpenSCAD pages, skills) and the app speak en and zh; the others get English. */
+export function viewerSiteLocale(locale) {
+  return locale === "zh" ? "zh" : "en";
+}
 
 const SLUG = "openscad-viewer";
 
@@ -19,7 +47,7 @@ export function viewerPath(locale) {
 }
 
 export function viewerAppUrl(locale) {
-  return `${APP_SCAD_URL}?lang=${locale}`;
+  return `${APP_SCAD_URL}?lang=${viewerSiteLocale(locale)}`;
 }
 
 /** The page's own example, opened from a link so the visitor lands on the preview with code in it. */
@@ -39,7 +67,7 @@ difference() {
 #translate([30, 2, 10]) rotate([-90, 0, 0]) cylinder(h = 4, d = 3); // a pin, highlighted`;
 
 export function viewerSampleUrl(locale) {
-  return `${APP_SCAD_URL}?lang=${locale}#code=${Buffer.from(VIEWER_SAMPLE, "utf8").toString("base64url")}`;
+  return `${APP_SCAD_URL}?lang=${viewerSiteLocale(locale)}#code=${Buffer.from(VIEWER_SAMPLE, "utf8").toString("base64url")}`;
 }
 
 export function viewerMetadata(locale) {
@@ -51,7 +79,7 @@ export function viewerMetadata(locale) {
     keywords: t.keywords.join(", "),
     alternates: {
       canonical: path,
-      languages: { en: viewerPath("en"), zh: viewerPath("zh"), "x-default": viewerPath("en") },
+      languages: { ...Object.fromEntries(VIEWER_LOCALES.map((l) => [l, viewerPath(l)])), "x-default": viewerPath("en") },
     },
     openGraph: {
       ...OG_BASE,
@@ -95,216 +123,14 @@ export function viewerSchemas(locale) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: t.breadcrumbHome, item: `${SITE_URL}/${locale}` },
+        { "@type": "ListItem", position: 1, name: t.breadcrumbHome, item: `${SITE_URL}/${viewerSiteLocale(locale)}` },
         { "@type": "ListItem", position: 2, name: t.toolName, item: url },
       ],
     },
   ];
 }
 
+/** This page's copy (app/lib/openscad-viewer-copy/<locale>.js). */
 export function getViewerCopy(locale) {
-  if (locale === "zh") {
-    return {
-      toolName: "OpenSCAD 在线预览",
-      openViewer: "打开预览器",
-      switchLabel: "EN",
-      breadcrumbHome: "首页",
-      ogLocale: "zh_CN",
-      ogImage: "/og/openscad-viewer-zh.png",
-      homeLink: "Forgent3D 首页",
-      converterLink: "OpenSCAD 转 STEP",
-      generatorsLink: "3D 打印生成器",
-      credit:
-        "OpenSCAD 是由 OpenSCAD 项目开发、以 GPL 协议发布的自由软件。Forgent3D 在浏览器里运行它来预览 .scad 文件，与 OpenSCAD 项目没有隶属关系。",
-      title: "OpenSCAD 在线预览与编辑 — 浏览器里写代码实时渲染，导出 STL / STEP | Forgent3D",
-      description:
-        "在线运行 OpenSCAD：真正的 OpenSCAD 在浏览器里跑，贴代码或拖进 .scad 文件，边写边渲染，拖滑块改参数，导出 STL / STEP。附常用写法速查。不用安装、不用登录、不上传。",
-      keywords: ["openscad在线", "OpenSCAD 在线预览", "OpenSCAD 在线编辑", "在线运行 OpenSCAD", "OpenSCAD 网页版", "OpenSCAD 在线查看器", "scad 在线浏览", "打开 scad 文件", "OpenSCAD 常用写法"],
-      h1: "OpenSCAD 在线预览与编辑：浏览器里写代码、直接看模型",
-      intro:
-        "把代码贴进来，或者拖进一个 .scad 文件、整个项目文件夹：真正的 OpenSCAD 在你的浏览器里运行，停下来半秒就渲染出来。color()、% 背景、# 高亮和桌面版按 F5 看到的一样。不用安装，不用登录，文件不上传。",
-      cta: "打开预览器",
-      sampleCta: "带着示例代码打开",
-      sampleHint: "点开就是这段代码，已经渲染好；改一行，半秒后重画。",
-      featuresTitle: "你会得到什么",
-      features: [
-        { title: "真正的 OpenSCAD", text: "不是模仿语法的解释器，是 OpenSCAD 本体（2025 开发版，Manifold 内核）编译成 WebAssembly 在浏览器里跑。module、function、递归、列表推导、include 和 use 都和桌面版一样。" },
-        { title: "边写边看", text: "停下输入半秒就重新渲染，不用点按钮。参数面板读 Customizer 注释，拖滑块就重建并写回源码。" },
-        { title: "和 F5 一样的画面", text: "color() 跟着布尔运算走到面上；被 difference 减掉的面显示成绿色；% 画成半透明灰，# 画成半透明粉。$preview 为 true。" },
-        { title: "多文件项目", text: "拖进整个文件夹，include 和 use 按真实目录解析。MCAD、Write.scad、BOSL2 内置，用到就自动挂载。文字用 OpenSCAD 自带的 Liberation 字体，也可以把 .ttf 放进项目。" },
-        { title: "链接里带代码", text: "「复制链接」把当前代码塞进网址，打开就是这个模型。AI 助手写的代码也能这样给你一个预览链接。" },
-        { title: "导出 STL 和 STEP", text: "「导出 STL」直接存下画布上的三角面，和桌面版渲染后导出的一样，拿去切片打印。要给 Fusion、SolidWorks、FreeCAD 继续用，同一个页面还能把模型重建成真正的 B-rep STEP，见「OpenSCAD 转 STEP」。" },
-      ],
-      examplesTitle: "手边没有 .scad 文件？先试试这几个",
-      examplesIntro: "点开就在浏览器里渲染好；拖参数面板里的滑块改尺寸。不用登录。",
-      exampleOpen: "打开预览",
-      examples: {
-        "pipe-flange": { title: "对焊法兰", text: "回转截面、锥形颈部、一圈螺栓孔。", alt: "对焊法兰的等轴测图：圆盘上八个螺栓孔，中间是锥形颈部和通孔" },
-        "spur-gears": { title: "一对啮合齿轮", text: "入口文件 use 了 lib/ 下的渐开线齿轮库：多文件项目按原样解析。", alt: "一大一小两个啮合直齿轮的等轴测图，各带一个中心孔" },
-        "parametric-box": { title: "带盖参数化盒子", text: "尺寸、壁厚、圆角、盖子松紧都是 Customizer 参数，拖滑块就重建。", alt: "圆角盒子和它的盖子并排摆放、开口朝上的等轴测图" },
-      },
-      cheatTitle: "OpenSCAD 常用写法速查",
-      cheatIntro: "最常用的几种写法，每条说清怎么用、哪里容易错。点「在线打开」，例子就在预览器里渲染好，改个数字马上看到变化。",
-      cheatHead: ["写法", "怎么用", ""],
-      cheatOpen: "在线打开",
-      cheatNote: "这些写法在桌面版 OpenSCAD 里一样能用。",
-      compareTitle: "和桌面版 OpenSCAD 比",
-      compareHead: ["", "桌面版 OpenSCAD", "这个预览器"],
-      compare: [
-        ["安装", "下载安装包", "打开网页就能用"],
-        ["执行代码的", "OpenSCAD", "同一个 OpenSCAD，编译成 WebAssembly"],
-        ["预览画面", "F5：OpenCSG", "Manifold 的真几何，配色沿用 F5 的约定"],
-        ["多文件项目", "打开入口文件", "拖进文件夹"],
-        ["分享", "发文件", "一个带代码的链接"],
-        ["导出", "STL / 3MF / OFF / AMF", "STL（就是预览那批三角面）、STEP（真 B-rep）"],
-        ["动画 $t", "有", "没有"],
-      ],
-      linkTitle: "从链接打开代码（给 AI 助手和脚本）",
-      linkText:
-        "把代码放进网址，预览器打开就载入它、立刻渲染：不用文件、不用登录。这是给 AI 助手准备的：ChatGPT、Gemini、Claude 替你写了 OpenSCAD，让它顺手附上一个 Forgent3D 预览链接，点开就是渲染好的模型，能拖参数，满意了还能导 STEP。上面「带着示例代码打开」那颗按钮就是这样一个链接。",
-      linkFormatLabel: "链接格式",
-      linkRules: [
-        "<CODE> 是 .scad 源码：百分号编码的原文（encodeURIComponent 的结果）或 base64 / base64url 的 UTF-8 都行，预览器自己识别。",
-        "放在 # 后面：片段不会离开浏览器，代码不经过我们的服务器，也没有长度限制。短代码也可以写成 ?code=。",
-        "一个链接带一个文件。include / use 多文件的项目走「加载项目文件夹」；MCAD、BOSL2 这些内置库从链接打开也能用。",
-        "预览器里的「复制链接」按钮，把当前打开的代码变成这样一个链接。",
-      ],
-      linkPromptLabel: "给 AI 的提示词",
-      linkPrompt: "写一个 OpenSCAD 的 ___，并给我一个 Forgent3D 预览链接：https://app.forgent3d.com/scad#code=<把代码 encodeURIComponent 之后放这里>",
-      skillTitle: "用 Claude Code 或 Codex？装 Forgent3D skill",
-      skillText:
-        "一条命令，agent 就能在你本机用真正的 OpenSCAD 渲染 .scad：读回包围盒、体积和 echo() 的数，截一张三视图自己核对，导 STL / 3MF，最后给你一个上面那样的带代码链接。不用装 OpenSCAD。",
-      skillBullets: [
-        "写好的 .scad 就在你的目录里；include / use 和 Customizer 参数按桌面版的规矩来，MCAD、BOSL2 内置。",
-        "STEP 还是在链接打开的这一页导：skill 本身出的是 OpenSCAD 的网格。",
-        "同一个 skill 也会写 Forgent3D 的参数化模型，它按你的要求选路线。",
-      ],
-      skillCopy: "复制",
-      skillCopied: "已复制",
-      skillMore: "Skills 页：两条路线怎么选",
-      faqTitle: "常见问题",
-      faqs: [
-        { q: "不装 OpenSCAD，能在线写代码、导出 STL 吗？", a: "能。这个预览器就是 OpenSCAD 本体编译成 WebAssembly，在浏览器里运行：写代码、渲染、拖参数、导出 STL 都在网页上完成，要给 CAD 软件用还能导出 STEP。不用安装，也不用登录。" },
-        { q: "这是真的 OpenSCAD 吗？", a: "是。执行代码的就是 OpenSCAD 本体（2025 年的开发版快照，带 Manifold 几何内核），编译成 WebAssembly 在你的浏览器里运行。语言行为、内置库、Customizer 注释都和桌面版一样。" },
-        { q: "为什么孔的内壁是绿色的？", a: "这是 OpenSCAD 预览（F5）的约定：被 difference() 减掉的物体留下的面用「背面色」显示，默认配色里是绿色。预览器照着这个约定画，color() 过的物体仍按自己的颜色显示。" },
-        { q: "能打开 Thingiverse、Printables 上下载的 .scad 文件吗？", a: "能。把下载的整个文件夹拖进来，被 include 的文件才会一起带上。MCAD、Write.scad 和 BOSL2 已经内置。" },
-        { q: "text() 里写中文，为什么出来是方框？", a: "预览器内置的是 OpenSCAD 自带的 Liberation 字体，里面没有汉字，缺的字会画成方框。把一个中文字体文件（.ttf 或 .otf；.ttc 字体集不认）和 .scad 放进同一个文件夹一起拖进来，代码里写 use <字体文件名.ttf>，再在 text() 里用 font = \"字体名\" 指定。字体名是字体自己的名字，不是文件名：比如 Windows 自带的 simhei.ttf 是 font = \"SimHei\"。" },
-        { q: "我的代码会上传到服务器吗？", a: "不会。OpenSCAD 在你的浏览器里运行，.scad 文件不上传；链接里 # 后面的代码也不会发给服务器。" },
-        { q: "多大的模型跑得动？", a: "一般模型一秒以内。展平后超过 15 万个节点的模型（把循环展开后）在浏览器里跑不动，会直接告诉你。耗时的渲染随时可以停。" },
-        { q: "预览和导出的 STEP 有什么区别？", a: "预览是 OpenSCAD 自己的渲染，圆是 $fn 个面片。导出 STEP 时由 CAD 内核把每个图元和布尔运算重建成精确几何，圆就是真圆柱。导出的 STL 就是预览那批三角面。颜色只在预览里，STL 和 STEP 都不带。" },
-        { q: "ChatGPT、Gemini 写的 OpenSCAD 代码怎么快速看效果？", a: "贴进预览器，或者让它直接给一个 https://app.forgent3d.com/scad#code=<代码> 形式的链接，点开就是渲染好的模型。" },
-      ],
-      moreTitle: "延伸阅读",
-      moreConverter: "预览满意了要 STEP：同一个工具，真正的 B-rep，Fusion、SolidWorks、FreeCAD 都能打开。",
-      moreCompat: "哪些 OpenSCAD 写法能精确转成 STEP，目前还有哪些限制。",
-      articleKicker: "文章",
-    };
-  }
-
-  return {
-    toolName: "OpenSCAD Viewer",
-    openViewer: "Open the viewer",
-    switchLabel: "中",
-    breadcrumbHome: "Home",
-    ogLocale: "en_US",
-    ogImage: "/og/openscad-viewer-en.png",
-    homeLink: "Forgent3D home",
-    converterLink: "OpenSCAD to STEP",
-    generatorsLink: "3D print generators",
-    credit:
-      "OpenSCAD is free software developed by the OpenSCAD project and licensed under the GPL. Forgent3D runs it in the browser to preview .scad files and is not affiliated with the OpenSCAD project.",
-    title: "OpenSCAD Online — Viewer & Editor in Your Browser (STL / STEP) | Forgent3D",
-    description:
-      "Run OpenSCAD online — the real OpenSCAD, in your browser. Paste code or drop in a .scad file: it renders as you type, sliders change the parameters, and it exports STL or STEP. Cheat sheet included. No install, no sign-up.",
-    keywords: [
-      "openscad online",
-      "openscad viewer",
-      "openscad online editor",
-      "openscad viewer online",
-      "openscad preview online",
-      "open scad file online",
-      "openscad in browser",
-      "run openscad online",
-      "scad file viewer",
-      "openscad cheat sheet",
-    ],
-    h1: "OpenSCAD online — view and edit .scad files in your browser",
-    intro:
-      "Paste code, or drop in a .scad file or a whole project folder: real OpenSCAD runs in your browser and renders the model half a second after you stop typing. color(), % background and # highlight look as they do when you press F5 on the desktop. No install, no sign-up, and nothing is uploaded.",
-    cta: "Open the viewer",
-    sampleCta: "Open with sample code",
-    sampleHint: "It opens with this code already rendered; change a line and it redraws half a second later.",
-    featuresTitle: "What you get",
-    features: [
-      { title: "Real OpenSCAD", text: "Not a look-alike interpreter: OpenSCAD itself (a 2025 development snapshot with the Manifold kernel) compiled to WebAssembly. Modules, functions, recursion, list comprehensions, include and use behave exactly as on the desktop." },
-      { title: "Renders as you type", text: "Half a second after the last keystroke the model is redrawn — no button. The parameter panel reads Customizer comments; drag a slider and the value is written back into the source." },
-      { title: "The F5 look", text: "color() follows the geometry through booleans; faces cut by a difference() show in green; % draws translucent grey and # translucent pink. $preview is true." },
-      { title: "Multi-file projects", text: "Drop the folder and include / use resolve against your real layout. MCAD, Write.scad and BOSL2 are built in and mounted when used. Text is shaped with OpenSCAD's own Liberation fonts; put a .ttf in the project for others." },
-      { title: "Code in the link", text: "“Copy link” puts the current code into the URL, so whoever opens it sees the model. An AI assistant can hand you such a preview link for the code it writes." },
-      { title: "STL and STEP export", text: "“Export STL” saves the triangles on the canvas — the same mesh desktop OpenSCAD exports after a render — ready for your slicer. For Fusion, SolidWorks and FreeCAD the same page also rebuilds the model as real B-rep STEP — see OpenSCAD to STEP." },
-    ],
-    examplesTitle: "No .scad file at hand? Start with one of these",
-    examplesIntro: "Each opens already rendered in your browser. Drag the Customizer sliders to resize it. No sign-up.",
-    exampleOpen: "Open the preview",
-    examples: {
-      "pipe-flange": { title: "Weld-neck flange", text: "A revolved profile with a tapered hub and a bolt circle.", alt: "Isometric view of a weld-neck flange: eight bolt holes around a tapered hub with a bore" },
-      "spur-gears": { title: "Meshing spur gears", text: "The entry file uses an involute gear library in lib/ — multi-file projects resolve as they are.", alt: "Isometric view of a small and a large spur gear in mesh, each with a centre bore" },
-      "parametric-box": { title: "Parametric box with lid", text: "Size, wall, corner radius and lid fit are Customizer parameters; drag a slider and it rebuilds.", alt: "Isometric view of a rounded box and its lid side by side, open side up" },
-    },
-    cheatTitle: "OpenSCAD cheat sheet",
-    cheatIntro: "The statements you will use most, each with how it works and where it trips people up. “Open online” loads the example into the viewer already rendered — change a number and watch it redraw.",
-    cheatHead: ["Statement", "How to use it", ""],
-    cheatOpen: "Open online",
-    cheatNote: "All of it works the same in desktop OpenSCAD.",
-    compareTitle: "Compared with desktop OpenSCAD",
-    compareHead: ["", "Desktop OpenSCAD", "This viewer"],
-    compare: [
-      ["Install", "Download an installer", "Open a web page"],
-      ["What runs your code", "OpenSCAD", "The same OpenSCAD, compiled to WebAssembly"],
-      ["Preview", "F5: OpenCSG", "Real geometry from Manifold, coloured by the F5 conventions"],
-      ["Multi-file projects", "Open the entry file", "Drop the folder"],
-      ["Sharing", "Send the file", "One link with the code in it"],
-      ["Export", "STL / 3MF / OFF / AMF", "STL (the triangles you see in the preview) and STEP (real B-rep)"],
-      ["Animation ($t)", "Yes", "No"],
-    ],
-    linkTitle: "Open code from a link (for AI assistants and scripts)",
-    linkText:
-      "Put the code in the URL and the viewer opens with it loaded and rendered — no file, no sign-up. It is made for AI assistants: when ChatGPT, Gemini or Claude writes OpenSCAD for you, ask it for a Forgent3D preview link. Whoever opens it sees the model rendered, can drag the parameters and, once happy, export STEP. The “Open with sample code” button above is such a link.",
-    linkFormatLabel: "Link format",
-    linkRules: [
-      "<CODE> is the .scad source, either percent-encoded (what encodeURIComponent produces) or base64 / base64url UTF-8. The viewer tells them apart.",
-      "Put it after #: the fragment never leaves the browser, so the code is not sent to our server and there is no length limit. ?code= works too for short snippets.",
-      "One link carries one file. Projects with include / use go through “Load project folder”; MCAD, BOSL2 and the other built-in libraries work from a link.",
-      "The “Copy link” button in the viewer turns the code you have open into such a link.",
-    ],
-    linkPromptLabel: "Prompt to try",
-    linkPrompt: "Write OpenSCAD for a ___ and give me a Forgent3D preview link: https://app.forgent3d.com/scad#code=<the code, encodeURIComponent-encoded>",
-    skillTitle: "Using Claude Code or Codex? Install the Forgent3D skill",
-    skillText:
-      "One command, and the agent renders your .scad with the real OpenSCAD on your machine: it reads back the bounding box, volume and echo() values, checks a three-view snapshot itself, exports STL / 3MF and hands you a link like the one above. No OpenSCAD install.",
-    skillBullets: [
-      "The .scad stays in your folder; include / use and Customizer parameters work as on the desktop, MCAD and BOSL2 are built in.",
-      "STEP is still exported on the page the link opens: the skill's own output is OpenSCAD's mesh.",
-      "The same skill also writes Forgent3D's parametric models; it picks the route from what you ask.",
-    ],
-    skillCopy: "Copy",
-    skillCopied: "Copied",
-    skillMore: "Skills page: how it picks the route",
-    faqTitle: "FAQ",
-    faqs: [
-      { q: "Can I write OpenSCAD and export an STL online, without installing it?", a: "Yes. The viewer is OpenSCAD itself, compiled to WebAssembly and running in your browser: writing code, rendering, dragging parameters and exporting STL all happen on the page, and STEP is there too for CAD software. No install and no sign-up." },
-      { q: "Is this real OpenSCAD?", a: "Yes. The code is executed by OpenSCAD itself — a 2025 development snapshot with the Manifold geometry kernel — compiled to WebAssembly and running in your browser. The language, the bundled libraries and the Customizer comments behave as on the desktop." },
-      { q: "Why are the walls of a hole green?", a: "That is OpenSCAD's own preview (F5) convention: faces left behind by an object subtracted with difference() are drawn in the “back face” colour, green in the default scheme. The viewer keeps the convention; an object with its own color() keeps that colour." },
-      { q: "Can I open .scad files downloaded from Thingiverse or Printables?", a: "Yes. Drop in the whole downloaded folder so the files it includes come along. MCAD, Write.scad and BOSL2 are built in." },
-      { q: "Can text() use other fonts, or scripts such as Chinese?", a: "The viewer ships OpenSCAD's own Liberation fonts, which have Latin, Greek and Cyrillic letters; a character the font lacks comes out as an empty box. For another font, drop its .ttf or .otf file into the project folder next to the .scad (.ttc collections are not read), add use <file.ttf> to the code and pick it with font = \"Family Name\" — the font's own name, not the file name: Windows' simhei.ttf, for example, is font = \"SimHei\"." },
-      { q: "Is my code uploaded to a server?", a: "No. OpenSCAD runs in your browser and the .scad files are never uploaded; code after # in a link is not sent to the server either." },
-      { q: "How large a model can it handle?", a: "A typical model renders in under a second. A model that flattens to more than 150,000 nodes (loops unrolled) is beyond the in-browser build and says so. A long render can be stopped at any time." },
-      { q: "How does the preview differ from the exported STEP?", a: "The preview is OpenSCAD's own render, with circles as $fn facets. For the STEP export a CAD kernel rebuilds every primitive and boolean as exact geometry, so a circle is a true cylinder. The exported STL is the preview's own triangles. Colours exist only in the preview; neither the STL nor the STEP carries them." },
-      { q: "How do I quickly see OpenSCAD code written by ChatGPT or Gemini?", a: "Paste it into the viewer, or ask the assistant for a link of the form https://app.forgent3d.com/scad#code=<code> — it opens with the model already rendered." },
-    ],
-    moreTitle: "Read more",
-    moreConverter: "Happy with the preview and need a STEP? The same tool, real B-rep, opens in Fusion, SolidWorks and FreeCAD.",
-    moreCompat: "Which OpenSCAD features convert exactly to STEP, and the current limits.",
-    articleKicker: "Article",
-  };
+  return COPY[locale] ?? COPY.en;
 }
