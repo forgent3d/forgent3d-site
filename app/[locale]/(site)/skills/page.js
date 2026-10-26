@@ -28,7 +28,7 @@ function getCopy(locale) {
       routes: [
         {
           title: "参数化模型",
-          badge: "build123d 方言",
+          badge: "build123d",
           when: "适合：尺寸以后要改、零件之间有配合或运动、要直接拿到真正的 STEP、要在浏览器里接着编辑。",
           gets: "引擎构建并测量——孔径和孔位、每个平面在哪、壁厚——导出 STEP，模型出现在你的 Forgent3D 工作区。",
           prompt: "用 Forgent3D skill 做一个电机安装支架：底板 80×60×6mm，四个 M4 沉头孔，立面上开一个 φ22 的轴孔。",
@@ -98,7 +98,7 @@ function getCopy(locale) {
     routes: [
       {
         title: "Parametric model",
-        badge: "build123d dialect",
+        badge: "build123d",
         when: "For parts whose dimensions will change, parts that fit or move against each other, a real STEP straight away, or editing on in the browser.",
         gets: "The engine builds and measures it — bore sizes and positions, where every flat face sits, wall thickness — exports STEP, and the model lands in your Forgent3D workspace.",
         prompt: "Use the Forgent3D skill to build a motor mount bracket: 80x60x6mm base plate, four M4 counterbored holes, and a 22mm shaft bore in the upright face.",

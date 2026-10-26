@@ -47,13 +47,6 @@ export default async function Build123dOnlinePage({ params }) {
           <span className="text-brand transition-colors group-hover:text-brand/80">{t.sampleCta} →</span>
         </a>
       </div>
-      {/* 引擎的实话放在首屏:来的人多半装过真 build123d,先说清楚这里跑的是什么、和原版差多少 */}
-      <p className="mt-5 max-w-3xl text-sm leading-6 text-muted-foreground">
-        {t.engineLine}{" "}
-        <a className="group" href="#compatibility">
-          <span className="text-brand transition-colors group-hover:text-brand/80">{t.engineLink} →</span>
-        </a>
-      </p>
 
       <section className="mt-16">
         <h2 className="text-2xl font-semibold">{t.featuresTitle}</h2>
@@ -106,7 +99,7 @@ export default async function Build123dOnlinePage({ params }) {
         </a>
       </section>
 
-      {/* 兼容性一节照 platform docs/build123d-preview-launch.md §3 写:不是 build123d 本体,边界一条条说清 */}
+      {/* 兼容性一节照 platform docs/build123d-preview-launch.md §3 写:边界一条条说清,不讲引擎怎么实现(10-26 裁定) */}
       <section className="mt-16" id="compatibility">
         <h2 className="text-2xl font-semibold">{t.runsTitle}</h2>
         <p className="mt-2 max-w-3xl text-muted-foreground">{t.runsIntro}</p>
