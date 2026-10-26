@@ -38,6 +38,7 @@ const COPY = {
     navGenerators: "Generators",
     navScadToStep: "OpenSCAD → STEP",
     navScadViewer: "OpenSCAD online viewer",
+    navBuild123d: "build123d online",
     navCompare: "Two ways in",
     navPricing: "Plans",
     navContact: "Contact",
@@ -127,6 +128,7 @@ const COPY = {
     navGenerators: "生成器",
     navScadToStep: "OpenSCAD 转 STEP",
     navScadViewer: "OpenSCAD 在线预览",
+    navBuild123d: "build123d 在线",
     navCompare: "两种用法",
     navPricing: "方案",
     navContact: "联系我们",
@@ -427,6 +429,7 @@ export function getLandingPageHtml(locale) {
           <a class="transition-colors hover:text-brand" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/openscad-to-step">${t.navScadToStep}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/openscad-viewer">${t.navScadViewer}</a>
+          <a class="transition-colors hover:text-brand" href="/${locale}/build123d-online">${t.navBuild123d}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/blog">${t.navBlog}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/local-data">${t.guidesLocalData}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/quick-start">${t.guidesQuickStart}</a>

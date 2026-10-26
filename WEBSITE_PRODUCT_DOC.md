@@ -69,6 +69,10 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
                                  一节通向 AI CAD agent）
                                  这三页的文案各在 app/lib/<slug>.js，共用的路径、互链、metadata、JSON-LD 在
                                  app/lib/openscad-pages.js，版块在 app/components/openscad-page.js；五个 OpenSCAD 页的页脚互链
+/[locale]/build123d-online       build123d 在线落地页（CTA 进 app 的 /build123d，那页 noindex，排名靠这页；自带顶栏）
+                                 首屏就说实话：Python 是真 CPython，build123d 层是我们自己的，带实测一致率；「能跑什么、不能跑什么」
+                                 一节照 platform docs/build123d-preview-launch.md §3 写。例子卡片 → /build123d?example=<名字>，
+                                 「从链接打开」完整版（格式、规则、提示词）在这页，public/llms.txt 同步
 /[locale]/blog                   文章列表;/[locale]/blog/<slug> 单篇。正文住在 content/blog/<slug>.<locale>.md
                                  (头部 title / description / date,可选 updated;Markdown 子集见 app/lib/markdown.js),
                                  中英各一份、同一个 slug。导航和页脚都有入口。运行时不读文件系统(Worker 里没有 content/):
@@ -174,7 +178,8 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 来源、utm、跳出率看它。自定义事件：`homepage_viewed`、`try_clicked`、`click_pricing`、`click_skills`、
 `click_skills_repo`、`copy_skills_command`、`click_download_desktop`、`click_github`、`click_explore`、
 `click_openscad_to_step`、`click_openscad_viewer`、`click_openscad_to_stl`、`click_openscad_customizer`、`click_chatgpt_openscad`、
-`click_scad_example`、`click_scad_code_link`(后两个在几个 OpenSCAD 页上都有，按 `path` 分)。新增 CTA 就补一条，别复用语义不符的事件名。
+`click_scad_example`、`click_scad_code_link`(后两个在几个 OpenSCAD 页上都有，按 `path` 分)、`click_build123d_online`、
+`click_b123d_example`、`click_b123d_code_link`(build123d 在线页；app 那头接着是 `code_link_opened`)。新增 CTA 就补一条，别复用语义不符的事件名。
 
 ## 5. 上线与迭代建议
 

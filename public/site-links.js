@@ -7,6 +7,8 @@ window.FORGENT_LINKS = {
   // OpenSCAD → STEP 转换器(/[locale]/openscad-to-step/* 的 CTA)。app 里的路径要是改了,这里和
   // app/lib/openscad-to-step.js 的 APP_SCAD_URL 一起改:那边是服务端渲染进 HTML 的 href(爬虫看到的),这里只在运行时覆盖它。
   scad: "https://app.forgent3d.com/scad",
+  // build123d 在线编辑器(/[locale]/build123d-online 的 CTA);路径改了和 app/lib/build123d-online.js 的 APP_B123D_URL 一起改
+  build123d: "https://app.forgent3d.com/build123d",
   // Header/footer GitHub entry — points at the skills repo, the open-source surface we lead with.
   github: "https://github.com/forgent3d/forgent3d-skills",
   skillsRepo: "https://github.com/forgent3d/forgent3d-skills",

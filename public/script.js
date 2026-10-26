@@ -157,6 +157,8 @@ function initPage() {
   applyLinks(".js-scad-stl-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
   applyLinks(".js-scad-customizer-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
   applyLinks(".js-scad-chatgpt-link", linkConfig.scad, "https://app.forgent3d.com/scad", { includeLocale: true });
+  // build123d 在线页(app/lib/build123d-online.js)进 app 的 /build123d
+  applyLinks(".js-b123d-link", linkConfig.build123d, "https://app.forgent3d.com/build123d", { includeLocale: true });
   applyLinks(".js-skills-repo-link", linkConfig.skillsRepo, "https://github.com/forgent3d/forgent3d-skills");
 
   // Install-command copy buttons (homepage skills section, /skills, and the two OpenSCAD pages).
@@ -206,6 +208,10 @@ function initPage() {
     [".js-scad-example-link", "click_scad_example"],
     // 带代码的链接:预览器页「从链接打开」那一节、ChatGPT 页的示例;app 那头接着是 scad_link_opened
     [".js-scad-code-link", "click_scad_code_link"],
+    // build123d 在线页:进编辑器、例子卡片(?example=)、带代码的链接(#code=);app 那头接着是 code_link_opened(where / example / from)
+    [".js-b123d-link", "click_build123d_online"],
+    [".js-b123d-example-link", "click_b123d_example"],
+    [".js-b123d-code-link", "click_b123d_code_link"],
     // STEP ↔ STL 的两页(app/lib/step-tools.js):同一个工具 /convert,来意各一个;app 那头接着是 convert_file / convert_download
     [".js-step-to-stl-link", "click_step_to_stl"],
     [".js-stl-to-step-link", "click_stl_to_step"],

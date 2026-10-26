@@ -18,6 +18,7 @@ const ROUTES = [
   ["/openscad-to-stl", "weekly", 0.85, "2026-10-15"],
   ["/openscad-customizer", "weekly", 0.85, "2026-10-15"],
   ["/chatgpt-openscad", "weekly", 0.85, "2026-10-15"],
+  ["/build123d-online", "weekly", 0.9, "2026-10-26"],
   ["/blog", "weekly", 0.7, "2026-10-21"],
   ["/ai-3d-model-generation", "weekly", 0.8, "2026-09-30"],
   ["/code-to-parametric-cad", "weekly", 0.8, "2026-09-30"],
