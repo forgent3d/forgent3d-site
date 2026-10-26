@@ -6,7 +6,7 @@
 //
 // Say what the page does, not how the engine works (10-26 user decision): no CPython, no match rates, and no "Forgent3D
 // implements the build123d layer" either. The edges are listed as plain facts under "what runs and what doesn't"; the
-// footer credit keeps only that we are not affiliated with build123d. The measured numbers are in public/llms.txt only.
+// footer credit only says whose build123d is (no affiliation line either, 10-26). The measured numbers are in public/llms.txt only.
 
 import { OG_BASE, SITE_URL } from "./seo";
 
@@ -133,7 +133,7 @@ export function getB123dCopy(locale) {
       generatorsLink: "3D 打印生成器",
       skillsLink: "Forgent3D Skill",
       credit:
-        "build123d 是 gumyr 与社区贡献者开发、以 Apache-2.0 协议发布的开源 Python CAD 库。Forgent3D 与 build123d 项目没有隶属关系。",
+        "build123d 是 gumyr 与社区贡献者开发、以 Apache-2.0 协议发布的开源 Python CAD 库。",
       licences: "浏览器里运行的开源组件：许可证与源码",
       title: "build123d 在线：在浏览器里运行 build123d 代码、导出 STEP | Forgent3D",
       description:
@@ -299,7 +299,7 @@ export function getB123dCopy(locale) {
     generatorsLink: "3D print generators",
     skillsLink: "Forgent3D Skill",
     credit:
-      "build123d is an open-source Python CAD library by gumyr and contributors, licensed under Apache-2.0. Forgent3D is not affiliated with the build123d project.",
+      "build123d is an open-source Python CAD library by gumyr and contributors, licensed under Apache-2.0.",
     licences: "Open-source components in the browser build: licences and source",
     title: "build123d Online — Run build123d Code in Your Browser, Export STEP | Forgent3D",
     description:
