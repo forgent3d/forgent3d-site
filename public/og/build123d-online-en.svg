@@ -1,0 +1,59 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- /[locale]/build123d-online 的社交卡片。右侧:一段 build123d 代码,它的常量变成滑块,再到 STEP —— 这一页的三件事。
+       改完用无头 Chrome 截成同名 .png(1200×630,窗口同尺寸、隐藏滚动条),或 sharp(x.svg).png() -->
+  <rect width="1200" height="630" fill="#F9FAFB"/>
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0" r="0.75">
+      <stop offset="0%" stop-color="#0886A6" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#0886A6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M46 0H0V46" fill="none" stroke="#D6DAE0" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="gridFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="gridMask"><rect width="1200" height="630" fill="url(#gridFade)"/></mask>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)" mask="url(#gridMask)"/>
+  <rect width="1200" height="400" fill="url(#glow)"/>
+
+  <g stroke="#0886A6" stroke-width="2.2" stroke-linejoin="round" fill="none">
+    <path d="M89 66l17 10v19l-17 10-17-10V76z"/>
+    <path d="M89 86v19M89 86l17-10M89 86l-17-10" stroke-opacity="0.45"/>
+  </g>
+  <text x="122" y="97" fill="#191C24" font-size="27" font-weight="600" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">Forgent3D</text>
+
+  <text x="72" y="264" fill="#191C24" font-size="64" font-weight="600" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">build123d online</text>
+  <text x="72" y="340" fill="#0886A6" font-size="64" font-weight="600" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">in your browser</text>
+  <text x="72" y="410" fill="#616875" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">Real CPython runs your script; constants become</text>
+  <text x="72" y="444" fill="#616875" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">sliders; export exact STEP or STL. No install.</text>
+
+  <!-- 代码卡片:上半是代码,下半是它的两个常量成了滑块,右下角导出 STEP -->
+  <rect x="712" y="120" width="424" height="390" rx="16" fill="#FFFFFF" stroke="#D6DAE0"/>
+  <g font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17">
+    <text x="740" y="166"><tspan fill="#8A3FFC">with</tspan><tspan fill="#191C24"> BuildPart() </tspan><tspan fill="#8A3FFC">as</tspan><tspan fill="#191C24"> flange:</tspan></text>
+    <text x="781" y="194" fill="#191C24">Cylinder(<tspan fill="#0886A6">FLANGE_D</tspan> / 2, 12)</text>
+    <text x="781" y="222"><tspan fill="#8A3FFC">with</tspan><tspan fill="#191C24"> PolarLocations(47, </tspan><tspan fill="#0886A6">BOLTS</tspan><tspan fill="#191C24">):</tspan></text>
+    <text x="822" y="250" fill="#191C24">Hole(5.5)</text>
+  </g>
+  <line x1="712" y1="280" x2="1136" y2="280" stroke="#E5E7EB"/>
+  <g font-family="IBM Plex Mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15">
+    <text x="740" y="318" fill="#616875">FLANGE_D</text>
+    <text x="1108" y="318" fill="#191C24" text-anchor="end">120</text>
+    <rect x="740" y="332" width="368" height="6" rx="3" fill="#E5E7EB"/>
+    <rect x="740" y="332" width="150" height="6" rx="3" fill="#0886A6"/>
+    <circle cx="890" cy="335" r="9" fill="#FFFFFF" stroke="#0886A6" stroke-width="3"/>
+    <text x="740" y="380" fill="#616875">BOLTS</text>
+    <text x="1108" y="380" fill="#191C24" text-anchor="end">6</text>
+    <rect x="740" y="394" width="368" height="6" rx="3" fill="#E5E7EB"/>
+    <rect x="740" y="394" width="110" height="6" rx="3" fill="#0886A6"/>
+    <circle cx="850" cy="397" r="9" fill="#FFFFFF" stroke="#0886A6" stroke-width="3"/>
+  </g>
+  <rect x="740" y="438" width="96" height="40" rx="8" fill="#0886A6"/>
+  <text x="788" y="464" fill="#FFFFFF" font-size="16" font-weight="600" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">STEP</text>
+  <rect x="848" y="438" width="80" height="40" rx="8" fill="#FFFFFF" stroke="#D6DAE0"/>
+  <text x="888" y="464" fill="#191C24" font-size="16" font-weight="600" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">STL</text>
+  <text x="1108" y="464" fill="#616875" font-size="16" text-anchor="end" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">B-rep</text>
+</svg>
