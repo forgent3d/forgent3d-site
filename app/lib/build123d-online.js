@@ -4,24 +4,16 @@
 // online / playground / in browser wants to run a script without installing Python and OCP, or to see what an AI
 // wrote. The path, the metadata, the copy (en / zh) and the numbers live here.
 //
-// Say plainly what runs: the Python is real CPython, the build123d layer is Forgent3D's own. Every number below is
-// measured, never rounded up; when the gate is re-run, change them here and the app's line with them
-// (platform packages/cloud/lib/i18n.ts codeLinkEngineLine / codeLinkScriptNote).
+// Say what the page does, not how the engine works (10-26 user decision): no CPython, no match rates, no gate numbers
+// on the page. One plain line that the build123d layer is Forgent3D's own stays, linked to "what runs and what doesn't",
+// like the app's line (platform packages/cloud/lib/i18n.ts codeLinkEngineLine). The measured numbers are in
+// public/llms.txt only.
 
 import { OG_BASE, SITE_URL } from "./seo";
 
 export const APP_B123D_URL = "https://app.forgent3d.com/build123d";
 
 const SLUG = "build123d-online";
-
-// The accuracy gate (platform docs/build123d-preview-launch.md §0 and B1, run 40181427126 on 10-25): a script
-// "builds the same part" when volume, surface area and bounding box are within 1% of what real build123d 0.13 makes.
-// AI-written = cadgenbench, 703 scripts that build123d itself builds (its own wrong answers left out, oracle-unreliable.jsonl):
-// 98.72%. Official = build123d's own examples and docs scripts: 96 of 104.
-const AI_SCRIPTS = 703;
-const AI_MATCH = "98.7%";
-const OFFICIAL_TOTAL = 104;
-const OFFICIAL_MATCH = 96;
 
 export function b123dPath(locale) {
   return `/${locale}/${SLUG}`;
@@ -146,7 +138,7 @@ export function getB123dCopy(locale) {
       licences: "浏览器里运行的开源组件：许可证与源码",
       title: "build123d 在线：在浏览器里运行 build123d 代码、导出 STEP | Forgent3D",
       description:
-        "在线运行 build123d：贴一段脚本或打开一个链接，就能看到精确的 B-rep 零件，拖滑块改参数，导出 STEP / STL。浏览器里跑真 CPython，不用安装，不用注册。",
+        "在线运行 build123d：贴一段脚本或打开一个链接，就能看到零件，拖滑块改参数，导出 STEP / STL。不用安装，不用注册。",
       keywords: [
         "build123d 在线",
         "build123d 在线运行",
@@ -159,20 +151,20 @@ export function getB123dCopy(locale) {
       ],
       h1: "build123d 在线：在浏览器里运行 build123d 代码",
       intro:
-        "把 build123d 脚本贴进来，或者打开一个带代码的链接：浏览器里的 CPython 运行它，建出精确的 B-rep 零件。代码里的尺寸常量变成滑块，拖一下就重建；满意了导出 STEP 或 STL。不用装 Python 和 OCP，不用注册，代码不上传。",
+        "把 build123d 脚本贴进来，或者打开一个带代码的链接，浏览器里直接建出零件。代码里的尺寸常量变成滑块，拖一下就重建；满意了导出 STEP 或 STL。不用装 Python 和 OCP，不用注册，代码不上传。",
       cta: "打开 build123d 编辑器",
       sampleCta: "带示例代码打开",
-      engineLine: `Python 是真 CPython；build123d 这一层是 Forgent3D 自己实现的。AI 写的 ${AI_SCRIPTS} 份测试脚本里 ${AI_MATCH} 和 build123d 0.13 建出同一个零件，build123d 自带的 ${OFFICIAL_TOTAL} 份示例里 ${OFFICIAL_MATCH} 份一致。`,
+      engineLine: "build123d 这一层是 Forgent3D 自己实现的，个别脚本建出来可能和 build123d 本体不同。",
       engineLink: "能跑什么、不能跑什么",
       featuresTitle: "你能得到什么",
       features: [
         {
-          title: "真 Python，build123d 的 API",
-          text: "运行脚本的是编译成 WebAssembly 的 CPython 3.14。build123d 0.13 的 API——builder 模式与代数模式、选择器、Locations、joints——由 Forgent3D 在 OpenCASCADE 内核上实现。numpy、bd_warehouse、sympy 照常 import。",
+          title: "脚本照原样跑",
+          text: "builder 模式与代数模式、选择器、Locations、joints——build123d 0.13 的写法照常能用，numpy、bd_warehouse、sympy 照常 import。",
         },
         {
           title: "精确几何，导出 STEP / STL",
-          text: "建出的是和 build123d 一样的 B-rep 实体：真平面、真圆柱、真孔。右下角一键导出 STEP（Fusion、SolidWorks、Onshape、FreeCAD 直接打开）或 STL（给切片软件）。",
+          text: "建出的是真正的实体，不是网格：真平面、真圆柱、真孔。右下角一键导出 STEP（Fusion、SolidWorks、Onshape、FreeCAD 直接打开）或 STL（给切片软件）。",
         },
         {
           title: "常量就是滑块",
@@ -213,9 +205,9 @@ export function getB123dCopy(locale) {
       },
       sampleTitle: "一段 AI 常写的那种脚本",
       sampleHint:
-        "代数模式，一行一个常量，没有 #@——打开后 OD、HEIGHT 这几个常量就是滑块。真 build123d 0.13 和这里建出的都是 1491.57 mm³。",
+        "代数模式，一行一个常量，没有 #@——打开后 OD、HEIGHT 这几个常量就是滑块。",
       runsTitle: "能跑什么、不能跑什么",
-      runsIntro: "这里没有装 build123d 本体，所以照实说清楚边界。做不到的写法会直接报错并说明原因，不会悄悄近似。",
+      runsIntro: "这里没有装 build123d 本体，所以照实说清楚边界。做不到的写法会直接报错并说明原因。",
       runsLabel: "能跑的",
       runs: [
         "build123d 0.13 的 API：BuildPart / BuildSketch / BuildLine 与代数模式、选择器与过滤、Locations 系列、joints，以及继承 build123d 类的写法。",
@@ -225,19 +217,17 @@ export function getB123dCopy(locale) {
       ],
       limitsLabel: "目前的限制",
       limits: [
-        "CadQuery、scipy、matplotlib、shapely，以及直接 from OCP import …（只保留了 bd_warehouse 用到的那些名字）都不可用，报错里会给出改法。",
-        "export_step、export_stl、Mesher 写文件、ExportSVG 只记录不落盘，导出用页面上的按钮；构建中写的其他文件构建完就没了。random 每次构建前 seed(0)，结果可复现。",
-        "Text() 用内置的 DejaVu Sans 字形，和 build123d 用你系统字体排出来的字不一样；传 font_path= 或中日韩文字会报错。",
-        "非解析曲面上的体积、面积读数刻意比 build123d 算得更准，所以断言 build123d 自己读数的脚本会断言失败（官方示例 handle.py、loft.py 就是这样）。",
-        "剩下的不一致里，有一小部分不报错：螺纹扫掠自相交（build123d 自己的答案也可疑），以及 sort_by(...)[i] 在两个等高的面之间平局、不同 OCCT 版本挑中的不一样。拿去加工前请核对尺寸。",
+        "CadQuery、scipy、matplotlib、shapely 不可用，直接 from OCP import … 大多也不行；报错里会给出改法。",
+        "export_step、export_stl 这类调用不会真写文件，导出用页面上的按钮。",
+        "Text() 用的是内置字体，和你本地排出来的字不一样；指定 font_path= 或写中日韩文字会报错。",
+        "个别脚本会建出略有不同的形状而不报错，拿去加工前请核对尺寸。",
         "一个链接只带一个文件：import 你项目里别的 .py 会找不到，把它内联进来。",
       ],
       compareTitle: "和本机装 build123d 比",
       compareHead: ["", "本机 build123d", "这一页"],
       compare: [
         ["安装", "pip install build123d（连带 OCP / OpenCASCADE 的 wheel）", "打开一个网页"],
-        ["Python", "你自己的 CPython", "CPython 3.14，编译成 WebAssembly"],
-        ["build123d 这一层", "build123d 本体", `Forgent3D 实现的 0.13 API（AI 写的脚本 ${AI_MATCH} 一致）`],
+        ["build123d 这一层", "build123d 本体", "Forgent3D 自己实现的 0.13 API"],
         ["看模型", "ocp_vscode / VS Code 插件", "页面自带"],
         ["改参数", "改数字、再运行一遍", "滑块，写回代码里的数字"],
         ["分享", "发 .py 文件", "一个带代码的链接"],
@@ -272,11 +262,11 @@ export function getB123dCopy(locale) {
       faqs: [
         {
           q: "不装 Python，能在线运行 build123d 吗？",
-          a: "能。打开编辑器，贴代码或打开带代码的链接，浏览器里的 CPython 运行它、建出零件；拖参数、导出 STEP / STL 都在页面上完成。不用安装，不用注册。",
+          a: "能。打开编辑器，贴代码或打开带代码的链接，浏览器里直接建出零件；拖参数、导出 STEP / STL 都在页面上完成。不用安装，不用注册。",
         },
         {
           q: "这是真的 build123d 吗？",
-          a: `Python 是真的：CPython 3.14 编译成 WebAssembly。build123d 这一层不是原版，而是 Forgent3D 照 build123d 0.13 的 API 在 OpenCASCADE 上实现的。我们拿真 build123d 0.13 逐份对照：AI 写的 ${AI_SCRIPTS} 份测试脚本里 ${AI_MATCH} 建出同一个零件（体积、面积、包围盒相差都在 1% 以内），build123d 自带的 ${OFFICIAL_TOTAL} 份示例里 ${OFFICIAL_MATCH} 份一致。碰到不一样的，请点「报告问题」发给我们。`,
+          a: "不是原版：build123d 这一层是 Forgent3D 照 build123d 0.13 的 API 自己实现的。我们拿真 build123d 逐份对照，绝大多数脚本建出同一个零件；碰到不一样的，请点「报告问题」发给我们。",
         },
         {
           q: "脚本要改吗？ocp_vscode 的 show() 怎么办？",
@@ -284,7 +274,7 @@ export function getB123dCopy(locale) {
         },
         {
           q: "能用 numpy、bd_warehouse 吗？CadQuery 呢？",
-          a: "numpy、bd_warehouse、sympy 和 Python 标准库都能 import。CadQuery、scipy、matplotlib、shapely 不行，直接 from OCP import … 只有 bd_warehouse 用到的那些名字；报错里会说该怎么改。",
+          a: "numpy、bd_warehouse、sympy 和 Python 标准库都能 import。CadQuery、scipy、matplotlib、shapely 不行，直接 from OCP import … 大多也不行；报错里会说该怎么改。",
         },
         {
           q: "代码会上传到服务器吗？",
@@ -296,11 +286,7 @@ export function getB123dCopy(locale) {
         },
         {
           q: "导出的 STEP 能在 SolidWorks、Fusion、FreeCAD 里打开吗？",
-          a: "能。导出的是带解析曲面的实体，孔和圆柱面导入后就是可以选取、标注的圆柱面，不是三角网格。",
-        },
-        {
-          q: "为什么脚本里的体积断言失败了？",
-          a: "在样条这类非解析曲面上，这里的体积、面积读数刻意比 build123d 算得更准，所以把 build123d 读数写死到很多位的 assert 会对不上。几何本身没变。",
+          a: "能。导出的是实体，孔和圆柱面导入后就是可以选取、标注的圆柱面，不是三角网格。",
         },
       ],
       moreTitle: "延伸阅读",
@@ -325,7 +311,7 @@ export function getB123dCopy(locale) {
     licences: "Open-source components in the browser build: licences and source",
     title: "build123d Online — Run build123d Code in Your Browser, Export STEP | Forgent3D",
     description:
-      "Run build123d online: paste a script or open a link, see the exact B-rep part, drag its parameters as sliders and export STEP or STL. Real CPython in your browser — no install, no sign-up.",
+      "Run build123d online: paste a script or open a link, see the part, drag its parameters as sliders and export STEP or STL. No install, no sign-up.",
     keywords: [
       "build123d online",
       "build123d playground",
@@ -339,20 +325,20 @@ export function getB123dCopy(locale) {
     ],
     h1: "build123d online — run build123d code in your browser",
     intro:
-      "Paste a build123d script, or open a link that carries one: CPython runs it in your browser and builds the exact B-rep part. The size constants in your code become sliders that rebuild as you drag; when it's right, export STEP or STL. No Python or OCP to install, no sign-up, and your code is not uploaded.",
+      "Paste a build123d script, or open a link that carries one, and it builds right in your browser. The size constants in your code become sliders that rebuild as you drag; when it's right, export STEP or STL. No Python or OCP to install, no sign-up, and your code is not uploaded.",
     cta: "Open the build123d editor",
     sampleCta: "Open with sample code",
-    engineLine: `The Python is real CPython; the build123d layer is Forgent3D's own. On ${AI_SCRIPTS} AI-written test scripts it builds the same part as build123d 0.13 ${AI_MATCH} of the time, and ${OFFICIAL_MATCH} of build123d's own ${OFFICIAL_TOTAL} examples match.`,
+    engineLine: "The build123d layer here is Forgent3D's own, so a few scripts may build differently from build123d itself.",
     engineLink: "What runs and what doesn't",
     featuresTitle: "What you get",
     features: [
       {
-        title: "Real Python, build123d's API",
-        text: "Your script runs on CPython 3.14 compiled to WebAssembly. The build123d 0.13 API — builder and algebra mode, selectors, Locations, joints — is Forgent3D's implementation on the OpenCASCADE kernel. numpy, bd_warehouse and sympy import as usual.",
+        title: "Your script, as written",
+        text: "Builder and algebra mode, selectors, Locations, joints — build123d 0.13 code runs as you wrote it, and numpy, bd_warehouse and sympy import as usual.",
       },
       {
         title: "Exact geometry, STEP and STL export",
-        text: "It builds the same kind of B-rep solid build123d does: true planes, cylinders and holes. One click exports STEP (opens in Fusion, SolidWorks, Onshape and FreeCAD) or STL (for your slicer).",
+        text: "It builds real solids, not meshes: true planes, cylinders and holes. One click exports STEP (opens in Fusion, SolidWorks, Onshape and FreeCAD) or STL (for your slicer).",
       },
       {
         title: "Constants become sliders",
@@ -393,9 +379,9 @@ export function getB123dCopy(locale) {
     },
     sampleTitle: "The kind of script an AI writes",
     sampleHint:
-      "Algebra mode, one constant per line, no #@ — open it and OD, HEIGHT and the rest are sliders. Real build123d 0.13 and this page both build 1491.57 mm³.",
+      "Algebra mode, one constant per line, no #@ — open it and OD, HEIGHT and the rest are sliders.",
     runsTitle: "What runs and what doesn't",
-    runsIntro: "This is not build123d itself, so here is exactly where the edges are. Code that can't run fails with an error that says why — nothing is quietly approximated.",
+    runsIntro: "This is not build123d itself, so here is exactly where the edges are. Code that can't run fails with an error that says why.",
     runsLabel: "Runs",
     runs: [
       "The build123d 0.13 API: BuildPart / BuildSketch / BuildLine and algebra mode, selectors and filters, the Locations family, joints, and classes that subclass build123d's.",
@@ -405,19 +391,17 @@ export function getB123dCopy(locale) {
     ],
     limitsLabel: "Current limits",
     limits: [
-      "CadQuery, scipy, matplotlib, shapely and direct from OCP import … are not available (only the OCP names bd_warehouse uses are); the error says what to do instead.",
-      "export_step, export_stl, Mesher writes and ExportSVG are recorded but write nothing — use the page's export buttons. Other files written during a build are gone after it. random is seeded with 0 before every build, so a run repeats.",
-      "Text() uses built-in DejaVu Sans outlines, so lettering differs from build123d with your system fonts; font_path= and Chinese, Japanese or Korean text raise an error.",
-      "Volume and area on non-analytic faces are deliberately computed more precisely than build123d does, so a script that asserts build123d's own reading can fail (the official handle.py and loft.py do).",
-      "A few of the remaining differences come with no error: thread sweeps that intersect themselves (where build123d's own answer is doubtful) and sort_by(...)[i] picking between two faces at the same height, which OCCT versions order differently. Check the dimensions before you make the part.",
+      "CadQuery, scipy, matplotlib and shapely are not available, and most direct from OCP import … isn't either; the error says what to do instead.",
+      "export_step, export_stl and the like write no file — use the page's export buttons.",
+      "Text() uses a built-in font, so lettering differs from what you get locally; font_path= and Chinese, Japanese or Korean text raise an error.",
+      "A few scripts build a slightly different shape without an error. Check the dimensions before you make the part.",
       "A link carries one file: importing another .py from your project fails — inline it.",
     ],
     compareTitle: "Compared with build123d on your machine",
     compareHead: ["", "build123d locally", "This page"],
     compare: [
       ["Install", "pip install build123d (pulls the OCP / OpenCASCADE wheels)", "Open a web page"],
-      ["Python", "Your own CPython", "CPython 3.14, compiled to WebAssembly"],
-      ["build123d layer", "build123d itself", `Forgent3D's implementation of the 0.13 API (${AI_MATCH} match on AI-written scripts)`],
+      ["build123d layer", "build123d itself", "Forgent3D's own implementation of the 0.13 API"],
       ["Viewer", "ocp_vscode / the VS Code extension", "Built in"],
       ["Parameters", "Change the number, run again", "Sliders that rewrite the number"],
       ["Sharing", "Send the .py", "One link with the code in it"],
@@ -452,11 +436,11 @@ export function getB123dCopy(locale) {
     faqs: [
       {
         q: "Can I run build123d online without installing Python?",
-        a: "Yes. Open the editor, paste code or open a link that carries it, and CPython runs it in your browser and builds the part; dragging parameters and exporting STEP or STL happen on the page. No install, no sign-up.",
+        a: "Yes. Open the editor, paste code or open a link that carries it, and it builds the part in your browser; dragging parameters and exporting STEP or STL happen on the page. No install, no sign-up.",
       },
       {
         q: "Is this the real build123d?",
-        a: `The Python is real: CPython 3.14 compiled to WebAssembly. The build123d layer is not the original but Forgent3D's implementation of the build123d 0.13 API on OpenCASCADE. We check it against real build123d 0.13 script by script: ${AI_MATCH} of ${AI_SCRIPTS} AI-written test scripts build the same part (volume, area and bounding box within 1%), and ${OFFICIAL_MATCH} of build123d's own ${OFFICIAL_TOTAL} examples match. If you hit a difference, send it with “Report a problem”.`,
+        a: "Not the original: the build123d layer is Forgent3D's own implementation of the build123d 0.13 API. We check it against real build123d script by script, and almost all scripts build the same part; if yours doesn't, send it with “Report a problem”.",
       },
       {
         q: "Do I need to change my script? What about show() from ocp_vscode?",
@@ -464,7 +448,7 @@ export function getB123dCopy(locale) {
       },
       {
         q: "Can I use numpy and bd_warehouse? And CadQuery?",
-        a: "numpy, bd_warehouse, sympy and the Python standard library import as usual. CadQuery, scipy, matplotlib and shapely don't, and direct from OCP import … only has the names bd_warehouse uses; the error tells you what to change.",
+        a: "numpy, bd_warehouse, sympy and the Python standard library import as usual. CadQuery, scipy, matplotlib and shapely don't, and most direct from OCP import … doesn't either; the error tells you what to change.",
       },
       {
         q: "Is my code uploaded to a server?",
@@ -476,11 +460,7 @@ export function getB123dCopy(locale) {
       },
       {
         q: "Does the exported STEP open in SolidWorks, Fusion and FreeCAD?",
-        a: "Yes. It contains solids with analytic faces, so holes and round faces come in as cylinders you can select and dimension, not a triangle mesh.",
-      },
-      {
-        q: "Why does a volume assertion in my script fail?",
-        a: "On non-analytic faces such as splines this page computes volume and area more precisely than build123d does, so an assert that pins build123d's reading to many digits won't match. The geometry is the same.",
+        a: "Yes. It contains solids, so holes and round faces come in as cylinders you can select and dimension, not a triangle mesh.",
       },
     ],
     moreTitle: "Read more",

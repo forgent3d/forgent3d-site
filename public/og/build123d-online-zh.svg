@@ -27,7 +27,7 @@
 
   <text x="72" y="264" fill="#191C24" font-size="64" font-weight="600" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">build123d 在线</text>
   <text x="72" y="340" fill="#0886A6" font-size="64" font-weight="600" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">浏览器里直接运行</text>
-  <text x="72" y="410" fill="#616875" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">真 CPython 运行你的脚本，常量变成滑块，</text>
+  <text x="72" y="410" fill="#616875" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">贴上脚本就建好，常量变成滑块，</text>
   <text x="72" y="444" fill="#616875" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif">导出精确的 STEP / STL。不用安装。</text>
 
   <!-- 代码卡片:上半是代码,下半是它的两个常量成了滑块,右下角导出 STEP -->
