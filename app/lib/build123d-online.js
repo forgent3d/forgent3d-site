@@ -5,10 +5,11 @@
 // wrote. The path, the metadata, the copy (en / zh) and the numbers live here.
 //
 // Say what the page does, not how the engine works (10-26 user decision): no CPython, no match rates, no gate numbers
-// on the page. What does stay (back on 10-31, after the 10-26 cut also took it out): that this is not build123d itself
-// (the line under the hero, linked to "what runs and what doesn't", the table row and the FAQ) and the footer's
-// "not affiliated with the build123d project". build123d's maintainers read this page too, and the page must say what
-// we tell them. The measured numbers are in public/llms.txt only.
+// on the page. What does stay (back on 10-31, after the 10-26 cut also took it out): the FAQ "is this the real
+// build123d?" and the footer credit saying we implement its API and are not affiliated, worded like the OpenSCAD pages'
+// footer. Said once each, not on the first screen: build123d's maintainers read this page too, and it must agree with
+// what we tell them, but a page that keeps saying what it isn't reads as defensive. The measured numbers are in
+// public/llms.txt only.
 
 import { OG_BASE, SITE_URL } from "./seo";
 
@@ -155,8 +156,6 @@ export function getB123dCopy(locale) {
         "把 build123d 脚本贴进来，或者打开一个带代码的链接，浏览器里直接建出零件。代码里的尺寸常量变成滑块，拖一下就重建；满意了导出 STEP 或 STL。不用装 Python 和 OCP，不用注册，代码不上传。",
       cta: "打开 build123d 编辑器",
       sampleCta: "带示例代码打开",
-      engineLine: "build123d 这一层是 Forgent3D 自己实现的，个别脚本建出来可能和 build123d 本体不同。",
-      engineLink: "能跑什么、不能跑什么",
       featuresTitle: "你能得到什么",
       features: [
         {
@@ -208,7 +207,7 @@ export function getB123dCopy(locale) {
       sampleHint:
         "代数模式，一行一个常量，没有 #@——打开后 OD、HEIGHT 这几个常量就是滑块。",
       runsTitle: "能跑什么、不能跑什么",
-      runsIntro: "这里没有装 build123d 本体，所以照实说清楚边界。做不到的写法会直接报错并说明原因。",
+      runsIntro: "能跑的和目前跑不了的，一条条列在这里。做不到的写法会直接报错并说明原因。",
       runsLabel: "能跑的",
       runs: [
         "build123d 0.13 的 API：BuildPart / BuildSketch / BuildLine 与代数模式、选择器与过滤、Locations 系列、joints，以及继承 build123d 类的写法。",
@@ -228,7 +227,6 @@ export function getB123dCopy(locale) {
       compareHead: ["", "本机 build123d", "这一页"],
       compare: [
         ["安装", "pip install build123d（连带 OCP / OpenCASCADE 的 wheel）", "打开一个网页"],
-        ["build123d 这一层", "build123d 本体", "Forgent3D 自己实现的 0.13 API"],
         ["看模型", "ocp_vscode / VS Code 插件", "页面自带"],
         ["改参数", "改数字、再运行一遍", "滑块，写回代码里的数字"],
         ["分享", "发 .py 文件", "一个带代码的链接"],
@@ -267,7 +265,7 @@ export function getB123dCopy(locale) {
         },
         {
           q: "这是真的 build123d 吗？",
-          a: "不是原版：build123d 这一层是 Forgent3D 照 build123d 0.13 的 API 自己实现的。我们拿真 build123d 逐份对照，绝大多数脚本建出同一个零件；碰到不一样的，请点「报告问题」发给我们。",
+          a: "不是 build123d 本体：Forgent3D 自己实现了 build123d 0.13 的 API，所以不用装任何东西就能跑 build123d 脚本。我们拿真 build123d 逐份对照，绝大多数脚本建出同一个零件；碰到不一样的，请点「报告问题」发给我们。",
         },
         {
           q: "脚本要改吗？ocp_vscode 的 show() 怎么办？",
@@ -329,8 +327,6 @@ export function getB123dCopy(locale) {
       "Paste a build123d script, or open a link that carries one, and it builds right in your browser. The size constants in your code become sliders that rebuild as you drag; when it's right, export STEP or STL. No Python or OCP to install, no sign-up, and your code is not uploaded.",
     cta: "Open the build123d editor",
     sampleCta: "Open with sample code",
-    engineLine: "The build123d layer here is Forgent3D's own, so a few scripts may build differently from build123d itself.",
-    engineLink: "What runs and what doesn't",
     featuresTitle: "What you get",
     features: [
       {
@@ -382,7 +378,7 @@ export function getB123dCopy(locale) {
     sampleHint:
       "Algebra mode, one constant per line, no #@ — open it and OD, HEIGHT and the rest are sliders.",
     runsTitle: "What runs and what doesn't",
-    runsIntro: "This is not build123d itself, so here is exactly where the edges are. Code that can't run fails with an error that says why.",
+    runsIntro: "Here is exactly where the edges are. Code that can't run fails with an error that says why.",
     runsLabel: "Runs",
     runs: [
       "The build123d 0.13 API: BuildPart / BuildSketch / BuildLine and algebra mode, selectors and filters, the Locations family, joints, and classes that subclass build123d's.",
@@ -402,7 +398,6 @@ export function getB123dCopy(locale) {
     compareHead: ["", "build123d locally", "This page"],
     compare: [
       ["Install", "pip install build123d (pulls the OCP / OpenCASCADE wheels)", "Open a web page"],
-      ["build123d layer", "build123d itself", "Forgent3D's own implementation of the 0.13 API"],
       ["Viewer", "ocp_vscode / the VS Code extension", "Built in"],
       ["Parameters", "Change the number, run again", "Sliders that rewrite the number"],
       ["Sharing", "Send the .py", "One link with the code in it"],
@@ -441,7 +436,7 @@ export function getB123dCopy(locale) {
       },
       {
         q: "Is this the real build123d?",
-        a: "Not the original: the build123d layer is Forgent3D's own implementation of the build123d 0.13 API. We check it against real build123d script by script, and almost all scripts build the same part; if yours doesn't, send it with “Report a problem”.",
+        a: "Not build123d itself: Forgent3D has its own implementation of the build123d 0.13 API, which is how scripts run here with nothing to install. We check it against real build123d script by script, and almost all scripts build the same part; if yours doesn't, send it with “Report a problem”.",
       },
       {
         q: "Do I need to change my script? What about show() from ocp_vscode?",
