@@ -19,6 +19,19 @@ export const HERO_PRODUCT_PRELOAD = {
   imageSizes: HERO_PRODUCT_SIZES,
 };
 
+/**
+ * 首页的免费工具:首屏 CTA 下一行文字链 + 页尾一节卡片。这些工具带来了站上大部分访客和几乎全部导出,
+ * 用过工具再搜 "forgent3d" 回来的人落在首页 —— 10-17..10-30 首页 244 个会话里 21 个自己翻到了 /scad,
+ * 而当时首页正文一个工具链接都没有。首页的权重也顺着这些链接给到真正靠排名的落地页。
+ * 每个工具链到 www 上自己的落地页(文案、边界、免责都在那页),不直接进 app。
+ */
+const HOME_TOOLS = [
+  { key: "scadViewer", links: [{ path: "openscad-viewer" }] },
+  { key: "build123d", links: [{ path: "build123d-online" }] },
+  { key: "generators", links: [{ path: "generators" }] },
+  { key: "stepStl", links: [{ path: "step-to-stl", label: "STEP → STL" }, { path: "stl-to-step", label: "STL → STEP" }] },
+];
+
 /** Kept in sync with the in-product skills guide (app.forgent3d.com/skills). */
 export const SKILLS_INSTALL_COMMAND = "npx skills add forgent3d/forgent3d-skills";
 export const SKILLS_REPO_URL = "https://github.com/forgent3d/forgent3d-skills";
@@ -103,6 +116,33 @@ const COPY = {
       "Model code stays in your repo; the model shows up in your workspace",
     ],
     compareShared: "Either way you get an editable CAD model, not a disposable image.",
+    toolsHeroLabel: "Free, no sign-up:",
+    toolsEyebrow: "Free tools",
+    toolsTitle: "Free tools that run in your browser",
+    toolsSubtitle: "No sign-up, and nothing to install.",
+    toolsOpen: "Open",
+    tools: {
+      scadViewer: {
+        name: "OpenSCAD online viewer",
+        short: "OpenSCAD viewer",
+        desc: "Open or paste a .scad file, drag the Customizer sliders, and export STL or STEP.",
+      },
+      build123d: {
+        name: "build123d online",
+        short: "build123d online",
+        desc: "Paste a build123d script, resize it with sliders made from its constants, and export STEP or STL.",
+      },
+      generators: {
+        name: "3D print generators",
+        short: "3D print generators",
+        desc: "Gears, Gridfinity bins, boxes, brackets and more: set the sizes and download STL or STEP.",
+      },
+      stepStl: {
+        name: "STEP ↔ STL",
+        short: "STEP ↔ STL",
+        desc: "Turn a STEP file into an STL for your slicer, or an STL into a STEP your CAD tool opens.",
+      },
+    },
     footerTagline: "AI CAD in the cloud, and a skill that brings it to the editor you already use",
     guidesAi3D: "AI 3D Model Generation",
     guidesCodeCad: "Code to 3D Models",
@@ -190,6 +230,33 @@ const COPY = {
       "模型代码留在你的仓库，模型出现在你的工作区",
     ],
     compareShared: "两种方式做出来的都是可编辑的 CAD 模型，不是一次性图片。",
+    toolsHeroLabel: "免费，不用注册：",
+    toolsEyebrow: "免费工具",
+    toolsTitle: "打开浏览器就能用的免费工具",
+    toolsSubtitle: "不用注册，也不用装任何东西。",
+    toolsOpen: "打开",
+    tools: {
+      scadViewer: {
+        name: "OpenSCAD 在线预览",
+        short: "OpenSCAD 在线预览",
+        desc: "打开或粘贴 .scad 文件，拖 Customizer 滑块调参数，导出 STL 或 STEP。",
+      },
+      build123d: {
+        name: "build123d 在线",
+        short: "build123d 在线",
+        desc: "粘贴 build123d 脚本，代码里的常量变成滑块，拖着改尺寸，导出 STEP 或 STL。",
+      },
+      generators: {
+        name: "3D 打印生成器",
+        short: "3D 打印生成器",
+        desc: "齿轮、Gridfinity 收纳盒、盒子、支架等等，填好尺寸就能下载 STL 或 STEP。",
+      },
+      stepStl: {
+        name: "STEP ↔ STL",
+        short: "STEP ↔ STL",
+        desc: "把 STEP 转成 STL 拿去切片，或者把 STL 转成 CAD 软件能打开的 STEP。",
+      },
+    },
     footerTagline: "云端 AI CAD，以及把它装进你编辑器的 skill",
     guidesAi3D: "AI 生成三维模型软件",
     guidesCodeCad: "代码生成三维模型软件",
@@ -299,6 +366,12 @@ export function getLandingPageHtml(locale) {
             <div class="hero-actions mt-8 flex flex-wrap gap-3">
               <a class="js-try-link ${BRAND_BUTTON} min-h-[44px] px-5" href="https://app.forgent3d.com?lang=${locale}">${t.heroTry}</a>
             </div>
+            <!-- 免费工具是给回头找工具的人的门(见 HOME_TOOLS):一行灰字链,不是第二颗按钮,不和上面那个动作抢。
+                 颜色和下划线挂在里面的 span 上:public/styles.css 的全局 a { color: inherit } 不在 layer 里,压得过 <a> 上的工具类。 -->
+            <p class="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
+              ${t.toolsHeroLabel}
+              ${HOME_TOOLS.map(({ key, links }) => `<a class="group whitespace-nowrap" href="/${locale}/${links[0].path}" data-track="home-tools-hero"><span class="text-foreground/80 underline decoration-border underline-offset-4 transition-colors group-hover:text-brand group-hover:decoration-brand/60">${t.tools[key].short}</span></a>`).join(" · ")}
+            </p>
           </div>
 
           <div class="hero-visual relative">
@@ -401,6 +474,26 @@ export function getLandingPageHtml(locale) {
             </article>
           </div>
           <p class="reveal mt-4 ${CARD_SURFACE} p-4 text-sm leading-6 text-muted-foreground sm:mt-5 sm:p-5">${t.compareShared}</p>
+        </section>
+
+        <section class="landing-section py-20" id="tools">
+          <div class="reveal mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p class="mobile-kicker mb-3 ${EYEBROW}">${t.toolsEyebrow}</p>
+              <h2 class="max-w-2xl ${SECTION_TITLE}">${t.toolsTitle}</h2>
+            </div>
+            <p class="max-w-sm text-sm leading-6 text-muted-foreground">${t.toolsSubtitle}</p>
+          </div>
+          <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            ${HOME_TOOLS.map(({ key, links }) => `
+            <article class="reveal flex flex-col ${CARD_SURFACE} p-5">
+              <h3 class="text-lg font-semibold text-foreground">${t.tools[key].name}</h3>
+              <p class="mt-2 flex-1 text-sm leading-6 text-muted-foreground">${t.tools[key].desc}</p>
+              <div class="mt-4 flex flex-wrap gap-x-4 gap-y-1">
+                ${links.map(({ path, label }) => `<a class="group text-sm font-medium" href="/${locale}/${path}" data-track="home-tools-card"><span class="text-brand transition-colors group-hover:text-brand/80">${label || t.toolsOpen} →</span></a>`).join("")}
+              </div>
+            </article>`).join("")}
+          </div>
         </section>
 
       </main>

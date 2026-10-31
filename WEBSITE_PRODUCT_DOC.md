@@ -103,6 +103,9 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 
 [Compare]      Forgent3D 云端  vs  Forgent3D Skill  + 共同承诺
 
+[Free tools]   OpenSCAD 在线预览 | build123d 在线 | 3D 打印生成器 | STEP ↔ STL，四张卡各链 www 上自己的落地页
+               （Hero 的 CTA 下面也有同一组的一行灰字链）。为什么在首页：见 landing-page.js 的 HOME_TOOLS（10-31）
+
 [Footer]       导航 + 指南链接 + 一条灰色的「开源桌面版」链接
 ```
 
