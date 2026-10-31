@@ -5,11 +5,11 @@
 // wrote. The path, the metadata, the copy (en / zh) and the numbers live here.
 //
 // Say what the page does, not how the engine works (10-26 user decision): no CPython, no match rates, no gate numbers
-// on the page. What does stay (back on 10-31, after the 10-26 cut also took it out): the FAQ "is this the real
-// build123d?" and the footer credit saying we implement its API and are not affiliated, worded like the OpenSCAD pages'
-// footer. Said once each, not on the first screen: build123d's maintainers read this page too, and it must agree with
-// what we tell them, but a page that keeps saying what it isn't reads as defensive. The measured numbers are in
-// public/llms.txt only.
+// on the page. What does stay (back on 10-31, after the 10-26 cut also took it out): that the engine is Forgent3D's and
+// compatible with the build123d API, said once in the FAQ ("same as running build123d locally?") and once in the
+// footer credit ("an independent project that's compatible with its API"). Worded as what we are, not as what we
+// aren't: build123d's maintainers read this page too and it must agree with what we tell them, but "we implemented its
+// API / are not affiliated" reads as defensive. The measured numbers are in public/llms.txt only.
 
 import { OG_BASE, SITE_URL } from "./seo";
 
@@ -136,7 +136,7 @@ export function getB123dCopy(locale) {
       generatorsLink: "3D 打印生成器",
       skillsLink: "Forgent3D Skill",
       credit:
-        "build123d 是 gumyr 与社区贡献者开发、以 Apache-2.0 协议发布的开源 Python CAD 库。Forgent3D 自己实现了它的 API，好在浏览器里运行 build123d 脚本，与 build123d 项目没有隶属关系。",
+        "build123d 是 gumyr 与社区贡献者开发、以 Apache-2.0 协议发布的开源 Python CAD 库。Forgent3D 是独立项目，兼容它的 API，让 build123d 脚本直接在浏览器里运行。",
       licences: "浏览器里运行的开源组件：许可证与源码",
       title: "build123d 在线：在浏览器里运行 build123d 代码、导出 STEP | Forgent3D",
       description:
@@ -264,8 +264,8 @@ export function getB123dCopy(locale) {
           a: "能。打开编辑器，贴代码或打开带代码的链接，浏览器里直接建出零件；拖参数、导出 STEP / STL 都在页面上完成。不用安装，不用注册。",
         },
         {
-          q: "这是真的 build123d 吗？",
-          a: "不是 build123d 本体：Forgent3D 自己实现了 build123d 0.13 的 API，所以不用装任何东西就能跑 build123d 脚本。我们拿真 build123d 逐份对照，绝大多数脚本建出同一个零件；碰到不一样的，请点「报告问题」发给我们。",
+          q: "和在本机跑 build123d 一样吗？",
+          a: "几乎一样。这里跑的是 Forgent3D 兼容 build123d 0.13 API 的引擎，所以不用装 Python 就能直接跑你的脚本。我们拿 build123d 本体逐份对照，绝大多数脚本建出同一个零件；碰到不一样的，点「报告问题」发给我们。",
         },
         {
           q: "脚本要改吗？ocp_vscode 的 show() 怎么办？",
@@ -306,7 +306,7 @@ export function getB123dCopy(locale) {
     generatorsLink: "3D print generators",
     skillsLink: "Forgent3D Skill",
     credit:
-      "build123d is an open-source Python CAD library by gumyr and contributors, licensed under Apache-2.0. Forgent3D implements its API to run build123d scripts in the browser and is not affiliated with the build123d project.",
+      "build123d is an open-source Python CAD library by gumyr and contributors, licensed under Apache-2.0. Forgent3D is an independent project that's compatible with its API and runs build123d scripts right in your browser.",
     licences: "Open-source components in the browser build: licences and source",
     title: "build123d Online — Run build123d Code in Your Browser, Export STEP | Forgent3D",
     description:
@@ -435,8 +435,8 @@ export function getB123dCopy(locale) {
         a: "Yes. Open the editor, paste code or open a link that carries it, and it builds the part in your browser; dragging parameters and exporting STEP or STL happen on the page. No install, no sign-up.",
       },
       {
-        q: "Is this the real build123d?",
-        a: "Not build123d itself: Forgent3D has its own implementation of the build123d 0.13 API, which is how scripts run here with nothing to install. We check it against real build123d script by script, and almost all scripts build the same part; if yours doesn't, send it with “Report a problem”.",
+        q: "Is it the same as running build123d locally?",
+        a: "Almost always. Scripts here run on Forgent3D's engine, which is compatible with the build123d 0.13 API, so there's nothing to install. We check it against build123d itself script by script, and almost all scripts build the same part; if yours doesn't, send it with “Report a problem”.",
       },
       {
         q: "Do I need to change my script? What about show() from ocp_vscode?",

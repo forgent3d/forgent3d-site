@@ -70,7 +70,7 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
                                  这三页的文案各在 app/lib/<slug>.js，共用的路径、互链、metadata、JSON-LD 在
                                  app/lib/openscad-pages.js，版块在 app/components/openscad-page.js；五个 OpenSCAD 页的页脚互链
 /[locale]/build123d-online       build123d 在线落地页（CTA 进 app 的 /build123d，那页 noindex，排名靠这页；自带顶栏）
-                                 首屏只说能做什么，不讲引擎怎么实现（10-26 裁定：不上 CPython、一致率，实测数只在 llms.txt）；「不是 build123d 本体」只在 FAQ 说一次，页脚写自己实现了它的 API、与 build123d 项目没有隶属关系，同 OpenSCAD 页的页脚（10-31：维护者也会看这页，但不在首屏、不重复）；「能跑什么、不能跑什么」
+                                 首屏只说能做什么，不讲引擎怎么实现（10-26 裁定：不上 CPython、一致率，实测数只在 llms.txt）；引擎是我们自己的、兼容 build123d 的 API，只在 FAQ「和在本机跑 build123d 一样吗」说一次，页脚写「Forgent3D 是独立项目，兼容它的 API」（10-31：维护者也会看这页；说我们是什么，不说「自己实现了」「没有隶属关系」，不在首屏、不重复）；「能跑什么、不能跑什么」
                                  一节照 platform docs/build123d-preview-launch.md §3 写。例子卡片 → /build123d?example=<名字>，
                                  「从链接打开」完整版（格式、规则、提示词）在这页，public/llms.txt 同步
 /[locale]/blog                   文章列表;/[locale]/blog/<slug> 单篇。正文住在 content/blog/<slug>.<locale>.md
