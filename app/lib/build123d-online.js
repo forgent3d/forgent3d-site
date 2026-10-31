@@ -20,7 +20,10 @@ export const APP_B123D_URL = "https://app.forgent3d.com/build123d";
 // bounding box within 1%). The cadbench corpus of AI-written scripts (1040, said as "about 1,000"), 99.04% in the platform
 // gate run 40181427126 (10-24; platform docs/build123d-preview-launch.md §2 B1). The page gives this one number, plainly
 // (user's call 10-31); public/llms.txt carries it with the other corpora — change both when a new gate run moves it.
-const COMPAT = { aiScripts: { en: "about 1,000", zh: "约 1000" }, aiSamePct: "99", measured: { en: "October 2026", zh: "2026 年 10 月" } };
+// The rest, said in one line: most of them stop with an error; 2 of the 1,040 (after the 10-25 silent-mismatch work, same
+// doc §2 B2 step 2) build a different shape without one — a thread sweep where build123d's own answer is doubtful, and a
+// pick between two faces at the same height that OCCT 8.0.1 and 7.9.0 order differently (doc §3).
+const COMPAT = { aiScripts: { en: "about 1,000", zh: "约 1000" }, aiSamePct: "99", silent: { en: "about 2 in 1,000", zh: "约千分之二" }, measured: { en: "October 2026", zh: "2026 年 10 月" } };
 
 const SLUG = "build123d-online";
 
@@ -272,7 +275,7 @@ export function getB123dCopy(locale) {
         },
         {
           q: "和在本机跑 build123d 一样吗？",
-          a: `几乎一样。这里跑的是 Forgent3D 兼容 build123d 0.13 API 的引擎，所以不用装 Python 就能直接跑你的脚本。拿 build123d 0.13 本体逐份对照，${COMPAT.aiScripts.zh} 份 AI 写的脚本里 ${COMPAT.aiSamePct}% 建出一样的零件（${COMPAT.measured.zh}）。碰到不一样的，点「报告问题」发给我们。`,
+          a: `几乎一样。这里跑的是 Forgent3D 兼容 build123d 0.13 API 的引擎，所以不用装 Python 就能直接跑你的脚本。拿 build123d 0.13 本体逐份对照，${COMPAT.aiScripts.zh} 份 AI 写的脚本里 ${COMPAT.aiSamePct}% 建出一样的零件（${COMPAT.measured.zh}）。剩下的 1% 大多会直接报错，不会悄悄给你一个错的零件；${COMPAT.silent.zh}会建出略有不同的形状，多是螺纹，或者脚本要在两个一样高的面里挑一个。碰到不一样的，点「报告问题」发给我们。`,
         },
         {
           q: "脚本要改吗？ocp_vscode 的 show() 怎么办？",
@@ -443,7 +446,7 @@ export function getB123dCopy(locale) {
       },
       {
         q: "Is it the same as running build123d locally?",
-        a: `Almost always. Scripts here run on Forgent3D's engine, which is compatible with the build123d 0.13 API, so there's nothing to install. Checked script by script against build123d 0.13 itself, ${COMPAT.aiSamePct}% of ${COMPAT.aiScripts.en} AI-written scripts build the same part (${COMPAT.measured.en}). If yours doesn't, send it with “Report a problem”.`,
+        a: `Almost always. Scripts here run on Forgent3D's engine, which is compatible with the build123d 0.13 API, so there's nothing to install. Checked script by script against build123d 0.13 itself, ${COMPAT.aiSamePct}% of ${COMPAT.aiScripts.en} AI-written scripts build the same part (${COMPAT.measured.en}). Most of the other 1% stop with an error rather than quietly giving you a wrong part; ${COMPAT.silent.en} build a slightly different shape, mostly threads or a script picking between two faces at the same height. If yours doesn't, send it with “Report a problem”.`,
       },
       {
         q: "Do I need to change my script? What about show() from ocp_vscode?",
