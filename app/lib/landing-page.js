@@ -368,7 +368,7 @@ export function getLandingPageHtml(locale) {
             </div>
             <!-- 免费工具是给回头找工具的人的门(见 HOME_TOOLS):一行灰字链,不是第二颗按钮,不和上面那个动作抢。
                  颜色和下划线挂在里面的 span 上:public/styles.css 的全局 a { color: inherit } 不在 layer 里,压得过 <a> 上的工具类。 -->
-            <p class="mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
+            <p class="hero-tools mt-5 max-w-xl text-sm leading-6 text-muted-foreground">
               ${t.toolsHeroLabel}
               ${HOME_TOOLS.map(({ key, links }) => `<a class="group whitespace-nowrap" href="/${locale}/${links[0].path}" data-track="home-tools-hero"><span class="text-foreground/80 underline decoration-border underline-offset-4 transition-colors group-hover:text-brand group-hover:decoration-brand/60">${t.tools[key].short}</span></a>`).join(" · ")}
             </p>

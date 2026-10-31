@@ -310,7 +310,8 @@ canvas {
     line-height: 1.12 !important;
   }
 
-  .hero-copy p:not(.mobile-kicker) {
+  /* 免费工具那行(.hero-tools)保持 text-sm:它是按钮下的次要入口,放大到和副标题一样就和按钮抢了 */
+  .hero-copy p:not(.mobile-kicker):not(.hero-tools) {
     font-size: 0.98rem;
     line-height: 1.65;
   }
