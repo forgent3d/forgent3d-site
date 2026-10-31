@@ -58,3 +58,5 @@ Constants marked `#@` in the model become sliders and switches on the shared pag
 With all of this, simple parts often come out right the first time: a box, a bracket, a spacer, a plate with holes; the agent measures the misplacement itself and fixes it. Complex parts still take several rounds, especially assemblies that need spatial reasoning. And "it can measure" is not the same as "it measures every time"; getting it into the habit took as much work as building the tools.
 
 How we know whether the rounds are getting better is another question, and the next article. That one is not pretty.
+
+How much these feedback tools matter next to the choice of CAD language is in [Which CAD code should AI write?](/en/blog/ai-cad-languages)

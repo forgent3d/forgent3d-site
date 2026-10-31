@@ -94,3 +94,5 @@ It is convention, and Python enforces none of it. A model can still put a hole a
 So neither answer is the IR the list describes. KCL put its rules in the language, at the level of the feature tree. We put ours above the feature tree, in conventions the language knows nothing about.
 
 B-rep serves the kernel. A feature tree in text serves the kernel and the editor. A CAD IR for language models has to serve the model as well, in the terms people use when they ask for a part.
+
+How KCL, build123d and the other options actually fare when a model writes them is in [Which CAD code should AI write?](/en/blog/ai-cad-languages)

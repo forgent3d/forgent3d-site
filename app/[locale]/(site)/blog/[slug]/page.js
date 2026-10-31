@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BRAND_BUTTON, isSupportedLocale } from "../../../../lib/landing-page";
-import { blogPath, formatDate, getPost, listPosts, postLocales, readingMinutes } from "../../../../lib/blog";
+import { blogPath, formatDate, getPost, listPosts, postFaqs, postLocales, readingMinutes } from "../../../../lib/blog";
 import { markdownToText, renderMarkdown } from "../../../../lib/markdown";
 import { scadAppUrl } from "../../../../lib/openscad-to-step";
 import { viewerAppUrl } from "../../../../lib/openscad-viewer";
@@ -102,10 +102,18 @@ export default async function BlogPostPage({ params }) {
     publisher: { "@type": "Organization", name: "Forgent3D", url: SITE_URL },
     articleBody: markdownToText(post.body),
   };
+  const faqs = postFaqs(post);
+  const schemas = faqs.length
+    ? [schema, {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((faq) => ({ "@type": "Question", name: faq.q, acceptedAnswer: { "@type": "Answer", text: faq.a } })),
+      }]
+    : schema;
 
   return (
     <main className="mx-auto w-[min(820px,calc(100vw-32px))] py-16 text-foreground">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }} />
       <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80">
         <Link className="transition-colors hover:text-brand" href={blogPath(locale)}>{t.back}</Link>
       </p>
