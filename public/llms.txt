@@ -135,6 +135,7 @@ Each calculator does the arithmetic and links to a generator with the result fil
 - Letting the AI reinvent the heat-set insert boss every time is a bad idea (the component library): https://www.forgent3d.com/en/blog/components-catalog
 - B-rep is not for transformers: why the AI writes CAD code that a kernel compiles instead of generating B-rep (pointers, numbers that must agree in several places, many spellings of one solid, no intent; measured on our own parts): https://www.forgent3d.com/en/blog/brep-not-for-transformers
 - A CAD IR for language models should not be a feature tree (seven requirements for the layer between model and kernel, Zoo's KCL compared, what a feature tree never stored): https://www.forgent3d.com/en/blog/cad-ir
+- Which CAD code should AI write? build123d, CadQuery, OpenSCAD, KCL, FeatureScript and SolidWorks/Fusion APIs compared on AI generation (CADGenBench results, one part in six languages, the run-and-measure loop, mesh vs B-rep): https://www.forgent3d.com/en/blog/ai-cad-languages
 
 ## Other pages
 

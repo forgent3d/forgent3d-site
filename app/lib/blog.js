@@ -80,6 +80,23 @@ export function articleCards(locale, slugs, kicker) {
     .map((post) => ({ href: blogPath(locale, post.slug), kicker, title: post.title, text: post.description }));
 }
 
+/**
+ * 正文里 `## FAQ` / `## 常见问题` 一节的问答:每个 `### 问题` 到下一个标题之间的文字是答案。给文章页的 FAQPage JSON-LD 用;
+ * 没有这一节就是空数组。
+ */
+export function postFaqs(post) {
+  const section = /^## (?:FAQ|常见问题)\s*$([\s\S]*?)(?=^## |(?![\s\S]))/m.exec(post.body);
+  if (!section) return [];
+  return section[1]
+    .split(/^### /m)
+    .slice(1)
+    .map((chunk) => {
+      const [question, ...answer] = chunk.split("\n");
+      return { q: question.trim(), a: markdownToText(answer.join("\n")) };
+    })
+    .filter((faq) => faq.q && faq.a);
+}
+
 /** Minutes to read, never 0. */
 export function readingMinutes(post) {
   return Math.max(1, Math.round(post.words / (post.locale === "zh" ? 400 : 220)));
