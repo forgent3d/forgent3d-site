@@ -4,13 +4,26 @@
 // online / playground / in browser wants to run a script without installing Python and OCP, or to see what an AI
 // wrote. The path, the metadata, the copy (en / zh) and the numbers live here.
 //
-// Say what the page does, not how the engine works (10-26 user decision): no CPython, no match rates, and no "Forgent3D
-// implements the build123d layer" either. The edges are listed as plain facts under "what runs and what doesn't"; the
-// footer credit only says whose build123d is (no affiliation line either, 10-26). The measured numbers are in public/llms.txt only.
+// Say what the page does, not how the engine works (10-26 user decision): no CPython, no match rates, no gate numbers
+// on the page. What does stay (back on 10-31, after the 10-26 cut also took it out): that the engine is Forgent3D's and
+// compatible with the build123d API, said once in the FAQ ("same as running build123d locally?", answered with the
+// measured numbers in COMPAT — 10-31, user's call: real numbers show how close it is) and once in the footer credit
+// ("an independent project that's compatible with its API"). Worded as what we are, not as what we
+// aren't: build123d's maintainers read this page too and it must agree with what we tell them, but "we implemented its
+// API / are not affiliated" reads as defensive. Engine internals (CPython, the gate's thresholds) stay off the page.
 
 import { OG_BASE, SITE_URL } from "./seo";
 
 export const APP_B123D_URL = "https://app.forgent3d.com/build123d";
+
+// How close to build123d itself, measured against real build123d 0.13 ("the same part": volume, surface area and
+// bounding box within 1%). The cadbench corpus of AI-written scripts (1040, said as "about 1,000"), 99.04% in the platform
+// gate run 40181427126 (10-24; platform docs/build123d-preview-launch.md §2 B1). The page gives this one number, plainly
+// (user's call 10-31); public/llms.txt carries it with the other corpora — change both when a new gate run moves it.
+// The rest, said in one line: most of them stop with an error; 2 of the 1,040 (after the 10-25 silent-mismatch work, same
+// doc §2 B2 step 2) build a different shape without one — a thread sweep where build123d's own answer is doubtful, and a
+// pick between two faces at the same height that OCCT 8.0.1 and 7.9.0 order differently (doc §3).
+const COMPAT = { aiScripts: { en: "about 1,000", zh: "约 1000" }, aiSamePct: "99", silent: { en: "about 2 in 1,000", zh: "约千分之二" }, measured: { en: "October 2026", zh: "2026 年 10 月" } };
 
 const SLUG = "build123d-online";
 
@@ -133,7 +146,7 @@ export function getB123dCopy(locale) {
       generatorsLink: "3D 打印生成器",
       skillsLink: "Forgent3D Skill",
       credit:
-        "build123d 是 gumyr 与社区贡献者开发、以 Apache-2.0 协议发布的开源 Python CAD 库。",
+        "build123d 是 gumyr 与社区贡献者开发、以 Apache-2.0 协议发布的开源 Python CAD 库。Forgent3D 是独立项目，兼容它的 API，让 build123d 脚本直接在浏览器里运行。",
       licences: "浏览器里运行的开源组件：许可证与源码",
       title: "build123d 在线：在浏览器里运行 build123d 代码、导出 STEP | Forgent3D",
       description:
@@ -261,6 +274,10 @@ export function getB123dCopy(locale) {
           a: "能。打开编辑器，贴代码或打开带代码的链接，浏览器里直接建出零件；拖参数、导出 STEP / STL 都在页面上完成。不用安装，不用注册。",
         },
         {
+          q: "和在本机跑 build123d 一样吗？",
+          a: `几乎一样。这里跑的是 Forgent3D 兼容 build123d 0.13 API 的引擎，所以不用装 Python 就能直接跑你的脚本。拿 build123d 0.13 本体逐份对照，${COMPAT.aiScripts.zh} 份 AI 写的脚本里 ${COMPAT.aiSamePct}% 建出一样的零件（${COMPAT.measured.zh}）。剩下的 1% 大多会直接报错，不会悄悄给你一个错的零件；${COMPAT.silent.zh}会建出略有不同的形状，多是螺纹，或者脚本要在两个一样高的面里挑一个。碰到不一样的，点「报告问题」发给我们。`,
+        },
+        {
           q: "脚本要改吗？ocp_vscode 的 show() 怎么办？",
           a: "一般不用改。from ocp_vscode import show 和 show(...) 原样能用：show 给的对象就是要显示的零件；没有 show 就取 export_step 之类导出的对象，再没有就取最后一个 3D 变量。export_* 不会真写文件，导出用页面上的按钮。",
         },
@@ -299,7 +316,7 @@ export function getB123dCopy(locale) {
     generatorsLink: "3D print generators",
     skillsLink: "Forgent3D Skill",
     credit:
-      "build123d is an open-source Python CAD library by gumyr and contributors, licensed under Apache-2.0.",
+      "build123d is an open-source Python CAD library by gumyr and contributors, licensed under Apache-2.0. Forgent3D is an independent project that's compatible with its API and runs build123d scripts right in your browser.",
     licences: "Open-source components in the browser build: licences and source",
     title: "build123d Online — Run build123d Code in Your Browser, Export STEP | Forgent3D",
     description:
@@ -426,6 +443,10 @@ export function getB123dCopy(locale) {
       {
         q: "Can I run build123d online without installing Python?",
         a: "Yes. Open the editor, paste code or open a link that carries it, and it builds the part in your browser; dragging parameters and exporting STEP or STL happen on the page. No install, no sign-up.",
+      },
+      {
+        q: "Is it the same as running build123d locally?",
+        a: `Almost always. Scripts here run on Forgent3D's engine, which is compatible with the build123d 0.13 API, so there's nothing to install. Checked script by script against build123d 0.13 itself, ${COMPAT.aiSamePct}% of ${COMPAT.aiScripts.en} AI-written scripts build the same part (${COMPAT.measured.en}). Most of the other 1% stop with an error rather than quietly giving you a wrong part; ${COMPAT.silent.en} build a slightly different shape, mostly threads or a script picking between two faces at the same height. If yours doesn't, send it with “Report a problem”.`,
       },
       {
         q: "Do I need to change my script? What about show() from ocp_vscode?",

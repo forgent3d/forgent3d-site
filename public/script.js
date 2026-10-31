@@ -229,7 +229,8 @@ function initPage() {
   });
 
   // Generator landing pages mark their buttons with data-track="<name>" (and data-generator="<slug>"): the event is the
-  // name with dashes as underscores — generator_open, generator_ai_edit. (The embedded generator reports its own
+  // name with dashes as underscores — generator_open, generator_ai_edit; the homepage's free-tool links are home_tools_hero
+  // and home_tools_card (href says which tool). (The embedded generator reports its own
   // opening, generator_embed_open, from components/generator-embed.js.)
   document.querySelectorAll("[data-track]").forEach((node) => {
     const eventName = String(node.dataset.track || "").replace(/-/g, "_");

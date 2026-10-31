@@ -70,7 +70,7 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
                                  这三页的文案各在 app/lib/<slug>.js，共用的路径、互链、metadata、JSON-LD 在
                                  app/lib/openscad-pages.js，版块在 app/components/openscad-page.js；五个 OpenSCAD 页的页脚互链
 /[locale]/build123d-online       build123d 在线落地页（CTA 进 app 的 /build123d，那页 noindex，排名靠这页；自带顶栏）
-                                 首屏只说能做什么，不讲引擎怎么实现（10-26 裁定：不上 CPython、一致率、「我们自己实现的」，实测数只在 llms.txt）；「能跑什么、不能跑什么」
+                                 首屏只说能做什么，不讲引擎怎么实现（10-26 裁定：不上 CPython）；引擎是我们自己的、兼容 build123d 的 API，只在 FAQ「和在本机跑 build123d 一样吗」说一次，答案带一个实测数「约 1000 份 AI 写的脚本里 99% 建出一样的零件」（cadbench 1040 份，标测量月份，常量 COMPAT，llms.txt 同步；10-31 用户改主意：要用真数据、直接说），页脚写「Forgent3D 是独立项目，兼容它的 API」（10-31：维护者也会看这页；说我们是什么，不说「自己实现了」「没有隶属关系」，不在首屏、不重复）；「能跑什么、不能跑什么」
                                  一节照 platform docs/build123d-preview-launch.md §3 写。例子卡片 → /build123d?example=<名字>，
                                  「从链接打开」完整版（格式、规则、提示词）在这页，public/llms.txt 同步
 /[locale]/blog                   文章列表;/[locale]/blog/<slug> 单篇。正文住在 content/blog/<slug>.<locale>.md
@@ -102,6 +102,9 @@ locale 只有 `en` 和 `zh`，两边文案必须同时更新——文案住在�
 [Skills]       安装命令（可复制）+ 已验证 agent chips + 三步流程 + 配置指南入口
 
 [Compare]      Forgent3D 云端  vs  Forgent3D Skill  + 共同承诺
+
+[Free tools]   OpenSCAD 在线预览 | build123d 在线 | 3D 打印生成器 | STEP ↔ STL，四张卡各链 www 上自己的落地页
+               （Hero 的 CTA 下面也有同一组的一行灰字链）。为什么在首页：见 landing-page.js 的 HOME_TOOLS（10-31）
 
 [Footer]       导航 + 指南链接 + 一条灰色的「开源桌面版」链接
 ```
