@@ -5,7 +5,7 @@ import { b123dAppUrl, b123dPath, getB123dCopy } from "../../lib/build123d-online
 /**
  * build123d 在线页自带顶栏,不用站点那条(app/[locale]/(site)/layout.js),同 OpenSCAD 那几页:搜 "build123d online"
  * 进来的人要的是编辑器,不是 AI CAD agent 的导航。顶栏只留品牌(回首页)、工具名、语言切换和进 app /build123d 的按钮
- * (.js-b123d-link,public/script.js 改写 href、记 click_build123d_online)。页脚写明 build123d 是谁的(gumyr,Apache-2.0)。
+ * (.js-b123d-link,public/script.js 改写 href、记 click_build123d_online)。页脚写明 build123d 是谁的、我们是自己实现的。
  */
 export default async function Build123dOnlineLayout({ children, params }) {
   const { locale } = await params;
