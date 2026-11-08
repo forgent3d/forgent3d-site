@@ -5,6 +5,7 @@ import { STEP_TOOL_LOCALES, STEP_TOOL_SLUGS } from "./lib/step-tools";
 import { VIEWER_LOCALES } from "./lib/openscad-viewer";
 import { AGENTS_UPDATED } from "./lib/agents-page";
 import { TEXT_TO_CAD_UPDATED } from "./lib/text-to-cad";
+import { STL_VS_STEP_UPDATED } from "./lib/stl-vs-step";
 
 const base = "https://www.forgent3d.com";
 
@@ -23,6 +24,7 @@ const ROUTES = [
   ["/build123d-online", "weekly", 0.9, "2026-10-26"],
   ["/blog", "weekly", 0.7, "2026-10-30"],
   ["/text-to-cad", "weekly", 0.9, TEXT_TO_CAD_UPDATED],
+  ["/stl-vs-step", "monthly", 0.7, STL_VS_STEP_UPDATED],
   ["/pricing", "weekly", 0.75, "2026-09-30"],
   ["/contact", "weekly", 0.7, "2026-09-30"],
   ["/local-data", "weekly", 0.7, "2026-09-30"],
