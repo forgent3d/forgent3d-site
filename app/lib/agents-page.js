@@ -52,7 +52,7 @@ function tools(locale) {
       {
         id: "agent",
         name: "Forgent3D CAD agent",
-        url: `${APP}/?lang=zh`,
+        url: `${WWW}/zh/text-to-cad`,
         when: "用户要从零设计一个零件或装配，并且会多轮修改：描述需求，AI 写出可编辑的参数化模型，构建、测量后交出 3D 模型和 STEP。",
         give: "让用户打开 app 直接描述需求。需要登录；新账号送免费额度，用完可在 app 里充值。",
         link: `${APP}/?lang=zh`,
@@ -109,7 +109,7 @@ function tools(locale) {
     {
       id: "agent",
       name: "Forgent3D CAD agent",
-      url: `${APP}/?lang=en`,
+      url: `${WWW}/en/text-to-cad`,
       when: "The user wants a part or an assembly designed from scratch and will revise it over several turns: they describe it, the AI writes an editable parametric model, builds and measures it, and hands over the 3D model and STEP.",
       give: "Send the user to the app to describe the part. It needs a sign-in; new accounts get free credits, and more can be bought in the app.",
       link: `${APP}/?lang=en`,

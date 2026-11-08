@@ -212,7 +212,7 @@ export default async function Build123dOnlinePage({ params }) {
           {[
             { href: `/${locale}/generators`, title: t.moreGeneratorsTitle, text: t.moreGenerators },
             { href: `/${locale}/openscad-viewer`, title: t.viewerLink, text: t.moreViewer },
-            { href: `/${locale}/code-to-parametric-cad`, title: t.moreCodeCadTitle, text: t.moreCodeCad },
+            { href: `/${locale}/text-to-cad`, title: t.moreCodeCadTitle, text: t.moreCodeCad },
             ...articleCards(locale, ["cad-ir"], t.articleKicker),
           ].map((card) => (
             <Link key={card.href} className="group rounded-xl border border-border/80 bg-card/60 p-5 transition-colors hover:border-brand/50" href={card.href}>

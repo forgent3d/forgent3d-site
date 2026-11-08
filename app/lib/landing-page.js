@@ -144,8 +144,7 @@ const COPY = {
       },
     },
     footerTagline: "AI CAD in the cloud, and a skill that brings it to the editor you already use",
-    guidesAi3D: "AI 3D Model Generation",
-    guidesCodeCad: "Code to 3D Models",
+    guidesTextToCad: "Text to CAD",
     guidesLocalData: "Cloud & Local Data",
     guidesQuickStart: "Quick Start",
     guidesSkills: "Skills Setup",
@@ -258,8 +257,7 @@ const COPY = {
       },
     },
     footerTagline: "云端 AI CAD，以及把它装进你编辑器的 skill",
-    guidesAi3D: "AI 生成三维模型软件",
-    guidesCodeCad: "代码生成三维模型软件",
+    guidesTextToCad: "AI 生成 CAD",
     guidesLocalData: "云端与本地数据",
     guidesQuickStart: "快速开始",
     guidesSkills: "Skills 配置",
@@ -518,8 +516,7 @@ export function getLandingPageHtml(locale) {
           <a class="transition-colors hover:text-brand" href="#compare">${t.navCompare}</a>
           <a class="js-pricing-link transition-colors hover:text-brand" href="/${locale}/pricing">${t.navPricing}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/contact">${t.navContact}</a>
-          <a class="transition-colors hover:text-brand" href="/${locale}/ai-3d-model-generation">${t.guidesAi3D}</a>
-          <a class="transition-colors hover:text-brand" href="/${locale}/code-to-parametric-cad">${t.guidesCodeCad}</a>
+          <a class="transition-colors hover:text-brand" href="/${locale}/text-to-cad">${t.guidesTextToCad}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/openscad-to-step">${t.navScadToStep}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/openscad-viewer">${t.navScadViewer}</a>
           <a class="transition-colors hover:text-brand" href="/${locale}/build123d-online">${t.navBuild123d}</a>

@@ -156,8 +156,7 @@ Each calculator does the arithmetic and links to a generator with the result fil
 - Forgent3D Skill for Claude Code, Codex and Cursor (`npx skills add forgent3d/forgent3d-skills`): https://www.forgent3d.com/en/skills
 - Quick start: https://www.forgent3d.com/en/quick-start
 - Pricing: https://www.forgent3d.com/en/pricing
-- AI 3D model generation: https://www.forgent3d.com/en/ai-3d-model-generation
-- Code to parametric CAD: https://www.forgent3d.com/en/code-to-parametric-cad
+- Text to CAD, the Forgent3D CAD agent (what it does, what it is not for, cost): https://www.forgent3d.com/en/text-to-cad (中文: https://www.forgent3d.com/zh/text-to-cad)
 - Cloud vs. local data: https://www.forgent3d.com/en/local-data
 - Contact: https://www.forgent3d.com/en/contact
 
