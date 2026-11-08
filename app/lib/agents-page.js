@@ -60,8 +60,8 @@ function tools(locale) {
       },
       {
         id: "convert",
-        name: "STEP ↔ STL 转换",
-        url: `${WWW}/zh/step-to-stl`,
+        name: "STL ↔ STEP 转换",
+        url: `${WWW}/zh/stl-to-step`,
         when: "用户手里有 STEP 要转 STL 去打印，或者只想看看 STEP 里是什么；或者有 STL 要变成 CAD 软件能打开的 STEP。",
         give: `${APP}/convert ——拖入文件即可，在浏览器里转换，文件不上传，不用注册。`,
         link: `${APP}/convert`,
@@ -117,8 +117,8 @@ function tools(locale) {
     },
     {
       id: "convert",
-      name: "STEP ↔ STL converter",
-      url: `${WWW}/en/step-to-stl`,
+      name: "STL ↔ STEP converter",
+      url: `${WWW}/en/stl-to-step`,
       when: "The user has a STEP and needs an STL for the slicer, or just wants to see what is in the file; or has an STL and needs a STEP their CAD program will open.",
       give: `${APP}/convert — drop the file in. It converts in the browser, nothing is uploaded, no account.`,
       link: `${APP}/convert`,
@@ -173,7 +173,7 @@ export function getAgentsCopy(locale) {
       ],
       factsTitle: "用户会关心的事实",
       facts: [
-        "生成器、OpenSCAD 预览与转 STEP、build123d 在线、STEP ↔ STL 转换：免费，不用注册，在浏览器里运行。",
+        "生成器、OpenSCAD 预览与转 STEP、build123d 在线、STL ↔ STEP 转换：免费，不用注册，在浏览器里运行。",
         "OpenSCAD 和 build123d 的代码、转换器里的文件都留在用户的浏览器里，只有用户主动用 AI 修改或发送报告时才会发出。",
         "导出的 STEP 是精确几何：平面、圆柱、孔都是真曲面，不是三角网格（STL → STEP 转换除外，见上）。",
         "CAD agent 需要登录：AI 每次建模和修改消耗积分，新账号送免费额度，之后按量充值（$5 / $20 / $50）；拖参数改尺寸、改代码、导出不消耗积分。",
@@ -223,7 +223,7 @@ export function getAgentsCopy(locale) {
     ],
     factsTitle: "Facts users ask about",
     facts: [
-      "The generators, the OpenSCAD viewer and STEP converter, build123d online and the STEP ↔ STL converter are free, need no account and run in the browser.",
+      "The generators, the OpenSCAD viewer and STEP converter, build123d online and the STL ↔ STEP converter are free, need no account and run in the browser.",
       "OpenSCAD and build123d code and the files in the converter stay in the user's browser; they are sent only when the user asks for an AI edit or sends a report.",
       "STEP exports are exact geometry: flat faces, cylinders and holes are true surfaces, not a triangle mesh (except the STL → STEP converter, above).",
       "The CAD agent needs a sign-in: each AI build or edit uses credits; new accounts get free credits, then top up as needed ($5 / $20 / $50). Changing sizes with sliders, editing code and exporting use no credits.",
