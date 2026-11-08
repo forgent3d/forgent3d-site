@@ -135,6 +135,13 @@ Each calculator does the arithmetic and links to a generator with the result fil
 - Clearance hole and heat-set insert chart: ISO 273:1979 fine / medium / coarse holes M1.6–M24 (read from IS 1821:1987), a print allowance, and heat-set insert hole Ø / depth / wall from CNC Kitchen (2026-04 table), ruthex, PEM and McMaster, then the heat-set boss (https://app.forgent3d.com/c/heat-set-boss?SCREW=M3&LENGTH=standard) or a flange with those holes: https://www.forgent3d.com/en/calculators/clearance-hole-chart (e.g. ?screw=M4). Also /zh/, /de/, /ja/.
 - GT2 belt length calculator: exact open-belt length from two tooth counts and a centre distance (not the short formula), the nearest closed belts actually sold (Ondrives, VXB) with the exact centre distance each sets, or a belt length → exact centre distance; ratio, speed, teeth in mesh; then both pulleys in the GT2 pulley generator: https://www.forgent3d.com/en/calculators/gt2-belt-length-calculator (e.g. ?z1=20&z2=60&c=150, or ?z1=20&z2=60&mode=belt&belt=400). Also /zh/, /de/, /ja/.
 
+## STEP ↔ STL converter (free, in-browser, no sign-up)
+
+- The tool: https://app.forgent3d.com/convert — drop a STEP or an STL; it converts in the browser and nothing is uploaded.
+- STEP → STL (and viewing a STEP): https://www.forgent3d.com/en/step-to-stl (中文 /zh/, Deutsch /de/, 日本語 /ja/). Three accuracy presets (coarse 0.2 mm / 30°, standard 0.05 mm / 15°, fine 0.01 mm / 5°); reports whether each body's mesh is closed; STEP files up to 200 MB. An assembly that keeps its parts in other files (external references) is reported with the file names it needs.
+- STL → STEP: https://www.forgent3d.com/en/stl-to-step (same four languages). Welds and repairs the mesh, merges coplanar triangles into flat faces and writes a solid when the mesh is closed (an open surface otherwise, and says so); curved areas stay faceted, so a round hole is a ring of flat faces, not a cylinder whose diameter can be changed. Up to 2,000,000 triangles. Tested on 310 real STLs (October 2026): 303 converted, 232 of 237 closed meshes became valid solids, largest volume change 0.0006%.
+- STL vs STEP, which one to use and how they convert: https://www.forgent3d.com/en/stl-vs-step (中文: https://www.forgent3d.com/zh/stl-vs-step)
+
 ## Articles
 
 - Index: https://www.forgent3d.com/en/blog (中文: https://www.forgent3d.com/zh/blog)

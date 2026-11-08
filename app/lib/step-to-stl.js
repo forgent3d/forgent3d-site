@@ -4,6 +4,7 @@
 // (lib/step-tools.js). Copy for en, zh, de, ja — each written for its readers, numbers from SURVEY.
 
 import { SURVEY, formatNumber, stepToolLinks } from "./step-tools";
+import { stlVsStepCard } from "./stl-vs-step";
 
 export const STEP_TO_STL_SLUG = "step-to-stl";
 
@@ -14,7 +15,8 @@ export function stepToStlMoreCards(locale) {
     { href: links.stlToStep, title: t.more.stlToStep.title, text: t.more.stlToStep.text },
     { href: links.openscadToStep, title: t.more.openscadToStep.title, text: t.more.openscadToStep.text },
     { href: links.generators, title: t.more.generators.title, text: t.more.generators.text },
-  ];
+    stlVsStepCard(locale),
+  ].filter(Boolean);
 }
 
 function numbers(locale) {
