@@ -12,8 +12,9 @@
 //    real-surface STEP inside it). "Change the hole to 8 mm" is the strongest reason to pick us over stl2step.ai,
 //    but it is the STEP → code capability the user chose not to promote yet. Variant A (below) sells real surfaces
 //    plus continuing in Forgent3D; variant B adds "sizes you can change" and needs that decision reversed.
-// 2. Whether the STEP can be downloaded on its own (§8: 单独下载 STEP 未定). The page is called STL to STEP; without a
-//    download it cannot promise one.
+// 2. ~~Whether the STEP can be downloaded on its own~~ — 11-08 user: yes.
+// Decided 11-08: variant A (real surfaces + keep working in Forgent3D); B stays here unused until the user decides to
+// promote STEP → code.
 
 const TBD = Symbol("TBD");
 
@@ -23,7 +24,7 @@ export const FACTS = {
   maxFileMB: 50, // §8: 50 MB, same as import
   maxTriangles: TBD, // §8: 三角形 / 内存上限待 runner 测量
   typicalTime: TBD, // §8: 待 mesh-recon-bench
-  stepDownload: TBD, // true / false — §8: 单独下载 STEP 未定
+  stepDownload: true, // 11-08 用户定：STEP 可以单独下载(§8 待同步)
   account: "sign-in", // §8: 导入要登录
   cost: TBD, // §8: 额度未定 (the conversion calls no LLM)
   benchmark: TBD, // { set, parts, metric, value, csv? } or null to publish no number
@@ -36,7 +37,7 @@ export function assertFactsSettled() {
 }
 
 /** English copy, variant A (real surfaces + keep working in Forgent3D). `${…}` reads FACTS once they are settled. */
-export function getStlToStepV2Copy(locale, variant = "A") {
+export function getStlToStepV2Copy(locale, variant = "A" /* 11-08 user: A */) {
   assertFactsSettled();
   const f = FACTS;
   if (locale !== "en") throw new Error("stl-to-step v2 draft: only English is written so far");
