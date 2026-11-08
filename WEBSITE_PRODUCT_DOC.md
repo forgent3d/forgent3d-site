@@ -51,8 +51,7 @@ Forgent3D 不是传统参数化 CAD 软件的完整替代品。它的价值是�
 /[locale]/quick-start            快速开始（网页入口 + skill 入口）
 /[locale]/pricing                方案（云端 Agent / Forgent3D Skill 两张卡）
 /[locale]/local-data             云端与本地数据边界
-/[locale]/ai-3d-model-generation SEO 落地页
-/[locale]/code-to-parametric-cad SEO 落地页
+/[locale]/text-to-cad agent 产品页(11-08 由 ai-3d-model-generation、code-to-parametric-cad 合并，旧址 301)
 /[locale]/openscad-to-step       OpenSCAD → STEP 落地页（CTA 进 app 的 /scad；自带顶栏，不挂站点导航）
                                  「从链接打开代码」一节只留一句话 + /scad#code=<代码> 格式，锚点 #open-from-link 保留（AI 聊天里引用过）；完整版在 openscad-viewer 页
   …/why-openscad-cant-export-step  为什么 OpenSCAD 导不出 STEP、三种绕法

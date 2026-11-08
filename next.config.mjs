@@ -32,6 +32,9 @@ const nextConfig = {
       // /en/openscad-to-step](https:/forgent3d.com/… 本来是 404。砍掉 "](" 起的那段,落回正常页。
       // 浏览器发出的路径里 "]" 就是字面的 "]"(WHATWG URL 不转义它),所以只匹配原样的那种。
       { source: "/:locale(en|zh|de|es|ja)/:page([^\\]]+)\\]:rest(.*)", destination: "/:locale/:page", permanent: true },
+      // 11-08:两个概念页并成 /text-to-cad(platform docs/site-seo-geo-architecture.md §3 H5)。
+      { source: "/:locale(en|zh)/ai-3d-model-generation", destination: "/:locale/text-to-cad", permanent: true },
+      { source: "/:locale(en|zh)/code-to-parametric-cad", destination: "/:locale/text-to-cad", permanent: true },
       { source: "/:locale(en|zh)/gallery", destination: "https://app.forgent3d.com/explore", permanent: true },
       { source: "/m/:shareSlug/:rest*", destination: "https://app.forgent3d.com/m/:shareSlug", permanent: true },
       { source: "/m/:shareSlug", destination: "https://app.forgent3d.com/m/:shareSlug", permanent: true },

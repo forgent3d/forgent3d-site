@@ -302,7 +302,7 @@ export function getB123dCopy(locale) {
       moreViewer: "写 OpenSCAD 的话：真 OpenSCAD 在浏览器里渲染，同样能导 STEP。",
       moreGeneratorsTitle: "3D 打印生成器",
       moreGenerators: "齿轮、轴承座、支架、盒子……每个都是一份 build123d 模型，在浏览器里改尺寸、导出 STEP。",
-      moreCodeCadTitle: "代码驱动的参数化 CAD",
+      moreCodeCadTitle: "AI 生成 CAD",
       moreCodeCad: "让 AI agent 写参数化 CAD 代码、自己构建并核对，交给你能继续改的模型。",
       articleKicker: "文章",
     };
@@ -473,7 +473,7 @@ export function getB123dCopy(locale) {
     moreViewer: "Writing OpenSCAD instead? Real OpenSCAD renders in the browser and exports STEP too.",
     moreGeneratorsTitle: "3D print generators",
     moreGenerators: "Gears, bearing blocks, brackets, boxes… each a build123d model you resize in the browser and export as STEP.",
-    moreCodeCadTitle: "Code to parametric CAD",
+    moreCodeCadTitle: "Text to CAD",
     moreCodeCad: "An AI agent writes parametric CAD code, builds and checks it, and hands you a model you can keep changing.",
     articleKicker: "Article",
   };
