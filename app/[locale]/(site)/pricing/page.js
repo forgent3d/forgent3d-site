@@ -19,9 +19,13 @@ function getCopy(locale) {
         {
           name: "Forgent3D Agent",
           badge: "网页运行",
-          price: "开放试用",
-          text: "在浏览器里描述零件，AI 建出可编辑的 3D 模型，接着改、导出。",
-          items: ["免安装 CAD 环境", "对话里建模、对话里改", "适合快速验证、演示和团队试用"],
+          price: "注册送免费额度",
+          text: "在浏览器里描述零件，AI 建出可编辑的 3D 模型，接着改、导出。按用量计费：AI 每次建模和修改消耗积分，注册即送一笔免费额度。",
+          items: [
+            "用完后按量充值：$5、$20、$50 三档",
+            "拖参数改尺寸、改代码、导出 STEP / STL 不消耗积分",
+            "免安装 CAD 环境，对话里建模、对话里改",
+          ],
           primary: "立即开始",
           primaryHref: "https://app.forgent3d.com?lang=zh",
           primaryClass: "js-try-link",
@@ -62,9 +66,13 @@ function getCopy(locale) {
       {
         name: "Forgent3D Agent",
         badge: "Runs in the browser",
-        price: "Open beta",
-        text: "Describe a part in the browser; the AI builds an editable 3D model you keep revising and export.",
-        items: ["No CAD environment setup", "Build and revise by chatting", "Good for quick validation, demos, and team trials"],
+        price: "Free credits to start",
+        text: "Describe a part in the browser; the AI builds an editable 3D model you keep revising and export. Pay as you go: each AI build or edit uses credits, and new accounts get free credits.",
+        items: [
+          "Then top up as you need: $5, $20 or $50",
+          "Changing sizes with sliders, editing code and exporting STEP / STL use no credits",
+          "No CAD setup; build and revise by chatting",
+        ],
         primary: "Get started",
         primaryHref: "https://app.forgent3d.com?lang=en",
         primaryClass: "js-try-link",
