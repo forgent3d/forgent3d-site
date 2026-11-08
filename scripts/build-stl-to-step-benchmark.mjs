@@ -1,5 +1,5 @@
 // mesh-bench results (platform, docs/mesh-bench.md §8) → what /stl-to-step publishes: app/lib/stl-to-step-benchmark.generated.js
-// (the numbers the page and llms.txt quote) and public/benchmark/stl-to-step-own-parts.csv (one row per solid).
+// (the numbers the page and llms.txt quote) and public/benchmark/stl-to-step-test-parts.csv (one row per solid).
 //
 //   node scripts/build-stl-to-step-benchmark.mjs <own results.jsonl> <run id> <stl2cad commit> <pairs results.jsonl> <pairs run id>
 //
@@ -95,5 +95,5 @@ for (const r of [...own].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : a.
   );
 }
 mkdirSync(path.join(root, "public", "benchmark"), { recursive: true });
-writeFileSync(path.join(root, "public", "benchmark", "stl-to-step-own-parts.csv"), lines.join("\n") + "\n");
+writeFileSync(path.join(root, "public", "benchmark", "stl-to-step-test-parts.csv"), lines.join("\n") + "\n");
 console.log(JSON.stringify(data.all), "own files", data.ownFiles, "pair files", data.pairFiles, JSON.stringify(Object.fromEntries(Object.entries(classes).map(([c, v]) => [c, [v.bodies, v.pctAB]]))));
