@@ -70,7 +70,7 @@ export function getStlVsStepCopy(locale) {
       convertTitle: "两种格式怎么互转",
       convert: [
         { title: "STEP → STL：简单、可控", text: "按你选的精度把精确几何切成三角形，精度越高三角形越多。在浏览器里转、文件不上传：", link: { href: `${base}/step-to-stl`, label: "STEP 转 STL" } },
-        { title: "STL → STEP：能转，但得到什么取决于转换器", text: "STL 里只有三角形。最简单的转换把三角形原样（或把共面的合并后）包成实体，CAD 能打开、能切能开孔，但圆孔仍是一圈小平面；更进一步的转换要从三角形里识别出平面、圆柱等真实曲面。无论哪种，设计时的尺寸和特征都不在 STL 里，转不回来。", link: { href: `${base}/stl-to-step`, label: "STL 转 STEP" } },
+        { title: "STL → STEP：能转，但得到什么取决于转换器", text: "STL 里只有三角形。最简单的转换把三角形原样（或把共面的合并后）包成实体，CAD 能打开、能切能开孔，但圆孔仍是一圈小平面；更进一步的转换要从三角形里识别出平面、圆柱等真实曲面。无论哪种，设计时的尺寸和特征都不在 STL 里，转不回来。我们的转换器做曲面识别，在浏览器里转，文件不上传：", link: { href: `${base}/stl-to-step`, label: "STL 转 STEP" } },
         { title: "最好的 STEP 从源头导出", text: "手里有 CAD 文件或 OpenSCAD 源码，就从源头直接导 STEP，孔和圆角都是真的；常用零件也可以用生成器按尺寸直接出 STEP。", link: { href: `${base}/openscad-to-step`, label: "OpenSCAD 转 STEP" }, link2: { href: `${base}/generators`, label: "零件生成器" } },
       ],
       othersTitle: "其他常见格式",
@@ -129,7 +129,7 @@ export function getStlVsStepCopy(locale) {
     convertTitle: "Converting between them",
     convert: [
       { title: "STEP → STL: simple and under your control", text: "The exact geometry is cut into triangles at the accuracy you choose; finer means more triangles. In the browser, without uploading the file:", link: { href: `${base}/step-to-stl`, label: "STEP to STL" } },
-      { title: "STL → STEP: possible, but what you get depends on the converter", text: "An STL holds only triangles. The simplest conversion wraps the triangles as they are (or with coplanar ones merged) into a solid that CAD opens and you can cut and drill, but a round hole stays a ring of flat facets; more advanced conversion recognises real surfaces such as planes and cylinders in the triangles. Either way, the dimensions and features of the original design are not in an STL and cannot come back.", link: { href: `${base}/stl-to-step`, label: "STL to STEP" } },
+      { title: "STL → STEP: possible, but what you get depends on the converter", text: "An STL holds only triangles. The simplest conversion wraps the triangles as they are (or with coplanar ones merged) into a solid that CAD opens and you can cut and drill, but a round hole stays a ring of flat facets; more advanced conversion recognises real surfaces such as planes and cylinders in the triangles. Either way, the dimensions and features of the original design are not in an STL and cannot come back. Ours recognises the surfaces, in the browser, without uploading the file:", link: { href: `${base}/stl-to-step`, label: "STL to STEP" } },
       { title: "The best STEP is exported from the source", text: "If you have the CAD file or the OpenSCAD source, export STEP from it and the holes and fillets are real; for common parts, a generator makes the STEP at your sizes.", link: { href: `${base}/openscad-to-step`, label: "OpenSCAD to STEP" }, link2: { href: `${base}/generators`, label: "Part generators" } },
     ],
     othersTitle: "Other formats you will meet",

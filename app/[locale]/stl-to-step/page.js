@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { JsonLd, OpenScadCards, OpenScadFaq, OpenScadHero, OpenScadMore, OpenScadSteps, OpenScadTable } from "../../components/openscad-page";
+import { JsonLd, OpenScadCards, OpenScadFaq, OpenScadHero, OpenScadMore, OpenScadSteps } from "../../components/openscad-page";
 import { StepToolFacts } from "../../components/step-tools-page";
 import { STEP_TOOL_LOCALES, convertAppUrl, isStepToolLocale, stepToolLinks, stepToolMetadata, stepToolSchemas } from "../../lib/step-tools";
 import { STL_TO_STEP_SLUG, getStlToStepCopy, stlToStepMoreCards } from "../../lib/stl-to-step";
@@ -41,8 +41,16 @@ export default async function StlToStepPage({ params }) {
       </section>
       <OpenScadSteps title={t.stepsTitle} steps={t.steps} />
       <StepToolFacts title={t.factsTitle} intro={t.factsIntro} facts={t.facts} note={t.factsNote} />
+      {/* how the numbers above were measured (lib/stl-to-step-benchmark.generated.js), folded by default, with every
+          solid of the parametric parts as CSV */}
+      <details className="mt-6 max-w-3xl text-sm text-muted-foreground" id="benchmark">
+        <summary className="cursor-pointer select-none hover:text-foreground">{t.bench.methodTitle}</summary>
+        <p className="mt-2 leading-6">{t.bench.method}</p>
+        <a className="mt-2 inline-block text-brand underline-offset-2 hover:underline" href={t.bench.csv} download data-track="stl-to-step-benchmark-csv">
+          {t.bench.csvLabel} ↓
+        </a>
+      </details>
       <OpenScadCards title={t.featuresTitle} cards={t.features} />
-      <OpenScadTable title={t.compareTitle} intro={t.compareIntro} head={t.compareHead} rows={t.compare} />
       <OpenScadFaq title={t.faqTitle} faqs={t.faqs} />
       <p className="mt-10 text-sm text-muted-foreground">
         {t.otherWay}{" "}

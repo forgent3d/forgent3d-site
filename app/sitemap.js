@@ -6,6 +6,7 @@ import { VIEWER_LOCALES } from "./lib/openscad-viewer";
 import { AGENTS_UPDATED } from "./lib/agents-page";
 import { TEXT_TO_CAD_UPDATED } from "./lib/text-to-cad";
 import { STL_VS_STEP_UPDATED } from "./lib/stl-vs-step";
+import { CAD_SLUGS, STL_TO_CAD_UPDATED } from "./lib/stl-to-cad";
 
 const base = "https://www.forgent3d.com";
 
@@ -25,6 +26,7 @@ const ROUTES = [
   ["/blog", "weekly", 0.7, "2026-10-30"],
   ["/text-to-cad", "weekly", 0.9, TEXT_TO_CAD_UPDATED],
   ["/stl-vs-step", "monthly", 0.7, STL_VS_STEP_UPDATED],
+  ...CAD_SLUGS.map((slug) => [`/${slug}`, "monthly", 0.75, STL_TO_CAD_UPDATED]),
   ["/pricing", "weekly", 0.75, "2026-09-30"],
   ["/contact", "weekly", 0.7, "2026-09-30"],
   ["/local-data", "weekly", 0.7, "2026-09-30"],
@@ -44,7 +46,9 @@ const GENERATOR_ROUTES = [
 ];
 
 // The STEP ↔ STL pages (app/lib/step-tools.js) are in en, zh, de and ja.
-const STEP_TOOL_ROUTES = STEP_TOOL_SLUGS.map((slug) => [`/${slug}`, "weekly", 0.85, "2026-10-20", STEP_TOOL_LOCALES]);
+// stl-to-step rewritten for surface recognition on 11-08 (live with platform PR #131); step-to-stl unchanged since 10-20
+const STEP_TOOL_UPDATED = { "step-to-stl": "2026-10-20", "stl-to-step": "2026-11-08" };
+const STEP_TOOL_ROUTES = STEP_TOOL_SLUGS.map((slug) => [`/${slug}`, "weekly", 0.85, STEP_TOOL_UPDATED[slug], STEP_TOOL_LOCALES]);
 
 // The OpenSCAD viewer (app/lib/openscad-viewer.js) is in six languages; en and zh last changed on 10-17, the
 // translations went up on 10-25.

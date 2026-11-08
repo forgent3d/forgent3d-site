@@ -62,6 +62,17 @@ export const SURVEY = {
   },
 };
 
+/**
+ * STL → STEP with surface recognition (app /convert, platform docs/step-tools.md §2.1, PR #131, 11-08): stl2cad as
+ * WebAssembly in the visitor's browser. The example is our own generator part (browser-kernel
+ * scripts/convert-fixtures/round-bore.stl), converted in Chrome on 11-08. Re-measure there, then change it here.
+ */
+export const RECOGNITION = {
+  /** Above this the browser rebuilds with planar faces only (cad-convert.ts MAX_SURFACE_TRIANGLES). */
+  maxTriangles: 300_000,
+  example: { triangles: 2812, faces: 112, cylinders: 6, planes: 20, extrusions: 34, facets: 52, volumePct: "0.24", seconds: 8 },
+};
+
 export const STEP_TOOL_LOCALES = ["en", "zh", "de", "ja"];
 
 const NUMBER_LOCALES = { en: "en-US", zh: "zh-CN", de: "de-DE", ja: "ja-JP" };
