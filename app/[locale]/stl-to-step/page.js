@@ -41,6 +41,39 @@ export default async function StlToStepPage({ params }) {
       </section>
       <OpenScadSteps title={t.stepsTitle} steps={t.steps} />
       <StepToolFacts title={t.factsTitle} intro={t.factsIntro} facts={t.facts} note={t.factsNote} />
+      {/* the benchmark behind the numbers above (lib/stl-to-step-benchmark.generated.js): per kind of part, how it was
+          measured, and every solid as CSV */}
+      <section className="mt-12" id="benchmark">
+        <h2 className="text-2xl font-semibold">{t.bench.title}</h2>
+        <div className="mt-5 overflow-x-auto rounded-xl border border-border/80">
+          <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-border/80 bg-card/60 text-xs text-muted-foreground">
+                {t.bench.head.map((h, i) => (
+                  <th key={i} className="px-4 py-3">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {t.bench.rows.map((row) => (
+                <tr key={row[0]} className="border-b border-border/60 last:border-b-0">
+                  {row.map((cell, i) => (
+                    <td key={i} className={`px-4 py-3 ${i === 0 ? "font-medium text-foreground" : i === 4 ? "font-mono text-foreground" : i === 3 ? "font-mono text-muted-foreground" : "text-muted-foreground"}`}>
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">{t.bench.note}</p>
+        <h3 className="mt-8 text-lg font-semibold">{t.bench.methodTitle}</h3>
+        <p className="mt-2 max-w-3xl leading-7 text-muted-foreground">{t.bench.method}</p>
+        <a className="mt-4 inline-block text-sm text-brand underline-offset-2 hover:underline" href={t.bench.csv} download data-track="stl-to-step-benchmark-csv">
+          {t.bench.csvLabel} ↓
+        </a>
+      </section>
       <OpenScadCards title={t.featuresTitle} cards={t.features} />
       <OpenScadTable title={t.compareTitle} intro={t.compareIntro} head={t.compareHead} rows={t.compare} />
       <OpenScadFaq title={t.faqTitle} faqs={t.faqs} />

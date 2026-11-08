@@ -6,6 +6,7 @@
 // (lib/step-tools.js). Copy for en, zh, de, ja.
 
 import { RECOGNITION, formatNumber, stepToolLinks } from "./step-tools";
+import { BENCHMARK } from "./stl-to-step-benchmark.generated";
 import { stlVsStepCard } from "./stl-vs-step";
 import { CAD_SLUGS, STL_TO_CAD_LOCALES } from "./stl-to-cad";
 
@@ -33,18 +34,30 @@ export function stlToStepMoreCards(locale) {
 
 export function getStlToStepCopy(locale) {
   const n = (v, d = 0) => formatNumber(locale, v, d);
-  const e = RECOGNITION.example;
   const x = {
     maxRecognise: n(RECOGNITION.maxTriangles),
     maxTriangles: n(2_000_000),
-    tri: n(e.triangles),
-    faces: n(e.faces),
-    cyl: n(e.cylinders),
-    planes: n(e.planes),
-    extr: n(e.extrusions),
-    facets: n(e.facets),
-    vol: locale === "de" ? e.volumePct.replace(".", ",") : e.volumePct,
-    sec: n(e.seconds),
+  };
+  // the benchmark (stl-to-step-benchmark.generated.js): our own parts per solid, the authors' meshes in totals
+  const B = BENCHMARK;
+  const p = (v) => (locale === "de" ? String(v).replace(".", ",") : String(v));
+  const b = {
+    files: n(B.own.files),
+    filesAB: n(B.own.filesAB),
+    bodies: n(B.own.bodies),
+    pctFiles: p(B.own.pctFilesAB),
+    pctValid: p(B.own.pctValid),
+    pctVol1: p(B.own.pctVol1),
+    surfaces: n(B.own.surfaces),
+    recalled: n(B.own.recalled),
+    pctSurfaces: p(B.own.pctSurfaces),
+    tpFiles: n(B.thirdParty.files),
+    tpPctFiles: p(B.thirdParty.pctFilesAB),
+    tpPctVol1: p(B.thirdParty.pctVol1),
+    tpPctValid: p(B.thirdParty.pctValid),
+    cls: Object.fromEntries(Object.entries(B.classes).map(([c, v]) => [c, { bodies: n(v.bodies), pct: p(v.pctAB), faces: p(v.facesRatioMedian) }])),
+    date: B.date,
+    csv: "/benchmark/stl-to-step-own-parts.csv",
   };
 
   if (locale === "zh") {
@@ -74,15 +87,31 @@ export function getStlToStepCopy(locale) {
         { title: "看报告", text: "按曲面类型列出面数（多少个圆柱、平面……）、是不是实体、STL 与 STEP 的体积，左边视图里转动查看。" },
         { title: "下载 STEP", text: "Fusion、SolidWorks、FreeCAD、Onshape 等 CAD 软件都能导入。" },
       ],
-      factsTitle: "一个零件的实测",
-      factsIntro: `我们自己生成器的一个零件（一块带六个圆孔和刻字的板），${x.tri} 个三角面，在 Chrome 里转换：`,
+      factsTitle: "实测：转回来的曲面和尺寸对不对",
+      factsIntro: `我们拿 ${b.files} 个自己的 CAD 零件（3D 打印生成器的零件和组件库）导出 STL，再转回 STEP，和原来的 CAD 模型逐个比对：`,
       facts: [
-        { label: "STEP 面数", value: x.faces, detail: `${x.cyl} 个圆柱面（六个孔）、${x.planes} 个平面、${x.extr} 个拉伸面（刻的字），另有 ${x.facets} 个没有曲面能拟合的小平面。` },
-        { label: "结果", value: "1 个实体", detail: "通过 OpenCascade 的有效性检查。" },
-        { label: "STL 与 STEP 的体积差", value: `${x.vol}%`, detail: "曲面贴着三角面的弦，而不是三角面本身，所以会差一点；超过 1% 的结果不会交给你。" },
-        { label: "用时", value: `${x.sec} 秒`, detail: "含第一次启动转换器。" },
+        { label: "零件转回来曲面和尺寸都对", value: `${b.pctFiles}%`, detail: `${b.files} 个里 ${b.filesAB} 个：每个实体的体积误差在 1% 以内，95% 以上的曲面面积被找回。` },
+        { label: "转回来是有效实体", value: `${b.pctValid}%`, detail: `${b.bodies} 个实体，通过 OpenCascade 的有效性检查，并和原来的实体一一对上。` },
+        { label: "体积误差在 1% 以内", value: `${b.pctVol1}%`, detail: "多数在万分之一以内。" },
+        { label: "曲面被找回", value: `${b.pctSurfaces}%`, detail: `${b.surfaces} 个曲面里 ${b.recalled} 个：孔回来是圆柱，圆角回来是圆角。` },
       ],
-      factsNote: "",
+      factsNote: `别人导出的 STL 精度和瑕疵各不相同：在第三方作者自己发布的 ${b.tpFiles} 个零件 STL 上（Voron、Prusa 等），${b.tpPctFiles}% 的零件完整找回曲面，${b.tpPctVol1}% 的实体体积误差在 1% 以内。`,
+      bench: {
+        title: "五类零件分别怎么样",
+        head: ["类别", "是什么样的零件", "测过的零件", "实体数", "结果"],
+        rows: [
+          ["纯平面", "只有平面：板、方块、带倒角的盒子", "卡扣、连接件、盒子", b.cls.C1.bodies, `${b.cls.C1.pct}%`],
+          ["平面 + 孔", "平面加上圆孔、圆柱凸台，没有圆角过渡", "电池架、联轴器、法兰盘、管夹、型材角码", b.cls.C2.bodies, `${b.cls.C2.pct}%`],
+          ["回转体", "绕一根轴转出来的零件，车床能车的那种", "垫圈、软管接头、漏斗、线孔盖、料盘架轮子", b.cls.C3.bodies, `${b.cls.C3.pct}%`],
+          ["带圆角和锥面", "有圆角、沉头孔、锥面、球面：大部分机械件和外壳", "开发板外壳、ESP32 外壳、带盖盒子、Gridfinity、风扇罩、层板托架", b.cls.C4.bodies, `${b.cls.C4.pct}%`],
+          ["自由曲面", "不是圆柱、圆锥这类标准形状的曲面，比如齿轮的渐开线齿面", "直齿轮、斜齿轮、锥齿轮、同步带轮", b.cls.C5.bodies, `${b.cls.C5.pct}%`],
+        ],
+        note: `「结果」按实体算：体积误差在 1% 以内、95% 以上的曲面面积被找回。自由曲面能找回，但会被切成比原模型多的小块（面数中位数是原模型的 ${b.cls.C5.faces} 倍）。`,
+        methodTitle: "怎么测的",
+        method: `零件来自我们自己的 3D 打印生成器（每个生成器取默认尺寸和随机抽的尺寸）和组件库，每个零件有原始的精确 CAD 模型作标准答案。STL 按平台默认的下载精度导出（弦高 0.1 mm），用这个转换器转成 STEP，再逐个实体和原模型比：类型、位置、半径都对上的曲面才算找回，体积按原模型算误差。测于 ${b.date}。`,
+        csv: b.csv,
+        csvLabel: `下载逐个实体的结果（CSV，${b.bodies} 行）`,
+      },
       featuresTitle: "转换器做了什么",
       features: [
         { title: "识别真实曲面", text: "平面、圆柱、圆锥、球面、圆环面，以及拉伸面、圆角和自由曲面；孔回来是有直径的圆柱，不是一圈窄条。" },
@@ -106,7 +135,7 @@ export function getStlToStepCopy(locale) {
       faqTitle: "常见问题",
       faqs: [
         { q: "STL 怎么转成 STEP？", a: "打开转换器，拖入 STL，看一眼报告，点「下载 STEP」。转换器会识别出平面、圆柱等曲面，并核对体积和有效性。在 FreeCAD 或 Fusion 里也能把网格转成实体，但得到的是一个三角面一个面，孔不是圆柱。" },
-        { q: "转出来的孔是圆柱吗？", a: `是。孔和凸台还原成有确定直径的圆柱面，在 CAD 里可以直接选中、量直径、做配合。上面那块板的六个孔都回来了。` },
+        { q: "转出来的孔是圆柱吗？", a: `是。孔和凸台还原成有确定直径的圆柱面，在 CAD 里可以直接选中、量直径、做配合。` },
         { q: "STL 转 STEP 能得到原来的 CAD 模型吗？", a: "曲面能还原，原来的特征树、草图和参数不能：它们从来没有存进 STL。转出的实体可以在 CAD 里用直接建模改面、开孔；要改参数的模型，得回到做这个零件的 CAD 文件或源码。" },
         { q: "CAD 软件能打开转出来的 STEP 吗？", a: "能。Fusion、SolidWorks、FreeCAD、Onshape 等都能导入；交给你之前，我们已经用 OpenCascade 把它读回来，核对过实体数、有效性和体积。" },
         { q: "转出来的是实体吗？", a: "STL 封闭（每条边正好两个三角面）就是实体。STL 有洞时写成开放曲面，报告里会说有多少条开口边；先用切片软件或 Meshmixer 修好网格再转，就能得到实体。" },
@@ -160,15 +189,31 @@ export function getStlToStepCopy(locale) {
         { title: "Bericht lesen", text: "Flächen nach Art (wie viele Zylinder, Ebenen …), Volumenkörper oder offene Fläche, Volumen von STL und STEP; links das Teil zum Drehen." },
         { title: "STEP herunterladen", text: "Fusion, SolidWorks, FreeCAD, Onshape und andere CAD-Programme importieren sie." },
       ],
-      factsTitle: "Ein Teil, gemessen",
-      factsIntro: `Ein Teil aus unseren eigenen Generatoren (eine Platte mit sechs Bohrungen und Gravur), ${x.tri} Dreiecke, in Chrome umgewandelt:`,
+      factsTitle: "Gemessen: Stimmen Flächen und Maße?",
+      factsIntro: `Wir haben ${b.files} unserer eigenen CAD-Teile (aus unseren 3D-Druck-Generatoren und der Komponentenbibliothek) als STL exportiert, zurück in STEP umgewandelt und jeden Körper mit dem ursprünglichen CAD-Modell verglichen:`,
       facts: [
-        { label: "Flächen in der STEP", value: x.faces, detail: `${x.cyl} Zylinder (die sechs Bohrungen), ${x.planes} Ebenen, ${x.extr} Extrusionen (die Gravur) und ${x.facets} kleine Facetten, wo keine Fläche passte.` },
-        { label: "Ergebnis", value: "1 Volumenkörper", detail: "Besteht die Gültigkeitsprüfung von OpenCascade." },
-        { label: "Volumenunterschied STL → STEP", value: `${x.vol} %`, detail: "Die Flächen liegen auf den Sehnen der Dreiecke, nicht auf den Dreiecken; ein Ergebnis über 1 % wird nicht ausgegeben." },
-        { label: "Dauer", value: `${x.sec} s`, detail: "Einschließlich des ersten Starts des Konverters." },
+        { label: "Teile mit richtigen Flächen und Maßen", value: `${b.pctFiles} %`, detail: `${b.filesAB} von ${b.files}: jeder Körper im Volumen höchstens 1 % daneben, mindestens 95 % der Fläche wiedergefunden.` },
+        { label: "gültige Volumenkörper", value: `${b.pctValid} %`, detail: `Von ${b.bodies} Körpern, gültig in der Prüfung von OpenCascade und eins zu eins den Originalen zugeordnet.` },
+        { label: "Volumen auf 1 % genau", value: `${b.pctVol1} %`, detail: "Die meisten auf ein Hundertstel Prozent." },
+        { label: "Flächen wiedergefunden", value: `${b.pctSurfaces} %`, detail: `${b.recalled} von ${b.surfaces}: Bohrungen als Zylinder, Rundungen als Rundungen.` },
       ],
-      factsNote: "",
+      factsNote: `Von anderen exportierte STL-Dateien sind unterschiedlich genau und fehlerhaft: Bei ${b.tpFiles} Teilen Dritter, deren Autoren die eigene STL veröffentlicht haben (Voron, Prusa u. a.), kommen ${b.tpPctFiles} % der Teile mit allen Flächen zurück und ${b.tpPctVol1} % der Körper auf 1 % Volumen genau.`,
+      bench: {
+        title: "Wie jede Art von Teil abschneidet",
+        head: ["Art", "Was es ist", "Getestete Teile", "Körper", "Ergebnis"],
+        rows: [
+          ["Nur eben", "Nur Ebenen: Platten, Blöcke, Boxen mit Fasen", "Clips, Verbinder, Boxen", b.cls.C1.bodies, `${b.cls.C1.pct} %`],
+          ["Eben + Bohrungen", "Ebenen mit Bohrungen und Zapfen, ohne Übergänge", "Akkuhalter, Wellenkupplungen, Flansche, Rohrschellen, Profilwinkel", b.cls.C2.bodies, `${b.cls.C2.pct} %`],
+          ["Drehteile", "Um eine Achse gedreht, wie auf der Drehbank", "Unterlegscheiben, Schlauchadapter, Trichter, Kabeldurchlässe, Spulenhalter-Rollen", b.cls.C3.bodies, `${b.cls.C3.pct} %`],
+          ["Rundungen und Kegel", "Rundungen, Senkungen, Kegel, Kugeln: die meisten Maschinenteile und Gehäuse", "Platinengehäuse, ESP32-Gehäuse, Boxen mit Deckel, Gridfinity, Lüftergitter, Regalträger", b.cls.C4.bodies, `${b.cls.C4.pct} %`],
+          ["Freiform", "Flächen, die weder Zylinder noch Kegel sind, etwa Evolventen-Zahnflanken", "Stirn-, Schräg- und Kegelzahnräder, Zahnriemenscheiben", b.cls.C5.bodies, `${b.cls.C5.pct} %`],
+        ],
+        note: `Ergebnis je Körper: Volumen höchstens 1 % daneben, mindestens 95 % der Fläche wiedergefunden. Freiformflächen kommen zurück, aber in mehr Stücke geteilt als im Original (im Median ${b.cls.C5.faces}-mal so viele Flächen).`,
+        methodTitle: "So haben wir gemessen",
+        method: `Die Teile stammen aus unseren eigenen 3D-Druck-Generatoren (Standardmaße und zufällig gezogene) und unserer Komponentenbibliothek; zu jedem gibt es das exakte CAD-Original als Antwort. Die STL wird mit der Download-Genauigkeit der Plattform exportiert (0,1 mm Sehne), mit diesem Konverter in STEP umgewandelt und jeder Körper mit dem Original verglichen: Eine Fläche zählt als wiedergefunden, wenn Art, Lage und Radius stimmen; der Volumenfehler bezieht sich auf das Original. Gemessen am ${b.date}.`,
+        csv: b.csv,
+        csvLabel: `Ergebnis für jeden Körper herunterladen (CSV, ${b.bodies} Zeilen)`,
+      },
       featuresTitle: "Was der Konverter macht",
       features: [
         { title: "Echte Flächen erkennen", text: "Ebenen, Zylinder, Kegel, Kugeln, Tori sowie Extrusionen, Rundungen und Freiformflächen; eine Bohrung kommt als Zylinder mit Durchmesser zurück, nicht als Ring aus Streifen." },
@@ -192,7 +237,7 @@ export function getStlToStepCopy(locale) {
       faqTitle: "Häufige Fragen",
       faqs: [
         { q: "Wie wandle ich STL in STEP um?", a: "Konverter öffnen, STL hineinziehen, Bericht ansehen, „STEP herunterladen“ klicken. Der Konverter erkennt Ebenen, Zylinder und weitere Flächen und prüft Volumen und Gültigkeit. FreeCAD und Fusion machen aus einem Netz ebenfalls einen Körper, aber mit einer Fläche pro Dreieck, und eine Bohrung ist dann kein Zylinder." },
-        { q: "Ist eine Bohrung danach ein Zylinder?", a: "Ja. Bohrungen und Zapfen kommen als Zylinder mit festem Durchmesser zurück, die Sie im CAD auswählen, vermessen und für Passungen nutzen können. Bei der Platte oben kamen alle sechs Bohrungen zurück." },
+        { q: "Ist eine Bohrung danach ein Zylinder?", a: "Ja. Bohrungen und Zapfen kommen als Zylinder mit festem Durchmesser zurück, die Sie im CAD auswählen, vermessen und für Passungen nutzen können." },
         { q: "Bekomme ich aus STL in STEP das ursprüngliche CAD-Modell zurück?", a: "Die Flächen ja, Feature-Baum, Skizzen und Parameter nicht: Sie standen nie in der STL. Den Körper können Sie im CAD per Direktmodellierung ändern und bohren; für ein parametrisches Modell braucht man die CAD-Datei oder den Quelltext." },
         { q: "Öffnet meine CAD-Software die STEP?", a: "Ja. Fusion, SolidWorks, FreeCAD, Onshape und andere importieren sie; bevor Sie sie bekommen, haben wir sie mit OpenCascade zurückgelesen und Körper, Gültigkeit und Volumen geprüft." },
         { q: "Ist das Ergebnis ein Volumenkörper?", a: "Wenn die STL geschlossen ist (jede Kante gehört zu genau zwei Dreiecken), ja. Hat die STL Löcher, wird sie als offene Fläche geschrieben, und der Bericht nennt die offenen Kanten; reparieren Sie das Netz vorher im Slicer oder in Meshmixer." },
@@ -246,15 +291,31 @@ export function getStlToStepCopy(locale) {
         { title: "レポートを確認", text: "曲面の種類ごとの面数（円柱、平面……）、ソリッドかどうか、STLとSTEPの体積。左のビューで回して確認できます。" },
         { title: "STEPをダウンロード", text: "Fusion、SolidWorks、FreeCAD、Onshape などのCADで読み込めます。" },
       ],
-      factsTitle: "ひとつの部品での実測",
-      factsIntro: `私たちのジェネレーターで作った部品（穴6つと刻印のあるプレート）、${x.tri}三角形をChromeで変換：`,
+      factsTitle: "実測：曲面と寸法は正しく戻るか",
+      factsIntro: `私たちのCAD部品${b.files}個（3Dプリント用ジェネレーターとコンポーネントライブラリ）をSTLで書き出し、STEPに変換し直して、すべてのソリッドを元のCADモデルと比べました：`,
       facts: [
-        { label: "STEPの面数", value: x.faces, detail: `円柱${x.cyl}面（6つの穴）、平面${x.planes}面、押し出し面${x.extr}面（刻印）、ほかに合う曲面のない小さな平面${x.facets}面。` },
-        { label: "結果", value: "ソリッド1つ", detail: "OpenCascade の妥当性チェックを通っています。" },
-        { label: "STLとSTEPの体積差", value: `${x.vol}%`, detail: "曲面は三角形そのものではなく、三角形の弦の上に乗るため少し差が出ます。1%を超える結果はお渡ししません。" },
-        { label: "所要時間", value: `${x.sec}秒`, detail: "変換ツールの初回起動を含みます。" },
+        { label: "曲面と寸法が正しく戻った部品", value: `${b.pctFiles}%`, detail: `${b.files}個中${b.filesAB}個：どのソリッドも元の体積との差が1%以内、表面積の95%以上の曲面を復元。` },
+        { label: "有効なソリッドとして戻った", value: `${b.pctValid}%`, detail: `${b.bodies}個のソリッドのうち、OpenCascade の妥当性チェックを通り、元のソリッドと1対1で対応したもの。` },
+        { label: "体積の差が1%以内", value: `${b.pctVol1}%`, detail: "ほとんどは0.01%以内。" },
+        { label: "復元された曲面", value: `${b.pctSurfaces}%`, detail: `${b.surfaces}面中${b.recalled}面：穴は円柱に、フィレットはフィレットに戻ります。` },
       ],
-      factsNote: "",
+      factsNote: `他の人が書き出したSTLは精度も不具合もまちまちです。作者自身がSTLを公開している第三者の部品${b.tpFiles}個（Voron、Prusa など）では、${b.tpPctFiles}%の部品がすべての曲面とともに戻り、${b.tpPctVol1}%のソリッドが体積差1%以内でした。`,
+      bench: {
+        title: "部品の種類ごとの結果",
+        head: ["種類", "どんな部品か", "テストした部品", "ソリッド数", "結果"],
+        rows: [
+          ["平面のみ", "平面だけ：プレート、ブロック、面取りした箱", "クリップ、ジョイント、箱", b.cls.C1.bodies, `${b.cls.C1.pct}%`],
+          ["平面＋穴", "平面に丸穴や円柱ボス、つなぎのR面なし", "電池ホルダー、カップリング、フランジ、配管クランプ、アルミフレーム用ブラケット", b.cls.C2.bodies, `${b.cls.C2.pct}%`],
+          ["回転体", "1本の軸まわりに回してできる、旋盤で作れる形", "ワッシャー、ホースアダプター、じょうご、配線孔キャップ、スプールホルダーのローラー", b.cls.C3.bodies, `${b.cls.C3.pct}%`],
+          ["フィレットと円錐", "フィレット、皿穴、円錐、球：機械部品や筐体の大半", "基板ケース、ESP32ケース、フタ付き箱、Gridfinity、ファンガード、棚受け", b.cls.C4.bodies, `${b.cls.C4.pct}%`],
+          ["自由曲面", "円柱でも円錐でもない曲面。インボリュート歯面など", "平歯車、はすば歯車、かさ歯車、タイミングプーリー", b.cls.C5.bodies, `${b.cls.C5.pct}%`],
+        ],
+        note: `結果はソリッドごと：体積差1%以内、表面積の95%以上の曲面を復元。自由曲面は戻りますが、元より細かく分かれます（面数の中央値は元の${b.cls.C5.faces}倍）。`,
+        methodTitle: "測定方法",
+        method: `部品は私たちの3Dプリント用ジェネレーター（既定寸法とランダムに選んだ寸法）とコンポーネントライブラリのもので、どれも正確な元のCADモデルを正解として持っています。STLはプラットフォームのダウンロード精度（弦高0.1 mm）で書き出し、この変換ツールでSTEPにして、ソリッドごとに元と比べます。種類・位置・半径が一致した曲面を復元とみなし、体積差は元のモデルに対して測ります。測定日 ${b.date}。`,
+        csv: b.csv,
+        csvLabel: `ソリッドごとの結果をダウンロード（CSV、${b.bodies}行）`,
+      },
       featuresTitle: "このツールが行うこと",
       features: [
         { title: "本物の曲面を認識", text: "平面、円柱、円錐、球、トーラス、押し出し面、フィレット、自由曲面。穴は帯の輪ではなく、直径のある円柱に戻ります。" },
@@ -278,7 +339,7 @@ export function getStlToStepCopy(locale) {
       faqTitle: "よくある質問",
       faqs: [
         { q: "STLをSTEPに変換するには？", a: "変換ツールを開き、STLをドロップして、レポートを確認し「STEPをダウンロード」を押すだけです。平面や円柱などの曲面を認識し、体積と妥当性も確認します。FreeCADやFusionでもメッシュをソリッドにできますが、三角形1つが1面になり、穴は円柱になりません。" },
-        { q: "変換後の穴は円柱ですか？", a: "はい。穴やボスは直径の決まった円柱面に戻り、CADで選択して直径を測ったり、はめ合いに使ったりできます。上のプレートでは6つの穴がすべて戻りました。" },
+        { q: "変換後の穴は円柱ですか？", a: "はい。穴やボスは直径の決まった円柱面に戻り、CADで選択して直径を測ったり、はめ合いに使ったりできます。" },
         { q: "STLをSTEPにすると元のCADモデルに戻りますか？", a: "曲面は戻りますが、フィーチャーツリー、スケッチ、パラメータは戻りません。STLに保存されたことがないからです。ソリッドはCADのダイレクトモデリングで面を変えたり穴をあけたりできます。パラメトリックなモデルが必要なら、元のCADファイルやソースに戻る必要があります。" },
         { q: "CADでSTEPを開けますか？", a: "はい。Fusion、SolidWorks、FreeCAD、Onshape などで読み込めます。お渡しする前に OpenCascade で読み戻し、ボディ数、妥当性、体積を確認しています。" },
         { q: "結果はソリッドですか？", a: "STLが閉じていれば（すべての辺がちょうど2つの三角形に共有されていれば）ソリッドです。穴のあるSTLは開いたサーフェスとして書き出し、開いた辺の数をレポートします。先にスライサーやMeshmixerで修正してください。" },
@@ -331,15 +392,31 @@ export function getStlToStepCopy(locale) {
       { title: "Read the report", text: "Faces by kind (how many cylinders, planes…), solid or open surface, the STL's and the STEP's volume; the part on the left to turn around." },
       { title: "Download the STEP", text: "Fusion, SolidWorks, FreeCAD, Onshape and other CAD programs import it." },
     ],
-    factsTitle: "One part, measured",
-    factsIntro: `A part from our own generators (a plate with six holes and engraved numbers), ${x.tri} triangles, converted in Chrome:`,
+    factsTitle: "Measured: do the surfaces and sizes come back right?",
+    factsIntro: `We exported ${b.files} of our own CAD parts (from our 3D print generators and component library) as STL, converted them back to STEP, and compared every solid with the original CAD model:`,
     facts: [
-      { label: "faces in the STEP", value: x.faces, detail: `${x.cyl} cylinders (the six holes), ${x.planes} planes, ${x.extr} extruded profiles (the engraving), and ${x.facets} small flat facets where no surface fitted.` },
-      { label: "result", value: "1 solid", detail: "Passes OpenCascade's validity check." },
-      { label: "volume difference, STL to STEP", value: `${x.vol}%`, detail: "The surfaces sit on the triangles' chords, not on the triangles, so it differs a little; a result off by more than 1% is not handed over." },
-      { label: "time", value: `${x.sec} s`, detail: "Including the converter's first start." },
+      { label: "parts that come back with the right surfaces and size", value: `${b.pctFiles}%`, detail: `${b.filesAB} of ${b.files}: every solid within 1% of the original volume, with at least 95% of its surface area recovered.` },
+      { label: "come back as valid solids", value: `${b.pctValid}%`, detail: `Of ${b.bodies} solids, valid in OpenCascade's check and matched one to one with the originals.` },
+      { label: "volume within 1%", value: `${b.pctVol1}%`, detail: "Most within a hundredth of a percent." },
+      { label: "surfaces recovered", value: `${b.pctSurfaces}%`, detail: `${b.recalled} of ${b.surfaces}: holes come back as cylinders, fillets as fillets.` },
     ],
-    factsNote: "",
+    factsNote: `STL files exported by others vary in accuracy and defects: on ${b.tpFiles} third-party parts whose authors published their own STL (Voron, Prusa and more), ${b.tpPctFiles}% of the parts come back with all their surfaces and ${b.tpPctVol1}% of the solids within 1% of the volume.`,
+    bench: {
+      title: "How each kind of part does",
+      head: ["Kind", "What it is", "Parts we tested", "Solids", "Result"],
+      rows: [
+        ["Flat only", "Only planes: plates, blocks, boxes with chamfers", "Clips, joints, boxes", b.cls.C1.bodies, `${b.cls.C1.pct}%`],
+        ["Flat + holes", "Planes with round holes and bosses, no blends", "Battery holders, shaft couplings, flanges, pipe clamps, extrusion brackets", b.cls.C2.bodies, `${b.cls.C2.pct}%`],
+        ["Turned", "Made by turning around one axis, as on a lathe", "Washers, hose adapters, funnels, desk grommets, spool holder wheels", b.cls.C3.bodies, `${b.cls.C3.pct}%`],
+        ["Fillets and cones", "Fillets, countersinks, cones, spheres: most mechanical parts and enclosures", "Board enclosures, ESP32 cases, boxes with lids, Gridfinity, fan grills, shelf brackets", b.cls.C4.bodies, `${b.cls.C4.pct}%`],
+        ["Free-form", "Surfaces that are no cylinder or cone, such as involute gear teeth", "Spur, helical and bevel gears, timing pulleys", b.cls.C5.bodies, `${b.cls.C5.pct}%`],
+      ],
+      note: `Result per solid: volume within 1% and at least 95% of the surface area recovered. Free-form surfaces come back, but split into more pieces than the original (a median ${b.cls.C5.faces} times the faces).`,
+      methodTitle: "How we measured",
+      method: `The parts come from our own 3D print generators (default sizes and randomly drawn ones) and our component library; each has its exact original CAD model as the answer. The STL is exported at the platform's download accuracy (0.1 mm chord), converted to STEP with this converter, and each solid compared with the original: a surface counts as recovered when its type, position and radius match; volume error is against the original. Measured ${b.date}.`,
+      csv: b.csv,
+      csvLabel: `Download the result for every solid (CSV, ${b.bodies} rows)`,
+    },
     featuresTitle: "What the converter does",
     features: [
       { title: "Recognises real surfaces", text: "Planes, cylinders, cones, spheres and tori, plus extruded profiles, fillets and free-form faces; a hole comes back as a cylinder with its diameter, not a ring of strips." },
@@ -363,7 +440,7 @@ export function getStlToStepCopy(locale) {
     faqTitle: "FAQ",
     faqs: [
       { q: "How do I convert STL to STEP?", a: "Open the converter, drop the STL, read the report and click Download STEP. It recognises planes, cylinders and other surfaces and checks the volume and validity. FreeCAD and Fusion also turn a mesh into a solid, but with one face per triangle, so a hole is not a cylinder." },
-      { q: "Is a hole a cylinder afterwards?", a: "Yes. Holes and bosses come back as cylinders with a definite diameter that you can select, measure and use for fits in CAD. All six holes of the plate above came back." },
+      { q: "Is a hole a cylinder afterwards?", a: "Yes. Holes and bosses come back as cylinders with a definite diameter that you can select, measure and use for fits in CAD." },
       { q: "Does converting STL to STEP give me back the original CAD model?", a: "The surfaces, yes; the feature tree, sketches and parameters, no: they were never stored in the STL. You can edit the solid's faces and drill it in CAD by direct modelling; for a parametric model you need the CAD file or source the part was made from." },
       { q: "Will my CAD software open the converted STEP?", a: "Yes. Fusion, SolidWorks, FreeCAD, Onshape and others import it; before you get it we read it back with OpenCascade and checked its solids, validity and volume." },
       { q: "Is the result a solid?", a: "When the STL is closed (every edge shared by exactly two triangles), yes. When it has holes, it is written as an open surface and the report gives the number of open edges; repair the mesh in your slicer or Meshmixer first." },
