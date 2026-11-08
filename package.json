@@ -3,7 +3,7 @@
   "scripts": {
     "dev": "next dev --port 4173",
     "prebuild": "node scripts/build-blog-content.mjs",
-    "build": "next build",
+    "build": "next build && node scripts/build-markdown.mjs",
     "preview": "wrangler dev",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "check:generators": "node scripts/check-generator-params.mjs",
@@ -23,6 +23,7 @@
     "@tailwindcss/postcss": "^4.3.0",
     "postcss": "^8.5.15",
     "tailwindcss": "^4.3.0",
+    "turndown": "7.2.0",
     "wrangler": "^4.85.0"
   }
 }

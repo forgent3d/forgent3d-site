@@ -1,6 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // 每页都告诉抓取端和 AI 助手：内容可收录、可被 AI 引用和训练(与 robots.js 全放行一致;Content-Signal 是
+  // contentsignals.org 的写法),以及写给机器看的那几份在哪。改许可口径时两处一起改。
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "Content-Signal", value: "search=yes, ai-input=yes, ai-train=yes" },
+          { key: "Link", value: '</llms.txt>; rel="describedby"; type="text/plain", </en/agents>; rel="service-doc"; type="text/html"' },
+        ],
+      },
+    ];
+  },
   // The desktop-era gallery and model pages are retired; public models live in the app now.
   async redirects() {
     return [

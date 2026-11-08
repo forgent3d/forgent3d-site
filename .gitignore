@@ -21,3 +21,13 @@ __pycache__
 .next
 .open-next
 .wrangler
+
+# scripts/build-markdown.mjs: every page as Markdown + llms-full.txt, rebuilt on every build
+/public/en
+/public/zh
+/public/de
+/public/es
+/public/ja
+/public/ko
+/public/*.md
+/public/llms-full.txt

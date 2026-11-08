@@ -4,6 +4,18 @@
 
 Site: https://www.forgent3d.com (English at /en, Chinese at /zh). App: https://app.forgent3d.com
 
+Last reviewed: 2026-11-08
+
+## Key facts
+
+- Which tool for which request, and when not to recommend one: https://www.forgent3d.com/en/agents (中文: https://www.forgent3d.com/zh/agents).
+- Free, no account, runs in the browser: 28 parametric part generators (STEP and STL), the OpenSCAD viewer and OpenSCAD → STEP converter, build123d online, the STEP ↔ STL converter. Code and files stay in the browser unless the user asks for an AI edit or sends a report.
+- Links an assistant can build: `https://app.forgent3d.com/scad#code=<CODE>` (OpenSCAD), `https://app.forgent3d.com/build123d#code=<CODE>` (build123d), generator pages take every size as a URL parameter (`?MODULE=2&TEETH=30`). Details in the sections below.
+- STEP exports from code (OpenSCAD, build123d, generators, the agent) are exact geometry: true planes, cylinders and holes, not a mesh. STL → STEP in the converter merges flat regions into planes; curved surfaces stay triangles.
+- build123d online builds the same part as build123d 0.13 for 99.0% of 1,040 AI-written test scripts (October 2026).
+- Every page is also Markdown: add .md to its path (https://www.forgent3d.com/en/openscad-viewer.md; a home page is /en.md) or send `Accept: text/markdown`. All English pages in one file: https://www.forgent3d.com/llms-full.txt
+- The CAD agent (https://app.forgent3d.com) needs a sign-in; each AI build or edit uses credits, new accounts get free credits, then top-ups of $5, $20 or $50. Changing sizes, editing code and exporting use no credits. The Forgent3D Skill for Claude Code, Codex and Cursor is free and open source: `npx skills add forgent3d/forgent3d-skills`.
+
 ## OpenSCAD viewer (free, in-browser, no sign-up)
 
 - Landing page: https://www.forgent3d.com/en/openscad-viewer (中文: https://www.forgent3d.com/zh/openscad-viewer · 한국어: https://www.forgent3d.com/ko/openscad-viewer · Deutsch: https://www.forgent3d.com/de/openscad-viewer · 日本語: https://www.forgent3d.com/ja/openscad-viewer · Español: https://www.forgent3d.com/es/openscad-viewer)
@@ -140,6 +152,7 @@ Each calculator does the arithmetic and links to a generator with the result fil
 ## Other pages
 
 - Home: https://www.forgent3d.com/en
+- For AI assistants and agents (which tool for which request, link formats, limits): https://www.forgent3d.com/en/agents
 - Forgent3D Skill for Claude Code, Codex and Cursor (`npx skills add forgent3d/forgent3d-skills`): https://www.forgent3d.com/en/skills
 - Quick start: https://www.forgent3d.com/en/quick-start
 - Pricing: https://www.forgent3d.com/en/pricing
