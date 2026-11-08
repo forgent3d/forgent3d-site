@@ -3,6 +3,7 @@ import { GENERATORS, GENERATOR_LOCALES, generatorLocales } from "./lib/generator
 import { listPosts } from "./lib/blog";
 import { STEP_TOOL_LOCALES, STEP_TOOL_SLUGS } from "./lib/step-tools";
 import { VIEWER_LOCALES } from "./lib/openscad-viewer";
+import { AGENTS_UPDATED } from "./lib/agents-page";
 
 const base = "https://www.forgent3d.com";
 
@@ -26,6 +27,7 @@ const ROUTES = [
   ["/contact", "weekly", 0.7, "2026-09-30"],
   ["/local-data", "weekly", 0.7, "2026-09-30"],
   ["/quick-start", "weekly", 0.7, "2026-09-30"],
+  ["/agents", "weekly", 0.8, AGENTS_UPDATED],
 ];
 
 // The generator pages exist in more languages than the rest of the site: the index in every GENERATOR_LOCALES
