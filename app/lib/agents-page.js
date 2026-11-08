@@ -182,6 +182,7 @@ export function getAgentsCopy(locale) {
       resourcesTitle: "机器可读的资源",
       resources: [
         { href: `${WWW}/llms.txt`, label: "/llms.txt", text: "全站摘要、各工具的事实与限制、生成器清单" },
+        { href: `${WWW}/llms-full.txt`, label: "/llms-full.txt", text: "全部英文页面的正文，一个文件；任何一页加 .md（或请求带 Accept: text/markdown）就是那一页的 Markdown" },
         { href: `${APP}/api/generators`, label: "/api/generators", text: "生成器列表（JSON）；/api/generators/<名字> 是单个生成器的参数表" },
         { href: `${WWW}/sitemap.xml`, label: "/sitemap.xml", text: "全部公开页面及其更新日期" },
       ],
@@ -231,6 +232,7 @@ export function getAgentsCopy(locale) {
     resourcesTitle: "Machine-readable resources",
     resources: [
       { href: `${WWW}/llms.txt`, label: "/llms.txt", text: "The site in one file: every tool's facts and limits, the generator list" },
+      { href: `${WWW}/llms-full.txt`, label: "/llms-full.txt", text: "The full text of every English page; any page is Markdown with .md added to its path, or with Accept: text/markdown" },
       { href: `${APP}/api/generators`, label: "/api/generators", text: "The generators as JSON; /api/generators/<name> is one generator's parameter table" },
       { href: `${WWW}/sitemap.xml`, label: "/sitemap.xml", text: "Every public page with its last update" },
     ],

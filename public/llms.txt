@@ -13,6 +13,7 @@ Last reviewed: 2026-11-08
 - Links an assistant can build: `https://app.forgent3d.com/scad#code=<CODE>` (OpenSCAD), `https://app.forgent3d.com/build123d#code=<CODE>` (build123d), generator pages take every size as a URL parameter (`?MODULE=2&TEETH=30`). Details in the sections below.
 - STEP exports from code (OpenSCAD, build123d, generators, the agent) are exact geometry: true planes, cylinders and holes, not a mesh. STL → STEP in the converter merges flat regions into planes; curved surfaces stay triangles.
 - build123d online builds the same part as build123d 0.13 for 99.0% of 1,040 AI-written test scripts (October 2026).
+- Every page is also Markdown: add .md to its path (https://www.forgent3d.com/en/openscad-viewer.md; a home page is /en.md) or send `Accept: text/markdown`. All English pages in one file: https://www.forgent3d.com/llms-full.txt
 - The CAD agent (https://app.forgent3d.com) needs a sign-in; new accounts get free credits, then pay as you go. The Forgent3D Skill for Claude Code, Codex and Cursor is free and open source: `npx skills add forgent3d/forgent3d-skills`.
 
 ## OpenSCAD viewer (free, in-browser, no sign-up)
