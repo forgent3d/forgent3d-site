@@ -7,6 +7,7 @@
 
 import { RECOGNITION, formatNumber, stepToolLinks } from "./step-tools";
 import { stlVsStepCard } from "./stl-vs-step";
+import { CAD_SLUGS, STL_TO_CAD_LOCALES } from "./stl-to-cad";
 
 export const STL_TO_STEP_SLUG = "stl-to-step";
 
@@ -18,6 +19,15 @@ export function stlToStepMoreCards(locale) {
     { href: links.stepToStl, title: t.more.stepToStl.title, text: t.more.stepToStl.text },
     { href: links.generators, title: t.more.generators.title, text: t.more.generators.text },
     stlVsStepCard(locale),
+    // one card per CAD program (lib/stl-to-cad.js), in the languages those pages have
+    ...(STL_TO_CAD_LOCALES.includes(locale)
+      ? CAD_SLUGS.map((slug) => {
+          const name = { "stl-to-solidworks": "SolidWorks", "stl-to-fusion-360": "Fusion 360", "stl-to-onshape": "Onshape", "stl-to-freecad": "FreeCAD" }[slug];
+          return locale === "zh"
+            ? { href: `/zh/${slug}`, title: `STL 转 ${name}`, text: `在 ${name} 里作为带真实曲面的实体打开 STL。` }
+            : { href: `/en/${slug}`, title: `STL to ${name}`, text: `Open an STL in ${name} as a solid with real faces.` };
+        })
+      : []),
   ].filter(Boolean);
 }
 
