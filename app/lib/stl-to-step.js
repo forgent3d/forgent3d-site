@@ -1,7 +1,8 @@
 // STL to STEP: /[locale]/stl-to-step. "stl to step / stl to step converter / convert stl to step / stl to stp",
-// "stl in step umwandeln", "STL STEP 変換": someone holding a mesh who needs a STEP for a CAD tool. Half the search
-// results are forum threads; the honest answer is ours to give: a mesh becomes a FACETED solid (flat areas merged into
-// planes, nothing curved recovered), and a real STEP comes from the source. The tool is app.forgent3d.com/convert
+// "stl in step umwandeln", "STL STEP 変換": someone holding a mesh who needs a STEP for a CAD tool. The page says what
+// THIS converter does (flat areas merged into planes, curves left faceted) without claiming no converter can recover
+// surfaces (11-08: other converters recognise surfaces, and the wasm stl2cad will make this one do it too; then the
+// page is rewritten from the draft on branch draft/stl-to-step-v2). The tool is app.forgent3d.com/convert
 // (lib/step-tools.js). Copy for en, zh, de, ja — numbers from SURVEY.
 
 import { SURVEY, formatNumber, stepToolLinks } from "./step-tools";
@@ -53,17 +54,17 @@ export function getStlToStepCopy(locale) {
     return {
       toolName: "STL 转 STEP",
       openTool: "打开转换器",
-      title: "STL 转 STEP 在线工具（STL 转 STP）—— 免费、如实、不上传 | Forgent3D",
+      title: "STL 转 STEP 在线工具（STL 转 STP）—— 免费、不用注册、文件不上传 | Forgent3D",
       description:
         "在浏览器里把 STL 转成 STEP：焊接三角面、修复导出错误、把平面合成整面、重建成 CAD 能打开的实体，并告诉你转出来的是什么。免费、不用注册、文件不上传。",
       keywords: ["STL 转 STEP", "stl 转 step 在线", "stl 转 stp", "stl 转换 step", "stl 文件转 step", "网格转实体", "stl 转实体", "stl 转 step 免费"],
-      h1: "STL 转 STEP：网格能变成的最好样子，也只能到这一步",
+      h1: "STL 转 STEP 在线：转成 CAD 软件能打开的实体",
       intro:
         "把 STL 拖进来。转换器焊接三角面、修好导出程序留下的毛病，把每一块平的区域合成一个平面，再建成 CAD 软件能打开的实体——全在你的浏览器里，文件不上传。然后告诉你转出来的是什么：多少个面、是实体还是开放曲面、体积和 STL 还对不对得上。",
       cta: "转换 STL",
-      truthTitle: "STL 转 STEP 能做什么、不能做什么",
+      truthTitle: "这个转换器怎么处理曲面",
       truth:
-        "STL 只有三角面。做它用的圆柱、圆角和草图都不在文件里，任何转换器都放不回去。你得到的是一个由平面拼成的实体：网格平的地方是整块平面，弯的地方是一条条窄平面。Fusion、SolidWorks、FreeCAD、Onshape 会把它当实体打开，可以切、挖槽、在平面之间测量——但孔仍是一圈窄条，不是能改直径的孔。",
+        "STL 只有三角面，做它用的圆柱、圆角和草图都没有存进文件。这个转换器把每块平的区域合成一个平面，弯的地方保留成一条条窄平面：Fusion、SolidWorks、FreeCAD、Onshape 会把结果当实体打开，可以切、挖槽、在平面之间测量——但孔仍是一圈窄条，不是能改直径的孔。从三角面里识别出圆柱等曲面需要曲面识别，这个转换器不做；最可靠的 STEP 仍然是从模型的源头导出。",
       realStep: "要带真圆柱、真孔的 STEP，就从模型的源头导出：",
       realStepScad: "OpenSCAD 转 STEP",
       realStepGenerators: "参数化生成器（可导出 STEP）",
@@ -112,8 +113,8 @@ export function getStlToStepCopy(locale) {
           a: "打开转换器，拖入 STL，看一眼报告，点「下载 STEP」。在 FreeCAD 里是 Part 工作台「从网格创建形状」、再「转换为实体」、最后导出 STEP；在 Fusion 里是插入网格后用「转换网格」。这里不用装软件，还会告诉你转出来的是不是实体。",
         },
         {
-          q: "为什么 STL 转 STEP 得不到真正的 CAD 模型？",
-          a: "因为 STL 里只有三角面：圆柱已经变成了一圈平面，圆角变成了一排窄面，原来的尺寸和特征都没有存进去。转换只能把这些三角面整理成一个干净的实体，没法推测出原来的设计。要可编辑的模型，得回到做这个零件的 CAD 文件或源码。",
+          q: "STL 转 STEP 能得到原来的 CAD 模型吗？",
+          a: "只能部分还原。曲面可以从三角面里识别出来（这个转换器只合并平面，曲面保留成窄平面）；但原来的尺寸、特征和草图从来没有存进 STL，转不回来。要可编辑的原始模型，得回到做这个零件的 CAD 文件或源码。",
         },
         {
           q: "CAD 软件能打开转出来的 STEP 吗？",
@@ -160,17 +161,17 @@ export function getStlToStepCopy(locale) {
     return {
       toolName: "STL in STEP umwandeln",
       openTool: "Konverter öffnen",
-      title: "STL in STEP umwandeln – online, kostenlos, ehrlich, ohne Upload | Forgent3D",
+      title: "STL in STEP umwandeln – online, kostenlos, ohne Anmeldung, ohne Upload | Forgent3D",
       description:
         "STL im Browser in STEP umwandeln: Dreiecke verschweißen, Exportfehler reparieren, ebene Bereiche zu Flächen zusammenfassen, als Volumenkörper aufbauen – und sehen, was dabei herauskommt. Kostenlos, ohne Anmeldung, ohne Upload.",
       keywords: ["STL in STEP umwandeln", "STL in STEP konvertieren", "STL zu STEP", "STL in STP umwandeln", "STL STEP Konverter", "Netz in Volumenkörper", "STL in STEP umwandeln kostenlos", "STL in CAD umwandeln"],
-      h1: "STL in STEP umwandeln: das Beste, was aus einem Netz werden kann – und nicht mehr",
+      h1: "STL in STEP umwandeln: ein Volumenkörper, den Ihre CAD-Software öffnet",
       intro:
         "Ziehen Sie eine STL hierher. Der Konverter verschweißt die Dreiecke, repariert, was der Exporter falsch gemacht hat, fasst jeden ebenen Bereich zu einer einzigen Fläche zusammen und baut einen Volumenkörper, den Ihre CAD-Software öffnet – in Ihrem Browser, ohne Upload. Danach sehen Sie, was herausgekommen ist: wie viele Flächen, Volumenkörper oder offene Fläche, und ob das Volumen noch zur STL passt.",
       cta: "STL umwandeln",
-      truthTitle: "Was STL in STEP leisten kann – und was nicht",
+      truthTitle: "Was dieser Konverter mit gekrümmten Flächen macht",
       truth:
-        "Eine STL besteht nur aus Dreiecken. Zylinder, Rundungen und die Skizze, aus der das Teil entstand, stehen nicht darin, und kein Konverter kann sie zurückholen. Sie erhalten einen facettierten Volumenkörper: ebene Flächen, wo das Netz eben war, schmale ebene Streifen, wo es gekrümmt war. Fusion, SolidWorks, FreeCAD und Onshape öffnen ihn als Volumenkörper, den Sie schneiden, mit Taschen versehen und zwischen ebenen Flächen messen können – eine Bohrung bleibt aber ein Ring aus Streifen, keine Bohrung, deren Durchmesser Sie ändern können.",
+        "Eine STL besteht nur aus Dreiecken; Zylinder, Rundungen und die Skizze, aus der das Teil entstand, sind darin nicht gespeichert. Dieser Konverter fasst jeden ebenen Bereich zu einer Fläche zusammen und lässt gekrümmte Bereiche als schmale ebene Streifen stehen: Fusion, SolidWorks, FreeCAD und Onshape öffnen das Ergebnis als Volumenkörper, den Sie schneiden, mit Taschen versehen und zwischen ebenen Flächen messen können – eine Bohrung bleibt aber ein Ring aus Streifen, keine Bohrung, deren Durchmesser Sie ändern können. Zylinder und andere gekrümmte Flächen aus den Dreiecken zu erkennen, erfordert Flächenerkennung, die dieser Konverter nicht macht; die zuverlässigste STEP kommt weiterhin aus der Quelle des Modells.",
       realStep: "Sie brauchen eine STEP mit echten Zylindern? Exportieren Sie sie aus der Quelle des Modells:",
       realStepScad: "OpenSCAD to STEP",
       realStepGenerators: "Parametrische Generatoren (mit STEP-Export)",
@@ -219,8 +220,8 @@ export function getStlToStepCopy(locale) {
           a: "Konverter öffnen, STL hineinziehen, den Bericht ansehen und „STEP herunterladen“ klicken. In FreeCAD geht es über die Part-Workbench „Form aus Netz erzeugen“, dann „In Volumenkörper umwandeln“ und den STEP-Export; in Fusion über „Netz einfügen“ und „Netz konvertieren“. Hier müssen Sie nichts installieren und sehen sofort, ob ein Volumenkörper herauskam.",
         },
         {
-          q: "Warum wird aus STL in STEP kein richtiges CAD-Modell?",
-          a: "Weil eine STL nur Dreiecke enthält: Zylinder sind schon zu einem Ring ebener Flächen geworden, Rundungen zu Reihen schmaler Flächen, Maße und Features wurden nie gespeichert. Eine Umwandlung kann die Dreiecke nur zu einem sauberen Volumenkörper ordnen, nicht die ursprüngliche Konstruktion erraten. Für ein bearbeitbares Modell braucht man die CAD-Datei oder den Quelltext, aus dem das Teil entstand.",
+          q: "Bekomme ich aus STL in STEP das ursprüngliche CAD-Modell zurück?",
+          a: "Nur zum Teil. Gekrümmte Flächen lassen sich in den Dreiecken erkennen (dieser Konverter fasst nur ebene zusammen und lässt gekrümmte als schmale Streifen stehen); Maße, Features und Skizze der ursprünglichen Konstruktion wurden aber nie in der STL gespeichert und kommen nicht zurück. Für das bearbeitbare Originalmodell braucht man die CAD-Datei oder den Quelltext, aus dem das Teil entstand.",
         },
         {
           q: "Öffnet meine CAD-Software die umgewandelte STEP?",
@@ -267,17 +268,17 @@ export function getStlToStepCopy(locale) {
     return {
       toolName: "STL→STEP 変換",
       openTool: "変換ツールを開く",
-      title: "STLをSTEPに変換（STL→STP）― 無料・アップロード不要、結果を正直に表示 | Forgent3D",
+      title: "STLをSTEPに変換（STL→STP）― 無料・登録不要・アップロード不要 | Forgent3D",
       description:
         "ブラウザでSTLをSTEPに変換。三角形を溶接し、書き出しの不具合を直し、平らな部分を1枚の面にまとめ、CADで開けるソリッドを組み立てて、何ができたかを表示します。無料・登録不要・アップロードなし。",
       keywords: ["STL STEP 変換", "STLをSTEPに変換", "STL STP 変換", "STL STEP 変換 フリー", "STL STEP 変換 オンライン", "メッシュ ソリッド 変換", "STL ソリッド化", "STL CAD 変換"],
-      h1: "STLをSTEPに変換：メッシュがなれる最良の形、ただしそれ以上ではない",
+      h1: "STLをSTEPに変換：CADで開けるソリッドに",
       intro:
         "STLをドロップしてください。三角形を溶接し、書き出しソフトが残した不具合を直し、平らな部分をそれぞれ1枚の平面にまとめて、CADで開けるソリッドを組み立てます――すべてブラウザの中で、ファイルはアップロードしません。そのうえで、何ができたかを表示します：面の数、ソリッドか開いたサーフェスか、体積がSTLと合っているか。",
       cta: "STLを変換する",
-      truthTitle: "STL→STEP 変換でできること、できないこと",
+      truthTitle: "この変換ツールは曲面をどう扱うか",
       truth:
-        "STLは三角形の集まりです。元になった円柱やフィレット、スケッチはファイルに入っておらず、どの変換ツールでも取り戻せません。得られるのは平面で組んだソリッドです。メッシュが平らな所は1枚の平面に、曲がっている所は細い平面の帯になります。Fusion、SolidWorks、FreeCAD、Onshape ではソリッドとして開け、カットやポケット、平面間の計測ができます――ただし穴は帯の輪のままで、直径を変えられる穴ではありません。",
+        "STLは三角形の集まりで、元になった円柱やフィレット、スケッチはファイルに保存されていません。この変換ツールは平らな部分をそれぞれ1枚の平面にまとめ、曲がっている部分は細い平面の帯のまま残します。Fusion、SolidWorks、FreeCAD、Onshape ではソリッドとして開け、カットやポケット、平面間の計測ができます――ただし穴は帯の輪のままで、直径を変えられる穴ではありません。三角形から円柱などの曲面を見つけ出すには曲面認識が必要で、この変換ツールはそれを行いません。最も確実なSTEPは、今もモデルの元データからの書き出しです。",
       realStep: "本物の円柱を持つSTEPが必要なら、モデルの元データから書き出してください：",
       realStepScad: "OpenSCAD to STEP（英語）",
       realStepGenerators: "パラメトリック・ジェネレーター（STEP書き出し可）",
@@ -326,8 +327,8 @@ export function getStlToStepCopy(locale) {
           a: "変換ツールを開き、STLをドロップして、レポートを確認し「STEPをダウンロード」を押すだけです。FreeCADならPartワークベンチの「メッシュからシェイプを作成」→「ソリッドに変換」→STEPで書き出し、Fusionなら「メッシュを挿入」して「メッシュを変換」。ここではインストール不要で、ソリッドになったかどうかもすぐ分かります。",
         },
         {
-          q: "STLをSTEPにしても本物のCADモデルにならないのはなぜ？",
-          a: "STLには三角形しかないからです。円柱はすでに平面の輪に、フィレットは細い面の列になり、寸法やフィーチャーは最初から保存されていません。変換でできるのは三角形をきれいなソリッドに整えることまでで、元の設計を推測することはできません。編集できるモデルが必要なら、その部品を作ったCADファイルやソースに戻る必要があります。",
+          q: "STLをSTEPにすると元のCADモデルに戻りますか？",
+          a: "一部だけです。曲面は三角形から認識できます（この変換ツールは平面だけをまとめ、曲面は細い帯のまま残します）。しかし元の設計の寸法、フィーチャー、スケッチはSTLに保存されたことがなく、戻りません。編集できる元のモデルが必要なら、その部品を作ったCADファイルやソースに戻る必要があります。",
         },
         {
           q: "変換したSTEPはCADソフトで開けますか？",
@@ -373,17 +374,17 @@ export function getStlToStepCopy(locale) {
   return {
     toolName: "STL to STEP",
     openTool: "Open the converter",
-    title: "STL to STEP Converter Online (STL to STP) — Free, Honest, No Upload | Forgent3D",
+    title: "STL to STEP Converter Online (STL to STP) — Free, No Sign-up, No Upload | Forgent3D",
     description:
       "Convert STL to STEP in your browser: triangles welded, export errors repaired, flat areas merged into faces, rebuilt as a solid your CAD tool opens — and a report of what came out. Free, no sign-up, never uploaded.",
     keywords: ["stl to step", "stl to step converter", "convert stl to step", "stl to stp", "stl to step online", "stl to step free", "mesh to step", "stl to solid"],
-    h1: "STL to STEP: the best a mesh can become, and no more",
+    h1: "STL to STEP online: a solid your CAD program opens",
     intro:
       "Drop an STL. The converter welds the triangles, repairs what the exporter got wrong, merges every flat area into one face and builds a solid your CAD tool can open — in your browser, without uploading the file. Then it tells you what came out: how many faces, solid or open surface, and whether the volume still matches the STL.",
     cta: "Convert an STL",
-    truthTitle: "What STL to STEP can and cannot do",
+    truthTitle: "What this converter does with curved surfaces",
     truth:
-      "An STL is triangles. The cylinders, fillets and sketch the part was made from are not in it, and no converter can put them back. What you get is a faceted solid: flat faces where the mesh was flat, narrow flat strips where it was curved. Fusion, SolidWorks, FreeCAD and Onshape open it as a solid you can cut, pocket and measure between flat faces — but a hole is still a ring of strips, not a hole whose diameter you can change.",
+      "An STL is triangles; the cylinders, fillets and sketch the part was made from are not stored in it. This converter merges every flat area into one face and leaves curved areas as narrow flat strips: Fusion, SolidWorks, FreeCAD and Onshape open the result as a solid you can cut, pocket and measure between flat faces — but a hole is still a ring of strips, not a hole whose diameter you can change. Getting cylinders and other curved surfaces back from the triangles takes surface recognition, which this converter does not do; the most reliable STEP still comes from the model's source.",
     realStep: "Need a STEP with true cylinders? Export it from the model's source:",
     realStepScad: "OpenSCAD to STEP",
     realStepGenerators: "Parametric generators (STEP export)",
@@ -432,8 +433,8 @@ export function getStlToStepCopy(locale) {
         a: "Open the converter, drop the STL, read the report and click Download STEP. In FreeCAD the same takes the Part workbench's Create shape from mesh, then Convert to solid, then a STEP export; in Fusion, Insert Mesh and Convert Mesh. Here nothing has to be installed, and you see straight away whether you got a solid.",
       },
       {
-        q: "Why can't converting STL to STEP give me a real CAD model?",
-        a: "Because an STL holds only triangles: the cylinders have already become rings of flat faces, the fillets rows of narrow ones, and the dimensions and features were never stored. A conversion can only tidy the triangles into a clean solid; it cannot guess the original design. For an editable model you need the CAD file or source code the part was made from.",
+        q: "Does converting STL to STEP give me back the original CAD model?",
+        a: "Only partly. Curved surfaces can be recognised in the triangles (this converter merges flat ones only and leaves curves as narrow strips), but the dimensions, features and sketch of the original design were never stored in the STL and do not come back. For the editable original you need the CAD file or source code the part was made from.",
       },
       {
         q: "Will my CAD software open the converted STEP?",
