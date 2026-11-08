@@ -65,6 +65,10 @@ const data = {
   run: Number(ownRun),
   pairsRun: Number(pairsRun),
   all: totals(all),
+  // parts per open-source project (mesh-pairs <source> in the id), for naming them on the page
+  pairSources: Object.fromEntries(
+    [...new Set(pairs.map((r) => r.id))].reduce((m, id) => m.set(id.split("/")[1], (m.get(id.split("/")[1]) ?? 0) + 1), new Map()),
+  ),
   ownFiles: totals(own).files,
   ownBodies: own.length,
   pairFiles: totals(pairs).files,

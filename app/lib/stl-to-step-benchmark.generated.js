@@ -18,6 +18,13 @@ export const BENCHMARK = {
     "recalled": 58328,
     "pctSurfaces": 94
   },
+  "pairSources": {
+    "voron-users": 90,
+    "thor": 26,
+    "so-arm100": 16,
+    "voron-0": 2,
+    "prusa-i3": 9
+  },
   "ownFiles": 598,
   "ownBodies": 972,
   "pairFiles": 143,

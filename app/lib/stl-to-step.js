@@ -44,8 +44,9 @@ export function getStlToStepCopy(locale) {
     const t = v === 100 ? "100" : Number(v).toFixed(1);
     return locale === "de" ? t.replace(".", ",") : t;
   };
-  // one set (11-08): generator test parts and open-source printer parts with their authors' STL together; the CSV is
-  // the generator parts only. Never call them "our own parts" on the page: it reads as if users' files were used
+  // one set (11-08): parametric test parts and open-source hardware parts with their authors' STL together; the CSV is
+  // the parametric parts only. The page names the open-source projects and never says "our parts" (it reads as if
+  // users' files were used); it says no user file was used
   const b = {
     files: n(B.all.files),
     filesAB: n(B.all.filesAB),
@@ -62,6 +63,10 @@ export function getStlToStepCopy(locale) {
     date: B.date,
     csv: "/benchmark/stl-to-step-test-parts.csv",
     csvRows: n(B.ownBodies),
+    voron: n((B.pairSources["voron-users"] ?? 0) + (B.pairSources["voron-0"] ?? 0) + (B.pairSources["voron-trident"] ?? 0)),
+    thor: n(B.pairSources.thor ?? 0),
+    arm: n(B.pairSources["so-arm100"] ?? 0),
+    prusa: n(B.pairSources["prusa-i3"] ?? 0),
   };
 
   if (locale === "zh") {
@@ -112,9 +117,9 @@ export function getStlToStepCopy(locale) {
         ],
         note: `「结果」按实体算：体积误差在 1% 以内、95% 以上的曲面面积被找回。自由曲面能找回，但会被切成比原模型多的小块（面数中位数是原模型的 ${b.cls.C5.faces} 倍）。`,
         methodTitle: "怎么测的",
-        method: `${b.files} 个零件：${b.own} 个是用我们的参数化生成器和组件库做的测试零件（默认尺寸和随机抽的尺寸），STL 按平台默认的下载精度导出（弦高 0.1 mm）；${b.pairs} 个是 Voron、Prusa 等开源打印机项目公开的零件，用作者发布的 STL 原文件。每个零件都有原始的精确 CAD 模型作标准答案。测试没有用任何用户上传的文件：你在这里转换的文件根本不会离开你的浏览器。STL 用这个转换器转成 STEP，再逐个实体和原模型比：类型、位置、半径都对上的曲面才算找回，体积按原模型算误差。测于 ${b.date}。`,
+        method: `${b.files} 个测试零件，每个都有原始的精确 CAD 模型作标准答案，都来自公开的正规渠道：${b.pairs} 个是 GitHub 上开源硬件项目的零件，用作者发布的 STL 原文件——Voron 3D 打印机（${b.voron} 个，GPL-3.0）、Thor 机械臂（${b.thor} 个，CC BY-SA 4.0）、SO-ARM100 机械臂（${b.arm} 个，Apache-2.0）、Prusa i3 打印机（${b.prusa} 个，GPL-2.0）；${b.own} 个是常见的参数化零件——齿轮、同步带轮、联轴器、法兰、外壳、收纳盒、支架等，取默认尺寸和随机尺寸，STL 按 0.1 mm 弦高导出。测试没有用任何用户上传的文件。STL 用这个转换器转成 STEP，再逐个实体和原模型比：类型、位置、半径都对上的曲面才算找回，体积按原模型算误差。测于 ${b.date}。`,
         csv: b.csv,
-        csvLabel: `下载 ${b.own} 个生成器测试零件逐个实体的结果（CSV，${b.csvRows} 行；开源项目的零件不逐件公开）`,
+        csvLabel: `下载 ${b.own} 个参数化零件逐个实体的结果（CSV，${b.csvRows} 行；不含开源项目的零件）`,
       },
       featuresTitle: "转换器做了什么",
       features: [
@@ -214,9 +219,9 @@ export function getStlToStepCopy(locale) {
         ],
         note: `Ergebnis je Körper: Volumen höchstens 1 % daneben, mindestens 95 % der Fläche wiedergefunden. Freiformflächen kommen zurück, aber in mehr Stücke geteilt als im Original (im Median ${b.cls.C5.faces}-mal so viele Flächen).`,
         methodTitle: "So haben wir gemessen",
-        method: `${b.files} Teile: ${b.own} Testteile, mit unseren parametrischen Generatoren und der Komponentenbibliothek erzeugt (Standardmaße und zufällig gezogene), als STL mit der Download-Genauigkeit der Plattform exportiert (0,1 mm Sehne); ${b.pairs} veröffentlichte Teile aus Open-Source-Druckerprojekten wie Voron und Prusa, mit der STL, die ihre Autoren veröffentlicht haben. Zu jedem gibt es das exakte CAD-Original als Antwort. Für den Test wurde keine von Nutzern hochgeladene Datei verwendet: Was Sie hier umwandeln, verlässt Ihren Browser gar nicht. Die STL wird mit diesem Konverter in STEP umgewandelt und jeder Körper mit dem Original verglichen: Eine Fläche zählt als wiedergefunden, wenn Art, Lage und Radius stimmen; der Volumenfehler bezieht sich auf das Original. Gemessen am ${b.date}.`,
+        method: `${b.files} Testteile, jedes mit seinem exakten CAD-Original als Antwort, alle aus öffentlichen, rechtmäßigen Quellen: ${b.pairs} Teile aus Open-Source-Hardwareprojekten auf GitHub, mit der STL, die ihre Autoren veröffentlicht haben – Voron-3D-Drucker (${b.voron}, GPL-3.0), Thor-Roboterarm (${b.thor}, CC BY-SA 4.0), SO-ARM100-Roboterarm (${b.arm}, Apache-2.0), Prusa i3 (${b.prusa}, GPL-2.0); ${b.own} gängige parametrische Teile – Zahnräder, Zahnriemenscheiben, Kupplungen, Flansche, Gehäuse, Boxen, Halter und mehr – in Standard- und zufälligen Maßen, als STL mit 0,1 mm Sehne exportiert. Keine von Nutzern hochgeladene Datei wurde verwendet. Die STL wird mit diesem Konverter in STEP umgewandelt und jeder Körper mit dem Original verglichen: Eine Fläche zählt als wiedergefunden, wenn Art, Lage und Radius stimmen; der Volumenfehler bezieht sich auf das Original. Gemessen am ${b.date}.`,
         csv: b.csv,
-        csvLabel: `Ergebnis für jeden Körper der ${b.own} Generator-Testteile herunterladen (CSV, ${b.csvRows} Zeilen; Teile aus Open-Source-Projekten werden nicht einzeln veröffentlicht)`,
+        csvLabel: `Ergebnis für jeden Körper der ${b.own} parametrischen Teile herunterladen (CSV, ${b.csvRows} Zeilen; ohne die Teile der Open-Source-Projekte)`,
       },
       featuresTitle: "Was der Konverter macht",
       features: [
@@ -316,9 +321,9 @@ export function getStlToStepCopy(locale) {
         ],
         note: `結果はソリッドごと：体積差1%以内、表面積の95%以上の曲面を復元。自由曲面は戻りますが、元より細かく分かれます（面数の中央値は元の${b.cls.C5.faces}倍）。`,
         methodTitle: "測定方法",
-        method: `部品は${b.files}個：${b.own}個はパラメトリック・ジェネレーターとコンポーネントライブラリで作ったテスト部品（既定寸法とランダムに選んだ寸法）で、STLはプラットフォームのダウンロード精度（弦高0.1 mm）で書き出し、${b.pairs}個は Voron、Prusa などオープンソースのプリンタープロジェクトが公開している部品で、作者が公開したSTLそのものを使いました。どれも正確な元のCADモデルを正解として持っています。テストにユーザーがアップロードしたファイルは一切使っていません。ここで変換するファイルは、そもそもブラウザの外に出ません。STLはこの変換ツールでSTEPにして、ソリッドごとに元と比べます。種類・位置・半径が一致した曲面を復元とみなし、体積差は元のモデルに対して測ります。測定日 ${b.date}。`,
+        method: `テスト部品は${b.files}個。どれも正確な元のCADモデルを正解として持ち、公開された正規の入手先から集めました：${b.pairs}個はGitHub上のオープンソース・ハードウェアの部品で、作者が公開したSTLそのもの――Voron 3Dプリンター（${b.voron}個、GPL-3.0）、Thor ロボットアーム（${b.thor}個、CC BY-SA 4.0）、SO-ARM100 ロボットアーム（${b.arm}個、Apache-2.0）、Prusa i3（${b.prusa}個、GPL-2.0）。${b.own}個は歯車、タイミングプーリー、カップリング、フランジ、ケース、収納ボックス、ブラケットなどよくあるパラメトリック部品で、既定寸法とランダムな寸法で作り、STLは弦高0.1 mmで書き出しました。ユーザーがアップロードしたファイルは一切使っていません。STLはこの変換ツールでSTEPにして、ソリッドごとに元と比べます。種類・位置・半径が一致した曲面を復元とみなし、体積差は元のモデルに対して測ります。測定日 ${b.date}。`,
         csv: b.csv,
-        csvLabel: `ジェネレーターのテスト部品${b.own}個のソリッドごとの結果をダウンロード（CSV、${b.csvRows}行。オープンソースプロジェクトの部品は個別に公開しません）`,
+        csvLabel: `パラメトリック部品${b.own}個のソリッドごとの結果をダウンロード（CSV、${b.csvRows}行。オープンソースプロジェクトの部品は含みません）`,
       },
       featuresTitle: "このツールが行うこと",
       features: [
@@ -417,9 +422,9 @@ export function getStlToStepCopy(locale) {
       ],
       note: `Result per solid: volume within 1% and at least 95% of the surface area recovered. Free-form surfaces come back, but split into more pieces than the original (a median ${b.cls.C5.faces} times the faces).`,
       methodTitle: "How we measured",
-      method: `${b.files} parts: ${b.own} test parts made with our parametric generators and component library (default sizes and randomly drawn ones), exported as STL at the platform's download accuracy (0.1 mm chord); ${b.pairs} published parts from open-source printer projects such as Voron and Prusa, with the STL file their authors released. Each has its exact original CAD model as the answer. No file uploaded by a user was used: what you convert here never leaves your browser. The STL is converted to STEP with this converter, and each solid compared with the original: a surface counts as recovered when its type, position and radius match; volume error is against the original. Measured ${b.date}.`,
+      method: `${b.files} test parts, each with its exact original CAD model as the answer, all from public, legitimate sources: ${b.pairs} parts from open-source hardware projects on GitHub, with the STL file their authors published — the Voron 3D printers (${b.voron}, GPL-3.0), the Thor robot arm (${b.thor}, CC BY-SA 4.0), the SO-ARM100 robot arm (${b.arm}, Apache-2.0) and the Prusa i3 (${b.prusa}, GPL-2.0); ${b.own} common parametric parts — gears, timing pulleys, couplings, flanges, enclosures, boxes, brackets and more — at default and random sizes, exported as STL at 0.1 mm chord. No file uploaded by a user was used. The STL is converted to STEP with this converter, and each solid compared with the original: a surface counts as recovered when its type, position and radius match; volume error is against the original. Measured ${b.date}.`,
       csv: b.csv,
-      csvLabel: `Download the result for every solid of the ${b.own} generator test parts (CSV, ${b.csvRows} rows; parts from open-source projects are not published one by one)`,
+      csvLabel: `Download the result for every solid of the ${b.own} parametric parts (CSV, ${b.csvRows} rows; without the open-source projects' parts)`,
     },
     featuresTitle: "What the converter does",
     features: [
