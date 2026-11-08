@@ -29,7 +29,9 @@ const HOME_TOOLS = [
   { key: "scadViewer", links: [{ path: "openscad-viewer" }] },
   { key: "build123d", links: [{ path: "build123d-online" }] },
   { key: "generators", links: [{ path: "generators" }] },
-  { key: "stepStl", links: [{ path: "step-to-stl", label: "STEP → STL" }, { path: "stl-to-step", label: "STL → STEP" }] },
+  // STL → STEP first (11-08 user): it is the converter people search for and ChatGPT is asked about; the hero line
+  // links links[0].
+  { key: "stepStl", links: [{ path: "stl-to-step", label: "STL → STEP" }, { path: "step-to-stl", label: "STEP → STL" }] },
 ];
 
 /** Kept in sync with the in-product skills guide (app.forgent3d.com/skills). */
@@ -138,9 +140,9 @@ const COPY = {
         desc: "Gears, Gridfinity bins, boxes, brackets and more: set the sizes and download STL or STEP.",
       },
       stepStl: {
-        name: "STEP ↔ STL",
-        short: "STEP ↔ STL",
-        desc: "Turn a STEP file into an STL for your slicer, or an STL into a STEP your CAD tool opens.",
+        name: "STL to STEP",
+        short: "STL to STEP",
+        desc: "Turn an STL into a STEP your CAD tool opens, or a STEP into an STL for your slicer. In the browser, nothing uploaded.",
       },
     },
     footerTagline: "AI CAD in the cloud, and a skill that brings it to the editor you already use",
@@ -251,9 +253,9 @@ const COPY = {
         desc: "齿轮、Gridfinity 收纳盒、盒子、支架等等，填好尺寸就能下载 STL 或 STEP。",
       },
       stepStl: {
-        name: "STEP ↔ STL",
-        short: "STEP ↔ STL",
-        desc: "把 STEP 转成 STL 拿去切片，或者把 STL 转成 CAD 软件能打开的 STEP。",
+        name: "STL 转 STEP",
+        short: "STL 转 STEP",
+        desc: "把 STL 转成 CAD 软件能打开的 STEP，或者把 STEP 转成 STL 拿去切片。在浏览器里转，文件不上传。",
       },
     },
     footerTagline: "云端 AI CAD，以及把它装进你编辑器的 skill",
