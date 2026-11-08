@@ -3,8 +3,9 @@
 //
 //   node scripts/build-stl-to-step-benchmark.mjs <own results.jsonl> <run id> <stl2cad commit> <pairs results.jsonl> <pairs run id>
 //
-// Published per part: our OWN parts only (source generator / catalog, licence "own"). The authors' meshes of third-party
-// parts (mesh-pairs) go in as totals only; the internal corpora (b123d, Thingiverse) never. Grades: A = the judge finds the
+// The page quotes one set (11-08, user: own and third-party in one number): our OWN parts (source generator / catalog,
+// licence "own") at T2 together with the third-party parts whose authors published their STL (mesh-pairs, Treal = their
+// file as published). Per part, the CSV holds our own parts only; the internal corpora (b123d, Thingiverse) never. Grades: A = the judge finds the
 // same solid; B = volume within 1 % and at least 95 % of the surface area recovered (docs/mesh-bench.md §8).
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
@@ -41,16 +42,17 @@ function totals(rows) {
   };
 }
 
+const all = [...own, ...pairs];
 const CLASSES = ["C1", "C2", "C3", "C4", "C5"];
 const classes = Object.fromEntries(
   CLASSES.map((c) => {
-    const rows = own.filter((r) => r.class === c);
+    const rows = all.filter((r) => r.class === c);
     const names = new Map();
     for (const r of rows) {
       const name = r.id.split("/")[1];
       names.set(name, (names.get(name) ?? 0) + 1);
     }
-    const faces = rows.map((r) => r.faces.out / Math.max(1, r.faces.truth)).sort((a, b) => a - b);
+    const faces = rows.filter((r) => r.faces).map((r) => r.faces.out / Math.max(1, r.faces.truth)).sort((a, b) => a - b);
     return [c, { bodies: rows.length, pctAB: pct(rows.filter(ab).length, rows.length), pctA: pct(rows.filter((r) => r.grade === "A").length, rows.length), facesRatioMedian: Math.round(10 * (faces[Math.floor(faces.length / 2)] ?? 1)) / 10, examples: [...names].sort((a, b) => b[1] - a[1]).map(([n]) => n) }];
   }),
 );
@@ -61,9 +63,12 @@ const data = {
   mesh: TESS,
   stl2cad: commit,
   run: Number(ownRun),
-  own: totals(own),
+  pairsRun: Number(pairsRun),
+  all: totals(all),
+  ownFiles: totals(own).files,
+  ownBodies: own.length,
+  pairFiles: totals(pairs).files,
   classes,
-  thirdParty: { run: Number(pairsRun), ...totals(pairs) },
 };
 writeFileSync(
   path.join(root, "app", "lib", "stl-to-step-benchmark.generated.js"),
@@ -91,4 +96,4 @@ for (const r of [...own].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : a.
 }
 mkdirSync(path.join(root, "public", "benchmark"), { recursive: true });
 writeFileSync(path.join(root, "public", "benchmark", "stl-to-step-own-parts.csv"), lines.join("\n") + "\n");
-console.log(JSON.stringify(data.own), "| third party", JSON.stringify(data.thirdParty));
+console.log(JSON.stringify(data.all), "own files", data.ownFiles, "pair files", data.pairFiles, JSON.stringify(Object.fromEntries(Object.entries(classes).map(([c, v]) => [c, [v.bodies, v.pctAB]]))));

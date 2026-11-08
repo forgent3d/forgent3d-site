@@ -40,24 +40,28 @@ export function getStlToStepCopy(locale) {
   };
   // the benchmark (stl-to-step-benchmark.generated.js): our own parts per solid, the authors' meshes in totals
   const B = BENCHMARK;
-  const p = (v) => (locale === "de" ? String(v).replace(".", ",") : String(v));
+  // one decimal everywhere (94.0, not 94), 100 as 100; the decimal comma in German
+  const p = (v) => {
+    const t = v === 100 ? "100" : Number(v).toFixed(1);
+    return locale === "de" ? t.replace(".", ",") : t;
+  };
+  // one set (11-08): our own parts and third-party parts with their authors' STL together; the CSV is our own only
   const b = {
-    files: n(B.own.files),
-    filesAB: n(B.own.filesAB),
-    bodies: n(B.own.bodies),
-    pctFiles: p(B.own.pctFilesAB),
-    pctValid: p(B.own.pctValid),
-    pctVol1: p(B.own.pctVol1),
-    surfaces: n(B.own.surfaces),
-    recalled: n(B.own.recalled),
-    pctSurfaces: p(B.own.pctSurfaces),
-    tpFiles: n(B.thirdParty.files),
-    tpPctFiles: p(B.thirdParty.pctFilesAB),
-    tpPctVol1: p(B.thirdParty.pctVol1),
-    tpPctValid: p(B.thirdParty.pctValid),
+    files: n(B.all.files),
+    filesAB: n(B.all.filesAB),
+    bodies: n(B.all.bodies),
+    own: n(B.ownFiles),
+    pairs: n(B.pairFiles),
+    pctFiles: p(B.all.pctFilesAB),
+    pctValid: p(B.all.pctValid),
+    pctVol1: p(B.all.pctVol1),
+    surfaces: n(B.all.surfaces),
+    recalled: n(B.all.recalled),
+    pctSurfaces: p(B.all.pctSurfaces),
     cls: Object.fromEntries(Object.entries(B.classes).map(([c, v]) => [c, { bodies: n(v.bodies), pct: p(v.pctAB), faces: p(v.facesRatioMedian) }])),
     date: B.date,
     csv: "/benchmark/stl-to-step-own-parts.csv",
+    csvRows: n(B.ownBodies),
   };
 
   if (locale === "zh") {
@@ -88,14 +92,14 @@ export function getStlToStepCopy(locale) {
         { title: "下载 STEP", text: "Fusion、SolidWorks、FreeCAD、Onshape 等 CAD 软件都能导入。" },
       ],
       factsTitle: "实测：转回来的曲面和尺寸对不对",
-      factsIntro: `我们拿 ${b.files} 个自己的 CAD 零件（3D 打印生成器的零件和组件库）导出 STL，再转回 STEP，和原来的 CAD 模型逐个比对：`,
+      factsIntro: `${b.files} 个有原始 CAD 模型的零件，把 STL 转回 STEP，再和原模型逐个实体比对：`,
       facts: [
         { label: "零件转回来曲面和尺寸都对", value: `${b.pctFiles}%`, detail: `${b.files} 个里 ${b.filesAB} 个：每个实体的体积误差在 1% 以内，95% 以上的曲面面积被找回。` },
-        { label: "转回来是有效实体", value: `${b.pctValid}%`, detail: `${b.bodies} 个实体，通过 OpenCascade 的有效性检查，并和原来的实体一一对上。` },
+        { label: "转回来是有效实体", value: `${b.pctValid}%`, detail: `共 ${b.bodies} 个实体，通过 OpenCascade 的有效性检查，并和原来的实体一一对上。` },
         { label: "体积误差在 1% 以内", value: `${b.pctVol1}%`, detail: "多数在万分之一以内。" },
         { label: "曲面被找回", value: `${b.pctSurfaces}%`, detail: `${b.surfaces} 个曲面里 ${b.recalled} 个：孔回来是圆柱，圆角回来是圆角。` },
       ],
-      factsNote: `别人导出的 STL 精度和瑕疵各不相同：在第三方作者自己发布的 ${b.tpFiles} 个零件 STL 上（Voron、Prusa 等），${b.tpPctFiles}% 的零件完整找回曲面，${b.tpPctVol1}% 的实体体积误差在 1% 以内。`,
+      factsNote: "",
       bench: {
         title: "五类零件分别怎么样",
         head: ["类别", "是什么样的零件", "测过的零件", "实体数", "结果"],
@@ -108,9 +112,9 @@ export function getStlToStepCopy(locale) {
         ],
         note: `「结果」按实体算：体积误差在 1% 以内、95% 以上的曲面面积被找回。自由曲面能找回，但会被切成比原模型多的小块（面数中位数是原模型的 ${b.cls.C5.faces} 倍）。`,
         methodTitle: "怎么测的",
-        method: `零件来自我们自己的 3D 打印生成器（每个生成器取默认尺寸和随机抽的尺寸）和组件库，每个零件有原始的精确 CAD 模型作标准答案。STL 按平台默认的下载精度导出（弦高 0.1 mm），用这个转换器转成 STEP，再逐个实体和原模型比：类型、位置、半径都对上的曲面才算找回，体积按原模型算误差。测于 ${b.date}。`,
+        method: `${b.files} 个零件：${b.own} 个来自我们自己的 3D 打印生成器（默认尺寸和随机抽的尺寸）和组件库，STL 按平台默认的下载精度导出（弦高 0.1 mm）；${b.pairs} 个是 Voron、Prusa 等打印机项目的零件，用作者自己发布的 STL 原文件。每个零件都有原始的精确 CAD 模型作标准答案。STL 用这个转换器转成 STEP，再逐个实体和原模型比：类型、位置、半径都对上的曲面才算找回，体积按原模型算误差。测于 ${b.date}。`,
         csv: b.csv,
-        csvLabel: `下载逐个实体的结果（CSV，${b.bodies} 行）`,
+        csvLabel: `下载我们自己 ${b.own} 个零件逐个实体的结果（CSV，${b.csvRows} 行；第三方零件不公开逐件结果）`,
       },
       featuresTitle: "转换器做了什么",
       features: [
@@ -190,14 +194,14 @@ export function getStlToStepCopy(locale) {
         { title: "STEP herunterladen", text: "Fusion, SolidWorks, FreeCAD, Onshape und andere CAD-Programme importieren sie." },
       ],
       factsTitle: "Gemessen: Stimmen Flächen und Maße?",
-      factsIntro: `Wir haben ${b.files} unserer eigenen CAD-Teile (aus unseren 3D-Druck-Generatoren und der Komponentenbibliothek) als STL exportiert, zurück in STEP umgewandelt und jeden Körper mit dem ursprünglichen CAD-Modell verglichen:`,
+      factsIntro: `${b.files} Teile mit ihrem ursprünglichen CAD-Modell: die STL zurück in STEP umgewandelt und jeder Körper mit dem Original verglichen:`,
       facts: [
         { label: "Teile mit richtigen Flächen und Maßen", value: `${b.pctFiles} %`, detail: `${b.filesAB} von ${b.files}: jeder Körper im Volumen höchstens 1 % daneben, mindestens 95 % der Fläche wiedergefunden.` },
-        { label: "gültige Volumenkörper", value: `${b.pctValid} %`, detail: `Von ${b.bodies} Körpern, gültig in der Prüfung von OpenCascade und eins zu eins den Originalen zugeordnet.` },
+        { label: "gültige Volumenkörper", value: `${b.pctValid} %`, detail: `Von insgesamt ${b.bodies} Körpern, gültig in der Prüfung von OpenCascade und eins zu eins den Originalen zugeordnet.` },
         { label: "Volumen auf 1 % genau", value: `${b.pctVol1} %`, detail: "Die meisten auf ein Hundertstel Prozent." },
         { label: "Flächen wiedergefunden", value: `${b.pctSurfaces} %`, detail: `${b.recalled} von ${b.surfaces}: Bohrungen als Zylinder, Rundungen als Rundungen.` },
       ],
-      factsNote: `Von anderen exportierte STL-Dateien sind unterschiedlich genau und fehlerhaft: Bei ${b.tpFiles} Teilen Dritter, deren Autoren die eigene STL veröffentlicht haben (Voron, Prusa u. a.), kommen ${b.tpPctFiles} % der Teile mit allen Flächen zurück und ${b.tpPctVol1} % der Körper auf 1 % Volumen genau.`,
+      factsNote: "",
       bench: {
         title: "Wie jede Art von Teil abschneidet",
         head: ["Art", "Was es ist", "Getestete Teile", "Körper", "Ergebnis"],
@@ -210,9 +214,9 @@ export function getStlToStepCopy(locale) {
         ],
         note: `Ergebnis je Körper: Volumen höchstens 1 % daneben, mindestens 95 % der Fläche wiedergefunden. Freiformflächen kommen zurück, aber in mehr Stücke geteilt als im Original (im Median ${b.cls.C5.faces}-mal so viele Flächen).`,
         methodTitle: "So haben wir gemessen",
-        method: `Die Teile stammen aus unseren eigenen 3D-Druck-Generatoren (Standardmaße und zufällig gezogene) und unserer Komponentenbibliothek; zu jedem gibt es das exakte CAD-Original als Antwort. Die STL wird mit der Download-Genauigkeit der Plattform exportiert (0,1 mm Sehne), mit diesem Konverter in STEP umgewandelt und jeder Körper mit dem Original verglichen: Eine Fläche zählt als wiedergefunden, wenn Art, Lage und Radius stimmen; der Volumenfehler bezieht sich auf das Original. Gemessen am ${b.date}.`,
+        method: `${b.files} Teile: ${b.own} aus unseren eigenen 3D-Druck-Generatoren (Standardmaße und zufällig gezogene) und der Komponentenbibliothek, als STL mit der Download-Genauigkeit der Plattform exportiert (0,1 mm Sehne); ${b.pairs} aus Voron-, Prusa- und anderen Druckerprojekten, mit der STL, die ihre Autoren veröffentlicht haben. Zu jedem gibt es das exakte CAD-Original als Antwort. Die STL wird mit diesem Konverter in STEP umgewandelt und jeder Körper mit dem Original verglichen: Eine Fläche zählt als wiedergefunden, wenn Art, Lage und Radius stimmen; der Volumenfehler bezieht sich auf das Original. Gemessen am ${b.date}.`,
         csv: b.csv,
-        csvLabel: `Ergebnis für jeden Körper herunterladen (CSV, ${b.bodies} Zeilen)`,
+        csvLabel: `Ergebnis für jeden Körper unserer ${b.own} eigenen Teile herunterladen (CSV, ${b.csvRows} Zeilen; Teile Dritter werden nicht einzeln veröffentlicht)`,
       },
       featuresTitle: "Was der Konverter macht",
       features: [
@@ -292,14 +296,14 @@ export function getStlToStepCopy(locale) {
         { title: "STEPをダウンロード", text: "Fusion、SolidWorks、FreeCAD、Onshape などのCADで読み込めます。" },
       ],
       factsTitle: "実測：曲面と寸法は正しく戻るか",
-      factsIntro: `私たちのCAD部品${b.files}個（3Dプリント用ジェネレーターとコンポーネントライブラリ）をSTLで書き出し、STEPに変換し直して、すべてのソリッドを元のCADモデルと比べました：`,
+      factsIntro: `元のCADモデルがある部品${b.files}個について、STLをSTEPに変換し直し、すべてのソリッドを元のモデルと比べました：`,
       facts: [
         { label: "曲面と寸法が正しく戻った部品", value: `${b.pctFiles}%`, detail: `${b.files}個中${b.filesAB}個：どのソリッドも元の体積との差が1%以内、表面積の95%以上の曲面を復元。` },
-        { label: "有効なソリッドとして戻った", value: `${b.pctValid}%`, detail: `${b.bodies}個のソリッドのうち、OpenCascade の妥当性チェックを通り、元のソリッドと1対1で対応したもの。` },
+        { label: "有効なソリッドとして戻った", value: `${b.pctValid}%`, detail: `全${b.bodies}個のソリッドのうち、OpenCascade の妥当性チェックを通り、元のソリッドと1対1で対応したもの。` },
         { label: "体積の差が1%以内", value: `${b.pctVol1}%`, detail: "ほとんどは0.01%以内。" },
         { label: "復元された曲面", value: `${b.pctSurfaces}%`, detail: `${b.surfaces}面中${b.recalled}面：穴は円柱に、フィレットはフィレットに戻ります。` },
       ],
-      factsNote: `他の人が書き出したSTLは精度も不具合もまちまちです。作者自身がSTLを公開している第三者の部品${b.tpFiles}個（Voron、Prusa など）では、${b.tpPctFiles}%の部品がすべての曲面とともに戻り、${b.tpPctVol1}%のソリッドが体積差1%以内でした。`,
+      factsNote: "",
       bench: {
         title: "部品の種類ごとの結果",
         head: ["種類", "どんな部品か", "テストした部品", "ソリッド数", "結果"],
@@ -312,9 +316,9 @@ export function getStlToStepCopy(locale) {
         ],
         note: `結果はソリッドごと：体積差1%以内、表面積の95%以上の曲面を復元。自由曲面は戻りますが、元より細かく分かれます（面数の中央値は元の${b.cls.C5.faces}倍）。`,
         methodTitle: "測定方法",
-        method: `部品は私たちの3Dプリント用ジェネレーター（既定寸法とランダムに選んだ寸法）とコンポーネントライブラリのもので、どれも正確な元のCADモデルを正解として持っています。STLはプラットフォームのダウンロード精度（弦高0.1 mm）で書き出し、この変換ツールでSTEPにして、ソリッドごとに元と比べます。種類・位置・半径が一致した曲面を復元とみなし、体積差は元のモデルに対して測ります。測定日 ${b.date}。`,
+        method: `部品は${b.files}個：${b.own}個は私たちの3Dプリント用ジェネレーター（既定寸法とランダムに選んだ寸法）とコンポーネントライブラリのもので、STLはプラットフォームのダウンロード精度（弦高0.1 mm）で書き出し、${b.pairs}個は Voron、Prusa などのプリンタープロジェクトの部品で、作者が公開したSTLそのものを使いました。どれも正確な元のCADモデルを正解として持っています。STLはこの変換ツールでSTEPにして、ソリッドごとに元と比べます。種類・位置・半径が一致した曲面を復元とみなし、体積差は元のモデルに対して測ります。測定日 ${b.date}。`,
         csv: b.csv,
-        csvLabel: `ソリッドごとの結果をダウンロード（CSV、${b.bodies}行）`,
+        csvLabel: `自社の${b.own}部品のソリッドごとの結果をダウンロード（CSV、${b.csvRows}行。第三者の部品は個別に公開しません）`,
       },
       featuresTitle: "このツールが行うこと",
       features: [
@@ -393,14 +397,14 @@ export function getStlToStepCopy(locale) {
       { title: "Download the STEP", text: "Fusion, SolidWorks, FreeCAD, Onshape and other CAD programs import it." },
     ],
     factsTitle: "Measured: do the surfaces and sizes come back right?",
-    factsIntro: `We exported ${b.files} of our own CAD parts (from our 3D print generators and component library) as STL, converted them back to STEP, and compared every solid with the original CAD model:`,
+    factsIntro: `${b.files} parts with their original CAD models: the STL converted back to STEP, and every solid compared with the original:`,
     facts: [
       { label: "parts that come back with the right surfaces and size", value: `${b.pctFiles}%`, detail: `${b.filesAB} of ${b.files}: every solid within 1% of the original volume, with at least 95% of its surface area recovered.` },
-      { label: "come back as valid solids", value: `${b.pctValid}%`, detail: `Of ${b.bodies} solids, valid in OpenCascade's check and matched one to one with the originals.` },
+      { label: "come back as valid solids", value: `${b.pctValid}%`, detail: `Of ${b.bodies} solids in all, valid in OpenCascade's check and matched one to one with the originals.` },
       { label: "volume within 1%", value: `${b.pctVol1}%`, detail: "Most within a hundredth of a percent." },
       { label: "surfaces recovered", value: `${b.pctSurfaces}%`, detail: `${b.recalled} of ${b.surfaces}: holes come back as cylinders, fillets as fillets.` },
     ],
-    factsNote: `STL files exported by others vary in accuracy and defects: on ${b.tpFiles} third-party parts whose authors published their own STL (Voron, Prusa and more), ${b.tpPctFiles}% of the parts come back with all their surfaces and ${b.tpPctVol1}% of the solids within 1% of the volume.`,
+    factsNote: "",
     bench: {
       title: "How each kind of part does",
       head: ["Kind", "What it is", "Parts we tested", "Solids", "Result"],
@@ -413,9 +417,9 @@ export function getStlToStepCopy(locale) {
       ],
       note: `Result per solid: volume within 1% and at least 95% of the surface area recovered. Free-form surfaces come back, but split into more pieces than the original (a median ${b.cls.C5.faces} times the faces).`,
       methodTitle: "How we measured",
-      method: `The parts come from our own 3D print generators (default sizes and randomly drawn ones) and our component library; each has its exact original CAD model as the answer. The STL is exported at the platform's download accuracy (0.1 mm chord), converted to STEP with this converter, and each solid compared with the original: a surface counts as recovered when its type, position and radius match; volume error is against the original. Measured ${b.date}.`,
+      method: `${b.files} parts: ${b.own} from our own 3D print generators (default sizes and randomly drawn ones) and component library, exported as STL at the platform's download accuracy (0.1 mm chord); ${b.pairs} from Voron, Prusa and other printer projects, with the STL file their authors published. Each has its exact original CAD model as the answer. The STL is converted to STEP with this converter, and each solid compared with the original: a surface counts as recovered when its type, position and radius match; volume error is against the original. Measured ${b.date}.`,
       csv: b.csv,
-      csvLabel: `Download the result for every solid (CSV, ${b.bodies} rows)`,
+      csvLabel: `Download the result for every solid of our own ${b.own} parts (CSV, ${b.csvRows} rows; third-party parts are not published one by one)`,
     },
     featuresTitle: "What the converter does",
     features: [

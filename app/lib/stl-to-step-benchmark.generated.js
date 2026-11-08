@@ -5,36 +5,42 @@ export const BENCHMARK = {
   "mesh": "T2",
   "stl2cad": "f2e5ccb",
   "run": 42460500610,
-  "own": {
-    "files": 598,
-    "bodies": 972,
-    "filesAB": 596,
-    "pctFilesAB": 99.7,
-    "pctBodiesAB": 99.7,
-    "pctValid": 99.9,
-    "pctVol1": 100,
-    "surfaces": 44889,
-    "recalled": 44487,
-    "pctSurfaces": 99.1
+  "pairsRun": 42474653822,
+  "all": {
+    "files": 741,
+    "bodies": 1133,
+    "filesAB": 716,
+    "pctFilesAB": 96.6,
+    "pctBodiesAB": 97.6,
+    "pctValid": 99.2,
+    "pctVol1": 99.8,
+    "surfaces": 62022,
+    "recalled": 58328,
+    "pctSurfaces": 94
   },
+  "ownFiles": 598,
+  "ownBodies": 972,
+  "pairFiles": 143,
   "classes": {
     "C1": {
-      "bodies": 11,
-      "pctAB": 100,
-      "pctA": 100,
+      "bodies": 18,
+      "pctAB": 88.9,
+      "pctA": 77.8,
       "facesRatioMedian": 1,
       "examples": [
         "joints",
+        "voron-users",
         "quick-release",
         "cutouts",
         "snaps",
-        "parametric-box"
+        "parametric-box",
+        "prusa-i3"
       ]
     },
     "C2": {
-      "bodies": 144,
-      "pctAB": 100,
-      "pctA": 98.6,
+      "bodies": 160,
+      "pctAB": 99.4,
+      "pctA": 96.3,
       "facesRatioMedian": 1,
       "examples": [
         "battery-holder",
@@ -42,7 +48,9 @@ export const BENCHMARK = {
         "bolt-circle-flange",
         "pipe-clamp",
         "spool-holder",
+        "voron-users",
         "extrusion-corner-bracket",
+        "thor",
         "extrusions",
         "hinges",
         "fasteners",
@@ -56,7 +64,7 @@ export const BENCHMARK = {
       ]
     },
     "C3": {
-      "bodies": 262,
+      "bodies": 263,
       "pctAB": 100,
       "pctA": 99.6,
       "facesRatioMedian": 1,
@@ -71,15 +79,17 @@ export const BENCHMARK = {
         "joints",
         "quick-release",
         "fasteners",
-        "snaps"
+        "snaps",
+        "thor"
       ]
     },
     "C4": {
-      "bodies": 472,
-      "pctAB": 99.6,
-      "pctA": 96,
+      "bodies": 539,
+      "pctAB": 97.6,
+      "pctA": 87.9,
       "facesRatioMedian": 1,
       "examples": [
+        "voron-users",
         "spool-holder",
         "dev-board-enclosure",
         "esp32-case",
@@ -95,6 +105,7 @@ export const BENCHMARK = {
         "phone-stand",
         "pocket",
         "pegboard-hook",
+        "thor",
         "funnel",
         "snaps",
         "desk-grommet",
@@ -107,35 +118,30 @@ export const BENCHMARK = {
         "extrusions",
         "fits",
         "cutouts",
-        "fasteners"
+        "so-arm100",
+        "prusa-i3",
+        "fasteners",
+        "voron-0"
       ]
     },
     "C5": {
-      "bodies": 83,
-      "pctAB": 98.8,
+      "bodies": 153,
+      "pctAB": 92.8,
       "pctA": 0,
-      "facesRatioMedian": 12.1,
+      "facesRatioMedian": 5.5,
       "examples": [
+        "voron-users",
         "timing-pulley",
         "helical-gear",
         "spur-gear",
         "bevel-gear",
+        "so-arm100",
+        "prusa-i3",
+        "thor",
         "fasteners",
+        "voron-0",
         "quick-release"
       ]
     }
-  },
-  "thirdParty": {
-    "run": 42474653822,
-    "files": 143,
-    "bodies": 161,
-    "filesAB": 120,
-    "pctFilesAB": 83.9,
-    "pctBodiesAB": 85.1,
-    "pctValid": 95,
-    "pctVol1": 98.8,
-    "surfaces": 17133,
-    "recalled": 13841,
-    "pctSurfaces": 80.8
   }
 };
