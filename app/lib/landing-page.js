@@ -142,7 +142,7 @@ const COPY = {
       stepStl: {
         name: "STL to STEP",
         short: "STL to STEP",
-        desc: "Turn an STL into a STEP your CAD tool opens, or a STEP into an STL for your slicer. In the browser, nothing uploaded.",
+        desc: "Turn an STL into a STEP with real surfaces — holes come back as cylinders — or a STEP into an STL for your slicer. In the browser, nothing uploaded.",
       },
     },
     footerTagline: "AI CAD in the cloud, and a skill that brings it to the editor you already use",
@@ -255,7 +255,7 @@ const COPY = {
       stepStl: {
         name: "STL 转 STEP",
         short: "STL 转 STEP",
-        desc: "把 STL 转成 CAD 软件能打开的 STEP，或者把 STEP 转成 STL 拿去切片。在浏览器里转，文件不上传。",
+        desc: "把 STL 转成带真实曲面的 STEP（孔回来是圆柱），或者把 STEP 转成 STL 拿去切片。在浏览器里转，文件不上传。",
       },
     },
     footerTagline: "云端 AI CAD，以及把它装进你编辑器的 skill",

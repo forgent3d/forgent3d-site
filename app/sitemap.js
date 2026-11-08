@@ -44,7 +44,9 @@ const GENERATOR_ROUTES = [
 ];
 
 // The STEP ↔ STL pages (app/lib/step-tools.js) are in en, zh, de and ja.
-const STEP_TOOL_ROUTES = STEP_TOOL_SLUGS.map((slug) => [`/${slug}`, "weekly", 0.85, "2026-10-20", STEP_TOOL_LOCALES]);
+// stl-to-step rewritten for surface recognition on 11-08 (live with platform PR #131); step-to-stl unchanged since 10-20
+const STEP_TOOL_UPDATED = { "step-to-stl": "2026-10-20", "stl-to-step": "2026-11-08" };
+const STEP_TOOL_ROUTES = STEP_TOOL_SLUGS.map((slug) => [`/${slug}`, "weekly", 0.85, STEP_TOOL_UPDATED[slug], STEP_TOOL_LOCALES]);
 
 // The OpenSCAD viewer (app/lib/openscad-viewer.js) is in six languages; en and zh last changed on 10-17, the
 // translations went up on 10-25.
