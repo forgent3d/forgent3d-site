@@ -2,6 +2,10 @@
 // ships (platform branch feat/stl-to-code; public facts in platform docs/step-to-code.md §8). Until then the live page
 // (lib/stl-to-step.js) stays: it describes the browser converter, which is true today.
 //
+// 11-08: the routes table below still has the import as the real-surface route; once /convert ships the wasm
+// stl2cad, rewrite it so /convert (no sign-in, no upload, real surfaces) is the main route and the import is the
+// next step.
+//
 // To launch: fill every FACTS entry from §8 (each TBD below is a §8 row still marked 待定 on 11-08), settle OPEN
 // QUESTIONS with the user, add zh / de / ja, then point app/[locale]/stl-to-step/page.js at getStlToStepV2Copy.
 // assertFactsSettled() throws while any entry is TBD, so wiring it in early fails the build instead of shipping
@@ -25,10 +29,13 @@ export const FACTS = {
   maxTriangles: TBD, // §8: 三角形 / 内存上限待 runner 测量
   typicalTime: TBD, // §8: 待 mesh-recon-bench
   stepDownload: true, // 11-08 用户定：STEP 可以单独下载(§8 待同步)
-  account: "sign-in", // §8: 导入要登录
+  account: "sign-in", // §8: 导入要登录 (the import; /convert needs none)
   cost: TBD, // §8: 额度未定 (the conversion calls no LLM)
   benchmark: TBD, // { set, parts, metric, value, csv? } or null to publish no number
-  runsWhere: "server", // §8: 定 — never write that the file stays in the browser
+  // 11-08 user: stl2cad goes to the browser — /convert (wasm) becomes the main route: no sign-in, no upload, real
+  // surfaces; the signed-in import is "keep working in Forgent3D". Both TBD until §8 says they can be said publicly.
+  convertRealSurfaces: TBD, // true once /convert ships the wasm stl2cad
+  convertLimits: TBD, // triangles / time in the browser, from the wasm measurement
 };
 
 export function assertFactsSettled() {
